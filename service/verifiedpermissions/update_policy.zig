@@ -14,6 +14,9 @@ pub const UpdatePolicyInput = struct {
     /// Specifies the updated policy content that you want to replace on the
     /// specified policy. The content must be valid Cedar policy language text.
     ///
+    /// If you don't specify this parameter, the existing policy definition remains
+    /// unchanged.
+    ///
     /// You can change only the following elements from the policy definition:
     ///
     /// * The `action` referenced by the policy.
@@ -27,17 +30,45 @@ pub const UpdatePolicyInput = struct {
     /// * The `resource` referenced by the policy.
     definition: ?UpdatePolicyDefinition = null,
 
+    /// Specifies a name for the policy that is unique among all policies within the
+    /// policy store. You can use the name in place of the policy ID in API
+    /// operations that reference the policy. The name must be prefixed with
+    /// `name/`.
+    ///
+    /// If you don't include the name in an update request, the existing name is
+    /// unchanged. To remove a name, set it to an empty string (`""`).
+    ///
+    /// If you specify a name that is already associated with another policy in the
+    /// policy store, you receive a `ConflictException` error.
+    name: ?[]const u8 = null,
+
     /// Specifies the ID of the policy that you want to update. To find this value,
     /// you can use
     /// [ListPolicies](https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html).
+    ///
+    /// You can use the policy name in place of the policy ID. When using a name,
+    /// prefix it with `name/`. For example:
+    ///
+    /// * ID: `SPEXAMPLEabcdefg111111`
+    /// * Name: `name/example-policy`
     policy_id: []const u8,
 
     /// Specifies the ID of the policy store that contains the policy that you want
     /// to update.
+    ///
+    /// To specify a policy store, use its ID or alias name. When using an alias
+    /// name, prefix it with `policy-store-alias/`. For example:
+    ///
+    /// * ID: `PSEXAMPLEabcdefg111111`
+    /// * Alias name: `policy-store-alias/example-policy-store`
+    ///
+    /// To view aliases, use
+    /// [ListPolicyStoreAliases](https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html).
     policy_store_id: []const u8,
 
     pub const json_field_names = .{
         .definition = "definition",
+        .name = "name",
         .policy_id = "policyId",
         .policy_store_id = "policyStoreId",
     };

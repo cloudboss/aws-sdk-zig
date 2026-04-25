@@ -8,14 +8,14 @@ const Record = @import("record.zig").Record;
 
 pub const GetRecordsInput = struct {
     /// The maximum number of records to return in a single `GetRecords` request.
-    /// Default value is 1000. You can specify a limit between 1 and 1000, but the
-    /// actual number returned might be less than the specified maximum if the size
-    /// of the data for the returned records exceeds the internal size limit.
+    /// The default value is 100. You can specify a limit between 1 and 1000, but
+    /// the actual number returned might be less than the specified maximum if the
+    /// size of the data for the returned records exceeds the internal size limit.
     max_results: ?i32 = null,
 
     /// The unique identifier of the shard iterator. A shard iterator specifies the
     /// position in the shard from which you want to start reading data records
-    /// sequentially. You obtain this value by calling the `GetShardIterator`
+    /// sequentially. You obtain this value by calling the `GetShardIterator `
     /// operation. Each shard iterator is valid for 15 minutes after creation.
     shard_iterator: []const u8,
 
@@ -33,8 +33,8 @@ pub const GetRecordsOutput = struct {
     change_records: ?[]const Record = null,
 
     /// The next position in the shard from which to start sequentially reading data
-    /// records. If null, the shard has been closed and the requested iterator
-    /// doesn't return any more data.
+    /// records. If null, the shard has been closed and the requested iterator will
+    /// not return any more data.
     next_shard_iterator: ?[]const u8 = null,
 
     pub const json_field_names = .{

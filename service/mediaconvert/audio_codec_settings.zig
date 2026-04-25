@@ -1,5 +1,6 @@
 const AacSettings = @import("aac_settings.zig").AacSettings;
 const Ac3Settings = @import("ac_3_settings.zig").Ac3Settings;
+const Ac4Settings = @import("ac_4_settings.zig").Ac4Settings;
 const AiffSettings = @import("aiff_settings.zig").AiffSettings;
 const AudioCodec = @import("audio_codec.zig").AudioCodec;
 const Eac3AtmosSettings = @import("eac_3_atmos_settings.zig").Eac3AtmosSettings;
@@ -24,6 +25,9 @@ pub const AudioCodecSettings = struct {
 
     /// Required when you set Codec to the value AC3.
     ac_3_settings: ?Ac3Settings = null,
+
+    /// Required when you set Codec to the value AC4.
+    ac_4_settings: ?Ac4Settings = null,
 
     /// Required when you set Codec to the value AIFF.
     aiff_settings: ?AiffSettings = null,
@@ -66,6 +70,7 @@ pub const AudioCodecSettings = struct {
     pub const json_field_names = .{
         .aac_settings = "AacSettings",
         .ac_3_settings = "Ac3Settings",
+        .ac_4_settings = "Ac4Settings",
         .aiff_settings = "AiffSettings",
         .codec = "Codec",
         .eac_3_atmos_settings = "Eac3AtmosSettings",

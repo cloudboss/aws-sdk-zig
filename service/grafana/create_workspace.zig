@@ -15,89 +15,77 @@ const WorkspaceDescription = @import("workspace_description.zig").WorkspaceDescr
 
 pub const CreateWorkspaceInput = struct {
     /// Specifies whether the workspace can access Amazon Web Services resources in
-    /// this
-    /// Amazon Web Services account only, or whether it can also access Amazon Web
-    /// Services
-    /// resources in other accounts in the same organization. If you specify
-    /// `ORGANIZATION`, you must specify which organizational units the workspace
-    /// can access in the `workspaceOrganizationalUnits` parameter.
+    /// this Amazon Web Services account only, or whether it can also access Amazon
+    /// Web Services resources in other accounts in the same organization. If you
+    /// specify `ORGANIZATION`, you must specify which organizational units the
+    /// workspace can access in the `workspaceOrganizationalUnits` parameter.
     account_access_type: AccountAccessType,
 
     /// Specifies whether this workspace uses SAML 2.0, IAM Identity Center, or both
-    /// to
-    /// authenticate users for using the Grafana console within a workspace. For
-    /// more
-    /// information, see [User authentication in
-    /// Amazon Managed
+    /// to authenticate users for using the Grafana console within a workspace. For
+    /// more information, see [User authentication in Amazon Managed
     /// Grafana](https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html).
     authentication_providers: []const AuthenticationProviderTypes,
 
     /// A unique, case-sensitive, user-provided identifier to ensure the idempotency
-    /// of the
-    /// request.
+    /// of the request.
     client_token: ?[]const u8 = null,
 
     /// The configuration string for the workspace that you create. For more
-    /// information about
-    /// the format and configuration options available, see [Working in your Grafana
+    /// information about the format and configuration options available, see
+    /// [Working in your Grafana
     /// workspace](https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html).
     configuration: ?[]const u8 = null,
 
     /// Specifies the version of Grafana to support in the new workspace. If not
-    /// specified,
-    /// defaults to the latest version (for example, 10.4).
+    /// specified, defaults to the latest version (for example, 10.4).
     ///
-    /// To get a list of supported versions, use the `ListVersions`
-    /// operation.
+    /// To get a list of supported versions, use the `ListVersions` operation.
     grafana_version: ?[]const u8 = null,
+
+    /// The ID or ARN of the Key Management Service key to use for encrypting
+    /// workspace data.
+    kms_key_id: ?[]const u8 = null,
 
     /// Configuration for network access to your workspace.
     ///
     /// When this is configured, only listed IP addresses and VPC endpoints will be
-    /// able to
-    /// access your workspace. Standard Grafana authentication and authorization
-    /// will still be
-    /// required.
+    /// able to access your workspace. Standard Grafana authentication and
+    /// authorization will still be required.
     ///
     /// If this is not configured, or is removed, then all IP addresses and VPC
-    /// endpoints will
-    /// be allowed. Standard Grafana authentication and authorization will still be
-    /// required.
+    /// endpoints will be allowed. Standard Grafana authentication and authorization
+    /// will still be required.
     network_access_control: ?NetworkAccessConfiguration = null,
 
     /// The name of an IAM role that already exists to use with Organizations to
     /// access Amazon Web Services data sources and notification channels in other
-    /// accounts
-    /// in an organization.
+    /// accounts in an organization.
     organization_role_name: ?[]const u8 = null,
 
     /// When creating a workspace through the Amazon Web Services API, CLI or Amazon
     /// Web Services CloudFormation, you must manage IAM roles and provision the
     /// permissions that the workspace needs to use Amazon Web Services data sources
-    /// and
-    /// notification channels.
+    /// and notification channels.
     ///
-    /// You must also specify a `workspaceRoleArn` for a role that you will
-    /// manage for the workspace to use when accessing those datasources and
-    /// notification
+    /// You must also specify a `workspaceRoleArn` for a role that you will manage
+    /// for the workspace to use when accessing those datasources and notification
     /// channels.
     ///
     /// The ability for Amazon Managed Grafana to create and update IAM roles on
     /// behalf of the user is supported only in the Amazon Managed Grafana console,
-    /// where this value
-    /// may be set to `SERVICE_MANAGED`.
+    /// where this value may be set to `SERVICE_MANAGED`.
     ///
-    /// Use only the `CUSTOMER_MANAGED` permission type when creating a
-    /// workspace with the API, CLI or Amazon Web Services CloudFormation.
+    /// Use only the `CUSTOMER_MANAGED` permission type when creating a workspace
+    /// with the API, CLI or Amazon Web Services CloudFormation.
     ///
-    /// For more information, see [Amazon Managed Grafana
-    /// permissions and policies for Amazon Web Services data sources and
-    /// notification
+    /// For more information, see [Amazon Managed Grafana permissions and policies
+    /// for Amazon Web Services data sources and notification
     /// channels](https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html).
     permission_type: PermissionType,
 
-    /// The name of the CloudFormation stack set to use to generate IAM
-    /// roles to be used for this workspace.
+    /// The name of the CloudFormation stack set to use to generate IAM roles to be
+    /// used for this workspace.
     stack_set_name: ?[]const u8 = null,
 
     /// The list of tags associated with the workspace.
@@ -123,23 +111,21 @@ pub const CreateWorkspaceInput = struct {
     workspace_name: ?[]const u8 = null,
 
     /// Specify the Amazon Web Services notification channels that you plan to use
-    /// in this
-    /// workspace. Specifying these data sources here enables Amazon Managed Grafana
-    /// to create
-    /// IAM roles and permissions that allow Amazon Managed Grafana to use these
-    /// channels.
+    /// in this workspace. Specifying these data sources here enables Amazon Managed
+    /// Grafana to create IAM roles and permissions that allow Amazon Managed
+    /// Grafana to use these channels.
     workspace_notification_destinations: ?[]const NotificationDestinationType = null,
 
     /// Specifies the organizational units that this workspace is allowed to use
-    /// data sources
-    /// from, if this workspace is in an account that is part of an organization.
+    /// data sources from, if this workspace is in an account that is part of an
+    /// organization.
     workspace_organizational_units: ?[]const []const u8 = null,
 
     /// Specified the IAM role that grants permissions to the Amazon Web Services
     /// resources that the workspace will view data from, including both data
     /// sources and notification channels. You are responsible for managing the
-    /// permissions
-    /// for this role as new data sources or notification channels are added.
+    /// permissions for this role as new data sources or notification channels are
+    /// added.
     workspace_role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -148,6 +134,7 @@ pub const CreateWorkspaceInput = struct {
         .client_token = "clientToken",
         .configuration = "configuration",
         .grafana_version = "grafanaVersion",
+        .kms_key_id = "kmsKeyId",
         .network_access_control = "networkAccessControl",
         .organization_role_name = "organizationRoleName",
         .permission_type = "permissionType",
@@ -233,6 +220,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateWorkspaceInput, c
     if (input.grafana_version) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"grafanaVersion\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.kms_key_id) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"kmsKeyId\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

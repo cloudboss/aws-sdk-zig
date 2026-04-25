@@ -4,14 +4,14 @@ const RouteMatrixTrailerOptions = @import("route_matrix_trailer_options.zig").Ro
 const RouteMatrixTruckType = @import("route_matrix_truck_type.zig").RouteMatrixTruckType;
 const WeightPerAxleGroup = @import("weight_per_axle_group.zig").WeightPerAxleGroup;
 
-/// Travel mode options when the provided travel mode is "Truck"
+/// Travel mode options when the provided travel mode is `Truck`.
 pub const RouteMatrixTruckOptions = struct {
     /// Total number of axles of the vehicle.
     axle_count: ?i32 = null,
 
     /// Gross weight of the vehicle including trailers, and goods at capacity.
     ///
-    /// **Unit**: `Kilograms`
+    /// **Unit**: `kilograms`
     gross_weight: i64 = 0,
 
     /// List of Hazardous cargo contained in the vehicle.
@@ -37,12 +37,12 @@ pub const RouteMatrixTruckOptions = struct {
 
     /// Maximum speed
     ///
-    /// **Unit**: `KilometersPerHour`
+    /// **Unit**: `kilometers per hour`
     max_speed: ?f64 = null,
 
     /// The number of occupants in the vehicle.
     ///
-    /// Default Value: `1`
+    /// Default value: `1`
     occupancy: ?i32 = null,
 
     /// Payload capacity of the vehicle and trailers attached.
@@ -53,7 +53,9 @@ pub const RouteMatrixTruckOptions = struct {
     /// Trailer options corresponding to the vehicle.
     trailer: ?RouteMatrixTrailerOptions = null,
 
-    /// Type of the truck.
+    /// The type of truck: `LightTruck` for smaller delivery vehicles, `
+    /// StraightTruck` for rigid body trucks, or `Tractor` for tractor-trailer
+    /// combinations.
     truck_type: ?RouteMatrixTruckType = null,
 
     /// The tunnel restriction code.
@@ -87,7 +89,7 @@ pub const RouteMatrixTruckOptions = struct {
     /// Meant for usage in countries where the differences in axle types or axle
     /// groups are not distinguished.
     ///
-    /// **Unit**: `Kilograms`
+    /// **Unit**: `kilograms`
     weight_per_axle: i64 = 0,
 
     /// Specifies the total weight for the specified axle group. Meant for usage in

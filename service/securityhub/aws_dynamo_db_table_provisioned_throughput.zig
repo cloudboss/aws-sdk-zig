@@ -5,14 +5,14 @@ pub const AwsDynamoDbTableProvisionedThroughput = struct {
     /// Indicates when the provisioned throughput was last decreased.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     last_decrease_date_time: ?[]const u8 = null,
 
     /// Indicates when the provisioned throughput was last increased.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     last_increase_date_time: ?[]const u8 = null,
 

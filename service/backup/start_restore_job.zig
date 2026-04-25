@@ -61,6 +61,9 @@ pub const StartRestoreJobInput = struct {
     ///   EFS](https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-efs.html#efs-restore-cli)
     ///
     /// * [Metadata for Amazon
+    ///   EKS](https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-eks.html#eks-restore-backup-section)
+    ///
+    /// * [Metadata for Amazon
     ///   FSx](https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-fsx.html#fsx-restore-cli)
     ///
     /// * [Metadata for Amazon
@@ -104,6 +107,8 @@ pub const StartRestoreJobInput = struct {
     /// * `EC2` - Amazon Elastic Compute Cloud
     ///
     /// * `EFS` - Amazon Elastic File System
+    ///
+    /// * `EKS` - Amazon Elastic Kubernetes Service
     ///
     /// * `FSx` - Amazon FSx
     ///

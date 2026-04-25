@@ -75,8 +75,15 @@ pub const DataLakeSettings = struct {
     external_data_filtering_allow_list: ?[]const DataLakePrincipal = null,
 
     /// A key-value map that provides an additional configuration on your data lake.
-    /// CROSS_ACCOUNT_VERSION is the key you can configure in the Parameters field.
-    /// Accepted values for the CrossAccountVersion key are 1, 2, 3, and 4.
+    /// The following key-value pairs are supported:
+    ///
+    /// * `CROSS_ACCOUNT_VERSION` - Accepted values are 1, 2, 3, 4, and 5.
+    ///
+    /// * `SET_SOURCE_IDENTITY` - Accepted values are `TRUE` and `FALSE`. When set
+    ///   to `TRUE`, Lake Formation includes the IAM role identifier that was used
+    ///   to query in the S3 data event CloudTrail logs for `s3:GetObject` calls.
+    ///   For more information, see [Tracking query engine IAM roles in S3 data
+    ///   events](https://docs.aws.amazon.com/lake-formation/latest/dg/cloudtrail-logging.html#source-identity-cloudtrail).
     parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// A list of Lake Formation principals with only view access to the resources,

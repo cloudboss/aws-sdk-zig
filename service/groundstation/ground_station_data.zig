@@ -1,6 +1,6 @@
 /// Information about the ground station data.
 pub const GroundStationData = struct {
-    /// UUID of a ground station.
+    /// ID of a ground station.
     ground_station_id: ?[]const u8 = null,
 
     /// Name of a ground station.

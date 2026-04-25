@@ -12,7 +12,7 @@ pub const AssociationFilters = struct {
 
     /// Indicates whether the association between a target and a configuration was
     /// directly applied by the
-    /// Security Hub delegated administrator or inherited from a parent.
+    /// Security Hub CSPM delegated administrator or inherited from a parent.
     association_type: ?AssociationType = null,
 
     /// The ARN or UUID of the configuration policy.

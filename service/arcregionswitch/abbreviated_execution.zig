@@ -38,6 +38,10 @@ pub const AbbreviatedExecution = struct {
     /// The Amazon Resource Name (ARN) of the plan.
     plan_arn: []const u8,
 
+    /// The unique identifier of the most recent recovery execution. Required when
+    /// starting a post-recovery execution.
+    recovery_execution_id: ?[]const u8 = null,
+
     /// The timestamp when the plan execution was started.
     start_time: i64,
 
@@ -57,6 +61,7 @@ pub const AbbreviatedExecution = struct {
         .execution_state = "executionState",
         .mode = "mode",
         .plan_arn = "planArn",
+        .recovery_execution_id = "recoveryExecutionId",
         .start_time = "startTime",
         .updated_at = "updatedAt",
         .version = "version",

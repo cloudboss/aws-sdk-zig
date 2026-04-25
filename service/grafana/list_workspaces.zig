@@ -11,8 +11,7 @@ pub const ListWorkspacesInput = struct {
     max_results: ?i32 = null,
 
     /// The token for the next set of workspaces to return. (You receive this token
-    /// from a
-    /// previous `ListWorkspaces` operation.)
+    /// from a previous `ListWorkspaces` operation.)
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -26,8 +25,7 @@ pub const ListWorkspacesOutput = struct {
     next_token: ?[]const u8 = null,
 
     /// An array of structures that contain some information about the workspaces in
-    /// the
-    /// account.
+    /// the account.
     workspaces: ?[]const WorkspaceSummary = null,
 
     pub const json_field_names = .{

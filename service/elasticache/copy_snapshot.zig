@@ -39,7 +39,7 @@ pub const CopySnapshotInput = struct {
     /// snapshot,
     /// therefore this name must be unique within its context - ElastiCache or an
     /// Amazon S3
-    /// bucket if exporting.
+    /// bucket if exporting. This value is stored as a lowercase string.
     target_snapshot_name: []const u8,
 };
 

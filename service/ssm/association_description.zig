@@ -23,6 +23,13 @@ pub const AssociationDescription = struct {
     /// expressions.
     apply_only_at_cron_interval: bool = false,
 
+    /// A role used by association to take actions on your behalf.
+    /// State Manager will assume this role and call required APIs when dispatching
+    /// configurations to nodes. If not specified, [
+    /// service-linked role for Systems
+    /// Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html) will be used by default.
+    association_dispatch_assume_role: ?[]const u8 = null,
+
     /// The association ID.
     association_id: ?[]const u8 = null,
 
@@ -170,6 +177,7 @@ pub const AssociationDescription = struct {
     pub const json_field_names = .{
         .alarm_configuration = "AlarmConfiguration",
         .apply_only_at_cron_interval = "ApplyOnlyAtCronInterval",
+        .association_dispatch_assume_role = "AssociationDispatchAssumeRole",
         .association_id = "AssociationId",
         .association_name = "AssociationName",
         .association_version = "AssociationVersion",

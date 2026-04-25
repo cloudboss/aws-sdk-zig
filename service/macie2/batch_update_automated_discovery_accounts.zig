@@ -19,9 +19,9 @@ pub const BatchUpdateAutomatedDiscoveryAccountsInput = struct {
 };
 
 pub const BatchUpdateAutomatedDiscoveryAccountsOutput = struct {
-    /// An array of objects, one for each account whose status wasn’t changed. Each
+    /// An array of objects, one for each account whose status wasn't changed. Each
     /// object identifies the account and explains why the status of automated
-    /// sensitive data discovery wasn’t changed for the account. This value is null
+    /// sensitive data discovery wasn't changed for the account. This value is null
     /// if the request succeeded for all specified accounts.
     errors: ?[]const AutomatedDiscoveryAccountUpdateError = null,
 

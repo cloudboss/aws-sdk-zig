@@ -2,6 +2,7 @@ const aws = @import("aws");
 
 const DependencyConfig = @import("dependency_config.zig").DependencyConfig;
 const EvaluationType = @import("evaluation_type.zig").EvaluationType;
+const MetricSource = @import("metric_source.zig").MetricSource;
 const MetricSourceType = @import("metric_source_type.zig").MetricSourceType;
 
 /// A structure that contains information about one service level objective
@@ -35,11 +36,18 @@ pub const ServiceLevelObjectiveSummary = struct {
     ///   it belongs to.
     key_attributes: ?[]const aws.map.StringMapEntry = null,
 
+    /// Identifies the metric source for SLOs on resources other than Application
+    /// Signals services.
+    metric_source: ?MetricSource = null,
+
     /// Displays the SLI metric source type for this SLO. Supported types are:
     ///
     /// * Service operation
     /// * Service dependency
+    /// * Service
     /// * CloudWatch metric
+    /// * AppMonitor
+    /// * Canary
     metric_source_type: ?MetricSourceType = null,
 
     /// The name of the service level objective.
@@ -55,6 +63,7 @@ pub const ServiceLevelObjectiveSummary = struct {
         .dependency_config = "DependencyConfig",
         .evaluation_type = "EvaluationType",
         .key_attributes = "KeyAttributes",
+        .metric_source = "MetricSource",
         .metric_source_type = "MetricSourceType",
         .name = "Name",
         .operation_name = "OperationName",

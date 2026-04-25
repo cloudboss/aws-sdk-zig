@@ -1,12 +1,11 @@
 /// Contains information about the condition.
 pub const FilterCondition = struct {
-    /// Represents an *equal*
-    /// **** condition to be applied to
-    /// a single field when querying for scan entries.
+    /// Represents an *equal* condition to be applied to a single field when
+    /// querying for scan entries.
     equals_value: ?[]const u8 = null,
 
-    /// Represents a *greater than* condition to be applied to a single field
-    /// when querying for scan entries.
+    /// Represents a *greater than* condition to be applied to a single field when
+    /// querying for scan entries.
     greater_than: ?i64 = null,
 
     /// Represents a *less than* condition to be applied to a single field when

@@ -26,6 +26,7 @@ pub const EmailOutboundConfig = @import("email_outbound_config.zig").EmailOutbou
 pub const EmailOutboundMode = @import("email_outbound_mode.zig").EmailOutboundMode;
 pub const EncryptionConfig = @import("encryption_config.zig").EncryptionConfig;
 pub const EncryptionType = @import("encryption_type.zig").EncryptionType;
+pub const EntryLimitsConfig = @import("entry_limits_config.zig").EntryLimitsConfig;
 pub const EventTrigger = @import("event_trigger.zig").EventTrigger;
 pub const EventType = @import("event_type.zig").EventType;
 pub const ExternalCampaignType = @import("external_campaign_type.zig").ExternalCampaignType;

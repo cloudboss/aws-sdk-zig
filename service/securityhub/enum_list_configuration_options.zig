@@ -4,8 +4,8 @@ pub const EnumListConfigurationOptions = struct {
     /// The valid values for a control parameter that is a list of enums.
     allowed_values: ?[]const []const u8 = null,
 
-    /// The Security Hub default value for a control parameter that is a list of
-    /// enums.
+    /// The Security Hub CSPM default value for a control parameter that is a list
+    /// of enums.
     default_value: ?[]const []const u8 = null,
 
     /// The maximum number of list items that an enum list control parameter can

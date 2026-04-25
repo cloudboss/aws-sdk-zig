@@ -1,6 +1,7 @@
 const ReservationEndDateType = @import("reservation_end_date_type.zig").ReservationEndDateType;
 const ReservationState = @import("reservation_state.zig").ReservationState;
 const ReservationType = @import("reservation_type.zig").ReservationType;
+const CapacityManagerTagDimension = @import("capacity_manager_tag_dimension.zig").CapacityManagerTagDimension;
 const CapacityTenancy = @import("capacity_tenancy.zig").CapacityTenancy;
 
 /// Represents dimension values for capacity metrics, including resource
@@ -9,6 +10,11 @@ const CapacityTenancy = @import("capacity_tenancy.zig").CapacityTenancy;
 pub const CapacityManagerDimension = struct {
     /// The Amazon Web Services account ID that owns the capacity resource.
     account_id: ?[]const u8 = null,
+
+    /// The name of the Amazon Web Services account that owns the capacity resource.
+    /// This dimension is only available when Organizations access is enabled for
+    /// Capacity Manager.
+    account_name: ?[]const u8 = null,
 
     /// The unique identifier of the Availability Zone where the capacity resource
     /// is located.
@@ -67,6 +73,11 @@ pub const CapacityManagerDimension = struct {
 
     /// The Amazon Web Services Region where the capacity resource is located.
     resource_region: ?[]const u8 = null,
+
+    /// The tags associated with the capacity resource, represented as key-value
+    /// pairs. Only tags that have been activated for monitoring via
+    /// `UpdateCapacityManagerMonitoredTagKeys` are included.
+    tags: ?[]const CapacityManagerTagDimension = null,
 
     /// The tenancy of the EC2 instances associated with this capacity dimension.
     /// Valid values are 'default' for shared tenancy, 'dedicated' for dedicated

@@ -59,10 +59,11 @@ pub const OptimizeWaypointsInput = struct {
 
     /// Specifies the optimization criteria for the calculated sequence.
     ///
-    /// Default Value: `FastestRoute`.
+    /// Default value: `FastestRoute`.
     optimize_sequencing_for: ?WaypointOptimizationSequencingObjective = null,
 
-    /// The start position for the route.
+    /// The start position for the route in World Geodetic System (WGS 84) format:
+    /// [longitude, latitude].
     origin: []const f64,
 
     /// Origin related options.
@@ -74,7 +75,7 @@ pub const OptimizeWaypointsInput = struct {
     /// Specifies the mode of transport when calculating a route. Used in estimating
     /// the speed of travel and road compatibility.
     ///
-    /// Default Value: `Car`
+    /// Default value: `Car`
     travel_mode: ?WaypointOptimizationTravelMode = null,
 
     /// Travel mode related options for the provided travel mode.

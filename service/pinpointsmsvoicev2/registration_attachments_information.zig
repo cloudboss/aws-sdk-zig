@@ -14,6 +14,9 @@ pub const RegistrationAttachmentsInformation = struct {
     /// A description of why the upload didn't successfully complete.
     attachment_upload_error_reason: ?AttachmentUploadErrorReason = null,
 
+    /// The URL to the document that's associated with the registration attachment.
+    attachment_url: ?[]const u8 = null,
+
     /// The time when the registration attachment was created, in [UNIX epoch
     /// time](https://www.epochconverter.com/) format.
     created_timestamp: i64,
@@ -27,6 +30,7 @@ pub const RegistrationAttachmentsInformation = struct {
     pub const json_field_names = .{
         .attachment_status = "AttachmentStatus",
         .attachment_upload_error_reason = "AttachmentUploadErrorReason",
+        .attachment_url = "AttachmentUrl",
         .created_timestamp = "CreatedTimestamp",
         .registration_attachment_arn = "RegistrationAttachmentArn",
         .registration_attachment_id = "RegistrationAttachmentId",

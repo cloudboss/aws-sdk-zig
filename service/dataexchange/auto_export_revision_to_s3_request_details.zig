@@ -7,8 +7,7 @@ pub const AutoExportRevisionToS3RequestDetails = struct {
     encryption: ?ExportServerSideEncryption = null,
 
     /// A revision destination is the Amazon S3 bucket folder destination to where
-    /// the export
-    /// will be sent.
+    /// the export will be sent.
     revision_destination: AutoExportRevisionDestinationEntry,
 
     pub const json_field_names = .{

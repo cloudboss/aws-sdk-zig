@@ -4,6 +4,7 @@ const AdvancedSecurityOptions = @import("advanced_security_options.zig").Advance
 const AutoTuneOptionsOutput = @import("auto_tune_options_output.zig").AutoTuneOptionsOutput;
 const ChangeProgressDetails = @import("change_progress_details.zig").ChangeProgressDetails;
 const CognitoOptions = @import("cognito_options.zig").CognitoOptions;
+const DeploymentStrategyOptions = @import("deployment_strategy_options.zig").DeploymentStrategyOptions;
 const DomainEndpointOptions = @import("domain_endpoint_options.zig").DomainEndpointOptions;
 const DomainProcessingStatusType = @import("domain_processing_status_type.zig").DomainProcessingStatusType;
 const EBSOptions = @import("ebs_options.zig").EBSOptions;
@@ -52,6 +53,10 @@ pub const ElasticsearchDomainStatus = struct {
     /// has not been deleted. Once domain deletion is complete, the status of the
     /// domain is no longer returned.
     deleted: ?bool = null,
+
+    /// The current status of the Elasticsearch domain's deployment strategy
+    /// options.
+    deployment_strategy_options: ?DeploymentStrategyOptions = null,
 
     /// The current status of the Elasticsearch domain's endpoint options.
     domain_endpoint_options: ?DomainEndpointOptions = null,
@@ -129,6 +134,7 @@ pub const ElasticsearchDomainStatus = struct {
         .cognito_options = "CognitoOptions",
         .created = "Created",
         .deleted = "Deleted",
+        .deployment_strategy_options = "DeploymentStrategyOptions",
         .domain_endpoint_options = "DomainEndpointOptions",
         .domain_id = "DomainId",
         .domain_name = "DomainName",

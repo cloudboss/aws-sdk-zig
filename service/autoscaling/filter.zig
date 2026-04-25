@@ -82,6 +82,14 @@ pub const Filter = struct {
     /// values, see
     /// [Activity](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_Activity.html)
     /// in the *Amazon EC2 Auto Scaling API Reference*.
+    ///
+    /// `StartTimeLowerBound` and `StartTimeUpperBound` accept ISO 8601 formatted
+    /// timestamps.
+    /// Timestamps without a timezone offset are assumed to be UTC.
+    ///
+    /// * `2000-01-18T08:15:00Z`
+    ///
+    /// * `2000-01-18T16:15:00+08:00`
     name: ?[]const u8 = null,
 
     /// One or more filter values. Filter values are case-sensitive.

@@ -1,5 +1,6 @@
 const AuthenticationType = @import("authentication_type.zig").AuthenticationType;
 const SessionConnectionState = @import("session_connection_state.zig").SessionConnectionState;
+const InstanceDrainStatus = @import("instance_drain_status.zig").InstanceDrainStatus;
 const NetworkAccessConfiguration = @import("network_access_configuration.zig").NetworkAccessConfiguration;
 const SessionState = @import("session_state.zig").SessionState;
 
@@ -17,6 +18,10 @@ pub const Session = struct {
 
     /// The identifier of the streaming session.
     id: []const u8,
+
+    /// The drain status of the instance hosting the streaming session. This only
+    /// applies to multi-session fleets.
+    instance_drain_status: ?InstanceDrainStatus = null,
 
     /// The identifier for the instance hosting the session.
     instance_id: ?[]const u8 = null,
@@ -51,6 +56,7 @@ pub const Session = struct {
         .connection_state = "ConnectionState",
         .fleet_name = "FleetName",
         .id = "Id",
+        .instance_drain_status = "InstanceDrainStatus",
         .instance_id = "InstanceId",
         .max_expiration_time = "MaxExpirationTime",
         .network_access_configuration = "NetworkAccessConfiguration",

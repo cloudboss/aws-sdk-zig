@@ -14,6 +14,7 @@ pub const SavingsPlanProductType = enum {
     timestream,
     keyspaces,
     dms,
+    opensearch,
 
     pub const json_field_names = .{
         .ec2 = "EC2",
@@ -29,6 +30,7 @@ pub const SavingsPlanProductType = enum {
         .timestream = "Timestream",
         .keyspaces = "Keyspaces",
         .dms = "DMS",
+        .opensearch = "OpenSearch",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -46,6 +48,7 @@ pub const SavingsPlanProductType = enum {
             .timestream => "Timestream",
             .keyspaces => "Keyspaces",
             .dms => "DMS",
+            .opensearch => "OpenSearch",
         };
     }
 

@@ -9,9 +9,22 @@ pub const RouteTrafficOptions = struct {
     /// it will be used over the historical traffic data.
     flow_event_threshold_override: i64 = 0,
 
-    /// Determines if traffic should be used or ignored while calculating the route.
+    /// Specifies how traffic data should be used when calculating routes.
     ///
     /// Default Value: `UseTrafficData`
+    ///
+    /// Traffic data usage depends on the time parameters in your route request:
+    ///
+    /// * When `Usage` is set to `UseTrafficData`:
+    ///
+    /// * If `DepartNow` is set to `true`, or if you specify `DepartureTime` or
+    ///   `ArrivalTime`, then all traffic data is considered (including live traffic
+    ///   and closures).
+    /// * If `DepartNow`, `DepartureTime`, and `ArrivalTime` are all unspecified,
+    ///   then only long-term closures are considered, regardless of this setting.
+    ///
+    /// * When `Usage` is set to `IgnoreTrafficData`, then all traffic data is
+    ///   ignored regardless of the time parameters in your route request.
     usage: ?TrafficUsage = null,
 
     pub const json_field_names = .{

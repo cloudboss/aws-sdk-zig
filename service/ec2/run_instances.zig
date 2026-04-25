@@ -27,6 +27,7 @@ const InstanceNetworkPerformanceOptionsRequest = @import("instance_network_perfo
 const OperatorRequest = @import("operator_request.zig").OperatorRequest;
 const Placement = @import("placement.zig").Placement;
 const PrivateDnsNameOptionsRequest = @import("private_dns_name_options_request.zig").PrivateDnsNameOptionsRequest;
+const InstanceSecondaryInterfaceSpecificationRequest = @import("instance_secondary_interface_specification_request.zig").InstanceSecondaryInterfaceSpecificationRequest;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const GroupIdentifier = @import("group_identifier.zig").GroupIdentifier;
 const Instance = @import("instance.zig").Instance;
@@ -332,6 +333,9 @@ pub const RunInstancesInput = struct {
     /// *Amazon EC2 User Guide*.
     ramdisk_id: ?[]const u8 = null,
 
+    /// The secondary interfaces to associate with the instance.
+    secondary_interfaces: ?[]const InstanceSecondaryInterfaceSpecificationRequest = null,
+
     /// The IDs of the security groups.
     ///
     /// If you specify a network interface, you must specify any security groups as
@@ -584,6 +588,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RunInstancesInput, conf
         if (v.core_count) |sv| {
             try body_buf.appendSlice(allocator, "&CpuOptions.CoreCount=");
             try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
+        }
+        if (v.nested_virtualization) |sv| {
+            try body_buf.appendSlice(allocator, "&CpuOptions.NestedVirtualization=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }
         if (v.threads_per_core) |sv| {
             try body_buf.appendSlice(allocator, "&CpuOptions.ThreadsPerCore=");
@@ -1135,6 +1143,70 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RunInstancesInput, conf
     if (input.ramdisk_id) |v| {
         try body_buf.appendSlice(allocator, "&RamdiskId=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
+    if (input.secondary_interfaces) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.delete_on_termination) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecondaryInterface.{d}.DeleteOnTermination=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_1) "true" else "false");
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.device_index) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecondaryInterface.{d}.DeviceIndex=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.interface_type) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecondaryInterface.{d}.InterfaceType=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.network_card_index) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecondaryInterface.{d}.NetworkCardIndex=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.private_ip_address_count) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecondaryInterface.{d}.PrivateIpAddressCount=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
+                }
+            }
+            if (item.private_ip_addresses) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecondaryInterface.{d}.PrivateIpAddress.{d}.PrivateIpAddress=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_1.private_ip_address);
+                    }
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.secondary_subnet_id) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&SecondaryInterface.{d}.SecondarySubnetId=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
+                }
+            }
+        }
     }
     if (input.security_group_ids) |list| {
         for (list, 0..) |item, idx| {

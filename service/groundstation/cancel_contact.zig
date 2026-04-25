@@ -18,8 +18,12 @@ pub const CancelContactOutput = struct {
     /// UUID of a contact.
     contact_id: ?[]const u8 = null,
 
+    /// Version ID of a contact.
+    version_id: ?i32 = null,
+
     pub const json_field_names = .{
         .contact_id = "contactId",
+        .version_id = "versionId",
     };
 };
 

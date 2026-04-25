@@ -4,11 +4,13 @@ pub const AssetState = enum {
     active,
     retiring,
     isolated,
+    installing,
 
     pub const json_field_names = .{
         .active = "ACTIVE",
         .retiring = "RETIRING",
         .isolated = "ISOLATED",
+        .installing = "INSTALLING",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const AssetState = enum {
             .active => "ACTIVE",
             .retiring => "RETIRING",
             .isolated => "ISOLATED",
+            .installing => "INSTALLING",
         };
     }
 

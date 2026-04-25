@@ -6,14 +6,16 @@ pub const SuggestQueryResult = struct {
     /// API. The QueryId retains context from the original Suggest request such as
     /// filters, political view and language. See the SearchText API documentation
     /// for more details [SearchText API
-    /// docs](https://docs.aws.amazon.com/location/latest/APIReference/API_geoplaces_SearchText.html).
+    /// docs](https://docs.aws.amazon.com/location/latest/APIReference/API_geoplaces_SearchText.html). Not supported in `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
     /// The fields `QueryText`, and `QueryID` are mutually exclusive.
     query_id: ?[]const u8 = null,
 
     /// The query type. Category queries will search for places which have an entry
     /// matching the given category, for example "doctor office". BusinessChain
-    /// queries will search for instances of a given business.
+    /// queries will search for instances of a given business. Not supported in
+    /// `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     query_type: ?QueryType = null,
 
     pub const json_field_names = .{

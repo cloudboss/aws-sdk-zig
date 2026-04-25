@@ -5,6 +5,7 @@ pub const ApprovalStrategyResponse = @import("approval_strategy_response.zig").A
 pub const ApprovalTeamRequestApprover = @import("approval_team_request_approver.zig").ApprovalTeamRequestApprover;
 pub const ApprovalTeamStatus = @import("approval_team_status.zig").ApprovalTeamStatus;
 pub const ApprovalTeamStatusCode = @import("approval_team_status_code.zig").ApprovalTeamStatusCode;
+pub const ApproverLastActivity = @import("approver_last_activity.zig").ApproverLastActivity;
 pub const Filter = @import("filter.zig").Filter;
 pub const FilterField = @import("filter_field.zig").FilterField;
 pub const GetApprovalTeamResponseApprover = @import("get_approval_team_response_approver.zig").GetApprovalTeamResponseApprover;

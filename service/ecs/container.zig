@@ -20,8 +20,7 @@ pub const Container = struct {
     gpu_ids: ?[]const []const u8 = null,
 
     /// The health status of the container. If health checks aren't configured for
-    /// this
-    /// container in its task definition, then it reports the health status as
+    /// this container in its task definition, then it reports the health status as
     /// `UNKNOWN`.
     health_status: ?HealthStatus = null,
 
@@ -53,8 +52,7 @@ pub const Container = struct {
     network_interfaces: ?[]const NetworkInterface = null,
 
     /// A short (1024 max characters) human-readable string to provide additional
-    /// details
-    /// about a running or stopped container.
+    /// details about a running or stopped container.
     reason: ?[]const u8 = null,
 
     /// The ID of the Docker container.

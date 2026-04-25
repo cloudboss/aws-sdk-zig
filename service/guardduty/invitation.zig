@@ -4,8 +4,7 @@ pub const Invitation = struct {
     account_id: ?[]const u8 = null,
 
     /// The ID of the invitation. This value is used to validate the inviter account
-    /// to the member
-    /// account.
+    /// to the member account.
     invitation_id: ?[]const u8 = null,
 
     /// The timestamp when the invitation was sent.

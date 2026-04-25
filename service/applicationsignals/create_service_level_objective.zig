@@ -17,6 +17,14 @@ pub const CreateServiceLevelObjectiveInput = struct {
     /// relative to the attainment goal of the SLO.
     burn_rate_configurations: ?[]const BurnRateConfiguration = null,
 
+    /// Set this to `true` to create a recommended SLO out of the box. When set to
+    /// `true`, you don't need to specify the `MetricThreshold` or
+    /// `ComparisonOperator` in the `SliConfig` or `RequestBasedSliConfig`. The
+    /// default value is `false`.
+    ///
+    /// This is supported for SLOs on a service, service operation, or a dependency.
+    create_recommended_slo: ?bool = null,
+
     /// An optional description for this SLO.
     description: ?[]const u8 = null,
 
@@ -51,6 +59,7 @@ pub const CreateServiceLevelObjectiveInput = struct {
 
     pub const json_field_names = .{
         .burn_rate_configurations = "BurnRateConfigurations",
+        .create_recommended_slo = "CreateRecommendedSlo",
         .description = "Description",
         .goal = "Goal",
         .name = "Name",
@@ -110,6 +119,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateServiceLevelObjec
     if (input.burn_rate_configurations) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"BurnRateConfigurations\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.create_recommended_slo) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"CreateRecommendedSlo\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

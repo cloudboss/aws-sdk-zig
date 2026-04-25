@@ -7,7 +7,7 @@ const StatusReason = @import("status_reason.zig").StatusReason;
 /// applicable standards and the status of
 /// control checks. While finding providers can add custom content in
 /// `Compliance` object fields, they are
-/// typically used to review details of Security Hub control findings.
+/// typically used to review details of Security Hub CSPM control findings.
 pub const Compliance = struct {
     /// Typically provides an array of enabled security standards in which a
     /// security control is currently enabled.
@@ -21,7 +21,7 @@ pub const Compliance = struct {
     related_requirements: ?[]const []const u8 = null,
 
     /// Typically provides the unique identifier of a control across standards. For
-    /// Security Hub controls, this field consists of an
+    /// Security Hub CSPM controls, this field consists of an
     /// Amazon Web Services service and a unique number, such as `APIGateway.5`.
     security_control_id: ?[]const u8 = null,
 
@@ -31,7 +31,7 @@ pub const Compliance = struct {
 
     /// Typically summarizes the result of a control check.
     ///
-    /// For Security Hub controls, valid values for `Status` are as follows.
+    /// For Security Hub CSPM controls, valid values for `Status` are as follows.
     ///
     /// *
     ///
@@ -47,8 +47,8 @@ pub const Compliance = struct {
     /// * `NOT_AVAILABLE` - Check could not be performed due to a service
     /// outage, API error, or because the result of the Config evaluation was
     /// `NOT_APPLICABLE`. If the Config evaluation result was
-    /// `NOT_APPLICABLE` for a Security Hub control, Security Hub automatically
-    /// archives
+    /// `NOT_APPLICABLE` for a Security Hub CSPM control, Security Hub CSPM
+    /// automatically archives
     /// the finding after 3 days.
     status: ?ComplianceStatus = null,
 

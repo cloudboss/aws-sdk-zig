@@ -14,6 +14,9 @@ pub const Span = struct {
     /// Operation end time in milliseconds since epoch
     end_timestamp: i64,
 
+    /// The origin request identifier for end-to-end tracing.
+    origin_request_id: ?[]const u8 = null,
+
     /// Parent span identifier for hierarchy. Null for root spans.
     parent_span_id: ?[]const u8 = null,
 
@@ -42,6 +45,7 @@ pub const Span = struct {
         .assistant_id = "assistantId",
         .attributes = "attributes",
         .end_timestamp = "endTimestamp",
+        .origin_request_id = "originRequestId",
         .parent_span_id = "parentSpanId",
         .request_id = "requestId",
         .session_id = "sessionId",

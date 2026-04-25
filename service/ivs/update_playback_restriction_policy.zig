@@ -8,24 +8,20 @@ const PlaybackRestrictionPolicy = @import("playback_restriction_policy.zig").Pla
 
 pub const UpdatePlaybackRestrictionPolicyInput = struct {
     /// A list of country codes that control geoblocking restriction. Allowed values
-    /// are the
-    /// officially assigned [ISO 3166-1
+    /// are the officially assigned [ISO 3166-1
     /// alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) codes. Default:
     /// All countries (an empty array).
     allowed_countries: ?[]const []const u8 = null,
 
     /// A list of origin sites that control CORS restriction. Allowed values are the
-    /// same as valid
-    /// values of the Origin header defined at
-    /// [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin). Default: All
-    /// origins (an empty array).
+    /// same as valid values of the Origin header defined at
+    /// [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin). Default: All origins (an empty array).
     allowed_origins: ?[]const []const u8 = null,
 
     /// ARN of the playback-restriction-policy to be updated.
     arn: []const u8,
 
-    /// Whether channel playback is constrained by origin site. Default:
-    /// `false`.
+    /// Whether channel playback is constrained by origin site. Default: `false`.
     enable_strict_origin_enforcement: ?bool = null,
 
     /// Playback-restriction-policy name. The value does not need to be unique.
@@ -194,6 +190,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
         return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceUnavailable")) {
+        return .{ .arena = arena, .kind = .{ .service_unavailable = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

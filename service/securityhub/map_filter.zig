@@ -1,11 +1,11 @@
 const MapFilterComparison = @import("map_filter_comparison.zig").MapFilterComparison;
 
-/// A map filter for filtering Security Hub findings. Each map filter provides
-/// the field to check for, the
+/// A map filter for filtering Security Hub CSPM findings. Each map filter
+/// provides the field to check for, the
 /// value to check for, and the comparison operator.
 pub const MapFilter = struct {
-    /// The condition to apply to the key value when filtering Security Hub findings
-    /// with a map
+    /// The condition to apply to the key value when filtering Security Hub CSPM
+    /// findings with a map
     /// filter.
     ///
     /// To search for values that have the filter value, use one of the following
@@ -68,7 +68,7 @@ pub const MapFilter = struct {
     /// `CONTAINS` and `NOT_CONTAINS` operators can be used only with automation
     /// rules. For more information,
     /// see [Automation
-    /// rules](https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html) in the *Security Hub User Guide*.
+    /// rules](https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html) in the *Security Hub CSPM User Guide*.
     comparison: ?MapFilterComparison = null,
 
     /// The key of the map filter. For example, for `ResourceTags`, `Key`

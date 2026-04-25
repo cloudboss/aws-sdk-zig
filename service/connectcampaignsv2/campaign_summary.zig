@@ -1,4 +1,5 @@
 const ChannelSubtype = @import("channel_subtype.zig").ChannelSubtype;
+const EntryLimitsConfig = @import("entry_limits_config.zig").EntryLimitsConfig;
 const Schedule = @import("schedule.zig").Schedule;
 const ExternalCampaignType = @import("external_campaign_type.zig").ExternalCampaignType;
 
@@ -11,6 +12,8 @@ pub const CampaignSummary = struct {
     connect_campaign_flow_arn: ?[]const u8 = null,
 
     connect_instance_id: []const u8,
+
+    entry_limits_config: ?EntryLimitsConfig = null,
 
     id: []const u8,
 
@@ -25,6 +28,7 @@ pub const CampaignSummary = struct {
         .channel_subtypes = "channelSubtypes",
         .connect_campaign_flow_arn = "connectCampaignFlowArn",
         .connect_instance_id = "connectInstanceId",
+        .entry_limits_config = "entryLimitsConfig",
         .id = "id",
         .name = "name",
         .schedule = "schedule",

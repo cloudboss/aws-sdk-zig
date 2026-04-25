@@ -13,8 +13,7 @@ pub const ResourceV2 = struct {
     cloud_partition: ?[]const u8 = null,
 
     /// Contains information about the Amazon Web Services resource associated with
-    /// the activity that prompted
-    /// GuardDuty to generate a finding.
+    /// the activity that prompted GuardDuty to generate a finding.
     data: ?ResourceData = null,
 
     /// The name of the resource.

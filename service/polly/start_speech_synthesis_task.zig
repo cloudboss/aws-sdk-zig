@@ -37,7 +37,8 @@ pub const StartSpeechSynthesisTaskInput = struct {
     lexicon_names: ?[]const []const u8 = null,
 
     /// The format in which the returned output will be encoded. For audio
-    /// stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will
+    /// stream, this will be mp3, ogg_vorbis, ogg_opus, mu-law, a-law, or pcm. For
+    /// speech marks, this will
     /// be json.
     output_format: OutputFormat,
 
@@ -56,6 +57,10 @@ pub const StartSpeechSynthesisTaskInput = struct {
     ///
     /// Valid values for pcm are "8000" and "16000" The default value is
     /// "16000".
+    ///
+    /// Valid value for ogg_opus is "48000".
+    ///
+    /// Valid value for mu-law and a-law is "8000".
     sample_rate: ?[]const u8 = null,
 
     /// ARN for the SNS topic optionally used for providing status
@@ -341,6 +346,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "SsmlMarksNotSupportedForTextTypeException")) {
         return .{ .arena = arena, .kind = .{ .ssml_marks_not_supported_for_text_type_exception = .{
             .message = owned_message,
@@ -359,6 +370,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "UnsupportedPlsAlphabetException")) {
         return .{ .arena = arena, .kind = .{ .unsupported_pls_alphabet_exception = .{
             .message = owned_message,
@@ -367,6 +384,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "UnsupportedPlsLanguageException")) {
         return .{ .arena = arena, .kind = .{ .unsupported_pls_language_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

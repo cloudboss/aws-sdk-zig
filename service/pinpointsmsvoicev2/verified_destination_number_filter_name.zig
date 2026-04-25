@@ -1,15 +1,23 @@
 const std = @import("std");
 
+/// The filter name for filtering verified destination numbers. The available
+/// filter names are:
+///
+/// * `status`: Filter by verification status.
+/// * `rcs-agent-id`: Filter by the RCS agent identifier.
 pub const VerifiedDestinationNumberFilterName = enum {
     status,
+    rcs_agent_id,
 
     pub const json_field_names = .{
         .status = "status",
+        .rcs_agent_id = "rcs-agent-id",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .status => "status",
+            .rcs_agent_id => "rcs-agent-id",
         };
     }
 

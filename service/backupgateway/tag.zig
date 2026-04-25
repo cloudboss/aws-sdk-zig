@@ -1,8 +1,8 @@
 /// A key-value pair you can use to manage, filter, and search for your
 /// resources. Allowed
-/// characters include UTF-8 letters, numbers, spaces, and the following
-/// characters: + - = . _ :
-/// /.
+/// characters include UTF-8 letters, numbers, and the following characters: + -
+/// = . _ :
+/// /. Spaces are not allowed in tag values.
 pub const Tag = struct {
     /// The key part of a tag's key-value pair. The key can't start with `aws:`.
     key: []const u8,

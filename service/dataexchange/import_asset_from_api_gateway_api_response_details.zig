@@ -15,8 +15,7 @@ pub const ImportAssetFromApiGatewayApiResponseDetails = struct {
     api_name: []const u8,
 
     /// The Base64-encoded Md5 hash for the API asset, used to ensure the integrity
-    /// of the API
-    /// at that location.
+    /// of the API at that location.
     api_specification_md_5_hash: []const u8,
 
     /// The upload URL of the API specification.

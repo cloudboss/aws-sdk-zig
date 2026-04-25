@@ -41,6 +41,9 @@ pub const Account = struct {
     /// character range.
     name: ?[]const u8 = null,
 
+    /// The paths in the organization where the account exists.
+    paths: ?[]const []const u8 = null,
+
     /// Each state represents a specific phase in the account lifecycle. Use this
     /// information
     /// to manage account access, automate workflows, or trigger actions based on
@@ -72,6 +75,7 @@ pub const Account = struct {
         .joined_method = "JoinedMethod",
         .joined_timestamp = "JoinedTimestamp",
         .name = "Name",
+        .paths = "Paths",
         .state = "State",
         .status = "Status",
     };

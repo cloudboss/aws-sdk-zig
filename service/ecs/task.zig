@@ -14,8 +14,7 @@ const Tag = @import("tag.zig").Tag;
 /// Details on a task in a cluster.
 pub const Task = struct {
     /// The Elastic Network Adapter that's associated with the task if the task uses
-    /// the
-    /// `awsvpc` network mode.
+    /// the `awsvpc` network mode.
     attachments: ?[]const Attachment = null,
 
     /// The attributes of the task
@@ -44,29 +43,23 @@ pub const Task = struct {
     containers: ?[]const Container = null,
 
     /// The number of CPU units used by the task as expressed in a task definition.
-    /// It can be
-    /// expressed as an integer using CPU units (for example, `1024`). It can also
-    /// be
-    /// expressed as a string using vCPUs (for example, `1 vCPU` or `1
+    /// It can be expressed as an integer using CPU units (for example, `1024`). It
+    /// can also be expressed as a string using vCPUs (for example, `1 vCPU` or `1
     /// vcpu`). String values are converted to an integer that indicates the CPU
-    /// units
-    /// when the task definition is registered.
+    /// units when the task definition is registered.
     ///
     /// If you're using the EC2 launch type or the external launch type, this field
-    /// is
-    /// optional. Supported values are between `128` CPU units (`0.125`
-    /// vCPUs) and `196608` CPU units (`192` vCPUs). If you do not specify
-    /// a value, the parameter is ignored.
+    /// is optional. Supported values are between `128` CPU units (`0.125` vCPUs)
+    /// and `196608` CPU units (`192` vCPUs). If you do not specify a value, the
+    /// parameter is ignored.
     ///
     /// This field is required for Fargate. For information about the valid values,
     /// see [Task
-    /// size](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_size) in the *Amazon Elastic Container Service Developer
-    /// Guide*.
+    /// size](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_size) in the *Amazon Elastic Container Service Developer Guide*.
     cpu: ?[]const u8 = null,
 
     /// The Unix timestamp for the time when the task was created. More
-    /// specifically, it's for
-    /// the time when the task entered the `PENDING` state.
+    /// specifically, it's for the time when the task entered the `PENDING` state.
     created_at: ?i64 = null,
 
     /// The desired status of the task. For more information, see [Task
@@ -74,8 +67,7 @@ pub const Task = struct {
     desired_status: ?[]const u8 = null,
 
     /// Determines whether execute command functionality is turned on for this task.
-    /// If
-    /// `true`, execute command functionality is turned on all the containers in
+    /// If `true`, execute command functionality is turned on all the containers in
     /// the task.
     enable_execute_command: bool = false,
 
@@ -92,23 +84,17 @@ pub const Task = struct {
     group: ?[]const u8 = null,
 
     /// The health status for the task. It's determined by the health of the
-    /// essential
-    /// containers in the task. If all essential containers in the task are
-    /// reporting as
-    /// `HEALTHY`, the task status also reports as `HEALTHY`. If any
-    /// essential containers in the task are reporting as `UNHEALTHY` or
-    /// `UNKNOWN`, the task status also reports as `UNHEALTHY` or
-    /// `UNKNOWN`.
+    /// essential containers in the task. If all essential containers in the task
+    /// are reporting as `HEALTHY`, the task status also reports as `HEALTHY`. If
+    /// any essential containers in the task are reporting as `UNHEALTHY` or
+    /// `UNKNOWN`, the task status also reports as `UNHEALTHY` or `UNKNOWN`.
     ///
     /// The Amazon ECS container agent doesn't monitor or report on Docker health
-    /// checks
-    /// that are embedded in a container image and not specified in the container
-    /// definition. For example, this includes those specified in a parent image or
-    /// from the
-    /// image's Dockerfile. Health check parameters that are specified in a
-    /// container
-    /// definition override any Docker health checks that are found in the container
-    /// image.
+    /// checks that are embedded in a container image and not specified in the
+    /// container definition. For example, this includes those specified in a parent
+    /// image or from the image's Dockerfile. Health check parameters that are
+    /// specified in a container definition override any Docker health checks that
+    /// are found in the container image.
     health_status: ?HealthStatus = null,
 
     /// The Elastic Inference accelerator that's associated with the task.
@@ -119,52 +105,38 @@ pub const Task = struct {
     last_status: ?[]const u8 = null,
 
     /// The infrastructure where your task runs on. For more information, see
-    /// [Amazon
-    /// ECS launch
-    /// types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer
-    /// Guide*.
+    /// [Amazon ECS launch
+    /// types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer Guide*.
     launch_type: ?LaunchType = null,
 
     /// The amount of memory (in MiB) that the task uses as expressed in a task
-    /// definition. It
-    /// can be expressed as an integer using MiB (for example, `1024`). If it's
-    /// expressed as a string using GB (for example, `1GB` or `1 GB`),
-    /// it's converted to an integer indicating the MiB when the task definition is
-    /// registered.
+    /// definition. It can be expressed as an integer using MiB (for example,
+    /// `1024`). If it's expressed as a string using GB (for example, `1GB` or `1
+    /// GB`), it's converted to an integer indicating the MiB when the task
+    /// definition is registered.
     ///
     /// If you use the EC2 launch type, this field is optional.
     ///
     /// If you use the Fargate launch type, this field is required. You must use one
-    /// of the
-    /// following values. The value that you choose determines the range of
-    /// supported values for
-    /// the `cpu` parameter.
+    /// of the following values. The value that you choose determines the range of
+    /// supported values for the `cpu` parameter.
     ///
-    /// * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available `cpu` values:
-    /// 256 (.25 vCPU)
-    ///
-    /// * 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available
-    /// `cpu` values: 512 (.5 vCPU)
-    ///
+    /// * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available `cpu` values: 256 (.25
+    ///   vCPU)
+    /// * 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available `cpu`
+    ///   values: 512 (.5 vCPU)
     /// * 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7
-    ///   GB),
-    /// 8192 (8 GB) - Available `cpu` values: 1024 (1 vCPU)
-    ///
+    ///   GB), 8192 (8 GB) - Available `cpu` values: 1024 (1 vCPU)
     /// * Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) -
-    ///   Available
-    /// `cpu` values: 2048 (2 vCPU)
-    ///
+    ///   Available `cpu` values: 2048 (2 vCPU)
     /// * Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) -
-    ///   Available
-    /// `cpu` values: 4096 (4 vCPU)
-    ///
-    /// * Between 16 GB and 60 GB in 4 GB increments - Available `cpu`
-    /// values: 8192 (8 vCPU)
+    ///   Available `cpu` values: 4096 (4 vCPU)
+    /// * Between 16 GB and 60 GB in 4 GB increments - Available `cpu` values: 8192
+    ///   (8 vCPU)
     ///
     /// This option requires Linux platform `1.4.0` or later.
-    ///
-    /// * Between 32GB and 120 GB in 8 GB increments - Available `cpu`
-    /// values: 16384 (16 vCPU)
+    /// * Between 32GB and 120 GB in 8 GB increments - Available `cpu` values: 16384
+    ///   (16 vCPU)
     ///
     /// This option requires Linux platform `1.4.0` or later.
     memory: ?[]const u8 = null,
@@ -173,21 +145,17 @@ pub const Task = struct {
     overrides: ?TaskOverride = null,
 
     /// The operating system that your tasks are running on. A platform family is
-    /// specified
-    /// only for tasks that use the Fargate launch type.
+    /// specified only for tasks that use the Fargate launch type.
     ///
     /// All tasks that run as part of this service must use the same
-    /// `platformFamily` value as the service (for example,
-    /// `LINUX.`).
+    /// `platformFamily` value as the service (for example, `LINUX.`).
     platform_family: ?[]const u8 = null,
 
     /// The platform version where your task runs on. A platform version is only
-    /// specified for
-    /// tasks that use the Fargate launch type. If you didn't specify one, the
-    /// `LATEST` platform version is used. For more information, see [Fargate
-    /// Platform
-    /// Versions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html) in the *Amazon Elastic
-    /// Container Service Developer Guide*.
+    /// specified for tasks that use the Fargate launch type. If you didn't specify
+    /// one, the `LATEST` platform version is used. For more information, see
+    /// [Fargate Platform
+    /// Versions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html) in the *Amazon Elastic Container Service Developer Guide*.
     platform_version: ?[]const u8 = null,
 
     /// The Unix timestamp for the time when the container image pull began.
@@ -197,73 +165,56 @@ pub const Task = struct {
     pull_stopped_at: ?i64 = null,
 
     /// The Unix timestamp for the time when the task started. More specifically,
-    /// it's for the
-    /// time when the task transitioned from the `PENDING` state to the
+    /// it's for the time when the task transitioned from the `PENDING` state to the
     /// `RUNNING` state.
     started_at: ?i64 = null,
 
     /// The tag specified when a task is started. If an Amazon ECS service started
-    /// the task,
-    /// the `startedBy` parameter contains the deployment ID of that service.
+    /// the task, the `startedBy` parameter contains the deployment ID of that
+    /// service.
     started_by: ?[]const u8 = null,
 
     /// The stop code indicating why a task was stopped. The `stoppedReason` might
     /// contain additional details.
     ///
-    /// For more information about stop code, see [Stopped tasks
-    /// error
+    /// For more information about stop code, see [Stopped tasks error
     /// codes](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/stopped-task-error-codes.html) in the *Amazon ECS Developer Guide*.
     stop_code: ?TaskStopCode = null,
 
     /// The Unix timestamp for the time when the task was stopped. More
-    /// specifically, it's for
-    /// the time when the task transitioned from the `RUNNING` state to the
-    /// `STOPPED` state.
+    /// specifically, it's for the time when the task transitioned from the
+    /// `RUNNING` state to the `STOPPED` state.
     stopped_at: ?i64 = null,
 
     /// The reason that the task was stopped.
     stopped_reason: ?[]const u8 = null,
 
     /// The Unix timestamp for the time when the task stops. More specifically, it's
-    /// for the
-    /// time when the task transitions from the `RUNNING` state to
+    /// for the time when the task transitions from the `RUNNING` state to
     /// `STOPPING`.
     stopping_at: ?i64 = null,
 
     /// The metadata that you apply to the task to help you categorize and organize
-    /// the task.
-    /// Each tag consists of a key and an optional value. You define both the key
-    /// and
-    /// value.
+    /// the task. Each tag consists of a key and an optional value. You define both
+    /// the key and value.
     ///
     /// The following basic restrictions apply to tags:
     ///
     /// * Maximum number of tags per resource - 50
-    ///
     /// * For each resource, each tag key must be unique, and each tag key can have
-    ///   only
-    /// one value.
-    ///
+    ///   only one value.
     /// * Maximum key length - 128 Unicode characters in UTF-8
-    ///
     /// * Maximum value length - 256 Unicode characters in UTF-8
-    ///
     /// * If your tagging schema is used across multiple services and resources,
-    /// remember that other services may have restrictions on allowed characters.
-    /// Generally allowed characters are: letters, numbers, and spaces representable
-    /// in
-    /// UTF-8, and the following characters: + - = . _ : / @.
-    ///
+    ///   remember that other services may have restrictions on allowed characters.
+    ///   Generally allowed characters are: letters, numbers, and spaces
+    ///   representable in UTF-8, and the following characters: + - = . _ : / @.
     /// * Tag keys and values are case-sensitive.
-    ///
-    /// * Do not use `aws:`, `AWS:`, or any upper or lowercase
-    /// combination of such as a prefix for either keys or values as it is reserved
-    /// for
-    /// Amazon Web
-    /// Services use. You cannot edit or delete tag keys or values with
-    /// this prefix. Tags with this prefix do not count against your tags per
-    /// resource
-    /// limit.
+    /// * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of such
+    ///   as a prefix for either keys or values as it is reserved for Amazon Web
+    ///   Services use. You cannot edit or delete tag keys or values with this
+    ///   prefix. Tags with this prefix do not count against your tags per resource
+    ///   limit.
     tags: ?[]const Tag = null,
 
     /// The Amazon Resource Name (ARN) of the task.
@@ -273,15 +224,11 @@ pub const Task = struct {
     task_definition_arn: ?[]const u8 = null,
 
     /// The version counter for the task. Every time a task experiences a change
-    /// that starts a
-    /// CloudWatch event, the version counter is incremented. If you replicate your
-    /// Amazon ECS
-    /// task state with CloudWatch Events, you can compare the version of a task
-    /// reported by the
-    /// Amazon ECS API actions with the version reported in CloudWatch Events for
-    /// the task
-    /// (inside the `detail` object) to verify that the version in your event stream
-    /// is current.
+    /// that starts a CloudWatch event, the version counter is incremented. If you
+    /// replicate your Amazon ECS task state with CloudWatch Events, you can compare
+    /// the version of a task reported by the Amazon ECS API actions with the
+    /// version reported in CloudWatch Events for the task (inside the `detail`
+    /// object) to verify that the version in your event stream is current.
     version: i64 = 0,
 
     pub const json_field_names = .{

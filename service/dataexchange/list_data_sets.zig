@@ -15,8 +15,7 @@ pub const ListDataSetsInput = struct {
     next_token: ?[]const u8 = null,
 
     /// A property that defines the data set as OWNED by the account (for providers)
-    /// or ENTITLED
-    /// to the account (for subscribers).
+    /// or ENTITLED to the account (for subscribers).
     origin: ?[]const u8 = null,
 
     pub const json_field_names = .{

@@ -24,6 +24,8 @@ pub const ReferenceSummary = union(enum) {
     /// Otherwise, null.
     email_message: ?EmailMessageReference,
     email_message_plain_text: ?EmailMessageReference,
+    email_message_plain_text_redacted: ?EmailMessageReference,
+    email_message_redacted: ?EmailMessageReference,
     /// Information about a reference when the `referenceType` is `NUMBER`.
     /// Otherwise,
     /// null.
@@ -42,6 +44,8 @@ pub const ReferenceSummary = union(enum) {
         .email = "Email",
         .email_message = "EmailMessage",
         .email_message_plain_text = "EmailMessagePlainText",
+        .email_message_plain_text_redacted = "EmailMessagePlainTextRedacted",
+        .email_message_redacted = "EmailMessageRedacted",
         .number = "Number",
         .string = "String",
         .url = "Url",

@@ -6,7 +6,7 @@ pub const RouteFerryPlace = struct {
     /// Position provided in the request.
     original_position: ?[]const f64 = null,
 
-    /// Position defined as `[longitude, latitude]`.
+    /// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
     position: []const f64,
 
     /// Index of the waypoint in the request.

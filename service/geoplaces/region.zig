@@ -2,7 +2,9 @@
 ///
 /// Example: `North Rhine-Westphalia`.
 pub const Region = struct {
-    /// Abbreviated code for a the state, province or region of the country.
+    /// Abbreviated code for a the state, province or region of the country. Not
+    /// available in `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
     /// Example: `BC`.
     code: ?[]const u8 = null,

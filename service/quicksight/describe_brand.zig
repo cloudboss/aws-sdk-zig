@@ -11,7 +11,7 @@ pub const DescribeBrandInput = struct {
     /// The ID of the Amazon Web Services account that owns the brand.
     aws_account_id: []const u8,
 
-    /// The ID of the Quick Suite brand.
+    /// The ID of the Quick brand.
     brand_id: []const u8,
 
     /// The ID of the specific version. The default value is the latest version.

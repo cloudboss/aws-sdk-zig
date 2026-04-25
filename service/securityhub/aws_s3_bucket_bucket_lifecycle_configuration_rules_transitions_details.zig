@@ -4,7 +4,7 @@ pub const AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails = struc
     /// provide `Date`, you cannot provide `Days`.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     date: ?[]const u8 = null,
 

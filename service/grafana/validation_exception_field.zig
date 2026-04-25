@@ -1,6 +1,5 @@
 /// A structure that contains information about a request parameter that caused
-/// an
-/// error.
+/// an error.
 pub const ValidationExceptionField = struct {
     /// A message describing why this field couldn't be validated.
     message: []const u8,

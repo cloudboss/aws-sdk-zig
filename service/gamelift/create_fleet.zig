@@ -13,6 +13,8 @@ const FleetType = @import("fleet_type.zig").FleetType;
 const InstanceRoleCredentialsProvider = @import("instance_role_credentials_provider.zig").InstanceRoleCredentialsProvider;
 const LocationConfiguration = @import("location_configuration.zig").LocationConfiguration;
 const ProtectionPolicy = @import("protection_policy.zig").ProtectionPolicy;
+const PlayerGatewayConfiguration = @import("player_gateway_configuration.zig").PlayerGatewayConfiguration;
+const PlayerGatewayMode = @import("player_gateway_mode.zig").PlayerGatewayMode;
 const ResourceCreationLimitPolicy = @import("resource_creation_limit_policy.zig").ResourceCreationLimitPolicy;
 const RuntimeConfiguration = @import("runtime_configuration.zig").RuntimeConfiguration;
 const Tag = @import("tag.zig").Tag;
@@ -199,6 +201,39 @@ pub const CreateFleetInput = struct {
     /// Fleets](https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
     peer_vpc_id: ?[]const u8 = null,
 
+    /// Configuration settings for player gateway. Use this to specify advanced
+    /// options for how player gateway handles connections.
+    player_gateway_configuration: ?PlayerGatewayConfiguration = null,
+
+    /// Configures player gateway for your fleet. Player gateway provides benefits
+    /// such as DDoS protection by rate limiting and validating traﬃc before it
+    /// reaches game servers, hiding game server IP addresses from players, and
+    /// providing updated endpoints when relay endpoints become unhealthy. Note,
+    /// player gateway is only available for fleets using server SDK 5.x or later
+    /// game server builds.
+    ///
+    /// **How it works:** When enabled, game clients connect to relay endpoints
+    /// instead of to your game servers. Player gateway validates player gateway
+    /// tokens and routes traffic to the appropriate game server. Your game backend
+    /// calls
+    /// [GetPlayerConnectionDetails](https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetPlayerConnectionDetails.html) to retrieve relay endpoints and player gateway tokens for your game clients. To learn more about this topic, see [DDoS protection with Amazon GameLift Servers player gateway](https://docs.aws.amazon.com/gameliftservers/latest/developerguide/ddos-protection-intro.html).
+    ///
+    /// Possible values include:
+    ///
+    /// * `DISABLED` (default) -- Game clients connect to the game server endpoint.
+    ///   Use this when you do not intend to integrate your game with player
+    ///   gateway.
+    ///
+    /// * `ENABLED` -- Player gateway is available in fleet locations where it is
+    ///   supported. Your game backend can call
+    ///   [GetPlayerConnectionDetails](https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetPlayerConnectionDetails.html) to obtain a player gateway token and endpoints for game clients.
+    ///
+    /// * `REQUIRED` -- Player gateway is available in fleet locations where it is
+    ///   supported, and the fleet can only use locations that support this feature.
+    ///   Attempting to add a remote location to your fleet which does not support
+    ///   player gateway will result in an `InvalidRequestException`.
+    player_gateway_mode: ?PlayerGatewayMode = null,
+
     /// A policy that limits the number of game sessions that an individual player
     /// can create
     /// on instances in this fleet within a specified span of time.
@@ -265,6 +300,8 @@ pub const CreateFleetInput = struct {
         .new_game_session_protection_policy = "NewGameSessionProtectionPolicy",
         .peer_vpc_aws_account_id = "PeerVpcAwsAccountId",
         .peer_vpc_id = "PeerVpcId",
+        .player_gateway_configuration = "PlayerGatewayConfiguration",
+        .player_gateway_mode = "PlayerGatewayMode",
         .resource_creation_limit_policy = "ResourceCreationLimitPolicy",
         .runtime_configuration = "RuntimeConfiguration",
         .script_id = "ScriptId",

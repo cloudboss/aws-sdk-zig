@@ -24,6 +24,7 @@ pub const FailbackReplicationError = @import("failback_replication_error.zig").F
 pub const FailbackState = @import("failback_state.zig").FailbackState;
 pub const IdentificationHints = @import("identification_hints.zig").IdentificationHints;
 pub const InitiatedBy = @import("initiated_by.zig").InitiatedBy;
+pub const InternetProtocol = @import("internet_protocol.zig").InternetProtocol;
 pub const Job = @import("job.zig").Job;
 pub const JobLog = @import("job_log.zig").JobLog;
 pub const JobLogEvent = @import("job_log_event.zig").JobLogEvent;

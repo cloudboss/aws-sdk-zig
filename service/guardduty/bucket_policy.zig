@@ -1,13 +1,11 @@
 /// Contains information on the current bucket policies for the S3 bucket.
 pub const BucketPolicy = struct {
     /// A value that indicates whether public read access for the bucket is enabled
-    /// through a
-    /// bucket policy.
+    /// through a bucket policy.
     allows_public_read_access: ?bool = null,
 
     /// A value that indicates whether public write access for the bucket is enabled
-    /// through a
-    /// bucket policy.
+    /// through a bucket policy.
     allows_public_write_access: ?bool = null,
 
     pub const json_field_names = .{

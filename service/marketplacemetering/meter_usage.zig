@@ -197,6 +197,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "InvalidLicenseException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_license_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "InvalidProductCodeException")) {
         return .{ .arena = arena, .kind = .{ .invalid_product_code_exception = .{
             .message = owned_message,

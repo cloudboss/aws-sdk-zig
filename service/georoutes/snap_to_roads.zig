@@ -19,7 +19,7 @@ pub const SnapToRoadsInput = struct {
 
     /// Chooses what the returned SnappedGeometry format should be.
     ///
-    /// Default Value: `FlexiblePolyline`
+    /// Default value: `FlexiblePolyline`
     snapped_geometry_format: ?GeometryFormat = null,
 
     /// The radius around the provided tracepoint that is considered for snapping.
@@ -35,7 +35,7 @@ pub const SnapToRoadsInput = struct {
     /// Specifies the mode of transport when calculating a route. Used in estimating
     /// the speed of travel and road compatibility.
     ///
-    /// Default Value: `Car`
+    /// Default value: `Car`
     travel_mode: ?RoadSnapTravelMode = null,
 
     /// Travel mode related options for the provided travel mode.

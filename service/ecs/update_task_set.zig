@@ -9,18 +9,15 @@ const TaskSet = @import("task_set.zig").TaskSet;
 
 pub const UpdateTaskSetInput = struct {
     /// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-    /// the
-    /// service that the task set is found in.
+    /// the service that the task set is found in.
     cluster: []const u8,
 
     /// A floating-point percentage of the desired number of tasks to place and keep
-    /// running
-    /// in the task set.
+    /// running in the task set.
     scale: Scale,
 
     /// The short name or full Amazon Resource Name (ARN) of the service that the
-    /// task set is
-    /// found in.
+    /// task set is found in.
     service: []const u8,
 
     /// The short name or full Amazon Resource Name (ARN) of the task set to update.
@@ -167,6 +164,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

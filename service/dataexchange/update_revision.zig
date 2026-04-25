@@ -13,10 +13,8 @@ pub const UpdateRevisionInput = struct {
     data_set_id: []const u8,
 
     /// Finalizing a revision tells AWS Data Exchange that your changes to the
-    /// assets in the
-    /// revision are complete. After it's in this read-only state, you can publish
-    /// the revision to
-    /// your products.
+    /// assets in the revision are complete. After it's in this read-only state, you
+    /// can publish the revision to your products.
     finalized: ?bool = null,
 
     /// The unique identifier for a revision.
@@ -45,15 +43,11 @@ pub const UpdateRevisionOutput = struct {
     data_set_id: ?[]const u8 = null,
 
     /// To publish a revision to a data set in a product, the revision must first be
-    /// finalized.
-    /// Finalizing a revision tells AWS Data Exchange that changes to the assets in
-    /// the revision
-    /// are complete. After it's in this read-only state, you can publish the
-    /// revision to your
-    /// products. Finalized revisions can be published through the AWS Data Exchange
-    /// console or the
-    /// AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace
-    /// Catalog API action.
+    /// finalized. Finalizing a revision tells AWS Data Exchange that changes to the
+    /// assets in the revision are complete. After it's in this read-only state, you
+    /// can publish the revision to your products. Finalized revisions can be
+    /// published through the AWS Data Exchange console or the AWS Marketplace
+    /// Catalog API, using the StartChangeSet AWS Marketplace Catalog API action.
     /// When using the API, revisions are uniquely identified by their ARN.
     finalized: ?bool = null,
 
@@ -61,8 +55,7 @@ pub const UpdateRevisionOutput = struct {
     id: ?[]const u8 = null,
 
     /// A required comment to inform subscribers of the reason their access to the
-    /// revision was
-    /// revoked.
+    /// revision was revoked.
     revocation_comment: ?[]const u8 = null,
 
     /// A status indicating that subscribers' access to the revision was revoked.
@@ -72,10 +65,8 @@ pub const UpdateRevisionOutput = struct {
     revoked_at: ?i64 = null,
 
     /// The revision ID of the owned revision corresponding to the entitled revision
-    /// being
-    /// viewed. This parameter is returned when a revision owner is viewing the
-    /// entitled copy of
-    /// its owned revision.
+    /// being viewed. This parameter is returned when a revision owner is viewing
+    /// the entitled copy of its owned revision.
     source_id: ?[]const u8 = null,
 
     /// The date and time that the revision was last updated, in ISO 8601 format.

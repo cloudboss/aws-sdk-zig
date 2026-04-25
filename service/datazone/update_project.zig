@@ -91,6 +91,9 @@ pub const UpdateProjectOutput = struct {
     /// The name of the project that is to be updated.
     name: []const u8,
 
+    /// The category of the project.
+    project_category: ?[]const u8 = null,
+
     /// The ID of the project profile.
     project_profile_id: ?[]const u8 = null,
 
@@ -115,6 +118,7 @@ pub const UpdateProjectOutput = struct {
         .id = "id",
         .last_updated_at = "lastUpdatedAt",
         .name = "name",
+        .project_category = "projectCategory",
         .project_profile_id = "projectProfileId",
         .project_status = "projectStatus",
         .resource_tags = "resourceTags",

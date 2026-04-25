@@ -36,6 +36,9 @@ pub const CreateEnvironmentInput = struct {
     /// The configuration ID of the environment.
     environment_configuration_id: ?[]const u8 = null,
 
+    /// The configuration name of the environment.
+    environment_configuration_name: ?[]const u8 = null,
+
     /// The identifier of the environment profile that is used to create this Amazon
     /// DataZone environment.
     environment_profile_identifier: ?[]const u8 = null,
@@ -61,6 +64,7 @@ pub const CreateEnvironmentInput = struct {
         .environment_account_region = "environmentAccountRegion",
         .environment_blueprint_identifier = "environmentBlueprintIdentifier",
         .environment_configuration_id = "environmentConfigurationId",
+        .environment_configuration_name = "environmentConfigurationName",
         .environment_profile_identifier = "environmentProfileIdentifier",
         .glossary_terms = "glossaryTerms",
         .name = "name",
@@ -103,6 +107,9 @@ pub const CreateEnvironmentOutput = struct {
 
     /// The configuration ID of the environment.
     environment_configuration_id: ?[]const u8 = null,
+
+    /// The configuration name of the environment.
+    environment_configuration_name: ?[]const u8 = null,
 
     /// The ID of the environment profile with which this Amazon DataZone
     /// environment was created.
@@ -152,6 +159,7 @@ pub const CreateEnvironmentOutput = struct {
         .environment_actions = "environmentActions",
         .environment_blueprint_id = "environmentBlueprintId",
         .environment_configuration_id = "environmentConfigurationId",
+        .environment_configuration_name = "environmentConfigurationName",
         .environment_profile_id = "environmentProfileId",
         .glossary_terms = "glossaryTerms",
         .id = "id",
@@ -242,6 +250,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateEnvironmentInput,
     if (input.environment_configuration_id) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"environmentConfigurationId\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.environment_configuration_name) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"environmentConfigurationName\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

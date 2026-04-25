@@ -10,43 +10,37 @@ const Failure = @import("failure.zig").Failure;
 
 pub const DescribeCapacityProvidersInput = struct {
     /// The short name or full Amazon Resource Name (ARN) of one or more capacity
-    /// providers.
-    /// Up to `100` capacity providers can be described in an action.
+    /// providers. Up to `100` capacity providers can be described in an action.
     capacity_providers: ?[]const []const u8 = null,
 
     /// The name of the cluster to describe capacity providers for. When specified,
-    /// only
-    /// capacity providers associated with this cluster are returned, including
-    /// Amazon ECS
-    /// Managed Instances capacity providers.
+    /// only capacity providers associated with this cluster are returned, including
+    /// Amazon ECS Managed Instances capacity providers.
     cluster: ?[]const u8 = null,
 
     /// Specifies whether or not you want to see the resource tags for the capacity
-    /// provider.
-    /// If `TAGS` is specified, the tags are included in the response. If this field
-    /// is omitted, tags aren't included in the response.
+    /// provider. If `TAGS` is specified, the tags are included in the response. If
+    /// this field is omitted, tags aren't included in the response.
     include: ?[]const CapacityProviderField = null,
 
     /// The maximum number of account setting results returned by
     /// `DescribeCapacityProviders` in paginated output. When this parameter is
-    /// used, `DescribeCapacityProviders` only returns `maxResults`
-    /// results in a single page along with a `nextToken` response element. The
-    /// remaining results of the initial request can be seen by sending another
-    /// `DescribeCapacityProviders` request with the returned
-    /// `nextToken` value. This value can be between 1 and 10. If this parameter
-    /// is not used, then `DescribeCapacityProviders` returns up to 10 results and a
-    /// `nextToken` value if applicable.
+    /// used, `DescribeCapacityProviders` only returns `maxResults` results in a
+    /// single page along with a `nextToken` response element. The remaining results
+    /// of the initial request can be seen by sending another
+    /// `DescribeCapacityProviders` request with the returned `nextToken` value.
+    /// This value can be between 1 and 10. If this parameter is not used, then
+    /// `DescribeCapacityProviders` returns up to 10 results and a `nextToken` value
+    /// if applicable.
     max_results: ?i32 = null,
 
     /// The `nextToken` value returned from a previous paginated
-    /// `DescribeCapacityProviders` request where `maxResults` was
-    /// used and the results exceeded the value of that parameter. Pagination
-    /// continues from the
+    /// `DescribeCapacityProviders` request where `maxResults` was used and the
+    /// results exceeded the value of that parameter. Pagination continues from the
     /// end of the previous results that returned the `nextToken` value.
     ///
     /// This token should be treated as an opaque identifier that is only used to
-    /// retrieve
-    /// the next items in a list and not for other programmatic purposes.
+    /// retrieve the next items in a list and not for other programmatic purposes.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -65,11 +59,10 @@ pub const DescribeCapacityProvidersOutput = struct {
     /// Any failures associated with the call.
     failures: ?[]const Failure = null,
 
-    /// The `nextToken` value to include in a future
-    /// `DescribeCapacityProviders` request. When the results of a
-    /// `DescribeCapacityProviders` request exceed `maxResults`, this
-    /// value can be used to retrieve the next page of results. This value is `null`
-    /// when there are no more results to return.
+    /// The `nextToken` value to include in a future `DescribeCapacityProviders`
+    /// request. When the results of a `DescribeCapacityProviders` request exceed
+    /// `maxResults`, this value can be used to retrieve the next page of results.
+    /// This value is `null` when there are no more results to return.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -203,6 +196,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

@@ -15,14 +15,18 @@ pub const RoutePedestrianLegDetails = struct {
     departure: RoutePedestrianDeparture,
 
     /// Notices are additional information returned that indicate issues that
-    /// occurred during route calculation.
+    /// occurred during route calculation. Not supported in `ap-southeast-1` and
+    /// `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     notices: []const RoutePedestrianNotice,
 
     /// Waypoints that were passed through during the leg. This includes the
     /// waypoints that were configured with the PassThrough option.
     pass_through_waypoints: []const RoutePassThroughWaypoint,
 
-    /// Spans that were computed for the requested SpanAdditionalFeatures.
+    /// Spans that were computed for the requested SpanAdditionalFeatures. Not
+    /// supported in `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     spans: []const RoutePedestrianSpan,
 
     /// Summarized details of the leg.

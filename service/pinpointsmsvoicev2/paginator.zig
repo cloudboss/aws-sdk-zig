@@ -8,11 +8,15 @@ const describe_account_attributes = @import("describe_account_attributes.zig");
 const describe_account_limits = @import("describe_account_limits.zig");
 const describe_configuration_sets = @import("describe_configuration_sets.zig");
 const describe_keywords = @import("describe_keywords.zig");
+const describe_notify_configurations = @import("describe_notify_configurations.zig");
+const describe_notify_templates = @import("describe_notify_templates.zig");
 const describe_opt_out_lists = @import("describe_opt_out_lists.zig");
 const describe_opted_out_numbers = @import("describe_opted_out_numbers.zig");
 const describe_phone_numbers = @import("describe_phone_numbers.zig");
 const describe_pools = @import("describe_pools.zig");
 const describe_protect_configurations = @import("describe_protect_configurations.zig");
+const describe_rcs_agent_country_launch_status = @import("describe_rcs_agent_country_launch_status.zig");
+const describe_rcs_agents = @import("describe_rcs_agents.zig");
 const describe_registration_attachments = @import("describe_registration_attachments.zig");
 const describe_registration_field_definitions = @import("describe_registration_field_definitions.zig");
 const describe_registration_field_values = @import("describe_registration_field_values.zig");
@@ -23,6 +27,7 @@ const describe_registrations = @import("describe_registrations.zig");
 const describe_sender_ids = @import("describe_sender_ids.zig");
 const describe_spend_limits = @import("describe_spend_limits.zig");
 const describe_verified_destination_numbers = @import("describe_verified_destination_numbers.zig");
+const list_notify_countries = @import("list_notify_countries.zig");
 const list_pool_origination_identities = @import("list_pool_origination_identities.zig");
 const list_protect_configuration_rule_set_number_overrides = @import("list_protect_configuration_rule_set_number_overrides.zig");
 const list_registration_associations = @import("list_registration_associations.zig");
@@ -163,6 +168,86 @@ pub const DescribeKeywordsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_keywords.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const DescribeNotifyConfigurationsPaginator = struct {
+    client: *Client,
+    params: describe_notify_configurations.DescribeNotifyConfigurationsInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_notify_configurations.DescribeNotifyConfigurationsOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try describe_notify_configurations.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const DescribeNotifyTemplatesPaginator = struct {
+    client: *Client,
+    params: describe_notify_templates.DescribeNotifyTemplatesInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_notify_templates.DescribeNotifyTemplatesOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try describe_notify_templates.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -363,6 +448,86 @@ pub const DescribeProtectConfigurationsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_protect_configurations.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const DescribeRcsAgentCountryLaunchStatusPaginator = struct {
+    client: *Client,
+    params: describe_rcs_agent_country_launch_status.DescribeRcsAgentCountryLaunchStatusInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_rcs_agent_country_launch_status.DescribeRcsAgentCountryLaunchStatusOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try describe_rcs_agent_country_launch_status.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const DescribeRcsAgentsPaginator = struct {
+    client: *Client,
+    params: describe_rcs_agents.DescribeRcsAgentsInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_rcs_agents.DescribeRcsAgentsOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try describe_rcs_agents.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -763,6 +928,46 @@ pub const DescribeVerifiedDestinationNumbersPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try describe_verified_destination_numbers.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListNotifyCountriesPaginator = struct {
+    client: *Client,
+    params: list_notify_countries.ListNotifyCountriesInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_notify_countries.ListNotifyCountriesOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_notify_countries.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

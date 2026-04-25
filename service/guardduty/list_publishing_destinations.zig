@@ -9,8 +9,8 @@ const Destination = @import("destination.zig").Destination;
 pub const ListPublishingDestinationsInput = struct {
     /// The detector ID for which you want to retrieve the publishing destination.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 
@@ -18,12 +18,9 @@ pub const ListPublishingDestinationsInput = struct {
     max_results: ?i32 = null,
 
     /// A token to use for paginating results that are returned in the response. Set
-    /// the value of
-    /// this parameter to null for the first request to a list action. For
-    /// subsequent calls, use the
-    /// `NextToken` value returned from the previous request to continue listing
-    /// results
-    /// after the first page.
+    /// the value of this parameter to null for the first request to a list action.
+    /// For subsequent calls, use the `NextToken` value returned from the previous
+    /// request to continue listing results after the first page.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -39,12 +36,9 @@ pub const ListPublishingDestinationsOutput = struct {
     destinations: ?[]const Destination = null,
 
     /// A token to use for paginating results that are returned in the response. Set
-    /// the value of
-    /// this parameter to null for the first request to a list action. For
-    /// subsequent calls, use the
-    /// `NextToken` value returned from the previous request to continue listing
-    /// results
-    /// after the first page.
+    /// the value of this parameter to null for the first request to a list action.
+    /// For subsequent calls, use the `NextToken` value returned from the previous
+    /// request to continue listing results after the first page.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{

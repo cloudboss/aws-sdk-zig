@@ -3,6 +3,10 @@ const MaintenanceStartTime = @import("maintenance_start_time.zig").MaintenanceSt
 
 /// The details of gateway.
 pub const GatewayDetails = struct {
+    /// Date after which this gateway will not receive software updates for new
+    /// features and bug fixes.
+    deprecation_date: ?i64 = null,
+
     /// The Amazon Resource Name (ARN) of the
     /// gateway. Use the `ListGateways` operation
     /// to return a list of gateways for your account and
@@ -32,11 +36,15 @@ pub const GatewayDetails = struct {
     /// gateway.
     next_update_availability_time: ?i64 = null,
 
+    /// The version number of the software running on the gateway appliance.
+    software_version: ?[]const u8 = null,
+
     /// The DNS name for the virtual private cloud (VPC) endpoint the gateway
     /// uses to connect to the cloud for backup gateway.
     vpc_endpoint: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .deprecation_date = "DeprecationDate",
         .gateway_arn = "GatewayArn",
         .gateway_display_name = "GatewayDisplayName",
         .gateway_type = "GatewayType",
@@ -44,6 +52,7 @@ pub const GatewayDetails = struct {
         .last_seen_time = "LastSeenTime",
         .maintenance_start_time = "MaintenanceStartTime",
         .next_update_availability_time = "NextUpdateAvailabilityTime",
+        .software_version = "SoftwareVersion",
         .vpc_endpoint = "VpcEndpoint",
     };
 };

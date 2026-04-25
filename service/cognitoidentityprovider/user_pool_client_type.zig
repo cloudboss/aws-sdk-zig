@@ -111,9 +111,12 @@ pub const UserPoolClientType = struct {
     /// See [OAuth 2.0 -
     /// Redirection Endpoint](https://tools.ietf.org/html/rfc6749#section-3.1.2).
     ///
-    /// Amazon Cognito requires HTTPS over HTTP except for http://localhost for
-    /// testing purposes
-    /// only.
+    /// Amazon Cognito requires HTTPS over HTTP for callback URLs to
+    /// `http://localhost`,
+    /// `http://127.0.0.1` and `http://[::1]`. These callback URLs are
+    /// for testing purposes only. You can specify custom TCP ports for your
+    /// callback
+    /// URLs.
     ///
     /// App callback URLs such as myapp://example are also supported.
     callback_ur_ls: ?[]const []const u8 = null,
@@ -145,9 +148,12 @@ pub const UserPoolClientType = struct {
     /// See [OAuth 2.0 -
     /// Redirection Endpoint](https://tools.ietf.org/html/rfc6749#section-3.1.2).
     ///
-    /// Amazon Cognito requires HTTPS over HTTP except for http://localhost for
-    /// testing purposes
-    /// only.
+    /// Amazon Cognito requires HTTPS over HTTP for callback URLs to
+    /// `http://localhost`,
+    /// `http://127.0.0.1` and `http://[::1]`. These callback URLs are
+    /// for testing purposes only. You can specify custom TCP ports for your
+    /// callback
+    /// URLs.
     ///
     /// App callback URLs such as myapp://example are also supported.
     default_redirect_uri: ?[]const u8 = null,

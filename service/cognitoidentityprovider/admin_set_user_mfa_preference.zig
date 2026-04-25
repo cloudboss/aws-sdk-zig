@@ -7,6 +7,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const EmailMfaSettingsType = @import("email_mfa_settings_type.zig").EmailMfaSettingsType;
 const SMSMfaSettingsType = @import("sms_mfa_settings_type.zig").SMSMfaSettingsType;
 const SoftwareTokenMfaSettingsType = @import("software_token_mfa_settings_type.zig").SoftwareTokenMfaSettingsType;
+const WebAuthnMfaSettingsType = @import("web_authn_mfa_settings_type.zig").WebAuthnMfaSettingsType;
 
 pub const AdminSetUserMFAPreferenceInput = struct {
     /// User preferences for email message MFA. Activates or deactivates email MFA
@@ -26,9 +27,6 @@ pub const AdminSetUserMFAPreferenceInput = struct {
     /// deactivates
     /// TOTP MFA and sets it as the preferred MFA method when multiple methods are
     /// available.
-    /// This operation can set TOTP as a user's preferred MFA method before they
-    /// register a
-    /// TOTP authenticator.
     software_token_mfa_settings: ?SoftwareTokenMfaSettingsType = null,
 
     /// The name of the user that you want to query or modify. The value of this
@@ -43,12 +41,25 @@ pub const AdminSetUserMFAPreferenceInput = struct {
     /// The ID of the user pool where you want to set a user's MFA preferences.
     user_pool_id: []const u8,
 
+    /// User preferences for passkey MFA. Activates or deactivates passkey MFA for
+    /// the user.
+    /// When activated, passkey authentication requires user verification, and
+    /// passkey sign-in
+    /// is available when MFA is required. To activate this setting, the
+    /// `FactorConfiguration` of your user pool `WebAuthnConfiguration`
+    /// must be `MULTI_FACTOR_WITH_USER_VERIFICATION`.
+    /// To activate this setting, your user pool must be in the [
+    /// Essentials
+    /// tier](https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html) or higher.
+    web_authn_mfa_settings: ?WebAuthnMfaSettingsType = null,
+
     pub const json_field_names = .{
         .email_mfa_settings = "EmailMfaSettings",
         .sms_mfa_settings = "SMSMfaSettings",
         .software_token_mfa_settings = "SoftwareTokenMfaSettings",
         .username = "Username",
         .user_pool_id = "UserPoolId",
+        .web_authn_mfa_settings = "WebAuthnMfaSettings",
     };
 };
 
@@ -124,6 +135,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     const owned_message = try arena_alloc.dupe(u8, error_message);
     const owned_request_id = try arena_alloc.dupe(u8, "");
 
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "AliasExistsException")) {
         return .{ .arena = arena, .kind = .{ .alias_exists_exception = .{
             .message = owned_message,
@@ -192,6 +209,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "InternalErrorException")) {
         return .{ .arena = arena, .kind = .{ .internal_error_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

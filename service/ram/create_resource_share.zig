@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const ResourceShareConfiguration = @import("resource_share_configuration.zig").ResourceShareConfiguration;
 const Tag = @import("tag.zig").Tag;
 const ResourceShare = @import("resource_share.zig").ResourceShare;
 
@@ -81,6 +82,9 @@ pub const CreateResourceShareInput = struct {
     /// resource share.
     resource_arns: ?[]const []const u8 = null,
 
+    /// Specifies the configuration of this resource share.
+    resource_share_configuration: ?ResourceShareConfiguration = null,
+
     /// Specifies source constraints (accounts, ARNs, organization IDs, or
     /// organization paths) that limit when service principals can access resources
     /// in this resource share. When a service principal attempts to access a shared
@@ -101,6 +105,7 @@ pub const CreateResourceShareInput = struct {
         .permission_arns = "permissionArns",
         .principals = "principals",
         .resource_arns = "resourceArns",
+        .resource_share_configuration = "resourceShareConfiguration",
         .sources = "sources",
         .tags = "tags",
     };
@@ -192,6 +197,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateResourceShareInpu
     if (input.resource_arns) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"resourceArns\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.resource_share_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"resourceShareConfiguration\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

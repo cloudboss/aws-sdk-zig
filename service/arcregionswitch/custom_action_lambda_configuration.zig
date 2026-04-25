@@ -8,7 +8,10 @@ pub const CustomActionLambdaConfiguration = struct {
     /// The Amazon Web Services Lambda functions for the execution block.
     lambdas: []const Lambdas,
 
-    /// The Amazon Web Services Region for the function to run in.
+    /// The Amazon Web Services Region for the function to run in. For recovery
+    /// workflows use `activatingRegion` or `deactivatingRegion`. For post-recovery
+    /// workflows, use `activeRegion` (the Region with customer traffic) or
+    /// `inactiveRegion` (the Region with no customer traffic).
     region_to_run: RegionToRunIn,
 
     /// The retry interval specified.

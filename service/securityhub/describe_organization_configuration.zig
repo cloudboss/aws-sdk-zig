@@ -11,29 +11,29 @@ pub const DescribeOrganizationConfigurationInput = struct {
 };
 
 pub const DescribeOrganizationConfigurationOutput = struct {
-    /// Whether to automatically enable Security Hub in new member accounts when
-    /// they join the organization.
+    /// Whether to automatically enable Security Hub CSPM in new member accounts
+    /// when they join the organization.
     ///
-    /// If set to `true`, then Security Hub is automatically enabled in new
+    /// If set to `true`, then Security Hub CSPM is automatically enabled in new
     /// accounts. If set to `false`,
-    /// then Security Hub isn't enabled in new accounts automatically. The default
-    /// value is `false`.
+    /// then Security Hub CSPM isn't enabled in new accounts automatically. The
+    /// default value is `false`.
     ///
     /// If the `ConfigurationType` of your organization is set to `CENTRAL`, then
     /// this field is set
     /// to `false` and can't be changed in the home Region and linked Regions.
     /// However, in that case, the delegated administrator can create a
     /// configuration
-    /// policy in which Security Hub is enabled and associate the policy with new
-    /// organization accounts.
+    /// policy in which Security Hub CSPM is enabled and associate the policy with
+    /// new organization accounts.
     auto_enable: ?bool = null,
 
-    /// Whether to automatically enable Security Hub [default
+    /// Whether to automatically enable Security Hub CSPM [default
     /// standards](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html)
     /// in new member accounts when they join the organization.
     ///
-    /// If equal to `DEFAULT`, then Security Hub default standards are automatically
-    /// enabled for new member
+    /// If equal to `DEFAULT`, then Security Hub CSPM default standards are
+    /// automatically enabled for new member
     /// accounts. If equal to `NONE`, then default standards are not automatically
     /// enabled for new member
     /// accounts. The default value of this parameter is equal to `DEFAULT`.
@@ -49,7 +49,7 @@ pub const DescribeOrganizationConfigurationOutput = struct {
 
     /// Whether the maximum number of allowed member accounts are already associated
     /// with the
-    /// Security Hub administrator account.
+    /// Security Hub CSPM administrator account.
     member_account_limit_reached: ?bool = null,
 
     organization_configuration: ?OrganizationConfiguration = null,
@@ -174,6 +174,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "LimitExceededException")) {
         return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organization_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationalUnitNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organizational_unit_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

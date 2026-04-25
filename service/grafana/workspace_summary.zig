@@ -9,8 +9,7 @@ const WorkspaceStatus = @import("workspace_status.zig").WorkspaceStatus;
 /// account.
 pub const WorkspaceSummary = struct {
     /// A structure containing information about the authentication methods used in
-    /// the
-    /// workspace.
+    /// the workspace.
     authentication: AuthenticationSummary,
 
     /// The date that the workspace was created.
@@ -23,8 +22,7 @@ pub const WorkspaceSummary = struct {
     endpoint: []const u8,
 
     /// The token that ties this workspace to a Grafana Labs account. For more
-    /// information,
-    /// see [Link your account with Grafana
+    /// information, see [Link your account with Grafana
     /// Labs](https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise).
     grafana_token: ?[]const u8 = null,
 
@@ -47,9 +45,8 @@ pub const WorkspaceSummary = struct {
     name: ?[]const u8 = null,
 
     /// The Amazon Web Services notification channels that Amazon Managed Grafana
-    /// can automatically
-    /// create IAM roles and permissions for, which allows Amazon Managed Grafana to
-    /// use these channels.
+    /// can automatically create IAM roles and permissions for, which allows Amazon
+    /// Managed Grafana to use these channels.
     notification_destinations: ?[]const NotificationDestinationType = null,
 
     /// The current status of the workspace.

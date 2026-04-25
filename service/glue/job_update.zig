@@ -99,7 +99,8 @@ pub const JobUpdate = struct {
     /// developer
     /// guide.
     ///
-    /// Jobs that are created without specifying a Glue version default to Glue 0.9.
+    /// If not provided in the update request, the Glue version retains the value
+    /// from the existing job definition.
     glue_version: ?[]const u8 = null,
 
     /// A mode that describes how a job was created. Valid values are:

@@ -7,6 +7,7 @@ const ChannelEngineVersionResponse = @import("channel_engine_version_response.zi
 const OutputDestination = @import("output_destination.zig").OutputDestination;
 const ChannelEgressEndpoint = @import("channel_egress_endpoint.zig").ChannelEgressEndpoint;
 const EncoderSettings = @import("encoder_settings.zig").EncoderSettings;
+const DescribeInferenceSettings = @import("describe_inference_settings.zig").DescribeInferenceSettings;
 const InputAttachment = @import("input_attachment.zig").InputAttachment;
 const InputSpecification = @import("input_specification.zig").InputSpecification;
 const DescribeLinkedChannelSettings = @import("describe_linked_channel_settings.zig").DescribeLinkedChannelSettings;
@@ -49,6 +50,10 @@ pub const Channel = struct {
 
     /// The unique id of the channel.
     id: ?[]const u8 = null,
+
+    /// Include this setting to include Elemental Inference features in this
+    /// channel.
+    inference_settings: ?DescribeInferenceSettings = null,
 
     /// List of input attachments for channel.
     input_attachments: ?[]const InputAttachment = null,
@@ -96,6 +101,7 @@ pub const Channel = struct {
         .egress_endpoints = "EgressEndpoints",
         .encoder_settings = "EncoderSettings",
         .id = "Id",
+        .inference_settings = "InferenceSettings",
         .input_attachments = "InputAttachments",
         .input_specification = "InputSpecification",
         .linked_channel_settings = "LinkedChannelSettings",

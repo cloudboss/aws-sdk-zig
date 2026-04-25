@@ -11,8 +11,8 @@ const PreferredResourceName = @import("preferred_resource_name.zig").PreferredRe
 /// preferences](https://docs.aws.amazon.com/compute-optimizer/latest/ug/rightsizing-preferences.html) in the *Compute Optimizer User
 /// Guide*.
 ///
-/// * This preference is only available for the Amazon EC2 instance and Amazon
-///   EC2 Auto Scaling group resource types.
+/// * This preference is only available for the Amazon EC2 instance and Auto
+///   Scaling group resource types.
 ///
 /// * Compute Optimizer only supports the customization of `Ec2InstanceTypes`.
 pub const PreferredResource = struct {

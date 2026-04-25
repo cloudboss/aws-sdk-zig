@@ -1,3 +1,4 @@
+const QueryParameter = @import("query_parameter.zig").QueryParameter;
 const QueryLanguage = @import("query_language.zig").QueryLanguage;
 
 /// This structure contains details about a saved CloudWatch Logs Insights query
@@ -13,6 +14,11 @@ pub const QueryDefinition = struct {
 
     /// The name of the query definition.
     name: ?[]const u8 = null,
+
+    /// If this query definition contains a list of query parameters that define
+    /// placeholder
+    /// variables for the query string, that list appears here.
+    parameters: ?[]const QueryParameter = null,
 
     /// The unique ID of the query definition.
     query_definition_id: ?[]const u8 = null,
@@ -33,6 +39,7 @@ pub const QueryDefinition = struct {
         .last_modified = "lastModified",
         .log_group_names = "logGroupNames",
         .name = "name",
+        .parameters = "parameters",
         .query_definition_id = "queryDefinitionId",
         .query_language = "queryLanguage",
         .query_string = "queryString",

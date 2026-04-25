@@ -5,12 +5,15 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BlueprintFilter = @import("blueprint_filter.zig").BlueprintFilter;
+const DataAutomationLibraryFilter = @import("data_automation_library_filter.zig").DataAutomationLibraryFilter;
 const DataAutomationProjectStageFilter = @import("data_automation_project_stage_filter.zig").DataAutomationProjectStageFilter;
 const ResourceOwner = @import("resource_owner.zig").ResourceOwner;
 const DataAutomationProjectSummary = @import("data_automation_project_summary.zig").DataAutomationProjectSummary;
 
 pub const ListDataAutomationProjectsInput = struct {
     blueprint_filter: ?BlueprintFilter = null,
+
+    library_filter: ?DataAutomationLibraryFilter = null,
 
     max_results: ?i32 = null,
 
@@ -22,6 +25,7 @@ pub const ListDataAutomationProjectsInput = struct {
 
     pub const json_field_names = .{
         .blueprint_filter = "blueprintFilter",
+        .library_filter = "libraryFilter",
         .max_results = "maxResults",
         .next_token = "nextToken",
         .project_stage_filter = "projectStageFilter",
@@ -81,6 +85,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListDataAutomationProje
     if (input.blueprint_filter) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"blueprintFilter\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.library_filter) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"libraryFilter\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

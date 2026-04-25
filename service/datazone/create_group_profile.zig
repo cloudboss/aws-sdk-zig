@@ -16,12 +16,18 @@ pub const CreateGroupProfileInput = struct {
     domain_identifier: []const u8,
 
     /// The identifier of the group for which the group profile is created.
-    group_identifier: []const u8,
+    group_identifier: ?[]const u8 = null,
+
+    /// The ARN of the IAM role that will be associated with the group profile. This
+    /// role defines the permissions that group members will assume when accessing
+    /// Amazon DataZone resources.
+    role_principal_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
         .domain_identifier = "domainIdentifier",
         .group_identifier = "groupIdentifier",
+        .role_principal_arn = "rolePrincipalArn",
     };
 };
 
@@ -36,6 +42,14 @@ pub const CreateGroupProfileOutput = struct {
     /// The identifier of the group profile.
     id: ?[]const u8 = null,
 
+    /// The ARN of the IAM role principal. This role is associated with the group
+    /// profile.
+    role_principal_arn: ?[]const u8 = null,
+
+    /// The unique identifier of the IAM role principal. This principal is
+    /// associated with the group profile.
+    role_principal_id: ?[]const u8 = null,
+
     /// The status of the group profile.
     status: ?GroupProfileStatus = null,
 
@@ -43,6 +57,8 @@ pub const CreateGroupProfileOutput = struct {
         .domain_id = "domainId",
         .group_name = "groupName",
         .id = "id",
+        .role_principal_arn = "rolePrincipalArn",
+        .role_principal_id = "rolePrincipalId",
         .status = "status",
     };
 };
@@ -95,10 +111,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateGroupProfileInput
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"groupIdentifier\":");
-    try aws.json.writeValue(@TypeOf(input.group_identifier), input.group_identifier, allocator, &body_buf);
-    has_prev = true;
+    if (input.group_identifier) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"groupIdentifier\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.role_principal_arn) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"rolePrincipalArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);

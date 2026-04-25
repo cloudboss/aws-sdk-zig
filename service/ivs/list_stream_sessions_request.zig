@@ -6,8 +6,7 @@ pub const ListStreamSessionsRequest = struct {
     max_results: ?i32 = null,
 
     /// The first stream to retrieve. This is used for pagination; see the
-    /// `nextToken`
-    /// response field.
+    /// `nextToken` response field.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{

@@ -18,39 +18,53 @@ pub const RouteVehicleLegDetails = struct {
     /// Details corresponding to the departure for the leg.
     departure: RouteVehicleDeparture,
 
-    /// Incidents corresponding to this leg of the route.
+    /// Incidents corresponding to this leg of the route. Not supported in
+    /// `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     incidents: []const RouteVehicleIncident,
 
     /// Notices are additional information returned that indicate issues that
-    /// occurred during route calculation.
+    /// occurred during route calculation. Not supported in `ap-southeast-1` and
+    /// `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     notices: []const RouteVehicleNotice,
 
     /// Waypoints that were passed through during the leg. This includes the
     /// waypoints that were configured with the PassThrough option.
     pass_through_waypoints: []const RoutePassThroughWaypoint,
 
-    /// Spans that were computed for the requested SpanAdditionalFeatures.
+    /// Spans that were computed for the requested SpanAdditionalFeatures. Not
+    /// supported in `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     spans: []const RouteVehicleSpan,
 
     /// Summarized details of the leg.
     summary: ?RouteVehicleSummary = null,
 
-    /// Toll related options.
+    /// Toll related options. Not supported in `ap-southeast-1` and `ap-southeast-5`
+    /// regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     tolls: []const RouteToll,
 
-    /// Toll systems are authorities that collect payments for the toll.
+    /// Toll systems are authorities that collect payments for the toll. Not
+    /// supported in `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     toll_systems: []const RouteTollSystem,
 
     /// Steps of a leg that must be performed before the travel portion of the leg.
     travel_steps: []const RouteVehicleTravelStep,
 
     /// Truck road type identifiers. `BK1` through `BK4` apply only to Sweden.
-    /// `A2,A4,B2,B4,C,D,ET2,ET4` apply only to Mexico.
+    /// `A2,A4,B2,B4,C,D,ET2,ET4` apply only to Mexico. Not supported in
+    /// `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
     /// There are currently no other supported values as of 26th April 2024.
     truck_road_types: []const []const u8,
 
-    /// Zones corresponding to this leg of the route.
+    /// Zones corresponding to this leg of the route. Not supported in
+    /// `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     zones: []const RouteZone,
 
     pub const json_field_names = .{

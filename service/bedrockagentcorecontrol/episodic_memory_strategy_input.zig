@@ -11,6 +11,9 @@ pub const EpisodicMemoryStrategyInput = struct {
     /// The namespaces for which to create episodes.
     namespaces: ?[]const []const u8 = null,
 
+    /// The namespaceTemplates for which to create episodes.
+    namespace_templates: ?[]const []const u8 = null,
+
     /// The configuration for the reflections created with the episodic memory
     /// strategy.
     reflection_configuration: ?EpisodicReflectionConfigurationInput = null,
@@ -19,6 +22,7 @@ pub const EpisodicMemoryStrategyInput = struct {
         .description = "description",
         .name = "name",
         .namespaces = "namespaces",
+        .namespace_templates = "namespaceTemplates",
         .reflection_configuration = "reflectionConfiguration",
     };
 };

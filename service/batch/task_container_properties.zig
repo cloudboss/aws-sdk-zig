@@ -197,6 +197,28 @@ pub const TaskContainerProperties = struct {
     /// Data](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html) in the Amazon Elastic Container Service Developer Guide.
     secrets: ?[]const Secret = null,
 
+    /// Time duration (in seconds) to wait before giving up on resolving
+    /// dependencies for a
+    /// container. The minimum value is 2 seconds and the maximum value for Fargate
+    /// is 120
+    /// seconds.
+    start_timeout: ?i32 = null,
+
+    /// Time duration (in seconds) to wait before the container is forcefully killed
+    /// if it doesn't
+    /// exit normally on its own. The minimum value is 2 seconds and the maximum
+    /// value for Fargate is
+    /// 120 seconds. If the parameter is not specified, the default value of 30
+    /// seconds is used. For
+    /// tasks that use the EC2 launch type, if the `stopTimeout` parameter isn't
+    /// specified,
+    /// the value set for the Amazon ECS container agent configuration variable
+    /// `ECS_CONTAINER_STOP_TIMEOUT` is used. If neither the `stopTimeout`
+    /// parameter nor the `ECS_CONTAINER_STOP_TIMEOUT` agent configuration variable
+    /// are set,
+    /// then the default value of 30 seconds is used.
+    stop_timeout: ?i32 = null,
+
     /// A list of `ulimits` to set in the container. If a `ulimit` value is
     /// specified in a task definition, it overrides the default values set by
     /// Docker. This parameter
@@ -269,6 +291,8 @@ pub const TaskContainerProperties = struct {
         .repository_credentials = "repositoryCredentials",
         .resource_requirements = "resourceRequirements",
         .secrets = "secrets",
+        .start_timeout = "startTimeout",
+        .stop_timeout = "stopTimeout",
         .ulimits = "ulimits",
         .user = "user",
     };

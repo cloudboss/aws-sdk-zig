@@ -24,7 +24,7 @@ pub const CreateReplicationGroupInput = struct {
     /// replication group.
     ///
     /// **Required:** Only available when creating a replication
-    /// group in an Amazon VPC using Valkey 7.2 and later, Redis OSS version
+    /// group in an Amazon VPC using Valkey `7.2` and later, Redis OSS version
     /// `3.2.6`, or Redis OSS `4.x` and
     /// later.
     ///

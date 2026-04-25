@@ -9,8 +9,7 @@ pub const ManagedAgent = struct {
     last_status: ?[]const u8 = null,
 
     /// The name of the managed agent. When the execute command feature is turned
-    /// on, the
-    /// managed agent name is `ExecuteCommandAgent`.
+    /// on, the managed agent name is `ExecuteCommandAgent`.
     name: ?ManagedAgentName = null,
 
     /// The reason for why the managed agent is in the state it is in.

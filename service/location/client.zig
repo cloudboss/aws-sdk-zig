@@ -10,6 +10,7 @@ const batch_put_geofence = @import("batch_put_geofence.zig");
 const batch_update_device_position = @import("batch_update_device_position.zig");
 const calculate_route = @import("calculate_route.zig");
 const calculate_route_matrix = @import("calculate_route_matrix.zig");
+const cancel_job = @import("cancel_job.zig");
 const create_geofence_collection = @import("create_geofence_collection.zig");
 const create_key = @import("create_key.zig");
 const create_map = @import("create_map.zig");
@@ -33,6 +34,7 @@ const forecast_geofence_events = @import("forecast_geofence_events.zig");
 const get_device_position = @import("get_device_position.zig");
 const get_device_position_history = @import("get_device_position_history.zig");
 const get_geofence = @import("get_geofence.zig");
+const get_job = @import("get_job.zig");
 const get_map_glyphs = @import("get_map_glyphs.zig");
 const get_map_sprites = @import("get_map_sprites.zig");
 const get_map_style_descriptor = @import("get_map_style_descriptor.zig");
@@ -41,6 +43,7 @@ const get_place = @import("get_place.zig");
 const list_device_positions = @import("list_device_positions.zig");
 const list_geofence_collections = @import("list_geofence_collections.zig");
 const list_geofences = @import("list_geofences.zig");
+const list_jobs = @import("list_jobs.zig");
 const list_keys = @import("list_keys.zig");
 const list_maps = @import("list_maps.zig");
 const list_place_indexes = @import("list_place_indexes.zig");
@@ -52,6 +55,7 @@ const put_geofence = @import("put_geofence.zig");
 const search_place_index_for_position = @import("search_place_index_for_position.zig");
 const search_place_index_for_suggestions = @import("search_place_index_for_suggestions.zig");
 const search_place_index_for_text = @import("search_place_index_for_text.zig");
+const start_job = @import("start_job.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_geofence_collection = @import("update_geofence_collection.zig");
@@ -63,6 +67,7 @@ const update_tracker = @import("update_tracker.zig");
 const verify_device_position = @import("verify_device_position.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
+const waiters = @import("waiters.zig");
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -266,6 +271,16 @@ pub const Client = struct {
     ///   mode](https://docs.aws.amazon.com/location/previous/developerguide/travel-mode.html) using TravelMode sets the transportation mode used to calculate the routes. This also lets you specify additional route preferences in `CarModeOptions` if traveling by `Car`, or `TruckModeOptions` if traveling by `Truck`.
     pub fn calculateRouteMatrix(self: *Self, allocator: std.mem.Allocator, input: calculate_route_matrix.CalculateRouteMatrixInput, options: CallOptions) !calculate_route_matrix.CalculateRouteMatrixOutput {
         return calculate_route_matrix.execute(self, allocator, input, options);
+    }
+
+    /// `CancelJob` cancels a job that is currently running or pending. If the job
+    /// is already in a terminal state (`Completed`, `Failed`, or `Cancelled`), the
+    /// operation returns successfully with the current status.
+    ///
+    /// For more information, see [Job
+    /// concepts](https://docs.aws.amazon.com/location/latest/developerguide/jobs-concepts.html) in the *Amazon Location Service Developer Guide*.
+    pub fn cancelJob(self: *Self, allocator: std.mem.Allocator, input: cancel_job.CancelJobInput, options: CallOptions) !cancel_job.CancelJobOutput {
+        return cancel_job.execute(self, allocator, input, options);
     }
 
     /// Creates a geofence collection, which manages and stores geofences.
@@ -605,6 +620,15 @@ pub const Client = struct {
         return get_geofence.execute(self, allocator, input, options);
     }
 
+    /// `GetJob` retrieves detailed information about a specific job, including its
+    /// current status, configuration, and error information if the job failed.
+    ///
+    /// For more information, see [Job
+    /// concepts](https://docs.aws.amazon.com/location/latest/developerguide/jobs-concepts.html) in the *Amazon Location Service Developer Guide*.
+    pub fn getJob(self: *Self, allocator: std.mem.Allocator, input: get_job.GetJobInput, options: CallOptions) !get_job.GetJobOutput {
+        return get_job.execute(self, allocator, input, options);
+    }
+
     /// This operation is no longer current and may be deprecated in the future. We
     /// recommend upgrading to [ `GetGlyphs`
     /// ](https://docs.aws.amazon.com/location/latest/APIReference/API_geomaps_GetGlyphs.html) unless you require `Grab` data.
@@ -752,6 +776,15 @@ pub const Client = struct {
     /// Lists geofences stored in a given geofence collection.
     pub fn listGeofences(self: *Self, allocator: std.mem.Allocator, input: list_geofences.ListGeofencesInput, options: CallOptions) !list_geofences.ListGeofencesOutput {
         return list_geofences.execute(self, allocator, input, options);
+    }
+
+    /// `ListJobs` retrieves a list of jobs with optional filtering and pagination
+    /// support.
+    ///
+    /// For more information, see [Job
+    /// concepts](https://docs.aws.amazon.com/location/latest/developerguide/jobs-concepts.html) in the *Amazon Location Service Developer Guide*.
+    pub fn listJobs(self: *Self, allocator: std.mem.Allocator, input: list_jobs.ListJobsInput, options: CallOptions) !list_jobs.ListJobsOutput {
+        return list_jobs.execute(self, allocator, input, options);
     }
 
     /// Lists API key resources in your Amazon Web Services account.
@@ -942,6 +975,16 @@ pub const Client = struct {
         return search_place_index_for_text.execute(self, allocator, input, options);
     }
 
+    /// `StartJob` starts a new asynchronous bulk processing job. You specify the
+    /// input data location in Amazon S3, the action to perform, and the output
+    /// location where results are written.
+    ///
+    /// For more information, see [Job
+    /// concepts](https://docs.aws.amazon.com/location/latest/developerguide/jobs-concepts.html) in the *Amazon Location Service Developer Guide*.
+    pub fn startJob(self: *Self, allocator: std.mem.Allocator, input: start_job.StartJobInput, options: CallOptions) !start_job.StartJobOutput {
+        return start_job.execute(self, allocator, input, options);
+    }
+
     /// Assigns one or more tags (key-value pairs) to the specified Amazon Location
     /// Service resource.
     ///
@@ -1090,6 +1133,13 @@ pub const Client = struct {
         };
     }
 
+    pub fn listJobsPaginator(self: *Self, params: list_jobs.ListJobsInput) paginator.ListJobsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listKeysPaginator(self: *Self, params: list_keys.ListKeysInput) paginator.ListKeysPaginator {
         return .{
             .client = self,
@@ -1130,5 +1180,10 @@ pub const Client = struct {
             .client = self,
             .params = params,
         };
+    }
+
+    pub fn waitUntilJobCompleted(self: *Self, params: get_job.GetJobInput) aws.waiter.WaiterError!void {
+        var w = waiters.JobCompletedWaiter{ .client = self, .params = params };
+        return w.wait();
     }
 };

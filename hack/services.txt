@@ -148,7 +148,6 @@ emrcontainers models/emr-containers/service/2020-10-01/emr-containers-2020-10-01
 emrserverless models/emr-serverless/service/2021-07-13/emr-serverless-2021-07-13.json com.amazonaws.emrserverless#AwsToledoWebService
 entityresolution models/entityresolution/service/2018-05-10/entityresolution-2018-05-10.json com.amazonaws.entityresolution#AWSVeniceService
 eventbridge models/eventbridge/service/2015-10-07/eventbridge-2015-10-07.json com.amazonaws.eventbridge#AWSEvents
-evidently models/evidently/service/2021-02-01/evidently-2021-02-01.json com.amazonaws.evidently#Evidently
 evs models/evs/service/2023-07-27/evs-2023-07-27.json com.amazonaws.evs#AmazonElasticVMwareService
 finspace models/finspace/service/2021-03-12/finspace-2021-03-12.json com.amazonaws.finspace#AWSHabaneroManagementService
 finspacedata models/finspace-data/service/2020-07-13/finspace-data-2020-07-13.json com.amazonaws.finspacedata#AWSHabaneroPublicAPI
@@ -184,7 +183,6 @@ inspectorscan models/inspector-scan/service/2023-08-08/inspector-scan-2023-08-08
 internetmonitor models/internetmonitor/service/2021-06-03/internetmonitor-2021-06-03.json com.amazonaws.internetmonitor#InternetMonitor20210603
 invoicing models/invoicing/service/2024-12-01/invoicing-2024-12-01.json com.amazonaws.invoicing#Invoicing
 iot models/iot/service/2015-05-28/iot-2015-05-28.json com.amazonaws.iot#AWSIotService
-iotanalytics models/iotanalytics/service/2017-11-27/iotanalytics-2017-11-27.json com.amazonaws.iotanalytics#AWSIoTAnalytics
 iotdataplane models/iot-data-plane/service/2015-05-28/iot-data-plane-2015-05-28.json com.amazonaws.iotdataplane#IotMoonrakerService
 iotdeviceadvisor models/iotdeviceadvisor/service/2020-09-18/iotdeviceadvisor-2020-09-18.json com.amazonaws.iotdeviceadvisor#IotSenateService
 iotevents models/iot-events/service/2018-07-27/iot-events-2018-07-27.json com.amazonaws.iotevents#IotColumboService

@@ -1,5 +1,6 @@
 const FailoverState = @import("failover_state.zig").FailoverState;
 const GlobalClusterMember = @import("global_cluster_member.zig").GlobalClusterMember;
+const Tag = @import("tag.zig").Tag;
 
 /// Contains the details of an Amazon Neptune global database.
 ///
@@ -11,6 +12,9 @@ const GlobalClusterMember = @import("global_cluster_member.zig").GlobalClusterMe
 /// FailoverGlobalCluster, and
 /// RemoveFromGlobalCluster actions.
 pub const GlobalCluster = struct {
+    /// The default database name within the new global database cluster.
+    database_name: ?[]const u8 = null,
+
     /// The deletion protection setting for the global database.
     deletion_protection: ?bool = null,
 
@@ -39,7 +43,7 @@ pub const GlobalCluster = struct {
     /// that are part of the global database.
     global_cluster_members: ?[]const GlobalClusterMember = null,
 
-    /// An immutable identifier for the global database that is unique within in all
+    /// An immutable identifier for the global database that is unique within all
     /// regions. This identifier is found in CloudTrail log entries whenever the KMS
     /// key for the DB cluster is accessed.
     global_cluster_resource_id: ?[]const u8 = null,
@@ -49,4 +53,7 @@ pub const GlobalCluster = struct {
 
     /// The storage encryption setting for the global database.
     storage_encrypted: ?bool = null,
+
+    /// A list of global cluster tags.
+    tag_list: ?[]const Tag = null,
 };

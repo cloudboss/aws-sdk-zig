@@ -2,8 +2,7 @@ const CoverageFilterCriterionKey = @import("coverage_filter_criterion_key.zig").
 const CoverageFilterCondition = @import("coverage_filter_condition.zig").CoverageFilterCondition;
 
 /// Represents a condition that when matched will be added to the response of
-/// the
-/// operation.
+/// the operation.
 pub const CoverageFilterCriterion = struct {
     /// An enum value representing possible filter fields.
     ///

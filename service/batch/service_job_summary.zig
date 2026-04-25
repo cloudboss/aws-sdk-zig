@@ -1,9 +1,15 @@
+const ServiceJobCapacityUsageSummary = @import("service_job_capacity_usage_summary.zig").ServiceJobCapacityUsageSummary;
 const LatestServiceJobAttempt = @import("latest_service_job_attempt.zig").LatestServiceJobAttempt;
 const ServiceJobType = @import("service_job_type.zig").ServiceJobType;
 const ServiceJobStatus = @import("service_job_status.zig").ServiceJobStatus;
 
 /// Summary information about a service job.
 pub const ServiceJobSummary = struct {
+    /// The capacity usage information for this service job, including the unit of
+    /// measure and
+    /// quantity of resources being used.
+    capacity_usage: ?[]const ServiceJobCapacityUsageSummary = null,
+
     /// The Unix timestamp (in milliseconds) for when the service job was created.
     created_at: ?i64 = null,
 
@@ -18,6 +24,14 @@ pub const ServiceJobSummary = struct {
 
     /// Information about the latest attempt for the service job.
     latest_attempt: ?LatestServiceJobAttempt = null,
+
+    /// The quota share for the service job.
+    quota_share_name: ?[]const u8 = null,
+
+    /// The Unix timestamp (in milliseconds) for when the service job was scheduled
+    /// for
+    /// execution.
+    scheduled_at: ?i64 = null,
 
     /// The type of service job. For SageMaker Training jobs, this value is
     /// `SAGEMAKER_TRAINING`.
@@ -41,11 +55,14 @@ pub const ServiceJobSummary = struct {
     stopped_at: ?i64 = null,
 
     pub const json_field_names = .{
+        .capacity_usage = "capacityUsage",
         .created_at = "createdAt",
         .job_arn = "jobArn",
         .job_id = "jobId",
         .job_name = "jobName",
         .latest_attempt = "latestAttempt",
+        .quota_share_name = "quotaShareName",
+        .scheduled_at = "scheduledAt",
         .service_job_type = "serviceJobType",
         .share_identifier = "shareIdentifier",
         .started_at = "startedAt",

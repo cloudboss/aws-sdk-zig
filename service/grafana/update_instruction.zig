@@ -8,8 +8,7 @@ pub const UpdateInstruction = struct {
     /// Specifies whether this update is to add or revoke role permissions.
     action: UpdateAction,
 
-    /// The role to add or revoke for the user or the group specified in
-    /// `users`.
+    /// The role to add or revoke for the user or the group specified in `users`.
     role: Role,
 
     /// A structure that specifies the user or group to add or revoke the role for.

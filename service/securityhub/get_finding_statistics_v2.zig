@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const GroupByRule = @import("group_by_rule.zig").GroupByRule;
+const FindingScopes = @import("finding_scopes.zig").FindingScopes;
 const SortOrder = @import("sort_order.zig").SortOrder;
 const GroupByResult = @import("group_by_result.zig").GroupByResult;
 
@@ -17,6 +18,19 @@ pub const GetFindingStatisticsV2Input = struct {
     /// The maximum number of results to be returned.
     max_statistic_results: ?i32 = null,
 
+    /// Limits the results to findings from specific organizational units or from
+    /// the delegated administrator's organization.
+    /// Only the delegated administrator account can use this parameter. Other
+    /// accounts receive an `AccessDeniedException`.
+    ///
+    /// This parameter is optional. If you omit it, the delegated administrator sees
+    /// statistics from all accounts across the entire organization. Other accounts
+    /// see only statistics for their own findings.
+    ///
+    /// You can specify up to 10 entries in `Scopes.AwsOrganizations`. If multiple
+    /// entries are specified, the entries are combined using OR logic.
+    scopes: ?FindingScopes = null,
+
     /// Orders the aggregation count in descending or ascending order.
     /// Descending order is the default.
     sort_order: ?SortOrder = null,
@@ -24,6 +38,7 @@ pub const GetFindingStatisticsV2Input = struct {
     pub const json_field_names = .{
         .group_by_rules = "GroupByRules",
         .max_statistic_results = "MaxStatisticResults",
+        .scopes = "Scopes",
         .sort_order = "SortOrder",
     };
 };
@@ -83,6 +98,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetFindingStatisticsV2I
     if (input.max_statistic_results) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"MaxStatisticResults\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.scopes) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"Scopes\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
@@ -171,6 +192,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "LimitExceededException")) {
         return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organization_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationalUnitNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organizational_unit_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

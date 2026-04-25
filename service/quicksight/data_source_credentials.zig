@@ -1,5 +1,6 @@
 const CredentialPair = @import("credential_pair.zig").CredentialPair;
 const KeyPairCredentials = @import("key_pair_credentials.zig").KeyPairCredentials;
+const OAuthClientCredentials = @import("o_auth_client_credentials.zig").OAuthClientCredentials;
 const WebProxyCredentials = @import("web_proxy_credentials.zig").WebProxyCredentials;
 
 /// Data source credentials. This is a variant type structure. For this
@@ -22,6 +23,14 @@ pub const DataSourceCredentials = struct {
     /// The credentials for connecting using key-pair.
     key_pair_credentials: ?KeyPairCredentials = null,
 
+    /// The OAuth client credentials for connecting to a data source using OAuth 2.0
+    /// client
+    /// credentials (2LO) authentication. For more information, see
+    /// `
+    /// [OAuthClientCredentials](https://docs.aws.amazon.com/quicksight/latest/APIReference/API_OAuthClientCredentials.html)
+    /// `.
+    o_auth_client_credentials: ?OAuthClientCredentials = null,
+
     /// The Amazon Resource Name (ARN) of the secret associated with the data source
     /// in Amazon Secrets Manager.
     secret_arn: ?[]const u8 = null,
@@ -33,6 +42,7 @@ pub const DataSourceCredentials = struct {
         .copy_source_arn = "CopySourceArn",
         .credential_pair = "CredentialPair",
         .key_pair_credentials = "KeyPairCredentials",
+        .o_auth_client_credentials = "OAuthClientCredentials",
         .secret_arn = "SecretArn",
         .web_proxy_credentials = "WebProxyCredentials",
     };

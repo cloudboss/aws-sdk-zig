@@ -12,8 +12,8 @@ pub const FlinkApplicationConfigurationDescription = struct {
 
     /// The job plan for an application. For more information about the job plan,
     /// see [Jobs and
-    /// Scheduling](https://nightlies.apache.org/flink/flink-docs-release-1.20/internals/job_scheduling.html) in the [Apache Flink
-    /// Documentation](https://nightlies.apache.org/flink/flink-docs-release-1.20/).
+    /// Scheduling](https://nightlies.apache.org/flink/flink-docs-release-2.2/internals/job_scheduling.html) in the [Apache Flink
+    /// Documentation](https://nightlies.apache.org/flink/flink-docs-release-2.2/).
     /// To retrieve the job plan for the application, use the
     /// DescribeApplicationRequest$IncludeAdditionalDetails parameter of the
     /// DescribeApplication operation.

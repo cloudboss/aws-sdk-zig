@@ -96,6 +96,15 @@ pub const UploadPartInput = struct {
     checksum_crc64_nvme: ?[]const u8 = null,
 
     /// This header can be used as a data integrity check to verify that the data
+    /// received is the same data
+    /// that was originally sent. This header specifies the Base64 encoded, 128-bit
+    /// `MD5`
+    /// digest of the part. For more information, see [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
+    /// the *Amazon S3 User Guide*.
+    checksum_md5: ?[]const u8 = null,
+
+    /// This header can be used as a data integrity check to verify that the data
     /// received is the same data that was originally sent.
     /// This header specifies the Base64 encoded, 160-bit `SHA1` digest of the
     /// object. For more information, see
@@ -112,6 +121,42 @@ pub const UploadPartInput = struct {
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in the
     /// *Amazon S3 User Guide*.
     checksum_sha256: ?[]const u8 = null,
+
+    /// This header can be used as a data integrity check to verify that the data
+    /// received is the same data
+    /// that was originally sent. This header specifies the Base64 encoded, 512-bit
+    /// `SHA512`
+    /// digest of the part. For more information, see [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
+    /// the *Amazon S3 User Guide*.
+    checksum_sha512: ?[]const u8 = null,
+
+    /// This header can be used as a data integrity check to verify that the data
+    /// received is the same data
+    /// that was originally sent. This header specifies the Base64 encoded, 128-bit
+    /// `XXHASH128`
+    /// checksum of the part. For more information, see [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
+    /// the *Amazon S3 User Guide*.
+    checksum_xxhash128: ?[]const u8 = null,
+
+    /// This header can be used as a data integrity check to verify that the data
+    /// received is the same data
+    /// that was originally sent. This header specifies the Base64 encoded, 64-bit
+    /// `XXHASH3`
+    /// checksum of the part. For more information, see [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
+    /// the *Amazon S3 User Guide*.
+    checksum_xxhash3: ?[]const u8 = null,
+
+    /// This header can be used as a data integrity check to verify that the data
+    /// received is the same data
+    /// that was originally sent. This header specifies the Base64 encoded, 64-bit
+    /// `XXHASH64`
+    /// checksum of the part. For more information, see [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
+    /// the *Amazon S3 User Guide*.
+    checksum_xxhash64: ?[]const u8 = null,
 
     /// Size of the body in bytes. This parameter is useful when the size of the
     /// body cannot be determined
@@ -176,62 +221,85 @@ pub const UploadPartOutput = struct {
     /// Key Management Service (KMS) keys (SSE-KMS).
     bucket_key_enabled: ?bool = null,
 
-    /// The Base64 encoded, 32-bit `CRC32 checksum` of the object. This checksum is
-    /// only present if the checksum was uploaded
-    /// with the object. When you use an API operation on an object that was
-    /// uploaded using multipart uploads, this value may not be a direct checksum
-    /// value of the full object. Instead, it's a calculation based on the checksum
-    /// values of each individual part. For more information about how checksums are
-    /// calculated
-    /// with multipart uploads, see [
-    /// Checking object
-    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums) in the *Amazon S3 User Guide*.
+    /// The Base64 encoded, 32-bit `CRC32` checksum of the part. This will only be
+    /// present if
+    /// the checksum was provided in the request. For more information, see
+    /// [Checking
+    /// object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in the *Amazon S3 User Guide*.
     checksum_crc32: ?[]const u8 = null,
 
-    /// The Base64 encoded, 32-bit `CRC32C` checksum of the object. This checksum is
-    /// only present if the checksum was uploaded
-    /// with the object. When you use an API operation on an object that was
-    /// uploaded using multipart uploads, this value may not be a direct checksum
-    /// value of the full object. Instead, it's a calculation based on the checksum
-    /// values of each individual part. For more information about how checksums are
-    /// calculated
-    /// with multipart uploads, see [
-    /// Checking object
-    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums) in the *Amazon S3 User Guide*.
+    /// The Base64 encoded, 32-bit `CRC32C` checksum of the part. This will only be
+    /// present if
+    /// the checksum was provided in the request. For more information, see
+    /// [Checking
+    /// object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in the *Amazon S3 User Guide*.
     checksum_crc32_c: ?[]const u8 = null,
 
-    /// This header can be used as a data integrity check to verify that the data
-    /// received is the same data
-    /// that was originally sent. This header specifies the Base64 encoded, 64-bit
-    /// `CRC64NVME`
-    /// checksum of the part. For more information, see [Checking object
-    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
-    /// the *Amazon S3 User Guide*.
+    /// The Base64 encoded, 64-bit `CRC64NVME` checksum of the part. This will only
+    /// be present if
+    /// the checksum was provided in the request. For more information, see
+    /// [Checking
+    /// object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in the *Amazon S3 User Guide*.
     checksum_crc64_nvme: ?[]const u8 = null,
 
-    /// The Base64 encoded, 160-bit `SHA1` digest of the object. This checksum is
-    /// only present if the checksum was uploaded
-    /// with the object. When you use the API operation on an object that was
-    /// uploaded using multipart uploads, this value may not be a direct checksum
-    /// value of the full object. Instead, it's a calculation based on the checksum
-    /// values of each individual part. For more information about how checksums are
-    /// calculated
-    /// with multipart uploads, see [
-    /// Checking object
-    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums) in the *Amazon S3 User Guide*.
+    /// The Base64 encoded, 128-bit `MD5` checksum of the part. This will only be
+    /// present if
+    /// the checksum was provided in the request. For more information, see
+    /// [Checking
+    /// object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in the *Amazon S3 User Guide*.
+    checksum_md5: ?[]const u8 = null,
+
+    /// The Base64 encoded, 160-bit `SHA1` checksum of the part. This will only be
+    /// present if
+    /// the checksum was provided in the request. For more information, see
+    /// [Checking
+    /// object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in the *Amazon S3 User Guide*.
     checksum_sha1: ?[]const u8 = null,
 
-    /// The Base64 encoded, 256-bit `SHA256` digest of the object. This checksum is
-    /// only present if the checksum was uploaded
-    /// with the object. When you use an API operation on an object that was
-    /// uploaded using multipart uploads, this value may not be a direct checksum
-    /// value of the full object. Instead, it's a calculation based on the checksum
-    /// values of each individual part. For more information about how checksums are
-    /// calculated
-    /// with multipart uploads, see [
-    /// Checking object
-    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums) in the *Amazon S3 User Guide*.
+    /// The Base64 encoded, 256-bit `SHA256` checksum of the part. This will only be
+    /// present if
+    /// the checksum was provided in the request. For more information, see
+    /// [Checking
+    /// object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in the *Amazon S3 User Guide*.
     checksum_sha256: ?[]const u8 = null,
+
+    /// The Base64 encoded, 512-bit `SHA512` checksum of the part. This will only be
+    /// present if
+    /// the checksum was provided in the request. For more information, see
+    /// [Checking
+    /// object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in the *Amazon S3 User Guide*.
+    checksum_sha512: ?[]const u8 = null,
+
+    /// The Base64 encoded, 128-bit `XXHASH128` checksum of the part. This will only
+    /// be present if
+    /// the checksum was provided in the request. For more information, see
+    /// [Checking
+    /// object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in the *Amazon S3 User Guide*.
+    checksum_xxhash128: ?[]const u8 = null,
+
+    /// The Base64 encoded, 64-bit `XXHASH3` checksum of the part. This will only be
+    /// present if
+    /// the checksum was provided in the request. For more information, see
+    /// [Checking
+    /// object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in the *Amazon S3 User Guide*.
+    checksum_xxhash3: ?[]const u8 = null,
+
+    /// The Base64 encoded, 64-bit `XXHASH64` checksum of the part. This will only
+    /// be present if
+    /// the checksum was provided in the request. For more information, see
+    /// [Checking
+    /// object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in the *Amazon S3 User Guide*.
+    checksum_xxhash64: ?[]const u8 = null,
 
     /// Entity tag for the uploaded object.
     e_tag: ?[]const u8 = null,
@@ -369,11 +437,26 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UploadPartInput, config
     if (input.checksum_crc64_nvme) |v| {
         try request.headers.put(allocator, "x-amz-checksum-crc64nvme", v);
     }
+    if (input.checksum_md5) |v| {
+        try request.headers.put(allocator, "x-amz-checksum-md5", v);
+    }
     if (input.checksum_sha1) |v| {
         try request.headers.put(allocator, "x-amz-checksum-sha1", v);
     }
     if (input.checksum_sha256) |v| {
         try request.headers.put(allocator, "x-amz-checksum-sha256", v);
+    }
+    if (input.checksum_sha512) |v| {
+        try request.headers.put(allocator, "x-amz-checksum-sha512", v);
+    }
+    if (input.checksum_xxhash128) |v| {
+        try request.headers.put(allocator, "x-amz-checksum-xxhash128", v);
+    }
+    if (input.checksum_xxhash3) |v| {
+        try request.headers.put(allocator, "x-amz-checksum-xxhash3", v);
+    }
+    if (input.checksum_xxhash64) |v| {
+        try request.headers.put(allocator, "x-amz-checksum-xxhash64", v);
     }
     if (input.content_length) |v| {
         {
@@ -419,11 +502,26 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
     if (headers.get("x-amz-checksum-crc64nvme")) |value| {
         result.checksum_crc64_nvme = try allocator.dupe(u8, value);
     }
+    if (headers.get("x-amz-checksum-md5")) |value| {
+        result.checksum_md5 = try allocator.dupe(u8, value);
+    }
     if (headers.get("x-amz-checksum-sha1")) |value| {
         result.checksum_sha1 = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-checksum-sha256")) |value| {
         result.checksum_sha256 = try allocator.dupe(u8, value);
+    }
+    if (headers.get("x-amz-checksum-sha512")) |value| {
+        result.checksum_sha512 = try allocator.dupe(u8, value);
+    }
+    if (headers.get("x-amz-checksum-xxhash128")) |value| {
+        result.checksum_xxhash128 = try allocator.dupe(u8, value);
+    }
+    if (headers.get("x-amz-checksum-xxhash3")) |value| {
+        result.checksum_xxhash3 = try allocator.dupe(u8, value);
+    }
+    if (headers.get("x-amz-checksum-xxhash64")) |value| {
+        result.checksum_xxhash64 = try allocator.dupe(u8, value);
     }
     if (headers.get("etag")) |value| {
         result.e_tag = try allocator.dupe(u8, value);

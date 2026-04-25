@@ -24,10 +24,8 @@ pub const GetRecommendationPreferencesInput = struct {
     /// preferences.
     ///
     /// The `Ec2Instance` option encompasses standalone instances and instances
-    /// that are part of Amazon EC2 Auto Scaling groups. The `AutoScalingGroup`
-    /// option
-    /// encompasses only instances that are part of an Amazon EC2 Auto Scaling
-    /// group.
+    /// that are part of Auto Scaling groups. The `AutoScalingGroup` option
+    /// encompasses only instances that are part of an Auto Scaling group.
     resource_type: ResourceType,
 
     /// An object that describes the scope of the recommendation preference to

@@ -21,6 +21,10 @@ pub const UpdateAutoScalingGroupInput = struct {
     /// The instance capacity distribution across Availability Zones.
     availability_zone_distribution: ?AvailabilityZoneDistribution = null,
 
+    /// A list of Availability Zone IDs for the Auto Scaling group. You cannot
+    /// specify both AvailabilityZones and AvailabilityZoneIds in the same request.
+    availability_zone_ids: ?[]const []const u8 = null,
+
     /// The policy for Availability Zone impairment.
     availability_zone_impairment_policy: ?AvailabilityZoneImpairmentPolicy = null,
 
@@ -91,6 +95,12 @@ pub const UpdateAutoScalingGroupInput = struct {
     /// `prevent-all-deletion`.
     ///
     /// Default: `none`
+    ///
+    /// For more information, see
+    /// [
+    /// Configure deletion protection for your Amazon EC2 Auto Scaling
+    /// resources](https://docs.aws.amazon.com/autoscaling/ec2/userguide/resource-deletion-protection.html)
+    /// in the *Amazon EC2 Auto Scaling User Guide*.
     deletion_protection: ?DeletionProtection = null,
 
     /// The desired capacity is the initial capacity of the Auto Scaling group after
@@ -307,6 +317,15 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAutoScalingGroupI
         if (v.capacity_distribution_strategy) |sv| {
             try body_buf.appendSlice(allocator, "&AvailabilityZoneDistribution.CapacityDistributionStrategy=");
             try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
+        }
+    }
+    if (input.availability_zone_ids) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            var prefix_buf: [256]u8 = undefined;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AvailabilityZoneIds.member.{d}=", .{n}) catch continue;
+            try body_buf.appendSlice(allocator, field_prefix);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
     }
     if (input.availability_zone_impairment_policy) |v| {

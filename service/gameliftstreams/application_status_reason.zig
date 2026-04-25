@@ -3,16 +3,19 @@ const std = @import("std");
 pub const ApplicationStatusReason = enum {
     internal_error,
     access_denied,
+    source_modified,
 
     pub const json_field_names = .{
         .internal_error = "internalError",
         .access_denied = "accessDenied",
+        .source_modified = "sourceModified",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .internal_error => "internalError",
             .access_denied => "accessDenied",
+            .source_modified => "sourceModified",
         };
     }
 

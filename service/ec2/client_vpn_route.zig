@@ -25,6 +25,10 @@ pub const ClientVpnRoute = struct {
     /// The ID of the subnet through which traffic is routed.
     target_subnet: ?[]const u8 = null,
 
+    /// The ID of the Transit Gateway attachment, if the route targets a Transit
+    /// Gateway.
+    transit_gateway_attachment_id: ?[]const u8 = null,
+
     /// The route type.
     @"type": ?[]const u8 = null,
 };

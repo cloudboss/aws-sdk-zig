@@ -14,7 +14,7 @@ pub const ListSelfUpgradesInput = struct {
     /// The maximum number of results to return.
     max_results: ?i32 = null,
 
-    /// The Quick Suite namespace for the self-upgrade requests.
+    /// The Quick namespace for the self-upgrade requests.
     namespace: []const u8,
 
     /// The token for the next set of results, or null if there are no more results.

@@ -4,6 +4,7 @@ const ClusterInstanceStorageConfig = @import("cluster_instance_storage_config.zi
 const ClusterInstanceType = @import("cluster_instance_type.zig").ClusterInstanceType;
 const ClusterKubernetesConfigNodeDetails = @import("cluster_kubernetes_config_node_details.zig").ClusterKubernetesConfigNodeDetails;
 const ClusterLifeCycleConfig = @import("cluster_life_cycle_config.zig").ClusterLifeCycleConfig;
+const ClusterNetworkInterfaceDetails = @import("cluster_network_interface_details.zig").ClusterNetworkInterfaceDetails;
 const VpcConfig = @import("vpc_config.zig").VpcConfig;
 const ClusterInstancePlacement = @import("cluster_instance_placement.zig").ClusterInstancePlacement;
 const UltraServerInfo = @import("ultra_server_info.zig").UltraServerInfo;
@@ -52,6 +53,9 @@ pub const ClusterNodeDetails = struct {
     /// The LifeCycle configuration applied to the instance.
     life_cycle_config: ?ClusterLifeCycleConfig = null,
 
+    /// The network interface configuration for the cluster node.
+    network_interface: ?ClusterNetworkInterfaceDetails = null,
+
     /// A unique identifier for the node that persists throughout its lifecycle,
     /// from provisioning request to termination. This identifier can be used to
     /// track the node even before it has an assigned `InstanceId`.
@@ -96,6 +100,7 @@ pub const ClusterNodeDetails = struct {
         .last_software_update_time = "LastSoftwareUpdateTime",
         .launch_time = "LaunchTime",
         .life_cycle_config = "LifeCycleConfig",
+        .network_interface = "NetworkInterface",
         .node_logical_id = "NodeLogicalId",
         .override_vpc_config = "OverrideVpcConfig",
         .placement = "Placement",

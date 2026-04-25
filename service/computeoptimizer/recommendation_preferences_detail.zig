@@ -56,10 +56,8 @@ pub const RecommendationPreferencesDetail = struct {
     /// The target resource type of the recommendation preference to create.
     ///
     /// The `Ec2Instance` option encompasses standalone instances and instances
-    /// that are part of Amazon EC2 Auto Scaling groups. The `AutoScalingGroup`
-    /// option
-    /// encompasses only instances that are part of an Amazon EC2 Auto Scaling
-    /// group.
+    /// that are part of Auto Scaling groups. The `AutoScalingGroup` option
+    /// encompasses only instances that are part of an Auto Scaling group.
     resource_type: ?ResourceType = null,
 
     /// Describes the savings estimation mode used for calculating savings

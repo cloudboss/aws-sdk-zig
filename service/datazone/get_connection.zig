@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const Configuration = @import("configuration.zig").Configuration;
 const ConnectionCredentials = @import("connection_credentials.zig").ConnectionCredentials;
 const PhysicalEndpoint = @import("physical_endpoint.zig").PhysicalEndpoint;
 const ConnectionPropertiesOutput = @import("connection_properties_output.zig").ConnectionPropertiesOutput;
@@ -28,6 +29,9 @@ pub const GetConnectionInput = struct {
 };
 
 pub const GetConnectionOutput = struct {
+    /// The configurations of the connection.
+    configurations: ?[]const Configuration = null,
+
     /// Connection credentials.
     connection_credentials: ?ConnectionCredentials = null,
 
@@ -68,6 +72,7 @@ pub const GetConnectionOutput = struct {
     @"type": ConnectionType,
 
     pub const json_field_names = .{
+        .configurations = "configurations",
         .connection_credentials = "connectionCredentials",
         .connection_id = "connectionId",
         .description = "description",

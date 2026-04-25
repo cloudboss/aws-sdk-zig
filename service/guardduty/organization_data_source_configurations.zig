@@ -3,12 +3,10 @@ const OrganizationMalwareProtectionConfiguration = @import("organization_malware
 const OrganizationS3LogsConfiguration = @import("organization_s3_logs_configuration.zig").OrganizationS3LogsConfiguration;
 
 /// An object that contains information on which data sources will be configured
-/// to be
-/// automatically enabled for new members within the organization.
+/// to be automatically enabled for new members within the organization.
 pub const OrganizationDataSourceConfigurations = struct {
     /// Describes the configuration of Kubernetes data sources for new members of
-    /// the
-    /// organization.
+    /// the organization.
     kubernetes: ?OrganizationKubernetesConfiguration = null,
 
     /// Describes the configuration of Malware Protection for new members of the

@@ -1,5 +1,6 @@
 const InstanceMetadataEndpointState = @import("instance_metadata_endpoint_state.zig").InstanceMetadataEndpointState;
 const HttpTokensState = @import("http_tokens_state.zig").HttpTokensState;
+const HttpTokensEnforcedState = @import("http_tokens_enforced_state.zig").HttpTokensEnforcedState;
 const InstanceMetadataTagsState = @import("instance_metadata_tags_state.zig").InstanceMetadataTagsState;
 const ManagedBy = @import("managed_by.zig").ManagedBy;
 
@@ -24,11 +25,17 @@ pub const InstanceMetadataDefaultsResponse = struct {
     /// disabled, and you must use IMDSv2.
     http_tokens: ?HttpTokensState = null,
 
+    /// Indicates whether to enforce the requirement of IMDSv2 on an instance at the
+    /// time of
+    /// launch. When enforcement is enabled, the instance can't launch unless IMDSv2
+    /// (`HttpTokens`) is set to `required`.
+    http_tokens_enforced: ?HttpTokensEnforcedState = null,
+
     /// Indicates whether access to instance tags from the instance metadata is
     /// enabled or
-    /// disabled. For more information, see [Work with
-    /// instance tags using the instance
-    /// metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS) in the
+    /// disabled. For more information, see [View tags for your EC2
+    /// instances using instance
+    /// metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-tags-in-IMDS.html) in the
     /// *Amazon EC2 User Guide*.
     instance_metadata_tags: ?InstanceMetadataTagsState = null,
 

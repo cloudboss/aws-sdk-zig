@@ -1,4 +1,5 @@
 const PrincipalType = @import("principal_type.zig").PrincipalType;
+const ServiceOptions = @import("service_options.zig").ServiceOptions;
 
 /// Information about an Amazon Web Services account or service that has access
 /// to an
@@ -12,8 +13,14 @@ pub const AuthorizedPrincipal = struct {
     /// The type of principal.
     principal_type: ?PrincipalType = null,
 
+    /// The options for the service, including the supported Regions for the
+    /// endpoint
+    /// access.
+    service_options: ?ServiceOptions = null,
+
     pub const json_field_names = .{
         .principal = "Principal",
         .principal_type = "PrincipalType",
+        .service_options = "ServiceOptions",
     };
 };

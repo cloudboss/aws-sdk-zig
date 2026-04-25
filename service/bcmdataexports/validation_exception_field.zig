@@ -1,6 +1,5 @@
 /// The input failed to meet the constraints specified by the Amazon Web
-/// Services service in a
-/// specified field.
+/// Services service in a specified field.
 pub const ValidationExceptionField = struct {
     /// A message with the reason for the validation exception error.
     message: []const u8,

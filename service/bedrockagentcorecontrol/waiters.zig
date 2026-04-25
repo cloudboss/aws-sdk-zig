@@ -80,7 +80,7 @@ pub const PolicyActiveWaiter = struct {
     client: *Client,
     params: get_policy.GetPolicyInput,
     config: aws.waiter.WaiterConfig = .{
-        .min_delay_s = 2,
+        .min_delay_s = 5,
         .max_delay_s = 120,
         .max_wait_time_s = 300,
     },
@@ -211,7 +211,7 @@ pub const PolicyEngineActiveWaiter = struct {
     client: *Client,
     params: get_policy_engine.GetPolicyEngineInput,
     config: aws.waiter.WaiterConfig = .{
-        .min_delay_s = 2,
+        .min_delay_s = 5,
         .max_delay_s = 120,
         .max_wait_time_s = 300,
     },
@@ -342,7 +342,7 @@ pub const PolicyGenerationCompletedWaiter = struct {
     client: *Client,
     params: get_policy_generation.GetPolicyGenerationInput,
     config: aws.waiter.WaiterConfig = .{
-        .min_delay_s = 2,
+        .min_delay_s = 5,
         .max_delay_s = 120,
         .max_wait_time_s = 300,
     },

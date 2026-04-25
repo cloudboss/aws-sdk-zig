@@ -5,14 +5,13 @@ const UtilizationMetric = @import("utilization_metric.zig").UtilizationMetric;
 const SavingsOpportunity = @import("savings_opportunity.zig").SavingsOpportunity;
 const AutoScalingGroupSavingsOpportunityAfterDiscounts = @import("auto_scaling_group_savings_opportunity_after_discounts.zig").AutoScalingGroupSavingsOpportunityAfterDiscounts;
 
-/// Describes a recommendation option for an Amazon EC2 Auto Scaling group.
+/// Describes a recommendation option for an Auto Scaling group.
 pub const AutoScalingGroupRecommendationOption = struct {
-    /// An array of objects that describe an Amazon EC2 Auto Scaling group
-    /// configuration.
+    /// An array of objects that describe an Auto Scaling group configuration.
     configuration: ?AutoScalingGroupConfiguration = null,
 
     /// Describes the GPU accelerator settings for the recommended instance type of
-    /// the Amazon EC2 Auto Scaling group.
+    /// the Auto Scaling group.
     instance_gpu_info: ?GpuInfo = null,
 
     /// The level of effort required to migrate from the current instance type to
@@ -29,7 +28,7 @@ pub const AutoScalingGroupRecommendationOption = struct {
     /// same CPU architecture.
     migration_effort: ?MigrationEffort = null,
 
-    /// The performance risk of the Amazon EC2 Auto Scaling group configuration
+    /// The performance risk of the Auto Scaling group configuration
     /// recommendation.
     ///
     /// Performance risk indicates the likelihood of the recommended instance type
@@ -57,7 +56,7 @@ pub const AutoScalingGroupRecommendationOption = struct {
     performance_risk: f64 = 0,
 
     /// An array of objects that describe the projected utilization metrics of the
-    /// Amazon EC2 Auto Scaling group recommendation option.
+    /// Auto Scaling group recommendation option.
     ///
     /// The `Cpu` and `Memory` metrics are the only projected
     /// utilization metrics returned. Additionally, the `Memory` metric is
@@ -67,21 +66,20 @@ pub const AutoScalingGroupRecommendationOption = struct {
     /// Agent](https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent).
     projected_utilization_metrics: ?[]const UtilizationMetric = null,
 
-    /// The rank of the Amazon EC2 Auto Scaling group recommendation option.
+    /// The rank of the Auto Scaling group recommendation option.
     ///
     /// The top recommendation option is ranked as `1`.
     rank: i32 = 0,
 
-    /// An object that describes the savings opportunity for the Amazon EC2 Auto
-    /// Scaling group
+    /// An object that describes the savings opportunity for the Auto Scaling group
     /// recommendation option. Savings opportunity includes the estimated monthly
     /// savings amount
     /// and percentage.
     savings_opportunity: ?SavingsOpportunity = null,
 
-    /// An object that describes the savings opportunity for the Amazon EC2 Auto
-    /// Scaling group recommendation option that includes Savings Plans and Reserved
-    /// Instances discounts.
+    /// An object that describes the savings opportunity for the Auto Scaling group
+    /// recommendation option that includes Savings Plans and Reserved Instances
+    /// discounts.
     /// Savings opportunity includes the estimated monthly savings and percentage.
     savings_opportunity_after_discounts: ?AutoScalingGroupSavingsOpportunityAfterDiscounts = null,
 

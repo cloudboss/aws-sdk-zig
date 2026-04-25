@@ -1,8 +1,7 @@
 const std = @import("std");
 
 /// An enum value representing possible resource properties to match with given
-/// scan
-/// condition.
+/// scan condition.
 pub const ScanCriterionKey = enum {
     ec2_instance_tag,
 

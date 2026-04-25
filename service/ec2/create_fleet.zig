@@ -7,6 +7,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const FleetExcessCapacityTerminationPolicy = @import("fleet_excess_capacity_termination_policy.zig").FleetExcessCapacityTerminationPolicy;
 const FleetLaunchTemplateConfigRequest = @import("fleet_launch_template_config_request.zig").FleetLaunchTemplateConfigRequest;
 const OnDemandOptionsRequest = @import("on_demand_options_request.zig").OnDemandOptionsRequest;
+const ReservedCapacityOptionsRequest = @import("reserved_capacity_options_request.zig").ReservedCapacityOptionsRequest;
 const SpotOptionsRequest = @import("spot_options_request.zig").SpotOptionsRequest;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TargetCapacitySpecificationRequest = @import("target_capacity_specification_request.zig").TargetCapacitySpecificationRequest;
@@ -55,6 +56,12 @@ pub const CreateFleetInput = struct {
     /// health
     /// checks](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#ec2-fleet-health-checks) in the *Amazon EC2 User Guide*.
     replace_unhealthy_instances: ?bool = null,
+
+    /// Defines EC2 Fleet preferences for utilizing reserved capacity when
+    /// DefaultTargetCapacityType is set to `reserved-capacity`.
+    ///
+    /// Supported only for fleets of type `instant`.
+    reserved_capacity_options: ?ReservedCapacityOptionsRequest = null,
 
     /// Describes the configuration of Spot Instances in an EC2 Fleet.
     spot_options: ?SpotOptionsRequest = null,
@@ -812,6 +819,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFleetInput, confi
     if (input.replace_unhealthy_instances) |v| {
         try body_buf.appendSlice(allocator, "&ReplaceUnhealthyInstances=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
+    }
+    if (input.reserved_capacity_options) |v| {
+        if (v.reservation_types) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReservedCapacityOptions.ReservationType.{d}=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.wireName());
+            }
+        }
     }
     if (input.spot_options) |v| {
         if (v.allocation_strategy) |sv| {

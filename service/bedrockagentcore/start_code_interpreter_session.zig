@@ -4,8 +4,12 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const Certificate = @import("certificate.zig").Certificate;
 
 pub const StartCodeInterpreterSessionInput = struct {
+    /// A list of certificates to install in the code interpreter session.
+    certificates: ?[]const Certificate = null,
+
     /// A unique, case-sensitive identifier to ensure that the API request completes
     /// no more than one time. If this token matches a previous request, Amazon
     /// Bedrock AgentCore ignores the request, but does not return an error. This
@@ -22,10 +26,10 @@ pub const StartCodeInterpreterSessionInput = struct {
     /// manage the session. The name does not need to be unique.
     name: ?[]const u8 = null,
 
-    /// The time in seconds after which the session automatically terminates if
-    /// there is no activity. The default value is 900 seconds (15 minutes). The
-    /// minimum allowed value is 60 seconds, and the maximum allowed value is 28800
-    /// seconds (8 hours).
+    /// The duration in seconds (time-to-live) after which the session automatically
+    /// terminates, regardless of ongoing activity. Defaults to 900 seconds (15
+    /// minutes). Recommended minimum: 60 seconds. Maximum allowed: 28,800 seconds
+    /// (8 hours).
     session_timeout_seconds: ?i32 = null,
 
     /// The trace identifier for request tracking.
@@ -35,6 +39,7 @@ pub const StartCodeInterpreterSessionInput = struct {
     trace_parent: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .certificates = "certificates",
         .client_token = "clientToken",
         .code_interpreter_identifier = "codeInterpreterIdentifier",
         .name = "name",
@@ -103,6 +108,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartCodeInterpreterSes
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.certificates) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"certificates\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.client_token) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"clientToken\":");

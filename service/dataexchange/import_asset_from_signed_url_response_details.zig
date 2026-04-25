@@ -1,6 +1,5 @@
 /// The details in the response for an import request, including the signed URL
-/// and other
-/// information.
+/// and other information.
 pub const ImportAssetFromSignedUrlResponseDetails = struct {
     /// The name for the asset associated with this import job.
     asset_name: []const u8,
@@ -9,8 +8,7 @@ pub const ImportAssetFromSignedUrlResponseDetails = struct {
     data_set_id: []const u8,
 
     /// The Base64-encoded Md5 hash for the asset, used to ensure the integrity of
-    /// the file at
-    /// that location.
+    /// the file at that location.
     md_5_hash: ?[]const u8 = null,
 
     /// The unique identifier for the revision associated with this import response.

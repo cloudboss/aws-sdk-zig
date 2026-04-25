@@ -3,16 +3,19 @@ const std = @import("std");
 pub const RuleGroupType = enum {
     stateless,
     stateful,
+    stateful_domain,
 
     pub const json_field_names = .{
         .stateless = "STATELESS",
         .stateful = "STATEFUL",
+        .stateful_domain = "STATEFUL_DOMAIN",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .stateless => "STATELESS",
             .stateful => "STATEFUL",
+            .stateful_domain => "STATEFUL_DOMAIN",
         };
     }
 

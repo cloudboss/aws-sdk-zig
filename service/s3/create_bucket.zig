@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BucketCannedACL = @import("bucket_canned_acl.zig").BucketCannedACL;
+const BucketNamespace = @import("bucket_namespace.zig").BucketNamespace;
 const CreateBucketConfiguration = @import("create_bucket_configuration.zig").CreateBucketConfiguration;
 const ObjectOwnership = @import("object_ownership.zig").ObjectOwnership;
 const serde = @import("serde.zig");
@@ -32,6 +33,33 @@ pub const CreateBucketInput = struct {
     /// naming restrictions, see [Directory bucket naming
     /// rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-bucket-naming-rules.html) in the *Amazon S3 User Guide*
     bucket: []const u8,
+
+    /// Specifies the namespace where you want to create your general purpose
+    /// bucket. When you create a
+    /// general purpose bucket, you can choose to create a bucket in the shared
+    /// global namespace or you can choose to
+    /// create a bucket in your account regional namespace. Your account regional
+    /// namespace is a subdivision of
+    /// the global namespace that only your account can create buckets in. For more
+    /// information on bucket
+    /// namespaces, see [Namespaces for general purpose
+    /// buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/gpbucketnamespaces.html).
+    ///
+    /// General purpose buckets in your account regional namespace must follow a
+    /// specific naming convention. These
+    /// buckets consist of a bucket name prefix that you create, and a suffix that
+    /// contains your 12-digit Amazon Web Services
+    /// Account ID, the Amazon Web Services Region code, and ends with `-an`. Bucket
+    /// names must follow the format
+    /// `bucket-name-prefix-accountId-region-an` (for example,
+    /// `amzn-s3-demo-bucket-111122223333-us-west-2-an`). For information about
+    /// bucket naming
+    /// restrictions, see [Account regional namespace naming
+    /// rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html#account-regional-naming-rules)
+    /// in the *Amazon S3 User Guide*.
+    ///
+    /// This functionality is not supported for directory buckets.
+    bucket_namespace: ?BucketNamespace = null,
 
     /// The configuration information for the bucket.
     create_bucket_configuration: ?CreateBucketConfiguration = null,
@@ -146,6 +174,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBucketInput, conf
     try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.acl) |v| {
         try request.headers.put(allocator, "x-amz-acl", v.wireName());
+    }
+    if (input.bucket_namespace) |v| {
+        try request.headers.put(allocator, "x-amz-bucket-namespace", v.wireName());
     }
     if (input.grant_full_control) |v| {
         try request.headers.put(allocator, "x-amz-grant-full-control", v);

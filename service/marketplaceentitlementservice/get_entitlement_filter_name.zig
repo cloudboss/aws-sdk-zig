@@ -4,11 +4,13 @@ pub const GetEntitlementFilterName = enum {
     customer_identifier,
     dimension,
     customer_aws_account_id,
+    license_arn,
 
     pub const json_field_names = .{
         .customer_identifier = "CUSTOMER_IDENTIFIER",
         .dimension = "DIMENSION",
         .customer_aws_account_id = "CUSTOMER_AWS_ACCOUNT_ID",
+        .license_arn = "LICENSE_ARN",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const GetEntitlementFilterName = enum {
             .customer_identifier => "CUSTOMER_IDENTIFIER",
             .dimension => "DIMENSION",
             .customer_aws_account_id => "CUSTOMER_AWS_ACCOUNT_ID",
+            .license_arn => "LICENSE_ARN",
         };
     }
 

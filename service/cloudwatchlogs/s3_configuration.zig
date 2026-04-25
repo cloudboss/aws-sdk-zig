@@ -5,6 +5,14 @@ pub const S3Configuration = struct {
     /// format.
     destination_identifier: []const u8,
 
+    /// The Amazon Resource Name (ARN) of the KMS encryption key. Must belong to the
+    /// same Amazon Web Services Region
+    /// as the destination Amazon S3 bucket.
+    kms_key_id: ?[]const u8 = null,
+
+    /// The Amazon Web Services accountId for the bucket owning account.
+    owner_account_id: ?[]const u8 = null,
+
     /// The ARN of the IAM role that grants permissions to write query results to
     /// the specified
     /// Amazon S3 destination.
@@ -12,6 +20,8 @@ pub const S3Configuration = struct {
 
     pub const json_field_names = .{
         .destination_identifier = "destinationIdentifier",
+        .kms_key_id = "kmsKeyId",
+        .owner_account_id = "ownerAccountId",
         .role_arn = "roleArn",
     };
 };

@@ -6,8 +6,7 @@ pub const VolumeFrom = struct {
     read_only: ?bool = null,
 
     /// The name of another container within the same task definition to mount
-    /// volumes
-    /// from.
+    /// volumes from.
     source_container: ?[]const u8 = null,
 
     pub const json_field_names = .{

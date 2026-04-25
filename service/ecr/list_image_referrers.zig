@@ -22,7 +22,7 @@ pub const ListImageReferrersInput = struct {
     /// by sending
     /// another `ListImageReferrers` request with the returned `nextToken` value.
     /// This value can be between 1 and 50. If this parameter is
-    /// not used, then `ListImageReferrers` returns up to 50 results and a
+    /// not used, then `ListImageReferrers` returns up to 20 results and a
     /// `nextToken` value, if applicable.
     max_results: ?i32 = null,
 
@@ -393,6 +393,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "UnableToGetUpstreamLayerException")) {
         return .{ .arena = arena, .kind = .{ .unable_to_get_upstream_layer_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnableToListUpstreamImageReferrersException")) {
+        return .{ .arena = arena, .kind = .{ .unable_to_list_upstream_image_referrers_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

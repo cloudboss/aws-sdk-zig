@@ -2,43 +2,46 @@
 pub const Condition = struct {
     /// Represents the *equal* condition to be applied to a single field when
     /// querying for findings.
+    ///
+    /// Max values: 50
     eq: ?[]const []const u8 = null,
 
-    /// Represents an *equal*
-    /// **** condition to be applied to
-    /// a single field when querying for findings.
+    /// Represents an *equal* condition to be applied to a single field when
+    /// querying for findings.
+    ///
+    /// Max values: 50
     equals: ?[]const []const u8 = null,
 
-    /// Represents a *greater than* condition to be applied to a single field
-    /// when querying for findings.
+    /// Represents a *greater than* condition to be applied to a single field when
+    /// querying for findings.
     greater_than: ?i64 = null,
 
-    /// Represents a *greater than or equal* condition to be applied to a
-    /// single field when querying for findings.
+    /// Represents a *greater than or equal* condition to be applied to a single
+    /// field when querying for findings.
     greater_than_or_equal: ?i64 = null,
 
-    /// Represents a *greater than* condition to be applied to a single field
-    /// when querying for findings.
+    /// Represents a *greater than* condition to be applied to a single field when
+    /// querying for findings.
     gt: ?i32 = null,
 
-    /// Represents a *greater than or equal* condition to be applied to a
-    /// single field when querying for findings.
+    /// Represents a *greater than or equal* condition to be applied to a single
+    /// field when querying for findings.
     gte: ?i32 = null,
 
     /// Represents a *less than* condition to be applied to a single field when
     /// querying for findings.
     less_than: ?i64 = null,
 
-    /// Represents a *less than or equal* condition to be applied to a single
-    /// field when querying for findings.
+    /// Represents a *less than or equal* condition to be applied to a single field
+    /// when querying for findings.
     less_than_or_equal: ?i64 = null,
 
     /// Represents a *less than* condition to be applied to a single field when
     /// querying for findings.
     lt: ?i32 = null,
 
-    /// Represents a *less than or equal* condition to be applied to a single
-    /// field when querying for findings.
+    /// Represents a *less than or equal* condition to be applied to a single field
+    /// when querying for findings.
     lte: ?i32 = null,
 
     /// Represents the *match* condition to be applied to a single field when
@@ -48,13 +51,16 @@ pub const Condition = struct {
     /// update-filter APIs.
     matches: ?[]const []const u8 = null,
 
-    /// Represents the *not equal* condition to be applied to a single field
-    /// when querying for findings.
+    /// Represents the *not equal* condition to be applied to a single field when
+    /// querying for findings.
+    ///
+    /// Max values: 50
     neq: ?[]const []const u8 = null,
 
-    /// Represents a *not equal*
-    /// **** condition to be applied
-    /// to a single field when querying for findings.
+    /// Represents a *not equal* condition to be applied to a single field when
+    /// querying for findings.
+    ///
+    /// Max values: 50
     not_equals: ?[]const []const u8 = null,
 
     /// Represents the *not match* condition to be applied to a single field when

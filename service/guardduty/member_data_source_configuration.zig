@@ -7,7 +7,7 @@ pub const MemberDataSourceConfiguration = struct {
     account_id: []const u8,
 
     /// Contains information on the status of data sources for the account.
-    data_sources: ?DataSourceConfigurationsResult = null,
+    data_sources: DataSourceConfigurationsResult,
 
     /// Contains information about the status of the features for the member
     /// account.

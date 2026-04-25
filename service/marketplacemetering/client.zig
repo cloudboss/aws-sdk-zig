@@ -35,13 +35,13 @@ pub const Client = struct {
         self.http_client.deinit();
     }
 
-    /// The `CustomerIdentifier` and `CustomerAWSAccountID` are mutually exclusive
-    /// parameters. You must use one or the other, but not both in the same API
-    /// request.
-    /// For new implementations, we recommend using the `CustomerAWSAccountID`. Your
-    /// current integration will continue to work. When updating your
-    /// implementation, consider migrating to `CustomerAWSAccountID` for improved
-    /// integration.
+    /// Amazon Web Services Marketplace is introducing Concurrent Agreements,
+    /// enabling buyers to make multiple purchases per Amazon Web Services account.
+    /// Starting June 1, 2026, new SaaS products must use `CustomerAWSAccountId`
+    /// (instead of `CustomerIdentifier`), `LicenseArn` (instead of `ProductCode`)
+    /// to support this feature. Existing integrations will continue to work. Review
+    /// the new integration for Concurrent Agreements
+    /// [here](https://catalog.workshops.aws/mpseller/en-US/saas/integration-for-concurrent-agreements).
     ///
     /// To post metering records for customers, SaaS applications call
     /// `BatchMeterUsage`, which is used for metering SaaS flexible
@@ -213,7 +213,7 @@ pub const Client = struct {
     /// submits a registration token through their browser. The registration token
     /// is resolved
     /// through this API to obtain a `CustomerIdentifier` along with the
-    /// `CustomerAWSAccountId` and `ProductCode`.
+    /// `CustomerAWSAccountId`, `ProductCode`, and `LicenseArn`.
     ///
     /// To successfully resolve the token, the API must be called from the account
     /// that was used to publish the SaaS

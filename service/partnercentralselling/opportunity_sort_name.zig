@@ -5,12 +5,14 @@ pub const OpportunitySortName = enum {
     identifier,
     customer_company_name,
     created_date,
+    target_close_date,
 
     pub const json_field_names = .{
         .last_modifieddate = "LastModifiedDate",
         .identifier = "Identifier",
         .customer_company_name = "CustomerCompanyName",
         .created_date = "CreatedDate",
+        .target_close_date = "TargetCloseDate",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +21,7 @@ pub const OpportunitySortName = enum {
             .identifier => "Identifier",
             .customer_company_name => "CustomerCompanyName",
             .created_date => "CreatedDate",
+            .target_close_date => "TargetCloseDate",
         };
     }
 

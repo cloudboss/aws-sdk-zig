@@ -93,6 +93,9 @@ const describe_route_servers = @import("describe_route_servers.zig");
 const describe_route_tables = @import("describe_route_tables.zig");
 const describe_scheduled_instance_availability = @import("describe_scheduled_instance_availability.zig");
 const describe_scheduled_instances = @import("describe_scheduled_instances.zig");
+const describe_secondary_interfaces = @import("describe_secondary_interfaces.zig");
+const describe_secondary_networks = @import("describe_secondary_networks.zig");
+const describe_secondary_subnets = @import("describe_secondary_subnets.zig");
 const describe_security_group_rules = @import("describe_security_group_rules.zig");
 const describe_security_group_vpc_associations = @import("describe_security_group_vpc_associations.zig");
 const describe_security_groups = @import("describe_security_groups.zig");
@@ -140,6 +143,7 @@ const get_associated_ipv_6_pool_cidrs = @import("get_associated_ipv_6_pool_cidrs
 const get_aws_network_performance_data = @import("get_aws_network_performance_data.zig");
 const get_capacity_manager_metric_data = @import("get_capacity_manager_metric_data.zig");
 const get_capacity_manager_metric_dimensions = @import("get_capacity_manager_metric_dimensions.zig");
+const get_capacity_manager_monitored_tag_keys = @import("get_capacity_manager_monitored_tag_keys.zig");
 const get_groups_for_capacity_reservation = @import("get_groups_for_capacity_reservation.zig");
 const get_instance_types_from_instance_requirements = @import("get_instance_types_from_instance_requirements.zig");
 const get_ipam_address_history = @import("get_ipam_address_history.zig");
@@ -3729,6 +3733,126 @@ pub const DescribeScheduledInstancesPaginator = struct {
     }
 };
 
+pub const DescribeSecondaryInterfacesPaginator = struct {
+    client: *Client,
+    params: describe_secondary_interfaces.DescribeSecondaryInterfacesInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_secondary_interfaces.DescribeSecondaryInterfacesOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try describe_secondary_interfaces.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const DescribeSecondaryNetworksPaginator = struct {
+    client: *Client,
+    params: describe_secondary_networks.DescribeSecondaryNetworksInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_secondary_networks.DescribeSecondaryNetworksOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try describe_secondary_networks.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const DescribeSecondarySubnetsPaginator = struct {
+    client: *Client,
+    params: describe_secondary_subnets.DescribeSecondarySubnetsInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_secondary_subnets.DescribeSecondarySubnetsOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try describe_secondary_subnets.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
 pub const DescribeSecurityGroupRulesPaginator = struct {
     client: *Client,
     params: describe_security_group_rules.DescribeSecurityGroupRulesInput,
@@ -5585,6 +5709,46 @@ pub const GetCapacityManagerMetricDimensionsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try get_capacity_manager_metric_dimensions.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const GetCapacityManagerMonitoredTagKeysPaginator = struct {
+    client: *Client,
+    params: get_capacity_manager_monitored_tag_keys.GetCapacityManagerMonitoredTagKeysInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_capacity_manager_monitored_tag_keys.GetCapacityManagerMonitoredTagKeysOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try get_capacity_manager_monitored_tag_keys.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

@@ -23,6 +23,10 @@ pub const PolicyEngine = struct {
     /// engine's role in the overall governance strategy.
     description: ?[]const u8 = null,
 
+    /// The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy
+    /// engine data.
+    encryption_key_arn: ?[]const u8 = null,
+
     /// The customer-assigned immutable name for the policy engine. This
     /// human-readable identifier must be unique within the account and cannot
     /// exceed 48 characters.
@@ -52,6 +56,7 @@ pub const PolicyEngine = struct {
     pub const json_field_names = .{
         .created_at = "createdAt",
         .description = "description",
+        .encryption_key_arn = "encryptionKeyArn",
         .name = "name",
         .policy_engine_arn = "policyEngineArn",
         .policy_engine_id = "policyEngineId",

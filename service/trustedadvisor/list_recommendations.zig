@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const RecommendationLanguage = @import("recommendation_language.zig").RecommendationLanguage;
 const RecommendationPillar = @import("recommendation_pillar.zig").RecommendationPillar;
 const RecommendationSource = @import("recommendation_source.zig").RecommendationSource;
 const RecommendationStatus = @import("recommendation_status.zig").RecommendationStatus;
@@ -23,12 +24,15 @@ pub const ListRecommendationsInput = struct {
     /// The check identifier of the Recommendation
     check_identifier: ?[]const u8 = null,
 
+    /// The ISO 639-1 code for the language that you want your recommendations to
+    /// appear in.
+    language: ?RecommendationLanguage = null,
+
     /// The maximum number of results to return per page.
     max_results: ?i32 = null,
 
     /// The token for the next set of results. Use the value returned in the
-    /// previous response in the next request
-    /// to retrieve the next set of results.
+    /// previous response in the next request to retrieve the next set of results.
     next_token: ?[]const u8 = null,
 
     /// The pillar of the Recommendation
@@ -48,6 +52,7 @@ pub const ListRecommendationsInput = struct {
         .aws_service = "awsService",
         .before_last_updated_at = "beforeLastUpdatedAt",
         .check_identifier = "checkIdentifier",
+        .language = "language",
         .max_results = "maxResults",
         .next_token = "nextToken",
         .pillar = "pillar",
@@ -59,8 +64,7 @@ pub const ListRecommendationsInput = struct {
 
 pub const ListRecommendationsOutput = struct {
     /// The token for the next set of results. Use the value returned in the
-    /// previous response in the next request
-    /// to retrieve the next set of results.
+    /// previous response in the next request to retrieve the next set of results.
     next_token: ?[]const u8 = null,
 
     /// The list of Recommendations
@@ -136,6 +140,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRecommendationsInpu
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "checkIdentifier=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
+    if (input.language) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "language=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.max_results) |v| {

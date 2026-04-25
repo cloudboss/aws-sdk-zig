@@ -5,12 +5,14 @@ pub const ClientVpnEndpointStatusCode = enum {
     available,
     deleting,
     deleted,
+    pending,
 
     pub const json_field_names = .{
         .pending_associate = "pending-associate",
         .available = "available",
         .deleting = "deleting",
         .deleted = "deleted",
+        .pending = "pending",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +21,7 @@ pub const ClientVpnEndpointStatusCode = enum {
             .available => "available",
             .deleting => "deleting",
             .deleted => "deleted",
+            .pending => "pending",
         };
     }
 

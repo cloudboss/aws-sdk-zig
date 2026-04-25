@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const AssetConfiguration = @import("asset_configuration.zig").AssetConfiguration;
 const ResponseDetails = @import("response_details.zig").ResponseDetails;
 const JobError = @import("job_error.zig").JobError;
 const State = @import("state.zig").State;
@@ -21,6 +22,10 @@ pub const GetJobInput = struct {
 pub const GetJobOutput = struct {
     /// The ARN for the job.
     arn: ?[]const u8 = null,
+
+    /// The configuration for the asset, including tags applied to assets created by
+    /// the job.
+    asset_configuration: ?AssetConfiguration = null,
 
     /// The date and time that the job was created, in ISO 8601 format.
     created_at: ?i64 = null,
@@ -45,6 +50,7 @@ pub const GetJobOutput = struct {
 
     pub const json_field_names = .{
         .arn = "Arn",
+        .asset_configuration = "AssetConfiguration",
         .created_at = "CreatedAt",
         .details = "Details",
         .errors = "Errors",

@@ -524,6 +524,9 @@ pub const Client = struct {
     /// place and operational before calling
     /// [ExportKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ExportKey.html). The export token expires in 30 days. You can use the same export token to export multiple keys from your service account.
     ///
+    /// To return a previously generated export token and signing key certificate
+    /// instead of generating new ones, set `ReuseLastGeneratedToken` to `true`.
+    ///
     /// **Cross-account use:** This operation can't be used across different Amazon
     /// Web Services accounts.
     ///
@@ -544,6 +547,9 @@ pub const Client = struct {
     /// The wrapping key certificate wraps the key under import. The import token
     /// and wrapping key certificate must be in place and operational before calling
     /// [ImportKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html). The import token expires in 30 days. You can use the same import token to import multiple keys into your service account.
+    ///
+    /// To return a previously generated import token and wrapping key certificate
+    /// instead of generating new ones, set `ReuseLastGeneratedToken` to `true`.
     ///
     /// **Cross-account use:** This operation can't be used across different Amazon
     /// Web Services accounts.

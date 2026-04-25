@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ModelInvocationJobInputDataConfig = @import("model_invocation_job_input_data_config.zig").ModelInvocationJobInputDataConfig;
+const ModelInvocationType = @import("model_invocation_type.zig").ModelInvocationType;
 const ModelInvocationJobOutputDataConfig = @import("model_invocation_job_output_data_config.zig").ModelInvocationJobOutputDataConfig;
 const Tag = @import("tag.zig").Tag;
 const VpcConfig = @import("vpc_config.zig").VpcConfig;
@@ -26,6 +27,9 @@ pub const CreateModelInvocationJobInput = struct {
     /// The unique identifier of the foundation model to use for the batch inference
     /// job.
     model_id: []const u8,
+
+    /// The invocation endpoint for ModelInvocationJob
+    model_invocation_type: ?ModelInvocationType = null,
 
     /// Details about the location of the output of the batch inference job.
     output_data_config: ModelInvocationJobOutputDataConfig,
@@ -56,6 +60,7 @@ pub const CreateModelInvocationJobInput = struct {
         .input_data_config = "inputDataConfig",
         .job_name = "jobName",
         .model_id = "modelId",
+        .model_invocation_type = "modelInvocationType",
         .output_data_config = "outputDataConfig",
         .role_arn = "roleArn",
         .tags = "tags",
@@ -129,6 +134,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateModelInvocationJo
     try body_buf.appendSlice(allocator, "\"modelId\":");
     try aws.json.writeValue(@TypeOf(input.model_id), input.model_id, allocator, &body_buf);
     has_prev = true;
+    if (input.model_invocation_type) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"modelInvocationType\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"outputDataConfig\":");
     try aws.json.writeValue(@TypeOf(input.output_data_config), input.output_data_config, allocator, &body_buf);

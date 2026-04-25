@@ -37,6 +37,15 @@ pub const Checksum = struct {
     /// the *Amazon S3 User Guide*.
     checksum_crc64_nvme: ?[]const u8 = null,
 
+    /// The Base64 encoded, 128-bit `MD5` digest of the object. This checksum is
+    /// present
+    /// if the object was uploaded with the `MD5` checksum algorithm. For more
+    /// information, see
+    /// [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
+    /// the *Amazon S3 User Guide*.
+    checksum_md5: ?[]const u8 = null,
+
     /// The Base64 encoded, 160-bit `SHA1` digest of the object. This checksum is
     /// only present if the checksum was uploaded
     /// with the object. When you use the API operation on an object that was
@@ -61,10 +70,46 @@ pub const Checksum = struct {
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums) in the *Amazon S3 User Guide*.
     checksum_sha256: ?[]const u8 = null,
 
+    /// The Base64 encoded, 512-bit `SHA512` digest of the object. This checksum is
+    /// present
+    /// if the object was uploaded with the `SHA512` checksum algorithm. For more
+    /// information, see
+    /// [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
+    /// the *Amazon S3 User Guide*.
+    checksum_sha512: ?[]const u8 = null,
+
     /// The checksum type that is used to calculate the object’s checksum value. For
     /// more information, see
     /// [Checking
     /// object
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in the *Amazon S3 User Guide*.
     checksum_type: ?ChecksumType = null,
+
+    /// The Base64 encoded, 128-bit `XXHASH128` checksum of the object. This
+    /// checksum is present
+    /// if the object was uploaded with the `XXHASH128` checksum algorithm. For more
+    /// information, see
+    /// [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
+    /// the *Amazon S3 User Guide*.
+    checksum_xxhash128: ?[]const u8 = null,
+
+    /// The Base64 encoded, 64-bit `XXHASH3` checksum of the object. This checksum
+    /// is present
+    /// if the object was uploaded with the `XXHASH3` checksum algorithm. For more
+    /// information, see
+    /// [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
+    /// the *Amazon S3 User Guide*.
+    checksum_xxhash3: ?[]const u8 = null,
+
+    /// The Base64 encoded, 64-bit `XXHASH64` checksum of the object. This checksum
+    /// is present
+    /// if the object was uploaded with the `XXHASH64` checksum algorithm. For more
+    /// information, see
+    /// [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
+    /// the *Amazon S3 User Guide*.
+    checksum_xxhash64: ?[]const u8 = null,
 };

@@ -12,9 +12,14 @@ pub const EpisodicReflectionOverride = struct {
     /// the episodic namespaces.
     namespaces: ?[]const []const u8 = null,
 
+    /// The namespaceTemplates over which reflections were created. Can be less
+    /// nested than the episodic namespaces.
+    namespace_templates: ?[]const []const u8 = null,
+
     pub const json_field_names = .{
         .append_to_prompt = "appendToPrompt",
         .model_id = "modelId",
         .namespaces = "namespaces",
+        .namespace_templates = "namespaceTemplates",
     };
 };

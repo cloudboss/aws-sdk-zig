@@ -19,10 +19,16 @@ const IsolineTravelModeOptions = @import("isoline_travel_mode_options.zig").Isol
 const Isoline = @import("isoline.zig").Isoline;
 
 pub const CalculateIsolinesInput = struct {
-    /// Features that are allowed while calculating an isoline.
+    /// Enables special road types or features that should be considered for routing
+    /// even if they might be restricted by default for the selected travel mode.
+    /// These include high-occupancy vehicle and toll lanes.
     allow: ?IsolineAllowOptions = null,
 
-    /// Time of arrival at the destination.
+    /// Determine areas from which `Destination` can be reached by this time, taking
+    /// into account predicted traffic conditions and working backward to account
+    /// for congestion patterns. This attribute cannot be used together with
+    /// `DepartureTime` or `DepartNow`. Specified as an ISO-8601 timestamp with
+    /// timezone offset.
     ///
     /// Time format: `YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm`
     ///
@@ -33,16 +39,21 @@ pub const CalculateIsolinesInput = struct {
     /// `2020-04-22T17:57:24+02:00`
     arrival_time: ?[]const u8 = null,
 
-    /// Features that are avoided while calculating a route. Avoidance is on a
-    /// best-case basis. If an avoidance can't be satisfied for a particular case,
-    /// it violates the avoidance and the returned response produces a notice for
-    /// the violation.
+    /// Specifies road types, features, or areas to avoid (if possible) when
+    /// calculating reachable areas. These are treated as preferences rather than
+    /// strict constraints—if a route cannot be calculated without using an avoided
+    /// feature, that avoidance preference may be ignored.
     avoid: ?IsolineAvoidanceOptions = null,
 
-    /// Uses the current time as the time of departure.
+    /// When true, uses the current time as the departure time and takes current
+    /// traffic conditions into account. This attribute cannot be used together with
+    /// `DepartureTime` or `ArrivalTime`.
     depart_now: ?bool = null,
 
-    /// Time of departure from thr origin.
+    /// Determine areas that can be reached when departing at this time, taking into
+    /// account predicted traffic conditions. This attribute cannot be used together
+    /// with `ArrivalTime` or `DepartNow`. Specified as an ISO-8601 timestamp with
+    /// timezone offset.
     ///
     /// Time format:`YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm`
     ///
@@ -53,67 +64,110 @@ pub const CalculateIsolinesInput = struct {
     /// `2020-04-22T17:57:24+02:00`
     departure_time: ?[]const u8 = null,
 
-    /// The final position for the route. In the World Geodetic System (WGS 84)
-    /// format: `[longitude, latitude]`.
+    /// An optional destination point, specified as `[longitude, latitude]`
+    /// coordinates. When provided, the service calculates areas from which this
+    /// destination can be reached within the specified thresholds. This reverses
+    /// the usual isoline calculation to show areas that could reach your location,
+    /// rather than areas you could reach from your location. Either `Origin` or
+    /// `Destination` must be provided.
     destination: ?[]const f64 = null,
 
-    /// Destination related options.
+    /// Options that control how the destination point is matched to the road
+    /// network and how routes can approach it. These options help improve travel
+    /// time accuracy by accounting for real-world access to the destination.
     destination_options: ?IsolineDestinationOptions = null,
 
     /// The format of the returned IsolineGeometry.
     ///
-    /// Default Value:`FlexiblePolyline`
+    /// Default value:`FlexiblePolyline`
     isoline_geometry_format: ?GeometryFormat = null,
 
-    /// Defines the granularity of the returned Isoline.
+    /// Controls the detail level of the generated isolines. Higher granularity
+    /// produces smoother shapes but requires more processing time and results in
+    /// larger responses.
     isoline_granularity: ?IsolineGranularityOptions = null,
 
-    /// Optional: The API key to be used for authorization. Either an API key or
-    /// valid SigV4 signature must be provided when making a request.
+    /// An Amazon Location Service API Key with access to this action. If omitted,
+    /// the request must be signed using Signature Version 4.
     key: ?[]const u8 = null,
 
-    /// Specifies the optimization criteria for when calculating an isoline.
-    /// AccurateCalculation generates an isoline of higher granularity that is more
-    /// precise. FastCalculation generates an isoline faster by reducing the
-    /// granularity, and in turn the quality of the isoline. BalancedCalculation
-    /// generates an isoline by balancing between quality and performance.
+    /// Controls the trade-off between calculation speed and isoline precision.
+    /// Choose ` FastCalculation` for quicker results with less detail,
+    /// `AccurateCalculation` for more precise results, or `BalancedCalculation` for
+    /// a middle ground.
     ///
-    /// Default Value: `BalancedCalculation`
+    /// Default value: `BalancedCalculation`
     optimize_isoline_for: ?IsolineOptimizationObjective = null,
 
-    /// Specifies the optimization criteria for calculating a route.
+    /// Determines whether routes prioritize shortest travel time (`FastestRoute`)
+    /// or shortest physical distance (`ShortestRoute`) when calculating reachable
+    /// areas.
     ///
-    /// Default Value: `FastestRoute`
+    /// Default value: `FastestRoute`
     optimize_routing_for: ?RoutingObjective = null,
 
-    /// The start position for the route.
+    /// The starting point for isoline calculations, specified as `[longitude,
+    /// latitude]` coordinates. For example, this could be a store location, service
+    /// center, or any point from which you want to calculate reachable areas.
+    /// Either `Origin` or `Destination` must be provided.
     origin: ?[]const f64 = null,
 
-    /// Origin related options.
+    /// Options that control how the origin point is matched to the road network and
+    /// how routes can depart from it. These options help improve travel time
+    /// accuracy by accounting for real-world access from the origin.
     origin_options: ?IsolineOriginOptions = null,
 
-    /// Threshold to be used for the isoline calculation. Up to 3 thresholds per
-    /// provided type can be requested.
+    /// The distance or time thresholds used to determine reachable areas. You can
+    /// specify up to five thresholds (which all must be the same type) to calculate
+    /// multiple isolines in a single request. For example, to determine the areas
+    /// that are reachable within 10 and 20 minutes of the origin, specify time
+    /// thresholds of 600 and 1200 seconds.
     ///
-    /// You incur a calculation charge for each threshold. Using a large amount of
-    /// thresholds in a request can lead you to incur unexpected charges. See [
-    /// Amazon Location's pricing
-    /// page](https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`) for more information.
+    /// You incur a calculation charge for each threshold. Using a large number of
+    /// thresholds in a request can lead to unexpected charges. For more
+    /// information, see [Routes
+    /// pricing](https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html) in the *Amazon Location Service Developer Guide*.
     thresholds: IsolineThresholds,
 
-    /// Traffic related options.
+    /// Configures how real-time and historical traffic data affects isoline
+    /// calculations. Traffic patterns can significantly impact reachable areas,
+    /// especially during peak hours.
     traffic: ?IsolineTrafficOptions = null,
 
-    /// Specifies the mode of transport when calculating a route. Used in estimating
-    /// the speed of travel and road compatibility.
+    /// The mode of transportation to use for calculations. This affects which road
+    /// types or features can be used, estimated speed, and the traffic levels that
+    /// are applied.
     ///
-    /// The mode `Scooter` also applies to motorcycles, set to `Scooter` when wanted
-    /// to calculate options for motorcycles.
+    /// * `Car`—Standard passenger vehicle routing using roads accessible to cars
+    /// * `Pedestrian`—Walking routes using pedestrian paths, sidewalks, and
+    ///   crossings
+    /// * `Scooter`—Light two-wheeled vehicle routing using roads and paths
+    ///   accessible to scooters
+    /// * `Truck`—Commercial truck routing considering vehicle dimensions, weight
+    ///   restrictions, and hazardous material regulations
     ///
-    /// Default Value: `Car`
+    /// The mode `Scooter` also applies to motorcycles; set this to `Scooter` when
+    /// calculating isolines for motorcycles.
+    ///
+    /// Default value: `Car`
     travel_mode: ?IsolineTravelMode = null,
 
-    /// Travel mode related options for the provided travel mode.
+    /// Additional attributes that refine how reachable areas are calculated based
+    /// on specific vehicle characteristics. These options help produce more
+    /// accurate results by accounting for real-world constraints and capabilities.
+    ///
+    /// For example:
+    ///
+    /// * For trucks (`Truck`), specify dimensions, weight limits, and hazardous
+    ///   cargo restrictions to ensure isolines only include roads that can
+    ///   physically and legally accommodate the vehicle
+    /// * For cars (`Car`), set maximum speed capabilities or indicate
+    ///   high-occupancy vehicle eligibility to better estimate reachable areas
+    /// * For scooters (`Scooter`), specify engine type and speed limitations to
+    ///   more accurately model their travel capabilities
+    ///
+    /// Without these options, calculations use default assumptions that may not
+    /// match your specific use case.
     travel_mode_options: ?IsolineTravelModeOptions = null,
 
     pub const json_field_names = .{
@@ -139,10 +193,11 @@ pub const CalculateIsolinesInput = struct {
 };
 
 pub const CalculateIsolinesOutput = struct {
-    /// Time of arrival at the destination. This parameter is returned only if the
-    /// Destination parameters was provided in the request.
+    /// Time of arrival at the destination, used for traffic calculations. This
+    /// attribute is returned only if the `Destination` and `ArrivalTime` attributes
+    /// were provided in the request.
     ///
-    /// Time format:`YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm`
+    /// Time format: `YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm`
     ///
     /// Examples:
     ///
@@ -151,9 +206,12 @@ pub const CalculateIsolinesOutput = struct {
     /// `2020-04-22T17:57:24+02:00`
     arrival_time: ?[]const u8 = null,
 
-    /// Time of departure from thr origin.
+    /// Time of departure from the origin, used for traffic calculations. This
+    /// attribute is returned when `Origin` was provided in the request and either a
+    /// specific departure time was requested (`DepartureTime`) or `DepartNow` was
+    /// set to true.
     ///
-    /// Time format:`YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm`
+    /// Time format: `YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm`
     ///
     /// Examples:
     ///
@@ -162,21 +220,26 @@ pub const CalculateIsolinesOutput = struct {
     /// `2020-04-22T17:57:24+02:00`
     departure_time: ?[]const u8 = null,
 
-    /// The format of the returned IsolineGeometry.
+    /// The format of the returned geometries, matching the format specified in the
+    /// request. Either ` FlexiblePolyline` for compact encoding or `Simple` for
+    /// GeoJSON-compatible coordinates.
     ///
-    /// Default Value:`FlexiblePolyline`
+    /// Default value:`FlexiblePolyline`
     isoline_geometry_format: GeometryFormat,
 
-    /// Calculated isolines and associated properties.
+    /// Reachable areas, or isolines, for each threshold specified in the request.
     isolines: ?[]const Isoline = null,
 
-    /// The pricing bucket for which the query is charged at.
+    /// The pricing bucket applied to this calculation. Different buckets apply
+    /// based on the travel mode and thresholds used.
     pricing_bucket: []const u8,
 
-    /// Snapped destination that was used for the Isoline calculation.
+    /// The actual point on the road network used for calculations, which may differ
+    /// from the requested destination if `Destination` was not directly on a road.
     snapped_destination: ?[]const f64 = null,
 
-    /// Snapped origin that was used for the Isoline calculation.
+    /// The actual point on the road network used for calculations, which may differ
+    /// from the requested origin if `Origin` was not directly on a road.
     snapped_origin: ?[]const f64 = null,
 
     pub const json_field_names = .{

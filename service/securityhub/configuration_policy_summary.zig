@@ -1,5 +1,5 @@
-/// An object that contains the details of an Security Hub configuration policy
-/// that’s returned in a
+/// An object that contains the details of an Security Hub CSPM configuration
+/// policy that’s returned in a
 /// `ListConfigurationPolicies` request.
 pub const ConfigurationPolicySummary = struct {
     /// The Amazon Resource Name (ARN) of the configuration policy.

@@ -7,15 +7,12 @@ const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DiscoverPollEndpointInput = struct {
     /// The short name or full Amazon Resource Name (ARN) of the cluster that the
-    /// container
-    /// instance belongs to.
+    /// container instance belongs to.
     cluster: ?[]const u8 = null,
 
     /// The container instance ID or full ARN of the container instance. For more
-    /// information
-    /// about the ARN format, see [Amazon Resource Name
-    /// (ARN)](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids) in the *Amazon ECS Developer
-    /// Guide*.
+    /// information about the ARN format, see [Amazon Resource Name
+    /// (ARN)](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids) in the *Amazon ECS Developer Guide*.
     container_instance: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -29,10 +26,8 @@ pub const DiscoverPollEndpointOutput = struct {
     endpoint: ?[]const u8 = null,
 
     /// The endpoint for the Amazon ECS agent to poll for Service Connect
-    /// configuration. For
-    /// more information, see [Service
-    /// Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
-    /// in the *Amazon Elastic Container Service Developer Guide*.
+    /// configuration. For more information, see [Service
+    /// Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.
     service_connect_endpoint: ?[]const u8 = null,
 
     /// The telemetry endpoint for the Amazon ECS agent.
@@ -169,6 +164,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

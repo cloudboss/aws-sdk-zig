@@ -8,8 +8,7 @@ const ThreatEntitySetFormat = @import("threat_entity_set_format.zig").ThreatEnti
 
 pub const CreateThreatEntitySetInput = struct {
     /// A boolean value that indicates whether GuardDuty should start using the
-    /// uploaded threat entity set to
-    /// generate findings.
+    /// uploaded threat entity set to generate findings.
     activate: bool,
 
     /// The idempotency token for the create request.
@@ -18,8 +17,8 @@ pub const CreateThreatEntitySetInput = struct {
     /// The unique ID of the detector of the GuardDuty account for which you want to
     /// create a threat entity set.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 
@@ -31,20 +30,17 @@ pub const CreateThreatEntitySetInput = struct {
     format: ThreatEntitySetFormat,
 
     /// The URI of the file that contains the threat entity set. The format of the
-    /// `Location` URL must be a valid
-    /// Amazon S3 URL format. Invalid URL formats will result in an error,
-    /// regardless of whether you activate the entity set or not. For more
-    /// information about
-    /// format of the location URLs, see [Format of location URL under Step 2:
-    /// Adding trusted or threat intelligence
-    /// data](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-lists-create-activate.html)
-    /// in the *Amazon GuardDuty User Guide*.
+    /// `Location` URL must be a valid Amazon S3 URL format. Invalid URL formats
+    /// will result in an error, regardless of whether you activate the entity set
+    /// or not. For more information about format of the location URLs, see [Format
+    /// of location URL under Step 2: Adding trusted or threat intelligence
+    /// data](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-lists-create-activate.html) in the *Amazon GuardDuty User Guide*.
     location: []const u8,
 
     /// A user-friendly name to identify the threat entity set.
     ///
-    /// The name of your list can include
-    /// lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).
+    /// The name of your list can include lowercase letters, uppercase letters,
+    /// numbers, dash (-), and underscore (_).
     name: []const u8,
 
     /// The tags to be added to a new threat entity set resource.

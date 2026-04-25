@@ -1,6 +1,7 @@
 pub const Accounting = @import("accounting.zig").Accounting;
 pub const AccountingMode = @import("accounting_mode.zig").AccountingMode;
 pub const AccountingRequest = @import("accounting_request.zig").AccountingRequest;
+pub const CgroupCustomSetting = @import("cgroup_custom_setting.zig").CgroupCustomSetting;
 pub const Cluster = @import("cluster.zig").Cluster;
 pub const ClusterSlurmConfiguration = @import("cluster_slurm_configuration.zig").ClusterSlurmConfiguration;
 pub const ClusterSlurmConfigurationRequest = @import("cluster_slurm_configuration_request.zig").ClusterSlurmConfigurationRequest;
@@ -41,6 +42,7 @@ pub const SlurmCustomSetting = @import("slurm_custom_setting.zig").SlurmCustomSe
 pub const SlurmRest = @import("slurm_rest.zig").SlurmRest;
 pub const SlurmRestMode = @import("slurm_rest_mode.zig").SlurmRestMode;
 pub const SlurmRestRequest = @import("slurm_rest_request.zig").SlurmRestRequest;
+pub const SlurmdbdCustomSetting = @import("slurmdbd_custom_setting.zig").SlurmdbdCustomSetting;
 pub const SpotAllocationStrategy = @import("spot_allocation_strategy.zig").SpotAllocationStrategy;
 pub const SpotOptions = @import("spot_options.zig").SpotOptions;
 pub const TagResourceRequest = @import("tag_resource_request.zig").TagResourceRequest;

@@ -1,27 +1,30 @@
 const MatchingStrategy = @import("matching_strategy.zig").MatchingStrategy;
 
-/// Isoline matching related options.
+/// Controls how origin and destination points are matched to the road network
+/// when they don't fall exactly on a road. Matching options help ensure
+/// realistic routing by connecting points to appropriate roads.
 pub const IsolineMatchingOptions = struct {
-    /// Attempts to match the provided position to a road similar to the provided
-    /// name.
+    /// The expected street name near the point. Helps disambiguate matching when
+    /// multiple roads are within range.
     name_hint: ?[]const u8 = null,
 
-    /// If the distance to a highway/bridge/tunnel/sliproad is within threshold, the
-    /// waypoint will be snapped to the highway/bridge/tunnel/sliproad.
+    /// The maximum distance in meters that a point can be from a road while still
+    /// being considered "on" that road. Points further than this distance require
+    /// explicit matching.
     ///
     /// **Unit**: `meters`
     on_road_threshold: i64 = 0,
 
-    /// Considers all roads within the provided radius to match the provided
-    /// destination to. The roads that are considered are determined by the provided
-    /// Strategy.
+    /// The maximum distance in meters to search for roads to match to. Points with
+    /// no roads within this radius will fail to match. The roads that are
+    /// considered within this radius are determined by the specified `Strategy`
     ///
-    /// **Unit**: `Meters`
+    /// **Unit**: `meters`
     radius: i64 = 0,
 
-    /// Strategy that defines matching of the position onto the road network.
-    /// MatchAny considers all roads possible, whereas MatchMostSignificantRoad
-    /// matches to the most significant road.
+    /// Determines how points are matched to the road network. `MatchAny` finds the
+    /// nearest viable road segment, while `MatchMostSignificantRoad` prioritizes
+    /// major roads.
     strategy: ?MatchingStrategy = null,
 
     pub const json_field_names = .{

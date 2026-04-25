@@ -10,8 +10,8 @@ const IpSetStatus = @import("ip_set_status.zig").IpSetStatus;
 pub const GetIPSetInput = struct {
     /// The unique ID of the detector that is associated with the IPSet.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 
@@ -26,8 +26,8 @@ pub const GetIPSetInput = struct {
 
 pub const GetIPSetOutput = struct {
     /// The Amazon Web Services account ID that owns the Amazon S3 bucket specified
-    /// in the **location** parameter. This field appears
-    /// in the response only if it was provided during IPSet creation or update.
+    /// in the **location** parameter. This field appears in the response only if it
+    /// was provided during IPSet creation or update.
     expected_bucket_owner: ?[]const u8 = null,
 
     /// The format of the file that contains the IPSet.

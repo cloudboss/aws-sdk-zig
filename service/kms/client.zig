@@ -584,8 +584,6 @@ pub const Client = struct {
     ///
     /// **Multi-Region primary keys**
     ///
-    /// **Imported key material**
-    ///
     /// To create a multi-Region *primary key* in the local Amazon Web Services
     /// Region,
     /// use the `MultiRegion` parameter with a value of `True`. To create
@@ -614,6 +612,8 @@ pub const Client = struct {
     /// or making a cross-Region call. For more information about multi-Region keys,
     /// see [Multi-Region keys in
     /// KMS](https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html) in the *Key Management Service Developer Guide*.
+    ///
+    /// **Imported key material**
     ///
     /// To import your own key material into a KMS key, begin by creating a KMS key
     /// with no
@@ -3204,7 +3204,7 @@ pub const Client = struct {
     /// automatically
     /// rotate, as scheduled, on April 14, 2024 and every 730 days thereafter.
     ///
-    /// You can perform on-demand key rotation a **maximum of 10
+    /// You can perform on-demand key rotation a **maximum of 25
     /// times** per KMS key. You can use the KMS console to view the number of
     /// remaining on-demand rotations available for a KMS key.
     ///

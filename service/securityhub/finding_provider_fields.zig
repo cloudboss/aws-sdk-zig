@@ -18,8 +18,8 @@ const FindingProviderSeverity = @import("finding_provider_severity.zig").Finding
 ///
 /// The preceding fields are nested under the `FindingProviderFields` object,
 /// but also have analogues of the same name
-/// as top-level ASFF fields. When a new finding is sent to Security Hub by a
-/// finding provider, Security Hub populates the
+/// as top-level ASFF fields. When a new finding is sent to Security Hub CSPM by
+/// a finding provider, Security Hub CSPM populates the
 /// `FindingProviderFields` object automatically, if it is empty, based on the
 /// corresponding top-level fields.
 ///
@@ -31,11 +31,11 @@ const FindingProviderSeverity = @import("finding_provider_severity.zig").Finding
 /// ](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) operation. Customers can update the top-level fields by using the `BatchUpdateFindings` operation. Customers can't
 /// update `FindingProviderFields`.
 ///
-/// For information about how Security Hub handles updates from
+/// For information about how Security Hub CSPM handles updates from
 /// `BatchImportFindings` to
 /// `FindingProviderFields` and to the corresponding top-level
 /// attributes, see [Using `FindingProviderFields`
-/// ](https://docs.aws.amazon.com/securityhub/latest/userguide/finding-update-batchimportfindings.html#batchimportfindings-findingproviderfields) in the *Security Hub User Guide*.
+/// ](https://docs.aws.amazon.com/securityhub/latest/userguide/finding-update-batchimportfindings.html#batchimportfindings-findingproviderfields) in the *Security Hub CSPM User Guide*.
 pub const FindingProviderFields = struct {
     /// A finding's confidence. Confidence is defined as the likelihood that a
     /// finding

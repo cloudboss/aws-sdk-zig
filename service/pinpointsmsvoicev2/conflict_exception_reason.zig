@@ -21,7 +21,10 @@ pub const ConflictExceptionReason = enum {
     phone_number_not_in_registration_region,
     registration_already_submitted,
     registration_not_complete,
+    resource_already_associated,
     sender_id_associated_to_pool,
+    rcs_agent_associated_to_pool,
+    pool_associated_to_notify_configuration,
     resource_already_exists,
     resource_deletion_not_allowed,
     resource_modification_not_allowed,
@@ -37,6 +40,8 @@ pub const ConflictExceptionReason = enum {
     protect_configuration_not_associated_with_configuration_set,
     destination_country_blocked_by_protect_configuration,
     destination_phone_number_blocked_by_protect_number_override,
+    rcs_agent_already_associated_to_registration_type,
+    notify_configuration_not_active,
 
     pub const json_field_names = .{
         .create_registration_version_not_allowed = "CREATE_REGISTRATION_VERSION_NOT_ALLOWED",
@@ -59,7 +64,10 @@ pub const ConflictExceptionReason = enum {
         .phone_number_not_in_registration_region = "PHONE_NUMBER_NOT_IN_REGISTRATION_REGION",
         .registration_already_submitted = "REGISTRATION_ALREADY_SUBMITTED",
         .registration_not_complete = "REGISTRATION_NOT_COMPLETE",
+        .resource_already_associated = "RESOURCE_ALREADY_ASSOCIATED",
         .sender_id_associated_to_pool = "SENDER_ID_ASSOCIATED_TO_POOL",
+        .rcs_agent_associated_to_pool = "RCS_AGENT_ASSOCIATED_TO_POOL",
+        .pool_associated_to_notify_configuration = "POOL_ASSOCIATED_TO_NOTIFY_CONFIGURATION",
         .resource_already_exists = "RESOURCE_ALREADY_EXISTS",
         .resource_deletion_not_allowed = "RESOURCE_DELETION_NOT_ALLOWED",
         .resource_modification_not_allowed = "RESOURCE_MODIFICATION_NOT_ALLOWED",
@@ -75,6 +83,8 @@ pub const ConflictExceptionReason = enum {
         .protect_configuration_not_associated_with_configuration_set = "PROTECT_CONFIGURATION_NOT_ASSOCIATED_WITH_CONFIGURATION_SET",
         .destination_country_blocked_by_protect_configuration = "DESTINATION_COUNTRY_BLOCKED_BY_PROTECT_CONFIGURATION",
         .destination_phone_number_blocked_by_protect_number_override = "DESTINATION_PHONE_NUMBER_BLOCKED_BY_PROTECT_NUMBER_OVERRIDE",
+        .rcs_agent_already_associated_to_registration_type = "RCS_AGENT_ALREADY_ASSOCIATED_TO_REGISTRATION_TYPE",
+        .notify_configuration_not_active = "NOTIFY_CONFIGURATION_NOT_ACTIVE",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -99,7 +109,10 @@ pub const ConflictExceptionReason = enum {
             .phone_number_not_in_registration_region => "PHONE_NUMBER_NOT_IN_REGISTRATION_REGION",
             .registration_already_submitted => "REGISTRATION_ALREADY_SUBMITTED",
             .registration_not_complete => "REGISTRATION_NOT_COMPLETE",
+            .resource_already_associated => "RESOURCE_ALREADY_ASSOCIATED",
             .sender_id_associated_to_pool => "SENDER_ID_ASSOCIATED_TO_POOL",
+            .rcs_agent_associated_to_pool => "RCS_AGENT_ASSOCIATED_TO_POOL",
+            .pool_associated_to_notify_configuration => "POOL_ASSOCIATED_TO_NOTIFY_CONFIGURATION",
             .resource_already_exists => "RESOURCE_ALREADY_EXISTS",
             .resource_deletion_not_allowed => "RESOURCE_DELETION_NOT_ALLOWED",
             .resource_modification_not_allowed => "RESOURCE_MODIFICATION_NOT_ALLOWED",
@@ -115,6 +128,8 @@ pub const ConflictExceptionReason = enum {
             .protect_configuration_not_associated_with_configuration_set => "PROTECT_CONFIGURATION_NOT_ASSOCIATED_WITH_CONFIGURATION_SET",
             .destination_country_blocked_by_protect_configuration => "DESTINATION_COUNTRY_BLOCKED_BY_PROTECT_CONFIGURATION",
             .destination_phone_number_blocked_by_protect_number_override => "DESTINATION_PHONE_NUMBER_BLOCKED_BY_PROTECT_NUMBER_OVERRIDE",
+            .rcs_agent_already_associated_to_registration_type => "RCS_AGENT_ALREADY_ASSOCIATED_TO_REGISTRATION_TYPE",
+            .notify_configuration_not_active => "NOTIFY_CONFIGURATION_NOT_ACTIVE",
         };
     }
 

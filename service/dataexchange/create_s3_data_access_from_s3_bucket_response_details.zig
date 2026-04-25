@@ -1,8 +1,7 @@
 const S3DataAccessAssetSourceEntry = @import("s3_data_access_asset_source_entry.zig").S3DataAccessAssetSourceEntry;
 
 /// Details about the response of the operation to create an S3 data access from
-/// an S3
-/// bucket.
+/// an S3 bucket.
 pub const CreateS3DataAccessFromS3BucketResponseDetails = struct {
     /// Details about the asset source from an Amazon S3 bucket.
     asset_source: S3DataAccessAssetSourceEntry,

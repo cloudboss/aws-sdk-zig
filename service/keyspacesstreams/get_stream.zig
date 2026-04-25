@@ -11,18 +11,18 @@ const StreamViewType = @import("stream_view_type.zig").StreamViewType;
 
 pub const GetStreamInput = struct {
     /// The maximum number of shard objects to return in a single `GetStream`
-    /// request. Default value is 100. The minimum value is 1 and the maximum value
-    /// is 100.
+    /// request. The default value is 100. The minimum value is 1 and the maximum
+    /// value is 100.
     max_results: ?i32 = null,
 
     /// An optional pagination token provided by a previous `GetStream` operation.
     /// If this parameter is specified, the response includes only records beyond
-    /// the token, up to the value specified by `maxResults`.
+    /// the token, up to the value specified by `MaxResults`.
     next_token: ?[]const u8 = null,
 
     /// Optional filter criteria to apply when retrieving shards. You can filter
-    /// shards based on their state or other attributes to narrow down the results
-    /// returned by the `GetStream` operation.
+    /// shards based on their parent `shardID` to get a list of children shards to
+    /// narrow down the results returned by the `GetStream` operation.
     shard_filter: ?ShardFilter = null,
 
     /// The Amazon Resource Name (ARN) of the stream for which detailed information

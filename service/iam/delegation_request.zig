@@ -20,7 +20,7 @@ pub const DelegationRequest = struct {
     /// The expiry time of this delegation request
     ///
     /// See the [Understanding the Request
-    /// Lifecycle](IAM/latest/UserGuide/temporary-delegation-building-integration.html#temporary-delegation-request-lifecycle) for
+    /// Lifecycle](https://docs.aws.amazon.com/IAM/latest/UserGuide/temporary-delegation-building-integration.html#temporary-delegation-request-lifecycle) for
     /// details on the life time of a delegation request at each state.
     expiration_time: ?i64 = null,
 
@@ -77,7 +77,7 @@ pub const DelegationRequest = struct {
     /// include the list of permissions boundary policies associated with the role
     /// creation.
     /// See [Permissions boundaries for IAM
-    /// entities](IAM/latest/UserGuide/access_policies_boundaries.html)
+    /// entities](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
     /// for more details about IAM permission boundaries.
     role_permission_restriction_arns: ?[]const []const u8 = null,
 
@@ -87,7 +87,7 @@ pub const DelegationRequest = struct {
     /// The state of this delegation request.
     ///
     /// See the [Understanding the Request
-    /// Lifecycle](IAM/latest/UserGuide/temporary-delegation-building-integration.html#temporary-delegation-request-lifecycle) for an explanation of how these
+    /// Lifecycle](https://docs.aws.amazon.com/IAM/latest/UserGuide/temporary-delegation-building-integration.html#temporary-delegation-request-lifecycle) for an explanation of how these
     /// states are transitioned.
     state: ?stateType = null,
 

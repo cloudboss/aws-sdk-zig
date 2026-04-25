@@ -61,7 +61,9 @@ pub const DescribeLocationAzureBlobOutput = struct {
     /// an
     /// authentication token that DataSync uses to access a specific storage
     /// location, with
-    /// a customer-managed KMS key.
+    /// a customer-managed Identity and Access Management (IAM) role that provides
+    /// access to
+    /// the secret.
     custom_secret_config: ?CustomSecretConfig = null,
 
     /// The ARN of your Azure Blob Storage transfer location.

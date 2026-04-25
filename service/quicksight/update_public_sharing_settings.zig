@@ -11,7 +11,7 @@ pub const UpdatePublicSharingSettingsInput = struct {
     aws_account_id: []const u8,
 
     /// A Boolean value that indicates whether public sharing is turned on for an
-    /// Quick Suite account.
+    /// Quick account.
     public_sharing_enabled: ?bool = null,
 
     pub const json_field_names = .{

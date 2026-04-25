@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const GlobalResolverIpAddressType = @import("global_resolver_ip_address_type.zig").GlobalResolverIpAddressType;
 const CRResourceStatus = @import("cr_resource_status.zig").CRResourceStatus;
 
 pub const DeleteGlobalResolverInput = struct {
@@ -35,19 +36,27 @@ pub const DeleteGlobalResolverOutput = struct {
     /// The unique identifier of the deleted Route 53 Global Resolver.
     id: []const u8,
 
+    /// The IP address type that was configured for the deleted Route 53 Global
+    /// Resolver.
+    ip_address_type: ?GlobalResolverIpAddressType = null,
+
     /// The global anycast IPv4 addresses that were associated with the deleted
     /// Route 53 Global Resolver.
     ipv_4_addresses: ?[]const []const u8 = null,
 
+    /// The global anycast IPv6 addresses that were associated with the deleted
+    /// Route 53 Global Resolver.
+    ipv_6_addresses: ?[]const []const u8 = null,
+
     /// The name of the deleted Route 53 Global Resolver.
     name: []const u8,
 
-    /// The AWS Region where observability data for the deleted Route 53 Global
-    /// Resolver was stored.
+    /// The Amazon Web Services Region where observability data for the deleted
+    /// Route 53 Global Resolver was stored.
     observability_region: ?[]const u8 = null,
 
-    /// The AWS Regions where the deleted Route 53 Global Resolver was deployed and
-    /// operational.
+    /// The Amazon Web Services Regions where the deleted Route 53 Global Resolver
+    /// was deployed and operational.
     regions: ?[]const []const u8 = null,
 
     /// The final status of the deleted Route 53 Global Resolver.
@@ -64,7 +73,9 @@ pub const DeleteGlobalResolverOutput = struct {
         .description = "description",
         .dns_name = "dnsName",
         .id = "id",
+        .ip_address_type = "ipAddressType",
         .ipv_4_addresses = "ipv4Addresses",
+        .ipv_6_addresses = "ipv6Addresses",
         .name = "name",
         .observability_region = "observabilityRegion",
         .regions = "regions",

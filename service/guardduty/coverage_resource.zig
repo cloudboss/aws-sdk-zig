@@ -24,8 +24,7 @@ pub const CoverageResource = struct {
     resource_id: ?[]const u8 = null,
 
     /// The timestamp at which the coverage details for the resource were last
-    /// updated. This is in
-    /// UTC format.
+    /// updated. This is in UTC format.
     updated_at: ?i64 = null,
 
     pub const json_field_names = .{

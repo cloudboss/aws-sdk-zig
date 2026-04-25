@@ -31,9 +31,13 @@ pub const OrganizationalUnit = struct {
     /// character range.
     name: ?[]const u8 = null,
 
+    /// The path in the organization where this OU exists.
+    path: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .arn = "Arn",
         .id = "Id",
         .name = "Name",
+        .path = "Path",
     };
 };

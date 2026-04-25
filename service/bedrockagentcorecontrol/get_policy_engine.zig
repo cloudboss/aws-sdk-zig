@@ -24,6 +24,10 @@ pub const GetPolicyEngineOutput = struct {
     /// This helps administrators understand the policy engine's role in governance.
     description: ?[]const u8 = null,
 
+    /// The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy
+    /// engine data.
+    encryption_key_arn: ?[]const u8 = null,
+
     /// The customer-assigned name of the policy engine. This is the human-readable
     /// identifier that was specified when the policy engine was created.
     name: []const u8,
@@ -52,6 +56,7 @@ pub const GetPolicyEngineOutput = struct {
     pub const json_field_names = .{
         .created_at = "createdAt",
         .description = "description",
+        .encryption_key_arn = "encryptionKeyArn",
         .name = "name",
         .policy_engine_arn = "policyEngineArn",
         .policy_engine_id = "policyEngineId",

@@ -1,8 +1,7 @@
 const ManagementType = @import("management_type.zig").ManagementType;
 
 /// Contains information about Amazon Web Services Fargate details associated
-/// with
-/// an Amazon ECS cluster.
+/// with an Amazon ECS cluster.
 pub const FargateDetails = struct {
     /// Runtime coverage issues identified for the resource running on Amazon Web
     /// Services Fargate.
@@ -12,7 +11,6 @@ pub const FargateDetails = struct {
     ///
     /// * `AUTO_MANAGED` indicates that GuardDuty deploys and manages updates for
     ///   this resource.
-    ///
     /// * `DISABLED` indicates that the deployment of the GuardDuty security agent
     ///   is disabled for this resource.
     ///

@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AWSServicePrincipal = @import("aws_service_principal.zig").AWSServicePrincipal;
+const ServiceOptions = @import("service_options.zig").ServiceOptions;
 
 pub const RevokeVpcEndpointAccessInput = struct {
     /// The account ID to revoke access from.
@@ -16,10 +17,16 @@ pub const RevokeVpcEndpointAccessInput = struct {
     /// The service SP to revoke access from.
     service: ?AWSServicePrincipal = null,
 
+    /// The options for the service, including the supported Regions for the
+    /// endpoint
+    /// access.
+    service_options: ?ServiceOptions = null,
+
     pub const json_field_names = .{
         .account = "Account",
         .domain_name = "DomainName",
         .service = "Service",
+        .service_options = "ServiceOptions",
     };
 };
 
@@ -77,6 +84,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RevokeVpcEndpointAccess
     if (input.service) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"Service\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.service_options) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"ServiceOptions\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
@@ -182,6 +195,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
         return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

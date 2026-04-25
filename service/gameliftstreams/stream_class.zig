@@ -14,6 +14,10 @@ pub const StreamClass = enum {
     gen_6_n_ultra_win_2022,
     gen_6_n_pro,
     gen_6_n_pro_win_2022,
+    gen_6_n_small_win_2022,
+    gen_6_n_medium_win_2022,
+    gen_6_e_pro,
+    gen_6_e_pro_win_2022,
 
     pub const json_field_names = .{
         .gen_4_n_high = "gen4n_high",
@@ -29,6 +33,10 @@ pub const StreamClass = enum {
         .gen_6_n_ultra_win_2022 = "gen6n_ultra_win2022",
         .gen_6_n_pro = "gen6n_pro",
         .gen_6_n_pro_win_2022 = "gen6n_pro_win2022",
+        .gen_6_n_small_win_2022 = "gen6n_small_win2022",
+        .gen_6_n_medium_win_2022 = "gen6n_medium_win2022",
+        .gen_6_e_pro = "gen6e_pro",
+        .gen_6_e_pro_win_2022 = "gen6e_pro_win2022",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -46,6 +54,10 @@ pub const StreamClass = enum {
             .gen_6_n_ultra_win_2022 => "gen6n_ultra_win2022",
             .gen_6_n_pro => "gen6n_pro",
             .gen_6_n_pro_win_2022 => "gen6n_pro_win2022",
+            .gen_6_n_small_win_2022 => "gen6n_small_win2022",
+            .gen_6_n_medium_win_2022 => "gen6n_medium_win2022",
+            .gen_6_e_pro => "gen6e_pro",
+            .gen_6_e_pro_win_2022 => "gen6e_pro_win2022",
         };
     }
 

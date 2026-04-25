@@ -20,7 +20,10 @@ const get_workload_access_token = @import("get_workload_access_token.zig");
 const get_workload_access_token_for_jwt = @import("get_workload_access_token_for_jwt.zig");
 const get_workload_access_token_for_user_id = @import("get_workload_access_token_for_user_id.zig");
 const invoke_agent_runtime = @import("invoke_agent_runtime.zig");
+const invoke_agent_runtime_command = @import("invoke_agent_runtime_command.zig");
+const invoke_browser = @import("invoke_browser.zig");
 const invoke_code_interpreter = @import("invoke_code_interpreter.zig");
+const invoke_harness = @import("invoke_harness.zig");
 const list_actors = @import("list_actors.zig");
 const list_browser_sessions = @import("list_browser_sessions.zig");
 const list_code_interpreter_sessions = @import("list_code_interpreter_sessions.zig");
@@ -30,6 +33,7 @@ const list_memory_records = @import("list_memory_records.zig");
 const list_sessions = @import("list_sessions.zig");
 const retrieve_memory_records = @import("retrieve_memory_records.zig");
 const save_browser_session_profile = @import("save_browser_session_profile.zig");
+const search_registry_records = @import("search_registry_records.zig");
 const start_browser_session = @import("start_browser_session.zig");
 const start_code_interpreter_session = @import("start_code_interpreter_session.zig");
 const start_memory_extraction_job = @import("start_memory_extraction_job.zig");
@@ -222,9 +226,11 @@ pub const Client = struct {
     /// Sends a request to an agent or tool hosted in an Amazon Bedrock AgentCore
     /// Runtime and receives responses in real-time.
     ///
-    /// To invoke an agent you must specify the AgentCore Runtime ARN and provide a
-    /// payload containing your request. You can optionally specify a qualifier to
-    /// target a specific version or endpoint of the agent.
+    /// To invoke an agent, you can specify either the AgentCore Runtime ARN or the
+    /// agent ID with an account ID, and provide a payload containing your request.
+    /// When you use the agent ID instead of the full ARN, you don't need to
+    /// URL-encode the identifier. You can optionally specify a qualifier to target
+    /// a specific endpoint of the agent.
     ///
     /// This operation supports streaming responses, allowing you to receive partial
     /// responses as they become available. We recommend using pagination to ensure
@@ -250,6 +256,43 @@ pub const Client = struct {
         return invoke_agent_runtime.execute(self, allocator, input, options);
     }
 
+    /// Executes a command in a runtime session container and streams the output
+    /// back to the caller. This operation allows you to run shell commands within
+    /// the agent runtime environment and receive real-time streaming responses
+    /// including standard output and standard error.
+    ///
+    /// To invoke a command, you must specify the agent runtime ARN and a runtime
+    /// session ID. The command execution supports streaming responses, allowing you
+    /// to receive output as it becomes available through `contentStart`,
+    /// `contentDelta`, and `contentStop` events.
+    ///
+    /// To use this operation, you must have the
+    /// `bedrock-agentcore:InvokeAgentRuntimeCommand` permission.
+    pub fn invokeAgentRuntimeCommand(self: *Self, allocator: std.mem.Allocator, input: invoke_agent_runtime_command.InvokeAgentRuntimeCommandInput, options: CallOptions) !invoke_agent_runtime_command.InvokeAgentRuntimeCommandOutput {
+        return invoke_agent_runtime_command.execute(self, allocator, input, options);
+    }
+
+    /// Invokes an operating system-level action on a browser session in Amazon
+    /// Bedrock AgentCore. This operation provides direct OS-level control over
+    /// browser sessions, enabling mouse actions, keyboard input, and screenshots
+    /// that the WebSocket-based Chrome DevTools Protocol (CDP) cannot handle — such
+    /// as interacting with print dialogs, context menus, and JavaScript alerts.
+    ///
+    /// You send a request with exactly one action in the `BrowserAction` union, and
+    /// receive a corresponding result in the `BrowserActionResult` union.
+    ///
+    /// The following operations are related to `InvokeBrowser`:
+    ///
+    /// *
+    ///   [StartBrowserSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StartBrowserSession.html)
+    /// *
+    ///   [GetBrowserSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetBrowserSession.html)
+    /// *
+    ///   [StopBrowserSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopBrowserSession.html)
+    pub fn invokeBrowser(self: *Self, allocator: std.mem.Allocator, input: invoke_browser.InvokeBrowserInput, options: CallOptions) !invoke_browser.InvokeBrowserOutput {
+        return invoke_browser.execute(self, allocator, input, options);
+    }
+
     /// Executes code within an active code interpreter session in Amazon Bedrock
     /// AgentCore. This operation processes the provided code, runs it in a secure
     /// environment, and returns the execution results including output, errors, and
@@ -271,6 +314,11 @@ pub const Client = struct {
     ///   [GetCodeInterpreterSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetCodeInterpreterSession.html)
     pub fn invokeCodeInterpreter(self: *Self, allocator: std.mem.Allocator, input: invoke_code_interpreter.InvokeCodeInterpreterInput, options: CallOptions) !invoke_code_interpreter.InvokeCodeInterpreterOutput {
         return invoke_code_interpreter.execute(self, allocator, input, options);
+    }
+
+    /// Operation to invoke a Harness.
+    pub fn invokeHarness(self: *Self, allocator: std.mem.Allocator, input: invoke_harness.InvokeHarnessInput, options: CallOptions) !invoke_harness.InvokeHarnessOutput {
+        return invoke_harness.execute(self, allocator, input, options);
     }
 
     /// Lists all actors in an AgentCore Memory resource. We recommend using
@@ -357,6 +405,8 @@ pub const Client = struct {
     /// We recommend using pagination to ensure that the operation returns quickly
     /// and successfully.
     ///
+    /// Empty sessions are automatically deleted after one day.
+    ///
     /// To use this operation, you must have the `bedrock-agentcore:ListSessions`
     /// permission.
     pub fn listSessions(self: *Self, allocator: std.mem.Allocator, input: list_sessions.ListSessionsInput, options: CallOptions) !list_sessions.ListSessionsOutput {
@@ -398,6 +448,13 @@ pub const Client = struct {
         return save_browser_session_profile.execute(self, allocator, input, options);
     }
 
+    /// Searches for registry records using semantic, lexical, or hybrid queries.
+    /// Returns metadata for matching records ordered by relevance within the
+    /// specified registry.
+    pub fn searchRegistryRecords(self: *Self, allocator: std.mem.Allocator, input: search_registry_records.SearchRegistryRecordsInput, options: CallOptions) !search_registry_records.SearchRegistryRecordsOutput {
+        return search_registry_records.execute(self, allocator, input, options);
+    }
+
     /// Creates and initializes a browser session in Amazon Bedrock AgentCore. The
     /// session enables agents to navigate and interact with web content, extract
     /// information from websites, and perform web-based tasks as part of their
@@ -418,6 +475,8 @@ pub const Client = struct {
     ///   [SaveBrowserSessionProfile](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_SaveBrowserSessionProfile.html)
     /// *
     ///   [StopBrowserSession](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopBrowserSession.html)
+    /// *
+    ///   [InvokeBrowser](https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_InvokeBrowser.html)
     pub fn startBrowserSession(self: *Self, allocator: std.mem.Allocator, input: start_browser_session.StartBrowserSessionInput, options: CallOptions) !start_browser_session.StartBrowserSessionOutput {
         return start_browser_session.execute(self, allocator, input, options);
     }

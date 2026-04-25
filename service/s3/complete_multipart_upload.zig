@@ -78,6 +78,16 @@ pub const CompleteMultipartUploadInput = struct {
     checksum_crc64_nvme: ?[]const u8 = null,
 
     /// This header can be used as a data integrity check to verify that the data
+    /// received is the same data
+    /// that was originally sent. This header specifies the Base64 encoded, 128-bit
+    /// `MD5`
+    /// digest of the object. For more information, see [Checking object integrity
+    /// in the Amazon S3
+    /// User
+    /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
+    checksum_md5: ?[]const u8 = null,
+
+    /// This header can be used as a data integrity check to verify that the data
     /// received is the same data that was originally sent.
     /// This header specifies the Base64 encoded, 160-bit `SHA1` digest of the
     /// object. For more information, see
@@ -95,6 +105,16 @@ pub const CompleteMultipartUploadInput = struct {
     /// *Amazon S3 User Guide*.
     checksum_sha256: ?[]const u8 = null,
 
+    /// This header can be used as a data integrity check to verify that the data
+    /// received is the same data
+    /// that was originally sent. This header specifies the Base64 encoded, 512-bit
+    /// `SHA512`
+    /// digest of the object. For more information, see [Checking object integrity
+    /// in the Amazon S3
+    /// User
+    /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
+    checksum_sha512: ?[]const u8 = null,
+
     /// This header specifies the checksum type of the object, which determines how
     /// part-level checksums are
     /// combined to create an object-level checksum for multipart objects. You can
@@ -107,6 +127,36 @@ pub const CompleteMultipartUploadInput = struct {
     /// For more
     /// information, see Checking object integrity in the Amazon S3 User Guide.
     checksum_type: ?ChecksumType = null,
+
+    /// This header can be used as a data integrity check to verify that the data
+    /// received is the same data
+    /// that was originally sent. This header specifies the Base64 encoded, 128-bit
+    /// `XXHASH128`
+    /// checksum of the object. For more information, see [Checking object integrity
+    /// in the Amazon S3
+    /// User
+    /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
+    checksum_xxhash128: ?[]const u8 = null,
+
+    /// This header can be used as a data integrity check to verify that the data
+    /// received is the same data
+    /// that was originally sent. This header specifies the Base64 encoded, 64-bit
+    /// `XXHASH3`
+    /// checksum of the object. For more information, see [Checking object integrity
+    /// in the Amazon S3
+    /// User
+    /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
+    checksum_xxhash3: ?[]const u8 = null,
+
+    /// This header can be used as a data integrity check to verify that the data
+    /// received is the same data
+    /// that was originally sent. This header specifies the Base64 encoded, 64-bit
+    /// `XXHASH64`
+    /// checksum of the object. For more information, see [Checking object integrity
+    /// in the Amazon S3
+    /// User
+    /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
+    checksum_xxhash64: ?[]const u8 = null,
 
     /// The account ID of the expected bucket owner. If the account ID that you
     /// provide does not match the actual owner of the bucket, the request fails
@@ -248,6 +298,12 @@ pub const CompleteMultipartUploadOutput = struct {
     /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
     checksum_crc64_nvme: ?[]const u8 = null,
 
+    /// The Base64 encoded, 128-bit `MD5` digest of the object. For more
+    /// information, see [Checking object integrity in the Amazon S3
+    /// User
+    /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
+    checksum_md5: ?[]const u8 = null,
+
     /// The Base64 encoded, 160-bit `SHA1` digest of the object. This checksum is
     /// only present if the checksum was uploaded
     /// with the object. When you use the API operation on an object that was
@@ -272,6 +328,12 @@ pub const CompleteMultipartUploadOutput = struct {
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums) in the *Amazon S3 User Guide*.
     checksum_sha256: ?[]const u8 = null,
 
+    /// The Base64 encoded, 512-bit `SHA512` digest of the object. For more
+    /// information, see [Checking object integrity in the Amazon S3
+    /// User
+    /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
+    checksum_sha512: ?[]const u8 = null,
+
     /// The checksum type, which determines how part-level checksums are combined to
     /// create an object-level
     /// checksum for multipart objects. You can use this header as a data integrity
@@ -283,6 +345,24 @@ pub const CompleteMultipartUploadOutput = struct {
     /// User
     /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
     checksum_type: ?ChecksumType = null,
+
+    /// The Base64 encoded, 128-bit `XXHASH128` checksum of the object. For more
+    /// information, see [Checking object integrity in the Amazon S3
+    /// User
+    /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
+    checksum_xxhash128: ?[]const u8 = null,
+
+    /// The Base64 encoded, 64-bit `XXHASH3` checksum of the object. For more
+    /// information, see [Checking object integrity in the Amazon S3
+    /// User
+    /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
+    checksum_xxhash3: ?[]const u8 = null,
+
+    /// The Base64 encoded, 64-bit `XXHASH64` checksum of the object. For more
+    /// information, see [Checking object integrity in the Amazon S3
+    /// User
+    /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
+    checksum_xxhash64: ?[]const u8 = null,
 
     /// Entity tag that identifies the newly created object's data. Objects with
     /// different object data will
@@ -408,14 +488,29 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CompleteMultipartUpload
     if (input.checksum_crc64_nvme) |v| {
         try request.headers.put(allocator, "x-amz-checksum-crc64nvme", v);
     }
+    if (input.checksum_md5) |v| {
+        try request.headers.put(allocator, "x-amz-checksum-md5", v);
+    }
     if (input.checksum_sha1) |v| {
         try request.headers.put(allocator, "x-amz-checksum-sha1", v);
     }
     if (input.checksum_sha256) |v| {
         try request.headers.put(allocator, "x-amz-checksum-sha256", v);
     }
+    if (input.checksum_sha512) |v| {
+        try request.headers.put(allocator, "x-amz-checksum-sha512", v);
+    }
     if (input.checksum_type) |v| {
         try request.headers.put(allocator, "x-amz-checksum-type", v.wireName());
+    }
+    if (input.checksum_xxhash128) |v| {
+        try request.headers.put(allocator, "x-amz-checksum-xxhash128", v);
+    }
+    if (input.checksum_xxhash3) |v| {
+        try request.headers.put(allocator, "x-amz-checksum-xxhash3", v);
+    }
+    if (input.checksum_xxhash64) |v| {
+        try request.headers.put(allocator, "x-amz-checksum-xxhash64", v);
     }
     if (input.expected_bucket_owner) |v| {
         try request.headers.put(allocator, "x-amz-expected-bucket-owner", v);
@@ -471,12 +566,22 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                     result.checksum_crc32_c = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumCRC64NVME")) {
                     result.checksum_crc64_nvme = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumMD5")) {
+                    result.checksum_md5 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumSHA1")) {
                     result.checksum_sha1 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumSHA256")) {
                     result.checksum_sha256 = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumSHA512")) {
+                    result.checksum_sha512 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumType")) {
                     result.checksum_type = ChecksumType.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumXXHASH128")) {
+                    result.checksum_xxhash128 = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumXXHASH3")) {
+                    result.checksum_xxhash3 = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumXXHASH64")) {
+                    result.checksum_xxhash64 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ETag")) {
                     result.e_tag = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Key")) {

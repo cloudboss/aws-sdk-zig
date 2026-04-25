@@ -10,11 +10,14 @@ const create_code_interpreter = @import("create_code_interpreter.zig");
 const create_evaluator = @import("create_evaluator.zig");
 const create_gateway = @import("create_gateway.zig");
 const create_gateway_target = @import("create_gateway_target.zig");
+const create_harness = @import("create_harness.zig");
 const create_memory = @import("create_memory.zig");
 const create_oauth_2_credential_provider = @import("create_oauth_2_credential_provider.zig");
 const create_online_evaluation_config = @import("create_online_evaluation_config.zig");
 const create_policy = @import("create_policy.zig");
 const create_policy_engine = @import("create_policy_engine.zig");
+const create_registry = @import("create_registry.zig");
+const create_registry_record = @import("create_registry_record.zig");
 const create_workload_identity = @import("create_workload_identity.zig");
 const delete_agent_runtime = @import("delete_agent_runtime.zig");
 const delete_agent_runtime_endpoint = @import("delete_agent_runtime_endpoint.zig");
@@ -25,11 +28,14 @@ const delete_code_interpreter = @import("delete_code_interpreter.zig");
 const delete_evaluator = @import("delete_evaluator.zig");
 const delete_gateway = @import("delete_gateway.zig");
 const delete_gateway_target = @import("delete_gateway_target.zig");
+const delete_harness = @import("delete_harness.zig");
 const delete_memory = @import("delete_memory.zig");
 const delete_oauth_2_credential_provider = @import("delete_oauth_2_credential_provider.zig");
 const delete_online_evaluation_config = @import("delete_online_evaluation_config.zig");
 const delete_policy = @import("delete_policy.zig");
 const delete_policy_engine = @import("delete_policy_engine.zig");
+const delete_registry = @import("delete_registry.zig");
+const delete_registry_record = @import("delete_registry_record.zig");
 const delete_resource_policy = @import("delete_resource_policy.zig");
 const delete_workload_identity = @import("delete_workload_identity.zig");
 const get_agent_runtime = @import("get_agent_runtime.zig");
@@ -41,12 +47,15 @@ const get_code_interpreter = @import("get_code_interpreter.zig");
 const get_evaluator = @import("get_evaluator.zig");
 const get_gateway = @import("get_gateway.zig");
 const get_gateway_target = @import("get_gateway_target.zig");
+const get_harness = @import("get_harness.zig");
 const get_memory = @import("get_memory.zig");
 const get_oauth_2_credential_provider = @import("get_oauth_2_credential_provider.zig");
 const get_online_evaluation_config = @import("get_online_evaluation_config.zig");
 const get_policy = @import("get_policy.zig");
 const get_policy_engine = @import("get_policy_engine.zig");
 const get_policy_generation = @import("get_policy_generation.zig");
+const get_registry = @import("get_registry.zig");
+const get_registry_record = @import("get_registry_record.zig");
 const get_resource_policy = @import("get_resource_policy.zig");
 const get_token_vault = @import("get_token_vault.zig");
 const get_workload_identity = @import("get_workload_identity.zig");
@@ -60,6 +69,7 @@ const list_code_interpreters = @import("list_code_interpreters.zig");
 const list_evaluators = @import("list_evaluators.zig");
 const list_gateway_targets = @import("list_gateway_targets.zig");
 const list_gateways = @import("list_gateways.zig");
+const list_harnesses = @import("list_harnesses.zig");
 const list_memories = @import("list_memories.zig");
 const list_oauth_2_credential_providers = @import("list_oauth_2_credential_providers.zig");
 const list_online_evaluation_configs = @import("list_online_evaluation_configs.zig");
@@ -67,11 +77,14 @@ const list_policies = @import("list_policies.zig");
 const list_policy_engines = @import("list_policy_engines.zig");
 const list_policy_generation_assets = @import("list_policy_generation_assets.zig");
 const list_policy_generations = @import("list_policy_generations.zig");
+const list_registries = @import("list_registries.zig");
+const list_registry_records = @import("list_registry_records.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const list_workload_identities = @import("list_workload_identities.zig");
 const put_resource_policy = @import("put_resource_policy.zig");
 const set_token_vault_cmk = @import("set_token_vault_cmk.zig");
 const start_policy_generation = @import("start_policy_generation.zig");
+const submit_registry_record_for_approval = @import("submit_registry_record_for_approval.zig");
 const synchronize_gateway_targets = @import("synchronize_gateway_targets.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
@@ -81,11 +94,15 @@ const update_api_key_credential_provider = @import("update_api_key_credential_pr
 const update_evaluator = @import("update_evaluator.zig");
 const update_gateway = @import("update_gateway.zig");
 const update_gateway_target = @import("update_gateway_target.zig");
+const update_harness = @import("update_harness.zig");
 const update_memory = @import("update_memory.zig");
 const update_oauth_2_credential_provider = @import("update_oauth_2_credential_provider.zig");
 const update_online_evaluation_config = @import("update_online_evaluation_config.zig");
 const update_policy = @import("update_policy.zig");
 const update_policy_engine = @import("update_policy_engine.zig");
+const update_registry = @import("update_registry.zig");
+const update_registry_record = @import("update_registry_record.zig");
+const update_registry_record_status = @import("update_registry_record_status.zig");
 const update_workload_identity = @import("update_workload_identity.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
@@ -153,9 +170,10 @@ pub const Client = struct {
     }
 
     /// Creates a custom evaluator for agent quality assessment. Custom evaluators
-    /// use LLM-as-a-Judge configurations with user-defined prompts, rating scales,
-    /// and model settings to evaluate agent performance at tool call, trace, or
-    /// session levels.
+    /// can use either LLM-as-a-Judge configurations with user-defined prompts,
+    /// rating scales, and model settings, or code-based configurations with
+    /// customer-managed Lambda functions to evaluate agent performance at tool
+    /// call, trace, or session levels.
     pub fn createEvaluator(self: *Self, allocator: std.mem.Allocator, input: create_evaluator.CreateEvaluatorInput, options: CallOptions) !create_evaluator.CreateEvaluatorOutput {
         return create_evaluator.execute(self, allocator, input, options);
     }
@@ -173,6 +191,11 @@ pub const Client = struct {
     /// gateway can connect to.
     pub fn createGatewayTarget(self: *Self, allocator: std.mem.Allocator, input: create_gateway_target.CreateGatewayTargetInput, options: CallOptions) !create_gateway_target.CreateGatewayTargetOutput {
         return create_gateway_target.execute(self, allocator, input, options);
+    }
+
+    /// Operation to create a Harness.
+    pub fn createHarness(self: *Self, allocator: std.mem.Allocator, input: create_harness.CreateHarnessInput, options: CallOptions) !create_harness.CreateHarnessOutput {
+        return create_harness.execute(self, allocator, input, options);
     }
 
     /// Creates a new Amazon Bedrock AgentCore Memory resource.
@@ -217,6 +240,27 @@ pub const Client = struct {
     /// [GetPolicyEngine](https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_GetPolicyEngine.html) operation to poll the `status` field to track completion.
     pub fn createPolicyEngine(self: *Self, allocator: std.mem.Allocator, input: create_policy_engine.CreatePolicyEngineInput, options: CallOptions) !create_policy_engine.CreatePolicyEngineOutput {
         return create_policy_engine.execute(self, allocator, input, options);
+    }
+
+    /// Creates a new registry in your Amazon Web Services account. A registry
+    /// serves as a centralized catalog for organizing and managing registry
+    /// records, including MCP servers, A2A agents, agent skills, and custom
+    /// resource types.
+    ///
+    /// If you specify `CUSTOM_JWT` as the `authorizerType`, you must provide an
+    /// `authorizerConfiguration`.
+    pub fn createRegistry(self: *Self, allocator: std.mem.Allocator, input: create_registry.CreateRegistryInput, options: CallOptions) !create_registry.CreateRegistryOutput {
+        return create_registry.execute(self, allocator, input, options);
+    }
+
+    /// Creates a new registry record within the specified registry. A registry
+    /// record represents an individual AI resource's metadata in the registry. This
+    /// could be an MCP server (and associated tools), A2A agent, agent skill, or a
+    /// custom resource with a custom schema.
+    ///
+    /// The record is processed asynchronously and returns HTTP 202 Accepted.
+    pub fn createRegistryRecord(self: *Self, allocator: std.mem.Allocator, input: create_registry_record.CreateRegistryRecordInput, options: CallOptions) !create_registry_record.CreateRegistryRecordOutput {
+        return create_registry_record.execute(self, allocator, input, options);
     }
 
     /// Creates a new workload identity.
@@ -267,8 +311,18 @@ pub const Client = struct {
     }
 
     /// Deletes a gateway target.
+    ///
+    /// You cannot delete a target that is in a pending authorization state
+    /// (`CREATE_PENDING_AUTH`, `UPDATE_PENDING_AUTH`, or
+    /// `SYNCHRONIZE_PENDING_AUTH`). Wait for the authorization to complete or fail
+    /// before deleting the target.
     pub fn deleteGatewayTarget(self: *Self, allocator: std.mem.Allocator, input: delete_gateway_target.DeleteGatewayTargetInput, options: CallOptions) !delete_gateway_target.DeleteGatewayTargetOutput {
         return delete_gateway_target.execute(self, allocator, input, options);
+    }
+
+    /// Operation to delete a Harness.
+    pub fn deleteHarness(self: *Self, allocator: std.mem.Allocator, input: delete_harness.DeleteHarnessInput, options: CallOptions) !delete_harness.DeleteHarnessOutput {
+        return delete_harness.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon Bedrock AgentCore Memory resource.
@@ -302,6 +356,18 @@ pub const Client = struct {
     /// `GetPolicyEngine` operation to poll the `status` field to track completion.
     pub fn deletePolicyEngine(self: *Self, allocator: std.mem.Allocator, input: delete_policy_engine.DeletePolicyEngineInput, options: CallOptions) !delete_policy_engine.DeletePolicyEngineOutput {
         return delete_policy_engine.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a registry. The registry must contain zero records before it can be
+    /// deleted. This operation initiates the deletion process asynchronously.
+    pub fn deleteRegistry(self: *Self, allocator: std.mem.Allocator, input: delete_registry.DeleteRegistryInput, options: CallOptions) !delete_registry.DeleteRegistryOutput {
+        return delete_registry.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a registry record. The record's status transitions to `DELETING` and
+    /// the record is removed asynchronously.
+    pub fn deleteRegistryRecord(self: *Self, allocator: std.mem.Allocator, input: delete_registry_record.DeleteRegistryRecordInput, options: CallOptions) !delete_registry_record.DeleteRegistryRecordOutput {
+        return delete_registry_record.execute(self, allocator, input, options);
     }
 
     /// Deletes the resource-based policy for a specified resource.
@@ -363,6 +429,11 @@ pub const Client = struct {
         return get_gateway_target.execute(self, allocator, input, options);
     }
 
+    /// Operation to get a single Harness.
+    pub fn getHarness(self: *Self, allocator: std.mem.Allocator, input: get_harness.GetHarnessInput, options: CallOptions) !get_harness.GetHarnessOutput {
+        return get_harness.execute(self, allocator, input, options);
+    }
+
     /// Retrieve an existing Amazon Bedrock AgentCore Memory resource.
     pub fn getMemory(self: *Self, allocator: std.mem.Allocator, input: get_memory.GetMemoryInput, options: CallOptions) !get_memory.GetMemoryOutput {
         return get_memory.execute(self, allocator, input, options);
@@ -401,6 +472,16 @@ pub const Client = struct {
     /// users to create policies.
     pub fn getPolicyGeneration(self: *Self, allocator: std.mem.Allocator, input: get_policy_generation.GetPolicyGenerationInput, options: CallOptions) !get_policy_generation.GetPolicyGenerationOutput {
         return get_policy_generation.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves information about a specific registry.
+    pub fn getRegistry(self: *Self, allocator: std.mem.Allocator, input: get_registry.GetRegistryInput, options: CallOptions) !get_registry.GetRegistryOutput {
+        return get_registry.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves information about a specific registry record.
+    pub fn getRegistryRecord(self: *Self, allocator: std.mem.Allocator, input: get_registry_record.GetRegistryRecordInput, options: CallOptions) !get_registry_record.GetRegistryRecordOutput {
+        return get_registry_record.execute(self, allocator, input, options);
     }
 
     /// Retrieves the resource-based policy for a specified resource.
@@ -471,6 +552,11 @@ pub const Client = struct {
         return list_gateways.execute(self, allocator, input, options);
     }
 
+    /// Operation to list Harnesses.
+    pub fn listHarnesses(self: *Self, allocator: std.mem.Allocator, input: list_harnesses.ListHarnessesInput, options: CallOptions) !list_harnesses.ListHarnessesOutput {
+        return list_harnesses.execute(self, allocator, input, options);
+    }
+
     /// Lists the available Amazon Bedrock AgentCore Memory resources in the current
     /// Amazon Web Services Region.
     pub fn listMemories(self: *Self, allocator: std.mem.Allocator, input: list_memories.ListMemoriesInput, options: CallOptions) !list_memories.ListMemoriesOutput {
@@ -520,6 +606,19 @@ pub const Client = struct {
         return list_policy_generations.execute(self, allocator, input, options);
     }
 
+    /// Lists all registries in the account. You can optionally filter results by
+    /// status using the `status` parameter.
+    pub fn listRegistries(self: *Self, allocator: std.mem.Allocator, input: list_registries.ListRegistriesInput, options: CallOptions) !list_registries.ListRegistriesOutput {
+        return list_registries.execute(self, allocator, input, options);
+    }
+
+    /// Lists registry records within a registry. You can optionally filter results
+    /// using the `name`, `status`, and `descriptorType` parameters. When multiple
+    /// filters are specified, they are combined using AND logic.
+    pub fn listRegistryRecords(self: *Self, allocator: std.mem.Allocator, input: list_registry_records.ListRegistryRecordsInput, options: CallOptions) !list_registry_records.ListRegistryRecordsOutput {
+        return list_registry_records.execute(self, allocator, input, options);
+    }
+
     /// Lists the tags associated with the specified resource.
     ///
     /// This feature is currently available only for AgentCore Runtime, Browser,
@@ -564,7 +663,24 @@ pub const Client = struct {
         return start_policy_generation.execute(self, allocator, input, options);
     }
 
-    /// The gateway targets.
+    /// Submits a registry record for approval. This transitions the record from
+    /// `DRAFT` status to `PENDING_APPROVAL` status. If the registry has
+    /// auto-approval enabled, the record is automatically approved.
+    pub fn submitRegistryRecordForApproval(self: *Self, allocator: std.mem.Allocator, input: submit_registry_record_for_approval.SubmitRegistryRecordForApprovalInput, options: CallOptions) !submit_registry_record_for_approval.SubmitRegistryRecordForApprovalOutput {
+        return submit_registry_record_for_approval.execute(self, allocator, input, options);
+    }
+
+    /// Synchronizes the gateway targets by fetching the latest tool definitions
+    /// from the target endpoints.
+    ///
+    /// You cannot synchronize a target that is in a pending authorization state
+    /// (`CREATE_PENDING_AUTH`, `UPDATE_PENDING_AUTH`, or
+    /// `SYNCHRONIZE_PENDING_AUTH`). Wait for the authorization to complete or fail
+    /// before synchronizing.
+    ///
+    /// You cannot synchronize a target that has a static tool schema
+    /// (`mcpToolSchema`) configured. Remove the static schema through an
+    /// `UpdateGatewayTarget` call to enable dynamic tool synchronization.
     pub fn synchronizeGatewayTargets(self: *Self, allocator: std.mem.Allocator, input: synchronize_gateway_targets.SynchronizeGatewayTargetsInput, options: CallOptions) !synchronize_gateway_targets.SynchronizeGatewayTargetsOutput {
         return synchronize_gateway_targets.execute(self, allocator, input, options);
     }
@@ -616,8 +732,18 @@ pub const Client = struct {
     }
 
     /// Updates an existing gateway target.
+    ///
+    /// You cannot update a target that is in a pending authorization state
+    /// (`CREATE_PENDING_AUTH`, `UPDATE_PENDING_AUTH`, or
+    /// `SYNCHRONIZE_PENDING_AUTH`). Wait for the authorization to complete or fail
+    /// before updating the target.
     pub fn updateGatewayTarget(self: *Self, allocator: std.mem.Allocator, input: update_gateway_target.UpdateGatewayTargetInput, options: CallOptions) !update_gateway_target.UpdateGatewayTargetOutput {
         return update_gateway_target.execute(self, allocator, input, options);
+    }
+
+    /// Operation to update a Harness.
+    pub fn updateHarness(self: *Self, allocator: std.mem.Allocator, input: update_harness.UpdateHarnessInput, options: CallOptions) !update_harness.UpdateHarnessOutput {
+        return update_harness.execute(self, allocator, input, options);
     }
 
     /// Update an Amazon Bedrock AgentCore Memory resource memory.
@@ -653,6 +779,25 @@ pub const Client = struct {
     /// `GetPolicyEngine` operation to poll the `status` field to track completion.
     pub fn updatePolicyEngine(self: *Self, allocator: std.mem.Allocator, input: update_policy_engine.UpdatePolicyEngineInput, options: CallOptions) !update_policy_engine.UpdatePolicyEngineOutput {
         return update_policy_engine.execute(self, allocator, input, options);
+    }
+
+    /// Updates an existing registry. This operation uses PATCH semantics, so you
+    /// only need to specify the fields you want to change.
+    pub fn updateRegistry(self: *Self, allocator: std.mem.Allocator, input: update_registry.UpdateRegistryInput, options: CallOptions) !update_registry.UpdateRegistryOutput {
+        return update_registry.execute(self, allocator, input, options);
+    }
+
+    /// Updates an existing registry record. This operation uses PATCH semantics, so
+    /// you only need to specify the fields you want to change. The update is
+    /// processed asynchronously and returns HTTP 202 Accepted.
+    pub fn updateRegistryRecord(self: *Self, allocator: std.mem.Allocator, input: update_registry_record.UpdateRegistryRecordInput, options: CallOptions) !update_registry_record.UpdateRegistryRecordOutput {
+        return update_registry_record.execute(self, allocator, input, options);
+    }
+
+    /// Updates the status of a registry record. Use this operation to approve,
+    /// reject, or deprecate a registry record.
+    pub fn updateRegistryRecordStatus(self: *Self, allocator: std.mem.Allocator, input: update_registry_record_status.UpdateRegistryRecordStatusInput, options: CallOptions) !update_registry_record_status.UpdateRegistryRecordStatusOutput {
+        return update_registry_record_status.execute(self, allocator, input, options);
     }
 
     /// Updates an existing workload identity.
@@ -730,6 +875,13 @@ pub const Client = struct {
         };
     }
 
+    pub fn listHarnessesPaginator(self: *Self, params: list_harnesses.ListHarnessesInput) paginator.ListHarnessesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listMemoriesPaginator(self: *Self, params: list_memories.ListMemoriesInput) paginator.ListMemoriesPaginator {
         return .{
             .client = self,
@@ -773,6 +925,20 @@ pub const Client = struct {
     }
 
     pub fn listPolicyGenerationsPaginator(self: *Self, params: list_policy_generations.ListPolicyGenerationsInput) paginator.ListPolicyGenerationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listRegistriesPaginator(self: *Self, params: list_registries.ListRegistriesInput) paginator.ListRegistriesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listRegistryRecordsPaginator(self: *Self, params: list_registry_records.ListRegistryRecordsInput) paginator.ListRegistryRecordsPaginator {
         return .{
             .client = self,
             .params = params,

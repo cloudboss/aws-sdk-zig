@@ -14,7 +14,10 @@ pub const LocationModel = struct {
     /// The location's name.
     location_name: ?[]const u8 = null,
 
-    /// Information about the UDP ping beacon for this location.
+    /// Information about the UDP ping beacon for this location. Ping beacons are
+    /// fixed endpoints that you can use to measure network
+    /// latency between a player device and an Amazon GameLift Servers hosting
+    /// location.
     ping_beacon: ?PingBeacon = null,
 
     pub const json_field_names = .{

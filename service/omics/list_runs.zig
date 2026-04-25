@@ -8,6 +8,9 @@ const RunStatus = @import("run_status.zig").RunStatus;
 const RunListItem = @import("run_list_item.zig").RunListItem;
 
 pub const ListRunsInput = struct {
+    /// Filter by batch ID.
+    batch_id: ?[]const u8 = null,
+
     /// The maximum number of runs to return in one page of results.
     max_results: ?i32 = null,
 
@@ -25,6 +28,7 @@ pub const ListRunsInput = struct {
     status: ?RunStatus = null,
 
     pub const json_field_names = .{
+        .batch_id = "batchId",
         .max_results = "maxResults",
         .name = "name",
         .run_group_id = "runGroupId",
@@ -82,6 +86,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRunsInput, config: 
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
+    if (input.batch_id) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "batchId=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
     if (input.max_results) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "maxResults=");

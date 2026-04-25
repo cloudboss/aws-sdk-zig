@@ -54,6 +54,12 @@ pub const DescribeVolumeStatusInput = struct {
     /// `impaired` | `warning` | `insufficient-data`).
     filters: ?[]const Filter = null,
 
+    /// Indicates whether to include managed resources in the output. If this
+    /// parameter is set to `true`, the output includes resources that are managed
+    /// by Amazon Web Services services, even if managed resource visibility is set
+    /// to hidden.
+    include_managed_resources: ?bool = null,
+
     /// The maximum number of items to return for this request.
     /// To get the next page of items, make another request with the token returned
     /// in the output.
@@ -143,6 +149,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeVolumeStatusInp
                 }
             }
         }
+    }
+    if (input.include_managed_resources) |v| {
+        try body_buf.appendSlice(allocator, "&IncludeManagedResources=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.max_results) |v| {
         try body_buf.appendSlice(allocator, "&MaxResults=");

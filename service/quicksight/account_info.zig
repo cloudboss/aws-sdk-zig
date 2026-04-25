@@ -15,8 +15,8 @@ const Edition = @import("edition.zig").Edition;
 pub const AccountInfo = struct {
     /// The account name that you provided for the Amazon Quick Sight subscription
     /// in your
-    /// Amazon Web Services account. You create this name when you sign up for Quick
-    /// Suite. It's unique over all of Amazon Web Services, and it appears only when
+    /// Amazon Web Services account. You create this name when you sign up for
+    /// Quick. It's unique over all of Amazon Web Services, and it appears only when
     /// users sign in.
     account_name: ?[]const u8 = null,
 

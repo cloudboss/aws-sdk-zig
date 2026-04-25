@@ -3,16 +3,19 @@ const std = @import("std");
 pub const EvaluatorType = enum {
     builtin,
     custom,
+    code,
 
     pub const json_field_names = .{
         .builtin = "Builtin",
         .custom = "Custom",
+        .code = "CustomCode",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .builtin => "Builtin",
             .custom => "Custom",
+            .code => "CustomCode",
         };
     }
 

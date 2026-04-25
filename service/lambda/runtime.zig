@@ -46,6 +46,7 @@ pub const Runtime = enum {
     python_314,
     java_25,
     dotnet_10,
+    ruby_40,
 
     pub const json_field_names = .{
         .nodejs = "nodejs",
@@ -93,6 +94,7 @@ pub const Runtime = enum {
         .python_314 = "python3.14",
         .java_25 = "java25",
         .dotnet_10 = "dotnet10",
+        .ruby_40 = "ruby4.0",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -142,6 +144,7 @@ pub const Runtime = enum {
             .python_314 => "python3.14",
             .java_25 => "java25",
             .dotnet_10 => "dotnet10",
+            .ruby_40 => "ruby4.0",
         };
     }
 

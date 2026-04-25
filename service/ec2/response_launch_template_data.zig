@@ -20,6 +20,7 @@ const LaunchTemplateNetworkPerformanceOptions = @import("launch_template_network
 const OperatorResponse = @import("operator_response.zig").OperatorResponse;
 const LaunchTemplatePlacement = @import("launch_template_placement.zig").LaunchTemplatePlacement;
 const LaunchTemplatePrivateDnsNameOptions = @import("launch_template_private_dns_name_options.zig").LaunchTemplatePrivateDnsNameOptions;
+const LaunchTemplateInstanceSecondaryInterfaceSpecification = @import("launch_template_instance_secondary_interface_specification.zig").LaunchTemplateInstanceSecondaryInterfaceSpecification;
 const LaunchTemplateTagSpecification = @import("launch_template_tag_specification.zig").LaunchTemplateTagSpecification;
 
 /// The information for a launch template.
@@ -165,6 +166,9 @@ pub const ResponseLaunchTemplateData = struct {
 
     /// The ID of the RAM disk, if applicable.
     ram_disk_id: ?[]const u8 = null,
+
+    /// The secondary interfaces associated with the launch template.
+    secondary_interfaces: ?[]const LaunchTemplateInstanceSecondaryInterfaceSpecification = null,
 
     /// The security group IDs.
     security_group_ids: ?[]const []const u8 = null,

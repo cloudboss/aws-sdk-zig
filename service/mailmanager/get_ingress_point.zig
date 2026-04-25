@@ -4,16 +4,23 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const TrustStoreResponseOption = @import("trust_store_response_option.zig").TrustStoreResponseOption;
 const IngressPointAuthConfiguration = @import("ingress_point_auth_configuration.zig").IngressPointAuthConfiguration;
 const NetworkConfiguration = @import("network_configuration.zig").NetworkConfiguration;
 const IngressPointStatus = @import("ingress_point_status.zig").IngressPointStatus;
+const TlsPolicy = @import("tls_policy.zig").TlsPolicy;
 const IngressPointType = @import("ingress_point_type.zig").IngressPointType;
 
 pub const GetIngressPointInput = struct {
+    /// Whether to include the trust store contents in the response. Use INCLUDE to
+    /// retrieve trust store certificate and CRL contents.
+    include_trust_store_contents: ?TrustStoreResponseOption = null,
+
     /// The identifier of an ingress endpoint.
     ingress_point_id: []const u8,
 
     pub const json_field_names = .{
+        .include_trust_store_contents = "IncludeTrustStoreContents",
         .ingress_point_id = "IngressPointId",
     };
 };
@@ -50,6 +57,9 @@ pub const GetIngressPointOutput = struct {
     /// The status of the ingress endpoint resource.
     status: ?IngressPointStatus = null,
 
+    /// The selected Transport Layer Security (TLS) policy of the ingress point.
+    tls_policy: ?TlsPolicy = null,
+
     /// The identifier of the traffic policy resource associated with the ingress
     /// endpoint.
     traffic_policy_id: ?[]const u8 = null,
@@ -68,6 +78,7 @@ pub const GetIngressPointOutput = struct {
         .network_configuration = "NetworkConfiguration",
         .rule_set_id = "RuleSetId",
         .status = "Status",
+        .tls_policy = "TlsPolicy",
         .traffic_policy_id = "TrafficPolicyId",
         .@"type" = "Type",
     };

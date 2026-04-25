@@ -23,6 +23,7 @@ const get_guest_user_history_count = @import("get_guest_user_history_count.zig")
 const get_network = @import("get_network.zig");
 const get_network_settings = @import("get_network_settings.zig");
 const get_oidc_info = @import("get_oidc_info.zig");
+const get_opentdf_config = @import("get_opentdf_config.zig");
 const get_security_group = @import("get_security_group.zig");
 const get_user = @import("get_user.zig");
 const get_users_count = @import("get_users_count.zig");
@@ -36,6 +37,7 @@ const list_security_groups = @import("list_security_groups.zig");
 const list_users = @import("list_users.zig");
 const register_oidc_config = @import("register_oidc_config.zig");
 const register_oidc_config_test = @import("register_oidc_config_test.zig");
+const register_opentdf_config = @import("register_opentdf_config.zig");
 const update_bot = @import("update_bot.zig");
 const update_data_retention = @import("update_data_retention.zig");
 const update_guest_user = @import("update_guest_user.zig");
@@ -221,6 +223,11 @@ pub const Client = struct {
         return get_oidc_info.execute(self, allocator, input, options);
     }
 
+    /// Retrieves the OpenTDF integration configuration for a Wickr network.
+    pub fn getOpentdfConfig(self: *Self, allocator: std.mem.Allocator, input: get_opentdf_config.GetOpentdfConfigInput, options: CallOptions) !get_opentdf_config.GetOpentdfConfigOutput {
+        return get_opentdf_config.execute(self, allocator, input, options);
+    }
+
     /// Retrieves detailed information about a specific security group in a Wickr
     /// network, including its settings, member counts, and configuration.
     pub fn getSecurityGroup(self: *Self, allocator: std.mem.Allocator, input: get_security_group.GetSecurityGroupInput, options: CallOptions) !get_security_group.GetSecurityGroupOutput {
@@ -302,6 +309,12 @@ pub const Client = struct {
     /// supported capabilities.
     pub fn registerOidcConfigTest(self: *Self, allocator: std.mem.Allocator, input: register_oidc_config_test.RegisterOidcConfigTestInput, options: CallOptions) !register_oidc_config_test.RegisterOidcConfigTestOutput {
         return register_oidc_config_test.execute(self, allocator, input, options);
+    }
+
+    /// Registers and saves OpenTDF configuration for a Wickr network, enabling
+    /// attribute-based access control for Wickr through an OpenTDF provider.
+    pub fn registerOpentdfConfig(self: *Self, allocator: std.mem.Allocator, input: register_opentdf_config.RegisterOpentdfConfigInput, options: CallOptions) !register_opentdf_config.RegisterOpentdfConfigOutput {
+        return register_opentdf_config.execute(self, allocator, input, options);
     }
 
     /// Updates the properties of an existing bot in a Wickr network. This operation

@@ -2,14 +2,20 @@ const std = @import("std");
 
 pub const EvaluationState = enum {
     partial_data,
+    evaluation_failure,
+    evaluation_error,
 
     pub const json_field_names = .{
         .partial_data = "PARTIAL_DATA",
+        .evaluation_failure = "EVALUATION_FAILURE",
+        .evaluation_error = "EVALUATION_ERROR",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .partial_data => "PARTIAL_DATA",
+            .evaluation_failure => "EVALUATION_FAILURE",
+            .evaluation_error => "EVALUATION_ERROR",
         };
     }
 

@@ -10,6 +10,8 @@ const describe_internet_gateways = @import("describe_internet_gateways.zig");
 const describe_key_pairs = @import("describe_key_pairs.zig");
 const describe_nat_gateways = @import("describe_nat_gateways.zig");
 const describe_network_interfaces = @import("describe_network_interfaces.zig");
+const describe_secondary_networks = @import("describe_secondary_networks.zig");
+const describe_secondary_subnets = @import("describe_secondary_subnets.zig");
 const describe_security_groups = @import("describe_security_groups.zig");
 const describe_spot_instance_requests = @import("describe_spot_instance_requests.zig");
 const describe_volumes = @import("describe_volumes.zig");
@@ -493,6 +495,114 @@ pub const NetworkInterfaceAvailableWaiter = struct {
                 defer diagnostic.deinit();
                 if (std.mem.eql(u8, diagnostic.code(), "InvalidNetworkInterfaceID.NotFound")) {
                     return .failure;
+                }
+            }
+            return .retry;
+        };
+
+        return .retry;
+    }
+};
+
+pub const SecondaryNetworkCreateCompleteWaiter = struct {
+    client: *Client,
+    params: describe_secondary_networks.DescribeSecondaryNetworksInput,
+    config: aws.waiter.WaiterConfig = .{
+        .min_delay_s = 10,
+        .max_delay_s = 120,
+        .max_wait_time_s = 300,
+    },
+
+    const Self = @This();
+
+    pub fn wait(self: *Self) aws.waiter.WaiterError!void {
+        const start = std.time.timestamp();
+        var delay_s: u32 = self.config.min_delay_s;
+
+        while (true) {
+            const state = self.poll();
+
+            switch (state) {
+                .success => return,
+                .failure => return error.WaiterFailed,
+                .retry => {},
+            }
+
+            const elapsed: u32 = @intCast(std.time.timestamp() - start);
+            if (elapsed >= self.config.max_wait_time_s) {
+                return error.WaiterTimedOut;
+            }
+
+            const jittered = aws.waiter.jitteredDelay(self.config.min_delay_s, delay_s);
+            std.Thread.sleep(@as(u64, jittered) * std.time.ns_per_s);
+            delay_s = @min(delay_s * 2, self.config.max_delay_s);
+        }
+    }
+
+    fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
+        var diagnostic: @import("errors.zig").ServiceError = undefined;
+        _ = self.client.describeSecondaryNetworks(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+            if (err == error.ServiceError) {
+                defer diagnostic.deinit();
+                if (std.mem.eql(u8, diagnostic.code(), "InvalidSecondaryNetworkId.NotFound")) {
+                    return .retry;
+                }
+            }
+            return .retry;
+        };
+
+        return .retry;
+    }
+};
+
+pub const SecondarySubnetCreateCompleteWaiter = struct {
+    client: *Client,
+    params: describe_secondary_subnets.DescribeSecondarySubnetsInput,
+    config: aws.waiter.WaiterConfig = .{
+        .min_delay_s = 10,
+        .max_delay_s = 120,
+        .max_wait_time_s = 300,
+    },
+
+    const Self = @This();
+
+    pub fn wait(self: *Self) aws.waiter.WaiterError!void {
+        const start = std.time.timestamp();
+        var delay_s: u32 = self.config.min_delay_s;
+
+        while (true) {
+            const state = self.poll();
+
+            switch (state) {
+                .success => return,
+                .failure => return error.WaiterFailed,
+                .retry => {},
+            }
+
+            const elapsed: u32 = @intCast(std.time.timestamp() - start);
+            if (elapsed >= self.config.max_wait_time_s) {
+                return error.WaiterTimedOut;
+            }
+
+            const jittered = aws.waiter.jitteredDelay(self.config.min_delay_s, delay_s);
+            std.Thread.sleep(@as(u64, jittered) * std.time.ns_per_s);
+            delay_s = @min(delay_s * 2, self.config.max_delay_s);
+        }
+    }
+
+    fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
+        var diagnostic: @import("errors.zig").ServiceError = undefined;
+        _ = self.client.describeSecondarySubnets(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+            if (err == error.ServiceError) {
+                defer diagnostic.deinit();
+                if (std.mem.eql(u8, diagnostic.code(), "InvalidSecondarySubnetId.NotFound")) {
+                    return .retry;
                 }
             }
             return .retry;

@@ -20,6 +20,9 @@ pub const Widget = struct {
     /// layout. Used to control widget placement.
     horizontal_offset: i32 = 0,
 
+    /// The unique identifier for the widget.
+    id: ?[]const u8 = null,
+
     /// The title of the widget.
     title: []const u8,
 
@@ -32,6 +35,7 @@ pub const Widget = struct {
         .description = "description",
         .height = "height",
         .horizontal_offset = "horizontalOffset",
+        .id = "id",
         .title = "title",
         .width = "width",
     };

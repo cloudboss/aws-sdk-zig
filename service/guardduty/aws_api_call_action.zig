@@ -7,8 +7,7 @@ const RemoteIpDetails = @import("remote_ip_details.zig").RemoteIpDetails;
 /// Contains information about the API action.
 pub const AwsApiCallAction = struct {
     /// The details of the Amazon Web Services account that made the API call. This
-    /// field identifies the
-    /// resources that were affected by this API call.
+    /// field identifies the resources that were affected by this API call.
     affected_resources: ?[]const aws.map.StringMapEntry = null,
 
     /// The Amazon Web Services API name.
@@ -24,8 +23,7 @@ pub const AwsApiCallAction = struct {
     error_code: ?[]const u8 = null,
 
     /// The details of the Amazon Web Services account that made the API call. This
-    /// field appears if the call
-    /// was made from outside your account.
+    /// field appears if the call was made from outside your account.
     remote_account_details: ?RemoteAccountDetails = null,
 
     /// The remote IP information of the connection that initiated the Amazon Web

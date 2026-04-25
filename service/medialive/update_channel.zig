@@ -9,11 +9,13 @@ const CdiInputSpecification = @import("cdi_input_specification.zig").CdiInputSpe
 const ChannelEngineVersionRequest = @import("channel_engine_version_request.zig").ChannelEngineVersionRequest;
 const OutputDestination = @import("output_destination.zig").OutputDestination;
 const EncoderSettings = @import("encoder_settings.zig").EncoderSettings;
+const InferenceSettings = @import("inference_settings.zig").InferenceSettings;
 const InputAttachment = @import("input_attachment.zig").InputAttachment;
 const InputSpecification = @import("input_specification.zig").InputSpecification;
 const LinkedChannelSettings = @import("linked_channel_settings.zig").LinkedChannelSettings;
 const LogLevel = @import("log_level.zig").LogLevel;
 const MaintenanceUpdateSettings = @import("maintenance_update_settings.zig").MaintenanceUpdateSettings;
+const SpecialRouterSettings = @import("special_router_settings.zig").SpecialRouterSettings;
 const Channel = @import("channel.zig").Channel;
 
 pub const UpdateChannelInput = struct {
@@ -40,6 +42,10 @@ pub const UpdateChannelInput = struct {
     /// The encoder settings for this channel.
     encoder_settings: ?EncoderSettings = null,
 
+    /// Include this setting to include Elemental Inference features in this
+    /// channel.
+    inference_settings: ?InferenceSettings = null,
+
     input_attachments: ?[]const InputAttachment = null,
 
     /// Specification of network and file inputs for this channel
@@ -62,6 +68,13 @@ pub const UpdateChannelInput = struct {
     /// previously set that role will be removed.
     role_arn: ?[]const u8 = null,
 
+    /// When using MediaConnect Router as the source of a MediaLive input there's a
+    /// special handoff that occurs when a router output
+    /// is created. This group of settings is set on your behalf by the MediaConnect
+    /// Router service using this set of settings. This
+    /// setting object can only by used by that service.
+    special_router_settings: ?SpecialRouterSettings = null,
+
     pub const json_field_names = .{
         .anywhere_settings = "AnywhereSettings",
         .cdi_input_specification = "CdiInputSpecification",
@@ -71,6 +84,7 @@ pub const UpdateChannelInput = struct {
         .destinations = "Destinations",
         .dry_run = "DryRun",
         .encoder_settings = "EncoderSettings",
+        .inference_settings = "InferenceSettings",
         .input_attachments = "InputAttachments",
         .input_specification = "InputSpecification",
         .linked_channel_settings = "LinkedChannelSettings",
@@ -78,6 +92,7 @@ pub const UpdateChannelInput = struct {
         .maintenance = "Maintenance",
         .name = "Name",
         .role_arn = "RoleArn",
+        .special_router_settings = "SpecialRouterSettings",
     };
 };
 
@@ -172,6 +187,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateChannelInput, con
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.inference_settings) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"InferenceSettings\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.input_attachments) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"InputAttachments\":");
@@ -211,6 +232,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateChannelInput, con
     if (input.role_arn) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"RoleArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.special_router_settings) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"SpecialRouterSettings\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

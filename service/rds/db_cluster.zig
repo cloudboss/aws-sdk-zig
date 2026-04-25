@@ -16,6 +16,7 @@ const RdsCustomClusterConfiguration = @import("rds_custom_cluster_configuration.
 const ScalingConfigurationInfo = @import("scaling_configuration_info.zig").ScalingConfigurationInfo;
 const ServerlessV2ScalingConfigurationInfo = @import("serverless_v2_scaling_configuration_info.zig").ServerlessV2ScalingConfigurationInfo;
 const DBClusterStatusInfo = @import("db_cluster_status_info.zig").DBClusterStatusInfo;
+const StorageEncryptionType = @import("storage_encryption_type.zig").StorageEncryptionType;
 const Tag = @import("tag.zig").Tag;
 const UpgradeRolloutOrder = @import("upgrade_rollout_order.zig").UpgradeRolloutOrder;
 const VpcSecurityGroupMembership = @import("vpc_security_group_membership.zig").VpcSecurityGroupMembership;
@@ -265,6 +266,13 @@ pub const DBCluster = struct {
     /// Management (IAM) accounts to database accounts is enabled.
     iam_database_authentication_enabled: ?bool = null,
 
+    /// Indicates whether the DB cluster has internet-based connectivity enabled
+    /// through an internet access gateway.
+    ///
+    /// This setting is applicable only for Aurora PostgreSQL clusters created
+    /// through express configuration.
+    internet_access_gateway_enabled: ?bool = null,
+
     /// The next time you can modify the DB cluster to use the `aurora-iopt1`
     /// storage type.
     ///
@@ -442,6 +450,16 @@ pub const DBCluster = struct {
     /// Indicates whether the DB cluster is encrypted.
     storage_encrypted: ?bool = null,
 
+    /// The type of encryption used to protect data at rest in the DB cluster.
+    /// Possible values:
+    ///
+    /// * `none` - The DB cluster is not encrypted.
+    /// * `sse-rds` - The DB cluster is encrypted using an Amazon Web Services owned
+    ///   KMS key.
+    /// * `sse-kms` - The DB cluster is encrypted using a customer managed KMS key
+    ///   or Amazon Web Services managed KMS key.
+    storage_encryption_type: ?StorageEncryptionType = null,
+
     /// The storage throughput for the DB cluster. The throughput is automatically
     /// set based on the IOPS that you provision, and is not configurable.
     ///
@@ -459,6 +477,12 @@ pub const DBCluster = struct {
     /// * [second] - Default order for resources not specifically configured.
     /// * [last] - Usually reserved for production environments.
     upgrade_rollout_order: ?UpgradeRolloutOrder = null,
+
+    /// Indicates whether the DB cluster uses VPC-based networking.
+    ///
+    /// This setting is applicable only for Aurora PostgreSQL clusters created
+    /// through express configuration.
+    vpc_networking_enabled: ?bool = null,
 
     /// The list of VPC security groups that the DB cluster belongs to.
     vpc_security_groups: ?[]const VpcSecurityGroupMembership = null,

@@ -63,6 +63,11 @@ pub const BackupSelection = struct {
     ///
     /// If you specify multiple ARNs, the resources much match any of the ARNs (OR
     /// logic).
+    ///
+    /// When using wildcards in ARN patterns for backup selections, the asterisk (*)
+    /// must appear at the end of the ARN string (prefix pattern). For example,
+    /// `arn:aws:s3:::my-bucket-*` is valid, but `arn:aws:s3:::*-logs` is not
+    /// supported.
     resources: ?[]const []const u8 = null,
 
     /// The display name of a resource selection document. Must contain 1 to 50

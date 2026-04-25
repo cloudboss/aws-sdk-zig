@@ -1,4 +1,5 @@
 pub const ActionIdentifier = @import("action_identifier.zig").ActionIdentifier;
+pub const AliasState = @import("alias_state.zig").AliasState;
 pub const AttributeValue = @import("attribute_value.zig").AttributeValue;
 pub const BatchGetPolicyErrorCode = @import("batch_get_policy_error_code.zig").BatchGetPolicyErrorCode;
 pub const BatchGetPolicyErrorItem = @import("batch_get_policy_error_item.zig").BatchGetPolicyErrorItem;
@@ -58,6 +59,8 @@ pub const PolicyDefinitionItem = @import("policy_definition_item.zig").PolicyDef
 pub const PolicyEffect = @import("policy_effect.zig").PolicyEffect;
 pub const PolicyFilter = @import("policy_filter.zig").PolicyFilter;
 pub const PolicyItem = @import("policy_item.zig").PolicyItem;
+pub const PolicyStoreAliasFilter = @import("policy_store_alias_filter.zig").PolicyStoreAliasFilter;
+pub const PolicyStoreAliasItem = @import("policy_store_alias_item.zig").PolicyStoreAliasItem;
 pub const PolicyStoreItem = @import("policy_store_item.zig").PolicyStoreItem;
 pub const PolicyTemplateItem = @import("policy_template_item.zig").PolicyTemplateItem;
 pub const PolicyType = @import("policy_type.zig").PolicyType;

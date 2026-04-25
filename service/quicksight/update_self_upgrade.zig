@@ -16,7 +16,7 @@ pub const UpdateSelfUpgradeInput = struct {
     /// request.
     aws_account_id: []const u8,
 
-    /// The Quick Suite namespace for the self-upgrade request.
+    /// The Quick namespace for the self-upgrade request.
     namespace: []const u8,
 
     /// The ID of the self-upgrade request to update.

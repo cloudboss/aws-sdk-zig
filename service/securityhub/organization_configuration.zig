@@ -2,14 +2,14 @@ const OrganizationConfigurationConfigurationType = @import("organization_configu
 const OrganizationConfigurationStatus = @import("organization_configuration_status.zig").OrganizationConfigurationStatus;
 
 /// Provides information about the way an organization is configured in Security
-/// Hub.
+/// Hub CSPM.
 pub const OrganizationConfiguration = struct {
     /// Indicates whether the organization uses local or central configuration.
     ///
     /// If you use local configuration, the
-    /// Security Hub delegated administrator can set `AutoEnable` to `true` and
+    /// Security Hub CSPM delegated administrator can set `AutoEnable` to `true` and
     /// `AutoEnableStandards` to `DEFAULT`. This automatically enables Security Hub
-    /// and
+    /// CSPM and
     /// default security standards in new organization accounts. These new account
     /// settings must be set separately in
     /// each Amazon Web Services Region, and settings may be different in each
@@ -17,7 +17,7 @@ pub const OrganizationConfiguration = struct {
     ///
     /// If you use central configuration, the delegated administrator can create
     /// configuration policies. Configuration
-    /// policies can be used to configure Security Hub, security standards, and
+    /// policies can be used to configure Security Hub CSPM, security standards, and
     /// security controls in multiple
     /// accounts and Regions. If you want new organization accounts to use a
     /// specific configuration, you can create a

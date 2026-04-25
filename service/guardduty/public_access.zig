@@ -3,8 +3,7 @@ const PermissionConfiguration = @import("permission_configuration.zig").Permissi
 /// Describes the public access policies that apply to the S3 bucket.
 pub const PublicAccess = struct {
     /// Describes the effective permission on this bucket after factoring all
-    /// attached
-    /// policies.
+    /// attached policies.
     effective_permission: ?[]const u8 = null,
 
     /// Contains information about how permissions are configured for the S3 bucket.

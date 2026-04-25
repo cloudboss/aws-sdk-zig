@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DependencyConfig = @import("dependency_config.zig").DependencyConfig;
+const MetricSource = @import("metric_source.zig").MetricSource;
 const MetricSourceType = @import("metric_source_type.zig").MetricSourceType;
 const ServiceLevelObjectiveSummary = @import("service_level_objective_summary.zig").ServiceLevelObjectiveSummary;
 
@@ -43,12 +44,18 @@ pub const ListServiceLevelObjectivesInput = struct {
     /// parameter, the default of 50 is used.
     max_results: ?i32 = null,
 
+    /// Identifies the metric source to filter SLOs by.
+    metric_source: ?MetricSource = null,
+
     /// Use this optional field to only include SLOs with the specified metric
     /// source types in the output. Supported types are:
     ///
     /// * Service operation
     /// * Service dependency
+    /// * Service
     /// * CloudWatch metric
+    /// * AppMonitor
+    /// * Canary
     metric_source_types: ?[]const MetricSourceType = null,
 
     /// Include this value, if it was returned by the previous operation, to get the
@@ -66,6 +73,7 @@ pub const ListServiceLevelObjectivesInput = struct {
         .include_linked_accounts = "IncludeLinkedAccounts",
         .key_attributes = "KeyAttributes",
         .max_results = "MaxResults",
+        .metric_source = "MetricSource",
         .metric_source_types = "MetricSourceTypes",
         .next_token = "NextToken",
         .operation_name = "OperationName",
@@ -172,6 +180,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListServiceLevelObjecti
     if (input.key_attributes) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"KeyAttributes\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.metric_source) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"MetricSource\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

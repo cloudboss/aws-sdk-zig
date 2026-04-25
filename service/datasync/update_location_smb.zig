@@ -32,7 +32,9 @@ pub const UpdateLocationSmbInput = struct {
     /// Specifies configuration information for a customer-managed secret, such as a
     /// `Password` or `KerberosKeytab` or set of credentials that DataSync uses to
     /// access a specific transfer location, and a
-    /// customer-managed KMS key.
+    /// customer-managed Identity and Access Management (IAM) role that provides
+    /// access to
+    /// the secret.
     custom_secret_config: ?CustomSecretConfig = null,
 
     /// Specifies the IP addresses (IPv4 or IPv6) for the DNS servers that your SMB

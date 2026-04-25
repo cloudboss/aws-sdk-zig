@@ -12,8 +12,7 @@ pub const GetExecutionInput = struct {
     execution_id: []const u8,
 
     /// The Amazon Resource Name (ARN) of the Export object that generated this
-    /// specific
-    /// execution.
+    /// specific execution.
     export_arn: []const u8,
 
     pub const json_field_names = .{
@@ -30,10 +29,9 @@ pub const GetExecutionOutput = struct {
     execution_status: ?ExecutionStatus = null,
 
     /// The export data for this specific execution. This export data is a snapshot
-    /// from when the
-    /// execution was generated. The data could be different from the current export
-    /// data if the
-    /// export was updated since the execution was generated.
+    /// from when the execution was generated. The data could be different from the
+    /// current export data if the export was updated since the execution was
+    /// generated.
     @"export": ?Export = null,
 
     pub const json_field_names = .{
@@ -111,6 +109,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     const owned_message = try arena_alloc.dupe(u8, error_message);
     const owned_request_id = try arena_alloc.dupe(u8, "");
 
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "InternalServerException")) {
         return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
             .message = owned_message,

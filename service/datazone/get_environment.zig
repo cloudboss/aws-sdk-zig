@@ -56,6 +56,9 @@ pub const GetEnvironmentOutput = struct {
     /// The configuration ID that is used to create the environment.
     environment_configuration_id: ?[]const u8 = null,
 
+    /// The configuration name that is used to create the environment.
+    environment_configuration_name: ?[]const u8 = null,
+
     /// The ID of the environment profile with which the environment is created.
     environment_profile_id: ?[]const u8 = null,
 
@@ -103,6 +106,7 @@ pub const GetEnvironmentOutput = struct {
         .environment_actions = "environmentActions",
         .environment_blueprint_id = "environmentBlueprintId",
         .environment_configuration_id = "environmentConfigurationId",
+        .environment_configuration_name = "environmentConfigurationName",
         .environment_profile_id = "environmentProfileId",
         .glossary_terms = "glossaryTerms",
         .id = "id",

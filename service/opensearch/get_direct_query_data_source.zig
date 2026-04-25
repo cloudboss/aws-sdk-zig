@@ -18,6 +18,11 @@ pub const GetDirectQueryDataSourceInput = struct {
 };
 
 pub const GetDirectQueryDataSourceOutput = struct {
+    /// The IAM access policy document that defines the permissions for accessing
+    /// the direct query data source. Returns the current policy configuration in
+    /// JSON format, or null if no custom policy is configured.
+    data_source_access_policy: ?[]const u8 = null,
+
     /// The unique, system-generated identifier that represents the data source.
     data_source_arn: ?[]const u8 = null,
 
@@ -41,6 +46,7 @@ pub const GetDirectQueryDataSourceOutput = struct {
     open_search_arns: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
+        .data_source_access_policy = "DataSourceAccessPolicy",
         .data_source_arn = "DataSourceArn",
         .data_source_name = "DataSourceName",
         .data_source_type = "DataSourceType",
@@ -187,6 +193,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
         return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

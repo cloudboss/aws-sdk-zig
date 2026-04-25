@@ -4,8 +4,22 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const CmkSecretConfig = @import("cmk_secret_config.zig").CmkSecretConfig;
+const CustomSecretConfig = @import("custom_secret_config.zig").CustomSecretConfig;
 
 pub const UpdateLocationFsxWindowsInput = struct {
+    /// Specifies configuration information for a DataSync-managed secret, such as a
+    /// `Password` or set of credentials that DataSync uses to access a specific
+    /// transfer location, and a customer-managed KMS key.
+    cmk_secret_config: ?CmkSecretConfig = null,
+
+    /// Specifies configuration information for a customer-managed secret, such as a
+    /// `Password` or set of credentials that DataSync uses to access a specific
+    /// transfer location, and a customer-managed Identity and Access Management
+    /// (IAM) role
+    /// that provides access to the secret.
+    custom_secret_config: ?CustomSecretConfig = null,
+
     /// Specifies the name of the Windows domain that your FSx for Windows File
     /// Server file system
     /// belongs to.
@@ -43,6 +57,8 @@ pub const UpdateLocationFsxWindowsInput = struct {
     user: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .cmk_secret_config = "CmkSecretConfig",
+        .custom_secret_config = "CustomSecretConfig",
         .domain = "Domain",
         .location_arn = "LocationArn",
         .password = "Password",

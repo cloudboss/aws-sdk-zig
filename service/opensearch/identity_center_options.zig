@@ -20,6 +20,9 @@ pub const IdentityCenterOptions = struct {
     /// The Amazon Resource Name (ARN) of the IAM Identity Center instance.
     identity_center_instance_arn: ?[]const u8 = null,
 
+    /// The Region of the IAM Identity Center instance.
+    identity_center_instance_region: ?[]const u8 = null,
+
     /// The identifier of the IAM Identity Store.
     identity_store_id: ?[]const u8 = null,
 
@@ -37,6 +40,7 @@ pub const IdentityCenterOptions = struct {
         .enabled_api_access = "EnabledAPIAccess",
         .identity_center_application_arn = "IdentityCenterApplicationARN",
         .identity_center_instance_arn = "IdentityCenterInstanceARN",
+        .identity_center_instance_region = "IdentityCenterInstanceRegion",
         .identity_store_id = "IdentityStoreId",
         .roles_key = "RolesKey",
         .subject_key = "SubjectKey",

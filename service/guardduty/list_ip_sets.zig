@@ -8,23 +8,19 @@ const ServiceError = @import("errors.zig").ServiceError;
 pub const ListIPSetsInput = struct {
     /// The unique ID of the detector that is associated with IPSet.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 
     /// You can use this parameter to indicate the maximum number of items you want
-    /// in the
-    /// response. The default value is 50. The maximum value is 50.
+    /// in the response. The default value is 50. The maximum value is 50.
     max_results: ?i32 = null,
 
     /// You can use this parameter when paginating results. Set the value of this
-    /// parameter to
-    /// null on your first call to the list action. For subsequent calls to the
-    /// action, fill nextToken
-    /// in the request with the value of NextToken from the previous response to
-    /// continue listing
-    /// data.
+    /// parameter to null on your first call to the list action. For subsequent
+    /// calls to the action, fill nextToken in the request with the value of
+    /// NextToken from the previous response to continue listing data.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -39,8 +35,7 @@ pub const ListIPSetsOutput = struct {
     ip_set_ids: ?[]const []const u8 = null,
 
     /// The pagination parameter to be used on the next list operation to retrieve
-    /// more
-    /// items.
+    /// more items.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{

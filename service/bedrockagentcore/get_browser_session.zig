@@ -4,8 +4,11 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const Certificate = @import("certificate.zig").Certificate;
+const BrowserEnterprisePolicy = @import("browser_enterprise_policy.zig").BrowserEnterprisePolicy;
 const BrowserExtension = @import("browser_extension.zig").BrowserExtension;
 const BrowserProfileConfiguration = @import("browser_profile_configuration.zig").BrowserProfileConfiguration;
+const ProxyConfiguration = @import("proxy_configuration.zig").ProxyConfiguration;
 const BrowserSessionStatus = @import("browser_session_status.zig").BrowserSessionStatus;
 const BrowserSessionStream = @import("browser_session_stream.zig").BrowserSessionStream;
 const ViewPort = @import("view_port.zig").ViewPort;
@@ -27,8 +30,14 @@ pub const GetBrowserSessionOutput = struct {
     /// The identifier of the browser.
     browser_identifier: []const u8,
 
+    /// The list of certificates installed in the browser session.
+    certificates: ?[]const Certificate = null,
+
     /// The time at which the browser session was created.
     created_at: i64,
+
+    /// A list of files containing enterprise policies for the browser session.
+    enterprise_policies: ?[]const BrowserEnterprisePolicy = null,
 
     /// The list of browser extensions that are configured in the browser session.
     extensions: ?[]const BrowserExtension = null,
@@ -43,6 +52,12 @@ pub const GetBrowserSessionOutput = struct {
     /// profile identifier that links to persistent browser data such as cookies and
     /// local storage.
     profile_configuration: ?BrowserProfileConfiguration = null,
+
+    /// The active proxy configuration for this browser session. This field is only
+    /// present if proxy configuration was provided when the session was started
+    /// using `StartBrowserSession`. The configuration includes proxy servers,
+    /// domain bypass rules and the proxy authentication credentials.
+    proxy_configuration: ?ProxyConfiguration = null,
 
     /// The identifier of the browser session.
     session_id: []const u8,
@@ -65,11 +80,14 @@ pub const GetBrowserSessionOutput = struct {
 
     pub const json_field_names = .{
         .browser_identifier = "browserIdentifier",
+        .certificates = "certificates",
         .created_at = "createdAt",
+        .enterprise_policies = "enterprisePolicies",
         .extensions = "extensions",
         .last_updated_at = "lastUpdatedAt",
         .name = "name",
         .profile_configuration = "profileConfiguration",
+        .proxy_configuration = "proxyConfiguration",
         .session_id = "sessionId",
         .session_replay_artifact = "sessionReplayArtifact",
         .session_timeout_seconds = "sessionTimeoutSeconds",

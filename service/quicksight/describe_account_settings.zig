@@ -30,7 +30,7 @@ pub const DescribeAccountSettingsOutput = struct {
     /// itself. Instead, it's a subscription to the Amazon Quick Sight service for
     /// your
     /// Amazon Web Services account. The edition that you subscribe to applies to
-    /// Quick Suite in every Amazon Web Services Region where you use it.
+    /// Quick in every Amazon Web Services Region where you use it.
     account_settings: ?AccountSettings = null,
 
     /// The Amazon Web Services request ID for this operation.

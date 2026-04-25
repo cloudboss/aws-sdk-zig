@@ -16,7 +16,7 @@ pub const ListStandardsControlAssociationsInput = struct {
     /// next 25 associations. This repeats until all associations for the specified
     /// control are
     /// returned. The number of results is limited by the number of supported
-    /// Security Hub
+    /// Security Hub CSPM
     /// standards that you've enabled in the calling account.
     max_results: ?i32 = null,
 
@@ -187,6 +187,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "LimitExceededException")) {
         return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organization_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationalUnitNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organizational_unit_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

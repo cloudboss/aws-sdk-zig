@@ -108,7 +108,7 @@ pub const ModifyReplicationGroupInput = struct {
     cluster_mode: ?ClusterMode = null,
 
     /// Modifies the engine listed in a replication group message. The options are
-    /// redis, memcached or valkey.
+    /// valkey, memcached or redis.
     engine: ?[]const u8 = null,
 
     /// The upgraded version of the cache engine to be run on the clusters in the

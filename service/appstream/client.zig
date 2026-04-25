@@ -64,6 +64,7 @@ const disassociate_application_fleet = @import("disassociate_application_fleet.z
 const disassociate_application_from_entitlement = @import("disassociate_application_from_entitlement.zig");
 const disassociate_fleet = @import("disassociate_fleet.zig");
 const disassociate_software_from_image_builder = @import("disassociate_software_from_image_builder.zig");
+const drain_session_instance = @import("drain_session_instance.zig");
 const enable_user = @import("enable_user.zig");
 const expire_session = @import("expire_session.zig");
 const get_export_image_task = @import("get_export_image_task.zig");
@@ -539,6 +540,14 @@ pub const Client = struct {
     /// instance.
     pub fn disassociateSoftwareFromImageBuilder(self: *Self, allocator: std.mem.Allocator, input: disassociate_software_from_image_builder.DisassociateSoftwareFromImageBuilderInput, options: CallOptions) !disassociate_software_from_image_builder.DisassociateSoftwareFromImageBuilderOutput {
         return disassociate_software_from_image_builder.execute(self, allocator, input, options);
+    }
+
+    /// Drains the instance hosting the specified streaming session. The instance
+    /// stops accepting new sessions while existing sessions continue uninterrupted.
+    /// Once all sessions end, the instance is reclaimed and replaced. This only
+    /// applies to multi-session fleets.
+    pub fn drainSessionInstance(self: *Self, allocator: std.mem.Allocator, input: drain_session_instance.DrainSessionInstanceInput, options: CallOptions) !drain_session_instance.DrainSessionInstanceOutput {
+        return drain_session_instance.execute(self, allocator, input, options);
     }
 
     /// Enables a user in the user pool. After being enabled, users can sign in to

@@ -2,14 +2,17 @@ const std = @import("std");
 
 pub const TestCaseEntryPointType = enum {
     voice_call,
+    chat,
 
     pub const json_field_names = .{
         .voice_call = "VOICE_CALL",
+        .chat = "CHAT",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .voice_call => "VOICE_CALL",
+            .chat => "CHAT",
         };
     }
 

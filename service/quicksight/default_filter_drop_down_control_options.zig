@@ -1,4 +1,5 @@
 const CommitMode = @import("commit_mode.zig").CommitMode;
+const ControlSortConfiguration = @import("control_sort_configuration.zig").ControlSortConfiguration;
 const DropDownControlDisplayOptions = @import("drop_down_control_display_options.zig").DropDownControlDisplayOptions;
 const FilterSelectableValues = @import("filter_selectable_values.zig").FilterSelectableValues;
 const SheetControlListType = @import("sheet_control_list_type.zig").SheetControlListType;
@@ -8,6 +9,10 @@ pub const DefaultFilterDropDownControlOptions = struct {
     /// The visibility configuration of the Apply button on a
     /// `FilterDropDownControl`.
     commit_mode: ?CommitMode = null,
+
+    /// The sort configuration for the values displayed in the control. Only one
+    /// sort configuration can be applied per control.
+    control_sort_configurations: ?[]const ControlSortConfiguration = null,
 
     /// The display options of a control.
     display_options: ?DropDownControlDisplayOptions = null,
@@ -25,6 +30,7 @@ pub const DefaultFilterDropDownControlOptions = struct {
 
     pub const json_field_names = .{
         .commit_mode = "CommitMode",
+        .control_sort_configurations = "ControlSortConfigurations",
         .display_options = "DisplayOptions",
         .selectable_values = "SelectableValues",
         .@"type" = "Type",

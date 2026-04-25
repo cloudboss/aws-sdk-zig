@@ -1,5 +1,5 @@
-/// Information about each resource type associated with the
-/// `groupedByResource` statistics.
+/// Information about each resource type associated with the `groupedByResource`
+/// statistics.
 pub const ResourceStatistics = struct {
     /// The ID of the Amazon Web Services account.
     account_id: ?[]const u8 = null,
@@ -8,30 +8,18 @@ pub const ResourceStatistics = struct {
     last_generated_at: ?i64 = null,
 
     /// ID associated with each resource. The following list provides the mapping of
-    /// the resource type
-    /// and resource ID.
-    ///
-    /// **Mapping of resource and resource ID**
+    /// the resource type and resource ID. **Mapping of resource and resource ID**
     ///
     /// * AccessKey - `resource.accessKeyDetails.accessKeyId`
-    ///
     /// * Container - `resource.containerDetails.id`
-    ///
     /// * ECSCluster - `resource.ecsClusterDetails.name`
-    ///
     /// * EKSCluster - `resource.eksClusterDetails.name`
-    ///
     /// * Instance - `resource.instanceDetails.instanceId`
-    ///
     /// * KubernetesCluster -
     ///   `resource.kubernetesDetails.kubernetesWorkloadDetails.name`
-    ///
     /// * Lambda - `resource.lambdaDetails.functionName`
-    ///
     /// * RDSDBInstance - `resource.rdsDbInstanceDetails.dbInstanceIdentifier`
-    ///
     /// * S3Bucket - `resource.s3BucketDetails.name`
-    ///
     /// * S3Object - `resource.s3BucketDetails.name`
     resource_id: ?[]const u8 = null,
 

@@ -1,8 +1,10 @@
 const AddHeaderAction = @import("add_header_action.zig").AddHeaderAction;
 const ArchiveAction = @import("archive_action.zig").ArchiveAction;
+const BounceAction = @import("bounce_action.zig").BounceAction;
 const DeliverToMailboxAction = @import("deliver_to_mailbox_action.zig").DeliverToMailboxAction;
 const DeliverToQBusinessAction = @import("deliver_to_q_business_action.zig").DeliverToQBusinessAction;
 const DropAction = @import("drop_action.zig").DropAction;
+const InvokeLambdaAction = @import("invoke_lambda_action.zig").InvokeLambdaAction;
 const SnsAction = @import("sns_action.zig").SnsAction;
 const RelayAction = @import("relay_action.zig").RelayAction;
 const ReplaceRecipientAction = @import("replace_recipient_action.zig").ReplaceRecipientAction;
@@ -16,6 +18,8 @@ pub const RuleAction = union(enum) {
     /// This action archives the email. This can be used to deliver an email to an
     /// archive.
     archive: ?ArchiveAction,
+    /// This action sends a bounce response for the email.
+    bounce: ?BounceAction,
     /// This action delivers an email to a WorkMail mailbox.
     deliver_to_mailbox: ?DeliverToMailboxAction,
     /// This action delivers an email to an Amazon Q Business application for
@@ -23,6 +27,9 @@ pub const RuleAction = union(enum) {
     deliver_to_q_business: ?DeliverToQBusinessAction,
     /// This action terminates the evaluation of rules in the rule set.
     drop: ?DropAction,
+    /// This action invokes an Amazon Web Services Lambda function to process the
+    /// email.
+    invoke_lambda: ?InvokeLambdaAction,
     /// This action publishes the email content to an Amazon SNS topic.
     publish_to_sns: ?SnsAction,
     /// This action relays the email to another SMTP server.
@@ -38,9 +45,11 @@ pub const RuleAction = union(enum) {
     pub const json_field_names = .{
         .add_header = "AddHeader",
         .archive = "Archive",
+        .bounce = "Bounce",
         .deliver_to_mailbox = "DeliverToMailbox",
         .deliver_to_q_business = "DeliverToQBusiness",
         .drop = "Drop",
+        .invoke_lambda = "InvokeLambda",
         .publish_to_sns = "PublishToSns",
         .relay = "Relay",
         .replace_recipient = "ReplaceRecipient",

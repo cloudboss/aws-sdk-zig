@@ -2,19 +2,26 @@ const aws = @import("aws");
 const std = @import("std");
 
 const associate_eip_to_vlan = @import("associate_eip_to_vlan.zig");
+const create_entitlement = @import("create_entitlement.zig");
 const create_environment = @import("create_environment.zig");
+const create_environment_connector = @import("create_environment_connector.zig");
 const create_environment_host = @import("create_environment_host.zig");
+const delete_entitlement = @import("delete_entitlement.zig");
 const delete_environment = @import("delete_environment.zig");
+const delete_environment_connector = @import("delete_environment_connector.zig");
 const delete_environment_host = @import("delete_environment_host.zig");
 const disassociate_eip_from_vlan = @import("disassociate_eip_from_vlan.zig");
 const get_environment = @import("get_environment.zig");
 const get_versions = @import("get_versions.zig");
+const list_environment_connectors = @import("list_environment_connectors.zig");
 const list_environment_hosts = @import("list_environment_hosts.zig");
 const list_environment_vlans = @import("list_environment_vlans.zig");
 const list_environments = @import("list_environments.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
+const list_vm_entitlements = @import("list_vm_entitlements.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const update_environment_connector = @import("update_environment_connector.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
@@ -52,6 +59,14 @@ pub const Client = struct {
         return associate_eip_to_vlan.execute(self, allocator, input, options);
     }
 
+    /// Creates a Windows Server License entitlement for virtual machines in an
+    /// Amazon EVS environment using the provided vCenter Server connector. This is
+    /// an asynchronous operation. Amazon EVS validates the specified virtual
+    /// machines before starting usage tracking.
+    pub fn createEntitlement(self: *Self, allocator: std.mem.Allocator, input: create_entitlement.CreateEntitlementInput, options: CallOptions) !create_entitlement.CreateEntitlementOutput {
+        return create_entitlement.execute(self, allocator, input, options);
+    }
+
     /// Creates an Amazon EVS environment that runs VCF software, such as SDDC
     /// Manager, NSX Manager, and vCenter Server.
     ///
@@ -73,6 +88,14 @@ pub const Client = struct {
     /// `ValidationException` response.
     pub fn createEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_environment.CreateEnvironmentInput, options: CallOptions) !create_environment.CreateEnvironmentOutput {
         return create_environment.execute(self, allocator, input, options);
+    }
+
+    /// Creates a connector for an Amazon EVS environment. A connector establishes a
+    /// connection to a VCF appliance, such as vCenter, using a fully qualified
+    /// domain name and an Amazon Web Services Secrets Manager secret that stores
+    /// the appliance credentials.
+    pub fn createEnvironmentConnector(self: *Self, allocator: std.mem.Allocator, input: create_environment_connector.CreateEnvironmentConnectorInput, options: CallOptions) !create_environment_connector.CreateEnvironmentConnectorOutput {
+        return create_environment_connector.execute(self, allocator, input, options);
     }
 
     /// Creates an ESX host and adds it to an Amazon EVS environment. Amazon EVS
@@ -99,6 +122,13 @@ pub const Client = struct {
         return create_environment_host.execute(self, allocator, input, options);
     }
 
+    /// Deletes a Windows Server License entitlement for virtual machines in an
+    /// Amazon EVS environment. Deleting an entitlement stops usage tracking for the
+    /// specified virtual machines.
+    pub fn deleteEntitlement(self: *Self, allocator: std.mem.Allocator, input: delete_entitlement.DeleteEntitlementInput, options: CallOptions) !delete_entitlement.DeleteEntitlementOutput {
+        return delete_entitlement.execute(self, allocator, input, options);
+    }
+
     /// Deletes an Amazon EVS environment.
     ///
     /// Amazon EVS environments will only be enabled for deletion once the hosts are
@@ -110,6 +140,14 @@ pub const Client = struct {
     /// continue to incur costs.
     pub fn deleteEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_environment.DeleteEnvironmentInput, options: CallOptions) !delete_environment.DeleteEnvironmentOutput {
         return delete_environment.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a connector from an Amazon EVS environment.
+    ///
+    /// Before deleting a connector, you must remove all entitlements that are
+    /// associated with the same vCenter.
+    pub fn deleteEnvironmentConnector(self: *Self, allocator: std.mem.Allocator, input: delete_environment_connector.DeleteEnvironmentConnectorInput, options: CallOptions) !delete_environment_connector.DeleteEnvironmentConnectorOutput {
+        return delete_environment_connector.execute(self, allocator, input, options);
     }
 
     /// Deletes a host from an Amazon EVS environment.
@@ -139,6 +177,12 @@ pub const Client = struct {
         return get_versions.execute(self, allocator, input, options);
     }
 
+    /// Lists the connectors within an environment. Returns the status of each
+    /// connector and its applicable checks, among other connector details.
+    pub fn listEnvironmentConnectors(self: *Self, allocator: std.mem.Allocator, input: list_environment_connectors.ListEnvironmentConnectorsInput, options: CallOptions) !list_environment_connectors.ListEnvironmentConnectorsOutput {
+        return list_environment_connectors.execute(self, allocator, input, options);
+    }
+
     /// List the hosts within an environment.
     pub fn listEnvironmentHosts(self: *Self, allocator: std.mem.Allocator, input: list_environment_hosts.ListEnvironmentHostsInput, options: CallOptions) !list_environment_hosts.ListEnvironmentHostsOutput {
         return list_environment_hosts.execute(self, allocator, input, options);
@@ -160,6 +204,13 @@ pub const Client = struct {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
+    /// Lists the Windows Server License entitlements for virtual machines in an
+    /// Amazon EVS environment. Returns existing entitlements for virtual machines
+    /// associated with the specified environment and connector.
+    pub fn listVmEntitlements(self: *Self, allocator: std.mem.Allocator, input: list_vm_entitlements.ListVmEntitlementsInput, options: CallOptions) !list_vm_entitlements.ListVmEntitlementsOutput {
+        return list_vm_entitlements.execute(self, allocator, input, options);
+    }
+
     /// Associates the specified tags to an Amazon EVS resource with the specified
     /// `resourceArn`. If existing tags on a resource are not specified in the
     /// request parameters, they aren't changed. When a resource is deleted, the
@@ -177,6 +228,22 @@ pub const Client = struct {
         return untag_resource.execute(self, allocator, input, options);
     }
 
+    /// Updates a connector for an Amazon EVS environment. You can update the Amazon
+    /// Web Services Secrets Manager secret ARN or the appliance FQDN to reconfigure
+    /// the connector metadata.
+    ///
+    /// You cannot update both the secret and the FQDN in the same request.
+    pub fn updateEnvironmentConnector(self: *Self, allocator: std.mem.Allocator, input: update_environment_connector.UpdateEnvironmentConnectorInput, options: CallOptions) !update_environment_connector.UpdateEnvironmentConnectorOutput {
+        return update_environment_connector.execute(self, allocator, input, options);
+    }
+
+    pub fn listEnvironmentConnectorsPaginator(self: *Self, params: list_environment_connectors.ListEnvironmentConnectorsInput) paginator.ListEnvironmentConnectorsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listEnvironmentHostsPaginator(self: *Self, params: list_environment_hosts.ListEnvironmentHostsInput) paginator.ListEnvironmentHostsPaginator {
         return .{
             .client = self,
@@ -192,6 +259,13 @@ pub const Client = struct {
     }
 
     pub fn listEnvironmentsPaginator(self: *Self, params: list_environments.ListEnvironmentsInput) paginator.ListEnvironmentsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listVmEntitlementsPaginator(self: *Self, params: list_vm_entitlements.ListVmEntitlementsInput) paginator.ListVmEntitlementsPaginator {
         return .{
             .client = self,
             .params = params,

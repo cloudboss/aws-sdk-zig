@@ -16,7 +16,7 @@ const SeverityLabel = @import("severity_label.zig").SeverityLabel;
 /// `BatchImportFindings`
 /// ](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) request for a
 /// new finding only provides `Label` or only provides `Normalized`, Security
-/// Hub
+/// Hub CSPM
 /// automatically populates the value of the other field.
 ///
 /// The `Normalized` and `Product` attributes are included in the
@@ -29,8 +29,8 @@ const SeverityLabel = @import("severity_label.zig").SeverityLabel;
 ///
 /// If the top-level `Finding.Severity` object is present, but
 /// `Finding.FindingProviderFields` isn't present,
-/// Security Hub creates the `FindingProviderFields.Severity` object and copies
-/// the entire `Finding.Severity` object into it.
+/// Security Hub CSPM creates the `FindingProviderFields.Severity` object and
+/// copies the entire `Finding.Severity` object into it.
 /// This ensures that the original, provider-supplied details are retained
 /// within the `FindingProviderFields.Severity`
 /// object, even if the top-level `Severity` object is overwritten.

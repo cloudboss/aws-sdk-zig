@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SegmentGroup = @import("segment_group.zig").SegmentGroup;
+const SegmentSort = @import("segment_sort.zig").SegmentSort;
 
 pub const CreateSegmentDefinitionInput = struct {
     /// The description of the segment definition.
@@ -24,6 +25,9 @@ pub const CreateSegmentDefinitionInput = struct {
     /// respective relationship.
     segment_groups: ?SegmentGroup = null,
 
+    /// The segment sort.
+    segment_sort: ?SegmentSort = null,
+
     /// The segment SQL query.
     segment_sql_query: ?[]const u8 = null,
 
@@ -36,6 +40,7 @@ pub const CreateSegmentDefinitionInput = struct {
         .domain_name = "DomainName",
         .segment_definition_name = "SegmentDefinitionName",
         .segment_groups = "SegmentGroups",
+        .segment_sort = "SegmentSort",
         .segment_sql_query = "SegmentSqlQuery",
         .tags = "Tags",
     };
@@ -126,6 +131,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSegmentDefinition
     if (input.segment_groups) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"SegmentGroups\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.segment_sort) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"SegmentSort\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

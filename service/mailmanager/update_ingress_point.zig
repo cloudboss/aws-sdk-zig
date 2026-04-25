@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IngressPointConfiguration = @import("ingress_point_configuration.zig").IngressPointConfiguration;
 const IngressPointStatusToUpdate = @import("ingress_point_status_to_update.zig").IngressPointStatusToUpdate;
+const TlsPolicy = @import("tls_policy.zig").TlsPolicy;
 
 pub const UpdateIngressPointInput = struct {
     /// If you choose an Authenticated ingress endpoint, you must configure either
@@ -25,6 +26,11 @@ pub const UpdateIngressPointInput = struct {
     /// The update status of an ingress endpoint.
     status_to_update: ?IngressPointStatusToUpdate = null,
 
+    /// The Transport Layer Security (TLS) policy for the ingress point. Valid
+    /// values are REQUIRED, OPTIONAL. Only ingress endpoints using REQUIRED or
+    /// OPTIONAL as TlsPolicy can be updated.
+    tls_policy: ?TlsPolicy = null,
+
     /// The identifier of an existing traffic policy that you attach to an ingress
     /// endpoint resource.
     traffic_policy_id: ?[]const u8 = null,
@@ -35,6 +41,7 @@ pub const UpdateIngressPointInput = struct {
         .ingress_point_name = "IngressPointName",
         .rule_set_id = "RuleSetId",
         .status_to_update = "StatusToUpdate",
+        .tls_policy = "TlsPolicy",
         .traffic_policy_id = "TrafficPolicyId",
     };
 };

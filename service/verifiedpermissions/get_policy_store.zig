@@ -10,7 +10,16 @@ const EncryptionState = @import("encryption_state.zig").EncryptionState;
 const ValidationSettings = @import("validation_settings.zig").ValidationSettings;
 
 pub const GetPolicyStoreInput = struct {
-    /// Specifies the ID of the policy store that you want information about.
+    /// Specifies the policy store that you want information about.
+    ///
+    /// To specify a policy store, use its ID or alias name. When using an alias
+    /// name, prefix it with `policy-store-alias/`. For example:
+    ///
+    /// * ID: `PSEXAMPLEabcdefg111111`
+    /// * Alias name: `policy-store-alias/example-policy-store`
+    ///
+    /// To view aliases, use
+    /// [ListPolicyStoreAliases](https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html).
     policy_store_id: []const u8,
 
     /// Specifies whether to return the tags that are attached to the policy store.

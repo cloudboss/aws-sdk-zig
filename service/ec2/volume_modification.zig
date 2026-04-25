@@ -1,4 +1,5 @@
 const VolumeModificationState = @import("volume_modification_state.zig").VolumeModificationState;
+const OperatorResponse = @import("operator_response.zig").OperatorResponse;
 const VolumeType = @import("volume_type.zig").VolumeType;
 
 /// Describes the modification status of an EBS volume.
@@ -8,6 +9,8 @@ pub const VolumeModification = struct {
 
     /// The current modification state.
     modification_state: ?VolumeModificationState = null,
+
+    operator: ?OperatorResponse = null,
 
     /// The original IOPS rate of the volume.
     original_iops: ?i32 = null,

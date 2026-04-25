@@ -7,6 +7,13 @@ pub const TrainingMetricName = enum {
     popularity,
     freshness,
     similarity,
+    mean_reciprocal_rank_at_25,
+    normalized_discounted_cumulative_gain_at_5,
+    normalized_discounted_cumulative_gain_at_10,
+    normalized_discounted_cumulative_gain_at_25,
+    precision_at_5,
+    precision_at_10,
+    precision_at_25,
 
     pub const json_field_names = .{
         .hit = "hit",
@@ -15,6 +22,13 @@ pub const TrainingMetricName = enum {
         .popularity = "popularity",
         .freshness = "freshness",
         .similarity = "similarity",
+        .mean_reciprocal_rank_at_25 = "mean_reciprocal_rank_at_25",
+        .normalized_discounted_cumulative_gain_at_5 = "normalized_discounted_cumulative_gain_at_5",
+        .normalized_discounted_cumulative_gain_at_10 = "normalized_discounted_cumulative_gain_at_10",
+        .normalized_discounted_cumulative_gain_at_25 = "normalized_discounted_cumulative_gain_at_25",
+        .precision_at_5 = "precision_at_5",
+        .precision_at_10 = "precision_at_10",
+        .precision_at_25 = "precision_at_25",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -25,6 +39,13 @@ pub const TrainingMetricName = enum {
             .popularity => "popularity",
             .freshness => "freshness",
             .similarity => "similarity",
+            .mean_reciprocal_rank_at_25 => "mean_reciprocal_rank_at_25",
+            .normalized_discounted_cumulative_gain_at_5 => "normalized_discounted_cumulative_gain_at_5",
+            .normalized_discounted_cumulative_gain_at_10 => "normalized_discounted_cumulative_gain_at_10",
+            .normalized_discounted_cumulative_gain_at_25 => "normalized_discounted_cumulative_gain_at_25",
+            .precision_at_5 => "precision_at_5",
+            .precision_at_10 => "precision_at_10",
+            .precision_at_25 => "precision_at_25",
         };
     }
 

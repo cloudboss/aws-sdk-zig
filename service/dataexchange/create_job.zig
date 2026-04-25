@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const AssetConfiguration = @import("asset_configuration.zig").AssetConfiguration;
 const RequestDetails = @import("request_details.zig").RequestDetails;
 const Type = @import("type.zig").Type;
 const ResponseDetails = @import("response_details.zig").ResponseDetails;
@@ -11,6 +12,10 @@ const JobError = @import("job_error.zig").JobError;
 const State = @import("state.zig").State;
 
 pub const CreateJobInput = struct {
+    /// The configuration for the asset, including tags to be applied to assets
+    /// created by the job.
+    asset_configuration: ?AssetConfiguration = null,
+
     /// The details for the CreateJob request.
     details: RequestDetails,
 
@@ -18,6 +23,7 @@ pub const CreateJobInput = struct {
     @"type": Type,
 
     pub const json_field_names = .{
+        .asset_configuration = "AssetConfiguration",
         .details = "Details",
         .@"type" = "Type",
     };
@@ -26,6 +32,10 @@ pub const CreateJobInput = struct {
 pub const CreateJobOutput = struct {
     /// The ARN for the job.
     arn: ?[]const u8 = null,
+
+    /// The configuration for the asset, including tags applied to assets created by
+    /// the job.
+    asset_configuration: ?AssetConfiguration = null,
 
     /// The date and time that the job was created, in ISO 8601 format.
     created_at: ?i64 = null,
@@ -50,6 +60,7 @@ pub const CreateJobOutput = struct {
 
     pub const json_field_names = .{
         .arn = "Arn",
+        .asset_configuration = "AssetConfiguration",
         .created_at = "CreatedAt",
         .details = "Details",
         .errors = "Errors",
@@ -98,6 +109,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateJobInput, config:
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.asset_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"AssetConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"Details\":");
     try aws.json.writeValue(@TypeOf(input.details), input.details, allocator, &body_buf);

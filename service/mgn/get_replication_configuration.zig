@@ -70,6 +70,9 @@ pub const GetReplicationConfigurationOutput = struct {
     /// Replication Configuration Staging Area tags.
     staging_area_tags: ?[]const aws.map.StringMapEntry = null,
 
+    /// Replication Configuration store snapshot on local zone.
+    store_snapshot_on_local_zone: ?bool = null,
+
     /// Replication Configuration use Dedicated Replication Server.
     use_dedicated_replication_server: ?bool = null,
 
@@ -92,6 +95,7 @@ pub const GetReplicationConfigurationOutput = struct {
         .source_server_id = "sourceServerID",
         .staging_area_subnet_id = "stagingAreaSubnetId",
         .staging_area_tags = "stagingAreaTags",
+        .store_snapshot_on_local_zone = "storeSnapshotOnLocalZone",
         .use_dedicated_replication_server = "useDedicatedReplicationServer",
         .use_fips_endpoint = "useFipsEndpoint",
     };

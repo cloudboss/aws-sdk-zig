@@ -1136,9 +1136,14 @@ pub fn deserializeChecksum(allocator: std.mem.Allocator, reader: *aws.xml.Reader
     result.checksum_crc32 = null;
     result.checksum_crc32_c = null;
     result.checksum_crc64_nvme = null;
+    result.checksum_md5 = null;
     result.checksum_sha1 = null;
     result.checksum_sha256 = null;
+    result.checksum_sha512 = null;
     result.checksum_type = null;
+    result.checksum_xxhash128 = null;
+    result.checksum_xxhash3 = null;
+    result.checksum_xxhash64 = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1148,12 +1153,22 @@ pub fn deserializeChecksum(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                     result.checksum_crc32_c = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumCRC64NVME")) {
                     result.checksum_crc64_nvme = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumMD5")) {
+                    result.checksum_md5 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumSHA1")) {
                     result.checksum_sha1 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumSHA256")) {
                     result.checksum_sha256 = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumSHA512")) {
+                    result.checksum_sha512 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumType")) {
                     result.checksum_type = ChecksumType.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumXXHASH128")) {
+                    result.checksum_xxhash128 = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumXXHASH3")) {
+                    result.checksum_xxhash3 = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumXXHASH64")) {
+                    result.checksum_xxhash64 = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1211,9 +1226,14 @@ pub fn deserializeCopyObjectResult(allocator: std.mem.Allocator, reader: *aws.xm
     result.checksum_crc32 = null;
     result.checksum_crc32_c = null;
     result.checksum_crc64_nvme = null;
+    result.checksum_md5 = null;
     result.checksum_sha1 = null;
     result.checksum_sha256 = null;
+    result.checksum_sha512 = null;
     result.checksum_type = null;
+    result.checksum_xxhash128 = null;
+    result.checksum_xxhash3 = null;
+    result.checksum_xxhash64 = null;
     result.e_tag = null;
     result.last_modified = null;
     while (try reader.next()) |event| {
@@ -1225,12 +1245,22 @@ pub fn deserializeCopyObjectResult(allocator: std.mem.Allocator, reader: *aws.xm
                     result.checksum_crc32_c = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumCRC64NVME")) {
                     result.checksum_crc64_nvme = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumMD5")) {
+                    result.checksum_md5 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumSHA1")) {
                     result.checksum_sha1 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumSHA256")) {
                     result.checksum_sha256 = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumSHA512")) {
+                    result.checksum_sha512 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumType")) {
                     result.checksum_type = ChecksumType.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumXXHASH128")) {
+                    result.checksum_xxhash128 = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumXXHASH3")) {
+                    result.checksum_xxhash3 = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumXXHASH64")) {
+                    result.checksum_xxhash64 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ETag")) {
                     result.e_tag = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LastModified")) {
@@ -1251,8 +1281,13 @@ pub fn deserializeCopyPartResult(allocator: std.mem.Allocator, reader: *aws.xml.
     result.checksum_crc32 = null;
     result.checksum_crc32_c = null;
     result.checksum_crc64_nvme = null;
+    result.checksum_md5 = null;
     result.checksum_sha1 = null;
     result.checksum_sha256 = null;
+    result.checksum_sha512 = null;
+    result.checksum_xxhash128 = null;
+    result.checksum_xxhash3 = null;
+    result.checksum_xxhash64 = null;
     result.e_tag = null;
     result.last_modified = null;
     while (try reader.next()) |event| {
@@ -1264,10 +1299,20 @@ pub fn deserializeCopyPartResult(allocator: std.mem.Allocator, reader: *aws.xml.
                     result.checksum_crc32_c = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumCRC64NVME")) {
                     result.checksum_crc64_nvme = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumMD5")) {
+                    result.checksum_md5 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumSHA1")) {
                     result.checksum_sha1 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumSHA256")) {
                     result.checksum_sha256 = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumSHA512")) {
+                    result.checksum_sha512 = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumXXHASH128")) {
+                    result.checksum_xxhash128 = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumXXHASH3")) {
+                    result.checksum_xxhash3 = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumXXHASH64")) {
+                    result.checksum_xxhash64 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ETag")) {
                     result.e_tag = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LastModified")) {
@@ -2530,8 +2575,13 @@ pub fn deserializeObjectPart(allocator: std.mem.Allocator, reader: *aws.xml.Read
     result.checksum_crc32 = null;
     result.checksum_crc32_c = null;
     result.checksum_crc64_nvme = null;
+    result.checksum_md5 = null;
     result.checksum_sha1 = null;
     result.checksum_sha256 = null;
+    result.checksum_sha512 = null;
+    result.checksum_xxhash128 = null;
+    result.checksum_xxhash3 = null;
+    result.checksum_xxhash64 = null;
     result.part_number = null;
     result.size = null;
     while (try reader.next()) |event| {
@@ -2543,10 +2593,20 @@ pub fn deserializeObjectPart(allocator: std.mem.Allocator, reader: *aws.xml.Read
                     result.checksum_crc32_c = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumCRC64NVME")) {
                     result.checksum_crc64_nvme = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumMD5")) {
+                    result.checksum_md5 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumSHA1")) {
                     result.checksum_sha1 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumSHA256")) {
                     result.checksum_sha256 = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumSHA512")) {
+                    result.checksum_sha512 = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumXXHASH128")) {
+                    result.checksum_xxhash128 = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumXXHASH3")) {
+                    result.checksum_xxhash3 = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumXXHASH64")) {
+                    result.checksum_xxhash64 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PartNumber")) {
                     result.part_number = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "Size")) {
@@ -2675,8 +2735,13 @@ pub fn deserializePart(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !P
     result.checksum_crc32 = null;
     result.checksum_crc32_c = null;
     result.checksum_crc64_nvme = null;
+    result.checksum_md5 = null;
     result.checksum_sha1 = null;
     result.checksum_sha256 = null;
+    result.checksum_sha512 = null;
+    result.checksum_xxhash128 = null;
+    result.checksum_xxhash3 = null;
+    result.checksum_xxhash64 = null;
     result.e_tag = null;
     result.last_modified = null;
     result.part_number = null;
@@ -2690,10 +2755,20 @@ pub fn deserializePart(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !P
                     result.checksum_crc32_c = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumCRC64NVME")) {
                     result.checksum_crc64_nvme = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumMD5")) {
+                    result.checksum_md5 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumSHA1")) {
                     result.checksum_sha1 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ChecksumSHA256")) {
                     result.checksum_sha256 = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumSHA512")) {
+                    result.checksum_sha512 = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumXXHASH128")) {
+                    result.checksum_xxhash128 = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumXXHASH3")) {
+                    result.checksum_xxhash3 = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumXXHASH64")) {
+                    result.checksum_xxhash64 = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ETag")) {
                     result.e_tag = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LastModified")) {
@@ -4069,6 +4144,11 @@ pub fn serializeCompletedPart(allocator: std.mem.Allocator, buf: *std.ArrayList(
         try aws.xml.appendXmlEscaped(allocator, buf, v);
         try buf.appendSlice(allocator, "</ChecksumCRC64NVME>");
     }
+    if (value.checksum_md5) |v| {
+        try buf.appendSlice(allocator, "<ChecksumMD5>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</ChecksumMD5>");
+    }
     if (value.checksum_sha1) |v| {
         try buf.appendSlice(allocator, "<ChecksumSHA1>");
         try aws.xml.appendXmlEscaped(allocator, buf, v);
@@ -4078,6 +4158,26 @@ pub fn serializeCompletedPart(allocator: std.mem.Allocator, buf: *std.ArrayList(
         try buf.appendSlice(allocator, "<ChecksumSHA256>");
         try aws.xml.appendXmlEscaped(allocator, buf, v);
         try buf.appendSlice(allocator, "</ChecksumSHA256>");
+    }
+    if (value.checksum_sha512) |v| {
+        try buf.appendSlice(allocator, "<ChecksumSHA512>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</ChecksumSHA512>");
+    }
+    if (value.checksum_xxhash128) |v| {
+        try buf.appendSlice(allocator, "<ChecksumXXHASH128>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</ChecksumXXHASH128>");
+    }
+    if (value.checksum_xxhash3) |v| {
+        try buf.appendSlice(allocator, "<ChecksumXXHASH3>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</ChecksumXXHASH3>");
+    }
+    if (value.checksum_xxhash64) |v| {
+        try buf.appendSlice(allocator, "<ChecksumXXHASH64>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</ChecksumXXHASH64>");
     }
     if (value.e_tag) |v| {
         try buf.appendSlice(allocator, "<ETag>");

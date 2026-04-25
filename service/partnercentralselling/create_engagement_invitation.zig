@@ -27,7 +27,8 @@ pub const CreateEngagementInvitationInput = struct {
     /// the invitation's receiver, and a payload. The `Payload` can be the
     /// `OpportunityInvitation`, which includes detailed structures for sender
     /// contacts, partner responsibilities, customer information, and project
-    /// details.
+    /// details, or `LeadInvitation`, which includes structures for customer
+    /// information and interaction details.
     invitation: Invitation,
 
     pub const json_field_names = .{

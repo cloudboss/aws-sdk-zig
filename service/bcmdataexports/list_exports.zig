@@ -100,6 +100,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     const owned_message = try arena_alloc.dupe(u8, error_message);
     const owned_request_id = try arena_alloc.dupe(u8, "");
 
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "InternalServerException")) {
         return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
             .message = owned_message,

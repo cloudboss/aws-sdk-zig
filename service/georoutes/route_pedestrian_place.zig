@@ -8,7 +8,7 @@ pub const RoutePedestrianPlace = struct {
     /// Position provided in the request.
     original_position: ?[]const f64 = null,
 
-    /// Position defined as `[longitude, latitude]`.
+    /// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
     position: []const f64,
 
     /// Options to configure matching the provided position to a side of the street.

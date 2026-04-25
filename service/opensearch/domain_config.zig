@@ -6,6 +6,7 @@ const AutoTuneOptionsStatus = @import("auto_tune_options_status.zig").AutoTuneOp
 const ChangeProgressDetails = @import("change_progress_details.zig").ChangeProgressDetails;
 const ClusterConfigStatus = @import("cluster_config_status.zig").ClusterConfigStatus;
 const CognitoOptionsStatus = @import("cognito_options_status.zig").CognitoOptionsStatus;
+const DeploymentStrategyOptionsStatus = @import("deployment_strategy_options_status.zig").DeploymentStrategyOptionsStatus;
 const DomainEndpointOptionsStatus = @import("domain_endpoint_options_status.zig").DomainEndpointOptionsStatus;
 const EBSOptionsStatus = @import("ebs_options_status.zig").EBSOptionsStatus;
 const EncryptionAtRestOptionsStatus = @import("encryption_at_rest_options_status.zig").EncryptionAtRestOptionsStatus;
@@ -49,6 +50,9 @@ pub const DomainConfig = struct {
 
     /// Container for Amazon Cognito options for the domain.
     cognito_options: ?CognitoOptionsStatus = null,
+
+    /// Specifies `DeploymentStrategyOptions` for the domain.
+    deployment_strategy_options: ?DeploymentStrategyOptionsStatus = null,
 
     /// Additional options for the domain endpoint, such as whether to require HTTPS
     /// for all
@@ -112,6 +116,7 @@ pub const DomainConfig = struct {
         .change_progress_details = "ChangeProgressDetails",
         .cluster_config = "ClusterConfig",
         .cognito_options = "CognitoOptions",
+        .deployment_strategy_options = "DeploymentStrategyOptions",
         .domain_endpoint_options = "DomainEndpointOptions",
         .ebs_options = "EBSOptions",
         .encryption_at_rest_options = "EncryptionAtRestOptions",

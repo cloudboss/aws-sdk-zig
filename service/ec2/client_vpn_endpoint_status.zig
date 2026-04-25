@@ -19,6 +19,10 @@ pub const ClientVpnEndpointStatus = struct {
     /// * `deleted` - The Client VPN endpoint has been deleted. The Client VPN
     ///   endpoint cannot accept
     /// connections.
+    ///
+    /// * `pending` - The Client VPN endpoint has been created with a Transit
+    ///   Gateway configuration and is waiting for the Transit Gateway attachment to
+    ///   be accepted. The Client VPN endpoint cannot accept connections.
     code: ?ClientVpnEndpointStatusCode = null,
 
     /// A message about the status of the Client VPN endpoint.

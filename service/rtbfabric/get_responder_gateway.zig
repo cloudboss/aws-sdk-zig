@@ -4,6 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const GatewayType = @import("gateway_type.zig").GatewayType;
+const ListenerConfig = @import("listener_config.zig").ListenerConfig;
 const ManagedEndpointConfiguration = @import("managed_endpoint_configuration.zig").ManagedEndpointConfiguration;
 const Protocol = @import("protocol.zig").Protocol;
 const ResponderGatewayStatus = @import("responder_gateway_status.zig").ResponderGatewayStatus;
@@ -31,11 +33,20 @@ pub const GetResponderGatewayOutput = struct {
     /// The domain name of the responder gateway.
     domain_name: ?[]const u8 = null,
 
+    /// The external inbound endpoint for the responder gateway.
+    external_inbound_endpoint: ?[]const u8 = null,
+
     /// The unique identifier of the gateway.
     gateway_id: []const u8,
 
+    /// The type of gateway. Valid values are `EXTERNAL` or `INTERNAL`.
+    gateway_type: ?GatewayType = null,
+
     /// The count of inbound links for the responder gateway.
     inbound_links_count: ?i32 = null,
+
+    /// The listener configuration for the responder gateway.
+    listener_config: ?ListenerConfig = null,
 
     /// The configuration of the managed endpoint.
     managed_endpoint_configuration: ?ManagedEndpointConfiguration = null,
@@ -76,8 +87,11 @@ pub const GetResponderGatewayOutput = struct {
         .created_at = "createdAt",
         .description = "description",
         .domain_name = "domainName",
+        .external_inbound_endpoint = "externalInboundEndpoint",
         .gateway_id = "gatewayId",
+        .gateway_type = "gatewayType",
         .inbound_links_count = "inboundLinksCount",
+        .listener_config = "listenerConfig",
         .managed_endpoint_configuration = "managedEndpointConfiguration",
         .port = "port",
         .protocol = "protocol",

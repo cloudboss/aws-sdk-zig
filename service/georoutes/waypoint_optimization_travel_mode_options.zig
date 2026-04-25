@@ -3,10 +3,10 @@ const WaypointOptimizationTruckOptions = @import("waypoint_optimization_truck_op
 
 /// Travel mode related options for the provided travel mode.
 pub const WaypointOptimizationTravelModeOptions = struct {
-    /// Travel mode options when the provided travel mode is "Pedestrian"
+    /// Travel mode options when the provided travel mode is `Pedestrian`.
     pedestrian: ?WaypointOptimizationPedestrianOptions = null,
 
-    /// Travel mode options when the provided travel mode is "Truck"
+    /// Travel mode options when the provided travel mode is `Truck`.
     truck: ?WaypointOptimizationTruckOptions = null,
 
     pub const json_field_names = .{

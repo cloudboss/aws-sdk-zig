@@ -1,8 +1,7 @@
 const ScaleUnit = @import("scale_unit.zig").ScaleUnit;
 
 /// A floating-point percentage of the desired number of tasks to place and keep
-/// running
-/// in the task set.
+/// running in the task set.
 pub const Scale = struct {
     /// The unit of measure for the scale value.
     unit: ?ScaleUnit = null,

@@ -11,6 +11,7 @@ const NodegroupScalingConfig = @import("nodegroup_scaling_config.zig").Nodegroup
 const NodegroupStatus = @import("nodegroup_status.zig").NodegroupStatus;
 const Taint = @import("taint.zig").Taint;
 const NodegroupUpdateConfig = @import("nodegroup_update_config.zig").NodegroupUpdateConfig;
+const WarmPoolConfig = @import("warm_pool_config.zig").WarmPoolConfig;
 
 /// An object representing an Amazon EKS managed node group.
 pub const Nodegroup = struct {
@@ -132,6 +133,12 @@ pub const Nodegroup = struct {
     /// The Kubernetes version of the managed node group.
     version: ?[]const u8 = null,
 
+    /// The warm pool configuration attached to the node group. Amazon EKS manages
+    /// warm pools throughout the node group lifecycle using the
+    /// `AWSServiceRoleForAmazonEKSNodegroup` service-linked role to create, update,
+    /// and delete warm pool resources.
+    warm_pool_config: ?WarmPoolConfig = null,
+
     pub const json_field_names = .{
         .ami_type = "amiType",
         .capacity_type = "capacityType",
@@ -157,5 +164,6 @@ pub const Nodegroup = struct {
         .taints = "taints",
         .update_config = "updateConfig",
         .version = "version",
+        .warm_pool_config = "warmPoolConfig",
     };
 };

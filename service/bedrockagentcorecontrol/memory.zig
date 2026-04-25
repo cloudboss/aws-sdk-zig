@@ -1,5 +1,6 @@
 const MemoryStatus = @import("memory_status.zig").MemoryStatus;
 const MemoryStrategy = @import("memory_strategy.zig").MemoryStrategy;
+const StreamDeliveryResources = @import("stream_delivery_resources.zig").StreamDeliveryResources;
 
 /// Contains information about a memory resource.
 pub const Memory = struct {
@@ -36,6 +37,9 @@ pub const Memory = struct {
     /// The list of memory strategies associated with this memory.
     strategies: ?[]const MemoryStrategy = null,
 
+    /// Configuration for streaming memory record data to external resources.
+    stream_delivery_resources: ?StreamDeliveryResources = null,
+
     /// The timestamp when the memory was last updated.
     updated_at: i64,
 
@@ -51,6 +55,7 @@ pub const Memory = struct {
         .name = "name",
         .status = "status",
         .strategies = "strategies",
+        .stream_delivery_resources = "streamDeliveryResources",
         .updated_at = "updatedAt",
     };
 };

@@ -49,7 +49,7 @@ pub const Filter = struct {
     ///
     /// * Specify `Optimized` or `NotOptimized` if you specify the
     /// `name` parameter as `Finding` and you want to filter
-    /// results for Amazon EC2 Auto Scaling groups.
+    /// results for Auto Scaling groups.
     ///
     /// * Specify `Underprovisioned`, `Overprovisioned`, or
     /// `Optimized` if you specify the `name` parameter as

@@ -20,10 +20,8 @@ pub const DescribeServicesInput = struct {
     next_token: ?[]const u8 = null,
 
     /// The code for the service whose information you want to retrieve, such as
-    /// `AmazonEC2`.
-    /// You can use
-    /// the `ServiceCode` to filter the results in a `GetProducts` call.
-    /// To retrieve a list of all services, leave this blank.
+    /// `AmazonEC2`. You can use the `ServiceCode` to filter the results in a
+    /// `GetProducts` call. To retrieve a list of all services, leave this blank.
     service_code: ?[]const u8 = null,
 
     pub const json_field_names = .{

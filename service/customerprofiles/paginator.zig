@@ -10,7 +10,9 @@ const list_domain_object_types = @import("list_domain_object_types.zig");
 const list_event_streams = @import("list_event_streams.zig");
 const list_event_triggers = @import("list_event_triggers.zig");
 const list_object_type_attributes = @import("list_object_type_attributes.zig");
+const list_recommender_filters = @import("list_recommender_filters.zig");
 const list_recommender_recipes = @import("list_recommender_recipes.zig");
+const list_recommender_schemas = @import("list_recommender_schemas.zig");
 const list_recommenders = @import("list_recommenders.zig");
 const list_rule_based_matches = @import("list_rule_based_matches.zig");
 const list_segment_definitions = @import("list_segment_definitions.zig");
@@ -256,6 +258,46 @@ pub const ListObjectTypeAttributesPaginator = struct {
     }
 };
 
+pub const ListRecommenderFiltersPaginator = struct {
+    client: *Client,
+    params: list_recommender_filters.ListRecommenderFiltersInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_recommender_filters.ListRecommenderFiltersOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_recommender_filters.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
 pub const ListRecommenderRecipesPaginator = struct {
     client: *Client,
     params: list_recommender_recipes.ListRecommenderRecipesInput,
@@ -272,6 +314,46 @@ pub const ListRecommenderRecipesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_recommender_recipes.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListRecommenderSchemasPaginator = struct {
+    client: *Client,
+    params: list_recommender_schemas.ListRecommenderSchemasInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_recommender_schemas.ListRecommenderSchemasOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_recommender_schemas.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

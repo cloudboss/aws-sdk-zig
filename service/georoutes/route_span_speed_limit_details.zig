@@ -1,10 +1,10 @@
 /// Details about the speed limit corresponding to the span.
 ///
-/// **Unit**: `KilometersPerHour`
+/// **Unit**: `kilometers per hour`
 pub const RouteSpanSpeedLimitDetails = struct {
     /// Maximum speed.
     ///
-    /// **Unit**: `KilometersPerHour`
+    /// **Unit**: `kilometers per hour`
     max_speed: f64 = 0,
 
     /// If the span doesn't have a speed limit like the Autobahn.

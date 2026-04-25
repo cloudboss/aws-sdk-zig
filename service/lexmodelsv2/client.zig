@@ -20,6 +20,7 @@ const create_test_set_discrepancy_report = @import("create_test_set_discrepancy_
 const create_upload_url = @import("create_upload_url.zig");
 const delete_bot = @import("delete_bot.zig");
 const delete_bot_alias = @import("delete_bot_alias.zig");
+const delete_bot_analyzer_recommendation = @import("delete_bot_analyzer_recommendation.zig");
 const delete_bot_locale = @import("delete_bot_locale.zig");
 const delete_bot_replica = @import("delete_bot_replica.zig");
 const delete_bot_version = @import("delete_bot_version.zig");
@@ -35,6 +36,7 @@ const delete_test_set = @import("delete_test_set.zig");
 const delete_utterances = @import("delete_utterances.zig");
 const describe_bot = @import("describe_bot.zig");
 const describe_bot_alias = @import("describe_bot_alias.zig");
+const describe_bot_analyzer_recommendation = @import("describe_bot_analyzer_recommendation.zig");
 const describe_bot_locale = @import("describe_bot_locale.zig");
 const describe_bot_recommendation = @import("describe_bot_recommendation.zig");
 const describe_bot_replica = @import("describe_bot_replica.zig");
@@ -56,6 +58,7 @@ const get_test_execution_artifacts_url = @import("get_test_execution_artifacts_u
 const list_aggregated_utterances = @import("list_aggregated_utterances.zig");
 const list_bot_alias_replicas = @import("list_bot_alias_replicas.zig");
 const list_bot_aliases = @import("list_bot_aliases.zig");
+const list_bot_analyzer_history = @import("list_bot_analyzer_history.zig");
 const list_bot_locales = @import("list_bot_locales.zig");
 const list_bot_recommendations = @import("list_bot_recommendations.zig");
 const list_bot_replicas = @import("list_bot_replicas.zig");
@@ -85,11 +88,13 @@ const list_test_sets = @import("list_test_sets.zig");
 const list_utterance_analytics_data = @import("list_utterance_analytics_data.zig");
 const list_utterance_metrics = @import("list_utterance_metrics.zig");
 const search_associated_transcripts = @import("search_associated_transcripts.zig");
+const start_bot_analyzer = @import("start_bot_analyzer.zig");
 const start_bot_recommendation = @import("start_bot_recommendation.zig");
 const start_bot_resource_generation = @import("start_bot_resource_generation.zig");
 const start_import = @import("start_import.zig");
 const start_test_execution = @import("start_test_execution.zig");
 const start_test_set_generation = @import("start_test_set_generation.zig");
+const stop_bot_analyzer = @import("stop_bot_analyzer.zig");
 const stop_bot_recommendation = @import("stop_bot_recommendation.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
@@ -322,6 +327,17 @@ pub const Client = struct {
         return delete_bot_alias.execute(self, allocator, input, options);
     }
 
+    /// Permanently deletes the recommendations and analysis results for a specific
+    /// bot analysis request. This operation is provided for GDPR compliance and
+    /// cannot be undone.
+    ///
+    /// After deletion, the analysis results cannot be retrieved. The analysis
+    /// request ID will still appear in the history list, but attempting to describe
+    /// the recommendations will return a `ResourceNotFoundException`.
+    pub fn deleteBotAnalyzerRecommendation(self: *Self, allocator: std.mem.Allocator, input: delete_bot_analyzer_recommendation.DeleteBotAnalyzerRecommendationInput, options: CallOptions) !delete_bot_analyzer_recommendation.DeleteBotAnalyzerRecommendationOutput {
+        return delete_bot_analyzer_recommendation.execute(self, allocator, input, options);
+    }
+
     /// Removes a locale from a bot.
     ///
     /// When you delete a locale, all intents, slots, and slot types defined
@@ -433,6 +449,17 @@ pub const Client = struct {
     /// Get information about a specific bot alias.
     pub fn describeBotAlias(self: *Self, allocator: std.mem.Allocator, input: describe_bot_alias.DescribeBotAliasInput, options: CallOptions) !describe_bot_alias.DescribeBotAliasOutput {
         return describe_bot_alias.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the analysis results and recommendations for bot optimization. The
+    /// analysis must be in `Available` status before recommendations can be
+    /// retrieved.
+    ///
+    /// Recommendations are returned with pagination support. Each recommendation
+    /// includes the issue location, priority level, detailed description, and
+    /// proposed fix.
+    pub fn describeBotAnalyzerRecommendation(self: *Self, allocator: std.mem.Allocator, input: describe_bot_analyzer_recommendation.DescribeBotAnalyzerRecommendationInput, options: CallOptions) !describe_bot_analyzer_recommendation.DescribeBotAnalyzerRecommendationOutput {
+        return describe_bot_analyzer_recommendation.execute(self, allocator, input, options);
     }
 
     /// Describes the settings that a bot has for a specific locale.
@@ -572,6 +599,15 @@ pub const Client = struct {
     /// Gets a list of aliases for the specified bot.
     pub fn listBotAliases(self: *Self, allocator: std.mem.Allocator, input: list_bot_aliases.ListBotAliasesInput, options: CallOptions) !list_bot_aliases.ListBotAliasesOutput {
         return list_bot_aliases.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves a list of historical bot analysis executions for a specific bot.
+    /// You can filter the results by locale and bot version.
+    ///
+    /// The history includes all analysis executions regardless of their status,
+    /// allowing you to track past analyses and their outcomes.
+    pub fn listBotAnalyzerHistory(self: *Self, allocator: std.mem.Allocator, input: list_bot_analyzer_history.ListBotAnalyzerHistoryInput, options: CallOptions) !list_bot_analyzer_history.ListBotAnalyzerHistoryOutput {
+        return list_bot_analyzer_history.execute(self, allocator, input, options);
     }
 
     /// Gets a list of locales for the specified bot.
@@ -872,6 +908,17 @@ pub const Client = struct {
         return search_associated_transcripts.execute(self, allocator, input, options);
     }
 
+    /// Initiates an asynchronous analysis of your bot configuration using
+    /// AI-powered analysis to identify potential issues and recommend improvements
+    /// based on AWS best practices.
+    ///
+    /// The analysis examines your bot's configuration, including intents,
+    /// utterances, slots, and conversation flows, to provide actionable
+    /// recommendations for optimization.
+    pub fn startBotAnalyzer(self: *Self, allocator: std.mem.Allocator, input: start_bot_analyzer.StartBotAnalyzerInput, options: CallOptions) !start_bot_analyzer.StartBotAnalyzerOutput {
+        return start_bot_analyzer.execute(self, allocator, input, options);
+    }
+
     /// Use this to provide your transcript data, and to start the bot
     /// recommendation process.
     pub fn startBotRecommendation(self: *Self, allocator: std.mem.Allocator, input: start_bot_recommendation.StartBotRecommendationInput, options: CallOptions) !start_bot_recommendation.StartBotRecommendationOutput {
@@ -905,6 +952,12 @@ pub const Client = struct {
     /// The action to start the generation of test set.
     pub fn startTestSetGeneration(self: *Self, allocator: std.mem.Allocator, input: start_test_set_generation.StartTestSetGenerationInput, options: CallOptions) !start_test_set_generation.StartTestSetGenerationOutput {
         return start_test_set_generation.execute(self, allocator, input, options);
+    }
+
+    /// Cancels an ongoing bot analysis execution. Once stopped, the analysis cannot
+    /// be resumed and no recommendations will be generated.
+    pub fn stopBotAnalyzer(self: *Self, allocator: std.mem.Allocator, input: stop_bot_analyzer.StopBotAnalyzerInput, options: CallOptions) !stop_bot_analyzer.StopBotAnalyzerOutput {
+        return stop_bot_analyzer.execute(self, allocator, input, options);
     }
 
     /// Stop an already running Bot Recommendation request.
@@ -981,6 +1034,13 @@ pub const Client = struct {
         return update_test_set.execute(self, allocator, input, options);
     }
 
+    pub fn describeBotAnalyzerRecommendationPaginator(self: *Self, params: describe_bot_analyzer_recommendation.DescribeBotAnalyzerRecommendationInput) paginator.DescribeBotAnalyzerRecommendationPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listAggregatedUtterancesPaginator(self: *Self, params: list_aggregated_utterances.ListAggregatedUtterancesInput) paginator.ListAggregatedUtterancesPaginator {
         return .{
             .client = self,
@@ -996,6 +1056,13 @@ pub const Client = struct {
     }
 
     pub fn listBotAliasesPaginator(self: *Self, params: list_bot_aliases.ListBotAliasesInput) paginator.ListBotAliasesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listBotAnalyzerHistoryPaginator(self: *Self, params: list_bot_analyzer_history.ListBotAnalyzerHistoryInput) paginator.ListBotAnalyzerHistoryPaginator {
         return .{
             .client = self,
             .params = params,

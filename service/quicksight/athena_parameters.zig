@@ -2,6 +2,13 @@ const IdentityCenterConfiguration = @import("identity_center_configuration.zig")
 
 /// Parameters for Amazon Athena.
 pub const AthenaParameters = struct {
+    /// Use `ConsumerAccountRoleArn` to perform cross-account Athena access. This is
+    /// an IAM role ARN in the same AWS account as the Athena resources you want to
+    /// access. Provide this along with `RoleArn` to enable role-chaining, where
+    /// Amazon Quick Sight first assumes the `RoleArn` and then assumes the
+    /// `ConsumerAccountRoleArn` to access Athena resources.
+    consumer_account_role_arn: ?[]const u8 = null,
+
     /// An optional parameter that configures IAM Identity Center authentication to
     /// grant Quick Sight access to your workgroup.
     ///
@@ -21,6 +28,7 @@ pub const AthenaParameters = struct {
     work_group: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .consumer_account_role_arn = "ConsumerAccountRoleArn",
         .identity_center_configuration = "IdentityCenterConfiguration",
         .role_arn = "RoleArn",
         .work_group = "WorkGroup",

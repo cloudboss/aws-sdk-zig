@@ -23,6 +23,9 @@ pub const KeyspacesCellValue = union(enum) {
     decimal_t: ?[]const u8,
     /// A 64-bit double-precision floating point value.
     double_t: ?[]const u8,
+    /// A duration value with nanosecond precision, representing a period of time
+    /// encoded as 32-bit months, 32-bit days, and 64-bit nanoseconds.
+    duration_t: ?[]const u8,
     /// A 32-bit single-precision floating point value.
     float_t: ?[]const u8,
     /// An IP address value, either IPv4 or IPv6 format.
@@ -58,7 +61,7 @@ pub const KeyspacesCellValue = union(enum) {
     uuid_t: ?[]const u8,
     /// A UTF-8 encoded string value, functionally equivalent to text type.
     varchar_t: ?[]const u8,
-    /// A variable precision integer value with arbitrary length.
+    /// An integer value within the +/-10^38 range.
     varint_t: ?[]const u8,
 
     pub const json_field_names = .{
@@ -70,6 +73,7 @@ pub const KeyspacesCellValue = union(enum) {
         .date_t = "dateT",
         .decimal_t = "decimalT",
         .double_t = "doubleT",
+        .duration_t = "durationT",
         .float_t = "floatT",
         .inet_t = "inetT",
         .int_t = "intT",

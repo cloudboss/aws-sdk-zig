@@ -103,6 +103,9 @@ pub const ResourceType = enum {
     ipam_prefix_list_resolver,
     ipam_policy,
     ipam_prefix_list_resolver_target,
+    secondary_interface,
+    secondary_network,
+    secondary_subnet,
     capacity_manager_data_export,
     vpn_concentrator,
 
@@ -209,6 +212,9 @@ pub const ResourceType = enum {
         .ipam_prefix_list_resolver = "ipam-prefix-list-resolver",
         .ipam_policy = "ipam-policy",
         .ipam_prefix_list_resolver_target = "ipam-prefix-list-resolver-target",
+        .secondary_interface = "secondary-interface",
+        .secondary_network = "secondary-network",
+        .secondary_subnet = "secondary-subnet",
         .capacity_manager_data_export = "capacity-manager-data-export",
         .vpn_concentrator = "vpn-concentrator",
     };
@@ -317,6 +323,9 @@ pub const ResourceType = enum {
             .ipam_prefix_list_resolver => "ipam-prefix-list-resolver",
             .ipam_policy => "ipam-policy",
             .ipam_prefix_list_resolver_target => "ipam-prefix-list-resolver-target",
+            .secondary_interface => "secondary-interface",
+            .secondary_network => "secondary-network",
+            .secondary_subnet => "secondary-subnet",
             .capacity_manager_data_export => "capacity-manager-data-export",
             .vpn_concentrator => "vpn-concentrator",
         };

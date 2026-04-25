@@ -6,9 +6,9 @@ const ConfigurationType = @import("configuration_type.zig").ConfigurationType;
 /// For more information, see
 /// [
 /// Checkpoints for Fault
-/// Tolerance](https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing) in the
+/// Tolerance](https://nightlies.apache.org/flink/flink-docs-release-2.2/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing) in the
 /// [Apache Flink
-/// Documentation](https://nightlies.apache.org/flink/flink-docs-release-1.20/).
+/// Documentation](https://nightlies.apache.org/flink/flink-docs-release-2.2/).
 pub const CheckpointConfiguration = struct {
     /// Describes whether checkpointing is enabled for a Managed Service for Apache
     /// Flink application.
@@ -51,8 +51,8 @@ pub const CheckpointConfiguration = struct {
     /// `CheckpointInterval`, the application otherwise performs continual
     /// checkpoint
     /// operations. For more information, see [ Tuning
-    /// Checkpointing](https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/ops/state/large_state_tuning/#tuning-checkpointing) in the [Apache Flink
-    /// Documentation](https://nightlies.apache.org/flink/flink-docs-release-1.20/).
+    /// Checkpointing](https://nightlies.apache.org/flink/flink-docs-release-2.2/docs/ops/state/large_state_tuning/#tuning-checkpointing) in the [Apache Flink
+    /// Documentation](https://nightlies.apache.org/flink/flink-docs-release-2.2/).
     ///
     /// If `CheckpointConfiguration.ConfigurationType` is `DEFAULT`,
     /// the application will use a `MinPauseBetweenCheckpoints` value of 5000, even

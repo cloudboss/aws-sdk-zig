@@ -7,8 +7,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DisableOrganizationAdminAccountInput = struct {
     /// The Amazon Web Services Account ID for the organizations account to be
-    /// disabled as a GuardDuty delegated
-    /// administrator.
+    /// disabled as a GuardDuty delegated administrator.
     admin_account_id: []const u8,
 
     pub const json_field_names = .{

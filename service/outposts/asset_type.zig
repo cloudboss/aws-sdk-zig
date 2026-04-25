@@ -2,14 +2,26 @@ const std = @import("std");
 
 pub const AssetType = enum {
     compute,
+    storage,
+    powershelf,
+    @"switch",
+    networking,
 
     pub const json_field_names = .{
         .compute = "COMPUTE",
+        .storage = "STORAGE",
+        .powershelf = "POWERSHELF",
+        .@"switch" = "SWITCH",
+        .networking = "NETWORKING",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .compute => "COMPUTE",
+            .storage => "STORAGE",
+            .powershelf => "POWERSHELF",
+            .@"switch" => "SWITCH",
+            .networking => "NETWORKING",
         };
     }
 

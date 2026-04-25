@@ -12,8 +12,10 @@ pub const AssociateOriginationIdentityInput = struct {
     client_token: ?[]const u8 = null,
 
     /// The new two-character code, in ISO 3166-1 alpha-2 format, for the country or
-    /// region of the origination identity.
-    iso_country_code: []const u8,
+    /// region of the origination identity. This field is optional and is not
+    /// required for origination identity types that are not country-specific, such
+    /// as RCS agents.
+    iso_country_code: ?[]const u8 = null,
 
     /// The origination identity to use, such as PhoneNumberId, PhoneNumberArn,
     /// SenderId, or SenderIdArn. You can use DescribePhoneNumbers to find the

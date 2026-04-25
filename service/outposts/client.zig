@@ -5,6 +5,7 @@ const cancel_capacity_task = @import("cancel_capacity_task.zig");
 const cancel_order = @import("cancel_order.zig");
 const create_order = @import("create_order.zig");
 const create_outpost = @import("create_outpost.zig");
+const create_renewal = @import("create_renewal.zig");
 const create_site = @import("create_site.zig");
 const delete_outpost = @import("delete_outpost.zig");
 const delete_site = @import("delete_site.zig");
@@ -16,6 +17,7 @@ const get_outpost = @import("get_outpost.zig");
 const get_outpost_billing_information = @import("get_outpost_billing_information.zig");
 const get_outpost_instance_types = @import("get_outpost_instance_types.zig");
 const get_outpost_supported_instance_types = @import("get_outpost_supported_instance_types.zig");
+const get_renewal_pricing = @import("get_renewal_pricing.zig");
 const get_site = @import("get_site.zig");
 const get_site_address = @import("get_site_address.zig");
 const list_asset_instances = @import("list_asset_instances.zig");
@@ -89,6 +91,11 @@ pub const Client = struct {
         return create_outpost.execute(self, allocator, input, options);
     }
 
+    /// Creates a renewal contract for the specified Outpost.
+    pub fn createRenewal(self: *Self, allocator: std.mem.Allocator, input: create_renewal.CreateRenewalInput, options: CallOptions) !create_renewal.CreateRenewalOutput {
+        return create_renewal.execute(self, allocator, input, options);
+    }
+
     /// Creates a site for an Outpost.
     pub fn createSite(self: *Self, allocator: std.mem.Allocator, input: create_site.CreateSiteInput, options: CallOptions) !create_site.CreateSiteOutput {
         return create_site.execute(self, allocator, input, options);
@@ -156,6 +163,11 @@ pub const Client = struct {
     /// cannot be launched with the current Outpost capacity configuration.
     pub fn getOutpostSupportedInstanceTypes(self: *Self, allocator: std.mem.Allocator, input: get_outpost_supported_instance_types.GetOutpostSupportedInstanceTypesInput, options: CallOptions) !get_outpost_supported_instance_types.GetOutpostSupportedInstanceTypesOutput {
         return get_outpost_supported_instance_types.execute(self, allocator, input, options);
+    }
+
+    /// Gets all available renewal pricing options for the specified Outpost.
+    pub fn getRenewalPricing(self: *Self, allocator: std.mem.Allocator, input: get_renewal_pricing.GetRenewalPricingInput, options: CallOptions) !get_renewal_pricing.GetRenewalPricingOutput {
+        return get_renewal_pricing.execute(self, allocator, input, options);
     }
 
     /// Gets information about the specified Outpost site.

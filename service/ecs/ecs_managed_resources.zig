@@ -5,8 +5,8 @@ const ManagedMetricAlarm = @import("managed_metric_alarm.zig").ManagedMetricAlar
 const ManagedSecurityGroup = @import("managed_security_group.zig").ManagedSecurityGroup;
 
 /// Represents the Amazon Web Services resources managed by Amazon ECS for an
-/// Express service, including ingress
-/// paths, auto-scaling policies, metric alarms, and security groups.
+/// Express service, including ingress paths, auto-scaling policies, metric
+/// alarms, and security groups.
 pub const ECSManagedResources = struct {
     /// The auto-scaling configuration and policies for the Express service.
     auto_scaling: ?ManagedAutoScaling = null,

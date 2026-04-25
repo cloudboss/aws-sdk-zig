@@ -17,6 +17,12 @@ pub const LogGroup = struct {
     /// version that doesn't include a trailing `:*`.
     arn: ?[]const u8 = null,
 
+    /// Indicates whether bearer token authentication is enabled for this log group.
+    /// When enabled,
+    /// bearer token authentication is allowed on operations until it is explicitly
+    /// disabled.
+    bearer_token_authentication_enabled: ?bool = null,
+
     /// The creation time of the log group, expressed as the number of milliseconds
     /// after Jan
     /// 1, 1970 00:00:00 UTC.
@@ -93,6 +99,7 @@ pub const LogGroup = struct {
 
     pub const json_field_names = .{
         .arn = "arn",
+        .bearer_token_authentication_enabled = "bearerTokenAuthenticationEnabled",
         .creation_time = "creationTime",
         .data_protection_status = "dataProtectionStatus",
         .deletion_protection_enabled = "deletionProtectionEnabled",

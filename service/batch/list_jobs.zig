@@ -16,11 +16,15 @@ pub const ListJobsInput = struct {
 
     /// The filter to apply to the query. Only one filter can be used at a time.
     /// When the filter
-    /// is used, `jobStatus` is ignored. The filter doesn't apply to child jobs in
-    /// an array
+    /// is used, `jobStatus` is ignored with the exception that `SHARE_IDENTIFIER`
+    /// and `jobStatus` can be used together. The filter doesn't apply to child jobs
+    /// in an array
     /// or multi-node parallel (MNP) jobs. The results are sorted by the `createdAt`
     /// field,
     /// with the most recent jobs being first.
+    ///
+    /// The `SHARE_IDENTIFIER` filter and the `jobStatus` field can be used together
+    /// to filter results.
     ///
     /// **JOB_NAME**
     ///
@@ -67,6 +71,10 @@ pub const ListJobsInput = struct {
     /// corresponds to the `createdAt` value. The value is a string representation
     /// of
     /// the number of milliseconds since 00:00:00 UTC (midnight) on January 1, 1970.
+    ///
+    /// **SHARE_IDENTIFIER**
+    ///
+    /// The value for the filter is the fairshare scheduling share identifier.
     filters: ?[]const KeyValuesPair = null,
 
     /// The name or full Amazon Resource Name (ARN) of the job queue used to list
@@ -76,7 +84,9 @@ pub const ListJobsInput = struct {
     /// The job status used to filter jobs in the specified queue. If the `filters`
     /// parameter is specified, the `jobStatus` parameter is ignored and jobs with
     /// any
-    /// status are returned. If you don't specify a status, only `RUNNING` jobs are
+    /// status are returned. The exception is the `SHARE_IDENTIFIER` filter and
+    /// `jobStatus` can be used together. If you don't specify a status, only
+    /// `RUNNING` jobs are
     /// returned.
     ///
     /// Array job parents are updated to `PENDING` when any child job is updated to

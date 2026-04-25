@@ -4,6 +4,7 @@ const AccelerationSettings = @import("acceleration_settings.zig").AccelerationSe
 const AccelerationStatus = @import("acceleration_status.zig").AccelerationStatus;
 const BillingTagsSource = @import("billing_tags_source.zig").BillingTagsSource;
 const JobPhase = @import("job_phase.zig").JobPhase;
+const ElementalInferenceConfiguration = @import("elemental_inference_configuration.zig").ElementalInferenceConfiguration;
 const HopDestination = @import("hop_destination.zig").HopDestination;
 const JobMessages = @import("job_messages.zig").JobMessages;
 const OutputGroupDetail = @import("output_group_detail.zig").OutputGroupDetail;
@@ -58,6 +59,9 @@ pub const Job = struct {
 
     /// A job's phase can be PROBING, TRANSCODING OR UPLOADING
     current_phase: ?JobPhase = null,
+
+    /// The Elemental Inference configuration used in this job.
+    elemental_inference_configuration: ?ElementalInferenceConfiguration = null,
 
     /// Error code for the job
     error_code: ?i32 = null,
@@ -176,6 +180,7 @@ pub const Job = struct {
         .client_request_token = "ClientRequestToken",
         .created_at = "CreatedAt",
         .current_phase = "CurrentPhase",
+        .elemental_inference_configuration = "ElementalInferenceConfiguration",
         .error_code = "ErrorCode",
         .error_message = "ErrorMessage",
         .hop_destinations = "HopDestinations",

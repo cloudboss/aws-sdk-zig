@@ -141,6 +141,7 @@ const post_lineage_event = @import("post_lineage_event.zig");
 const post_time_series_data_points = @import("post_time_series_data_points.zig");
 const put_data_export_configuration = @import("put_data_export_configuration.zig");
 const put_environment_blueprint_configuration = @import("put_environment_blueprint_configuration.zig");
+const query_graph = @import("query_graph.zig");
 const reject_predictions = @import("reject_predictions.zig");
 const reject_subscription_request = @import("reject_subscription_request.zig");
 const remove_entity_owner = @import("remove_entity_owner.zig");
@@ -1309,6 +1310,11 @@ pub const Client = struct {
         return put_environment_blueprint_configuration.execute(self, allocator, input, options);
     }
 
+    /// Queries entities in the graph store.
+    pub fn queryGraph(self: *Self, allocator: std.mem.Allocator, input: query_graph.QueryGraphInput, options: CallOptions) !query_graph.QueryGraphOutput {
+        return query_graph.execute(self, allocator, input, options);
+    }
+
     /// Rejects automatically generated business-friendly metadata for your Amazon
     /// DataZone assets.
     pub fn rejectPredictions(self: *Self, allocator: std.mem.Allocator, input: reject_predictions.RejectPredictionsInput, options: CallOptions) !reject_predictions.RejectPredictionsOutput {
@@ -1843,6 +1849,13 @@ pub const Client = struct {
     }
 
     pub fn listTimeSeriesDataPointsPaginator(self: *Self, params: list_time_series_data_points.ListTimeSeriesDataPointsInput) paginator.ListTimeSeriesDataPointsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn queryGraphPaginator(self: *Self, params: query_graph.QueryGraphInput) paginator.QueryGraphPaginator {
         return .{
             .client = self,
             .params = params,

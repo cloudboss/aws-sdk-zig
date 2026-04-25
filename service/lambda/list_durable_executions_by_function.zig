@@ -8,7 +8,7 @@ const ExecutionStatus = @import("execution_status.zig").ExecutionStatus;
 const Execution = @import("execution.zig").Execution;
 
 pub const ListDurableExecutionsByFunctionInput = struct {
-    /// Filter executions by name. Only executions with names that contain this
+    /// Filter executions by name. Only executions with names that matches this
     /// string are returned.
     durable_execution_name: ?[]const u8 = null,
 
@@ -420,6 +420,24 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ResourceNotReadyException")) {
         return .{ .arena = arena, .kind = .{ .resource_not_ready_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "S3FilesMountConnectivityException")) {
+        return .{ .arena = arena, .kind = .{ .s3_files_mount_connectivity_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "S3FilesMountFailureException")) {
+        return .{ .arena = arena, .kind = .{ .s3_files_mount_failure_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "S3FilesMountTimeoutException")) {
+        return .{ .arena = arena, .kind = .{ .s3_files_mount_timeout_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

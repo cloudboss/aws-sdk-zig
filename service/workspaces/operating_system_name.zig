@@ -12,6 +12,7 @@ pub const OperatingSystemName = enum {
     windows_server_2016,
     windows_server_2019,
     windows_server_2022,
+    windows_server_2025,
     rhel_8,
     rocky_8,
 
@@ -27,6 +28,7 @@ pub const OperatingSystemName = enum {
         .windows_server_2016 = "WINDOWS_SERVER_2016",
         .windows_server_2019 = "WINDOWS_SERVER_2019",
         .windows_server_2022 = "WINDOWS_SERVER_2022",
+        .windows_server_2025 = "WINDOWS_SERVER_2025",
         .rhel_8 = "RHEL_8",
         .rocky_8 = "ROCKY_8",
     };
@@ -44,6 +46,7 @@ pub const OperatingSystemName = enum {
             .windows_server_2016 => "WINDOWS_SERVER_2016",
             .windows_server_2019 => "WINDOWS_SERVER_2019",
             .windows_server_2022 => "WINDOWS_SERVER_2022",
+            .windows_server_2025 => "WINDOWS_SERVER_2025",
             .rhel_8 => "RHEL_8",
             .rocky_8 => "ROCKY_8",
         };

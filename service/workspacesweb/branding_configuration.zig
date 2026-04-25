@@ -28,7 +28,7 @@ pub const BrandingConfiguration = struct {
 
     /// Metadata for the wallpaper image file, including the MIME type, file
     /// extension, and upload timestamp.
-    wallpaper: ImageMetadata,
+    wallpaper: ?ImageMetadata = null,
 
     pub const json_field_names = .{
         .color_theme = "colorTheme",

@@ -1,6 +1,5 @@
 /// Error for a request in the batch for BatchStartViewerSessionRevocation. Each
-/// error is
-/// related to a specific channel-ARN and viewer-ID pair.
+/// error is related to a specific channel-ARN and viewer-ID pair.
 pub const BatchStartViewerSessionRevocationError = struct {
     /// Channel ARN.
     channel_arn: []const u8,

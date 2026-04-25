@@ -11,6 +11,7 @@ const IpPermission = @import("ip_permission.zig").IpPermission;
 const LocationConfiguration = @import("location_configuration.zig").LocationConfiguration;
 const LogConfiguration = @import("log_configuration.zig").LogConfiguration;
 const ProtectionPolicy = @import("protection_policy.zig").ProtectionPolicy;
+const PlayerGatewayMode = @import("player_gateway_mode.zig").PlayerGatewayMode;
 const Tag = @import("tag.zig").Tag;
 const ContainerFleet = @import("container_fleet.zig").ContainerFleet;
 
@@ -234,6 +235,33 @@ pub const CreateContainerFleetInput = struct {
     /// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html](https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html) resource.
     per_instance_container_group_definition_name: ?[]const u8 = null,
 
+    /// Configures player gateway for your fleet. Player gateway provides benefits
+    /// such as DDoS protection by rate limiting and validating traﬃc before it
+    /// reaches game servers, hiding game server IP addresses from players, and
+    /// providing updated endpoints when relay endpoints become unhealthy.
+    ///
+    /// **How it works:** When enabled, game clients connect to relay endpoints
+    /// instead of to your game servers. Player gateway validates player gateway
+    /// tokens and routes traffic to the appropriate game server. Your game backend
+    /// calls
+    /// [GetPlayerConnectionDetails](https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetPlayerConnectionDetails.html) to retrieve relay endpoints and player gateway tokens for your game clients. To learn more about this topic, see [DDoS protection with Amazon GameLift Servers player gateway](https://docs.aws.amazon.com/gameliftservers/latest/developerguide/ddos-protection-intro.html).
+    ///
+    /// Possible values include:
+    ///
+    /// * `DISABLED` (default) -- Game clients connect to the game server endpoint.
+    ///   Use this when you do not intend to integrate your game with player
+    ///   gateway.
+    ///
+    /// * `ENABLED` -- Player gateway is available in fleet locations where it is
+    ///   supported. Your game backend can call
+    ///   [GetPlayerConnectionDetails](https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetPlayerConnectionDetails.html) to obtain a player gateway token and endpoints for game clients.
+    ///
+    /// * `REQUIRED` -- Player gateway is available in fleet locations where it is
+    ///   supported, and the fleet can only use locations that support this feature.
+    ///   Attempting to add a remote location to your fleet which does not support
+    ///   player gateway will result in an `InvalidRequestException`.
+    player_gateway_mode: ?PlayerGatewayMode = null,
+
     /// A list of labels to assign to the new fleet resource. Tags are
     /// developer-defined
     /// key-value pairs. Tagging Amazon Web Services resources are useful for
@@ -260,6 +288,7 @@ pub const CreateContainerFleetInput = struct {
         .metric_groups = "MetricGroups",
         .new_game_session_protection_policy = "NewGameSessionProtectionPolicy",
         .per_instance_container_group_definition_name = "PerInstanceContainerGroupDefinitionName",
+        .player_gateway_mode = "PlayerGatewayMode",
         .tags = "Tags",
     };
 };

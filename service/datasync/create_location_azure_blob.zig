@@ -65,7 +65,9 @@ pub const CreateLocationAzureBlobInput = struct {
     /// location access credentials.
     ///
     /// Make sure that DataSync has permission to access the KMS key that
-    /// you specify.
+    /// you specify. For more information, see [
+    /// Using a service-managed secret encrypted with a custom KMS
+    /// key](https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key).
     ///
     /// You can use either `CmkSecretConfig` (with `SasConfiguration`) or
     /// `CustomSecretConfig` (without `SasConfiguration`) to provide
@@ -83,7 +85,9 @@ pub const CreateLocationAzureBlobInput = struct {
     /// plain text, in Secrets
     /// Manager. This configuration includes the secret ARN, and the ARN for an IAM
     /// role
-    /// that provides access to the secret.
+    /// that provides access to the secret. For more information, see [
+    /// Using a secret that you
+    /// manage](https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key).
     ///
     /// You can use either `CmkSecretConfig` (with `SasConfiguration`) or
     /// `CustomSecretConfig` (without `SasConfiguration`) to provide

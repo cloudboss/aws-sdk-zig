@@ -10,23 +10,19 @@ const Failure = @import("failure.zig").Failure;
 
 pub const UpdateContainerInstancesStateInput = struct {
     /// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-    /// the
-    /// container instance to update. If you do not specify a cluster, the default
-    /// cluster is
-    /// assumed.
+    /// the container instance to update. If you do not specify a cluster, the
+    /// default cluster is assumed.
     cluster: ?[]const u8 = null,
 
     /// A list of up to 10 container instance IDs or full ARN entries.
     container_instances: []const []const u8,
 
     /// The container instance state to update the container instance with. The only
-    /// valid
-    /// values for this action are `ACTIVE` and `DRAINING`. A container
+    /// valid values for this action are `ACTIVE` and `DRAINING`. A container
     /// instance can only be updated to `DRAINING` status once it has reached an
     /// `ACTIVE` state. If a container instance is in `REGISTERING`,
-    /// `DEREGISTERING`, or `REGISTRATION_FAILED` state you can
-    /// describe the container instance but can't update the container instance
-    /// state.
+    /// `DEREGISTERING`, or `REGISTRATION_FAILED` state you can describe the
+    /// container instance but can't update the container instance state.
     status: ContainerInstanceStatus,
 
     pub const json_field_names = .{
@@ -173,6 +169,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

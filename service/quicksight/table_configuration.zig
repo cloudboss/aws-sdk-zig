@@ -6,6 +6,7 @@ const TablePaginatedReportOptions = @import("table_paginated_report_options.zig"
 const TableSortConfiguration = @import("table_sort_configuration.zig").TableSortConfiguration;
 const TableInlineVisualization = @import("table_inline_visualization.zig").TableInlineVisualization;
 const TableOptions = @import("table_options.zig").TableOptions;
+const TooltipOptions = @import("tooltip_options.zig").TooltipOptions;
 const TotalOptions = @import("total_options.zig").TotalOptions;
 
 /// The configuration for a `TableVisual`.
@@ -35,6 +36,8 @@ pub const TableConfiguration = struct {
     /// The table options for a table visual.
     table_options: ?TableOptions = null,
 
+    tooltip: ?TooltipOptions = null,
+
     /// The total options for a table visual.
     total_options: ?TotalOptions = null,
 
@@ -47,6 +50,7 @@ pub const TableConfiguration = struct {
         .sort_configuration = "SortConfiguration",
         .table_inline_visualizations = "TableInlineVisualizations",
         .table_options = "TableOptions",
+        .tooltip = "Tooltip",
         .total_options = "TotalOptions",
     };
 };

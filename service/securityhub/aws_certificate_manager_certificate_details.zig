@@ -14,7 +14,7 @@ pub const AwsCertificateManagerCertificateDetails = struct {
     /// Indicates when the certificate was requested.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     created_at: ?[]const u8 = null,
 
@@ -54,7 +54,7 @@ pub const AwsCertificateManagerCertificateDetails = struct {
     /// `IMPORTED`.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     imported_at: ?[]const u8 = null,
 
@@ -67,7 +67,7 @@ pub const AwsCertificateManagerCertificateDetails = struct {
     /// `AMAZON_ISSUED`.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     issued_at: ?[]const u8 = null,
 
@@ -88,14 +88,14 @@ pub const AwsCertificateManagerCertificateDetails = struct {
     /// The time after which the certificate becomes invalid.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     not_after: ?[]const u8 = null,
 
     /// The time before which the certificate is not valid.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     not_before: ?[]const u8 = null,
 

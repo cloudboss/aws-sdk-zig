@@ -10,20 +10,17 @@ const Failure = @import("failure.zig").Failure;
 
 pub const DescribeClustersInput = struct {
     /// A list of up to 100 cluster names or full cluster Amazon Resource Name (ARN)
-    /// entries.
-    /// If you do not specify a cluster, the default cluster is assumed.
+    /// entries. If you do not specify a cluster, the default cluster is assumed.
     clusters: ?[]const []const u8 = null,
 
     /// Determines whether to include additional information about the clusters in
-    /// the
-    /// response. If this field is omitted, this information isn't included.
+    /// the response. If this field is omitted, this information isn't included.
     ///
     /// If `ATTACHMENTS` is specified, the attachments for the container instances
     /// or tasks within the cluster are included, for example the capacity
     /// providers.
     ///
-    /// If `SETTINGS` is specified, the settings for the cluster are
-    /// included.
+    /// If `SETTINGS` is specified, the settings for the cluster are included.
     ///
     /// If `CONFIGURATIONS` is specified, the configuration for the cluster is
     /// included.
@@ -178,6 +175,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

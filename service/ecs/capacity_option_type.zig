@@ -3,16 +3,19 @@ const std = @import("std");
 pub const CapacityOptionType = enum {
     on_demand,
     spot,
+    reserved,
 
     pub const json_field_names = .{
         .on_demand = "ON_DEMAND",
         .spot = "SPOT",
+        .reserved = "RESERVED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .on_demand => "ON_DEMAND",
             .spot => "SPOT",
+            .reserved => "RESERVED",
         };
     }
 

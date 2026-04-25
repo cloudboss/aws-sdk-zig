@@ -10,26 +10,21 @@ const Failure = @import("failure.zig").Failure;
 
 pub const DescribeContainerInstancesInput = struct {
     /// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-    /// the
-    /// container instances to describe. If you do not specify a cluster, the
-    /// default cluster is
-    /// assumed. This parameter is required if the container instance or container
-    /// instances you
-    /// are describing were launched in any cluster other than the default cluster.
+    /// the container instances to describe. If you do not specify a cluster, the
+    /// default cluster is assumed. This parameter is required if the container
+    /// instance or container instances you are describing were launched in any
+    /// cluster other than the default cluster.
     cluster: ?[]const u8 = null,
 
     /// A list of up to 100 container instance IDs or full Amazon Resource Name
-    /// (ARN)
-    /// entries.
+    /// (ARN) entries.
     container_instances: []const []const u8,
 
     /// Specifies whether you want to see the resource tags for the container
-    /// instance. If
-    /// `TAGS` is specified, the tags are included in the response. If
-    /// `CONTAINER_INSTANCE_HEALTH` is specified, the container instance health
-    /// is included in the response. If this field is omitted, tags and container
-    /// instance
-    /// health status aren't included in the response.
+    /// instance. If `TAGS` is specified, the tags are included in the response. If
+    /// `CONTAINER_INSTANCE_HEALTH` is specified, the container instance health is
+    /// included in the response. If this field is omitted, tags and container
+    /// instance health status aren't included in the response.
     include: ?[]const ContainerInstanceField = null,
 
     pub const json_field_names = .{
@@ -176,6 +171,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

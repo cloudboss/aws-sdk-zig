@@ -3,6 +3,7 @@ const aws = @import("aws");
 const CRUpdateAllocationStrategy = @import("cr_update_allocation_strategy.zig").CRUpdateAllocationStrategy;
 const Ec2Configuration = @import("ec_2_configuration.zig").Ec2Configuration;
 const LaunchTemplateSpecification = @import("launch_template_specification.zig").LaunchTemplateSpecification;
+const ComputeScalingPolicy = @import("compute_scaling_policy.zig").ComputeScalingPolicy;
 const CRType = @import("cr_type.zig").CRType;
 
 /// An object that represents the attributes of a compute environment that can
@@ -114,7 +115,8 @@ pub const ComputeResourceUpdate = struct {
     /// Provides information used to select Amazon Machine Images (AMIs) for Amazon
     /// EC2 instances in the
     /// compute environment. If `Ec2Configuration` isn't specified, the default is
-    /// `ECS_AL2`.
+    /// `ECS_AL2023` for EC2 (ECS) compute environments and `EKS_AL2023` for EKS
+    /// compute environments.
     ///
     /// When updating a compute environment, changing this setting requires an
     /// infrastructure update
@@ -169,9 +171,9 @@ pub const ComputeResourceUpdate = struct {
     /// environment uses A1 instance types,
     /// the compute resource AMI that you choose must support ARM instances. Amazon
     /// ECS vends both x86 and ARM versions of the
-    /// Amazon ECS-optimized Amazon Linux 2 AMI. For more information, see [Amazon
-    /// ECS-optimized
-    /// Amazon Linux 2
+    /// Amazon ECS-optimized Amazon Linux 2023 AMI. For more information, see
+    /// [Amazon ECS-optimized
+    /// Amazon Linux 2023
     /// AMI](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#ecs-optimized-ami-linux-variants.html)
     /// in the *Amazon Elastic Container Service Developer Guide*.
     image_id: ?[]const u8 = null,
@@ -335,6 +337,12 @@ pub const ComputeResourceUpdate = struct {
     /// resources. Don't specify it.
     placement_group: ?[]const u8 = null,
 
+    /// The scaling policy configuration for the compute environment.
+    ///
+    /// This parameter isn't applicable to jobs that are running on Fargate
+    /// resources. Don't specify it.
+    scaling_policy: ?ComputeScalingPolicy = null,
+
     /// The Amazon EC2 security groups that are associated with instances launched
     /// in the compute
     /// environment. This parameter is required for Fargate compute resources, where
@@ -457,6 +465,7 @@ pub const ComputeResourceUpdate = struct {
         .maxv_cpus = "maxvCpus",
         .minv_cpus = "minvCpus",
         .placement_group = "placementGroup",
+        .scaling_policy = "scalingPolicy",
         .security_group_ids = "securityGroupIds",
         .subnets = "subnets",
         .tags = "tags",

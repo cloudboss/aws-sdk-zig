@@ -8,19 +8,14 @@ const Attribute = @import("attribute.zig").Attribute;
 
 pub const DeleteAttributesInput = struct {
     /// The attributes to delete from your resource. You can specify up to 10
-    /// attributes for
-    /// each request. For custom attributes, specify the attribute name and target
-    /// ID, but don't
-    /// specify the value. If you specify the target ID using the short form, you
-    /// must also
-    /// specify the target type.
+    /// attributes for each request. For custom attributes, specify the attribute
+    /// name and target ID, but don't specify the value. If you specify the target
+    /// ID using the short form, you must also specify the target type.
     attributes: []const Attribute,
 
     /// The short name or full Amazon Resource Name (ARN) of the cluster that
-    /// contains the
-    /// resource to delete attributes. If you do not specify a cluster, the default
-    /// cluster is
-    /// assumed.
+    /// contains the resource to delete attributes. If you do not specify a cluster,
+    /// the default cluster is assumed.
     cluster: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -163,6 +158,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

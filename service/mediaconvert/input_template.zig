@@ -13,6 +13,7 @@ const InputFilterEnable = @import("input_filter_enable.zig").InputFilterEnable;
 const ImageInserter = @import("image_inserter.zig").ImageInserter;
 const InputClipping = @import("input_clipping.zig").InputClipping;
 const InputScanType = @import("input_scan_type.zig").InputScanType;
+const MultiViewSettings = @import("multi_view_settings.zig").MultiViewSettings;
 const InputPsiControl = @import("input_psi_control.zig").InputPsiControl;
 const InputTimecodeSource = @import("input_timecode_source.zig").InputTimecodeSource;
 const VideoOverlay = @import("video_overlay.zig").VideoOverlay;
@@ -127,6 +128,14 @@ pub const InputTemplate = struct {
     /// interlaced. Doing so creates horizontal interlacing artifacts.
     input_scan_type: ?InputScanType = null,
 
+    /// Specify the enhancement layer input video file path for Multi View outputs.
+    /// The base layer input is treated as the left eye and this Multi View input is
+    /// treated as the right eye. Only one Multi View input is currently supported.
+    /// MediaConvert encodes both views into a single MV-HEVC output codec. When you
+    /// add MultiViewSettings to your job, you can only produce Multi View outputs.
+    /// Adding any other codec output to the same job is not supported.
+    multi_view_settings: ?[]const MultiViewSettings = null,
+
     /// Use Selection placement to define the video area in your output frame. The
     /// area outside of the rectangle that you specify here is black. If you specify
     /// a value here, it will override any value that you specify in the output
@@ -190,6 +199,7 @@ pub const InputTemplate = struct {
         .image_inserter = "ImageInserter",
         .input_clippings = "InputClippings",
         .input_scan_type = "InputScanType",
+        .multi_view_settings = "MultiViewSettings",
         .position = "Position",
         .program_number = "ProgramNumber",
         .psi_control = "PsiControl",

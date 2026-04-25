@@ -33,6 +33,12 @@ pub const DescribeLaunchTemplatesInput = struct {
     ///   tag value.
     filters: ?[]const Filter = null,
 
+    /// Indicates whether to include managed resources in the output. If this
+    /// parameter is set to `true`, the output includes resources that are managed
+    /// by Amazon Web Services services, even if managed resource visibility is set
+    /// to hidden.
+    include_managed_resources: ?bool = null,
+
     /// One or more launch template IDs.
     launch_template_ids: ?[]const []const u8 = null,
 
@@ -120,6 +126,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeLaunchTemplates
                 }
             }
         }
+    }
+    if (input.include_managed_resources) |v| {
+        try body_buf.appendSlice(allocator, "&IncludeManagedResources=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.launch_template_ids) |list| {
         for (list, 0..) |item, idx| {

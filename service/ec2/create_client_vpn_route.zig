@@ -45,7 +45,10 @@ pub const CreateClientVpnRouteInput = struct {
     ///
     /// Alternatively, if you're adding a route for the local network, specify
     /// `local`.
-    target_vpc_subnet_id: []const u8,
+    ///
+    /// This parameter is required for VPC-based Client VPN endpoints. For Transit
+    /// Gateway-based endpoints, this parameter is not required.
+    target_vpc_subnet_id: ?[]const u8 = null,
 };
 
 pub const CreateClientVpnRouteOutput = struct {
@@ -104,8 +107,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateClientVpnRouteInp
         try body_buf.appendSlice(allocator, "&DryRun=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
-    try body_buf.appendSlice(allocator, "&TargetVpcSubnetId=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, input.target_vpc_subnet_id);
+    if (input.target_vpc_subnet_id) |v| {
+        try body_buf.appendSlice(allocator, "&TargetVpcSubnetId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
 
     const body = try body_buf.toOwnedSlice(allocator);
 

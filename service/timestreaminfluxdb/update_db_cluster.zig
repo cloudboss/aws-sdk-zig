@@ -7,6 +7,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const DbInstanceType = @import("db_instance_type.zig").DbInstanceType;
 const FailoverMode = @import("failover_mode.zig").FailoverMode;
 const LogDeliveryConfiguration = @import("log_delivery_configuration.zig").LogDeliveryConfiguration;
+const MaintenanceSchedule = @import("maintenance_schedule.zig").MaintenanceSchedule;
 const ClusterStatus = @import("cluster_status.zig").ClusterStatus;
 
 pub const UpdateDbClusterInput = struct {
@@ -25,6 +26,10 @@ pub const UpdateDbClusterInput = struct {
     /// The log delivery configuration to apply to the DB cluster.
     log_delivery_configuration: ?LogDeliveryConfiguration = null,
 
+    /// Specifies the maintenance schedule for the DB cluster, including the
+    /// preferred maintenance window and timezone.
+    maintenance_schedule: ?MaintenanceSchedule = null,
+
     /// Update the DB cluster to use the specified port.
     port: ?i32 = null,
 
@@ -34,6 +39,7 @@ pub const UpdateDbClusterInput = struct {
         .db_parameter_group_identifier = "dbParameterGroupIdentifier",
         .failover_mode = "failoverMode",
         .log_delivery_configuration = "logDeliveryConfiguration",
+        .maintenance_schedule = "maintenanceSchedule",
         .port = "port",
     };
 };

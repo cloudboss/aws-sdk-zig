@@ -15,8 +15,8 @@ pub const Container = struct {
 
     /// Part of the image name before the last slash. For example, imagePrefix for
     /// public.ecr.aws/amazonlinux/amazonlinux:latest would be
-    /// public.ecr.aws/amazonlinux. If the
-    /// image name is relative and does not have a slash, this field is empty.
+    /// public.ecr.aws/amazonlinux. If the image name is relative and does not have
+    /// a slash, this field is empty.
     image_prefix: ?[]const u8 = null,
 
     /// Container name.

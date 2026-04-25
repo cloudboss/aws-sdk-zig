@@ -31,6 +31,13 @@ pub const CreateProgramInput = struct {
     /// The name of the source location.
     source_location_name: []const u8,
 
+    /// The tags to assign to the program. Tags are key-value pairs that you can
+    /// associate with Amazon resources to help with organization, access control,
+    /// and cost tracking. For more information, see [Tagging AWS Elemental
+    /// MediaTailor
+    /// Resources](https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
+    tags: ?[]const aws.map.StringMapEntry = null,
+
     /// The name that's used to refer to a VOD source.
     vod_source_name: ?[]const u8 = null,
 
@@ -42,6 +49,7 @@ pub const CreateProgramInput = struct {
         .program_name = "ProgramName",
         .schedule_configuration = "ScheduleConfiguration",
         .source_location_name = "SourceLocationName",
+        .tags = "Tags",
         .vod_source_name = "VodSourceName",
     };
 };
@@ -80,6 +88,13 @@ pub const CreateProgramOutput = struct {
     /// The name to assign to the source location for this program.
     source_location_name: ?[]const u8 = null,
 
+    /// The tags to assign to the program. Tags are key-value pairs that you can
+    /// associate with Amazon resources to help with organization, access control,
+    /// and cost tracking. For more information, see [Tagging AWS Elemental
+    /// MediaTailor
+    /// Resources](https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
+    tags: ?[]const aws.map.StringMapEntry = null,
+
     /// The name that's used to refer to a VOD source.
     vod_source_name: ?[]const u8 = null,
 
@@ -95,6 +110,7 @@ pub const CreateProgramOutput = struct {
         .program_name = "ProgramName",
         .scheduled_start_time = "ScheduledStartTime",
         .source_location_name = "SourceLocationName",
+        .tags = "Tags",
         .vod_source_name = "VodSourceName",
     };
 };
@@ -168,6 +184,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateProgramInput, con
     try body_buf.appendSlice(allocator, "\"SourceLocationName\":");
     try aws.json.writeValue(@TypeOf(input.source_location_name), input.source_location_name, allocator, &body_buf);
     has_prev = true;
+    if (input.tags) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"Tags\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.vod_source_name) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"VodSourceName\":");

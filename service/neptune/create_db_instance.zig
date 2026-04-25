@@ -160,7 +160,7 @@ pub const CreateDBInstanceInput = struct {
     /// KMS encryption key used
     /// to encrypt the new DB instance, then you can use the KMS key alias instead
     /// of the ARN for the
-    /// KM encryption key.
+    /// KMS encryption key.
     ///
     /// Not applicable. The KMS key identifier is managed by the DB cluster. For
     /// more information,

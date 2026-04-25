@@ -1,4 +1,4 @@
-/// This displays the mapping of on-premises VMware tags to the
+/// This displays the mapping of VMware tags to the
 /// corresponding Amazon Web Services tags.
 pub const VmwareToAwsTagMapping = struct {
     /// The key part of the Amazon Web Services tag's key-value pair.

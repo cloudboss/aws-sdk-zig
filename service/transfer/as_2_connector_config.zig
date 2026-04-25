@@ -68,6 +68,8 @@ pub const As2ConnectorConfig = struct {
     /// AS2 server) to determine whether the partner response for transfers is
     /// synchronous or asynchronous. Specify either of the following values:
     ///
+    /// * `ASYNC`: The system expects an asynchronous MDN response, confirming that
+    ///   the file was transferred successfully (or not).
     /// * `SYNC`: The system expects a synchronous MDN response, confirming that the
     ///   file was transferred successfully (or not).
     /// * `NONE`: Specifies that no MDN response is required.

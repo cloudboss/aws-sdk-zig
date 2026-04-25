@@ -120,8 +120,7 @@ pub const Client = struct {
     }
 
     /// Accepts the invitation to be a member account and get monitored by a
-    /// GuardDuty
-    /// administrator account that sent the invitation.
+    /// GuardDuty administrator account that sent the invitation.
     pub fn acceptAdministratorInvitation(self: *Self, allocator: std.mem.Allocator, input: accept_administrator_invitation.AcceptAdministratorInvitationInput, options: CallOptions) !accept_administrator_invitation.AcceptAdministratorInvitationOutput {
         return accept_administrator_invitation.execute(self, allocator, input, options);
     }
@@ -134,62 +133,51 @@ pub const Client = struct {
     /// Archives GuardDuty findings that are specified by the list of finding IDs.
     ///
     /// Only the administrator account can archive findings. Member accounts don't
-    /// have
-    /// permission to archive findings from their accounts.
+    /// have permission to archive findings from their accounts.
     pub fn archiveFindings(self: *Self, allocator: std.mem.Allocator, input: archive_findings.ArchiveFindingsInput, options: CallOptions) !archive_findings.ArchiveFindingsOutput {
         return archive_findings.execute(self, allocator, input, options);
     }
 
     /// Creates a single GuardDuty detector. A detector is a resource that
-    /// represents the
-    /// GuardDuty service. To start using GuardDuty, you must create a detector in
-    /// each Region where
-    /// you enable the service. You can have only one detector per account per
-    /// Region. All data
-    /// sources are enabled in a new detector by default.
+    /// represents the GuardDuty service. To start using GuardDuty, you must create
+    /// a detector in each Region where you enable the service. You can have only
+    /// one detector per account per Region. All data sources are enabled in a new
+    /// detector by default.
     ///
-    /// * When you don't specify any `features`, with an
-    /// exception to `RUNTIME_MONITORING`, all the optional features are
-    /// enabled by default.
-    ///
+    /// * When you don't specify any `features`, with an exception to
+    ///   `RUNTIME_MONITORING`, all the optional features are enabled by default.
     /// * When you specify some of the `features`, any feature that is not specified
-    ///   in the
-    /// API call gets enabled by default, with an exception to `RUNTIME_MONITORING`.
+    ///   in the API call gets enabled by default, with an exception to
+    ///   `RUNTIME_MONITORING`.
     ///
-    /// Specifying both EKS Runtime Monitoring (`EKS_RUNTIME_MONITORING`)
-    /// and Runtime Monitoring (`RUNTIME_MONITORING`) will cause an error.
-    /// You can add only one of these two features because Runtime Monitoring
-    /// already includes the
-    /// threat detection for Amazon EKS resources. For more information, see
+    /// Specifying both EKS Runtime Monitoring (`EKS_RUNTIME_MONITORING`) and
+    /// Runtime Monitoring (`RUNTIME_MONITORING`) will cause an error. You can add
+    /// only one of these two features because Runtime Monitoring already includes
+    /// the threat detection for Amazon EKS resources. For more information, see
     /// [Runtime
     /// Monitoring](https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html).
     ///
     /// There might be regional differences because some data sources might not be
     /// available in all the Amazon Web Services Regions where GuardDuty is
-    /// presently supported. For more
-    /// information, see [Regions and
+    /// presently supported. For more information, see [Regions and
     /// endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
     pub fn createDetector(self: *Self, allocator: std.mem.Allocator, input: create_detector.CreateDetectorInput, options: CallOptions) !create_detector.CreateDetectorOutput {
         return create_detector.execute(self, allocator, input, options);
     }
 
     /// Creates a filter using the specified finding criteria. The maximum number of
-    /// saved filters
-    /// per Amazon Web Services account per Region is 100. For more information, see
-    /// [Quotas for
+    /// saved filters per Amazon Web Services account per Region is 100. For more
+    /// information, see [Quotas for
     /// GuardDuty](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_limits.html).
     pub fn createFilter(self: *Self, allocator: std.mem.Allocator, input: create_filter.CreateFilterInput, options: CallOptions) !create_filter.CreateFilterOutput {
         return create_filter.execute(self, allocator, input, options);
     }
 
     /// Creates a new IPSet, which is called a trusted IP list in the console user
-    /// interface. An
-    /// IPSet is a list of IP addresses that are trusted for secure communication
-    /// with Amazon Web Services
-    /// infrastructure and applications. GuardDuty doesn't generate findings for IP
-    /// addresses that are
-    /// included in IPSets. Only users from the administrator account can use this
-    /// operation.
+    /// interface. An IPSet is a list of IP addresses that are trusted for secure
+    /// communication with Amazon Web Services infrastructure and applications.
+    /// GuardDuty doesn't generate findings for IP addresses that are included in
+    /// IPSets. Only users from the administrator account can use this operation.
     pub fn createIpSet(self: *Self, allocator: std.mem.Allocator, input: create_ip_set.CreateIPSetInput, options: CallOptions) !create_ip_set.CreateIPSetOutput {
         return create_ip_set.execute(self, allocator, input, options);
     }
@@ -197,108 +185,88 @@ pub const Client = struct {
     /// Creates a new Malware Protection plan for the protected resource.
     ///
     /// When you create a Malware Protection plan, the Amazon Web Services service
-    /// terms for GuardDuty Malware
-    /// Protection apply. For more information, see [Amazon Web Services service
-    /// terms for GuardDuty Malware
+    /// terms for GuardDuty Malware Protection apply. For more information, see
+    /// [Amazon Web Services service terms for GuardDuty Malware
     /// Protection](http://aws.amazon.com/service-terms/#87._Amazon_GuardDuty).
     pub fn createMalwareProtectionPlan(self: *Self, allocator: std.mem.Allocator, input: create_malware_protection_plan.CreateMalwareProtectionPlanInput, options: CallOptions) !create_malware_protection_plan.CreateMalwareProtectionPlanOutput {
         return create_malware_protection_plan.execute(self, allocator, input, options);
     }
 
     /// Creates member accounts of the current Amazon Web Services account by
-    /// specifying a list of Amazon Web Services account
-    /// IDs. This step is a prerequisite for managing the associated member accounts
-    /// either by
+    /// specifying a list of Amazon Web Services account IDs. This step is a
+    /// prerequisite for managing the associated member accounts either by
     /// invitation or through an organization.
     ///
     /// As a delegated administrator, using `CreateMembers` will enable GuardDuty in
-    /// the added member accounts, with the exception of the
-    /// organization delegated administrator account. A delegated administrator must
-    /// enable GuardDuty
-    /// prior to being added as a member.
+    /// the added member accounts, with the exception of the organization delegated
+    /// administrator account. A delegated administrator must enable GuardDuty prior
+    /// to being added as a member.
     ///
-    /// When you use CreateMembers as an Organizations delegated
-    /// administrator, GuardDuty applies your organization's auto-enable settings to
-    /// the member
+    /// When you use CreateMembers as an Organizations delegated administrator,
+    /// GuardDuty applies your organization's auto-enable settings to the member
     /// accounts in this request, irrespective of the accounts being new or existing
-    /// members. For
-    /// more information about the existing auto-enable settings for your
-    /// organization, see
+    /// members. For more information about the existing auto-enable settings for
+    /// your organization, see
     /// [DescribeOrganizationConfiguration](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DescribeOrganizationConfiguration.html).
     ///
     /// If you disassociate a member account that was added by invitation, the
-    /// member account details
-    /// obtained from this API, including the associated email addresses, will be
-    /// retained.
-    /// This is done so that the delegated administrator can invoke the
-    /// [InviteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html) API without the need to invoke the CreateMembers API again. To
-    /// remove the details associated with a member account, the delegated
-    /// administrator must invoke the
-    /// [DeleteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html) API.
+    /// member account details obtained from this API, including the associated
+    /// email addresses, will be retained. This is done so that the delegated
+    /// administrator can invoke the
+    /// [InviteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html) API without the need to invoke the CreateMembers API again. To remove the details associated with a member account, the delegated administrator must invoke the [DeleteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html) API.
     ///
     /// When the member accounts added through Organizations are later
-    /// disassociated, you (administrator)
-    /// can't invite them by calling the InviteMembers API. You can create an
-    /// association with these
-    /// member accounts again only by calling the CreateMembers API.
+    /// disassociated, you (administrator) can't invite them by calling the
+    /// InviteMembers API. You can create an association with these member accounts
+    /// again only by calling the CreateMembers API.
     pub fn createMembers(self: *Self, allocator: std.mem.Allocator, input: create_members.CreateMembersInput, options: CallOptions) !create_members.CreateMembersOutput {
         return create_members.execute(self, allocator, input, options);
     }
 
     /// Creates a publishing destination where you can export your GuardDuty
-    /// findings. Before you start exporting the
-    /// findings, the destination resource must exist.
+    /// findings. Before you start exporting the findings, the destination resource
+    /// must exist.
     pub fn createPublishingDestination(self: *Self, allocator: std.mem.Allocator, input: create_publishing_destination.CreatePublishingDestinationInput, options: CallOptions) !create_publishing_destination.CreatePublishingDestinationOutput {
         return create_publishing_destination.execute(self, allocator, input, options);
     }
 
     /// Generates sample findings of types specified by the list of finding types.
-    /// If 'NULL' is
-    /// specified for `findingTypes`, the API generates sample findings of all
-    /// supported
-    /// finding types.
+    /// If 'NULL' is specified for `findingTypes`, the API generates sample findings
+    /// of all supported finding types.
     pub fn createSampleFindings(self: *Self, allocator: std.mem.Allocator, input: create_sample_findings.CreateSampleFindingsInput, options: CallOptions) !create_sample_findings.CreateSampleFindingsOutput {
         return create_sample_findings.execute(self, allocator, input, options);
     }
 
     /// Creates a new threat entity set. In a threat entity set, you can provide
-    /// known malicious
-    /// IP addresses and domains for your Amazon Web Services environment.
-    /// GuardDuty generates findings based on the entries in the threat entity sets.
-    /// Only users of the administrator account can manage entity sets, which
-    /// automatically apply
-    /// to member accounts.
+    /// known malicious IP addresses and domains for your Amazon Web Services
+    /// environment. GuardDuty generates findings based on the entries in the threat
+    /// entity sets. Only users of the administrator account can manage entity sets,
+    /// which automatically apply to member accounts.
     pub fn createThreatEntitySet(self: *Self, allocator: std.mem.Allocator, input: create_threat_entity_set.CreateThreatEntitySetInput, options: CallOptions) !create_threat_entity_set.CreateThreatEntitySetOutput {
         return create_threat_entity_set.execute(self, allocator, input, options);
     }
 
     /// Creates a new ThreatIntelSet. ThreatIntelSets consist of known malicious IP
-    /// addresses.
-    /// GuardDuty generates findings based on ThreatIntelSets. Only users of the
-    /// administrator
-    /// account can use this operation.
+    /// addresses. GuardDuty generates findings based on ThreatIntelSets. Only users
+    /// of the administrator account can use this operation.
     pub fn createThreatIntelSet(self: *Self, allocator: std.mem.Allocator, input: create_threat_intel_set.CreateThreatIntelSetInput, options: CallOptions) !create_threat_intel_set.CreateThreatIntelSetOutput {
         return create_threat_intel_set.execute(self, allocator, input, options);
     }
 
     /// Creates a new trusted entity set. In the trusted entity set, you can provide
-    /// IP addresses
-    /// and domains that you believe are secure for communication in your Amazon Web
-    /// Services environment. GuardDuty
-    /// will not generate findings for the entries that are specified in a trusted
-    /// entity set. At any
-    /// given time, you can have only one trusted entity set.
+    /// IP addresses and domains that you believe are secure for communication in
+    /// your Amazon Web Services environment. GuardDuty will not generate findings
+    /// for the entries that are specified in a trusted entity set. At any given
+    /// time, you can have only one trusted entity set.
     ///
     /// Only users of the administrator account can manage the entity sets, which
-    /// automatically
-    /// apply to member accounts.
+    /// automatically apply to member accounts.
     pub fn createTrustedEntitySet(self: *Self, allocator: std.mem.Allocator, input: create_trusted_entity_set.CreateTrustedEntitySetInput, options: CallOptions) !create_trusted_entity_set.CreateTrustedEntitySetOutput {
         return create_trusted_entity_set.execute(self, allocator, input, options);
     }
 
     /// Declines invitations sent to the current member account by Amazon Web
-    /// Services accounts specified by
-    /// their account IDs.
+    /// Services accounts specified by their account IDs.
     pub fn declineInvitations(self: *Self, allocator: std.mem.Allocator, input: decline_invitations.DeclineInvitationsInput, options: CallOptions) !decline_invitations.DeclineInvitationsOutput {
         return decline_invitations.execute(self, allocator, input, options);
     }
@@ -314,8 +282,7 @@ pub const Client = struct {
     }
 
     /// Deletes invitations sent to the current member account by Amazon Web
-    /// Services accounts specified by
-    /// their account IDs.
+    /// Services accounts specified by their account IDs.
     pub fn deleteInvitations(self: *Self, allocator: std.mem.Allocator, input: delete_invitations.DeleteInvitationsInput, options: CallOptions) !delete_invitations.DeleteInvitationsOutput {
         return delete_invitations.execute(self, allocator, input, options);
     }
@@ -327,23 +294,18 @@ pub const Client = struct {
     }
 
     /// Deletes the Malware Protection plan ID associated with the Malware
-    /// Protection plan resource.
-    /// Use this API only when you no longer want to protect the resource associated
-    /// with this
-    /// Malware Protection plan ID.
+    /// Protection plan resource. Use this API only when you no longer want to
+    /// protect the resource associated with this Malware Protection plan ID.
     pub fn deleteMalwareProtectionPlan(self: *Self, allocator: std.mem.Allocator, input: delete_malware_protection_plan.DeleteMalwareProtectionPlanInput, options: CallOptions) !delete_malware_protection_plan.DeleteMalwareProtectionPlanOutput {
         return delete_malware_protection_plan.execute(self, allocator, input, options);
     }
 
     /// Deletes GuardDuty member accounts (to the current GuardDuty administrator
-    /// account)
-    /// specified by the account IDs.
+    /// account) specified by the account IDs.
     ///
     /// With `autoEnableOrganizationMembers` configuration for your organization set
-    /// to
-    /// `ALL`, you'll receive an error if you attempt to disable GuardDuty for a
-    /// member
-    /// account in your organization.
+    /// to `ALL`, you'll receive an error if you attempt to disable GuardDuty for a
+    /// member account in your organization.
     pub fn deleteMembers(self: *Self, allocator: std.mem.Allocator, input: delete_members.DeleteMembersInput, options: CallOptions) !delete_members.DeleteMembersOutput {
         return delete_members.execute(self, allocator, input, options);
     }
@@ -371,43 +333,36 @@ pub const Client = struct {
     }
 
     /// Returns a list of malware scans. Each member account can view the malware
-    /// scans for their
-    /// own accounts. An administrator can view the malware scans for all the member
-    /// accounts.
+    /// scans for their own accounts. An administrator can view the malware scans
+    /// for all the member accounts.
     ///
     /// There might be regional differences because some data sources might not be
     /// available in all the Amazon Web Services Regions where GuardDuty is
-    /// presently supported. For more
-    /// information, see [Regions and
+    /// presently supported. For more information, see [Regions and
     /// endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
     pub fn describeMalwareScans(self: *Self, allocator: std.mem.Allocator, input: describe_malware_scans.DescribeMalwareScansInput, options: CallOptions) !describe_malware_scans.DescribeMalwareScansOutput {
         return describe_malware_scans.execute(self, allocator, input, options);
     }
 
     /// Returns information about the account selected as the delegated
-    /// administrator for
-    /// GuardDuty.
+    /// administrator for GuardDuty.
     ///
     /// There might be regional differences because some data sources might not be
     /// available in all the Amazon Web Services Regions where GuardDuty is
-    /// presently supported. For more
-    /// information, see [Regions and
+    /// presently supported. For more information, see [Regions and
     /// endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
     pub fn describeOrganizationConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_organization_configuration.DescribeOrganizationConfigurationInput, options: CallOptions) !describe_organization_configuration.DescribeOrganizationConfigurationOutput {
         return describe_organization_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns information about the publishing destination specified by the
-    /// provided
-    /// `destinationId`.
+    /// provided `destinationId`.
     pub fn describePublishingDestination(self: *Self, allocator: std.mem.Allocator, input: describe_publishing_destination.DescribePublishingDestinationInput, options: CallOptions) !describe_publishing_destination.DescribePublishingDestinationOutput {
         return describe_publishing_destination.execute(self, allocator, input, options);
     }
 
-    /// Removes the existing GuardDuty delegated
-    /// administrator of the organization. Only the organization's management
-    /// account can run this
-    /// API operation.
+    /// Removes the existing GuardDuty delegated administrator of the organization.
+    /// Only the organization's management account can run this API operation.
     pub fn disableOrganizationAdminAccount(self: *Self, allocator: std.mem.Allocator, input: disable_organization_admin_account.DisableOrganizationAdminAccountInput, options: CallOptions) !disable_organization_admin_account.DisableOrganizationAdminAccountOutput {
         return disable_organization_admin_account.execute(self, allocator, input, options);
     }
@@ -415,22 +370,13 @@ pub const Client = struct {
     /// Disassociates the current GuardDuty member account from its administrator
     /// account.
     ///
-    /// When you
-    /// disassociate an invited member from a GuardDuty delegated administrator, the
-    /// member account details
-    /// obtained from the
-    /// [CreateMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html) API, including the associated email addresses, are retained. This is
-    /// done so that the delegated administrator can invoke the
-    /// [InviteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html) API without the need to invoke the CreateMembers API again. To
-    /// remove the details associated with a member account, the delegated
-    /// administrator must invoke the
-    /// [DeleteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html) API.
+    /// When you disassociate an invited member from a GuardDuty delegated
+    /// administrator, the member account details obtained from the
+    /// [CreateMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html) API, including the associated email addresses, are retained. This is done so that the delegated administrator can invoke the [InviteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html) API without the need to invoke the CreateMembers API again. To remove the details associated with a member account, the delegated administrator must invoke the [DeleteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html) API.
     ///
     /// With `autoEnableOrganizationMembers` configuration for your organization set
-    /// to
-    /// `ALL`, you'll receive an error if you attempt to disable GuardDuty in a
-    /// member
-    /// account.
+    /// to `ALL`, you'll receive an error if you attempt to disable GuardDuty in a
+    /// member account.
     pub fn disassociateFromAdministratorAccount(self: *Self, allocator: std.mem.Allocator, input: disassociate_from_administrator_account.DisassociateFromAdministratorAccountInput, options: CallOptions) !disassociate_from_administrator_account.DisassociateFromAdministratorAccountOutput {
         return disassociate_from_administrator_account.execute(self, allocator, input, options);
     }
@@ -438,96 +384,67 @@ pub const Client = struct {
     /// Disassociates the current GuardDuty member account from its administrator
     /// account.
     ///
-    /// When you
-    /// disassociate an invited member from a GuardDuty delegated administrator, the
-    /// member account details
-    /// obtained from the
-    /// [CreateMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html) API, including the associated email addresses, are retained. This is
-    /// done so that the delegated administrator can invoke the
-    /// [InviteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html) API without the need to invoke the CreateMembers API again. To
-    /// remove the details associated with a member account, the delegated
-    /// administrator must invoke the
-    /// [DeleteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html) API.
+    /// When you disassociate an invited member from a GuardDuty delegated
+    /// administrator, the member account details obtained from the
+    /// [CreateMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html) API, including the associated email addresses, are retained. This is done so that the delegated administrator can invoke the [InviteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html) API without the need to invoke the CreateMembers API again. To remove the details associated with a member account, the delegated administrator must invoke the [DeleteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html) API.
     pub fn disassociateFromMasterAccount(self: *Self, allocator: std.mem.Allocator, input: disassociate_from_master_account.DisassociateFromMasterAccountInput, options: CallOptions) !disassociate_from_master_account.DisassociateFromMasterAccountOutput {
         return disassociate_from_master_account.execute(self, allocator, input, options);
     }
 
     /// Disassociates GuardDuty member accounts (from the current administrator
-    /// account) specified
-    /// by the account IDs.
+    /// account) specified by the account IDs.
     ///
-    /// When you
-    /// disassociate an invited member from a GuardDuty delegated administrator, the
-    /// member account details
-    /// obtained from the
-    /// [CreateMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html) API, including the associated email addresses, are retained. This is
-    /// done so that the delegated administrator can invoke the
-    /// [InviteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html) API without the need to invoke the CreateMembers API again. To
-    /// remove the details associated with a member account, the delegated
-    /// administrator must invoke the
-    /// [DeleteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html) API.
+    /// When you disassociate an invited member from a GuardDuty delegated
+    /// administrator, the member account details obtained from the
+    /// [CreateMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html) API, including the associated email addresses, are retained. This is done so that the delegated administrator can invoke the [InviteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html) API without the need to invoke the CreateMembers API again. To remove the details associated with a member account, the delegated administrator must invoke the [DeleteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html) API.
     ///
     /// With `autoEnableOrganizationMembers` configuration for your organization set
-    /// to
-    /// `ALL`, you'll receive an error if you attempt to disassociate a member
-    /// account
-    /// before removing them from your organization.
+    /// to `ALL`, you'll receive an error if you attempt to disassociate a member
+    /// account before removing them from your organization.
     ///
     /// If you disassociate a member account that was added by invitation, the
-    /// member account details
-    /// obtained from this API, including the associated email addresses, will be
-    /// retained.
-    /// This is done so that the delegated administrator can invoke the
-    /// [InviteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html) API without the need to invoke the CreateMembers API again. To
-    /// remove the details associated with a member account, the delegated
-    /// administrator must invoke the
-    /// [DeleteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html) API.
+    /// member account details obtained from this API, including the associated
+    /// email addresses, will be retained. This is done so that the delegated
+    /// administrator can invoke the
+    /// [InviteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html) API without the need to invoke the CreateMembers API again. To remove the details associated with a member account, the delegated administrator must invoke the [DeleteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html) API.
     ///
     /// When the member accounts added through Organizations are later
-    /// disassociated, you (administrator)
-    /// can't invite them by calling the InviteMembers API. You can create an
-    /// association with these
-    /// member accounts again only by calling the CreateMembers API.
+    /// disassociated, you (administrator) can't invite them by calling the
+    /// InviteMembers API. You can create an association with these member accounts
+    /// again only by calling the CreateMembers API.
     pub fn disassociateMembers(self: *Self, allocator: std.mem.Allocator, input: disassociate_members.DisassociateMembersInput, options: CallOptions) !disassociate_members.DisassociateMembersOutput {
         return disassociate_members.execute(self, allocator, input, options);
     }
 
     /// Designates an Amazon Web Services account within the organization as your
-    /// GuardDuty delegated
-    /// administrator. Only the organization's management account can run this
-    /// API operation.
+    /// GuardDuty delegated administrator. Only the organization's management
+    /// account can run this API operation.
     pub fn enableOrganizationAdminAccount(self: *Self, allocator: std.mem.Allocator, input: enable_organization_admin_account.EnableOrganizationAdminAccountInput, options: CallOptions) !enable_organization_admin_account.EnableOrganizationAdminAccountOutput {
         return enable_organization_admin_account.execute(self, allocator, input, options);
     }
 
     /// Provides the details of the GuardDuty administrator account associated with
-    /// the current
-    /// GuardDuty member account.
+    /// the current GuardDuty member account.
     ///
     /// Based on the type of account that runs this API, the following list shows
     /// how the API behavior varies:
     ///
     /// * When the GuardDuty administrator account runs this API, it will return
     ///   success (`HTTP 200`) but no content.
-    ///
     /// * When a member account runs this API, it will return the details of the
-    ///   GuardDuty administrator account that is associated
-    /// with this calling member account.
-    ///
+    ///   GuardDuty administrator account that is associated with this calling
+    ///   member account.
     /// * When an individual account (not associated with an organization) runs this
-    ///   API, it will return success (`HTTP 200`)
-    /// but no content.
+    ///   API, it will return success (`HTTP 200`) but no content.
     pub fn getAdministratorAccount(self: *Self, allocator: std.mem.Allocator, input: get_administrator_account.GetAdministratorAccountInput, options: CallOptions) !get_administrator_account.GetAdministratorAccountOutput {
         return get_administrator_account.execute(self, allocator, input, options);
     }
 
     /// Retrieves aggregated statistics for your account. If you are a GuardDuty
-    /// administrator, you
-    /// can retrieve the statistics for all the resources associated with the active
-    /// member accounts
-    /// in your organization who have enabled Runtime Monitoring and have the
-    /// GuardDuty security agent running
-    /// on their resources.
+    /// administrator, you can retrieve the statistics for all the resources
+    /// associated with the active member accounts in your organization who have
+    /// enabled Runtime Monitoring and have the GuardDuty security agent running on
+    /// their resources.
     pub fn getCoverageStatistics(self: *Self, allocator: std.mem.Allocator, input: get_coverage_statistics.GetCoverageStatisticsInput, options: CallOptions) !get_coverage_statistics.GetCoverageStatisticsOutput {
         return get_coverage_statistics.execute(self, allocator, input, options);
     }
@@ -536,8 +453,7 @@ pub const Client = struct {
     ///
     /// There might be regional differences because some data sources might not be
     /// available in all the Amazon Web Services Regions where GuardDuty is
-    /// presently supported. For more
-    /// information, see [Regions and
+    /// presently supported. For more information, see [Regions and
     /// endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
     pub fn getDetector(self: *Self, allocator: std.mem.Allocator, input: get_detector.GetDetectorInput, options: CallOptions) !get_detector.GetDetectorOutput {
         return get_detector.execute(self, allocator, input, options);
@@ -555,22 +471,20 @@ pub const Client = struct {
 
     /// Lists GuardDuty findings statistics for the specified detector ID.
     ///
-    /// You must provide either `findingStatisticTypes` or
-    /// `groupBy` parameter, and not both. You can use the `maxResults` and
-    /// `orderBy`
-    /// parameters only when using `groupBy`.
+    /// You must provide either `findingStatisticTypes` or `groupBy` parameter, and
+    /// not both. You can use the `maxResults` and `orderBy` parameters only when
+    /// using `groupBy`.
     ///
     /// There might be regional differences because some flags might not be
-    /// available in all the Regions where GuardDuty
-    /// is currently supported. For more information, see [Regions and
+    /// available in all the Regions where GuardDuty is currently supported. For
+    /// more information, see [Regions and
     /// endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
     pub fn getFindingsStatistics(self: *Self, allocator: std.mem.Allocator, input: get_findings_statistics.GetFindingsStatisticsInput, options: CallOptions) !get_findings_statistics.GetFindingsStatisticsOutput {
         return get_findings_statistics.execute(self, allocator, input, options);
     }
 
     /// Returns the count of all GuardDuty membership invitations that were sent to
-    /// the current
-    /// member account except the currently accepted invitation.
+    /// the current member account except the currently accepted invitation.
     pub fn getInvitationsCount(self: *Self, allocator: std.mem.Allocator, input: get_invitations_count.GetInvitationsCountInput, options: CallOptions) !get_invitations_count.GetInvitationsCountOutput {
         return get_invitations_count.execute(self, allocator, input, options);
     }
@@ -581,21 +495,19 @@ pub const Client = struct {
     }
 
     /// Retrieves the Malware Protection plan details associated with a Malware
-    /// Protection
-    /// plan ID.
+    /// Protection plan ID.
     pub fn getMalwareProtectionPlan(self: *Self, allocator: std.mem.Allocator, input: get_malware_protection_plan.GetMalwareProtectionPlanInput, options: CallOptions) !get_malware_protection_plan.GetMalwareProtectionPlanOutput {
         return get_malware_protection_plan.execute(self, allocator, input, options);
     }
 
     /// Retrieves the detailed information for a specific malware scan. Each member
-    /// account can view the malware scan details for their
-    /// own account. An administrator can view malware scan details for all accounts
-    /// in the organization.
+    /// account can view the malware scan details for their own account. An
+    /// administrator can view malware scan details for all accounts in the
+    /// organization.
     ///
     /// There might be regional differences because some data sources might not be
     /// available in all the Amazon Web Services Regions where GuardDuty is
-    /// presently supported. For more
-    /// information, see [Regions and
+    /// presently supported. For more information, see [Regions and
     /// endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
     pub fn getMalwareScan(self: *Self, allocator: std.mem.Allocator, input: get_malware_scan.GetMalwareScanInput, options: CallOptions) !get_malware_scan.GetMalwareScanOutput {
         return get_malware_scan.execute(self, allocator, input, options);
@@ -605,16 +517,14 @@ pub const Client = struct {
     ///
     /// There might be regional differences because some data sources might not be
     /// available in all the Amazon Web Services Regions where GuardDuty is
-    /// presently supported. For more
-    /// information, see [Regions and
+    /// presently supported. For more information, see [Regions and
     /// endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
     pub fn getMalwareScanSettings(self: *Self, allocator: std.mem.Allocator, input: get_malware_scan_settings.GetMalwareScanSettingsInput, options: CallOptions) !get_malware_scan_settings.GetMalwareScanSettingsOutput {
         return get_malware_scan_settings.execute(self, allocator, input, options);
     }
 
     /// Provides the details for the GuardDuty administrator account associated with
-    /// the current
-    /// GuardDuty member account.
+    /// the current GuardDuty member account.
     pub fn getMasterAccount(self: *Self, allocator: std.mem.Allocator, input: get_master_account.GetMasterAccountInput, options: CallOptions) !get_master_account.GetMasterAccountOutput {
         return get_master_account.execute(self, allocator, input, options);
     }
@@ -623,26 +533,24 @@ pub const Client = struct {
     ///
     /// There might be regional differences because some data sources might not be
     /// available in all the Amazon Web Services Regions where GuardDuty is
-    /// presently supported. For more
-    /// information, see [Regions and
+    /// presently supported. For more information, see [Regions and
     /// endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
     pub fn getMemberDetectors(self: *Self, allocator: std.mem.Allocator, input: get_member_detectors.GetMemberDetectorsInput, options: CallOptions) !get_member_detectors.GetMemberDetectorsOutput {
         return get_member_detectors.execute(self, allocator, input, options);
     }
 
     /// Retrieves GuardDuty member accounts (of the current GuardDuty administrator
-    /// account)
-    /// specified by the account IDs.
+    /// account) specified by the account IDs.
     pub fn getMembers(self: *Self, allocator: std.mem.Allocator, input: get_members.GetMembersInput, options: CallOptions) !get_members.GetMembersOutput {
         return get_members.execute(self, allocator, input, options);
     }
 
-    /// Retrieves how many active member accounts have
-    /// each feature enabled within GuardDuty. Only a delegated GuardDuty
-    /// administrator of an organization can run this API.
+    /// Retrieves how many active member accounts have each feature enabled within
+    /// GuardDuty. Only a delegated GuardDuty administrator of an organization can
+    /// run this API.
     ///
-    /// When you create a new organization, it might take up to 24
-    /// hours to generate the statistics for the entire organization.
+    /// When you create a new organization, it might take up to 24 hours to generate
+    /// the statistics for the entire organization.
     pub fn getOrganizationStatistics(self: *Self, allocator: std.mem.Allocator, input: get_organization_statistics.GetOrganizationStatisticsInput, options: CallOptions) !get_organization_statistics.GetOrganizationStatisticsOutput {
         return get_organization_statistics.execute(self, allocator, input, options);
     }
@@ -671,76 +579,56 @@ pub const Client = struct {
     }
 
     /// Lists Amazon GuardDuty usage statistics over the last 30 days for the
-    /// specified detector
-    /// ID. For newly enabled detectors or data sources, the cost returned will
-    /// include only the usage
-    /// so far under 30 days. This may differ from the cost metrics in the console,
-    /// which project
-    /// usage over 30 days to provide a monthly cost estimate. For more information,
-    /// see [Understanding How Usage Costs are
+    /// specified detector ID. For newly enabled detectors or data sources, the cost
+    /// returned will include only the usage so far under 30 days. This may differ
+    /// from the cost metrics in the console, which project usage over 30 days to
+    /// provide a monthly cost estimate. For more information, see [Understanding
+    /// How Usage Costs are
     /// Calculated](https://docs.aws.amazon.com/guardduty/latest/ug/monitoring_costs.html#usage-calculations).
     pub fn getUsageStatistics(self: *Self, allocator: std.mem.Allocator, input: get_usage_statistics.GetUsageStatisticsInput, options: CallOptions) !get_usage_statistics.GetUsageStatisticsOutput {
         return get_usage_statistics.execute(self, allocator, input, options);
     }
 
     /// Invites Amazon Web Services accounts to become members of an organization
-    /// administered by the Amazon Web Services account
-    /// that invokes this API. If you are using Amazon Web Services Organizations to
-    /// manage your GuardDuty environment, this step is not
-    /// needed. For more information, see [Managing accounts with
+    /// administered by the Amazon Web Services account that invokes this API. If
+    /// you are using Amazon Web Services Organizations to manage your GuardDuty
+    /// environment, this step is not needed. For more information, see [Managing
+    /// accounts with
     /// organizations](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_organizations.html).
     ///
-    /// To invite Amazon Web Services accounts, the first step is
-    /// to ensure that GuardDuty has been enabled in the potential member accounts.
-    /// You can now invoke this API
-    /// to add accounts by invitation. The
-    /// invited accounts can either accept or decline the invitation from their
-    /// GuardDuty accounts. Each invited Amazon Web Services account can
-    /// choose to accept the invitation from only one Amazon Web Services account.
-    /// For more information, see
-    /// [Managing GuardDuty accounts
-    /// by
+    /// To invite Amazon Web Services accounts, the first step is to ensure that
+    /// GuardDuty has been enabled in the potential member accounts. You can now
+    /// invoke this API to add accounts by invitation. The invited accounts can
+    /// either accept or decline the invitation from their GuardDuty accounts. Each
+    /// invited Amazon Web Services account can choose to accept the invitation from
+    /// only one Amazon Web Services account. For more information, see [Managing
+    /// GuardDuty accounts by
     /// invitation](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_invitations.html).
     ///
     /// After the invite has been accepted and you choose to disassociate a member
-    /// account
-    /// (by using
-    /// [DisassociateMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DisassociateMembers.html)) from your account,
-    /// the details of the member account obtained by invoking
-    /// [CreateMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html), including the
-    /// associated email addresses, will be retained.
-    /// This is done so that you can invoke InviteMembers without the need to invoke
-    /// [CreateMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html) again. To
-    /// remove the details associated with a member account, you must also invoke
-    /// [DeleteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html).
+    /// account (by using
+    /// [DisassociateMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DisassociateMembers.html)) from your account, the details of the member account obtained by invoking [CreateMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html), including the associated email addresses, will be retained. This is done so that you can invoke InviteMembers without the need to invoke [CreateMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html) again. To remove the details associated with a member account, you must also invoke [DeleteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html).
     ///
     /// If you disassociate a member account that was added by invitation, the
-    /// member account details
-    /// obtained from this API, including the associated email addresses, will be
-    /// retained.
-    /// This is done so that the delegated administrator can invoke the
-    /// [InviteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html) API without the need to invoke the CreateMembers API again. To
-    /// remove the details associated with a member account, the delegated
-    /// administrator must invoke the
-    /// [DeleteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html) API.
+    /// member account details obtained from this API, including the associated
+    /// email addresses, will be retained. This is done so that the delegated
+    /// administrator can invoke the
+    /// [InviteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html) API without the need to invoke the CreateMembers API again. To remove the details associated with a member account, the delegated administrator must invoke the [DeleteMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html) API.
     ///
     /// When the member accounts added through Organizations are later
-    /// disassociated, you (administrator)
-    /// can't invite them by calling the InviteMembers API. You can create an
-    /// association with these
-    /// member accounts again only by calling the CreateMembers API.
+    /// disassociated, you (administrator) can't invite them by calling the
+    /// InviteMembers API. You can create an association with these member accounts
+    /// again only by calling the CreateMembers API.
     pub fn inviteMembers(self: *Self, allocator: std.mem.Allocator, input: invite_members.InviteMembersInput, options: CallOptions) !invite_members.InviteMembersOutput {
         return invite_members.execute(self, allocator, input, options);
     }
 
     /// Lists coverage details for your GuardDuty account. If you're a GuardDuty
-    /// administrator, you can
-    /// retrieve all resources associated with the active member accounts in your
-    /// organization.
+    /// administrator, you can retrieve all resources associated with the active
+    /// member accounts in your organization.
     ///
     /// Make sure the accounts have Runtime Monitoring enabled and GuardDuty agent
-    /// running on
-    /// their resources.
+    /// running on their resources.
     pub fn listCoverage(self: *Self, allocator: std.mem.Allocator, input: list_coverage.ListCoverageInput, options: CallOptions) !list_coverage.ListCoverageOutput {
         return list_coverage.execute(self, allocator, input, options);
     }
@@ -758,25 +646,22 @@ pub const Client = struct {
     /// Lists GuardDuty findings for the specified detector ID.
     ///
     /// There might be regional differences because some flags might not be
-    /// available in all the Regions where GuardDuty
-    /// is currently supported. For more information, see [Regions and
+    /// available in all the Regions where GuardDuty is currently supported. For
+    /// more information, see [Regions and
     /// endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
     pub fn listFindings(self: *Self, allocator: std.mem.Allocator, input: list_findings.ListFindingsInput, options: CallOptions) !list_findings.ListFindingsOutput {
         return list_findings.execute(self, allocator, input, options);
     }
 
     /// Lists all GuardDuty membership invitations that were sent to the current
-    /// Amazon Web Services
-    /// account.
+    /// Amazon Web Services account.
     pub fn listInvitations(self: *Self, allocator: std.mem.Allocator, input: list_invitations.ListInvitationsInput, options: CallOptions) !list_invitations.ListInvitationsOutput {
         return list_invitations.execute(self, allocator, input, options);
     }
 
     /// Lists the IPSets of the GuardDuty service specified by the detector ID. If
-    /// you use this
-    /// operation from a member account, the IPSets returned are the IPSets from the
-    /// associated
-    /// administrator account.
+    /// you use this operation from a member account, the IPSets returned are the
+    /// IPSets from the associated administrator account.
     pub fn listIpSets(self: *Self, allocator: std.mem.Allocator, input: list_ip_sets.ListIPSetsInput, options: CallOptions) !list_ip_sets.ListIPSetsOutput {
         return list_ip_sets.execute(self, allocator, input, options);
     }
@@ -788,23 +673,20 @@ pub const Client = struct {
     }
 
     /// Returns a list of malware scans. Each member account can view the malware
-    /// scans for their
-    /// own accounts. An administrator can view the malware scans for all of its
-    /// members' accounts.
+    /// scans for their own accounts. An administrator can view the malware scans
+    /// for all of its members' accounts.
     pub fn listMalwareScans(self: *Self, allocator: std.mem.Allocator, input: list_malware_scans.ListMalwareScansInput, options: CallOptions) !list_malware_scans.ListMalwareScansOutput {
         return list_malware_scans.execute(self, allocator, input, options);
     }
 
     /// Lists details about all member accounts for the current GuardDuty
-    /// administrator
-    /// account.
+    /// administrator account.
     pub fn listMembers(self: *Self, allocator: std.mem.Allocator, input: list_members.ListMembersInput, options: CallOptions) !list_members.ListMembersOutput {
         return list_members.execute(self, allocator, input, options);
     }
 
-    /// Lists the accounts designated as GuardDuty delegated administrators.
-    /// Only the organization's management account can run this
-    /// API operation.
+    /// Lists the accounts designated as GuardDuty delegated administrators. Only
+    /// the organization's management account can run this API operation.
     pub fn listOrganizationAdminAccounts(self: *Self, allocator: std.mem.Allocator, input: list_organization_admin_accounts.ListOrganizationAdminAccountsInput, options: CallOptions) !list_organization_admin_accounts.ListOrganizationAdminAccountsOutput {
         return list_organization_admin_accounts.execute(self, allocator, input, options);
     }
@@ -816,38 +698,32 @@ pub const Client = struct {
     }
 
     /// Lists tags for a resource. Tagging is currently supported for detectors,
-    /// finding filters,
-    /// IP sets, threat intel sets, and publishing destination, with a limit of 50
-    /// tags per resource.
-    /// When invoked, this
-    /// operation returns all assigned tags for a given resource.
+    /// finding filters, IP sets, threat intel sets, and publishing destination,
+    /// with a limit of 50 tags per resource. When invoked, this operation returns
+    /// all assigned tags for a given resource.
     pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Lists the threat entity sets associated with the specified GuardDuty
-    /// detector ID. If you use this
-    /// operation from a member account, the threat entity sets that are returned as
-    /// a response, belong to the
-    /// administrator account.
+    /// detector ID. If you use this operation from a member account, the threat
+    /// entity sets that are returned as a response, belong to the administrator
+    /// account.
     pub fn listThreatEntitySets(self: *Self, allocator: std.mem.Allocator, input: list_threat_entity_sets.ListThreatEntitySetsInput, options: CallOptions) !list_threat_entity_sets.ListThreatEntitySetsOutput {
         return list_threat_entity_sets.execute(self, allocator, input, options);
     }
 
     /// Lists the ThreatIntelSets of the GuardDuty service specified by the detector
-    /// ID. If you
-    /// use this operation from a member account, the ThreatIntelSets associated
-    /// with the
-    /// administrator account are returned.
+    /// ID. If you use this operation from a member account, the ThreatIntelSets
+    /// associated with the administrator account are returned.
     pub fn listThreatIntelSets(self: *Self, allocator: std.mem.Allocator, input: list_threat_intel_sets.ListThreatIntelSetsInput, options: CallOptions) !list_threat_intel_sets.ListThreatIntelSetsOutput {
         return list_threat_intel_sets.execute(self, allocator, input, options);
     }
 
     /// Lists the trusted entity sets associated with the specified GuardDuty
-    /// detector ID. If you use this
-    /// operation from a member account, the trusted entity sets that are returned
-    /// as a response, belong to the
-    /// administrator account.
+    /// detector ID. If you use this operation from a member account, the trusted
+    /// entity sets that are returned as a response, belong to the administrator
+    /// account.
     pub fn listTrustedEntitySets(self: *Self, allocator: std.mem.Allocator, input: list_trusted_entity_sets.ListTrustedEntitySetsInput, options: CallOptions) !list_trusted_entity_sets.ListTrustedEntitySetsOutput {
         return list_trusted_entity_sets.execute(self, allocator, input, options);
     }
@@ -857,9 +733,8 @@ pub const Client = struct {
     /// have Malware Protection for S3 enabled.
     ///
     /// When you use this API, the Amazon Web Services service terms for GuardDuty
-    /// Malware
-    /// Protection apply. For more information, see [Amazon Web Services service
-    /// terms for GuardDuty Malware
+    /// Malware Protection apply. For more information, see [Amazon Web Services
+    /// service terms for GuardDuty Malware
     /// Protection](http://aws.amazon.com/service-terms/#87._Amazon_GuardDuty).
     pub fn sendObjectMalwareScan(self: *Self, allocator: std.mem.Allocator, input: send_object_malware_scan.SendObjectMalwareScanInput, options: CallOptions) !send_object_malware_scan.SendObjectMalwareScanOutput {
         return send_object_malware_scan.execute(self, allocator, input, options);
@@ -867,39 +742,34 @@ pub const Client = struct {
 
     /// Initiates the malware scan. Invoking this API will automatically create the
     /// [Service-linked
-    /// role](https://docs.aws.amazon.com/guardduty/latest/ug/slr-permissions-malware-protection.html) in
-    /// the corresponding account if the resourceArn belongs to an EC2 instance.
+    /// role](https://docs.aws.amazon.com/guardduty/latest/ug/slr-permissions-malware-protection.html) in the corresponding account if the resourceArn belongs to an EC2 instance.
     ///
     /// When the malware scan starts, you can use the associated scan ID to track
-    /// the status of the scan. For more information,
-    /// see
+    /// the status of the scan. For more information, see
     /// [ListMalwareScans](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListMalwareScans.html) and [GetMalwareScan](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_GetMalwareScan.html).
     ///
     /// When you use this API, the Amazon Web Services service terms for GuardDuty
-    /// Malware
-    /// Protection apply. For more information, see [Amazon Web Services service
-    /// terms for GuardDuty Malware
+    /// Malware Protection apply. For more information, see [Amazon Web Services
+    /// service terms for GuardDuty Malware
     /// Protection](http://aws.amazon.com/service-terms/#87._Amazon_GuardDuty).
     pub fn startMalwareScan(self: *Self, allocator: std.mem.Allocator, input: start_malware_scan.StartMalwareScanInput, options: CallOptions) !start_malware_scan.StartMalwareScanOutput {
         return start_malware_scan.execute(self, allocator, input, options);
     }
 
     /// Turns on GuardDuty monitoring of the specified member accounts. Use this
-    /// operation to
-    /// restart monitoring of accounts that you stopped monitoring with the
+    /// operation to restart monitoring of accounts that you stopped monitoring with
+    /// the
     /// [StopMonitoringMembers](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_StopMonitoringMembers.html) operation.
     pub fn startMonitoringMembers(self: *Self, allocator: std.mem.Allocator, input: start_monitoring_members.StartMonitoringMembersInput, options: CallOptions) !start_monitoring_members.StartMonitoringMembersOutput {
         return start_monitoring_members.execute(self, allocator, input, options);
     }
 
     /// Stops GuardDuty monitoring for the specified member accounts. Use the
-    /// `StartMonitoringMembers` operation to restart monitoring for those
-    /// accounts.
+    /// `StartMonitoringMembers` operation to restart monitoring for those accounts.
     ///
     /// With `autoEnableOrganizationMembers` configuration for your organization set
-    /// to
-    /// `ALL`, you'll receive an error if you attempt to stop monitoring the member
-    /// accounts in your organization.
+    /// to `ALL`, you'll receive an error if you attempt to stop monitoring the
+    /// member accounts in your organization.
     pub fn stopMonitoringMembers(self: *Self, allocator: std.mem.Allocator, input: stop_monitoring_members.StopMonitoringMembersInput, options: CallOptions) !stop_monitoring_members.StopMonitoringMembersOutput {
         return stop_monitoring_members.execute(self, allocator, input, options);
     }
@@ -921,18 +791,16 @@ pub const Client = struct {
 
     /// Updates the GuardDuty detector specified by the detector ID.
     ///
-    /// Specifying both EKS Runtime Monitoring (`EKS_RUNTIME_MONITORING`)
-    /// and Runtime Monitoring (`RUNTIME_MONITORING`) will cause an error.
-    /// You can add only one of these two features because Runtime Monitoring
-    /// already includes the
-    /// threat detection for Amazon EKS resources. For more information, see
+    /// Specifying both EKS Runtime Monitoring (`EKS_RUNTIME_MONITORING`) and
+    /// Runtime Monitoring (`RUNTIME_MONITORING`) will cause an error. You can add
+    /// only one of these two features because Runtime Monitoring already includes
+    /// the threat detection for Amazon EKS resources. For more information, see
     /// [Runtime
     /// Monitoring](https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html).
     ///
     /// There might be regional differences because some data sources might not be
     /// available in all the Amazon Web Services Regions where GuardDuty is
-    /// presently supported. For more
-    /// information, see [Regions and
+    /// presently supported. For more information, see [Regions and
     /// endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
     pub fn updateDetector(self: *Self, allocator: std.mem.Allocator, input: update_detector.UpdateDetectorInput, options: CallOptions) !update_detector.UpdateDetectorOutput {
         return update_detector.execute(self, allocator, input, options);
@@ -962,8 +830,7 @@ pub const Client = struct {
     ///
     /// There might be regional differences because some data sources might not be
     /// available in all the Amazon Web Services Regions where GuardDuty is
-    /// presently supported. For more
-    /// information, see [Regions and
+    /// presently supported. For more information, see [Regions and
     /// endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
     pub fn updateMalwareScanSettings(self: *Self, allocator: std.mem.Allocator, input: update_malware_scan_settings.UpdateMalwareScanSettingsInput, options: CallOptions) !update_malware_scan_settings.UpdateMalwareScanSettingsOutput {
         return update_malware_scan_settings.execute(self, allocator, input, options);
@@ -971,40 +838,35 @@ pub const Client = struct {
 
     /// Contains information on member accounts to be updated.
     ///
-    /// Specifying both EKS Runtime Monitoring (`EKS_RUNTIME_MONITORING`)
-    /// and Runtime Monitoring (`RUNTIME_MONITORING`) will cause an error.
-    /// You can add only one of these two features because Runtime Monitoring
-    /// already includes the
-    /// threat detection for Amazon EKS resources. For more information, see
+    /// Specifying both EKS Runtime Monitoring (`EKS_RUNTIME_MONITORING`) and
+    /// Runtime Monitoring (`RUNTIME_MONITORING`) will cause an error. You can add
+    /// only one of these two features because Runtime Monitoring already includes
+    /// the threat detection for Amazon EKS resources. For more information, see
     /// [Runtime
     /// Monitoring](https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html).
     ///
     /// There might be regional differences because some data sources might not be
     /// available in all the Amazon Web Services Regions where GuardDuty is
-    /// presently supported. For more
-    /// information, see [Regions and
+    /// presently supported. For more information, see [Regions and
     /// endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
     pub fn updateMemberDetectors(self: *Self, allocator: std.mem.Allocator, input: update_member_detectors.UpdateMemberDetectorsInput, options: CallOptions) !update_member_detectors.UpdateMemberDetectorsOutput {
         return update_member_detectors.execute(self, allocator, input, options);
     }
 
     /// Configures the delegated administrator account with the provided values. You
-    /// must provide
-    /// a value for either `autoEnableOrganizationMembers` or `autoEnable`, but not
-    /// both.
+    /// must provide a value for either `autoEnableOrganizationMembers` or
+    /// `autoEnable`, but not both.
     ///
-    /// Specifying both EKS Runtime Monitoring (`EKS_RUNTIME_MONITORING`)
-    /// and Runtime Monitoring (`RUNTIME_MONITORING`) will cause an error.
-    /// You can add only one of these two features because Runtime Monitoring
-    /// already includes the
-    /// threat detection for Amazon EKS resources. For more information, see
+    /// Specifying both EKS Runtime Monitoring (`EKS_RUNTIME_MONITORING`) and
+    /// Runtime Monitoring (`RUNTIME_MONITORING`) will cause an error. You can add
+    /// only one of these two features because Runtime Monitoring already includes
+    /// the threat detection for Amazon EKS resources. For more information, see
     /// [Runtime
     /// Monitoring](https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html).
     ///
     /// There might be regional differences because some data sources might not be
     /// available in all the Amazon Web Services Regions where GuardDuty is
-    /// presently supported. For more
-    /// information, see [Regions and
+    /// presently supported. For more information, see [Regions and
     /// endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
     pub fn updateOrganizationConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_organization_configuration.UpdateOrganizationConfigurationInput, options: CallOptions) !update_organization_configuration.UpdateOrganizationConfigurationOutput {
         return update_organization_configuration.execute(self, allocator, input, options);

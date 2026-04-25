@@ -12,6 +12,7 @@ const RemoteAccessConfig = @import("remote_access_config.zig").RemoteAccessConfi
 const NodegroupScalingConfig = @import("nodegroup_scaling_config.zig").NodegroupScalingConfig;
 const Taint = @import("taint.zig").Taint;
 const NodegroupUpdateConfig = @import("nodegroup_update_config.zig").NodegroupUpdateConfig;
+const WarmPoolConfig = @import("warm_pool_config.zig").WarmPoolConfig;
 const Nodegroup = @import("nodegroup.zig").Nodegroup;
 
 pub const CreateNodegroupInput = struct {
@@ -185,6 +186,12 @@ pub const CreateNodegroupInput = struct {
     /// templates](https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html) in the *Amazon EKS User Guide*.
     version: ?[]const u8 = null,
 
+    /// The warm pool configuration for the node group. Warm pools maintain
+    /// pre-initialized EC2 instances that can quickly join your cluster during
+    /// scale-out events, improving application scaling performance and reducing
+    /// costs.
+    warm_pool_config: ?WarmPoolConfig = null,
+
     pub const json_field_names = .{
         .ami_type = "amiType",
         .capacity_type = "capacityType",
@@ -205,6 +212,7 @@ pub const CreateNodegroupInput = struct {
         .taints = "taints",
         .update_config = "updateConfig",
         .version = "version",
+        .warm_pool_config = "warmPoolConfig",
     };
 };
 
@@ -358,6 +366,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateNodegroupInput, c
     if (input.version) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"version\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.warm_pool_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"warmPoolConfig\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

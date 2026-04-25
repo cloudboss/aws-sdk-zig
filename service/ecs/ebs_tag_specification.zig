@@ -4,10 +4,10 @@ const Tag = @import("tag.zig").Tag;
 
 /// The tag specifications of an Amazon EBS volume.
 pub const EBSTagSpecification = struct {
-    /// Determines whether to propagate the tags from the task definition to  the
+    /// Determines whether to propagate the tags from the task definition to the
     /// Amazon EBS volume. Tags can only propagate to a `SERVICE` specified in
-    /// `ServiceVolumeConfiguration`. If no value is specified, the tags
-    /// aren't  propagated.
+    /// `ServiceVolumeConfiguration`. If no value is specified, the tags aren't
+    /// propagated.
     propagate_tags: ?PropagateTags = null,
 
     /// The type of volume resource.

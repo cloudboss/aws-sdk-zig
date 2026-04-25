@@ -1,5 +1,5 @@
-/// A finding aggregator is a Security Hub resource that specifies cross-Region
-/// aggregation settings, including the
+/// A finding aggregator is a Security Hub CSPM resource that specifies
+/// cross-Region aggregation settings, including the
 /// home Region and any linked Regions.
 pub const FindingAggregator = struct {
     /// The ARN of the finding aggregator. You use the finding aggregator ARN to

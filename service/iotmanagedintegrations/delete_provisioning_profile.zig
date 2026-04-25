@@ -6,7 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DeleteProvisioningProfileInput = struct {
-    /// The name of the provisioning template.
+    /// The id of the provisioning profile.
     identifier: []const u8,
 
     pub const json_field_names = .{

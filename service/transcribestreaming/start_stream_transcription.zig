@@ -219,7 +219,9 @@ pub const StartStreamTranscriptionInput = struct {
     /// `CREDIT_DEBIT_CVV`, `CREDIT_DEBIT_EXPIRY`,
     /// `CREDIT_DEBIT_NUMBER`, `EMAIL`,
     /// `NAME`, `PHONE`, `PIN`,
-    /// `SSN`, or `ALL`.
+    /// `SSN`, `AGE`, `DATE_TIME`,
+    /// `LICENSE_PLATE`, `PASSPORT_NUMBER`,
+    /// `PASSWORD`, `USERNAME`, `VEHICLE_IDENTIFICATION_NUMBER`, or `ALL`.
     ///
     /// Note that if you include `PiiEntityTypes` in your request, you must also
     /// include
@@ -242,6 +244,16 @@ pub const StartStreamTranscriptionInput = struct {
     /// parameter in your request,
     /// Amazon Transcribe generates an ID and returns it in the response.
     session_id: ?[]const u8 = null,
+
+    /// Specify the time window, in minutes, during which your transcription session
+    /// can be resumed,
+    /// measured from the stream start time. This optional parameter accepts integer
+    /// values from 1 to 300 (5 hours).
+    ///
+    /// For example, if your stream starts at 1 PM and you specify a
+    /// `SessionResumeWindow` of 30 minutes,
+    /// you can reconnect to the session as many times as you want until 1:30 PM.
+    session_resume_window: ?i32 = null,
 
     /// Enables speaker partitioning (diarization) in your transcription output.
     /// Speaker partitioning
@@ -350,6 +362,7 @@ pub const StartStreamTranscriptionInput = struct {
         .pii_entity_types = "PiiEntityTypes",
         .preferred_language = "PreferredLanguage",
         .session_id = "SessionId",
+        .session_resume_window = "SessionResumeWindow",
         .show_speaker_label = "ShowSpeakerLabel",
         .vocabulary_filter_method = "VocabularyFilterMethod",
         .vocabulary_filter_name = "VocabularyFilterName",
@@ -415,6 +428,10 @@ pub const StartStreamTranscriptionOutput = struct {
     /// Provides the identifier for your transcription session.
     session_id: ?[]const u8 = null,
 
+    /// Provides the session resume window, in minutes, that you specified in your
+    /// request.
+    session_resume_window: ?i32 = null,
+
     /// Shows whether speaker partitioning was enabled for your transcription.
     show_speaker_label: ?bool = null,
 
@@ -459,6 +476,7 @@ pub const StartStreamTranscriptionOutput = struct {
         .preferred_language = "PreferredLanguage",
         .request_id = "RequestId",
         .session_id = "SessionId",
+        .session_resume_window = "SessionResumeWindow",
         .show_speaker_label = "ShowSpeakerLabel",
         .transcript_result_stream = "TranscriptResultStream",
         .vocabulary_filter_method = "VocabularyFilterMethod",

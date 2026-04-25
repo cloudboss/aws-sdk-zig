@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const SqlParameter = @import("sql_parameter.zig").SqlParameter;
 const ResultFormatString = @import("result_format_string.zig").ResultFormatString;
 
 pub const BatchExecuteStatementInput = struct {
@@ -23,6 +24,10 @@ pub const BatchExecuteStatementInput = struct {
     /// The database user name. This parameter is required when connecting to a
     /// cluster as a database user and authenticating using temporary credentials.
     db_user: ?[]const u8 = null,
+
+    /// The parameters for the SQL statements. The parameters are shared across all
+    /// SQL statements in the batch.
+    parameters: ?[]const SqlParameter = null,
 
     /// The data format of the result of the SQL statement. If no format is
     /// specified, the default is JSON.
@@ -65,6 +70,7 @@ pub const BatchExecuteStatementInput = struct {
         .cluster_identifier = "ClusterIdentifier",
         .database = "Database",
         .db_user = "DbUser",
+        .parameters = "Parameters",
         .result_format = "ResultFormat",
         .secret_arn = "SecretArn",
         .session_id = "SessionId",

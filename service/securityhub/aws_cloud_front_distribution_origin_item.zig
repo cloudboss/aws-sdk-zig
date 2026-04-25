@@ -2,8 +2,8 @@ const AwsCloudFrontDistributionOriginCustomOriginConfig = @import("aws_cloud_fro
 const AwsCloudFrontDistributionOriginS3OriginConfig = @import("aws_cloud_front_distribution_origin_s3_origin_config.zig").AwsCloudFrontDistributionOriginS3OriginConfig;
 
 /// A complex type that describes the
-/// Amazon S3 bucket, HTTP server (for example, a web server), or other server
-/// from which CloudFront gets your files.
+/// Amazon S3 bucket, HTTP server (for example, a web server),
+/// or other server from which CloudFront gets your files.
 pub const AwsCloudFrontDistributionOriginItem = struct {
     /// An origin that is not an Amazon S3 bucket, with one exception.
     /// If the Amazon S3 bucket is configured with static website hosting, use this

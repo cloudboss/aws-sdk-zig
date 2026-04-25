@@ -1,15 +1,15 @@
 const std = @import("std");
 
 pub const EphemerisInvalidReason = enum {
-    /// Provided spacecraft identifiers such as spacecraft NORAD Id are invalid
+    /// Provided spacecraft identifiers such as spacecraft NORAD ID are invalid.
     metadata_invalid,
-    /// Start, end, or expiration time(s) are invalid for the provided ephemeris
+    /// Start, end, or expiration time(s) are invalid for the provided ephemeris.
     time_range_invalid,
-    /// Provided ephemeris defines invalid spacecraft trajectory
+    /// Provided ephemeris defines invalid spacecraft trajectory.
     trajectory_invalid,
-    /// Provided KMS key is invalid
+    /// Provided KMS key is invalid.
     kms_key_invalid,
-    /// Internal Service Error occurred while processing ephemeris
+    /// Internal service error occurred while processing ephemeris.
     validation_error,
 
     pub const json_field_names = .{

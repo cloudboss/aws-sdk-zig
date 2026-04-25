@@ -1,5 +1,5 @@
 /// Details about the specified challenge, returned by the
-/// [GetChallengeMetadata](https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_GetChallengeMetadata.html) action.
+/// [GetChallengeMetadata](https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_GetChallengeMetadata.html) action.
 pub const ChallengeMetadataSummary = struct {
     /// The Amazon Resource Name (ARN) of the challenge.
     arn: ?[]const u8 = null,

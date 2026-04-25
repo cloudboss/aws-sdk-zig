@@ -11,6 +11,7 @@ pub const ConnectorEgressType = @import("connector_egress_type.zig").ConnectorEg
 pub const ConnectorFileTransferResult = @import("connector_file_transfer_result.zig").ConnectorFileTransferResult;
 pub const ConnectorStatus = @import("connector_status.zig").ConnectorStatus;
 pub const ConnectorVpcLatticeEgressConfig = @import("connector_vpc_lattice_egress_config.zig").ConnectorVpcLatticeEgressConfig;
+pub const ConnectorsIpAddressType = @import("connectors_ip_address_type.zig").ConnectorsIpAddressType;
 pub const CopyStepDetails = @import("copy_step_details.zig").CopyStepDetails;
 pub const CustomDirectoriesType = @import("custom_directories_type.zig").CustomDirectoriesType;
 pub const CustomHttpHeader = @import("custom_http_header.zig").CustomHttpHeader;

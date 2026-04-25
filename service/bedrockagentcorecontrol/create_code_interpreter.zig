@@ -4,10 +4,14 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const Certificate = @import("certificate.zig").Certificate;
 const CodeInterpreterNetworkConfiguration = @import("code_interpreter_network_configuration.zig").CodeInterpreterNetworkConfiguration;
 const CodeInterpreterStatus = @import("code_interpreter_status.zig").CodeInterpreterStatus;
 
 pub const CreateCodeInterpreterInput = struct {
+    /// A list of certificates to install in the code interpreter.
+    certificates: ?[]const Certificate = null,
+
     /// A unique, case-sensitive identifier to ensure that the operation completes
     /// no more than one time. If this token matches a previous request, Amazon
     /// Bedrock AgentCore ignores the request but does not return an error.
@@ -34,6 +38,7 @@ pub const CreateCodeInterpreterInput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
+        .certificates = "certificates",
         .client_token = "clientToken",
         .description = "description",
         .execution_role_arn = "executionRoleArn",
@@ -102,6 +107,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCodeInterpreterIn
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.certificates) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"certificates\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.client_token) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"clientToken\":");

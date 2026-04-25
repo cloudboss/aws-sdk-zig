@@ -7,6 +7,9 @@ const ServiceError = @import("errors.zig").ServiceError;
 
 pub const DeletePolicyStoreInput = struct {
     /// Specifies the ID of the policy store that you want to delete.
+    ///
+    /// To specify a policy store, the alias name cannot be used. Only the ID can be
+    /// used.
     policy_store_id: []const u8,
 
     pub const json_field_names = .{

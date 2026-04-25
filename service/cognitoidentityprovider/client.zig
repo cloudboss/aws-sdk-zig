@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const add_custom_attributes = @import("add_custom_attributes.zig");
+const add_user_pool_client_secret = @import("add_user_pool_client_secret.zig");
 const admin_add_user_to_group = @import("admin_add_user_to_group.zig");
 const admin_confirm_sign_up = @import("admin_confirm_sign_up.zig");
 const admin_create_user = @import("admin_create_user.zig");
@@ -52,6 +53,7 @@ const delete_user = @import("delete_user.zig");
 const delete_user_attributes = @import("delete_user_attributes.zig");
 const delete_user_pool = @import("delete_user_pool.zig");
 const delete_user_pool_client = @import("delete_user_pool_client.zig");
+const delete_user_pool_client_secret = @import("delete_user_pool_client_secret.zig");
 const delete_user_pool_domain = @import("delete_user_pool_domain.zig");
 const delete_web_authn_credential = @import("delete_web_authn_credential.zig");
 const describe_identity_provider = @import("describe_identity_provider.zig");
@@ -87,6 +89,7 @@ const list_resource_servers = @import("list_resource_servers.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const list_terms = @import("list_terms.zig");
 const list_user_import_jobs = @import("list_user_import_jobs.zig");
+const list_user_pool_client_secrets = @import("list_user_pool_client_secrets.zig");
 const list_user_pool_clients = @import("list_user_pool_clients.zig");
 const list_user_pools = @import("list_user_pools.zig");
 const list_users = @import("list_users.zig");
@@ -172,6 +175,13 @@ pub const Client = struct {
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
     pub fn addCustomAttributes(self: *Self, allocator: std.mem.Allocator, input: add_custom_attributes.AddCustomAttributesInput, options: CallOptions) !add_custom_attributes.AddCustomAttributesOutput {
         return add_custom_attributes.execute(self, allocator, input, options);
+    }
+
+    /// Creates a new client secret for an existing confidential user pool app
+    /// client. Supports up to 2 active secrets per app client for zero-downtime
+    /// credential rotation workflows.
+    pub fn addUserPoolClientSecret(self: *Self, allocator: std.mem.Allocator, input: add_user_pool_client_secret.AddUserPoolClientSecretInput, options: CallOptions) !add_user_pool_client_secret.AddUserPoolClientSecretOutput {
+        return add_user_pool_client_secret.execute(self, allocator, input, options);
     }
 
     /// Adds a user to a group. A user who is in a group can present a
@@ -1705,6 +1715,12 @@ pub const Client = struct {
         return delete_user_pool_client.execute(self, allocator, input, options);
     }
 
+    /// Deletes a specific client secret from a user pool app client. You cannot
+    /// delete the last remaining secret for an app client.
+    pub fn deleteUserPoolClientSecret(self: *Self, allocator: std.mem.Allocator, input: delete_user_pool_client_secret.DeleteUserPoolClientSecretInput, options: CallOptions) !delete_user_pool_client_secret.DeleteUserPoolClientSecretOutput {
+        return delete_user_pool_client_secret.execute(self, allocator, input, options);
+    }
+
     /// Given a user pool ID and domain identifier, deletes a user pool domain.
     /// After you
     /// delete a user pool domain, your managed login pages and authorization server
@@ -2459,6 +2475,15 @@ pub const Client = struct {
         return list_user_import_jobs.execute(self, allocator, input, options);
     }
 
+    /// Lists all client secrets associated with a user pool app client. Returns
+    /// metadata about the secrets. The response does not include pagination tokens
+    /// as there are only 2 secrets at any given time and we return both with every
+    /// ListUserPoolClientSecrets call. For security reasons, the response never
+    /// reveals the actual secret value in ClientSecretValue.
+    pub fn listUserPoolClientSecrets(self: *Self, allocator: std.mem.Allocator, input: list_user_pool_client_secrets.ListUserPoolClientSecretsInput, options: CallOptions) !list_user_pool_client_secrets.ListUserPoolClientSecretsOutput {
+        return list_user_pool_client_secrets.execute(self, allocator, input, options);
+    }
+
     /// Given a user pool ID, lists app clients. App clients are sets of rules for
     /// the access
     /// that you want a user pool to grant to one application. For more information,
@@ -2505,6 +2530,12 @@ pub const Client = struct {
     /// Given a user pool ID, returns a list of users and their basic details in a
     /// user
     /// pool.
+    ///
+    /// This operation is eventually consistent. You might experience a delay before
+    /// results
+    /// are up-to-date. To validate the existence or configuration of an individual
+    /// user, use
+    /// `AdminGetUser`.
     ///
     /// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
     /// requests for this API operation. For
@@ -3222,8 +3253,8 @@ pub const Client = struct {
     /// your user
     /// pool, modified to include the changes that you want to make.
     ///
-    /// If you don't provide a value for an attribute, Amazon Cognito sets it to its
-    /// default value.
+    /// With the exception of `UserPoolTier`, if you don't provide a value for an
+    /// attribute, Amazon Cognito sets it to its default value.
     ///
     /// This action might generate an SMS text message. Starting June 1, 2021, US
     /// telecom carriers

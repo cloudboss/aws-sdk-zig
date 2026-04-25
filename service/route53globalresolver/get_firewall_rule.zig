@@ -54,8 +54,8 @@ pub const GetFirewallRuleOutput = struct {
     /// The description of the DNS Firewall rule.
     description: ?[]const u8 = null,
 
-    /// The type of the DNS Firewall Advanced rule. Valid values are DGA and
-    /// DNS_TUNNELING.
+    /// The type of the DNS Firewall Advanced rule. Valid values are DGA,
+    /// DNS_TUNNELING, and DICTIONARY_DGA.
     dns_advanced_protection: ?DnsAdvancedProtection = null,
 
     /// The DNS view ID the DNS Firewall is associated with.

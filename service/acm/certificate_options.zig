@@ -22,7 +22,8 @@ pub const CertificateOptions = struct {
     certificate_transparency_logging_preference: ?CertificateTransparencyLoggingPreference = null,
 
     /// You can opt in to allow the export of your certificates by specifying
-    /// `ENABLED`.
+    /// `ENABLED`. You cannot update the value of `Export` after the the certificate
+    /// is created.
     @"export": ?CertificateExport = null,
 
     pub const json_field_names = .{

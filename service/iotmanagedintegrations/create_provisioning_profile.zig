@@ -5,12 +5,15 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ProvisioningType = @import("provisioning_type.zig").ProvisioningType;
+const ProvisioningProfileStatus = @import("provisioning_profile_status.zig").ProvisioningProfileStatus;
 
 pub const CreateProvisioningProfileInput = struct {
-    /// The id of the certificate authority (CA) certificate.
+    /// The body of the PEM-encoded certificate authority (CA) certificate.
     ca_certificate: ?[]const u8 = null,
 
-    /// The claim certificate.
+    /// The body of the PEM-encoded claim certificate. If a claim certificate is
+    /// provided, it will be used for the provisioning profile. Otherwise, a claim
+    /// certificate will be generated.
     claim_certificate: ?[]const u8 = null,
 
     /// An idempotency token. If you retry a request that completed successfully
@@ -18,7 +21,7 @@ pub const CreateProvisioningProfileInput = struct {
     /// will succeed without performing any further actions.
     client_token: ?[]const u8 = null,
 
-    /// The name of the provisioning template.
+    /// The name of the provisioning profile.
     name: ?[]const u8 = null,
 
     /// The type of provisioning workflow the device uses for onboarding to IoT
@@ -39,14 +42,13 @@ pub const CreateProvisioningProfileInput = struct {
 };
 
 pub const CreateProvisioningProfileOutput = struct {
-    /// The Amazon Resource Name (ARN) of the provisioning template used in the
-    /// provisioning profile.
+    /// The Amazon Resource Name (ARN) of the provisioning profile.
     arn: ?[]const u8 = null,
 
-    /// The id of the claim certificate.
+    /// The body of the PEM-encoded claim certificate.
     claim_certificate: ?[]const u8 = null,
 
-    /// The private key of the claim certificate. This is stored securely on the
+    /// The private key of the claim certificate. This may be stored securely on the
     /// device for validating the connection endpoint with IoT managed integrations
     /// using the public key.
     claim_certificate_private_key: ?[]const u8 = null,
@@ -54,12 +56,15 @@ pub const CreateProvisioningProfileOutput = struct {
     /// The identifier of the provisioning profile.
     id: ?[]const u8 = null,
 
-    /// The name of the provisioning template.
+    /// The name of the provisioning profile.
     name: ?[]const u8 = null,
 
     /// The type of provisioning workflow the device uses for onboarding to IoT
     /// managed integrations.
     provisioning_type: ?ProvisioningType = null,
+
+    /// The status of a provisioning profile.
+    status: ?ProvisioningProfileStatus = null,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -68,6 +73,7 @@ pub const CreateProvisioningProfileOutput = struct {
         .id = "Id",
         .name = "Name",
         .provisioning_type = "ProvisioningType",
+        .status = "Status",
     };
 };
 

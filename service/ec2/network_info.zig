@@ -1,4 +1,5 @@
 const BandwidthWeightingType = @import("bandwidth_weighting_type.zig").BandwidthWeightingType;
+const DefaultConnectionTrackingConfiguration = @import("default_connection_tracking_configuration.zig").DefaultConnectionTrackingConfiguration;
 const EfaInfo = @import("efa_info.zig").EfaInfo;
 const EnaSupport = @import("ena_support.zig").EnaSupport;
 const FlexibleEnaQueuesSupport = @import("flexible_ena_queues_support.zig").FlexibleEnaQueuesSupport;
@@ -10,6 +11,9 @@ pub const NetworkInfo = struct {
     /// instance type, if
     /// supported.
     bandwidth_weightings: ?[]const BandwidthWeightingType = null,
+
+    /// Indicates conntrack information for the instance type
+    connection_tracking_configuration: ?DefaultConnectionTrackingConfiguration = null,
 
     /// The index of the default network card, starting at 0.
     default_network_card_index: ?i32 = null,
@@ -40,6 +44,9 @@ pub const NetworkInfo = struct {
     /// The maximum number of IPv4 addresses per network interface.
     ipv_4_addresses_per_interface: ?i32 = null,
 
+    /// The maximum number of IPv4 addresses per secondary interface.
+    ipv_4_addresses_per_secondary_interface: ?i32 = null,
+
     /// The maximum number of IPv6 addresses per network interface.
     ipv_6_addresses_per_interface: ?i32 = null,
 
@@ -53,9 +60,16 @@ pub const NetworkInfo = struct {
     /// The maximum number of network interfaces for the instance type.
     maximum_network_interfaces: ?i32 = null,
 
+    /// The maximum number of secondary interfaces for the instance type.
+    maximum_secondary_network_interfaces: ?i32 = null,
+
     /// Describes the network cards for the instance type.
     network_cards: ?[]const NetworkCardInfo = null,
 
     /// The network performance.
     network_performance: ?[]const u8 = null,
+
+    /// Indicates whether secondary interface attachments from secondary network are
+    /// supported.
+    secondary_network_supported: ?bool = null,
 };

@@ -1,5 +1,10 @@
 const std = @import("std");
 
+/// The type of resource.
+///
+/// * `phone-number`: A phone number resource.
+/// * `sender-id`: A sender ID resource.
+/// * `rcs-agent`: An RCS agent resource.
 pub const ResourceType = enum {
     account,
     phone_number,
@@ -14,9 +19,12 @@ pub const ResourceType = enum {
     registration_attachment,
     verified_destination_number,
     protect_configuration,
+    notify_configuration,
+    notify_template,
     message_template,
     policy,
     message,
+    rcs_agent,
 
     pub const json_field_names = .{
         .account = "account",
@@ -32,9 +40,12 @@ pub const ResourceType = enum {
         .registration_attachment = "registration-attachment",
         .verified_destination_number = "verified-destination-number",
         .protect_configuration = "protect-configuration",
+        .notify_configuration = "notify-configuration",
+        .notify_template = "notify-template",
         .message_template = "message-template",
         .policy = "policy",
         .message = "message",
+        .rcs_agent = "rcs-agent",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -52,9 +63,12 @@ pub const ResourceType = enum {
             .registration_attachment => "registration-attachment",
             .verified_destination_number => "verified-destination-number",
             .protect_configuration => "protect-configuration",
+            .notify_configuration => "notify-configuration",
+            .notify_template => "notify-template",
             .message_template => "message-template",
             .policy => "policy",
             .message => "message",
+            .rcs_agent => "rcs-agent",
         };
     }
 

@@ -7,7 +7,7 @@ GRADLE_VERSION = 8.7
 CTR_IMAGE_BASE = alpine:3.21
 LOCALSTACK_IMG = localstack/localstack:4.14.0
 
-AWS_MODELS_COMMIT = fc44394485733bfdbe094a708e4b3963d31bd75d
+AWS_MODELS_COMMIT = 29144b97ed688d6b1a89b6fd21099823cbc0b3fb
 
 # The Dockerfile and its args are hashed to create a unique tag. The image
 # will be rebuilt if the hash changes, as the dependency file will change.

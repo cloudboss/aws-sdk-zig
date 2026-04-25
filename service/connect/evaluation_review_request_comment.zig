@@ -3,10 +3,10 @@ pub const EvaluationReviewRequestComment = struct {
     /// The text content of the review request comment.
     comment: ?[]const u8 = null,
 
-    /// The user who created the review request comment.
+    /// The user who created the evaluation review request comment.
     created_by: ?[]const u8 = null,
 
-    /// The timestamp when the review request comment was created.
+    /// The timestamp when the evaluation review request comment was created.
     created_time: ?i64 = null,
 
     pub const json_field_names = .{

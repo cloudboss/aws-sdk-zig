@@ -10,22 +10,18 @@ const CapacityProvider = @import("capacity_provider.zig").CapacityProvider;
 
 pub const UpdateCapacityProviderInput = struct {
     /// An object that represent the parameters to update for the Auto Scaling group
-    /// capacity
-    /// provider.
+    /// capacity provider.
     auto_scaling_group_provider: ?AutoScalingGroupProviderUpdate = null,
 
     /// The name of the cluster that contains the capacity provider to update.
-    /// Managed
-    /// instances capacity providers are cluster-scoped and can only be updated
-    /// within their
-    /// associated cluster.
+    /// Managed instances capacity providers are cluster-scoped and can only be
+    /// updated within their associated cluster.
     cluster: ?[]const u8 = null,
 
     /// The updated configuration for the Amazon ECS Managed Instances provider. You
-    /// can
-    /// modify the infrastructure role, instance launch template, and tag
-    /// propagation settings.
-    /// Changes take effect for new instances launched after the update.
+    /// can modify the infrastructure role, instance launch template, and tag
+    /// propagation settings. Changes take effect for new instances launched after
+    /// the update.
     managed_instances_provider: ?UpdateManagedInstancesProviderConfiguration = null,
 
     /// The name of the capacity provider to update.
@@ -172,6 +168,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

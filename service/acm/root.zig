@@ -29,4 +29,6 @@ pub const RequestCertificateOutput = @import("request_certificate.zig").RequestC
 pub const ResendValidationEmailInput = @import("resend_validation_email.zig").ResendValidationEmailInput;
 pub const RevokeCertificateInput = @import("revoke_certificate.zig").RevokeCertificateInput;
 pub const RevokeCertificateOutput = @import("revoke_certificate.zig").RevokeCertificateOutput;
+pub const SearchCertificatesInput = @import("search_certificates.zig").SearchCertificatesInput;
+pub const SearchCertificatesOutput = @import("search_certificates.zig").SearchCertificatesOutput;
 pub const UpdateCertificateOptionsInput = @import("update_certificate_options.zig").UpdateCertificateOptionsInput;

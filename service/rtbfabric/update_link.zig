@@ -17,10 +17,14 @@ pub const UpdateLinkInput = struct {
     /// Settings for the application logs.
     log_settings: ?LinkLogSettings = null,
 
+    /// The timeout value in milliseconds.
+    timeout_in_millis: ?i64 = null,
+
     pub const json_field_names = .{
         .gateway_id = "gatewayId",
         .link_id = "linkId",
         .log_settings = "logSettings",
+        .timeout_in_millis = "timeoutInMillis",
     };
 };
 
@@ -83,6 +87,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateLinkInput, config
     if (input.log_settings) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"logSettings\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.timeout_in_millis) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"timeoutInMillis\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

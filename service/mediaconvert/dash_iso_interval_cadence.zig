@@ -4,20 +4,25 @@ const std = @import("std");
 /// FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the
 /// output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert
 /// generates thumbnails according to the interval you specify in
-/// thumbnailInterval.
+/// thumbnailInterval. If set to FOLLOW_SEGMENTATION, MediaConvert generates
+/// thumbnail playlist entries that align exactly with video segment boundaries.
+/// FOLLOW_SEGMENTATION requires 1x1 tiling.
 pub const DashIsoIntervalCadence = enum {
     follow_iframe,
     follow_custom,
+    follow_segmentation,
 
     pub const json_field_names = .{
         .follow_iframe = "FOLLOW_IFRAME",
         .follow_custom = "FOLLOW_CUSTOM",
+        .follow_segmentation = "FOLLOW_SEGMENTATION",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .follow_iframe => "FOLLOW_IFRAME",
             .follow_custom => "FOLLOW_CUSTOM",
+            .follow_segmentation => "FOLLOW_SEGMENTATION",
         };
     }
 

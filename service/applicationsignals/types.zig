@@ -28,6 +28,7 @@ pub const Metric = @import("metric.zig").Metric;
 pub const MetricDataQuery = @import("metric_data_query.zig").MetricDataQuery;
 pub const MetricGraph = @import("metric_graph.zig").MetricGraph;
 pub const MetricReference = @import("metric_reference.zig").MetricReference;
+pub const MetricSource = @import("metric_source.zig").MetricSource;
 pub const MetricSourceType = @import("metric_source_type.zig").MetricSourceType;
 pub const MetricStat = @import("metric_stat.zig").MetricStat;
 pub const MonitoredRequestCountMetricDataQueries = @import("monitored_request_count_metric_data_queries.zig").MonitoredRequestCountMetricDataQueries;

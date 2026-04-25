@@ -11,6 +11,7 @@ pub const ComputeNodeGroupStatus = enum {
     deleted,
     suspending,
     suspended,
+    resuming,
 
     pub const json_field_names = .{
         .creating = "CREATING",
@@ -23,6 +24,7 @@ pub const ComputeNodeGroupStatus = enum {
         .deleted = "DELETED",
         .suspending = "SUSPENDING",
         .suspended = "SUSPENDED",
+        .resuming = "RESUMING",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -37,6 +39,7 @@ pub const ComputeNodeGroupStatus = enum {
             .deleted => "DELETED",
             .suspending => "SUSPENDING",
             .suspended => "SUSPENDED",
+            .resuming => "RESUMING",
         };
     }
 

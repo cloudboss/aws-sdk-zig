@@ -47,6 +47,7 @@ pub const ServiceError = struct {
         unable_to_decrypt_secret_value_exception: UnableToDecryptSecretValueException,
         unable_to_get_upstream_image_exception: UnableToGetUpstreamImageException,
         unable_to_get_upstream_layer_exception: UnableToGetUpstreamLayerException,
+        unable_to_list_upstream_image_referrers_exception: UnableToListUpstreamImageReferrersException,
         unsupported_image_type_exception: UnsupportedImageTypeException,
         unsupported_upstream_registry_exception: UnsupportedUpstreamRegistryException,
         upload_not_found_exception: UploadNotFoundException,
@@ -97,6 +98,7 @@ pub const ServiceError = struct {
                 .unable_to_decrypt_secret_value_exception => "UnableToDecryptSecretValueException",
                 .unable_to_get_upstream_image_exception => "UnableToGetUpstreamImageException",
                 .unable_to_get_upstream_layer_exception => "UnableToGetUpstreamLayerException",
+                .unable_to_list_upstream_image_referrers_exception => "UnableToListUpstreamImageReferrersException",
                 .unsupported_image_type_exception => "UnsupportedImageTypeException",
                 .unsupported_upstream_registry_exception => "UnsupportedUpstreamRegistryException",
                 .upload_not_found_exception => "UploadNotFoundException",
@@ -149,6 +151,7 @@ pub const ServiceError = struct {
                 .unable_to_decrypt_secret_value_exception => |e| e.message,
                 .unable_to_get_upstream_image_exception => |e| e.message,
                 .unable_to_get_upstream_layer_exception => |e| e.message,
+                .unable_to_list_upstream_image_referrers_exception => |e| e.message,
                 .unsupported_image_type_exception => |e| e.message,
                 .unsupported_upstream_registry_exception => |e| e.message,
                 .upload_not_found_exception => |e| e.message,
@@ -201,6 +204,7 @@ pub const ServiceError = struct {
                 .unable_to_decrypt_secret_value_exception => 400,
                 .unable_to_get_upstream_image_exception => 400,
                 .unable_to_get_upstream_layer_exception => 400,
+                .unable_to_list_upstream_image_referrers_exception => 400,
                 .unsupported_image_type_exception => 400,
                 .unsupported_upstream_registry_exception => 400,
                 .upload_not_found_exception => 400,
@@ -253,6 +257,7 @@ pub const ServiceError = struct {
                 .unable_to_decrypt_secret_value_exception => |e| e.request_id,
                 .unable_to_get_upstream_image_exception => |e| e.request_id,
                 .unable_to_get_upstream_layer_exception => |e| e.request_id,
+                .unable_to_list_upstream_image_referrers_exception => |e| e.request_id,
                 .unsupported_image_type_exception => |e| e.request_id,
                 .unsupported_upstream_registry_exception => |e| e.request_id,
                 .upload_not_found_exception => |e| e.request_id,
@@ -489,6 +494,11 @@ pub const UnableToGetUpstreamImageException = struct {
 };
 
 pub const UnableToGetUpstreamLayerException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const UnableToListUpstreamImageReferrersException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };

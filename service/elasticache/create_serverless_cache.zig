@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CacheUsageLimits = @import("cache_usage_limits.zig").CacheUsageLimits;
+const NetworkType = @import("network_type.zig").NetworkType;
 const Tag = @import("tag.zig").Tag;
 const ServerlessCache = @import("serverless_cache.zig").ServerlessCache;
 const serde = @import("serde.zig");
@@ -37,6 +38,13 @@ pub const CreateServerlessCacheInput = struct {
     /// cache.
     major_engine_version: ?[]const u8 = null,
 
+    /// The IP protocol version used by the serverless cache.
+    /// Must be either `ipv4` | `ipv6` | `dual_stack`.
+    /// `ipv6` is only supported with ipv6-only subnets.
+    /// If not specified, defaults to `ipv4`, unless all provided subnets are
+    /// IPv6-only, in which case it defaults to `ipv6`.
+    network_type: ?NetworkType = null,
+
     /// A list of the one or more VPC security groups to be associated with the
     /// serverless cache.
     /// The security group will authorize traffic access for the VPC end-point
@@ -54,11 +62,10 @@ pub const CreateServerlessCacheInput = struct {
     /// from. Available for Valkey, Redis OSS and Serverless Memcached only.
     snapshot_arns_to_restore: ?[]const []const u8 = null,
 
-    /// The number of snapshots that will be retained for the serverless cache that
-    /// is being created.
-    /// As new snapshots beyond this limit are added, the oldest snapshots will be
-    /// deleted on a rolling basis. Available for Valkey, Redis OSS and Serverless
-    /// Memcached only.
+    /// The number of days for which ElastiCache retains automatic snapshots before
+    /// deleting them.
+    /// Available for Valkey, Redis OSS and Serverless Memcached only. The maximum
+    /// value allowed is 35 days.
     snapshot_retention_limit: ?i32 = null,
 
     /// A list of the identifiers of the subnets where the VPC endpoint for the
@@ -156,6 +163,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateServerlessCacheIn
     if (input.major_engine_version) |v| {
         try body_buf.appendSlice(allocator, "&MajorEngineVersion=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
+    if (input.network_type) |v| {
+        try body_buf.appendSlice(allocator, "&NetworkType=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.security_group_ids) |list| {
         for (list, 0..) |item, idx| {

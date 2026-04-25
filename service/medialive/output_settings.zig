@@ -2,6 +2,7 @@ const ArchiveOutputSettings = @import("archive_output_settings.zig").ArchiveOutp
 const CmafIngestOutputSettings = @import("cmaf_ingest_output_settings.zig").CmafIngestOutputSettings;
 const FrameCaptureOutputSettings = @import("frame_capture_output_settings.zig").FrameCaptureOutputSettings;
 const HlsOutputSettings = @import("hls_output_settings.zig").HlsOutputSettings;
+const MediaConnectRouterOutputSettings = @import("media_connect_router_output_settings.zig").MediaConnectRouterOutputSettings;
 const MediaPackageOutputSettings = @import("media_package_output_settings.zig").MediaPackageOutputSettings;
 const MsSmoothOutputSettings = @import("ms_smooth_output_settings.zig").MsSmoothOutputSettings;
 const MultiplexOutputSettings = @import("multiplex_output_settings.zig").MultiplexOutputSettings;
@@ -18,6 +19,8 @@ pub const OutputSettings = struct {
     frame_capture_output_settings: ?FrameCaptureOutputSettings = null,
 
     hls_output_settings: ?HlsOutputSettings = null,
+
+    media_connect_router_output_settings: ?MediaConnectRouterOutputSettings = null,
 
     media_package_output_settings: ?MediaPackageOutputSettings = null,
 
@@ -36,6 +39,7 @@ pub const OutputSettings = struct {
         .cmaf_ingest_output_settings = "CmafIngestOutputSettings",
         .frame_capture_output_settings = "FrameCaptureOutputSettings",
         .hls_output_settings = "HlsOutputSettings",
+        .media_connect_router_output_settings = "MediaConnectRouterOutputSettings",
         .media_package_output_settings = "MediaPackageOutputSettings",
         .ms_smooth_output_settings = "MsSmoothOutputSettings",
         .multiplex_output_settings = "MultiplexOutputSettings",

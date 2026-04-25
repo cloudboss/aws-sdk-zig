@@ -11,11 +11,10 @@ const OrderBy = @import("order_by.zig").OrderBy;
 const FindingStatistics = @import("finding_statistics.zig").FindingStatistics;
 
 pub const GetFindingsStatisticsInput = struct {
-    /// The ID of the detector whose findings statistics you
-    /// want to retrieve.
+    /// The ID of the detector whose findings statistics you want to retrieve.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 
@@ -34,8 +33,8 @@ pub const GetFindingsStatisticsInput = struct {
     /// You can use this parameter only with the `groupBy` parameter.
     max_results: ?i32 = null,
 
-    /// Displays the sorted findings in the requested order. The default
-    /// value of `orderBy` is `DESC`.
+    /// Displays the sorted findings in the requested order. The default value of
+    /// `orderBy` is `DESC`.
     ///
     /// You can use this parameter only with the `groupBy` parameter.
     order_by: ?OrderBy = null,

@@ -1,6 +1,7 @@
 const As2ConnectorConfig = @import("as_2_connector_config.zig").As2ConnectorConfig;
 const DescribedConnectorEgressConfig = @import("described_connector_egress_config.zig").DescribedConnectorEgressConfig;
 const ConnectorEgressType = @import("connector_egress_type.zig").ConnectorEgressType;
+const ConnectorsIpAddressType = @import("connectors_ip_address_type.zig").ConnectorsIpAddressType;
 const SftpConnectorConfig = @import("sftp_connector_config.zig").SftpConnectorConfig;
 const ConnectorStatus = @import("connector_status.zig").ConnectorStatus;
 const Tag = @import("tag.zig").Tag;
@@ -66,6 +67,12 @@ pub const DescribedConnector = struct {
     /// failures.
     error_message: ?[]const u8 = null,
 
+    /// IP address type for the connector's network connections. When set to `IPV4`,
+    /// the connector uses IPv4 addresses only. When set to `DUALSTACK`, the
+    /// connector supports both IPv4 and IPv6 addresses, with IPv6 preferred when
+    /// available.
+    ip_address_type: ?ConnectorsIpAddressType = null,
+
     /// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
     /// role that allows a connector to turn on CloudWatch logging for Amazon S3
     /// events. When set, you can view connector activity in your CloudWatch logs.
@@ -104,6 +111,7 @@ pub const DescribedConnector = struct {
         .egress_config = "EgressConfig",
         .egress_type = "EgressType",
         .error_message = "ErrorMessage",
+        .ip_address_type = "IpAddressType",
         .logging_role = "LoggingRole",
         .security_policy_name = "SecurityPolicyName",
         .service_managed_egress_ip_addresses = "ServiceManagedEgressIpAddresses",

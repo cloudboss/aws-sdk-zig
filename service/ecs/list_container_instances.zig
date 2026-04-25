@@ -8,47 +8,39 @@ const ContainerInstanceStatus = @import("container_instance_status.zig").Contain
 
 pub const ListContainerInstancesInput = struct {
     /// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-    /// the
-    /// container instances to list. If you do not specify a cluster, the default
-    /// cluster is
-    /// assumed.
+    /// the container instances to list. If you do not specify a cluster, the
+    /// default cluster is assumed.
     cluster: ?[]const u8 = null,
 
     /// You can filter the results of a `ListContainerInstances` operation with
     /// cluster query language statements. For more information, see [Cluster Query
-    /// Language](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html) in the *Amazon Elastic
-    /// Container Service Developer Guide*.
+    /// Language](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html) in the *Amazon Elastic Container Service Developer Guide*.
     filter: ?[]const u8 = null,
 
     /// The maximum number of container instance results that
-    /// `ListContainerInstances` returned in paginated output. When this
-    /// parameter is used, `ListContainerInstances` only returns
-    /// `maxResults` results in a single page along with a `nextToken`
-    /// response element. The remaining results of the initial request can be seen
-    /// by sending
-    /// another `ListContainerInstances` request with the returned
-    /// `nextToken` value. This value can be between 1 and 100. If this parameter
-    /// isn't used, then `ListContainerInstances` returns up to 100 results and a
-    /// `nextToken` value if applicable.
+    /// `ListContainerInstances` returned in paginated output. When this parameter
+    /// is used, `ListContainerInstances` only returns `maxResults` results in a
+    /// single page along with a `nextToken` response element. The remaining results
+    /// of the initial request can be seen by sending another
+    /// `ListContainerInstances` request with the returned `nextToken` value. This
+    /// value can be between 1 and 100. If this parameter isn't used, then
+    /// `ListContainerInstances` returns up to 100 results and a `nextToken` value
+    /// if applicable.
     max_results: ?i32 = null,
 
-    /// The `nextToken` value returned from a `ListContainerInstances`
-    /// request indicating that more results are available to fulfill the request
-    /// and further
-    /// calls are needed. If `maxResults` was provided, it's possible the number of
-    /// results to be fewer than `maxResults`.
+    /// The `nextToken` value returned from a `ListContainerInstances` request
+    /// indicating that more results are available to fulfill the request and
+    /// further calls are needed. If `maxResults` was provided, it's possible the
+    /// number of results to be fewer than `maxResults`.
     ///
     /// This token should be treated as an opaque identifier that is only used to
-    /// retrieve
-    /// the next items in a list and not for other programmatic purposes.
+    /// retrieve the next items in a list and not for other programmatic purposes.
     next_token: ?[]const u8 = null,
 
     /// Filters the container instances by status. For example, if you specify the
     /// `DRAINING` status, the results include only container instances that have
     /// been set to `DRAINING` using
-    /// [UpdateContainerInstancesState](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateContainerInstancesState.html). If you don't specify this parameter, the The
-    /// default is to include container instances set to all states other than
-    /// `INACTIVE`.
+    /// [UpdateContainerInstancesState](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateContainerInstancesState.html). If you don't specify this parameter, the The default is to include container instances set to all states other than `INACTIVE`.
     status: ?ContainerInstanceStatus = null,
 
     pub const json_field_names = .{
@@ -62,15 +54,13 @@ pub const ListContainerInstancesInput = struct {
 
 pub const ListContainerInstancesOutput = struct {
     /// The list of container instances with full ARN entries for each container
-    /// instance
-    /// associated with the specified cluster.
+    /// instance associated with the specified cluster.
     container_instance_arns: ?[]const []const u8 = null,
 
-    /// The `nextToken` value to include in a future
-    /// `ListContainerInstances` request. When the results of a
-    /// `ListContainerInstances` request exceed `maxResults`, this
-    /// value can be used to retrieve the next page of results. This value is `null`
-    /// when there are no more results to return.
+    /// The `nextToken` value to include in a future `ListContainerInstances`
+    /// request. When the results of a `ListContainerInstances` request exceed
+    /// `maxResults`, this value can be used to retrieve the next page of results.
+    /// This value is `null` when there are no more results to return.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -203,6 +193,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

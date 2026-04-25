@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const LinkAttributes = @import("link_attributes.zig").LinkAttributes;
+const ConnectivityType = @import("connectivity_type.zig").ConnectivityType;
 const LinkDirection = @import("link_direction.zig").LinkDirection;
 const ModuleConfiguration = @import("module_configuration.zig").ModuleConfiguration;
 const LinkLogSettings = @import("link_log_settings.zig").LinkLogSettings;
@@ -27,6 +28,9 @@ pub const GetLinkOutput = struct {
     /// Attributes of the link.
     attributes: ?LinkAttributes = null,
 
+    /// The connectivity type of the link.
+    connectivity_type: ?ConnectivityType = null,
+
     /// The timestamp of when the link was created.
     created_at: i64,
 
@@ -38,6 +42,9 @@ pub const GetLinkOutput = struct {
 
     /// The unique identifier of the gateway.
     gateway_id: []const u8,
+
+    /// Boolean to specify if an HTTP responder is allowed.
+    http_responder_allowed: ?bool = null,
 
     /// The unique identifier of the link.
     link_id: []const u8,
@@ -58,21 +65,27 @@ pub const GetLinkOutput = struct {
     /// resource.
     tags: ?[]const aws.map.StringMapEntry = null,
 
+    /// The timeout value in milliseconds.
+    timeout_in_millis: ?i64 = null,
+
     /// The timestamp of when the link was updated.
     updated_at: i64,
 
     pub const json_field_names = .{
         .attributes = "attributes",
+        .connectivity_type = "connectivityType",
         .created_at = "createdAt",
         .direction = "direction",
         .flow_modules = "flowModules",
         .gateway_id = "gatewayId",
+        .http_responder_allowed = "httpResponderAllowed",
         .link_id = "linkId",
         .log_settings = "logSettings",
         .peer_gateway_id = "peerGatewayId",
         .pending_flow_modules = "pendingFlowModules",
         .status = "status",
         .tags = "tags",
+        .timeout_in_millis = "timeoutInMillis",
         .updated_at = "updatedAt",
     };
 };

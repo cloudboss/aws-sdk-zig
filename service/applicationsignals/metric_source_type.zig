@@ -4,11 +4,17 @@ pub const MetricSourceType = enum {
     service_operation,
     cloudwatch_metric,
     service_dependency,
+    appmonitor,
+    canary,
+    service,
 
     pub const json_field_names = .{
         .service_operation = "ServiceOperation",
         .cloudwatch_metric = "CloudWatchMetric",
         .service_dependency = "ServiceDependency",
+        .appmonitor = "AppMonitor",
+        .canary = "Canary",
+        .service = "Service",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +22,9 @@ pub const MetricSourceType = enum {
             .service_operation => "ServiceOperation",
             .cloudwatch_metric => "CloudWatchMetric",
             .service_dependency => "ServiceDependency",
+            .appmonitor => "AppMonitor",
+            .canary => "Canary",
+            .service => "Service",
         };
     }
 

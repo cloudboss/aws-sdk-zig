@@ -6,10 +6,12 @@ const accept_share = @import("accept_share.zig");
 const batch_delete_read_set = @import("batch_delete_read_set.zig");
 const cancel_annotation_import_job = @import("cancel_annotation_import_job.zig");
 const cancel_run = @import("cancel_run.zig");
+const cancel_run_batch = @import("cancel_run_batch.zig");
 const cancel_variant_import_job = @import("cancel_variant_import_job.zig");
 const complete_multipart_read_set_upload = @import("complete_multipart_read_set_upload.zig");
 const create_annotation_store = @import("create_annotation_store.zig");
 const create_annotation_store_version = @import("create_annotation_store_version.zig");
+const create_configuration = @import("create_configuration.zig");
 const create_multipart_read_set_upload = @import("create_multipart_read_set_upload.zig");
 const create_reference_store = @import("create_reference_store.zig");
 const create_run_cache = @import("create_run_cache.zig");
@@ -21,9 +23,12 @@ const create_workflow = @import("create_workflow.zig");
 const create_workflow_version = @import("create_workflow_version.zig");
 const delete_annotation_store = @import("delete_annotation_store.zig");
 const delete_annotation_store_versions = @import("delete_annotation_store_versions.zig");
+const delete_batch = @import("delete_batch.zig");
+const delete_configuration = @import("delete_configuration.zig");
 const delete_reference = @import("delete_reference.zig");
 const delete_reference_store = @import("delete_reference_store.zig");
 const delete_run = @import("delete_run.zig");
+const delete_run_batch = @import("delete_run_batch.zig");
 const delete_run_cache = @import("delete_run_cache.zig");
 const delete_run_group = @import("delete_run_group.zig");
 const delete_s3_access_policy = @import("delete_s3_access_policy.zig");
@@ -35,6 +40,8 @@ const delete_workflow_version = @import("delete_workflow_version.zig");
 const get_annotation_import_job = @import("get_annotation_import_job.zig");
 const get_annotation_store = @import("get_annotation_store.zig");
 const get_annotation_store_version = @import("get_annotation_store_version.zig");
+const get_batch = @import("get_batch.zig");
+const get_configuration = @import("get_configuration.zig");
 const get_read_set = @import("get_read_set.zig");
 const get_read_set_activation_job = @import("get_read_set_activation_job.zig");
 const get_read_set_export_job = @import("get_read_set_export_job.zig");
@@ -58,6 +65,8 @@ const get_workflow_version = @import("get_workflow_version.zig");
 const list_annotation_import_jobs = @import("list_annotation_import_jobs.zig");
 const list_annotation_store_versions = @import("list_annotation_store_versions.zig");
 const list_annotation_stores = @import("list_annotation_stores.zig");
+const list_batch = @import("list_batch.zig");
+const list_configurations = @import("list_configurations.zig");
 const list_multipart_read_set_uploads = @import("list_multipart_read_set_uploads.zig");
 const list_read_set_activation_jobs = @import("list_read_set_activation_jobs.zig");
 const list_read_set_export_jobs = @import("list_read_set_export_jobs.zig");
@@ -71,6 +80,7 @@ const list_run_caches = @import("list_run_caches.zig");
 const list_run_groups = @import("list_run_groups.zig");
 const list_run_tasks = @import("list_run_tasks.zig");
 const list_runs = @import("list_runs.zig");
+const list_runs_in_batch = @import("list_runs_in_batch.zig");
 const list_sequence_stores = @import("list_sequence_stores.zig");
 const list_shares = @import("list_shares.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
@@ -85,6 +95,7 @@ const start_read_set_export_job = @import("start_read_set_export_job.zig");
 const start_read_set_import_job = @import("start_read_set_import_job.zig");
 const start_reference_import_job = @import("start_reference_import_job.zig");
 const start_run = @import("start_run.zig");
+const start_run_batch = @import("start_run_batch.zig");
 const start_variant_import_job = @import("start_variant_import_job.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
@@ -153,12 +164,10 @@ pub const Client = struct {
         return batch_delete_read_set.execute(self, allocator, input, options);
     }
 
-    /// Amazon Web Services HealthOmics variant stores and annotation stores will no
-    /// longer be open to new customers starting November 7, 2025. If you would like
-    /// to use variant stores or annotation stores, sign up prior to that date.
-    /// Existing customers can continue to use the service as normal. For more
-    /// information, see [ Amazon Web Services HealthOmics variant store and
-    /// annotation store availability
+    /// Amazon Web Services HealthOmics variant stores and annotation stores are no
+    /// longer open to new customers. Existing customers can continue to use the
+    /// service as normal. For more information, see [ Amazon Web Services
+    /// HealthOmics variant store and annotation store availability
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Cancels an annotation import job.
@@ -173,12 +182,23 @@ pub const Client = struct {
         return cancel_run.execute(self, allocator, input, options);
     }
 
-    /// Amazon Web Services HealthOmics variant stores and annotation stores will no
-    /// longer be open to new customers starting November 7, 2025. If you would like
-    /// to use variant stores or annotation stores, sign up prior to that date.
-    /// Existing customers can continue to use the service as normal. For more
-    /// information, see [ Amazon Web Services HealthOmics variant store and
-    /// annotation store availability
+    /// Cancels all runs within a specified batch. This operation prevents
+    /// not-yet-submitted runs from starting and submits `CancelRun` requests for
+    /// runs that have already started.
+    ///
+    /// Cancel is only allowed on batches in `PENDING`, `SUBMITTING`, or
+    /// `INPROGRESS` state. Cancel operations are non-atomic and may be partially
+    /// successful. Use `GetBatch` to review `successfulCancelSubmissionCount` and
+    /// `failedCancelSubmissionCount` in the `submissionSummary`. Only one cancel or
+    /// delete operation per batch is allowed at a time.
+    pub fn cancelRunBatch(self: *Self, allocator: std.mem.Allocator, input: cancel_run_batch.CancelRunBatchInput, options: CallOptions) !cancel_run_batch.CancelRunBatchOutput {
+        return cancel_run_batch.execute(self, allocator, input, options);
+    }
+
+    /// Amazon Web Services HealthOmics variant stores and annotation stores are no
+    /// longer open to new customers. Existing customers can continue to use the
+    /// service as normal. For more information, see [ Amazon Web Services
+    /// HealthOmics variant store and annotation store availability
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Cancels a variant import job.
@@ -198,12 +218,10 @@ pub const Client = struct {
         return complete_multipart_read_set_upload.execute(self, allocator, input, options);
     }
 
-    /// Amazon Web Services HealthOmics variant stores and annotation stores will no
-    /// longer be open to new customers starting November 7, 2025. If you would like
-    /// to use variant stores or annotation stores, sign up prior to that date.
-    /// Existing customers can continue to use the service as normal. For more
-    /// information, see [ Amazon Web Services HealthOmics variant store and
-    /// annotation store availability
+    /// Amazon Web Services HealthOmics variant stores and annotation stores are no
+    /// longer open to new customers. Existing customers can continue to use the
+    /// service as normal. For more information, see [ Amazon Web Services
+    /// HealthOmics variant store and annotation store availability
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Creates an annotation store.
@@ -214,6 +232,11 @@ pub const Client = struct {
     /// Creates a new version of an annotation store.
     pub fn createAnnotationStoreVersion(self: *Self, allocator: std.mem.Allocator, input: create_annotation_store_version.CreateAnnotationStoreVersionInput, options: CallOptions) !create_annotation_store_version.CreateAnnotationStoreVersionOutput {
         return create_annotation_store_version.execute(self, allocator, input, options);
+    }
+
+    /// Create a new configuration.
+    pub fn createConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_configuration.CreateConfigurationInput, options: CallOptions) !create_configuration.CreateConfigurationOutput {
+        return create_configuration.execute(self, allocator, input, options);
     }
 
     /// Initiates a multipart read set upload for uploading partitioned source files
@@ -312,12 +335,10 @@ pub const Client = struct {
         return create_share.execute(self, allocator, input, options);
     }
 
-    /// Amazon Web Services HealthOmics variant stores and annotation stores will no
-    /// longer be open to new customers starting November 7, 2025. If you would like
-    /// to use variant stores or annotation stores, sign up prior to that date.
-    /// Existing customers can continue to use the service as normal. For more
-    /// information, see [ Amazon Web Services HealthOmics variant store and
-    /// annotation store availability
+    /// Amazon Web Services HealthOmics variant stores and annotation stores are no
+    /// longer open to new customers. Existing customers can continue to use the
+    /// service as normal. For more information, see [ Amazon Web Services
+    /// HealthOmics variant store and annotation store availability
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Creates a variant store.
@@ -378,12 +399,10 @@ pub const Client = struct {
         return create_workflow_version.execute(self, allocator, input, options);
     }
 
-    /// Amazon Web Services HealthOmics variant stores and annotation stores will no
-    /// longer be open to new customers starting November 7, 2025. If you would like
-    /// to use variant stores or annotation stores, sign up prior to that date.
-    /// Existing customers can continue to use the service as normal. For more
-    /// information, see [ Amazon Web Services HealthOmics variant store and
-    /// annotation store availability
+    /// Amazon Web Services HealthOmics variant stores and annotation stores are no
+    /// longer open to new customers. Existing customers can continue to use the
+    /// service as normal. For more information, see [ Amazon Web Services
+    /// HealthOmics variant store and annotation store availability
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Deletes an annotation store.
@@ -394,6 +413,23 @@ pub const Client = struct {
     /// Deletes one or multiple versions of an annotation store.
     pub fn deleteAnnotationStoreVersions(self: *Self, allocator: std.mem.Allocator, input: delete_annotation_store_versions.DeleteAnnotationStoreVersionsInput, options: CallOptions) !delete_annotation_store_versions.DeleteAnnotationStoreVersionsOutput {
         return delete_annotation_store_versions.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a run batch resource and its associated metadata. This operation
+    /// does not delete the individual workflow runs. To delete the runs, call
+    /// `DeleteRunBatch` before calling `DeleteBatch`.
+    ///
+    /// `DeleteBatch` requires the batch to be in a terminal state: `PROCESSED`,
+    /// `FAILED`, `CANCELLED`, or `RUNS_DELETED`. After `DeleteBatch` completes, the
+    /// batch metadata is no longer accessible. You cannot call `GetBatch`,
+    /// `ListRunsInBatch`, `DeleteRunBatch`, or `CancelRunBatch` on a deleted batch.
+    pub fn deleteBatch(self: *Self, allocator: std.mem.Allocator, input: delete_batch.DeleteBatchInput, options: CallOptions) !delete_batch.DeleteBatchOutput {
+        return delete_batch.execute(self, allocator, input, options);
+    }
+
+    /// Delete an existing configuration.
+    pub fn deleteConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_configuration.DeleteConfigurationInput, options: CallOptions) !delete_configuration.DeleteConfigurationOutput {
+        return delete_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes a reference genome and returns a response with no body if the
@@ -433,6 +469,18 @@ pub const Client = struct {
     /// * Use `GetRun` to verify the workflow cannot be found.
     pub fn deleteRun(self: *Self, allocator: std.mem.Allocator, input: delete_run.DeleteRunInput, options: CallOptions) !delete_run.DeleteRunOutput {
         return delete_run.execute(self, allocator, input, options);
+    }
+
+    /// Deletes the individual workflow runs within a batch. This operation is
+    /// separate from `DeleteBatch`, which removes the batch metadata.
+    ///
+    /// Delete is only allowed on batches in `PROCESSED` or `CANCELLED` state.
+    /// Delete operations are non-atomic and may be partially successful. Use
+    /// `GetBatch` to review `successfulDeleteSubmissionCount` and
+    /// `failedDeleteSubmissionCount` in the `submissionSummary`. Only one cancel or
+    /// delete operation per batch is allowed at a time.
+    pub fn deleteRunBatch(self: *Self, allocator: std.mem.Allocator, input: delete_run_batch.DeleteRunBatchInput, options: CallOptions) !delete_run_batch.DeleteRunBatchOutput {
+        return delete_run_batch.execute(self, allocator, input, options);
     }
 
     /// Deletes a run cache and returns a response with no body if the operation is
@@ -484,12 +532,10 @@ pub const Client = struct {
         return delete_share.execute(self, allocator, input, options);
     }
 
-    /// Amazon Web Services HealthOmics variant stores and annotation stores will no
-    /// longer be open to new customers starting November 7, 2025. If you would like
-    /// to use variant stores or annotation stores, sign up prior to that date.
-    /// Existing customers can continue to use the service as normal. For more
-    /// information, see [ Amazon Web Services HealthOmics variant store and
-    /// annotation store availability
+    /// Amazon Web Services HealthOmics variant stores and annotation stores are no
+    /// longer open to new customers. Existing customers can continue to use the
+    /// service as normal. For more information, see [ Amazon Web Services
+    /// HealthOmics variant store and annotation store availability
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Deletes a variant store.
@@ -517,12 +563,10 @@ pub const Client = struct {
         return delete_workflow_version.execute(self, allocator, input, options);
     }
 
-    /// Amazon Web Services HealthOmics variant stores and annotation stores will no
-    /// longer be open to new customers starting November 7, 2025. If you would like
-    /// to use variant stores or annotation stores, sign up prior to that date.
-    /// Existing customers can continue to use the service as normal. For more
-    /// information, see [ Amazon Web Services HealthOmics variant store and
-    /// annotation store availability
+    /// Amazon Web Services HealthOmics variant stores and annotation stores are no
+    /// longer open to new customers. Existing customers can continue to use the
+    /// service as normal. For more information, see [ Amazon Web Services
+    /// HealthOmics variant store and annotation store availability
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Gets information about an annotation import job.
@@ -530,12 +574,10 @@ pub const Client = struct {
         return get_annotation_import_job.execute(self, allocator, input, options);
     }
 
-    /// Amazon Web Services HealthOmics variant stores and annotation stores will no
-    /// longer be open to new customers starting November 7, 2025. If you would like
-    /// to use variant stores or annotation stores, sign up prior to that date.
-    /// Existing customers can continue to use the service as normal. For more
-    /// information, see [ Amazon Web Services HealthOmics variant store and
-    /// annotation store availability
+    /// Amazon Web Services HealthOmics variant stores and annotation stores are no
+    /// longer open to new customers. Existing customers can continue to use the
+    /// service as normal. For more information, see [ Amazon Web Services
+    /// HealthOmics variant store and annotation store availability
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Gets information about an annotation store.
@@ -546,6 +588,17 @@ pub const Client = struct {
     /// Retrieves the metadata for an annotation store version.
     pub fn getAnnotationStoreVersion(self: *Self, allocator: std.mem.Allocator, input: get_annotation_store_version.GetAnnotationStoreVersionInput, options: CallOptions) !get_annotation_store_version.GetAnnotationStoreVersionOutput {
         return get_annotation_store_version.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves details and current status for a specific run batch, including
+    /// submission progress and run execution counts.
+    pub fn getBatch(self: *Self, allocator: std.mem.Allocator, input: get_batch.GetBatchInput, options: CallOptions) !get_batch.GetBatchOutput {
+        return get_batch.execute(self, allocator, input, options);
+    }
+
+    /// Retrieve configuration details for specified name.
+    pub fn getConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_configuration.GetConfigurationInput, options: CallOptions) !get_configuration.GetConfigurationOutput {
+        return get_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieves detailed information from parts of a read set and returns the read
@@ -655,12 +708,10 @@ pub const Client = struct {
         return get_share.execute(self, allocator, input, options);
     }
 
-    /// Amazon Web Services HealthOmics variant stores and annotation stores will no
-    /// longer be open to new customers starting November 7, 2025. If you would like
-    /// to use variant stores or annotation stores, sign up prior to that date.
-    /// Existing customers can continue to use the service as normal. For more
-    /// information, see [ Amazon Web Services HealthOmics variant store and
-    /// annotation store availability
+    /// Amazon Web Services HealthOmics variant stores and annotation stores are no
+    /// longer open to new customers. Existing customers can continue to use the
+    /// service as normal. For more information, see [ Amazon Web Services
+    /// HealthOmics variant store and annotation store availability
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Gets information about a variant import job.
@@ -668,12 +719,10 @@ pub const Client = struct {
         return get_variant_import_job.execute(self, allocator, input, options);
     }
 
-    /// Amazon Web Services HealthOmics variant stores and annotation stores will no
-    /// longer be open to new customers starting November 7, 2025. If you would like
-    /// to use variant stores or annotation stores, sign up prior to that date.
-    /// Existing customers can continue to use the service as normal. For more
-    /// information, see [ Amazon Web Services HealthOmics variant store and
-    /// annotation store availability
+    /// Amazon Web Services HealthOmics variant stores and annotation stores are no
+    /// longer open to new customers. Existing customers can continue to use the
+    /// service as normal. For more information, see [ Amazon Web Services
+    /// HealthOmics variant store and annotation store availability
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Gets information about a variant store.
@@ -698,12 +747,10 @@ pub const Client = struct {
         return get_workflow_version.execute(self, allocator, input, options);
     }
 
-    /// Amazon Web Services HealthOmics variant stores and annotation stores will no
-    /// longer be open to new customers starting November 7, 2025. If you would like
-    /// to use variant stores or annotation stores, sign up prior to that date.
-    /// Existing customers can continue to use the service as normal. For more
-    /// information, see [ Amazon Web Services HealthOmics variant store and
-    /// annotation store availability
+    /// Amazon Web Services HealthOmics variant stores and annotation stores are no
+    /// longer open to new customers. Existing customers can continue to use the
+    /// service as normal. For more information, see [ Amazon Web Services
+    /// HealthOmics variant store and annotation store availability
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Retrieves a list of annotation import jobs.
@@ -716,17 +763,27 @@ pub const Client = struct {
         return list_annotation_store_versions.execute(self, allocator, input, options);
     }
 
-    /// Amazon Web Services HealthOmics variant stores and annotation stores will no
-    /// longer be open to new customers starting November 7, 2025. If you would like
-    /// to use variant stores or annotation stores, sign up prior to that date.
-    /// Existing customers can continue to use the service as normal. For more
-    /// information, see [ Amazon Web Services HealthOmics variant store and
-    /// annotation store availability
+    /// Amazon Web Services HealthOmics variant stores and annotation stores are no
+    /// longer open to new customers. Existing customers can continue to use the
+    /// service as normal. For more information, see [ Amazon Web Services
+    /// HealthOmics variant store and annotation store availability
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Retrieves a list of annotation stores.
     pub fn listAnnotationStores(self: *Self, allocator: std.mem.Allocator, input: list_annotation_stores.ListAnnotationStoresInput, options: CallOptions) !list_annotation_stores.ListAnnotationStoresOutput {
         return list_annotation_stores.execute(self, allocator, input, options);
+    }
+
+    /// Returns a list of run batches in your account, with optional filtering by
+    /// status, name, or run group. Results are paginated. Only one filter per call
+    /// is supported.
+    pub fn listBatch(self: *Self, allocator: std.mem.Allocator, input: list_batch.ListBatchInput, options: CallOptions) !list_batch.ListBatchOutput {
+        return list_batch.execute(self, allocator, input, options);
+    }
+
+    /// List all configurations for the account.
+    pub fn listConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_configurations.ListConfigurationsInput, options: CallOptions) !list_configurations.ListConfigurationsOutput {
+        return list_configurations.execute(self, allocator, input, options);
     }
 
     /// Lists in-progress multipart read set uploads for a sequence store and
@@ -823,6 +880,14 @@ pub const Client = struct {
         return list_runs.execute(self, allocator, input, options);
     }
 
+    /// Returns a paginated list of individual workflow runs within a specific
+    /// batch. Use this operation to map each `runSettingId` to its
+    /// HealthOmics-generated `runId`, and to check the submission status of each
+    /// run. Only one filter per call is supported.
+    pub fn listRunsInBatch(self: *Self, allocator: std.mem.Allocator, input: list_runs_in_batch.ListRunsInBatchInput, options: CallOptions) !list_runs_in_batch.ListRunsInBatchOutput {
+        return list_runs_in_batch.execute(self, allocator, input, options);
+    }
+
     /// Retrieves a list of sequence stores and returns each sequence store's
     /// metadata.
     ///
@@ -843,12 +908,10 @@ pub const Client = struct {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
-    /// Amazon Web Services HealthOmics variant stores and annotation stores will no
-    /// longer be open to new customers starting November 7, 2025. If you would like
-    /// to use variant stores or annotation stores, sign up prior to that date.
-    /// Existing customers can continue to use the service as normal. For more
-    /// information, see [ Amazon Web Services HealthOmics variant store and
-    /// annotation store availability
+    /// Amazon Web Services HealthOmics variant stores and annotation stores are no
+    /// longer open to new customers. Existing customers can continue to use the
+    /// service as normal. For more information, see [ Amazon Web Services
+    /// HealthOmics variant store and annotation store availability
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Retrieves a list of variant import jobs.
@@ -856,12 +919,10 @@ pub const Client = struct {
         return list_variant_import_jobs.execute(self, allocator, input, options);
     }
 
-    /// Amazon Web Services HealthOmics variant stores and annotation stores will no
-    /// longer be open to new customers starting November 7, 2025. If you would like
-    /// to use variant stores or annotation stores, sign up prior to that date.
-    /// Existing customers can continue to use the service as normal. For more
-    /// information, see [ Amazon Web Services HealthOmics variant store and
-    /// annotation store availability
+    /// Amazon Web Services HealthOmics variant stores and annotation stores are no
+    /// longer open to new customers. Existing customers can continue to use the
+    /// service as normal. For more information, see [ Amazon Web Services
+    /// HealthOmics variant store and annotation store availability
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Retrieves a list of variant stores.
@@ -890,12 +951,10 @@ pub const Client = struct {
         return put_s3_access_policy.execute(self, allocator, input, options);
     }
 
-    /// Amazon Web Services HealthOmics variant stores and annotation stores will no
-    /// longer be open to new customers starting November 7, 2025. If you would like
-    /// to use variant stores or annotation stores, sign up prior to that date.
-    /// Existing customers can continue to use the service as normal. For more
-    /// information, see [ Amazon Web Services HealthOmics variant store and
-    /// annotation store availability
+    /// Amazon Web Services HealthOmics variant stores and annotation stores are no
+    /// longer open to new customers. Existing customers can continue to use the
+    /// service as normal. For more information, see [ Amazon Web Services
+    /// HealthOmics variant store and annotation store availability
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Starts an annotation import job.
@@ -995,12 +1054,24 @@ pub const Client = struct {
         return start_run.execute(self, allocator, input, options);
     }
 
-    /// Amazon Web Services HealthOmics variant stores and annotation stores will no
-    /// longer be open to new customers starting November 7, 2025. If you would like
-    /// to use variant stores or annotation stores, sign up prior to that date.
-    /// Existing customers can continue to use the service as normal. For more
-    /// information, see [ Amazon Web Services HealthOmics variant store and
-    /// annotation store availability
+    /// Starts a batch of workflow runs. You can group up to 100,000 runs into a
+    /// single batch that share a common configuration defined in
+    /// `defaultRunSetting`. Per-run overrides can be provided either inline via
+    /// `inlineSettings` (up to 100 runs) or via a JSON file stored in Amazon S3 via
+    /// `s3UriSettings` (up to 100,000 runs).
+    ///
+    /// `StartRunBatch` validates common fields synchronously and returns
+    /// immediately with a batch ID and status `PENDING`. Runs are submitted
+    /// gradually and asynchronously at a rate governed by your `StartRun`
+    /// throughput quota.
+    pub fn startRunBatch(self: *Self, allocator: std.mem.Allocator, input: start_run_batch.StartRunBatchInput, options: CallOptions) !start_run_batch.StartRunBatchOutput {
+        return start_run_batch.execute(self, allocator, input, options);
+    }
+
+    /// Amazon Web Services HealthOmics variant stores and annotation stores are no
+    /// longer open to new customers. Existing customers can continue to use the
+    /// service as normal. For more information, see [ Amazon Web Services
+    /// HealthOmics variant store and annotation store availability
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Starts a variant import job.
@@ -1018,12 +1089,10 @@ pub const Client = struct {
         return untag_resource.execute(self, allocator, input, options);
     }
 
-    /// Amazon Web Services HealthOmics variant stores and annotation stores will no
-    /// longer be open to new customers starting November 7, 2025. If you would like
-    /// to use variant stores or annotation stores, sign up prior to that date.
-    /// Existing customers can continue to use the service as normal. For more
-    /// information, see [ Amazon Web Services HealthOmics variant store and
-    /// annotation store availability
+    /// Amazon Web Services HealthOmics variant stores and annotation stores are no
+    /// longer open to new customers. Existing customers can continue to use the
+    /// service as normal. For more information, see [ Amazon Web Services
+    /// HealthOmics variant store and annotation store availability
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Updates an annotation store.
@@ -1072,12 +1141,10 @@ pub const Client = struct {
         return update_sequence_store.execute(self, allocator, input, options);
     }
 
-    /// Amazon Web Services HealthOmics variant stores and annotation stores will no
-    /// longer be open to new customers starting November 7, 2025. If you would like
-    /// to use variant stores or annotation stores, sign up prior to that date.
-    /// Existing customers can continue to use the service as normal. For more
-    /// information, see [ Amazon Web Services HealthOmics variant store and
-    /// annotation store availability
+    /// Amazon Web Services HealthOmics variant stores and annotation stores are no
+    /// longer open to new customers. Existing customers can continue to use the
+    /// service as normal. For more information, see [ Amazon Web Services
+    /// HealthOmics variant store and annotation store availability
     /// change](https://docs.aws.amazon.com/omics/latest/dev/variant-store-availability-change.html).
     ///
     /// Updates a variant store.
@@ -1138,6 +1205,20 @@ pub const Client = struct {
     }
 
     pub fn listAnnotationStoresPaginator(self: *Self, params: list_annotation_stores.ListAnnotationStoresInput) paginator.ListAnnotationStoresPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listBatchPaginator(self: *Self, params: list_batch.ListBatchInput) paginator.ListBatchPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listConfigurationsPaginator(self: *Self, params: list_configurations.ListConfigurationsInput) paginator.ListConfigurationsPaginator {
         return .{
             .client = self,
             .params = params,
@@ -1229,6 +1310,13 @@ pub const Client = struct {
     }
 
     pub fn listRunsPaginator(self: *Self, params: list_runs.ListRunsInput) paginator.ListRunsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listRunsInBatchPaginator(self: *Self, params: list_runs_in_batch.ListRunsInBatchInput) paginator.ListRunsInBatchPaginator {
         return .{
             .client = self,
             .params = params,

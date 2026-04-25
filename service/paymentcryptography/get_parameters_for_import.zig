@@ -16,6 +16,15 @@ pub const GetParametersForImportInput = struct {
     /// trusted public key certificate.
     key_material_type: KeyMaterialType,
 
+    /// Specifies whether to reuse the existing import token and wrapping key
+    /// certificate. If set to `true` and a valid import token exists for the same
+    /// key material type and wrapping key algorithm with at least 7 days of
+    /// remaining validity, the existing token and wrapping key certificate are
+    /// returned. Otherwise, a new import token and wrapping key certificate are
+    /// generated. The default value is `false`, which generates a new import token
+    /// and wrapping key certificate on every call.
+    reuse_last_generated_token: ?bool = null,
+
     /// The wrapping key algorithm to generate a wrapping key certificate. This
     /// certificate wraps the key under import.
     ///
@@ -26,6 +35,7 @@ pub const GetParametersForImportInput = struct {
 
     pub const json_field_names = .{
         .key_material_type = "KeyMaterialType",
+        .reuse_last_generated_token = "ReuseLastGeneratedToken",
         .wrapping_key_algorithm = "WrappingKeyAlgorithm",
     };
 };

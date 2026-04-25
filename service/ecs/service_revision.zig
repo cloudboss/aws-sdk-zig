@@ -14,16 +14,11 @@ const VpcLatticeConfiguration = @import("vpc_lattice_configuration.zig").VpcLatt
 /// Information about the service revision.
 ///
 /// A service revision contains a record of the workload configuration Amazon
-/// ECS is
-/// attempting to deploy. Whenever you create or deploy a service, Amazon ECS
-/// automatically
-/// creates and captures the configuration that you're trying to deploy in the
-/// service
-/// revision. For information about service revisions, see [Amazon ECS service
-/// revisions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-revision.html) in the *
-/// Amazon Elastic Container Service
-/// Developer Guide*
-/// .
+/// ECS is attempting to deploy. Whenever you create or deploy a service, Amazon
+/// ECS automatically creates and captures the configuration that you're trying
+/// to deploy in the service revision. For information about service revisions,
+/// see [Amazon ECS service
+/// revisions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-revision.html) in the * Amazon Elastic Container Service Developer Guide* .
 pub const ServiceRevision = struct {
     /// The capacity provider strategy the service revision uses.
     capacity_provider_strategy: ?[]const CapacityProviderStrategyItem = null,

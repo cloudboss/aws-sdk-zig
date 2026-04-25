@@ -4,6 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const GatewayType = @import("gateway_type.zig").GatewayType;
+const ListenerConfig = @import("listener_config.zig").ListenerConfig;
 const ManagedEndpointConfiguration = @import("managed_endpoint_configuration.zig").ManagedEndpointConfiguration;
 const Protocol = @import("protocol.zig").Protocol;
 const TrustStoreConfiguration = @import("trust_store_configuration.zig").TrustStoreConfiguration;
@@ -18,6 +20,11 @@ pub const CreateResponderGatewayInput = struct {
 
     /// The domain name for the responder gateway.
     domain_name: ?[]const u8 = null,
+
+    /// The type of gateway. Valid values are `EXTERNAL` or `INTERNAL`.
+    gateway_type: ?GatewayType = null,
+
+    listener_config: ?ListenerConfig = null,
 
     /// The configuration for the managed endpoint.
     managed_endpoint_configuration: ?ManagedEndpointConfiguration = null,
@@ -47,6 +54,8 @@ pub const CreateResponderGatewayInput = struct {
         .client_token = "clientToken",
         .description = "description",
         .domain_name = "domainName",
+        .gateway_type = "gatewayType",
+        .listener_config = "listenerConfig",
         .managed_endpoint_configuration = "managedEndpointConfiguration",
         .port = "port",
         .protocol = "protocol",
@@ -59,14 +68,22 @@ pub const CreateResponderGatewayInput = struct {
 };
 
 pub const CreateResponderGatewayOutput = struct {
+    /// The external inbound endpoint for the responder gateway.
+    external_inbound_endpoint: ?[]const u8 = null,
+
     /// The unique identifier of the gateway.
     gateway_id: []const u8,
+
+    /// The listener configuration for the responder gateway.
+    listener_config: ?ListenerConfig = null,
 
     /// The status of the request.
     status: ResponderGatewayStatus,
 
     pub const json_field_names = .{
+        .external_inbound_endpoint = "externalInboundEndpoint",
         .gateway_id = "gatewayId",
+        .listener_config = "listenerConfig",
         .status = "status",
     };
 };
@@ -122,6 +139,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateResponderGatewayI
     if (input.domain_name) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"domainName\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.gateway_type) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"gatewayType\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.listener_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"listenerConfig\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

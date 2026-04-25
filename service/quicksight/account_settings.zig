@@ -20,8 +20,7 @@ pub const AccountSettings = struct {
     notification_email: ?[]const u8 = null,
 
     /// A Boolean value that indicates whether public sharing is turned on for an
-    /// Quick Suite account. For more information about turning on public sharing,
-    /// see
+    /// Quick account. For more information about turning on public sharing, see
     /// [UpdatePublicSharingSettings](https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdatePublicSharingSettings.html).
     public_sharing_enabled: bool = false,
 

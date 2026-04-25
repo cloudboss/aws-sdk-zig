@@ -9,6 +9,7 @@ const AIMLOptionsInput = @import("aiml_options_input.zig").AIMLOptionsInput;
 const AutoTuneOptions = @import("auto_tune_options.zig").AutoTuneOptions;
 const ClusterConfig = @import("cluster_config.zig").ClusterConfig;
 const CognitoOptions = @import("cognito_options.zig").CognitoOptions;
+const DeploymentStrategyOptions = @import("deployment_strategy_options.zig").DeploymentStrategyOptions;
 const DomainEndpointOptions = @import("domain_endpoint_options.zig").DomainEndpointOptions;
 const DryRunMode = @import("dry_run_mode.zig").DryRunMode;
 const EBSOptions = @import("ebs_options.zig").EBSOptions;
@@ -75,6 +76,9 @@ pub const UpdateDomainConfigInput = struct {
     /// Key-value pairs to configure Amazon Cognito authentication for OpenSearch
     /// Dashboards.
     cognito_options: ?CognitoOptions = null,
+
+    /// Specifies the deployment strategy options for the domain.
+    deployment_strategy_options: ?DeploymentStrategyOptions = null,
 
     /// Additional options for the domain endpoint, such as whether to require HTTPS
     /// for all
@@ -148,6 +152,7 @@ pub const UpdateDomainConfigInput = struct {
         .auto_tune_options = "AutoTuneOptions",
         .cluster_config = "ClusterConfig",
         .cognito_options = "CognitoOptions",
+        .deployment_strategy_options = "DeploymentStrategyOptions",
         .domain_endpoint_options = "DomainEndpointOptions",
         .domain_name = "DomainName",
         .dry_run = "DryRun",
@@ -263,6 +268,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateDomainConfigInput
     if (input.cognito_options) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"CognitoOptions\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.deployment_strategy_options) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"DeploymentStrategyOptions\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
@@ -447,6 +458,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
         return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

@@ -8,8 +8,8 @@ const ECSExpressGatewayService = @import("ecs_express_gateway_service.zig").ECSE
 
 pub const DeleteExpressGatewayServiceInput = struct {
     /// The Amazon Resource Name (ARN) of the Express service to delete. The ARN
-    /// uniquely
-    /// identifies the service within your Amazon Web Services account and region.
+    /// uniquely identifies the service within your Amazon Web Services account and
+    /// region.
     service_arn: []const u8,
 
     pub const json_field_names = .{
@@ -150,6 +150,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

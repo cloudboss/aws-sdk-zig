@@ -2,8 +2,7 @@
 ///
 /// For example, an error is returned if you request recommendations for an
 /// unsupported
-/// Amazon EC2 Auto Scaling group, or if you request recommendations for an
-/// instance of an
+/// Auto Scaling group, or if you request recommendations for an instance of an
 /// unsupported instance family.
 pub const GetRecommendationError = struct {
     /// The error code.

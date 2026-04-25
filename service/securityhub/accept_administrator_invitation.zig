@@ -6,12 +6,12 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const AcceptAdministratorInvitationInput = struct {
-    /// The account ID of the Security Hub administrator account that sent the
+    /// The account ID of the Security Hub CSPM administrator account that sent the
     /// invitation.
     administrator_id: []const u8,
 
-    /// The identifier of the invitation sent from the Security Hub administrator
-    /// account.
+    /// The identifier of the invitation sent from the Security Hub CSPM
+    /// administrator account.
     invitation_id: []const u8,
 
     pub const json_field_names = .{
@@ -147,6 +147,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "LimitExceededException")) {
         return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organization_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationalUnitNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organizational_unit_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

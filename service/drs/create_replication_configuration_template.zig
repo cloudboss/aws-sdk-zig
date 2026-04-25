@@ -7,12 +7,13 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ReplicationConfigurationDataPlaneRouting = @import("replication_configuration_data_plane_routing.zig").ReplicationConfigurationDataPlaneRouting;
 const ReplicationConfigurationDefaultLargeStagingDiskType = @import("replication_configuration_default_large_staging_disk_type.zig").ReplicationConfigurationDefaultLargeStagingDiskType;
 const ReplicationConfigurationEbsEncryption = @import("replication_configuration_ebs_encryption.zig").ReplicationConfigurationEbsEncryption;
+const InternetProtocol = @import("internet_protocol.zig").InternetProtocol;
 const PITPolicyRule = @import("pit_policy_rule.zig").PITPolicyRule;
 
 pub const CreateReplicationConfigurationTemplateInput = struct {
     /// Whether to associate the default Elastic Disaster Recovery Security group
     /// with the Replication Configuration Template.
-    associate_default_security_group: bool,
+    associate_default_security_group: ?bool = null,
 
     /// Whether to allow the AWS replication agent to automatically replicate newly
     /// added disks.
@@ -23,13 +24,13 @@ pub const CreateReplicationConfigurationTemplateInput = struct {
     bandwidth_throttling: ?i64 = null,
 
     /// Whether to create a Public IP for the Recovery Instance by default.
-    create_public_ip: bool,
+    create_public_ip: ?bool = null,
 
     /// The data plane routing mechanism that will be used for replication.
-    data_plane_routing: ReplicationConfigurationDataPlaneRouting,
+    data_plane_routing: ?ReplicationConfigurationDataPlaneRouting = null,
 
     /// The Staging Disk EBS volume type to be used during replication.
-    default_large_staging_disk_type: ReplicationConfigurationDefaultLargeStagingDiskType,
+    default_large_staging_disk_type: ?ReplicationConfigurationDefaultLargeStagingDiskType = null,
 
     /// The type of EBS encryption to be used during replication.
     ebs_encryption: ReplicationConfigurationEbsEncryption,
@@ -37,11 +38,15 @@ pub const CreateReplicationConfigurationTemplateInput = struct {
     /// The ARN of the EBS encryption key to be used during replication.
     ebs_encryption_key_arn: ?[]const u8 = null,
 
+    /// Which version of the Internet Protocol to use for replication of data. (IPv4
+    /// or IPv6)
+    internet_protocol: ?InternetProtocol = null,
+
     /// The Point in time (PIT) policy to manage snapshots taken during replication.
     pit_policy: []const PITPolicyRule,
 
     /// The instance type to be used for the replication server.
-    replication_server_instance_type: []const u8,
+    replication_server_instance_type: ?[]const u8 = null,
 
     /// The security group IDs that will be used by the replication server.
     replication_servers_security_groups_i_ds: []const []const u8,
@@ -59,7 +64,7 @@ pub const CreateReplicationConfigurationTemplateInput = struct {
 
     /// Whether to use a dedicated Replication Server in the replication staging
     /// area.
-    use_dedicated_replication_server: bool,
+    use_dedicated_replication_server: ?bool = null,
 
     pub const json_field_names = .{
         .associate_default_security_group = "associateDefaultSecurityGroup",
@@ -70,6 +75,7 @@ pub const CreateReplicationConfigurationTemplateInput = struct {
         .default_large_staging_disk_type = "defaultLargeStagingDiskType",
         .ebs_encryption = "ebsEncryption",
         .ebs_encryption_key_arn = "ebsEncryptionKeyArn",
+        .internet_protocol = "internetProtocol",
         .pit_policy = "pitPolicy",
         .replication_server_instance_type = "replicationServerInstanceType",
         .replication_servers_security_groups_i_ds = "replicationServersSecurityGroupsIDs",
@@ -120,10 +126,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationConfig
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"associateDefaultSecurityGroup\":");
-    try aws.json.writeValue(@TypeOf(input.associate_default_security_group), input.associate_default_security_group, allocator, &body_buf);
-    has_prev = true;
+    if (input.associate_default_security_group) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"associateDefaultSecurityGroup\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.auto_replicate_new_disks) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"autoReplicateNewDisks\":");
@@ -134,18 +142,24 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationConfig
     try body_buf.appendSlice(allocator, "\"bandwidthThrottling\":");
     try aws.json.writeValue(@TypeOf(input.bandwidth_throttling), input.bandwidth_throttling, allocator, &body_buf);
     has_prev = true;
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"createPublicIP\":");
-    try aws.json.writeValue(@TypeOf(input.create_public_ip), input.create_public_ip, allocator, &body_buf);
-    has_prev = true;
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"dataPlaneRouting\":");
-    try aws.json.writeValue(@TypeOf(input.data_plane_routing), input.data_plane_routing, allocator, &body_buf);
-    has_prev = true;
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"defaultLargeStagingDiskType\":");
-    try aws.json.writeValue(@TypeOf(input.default_large_staging_disk_type), input.default_large_staging_disk_type, allocator, &body_buf);
-    has_prev = true;
+    if (input.create_public_ip) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"createPublicIP\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.data_plane_routing) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"dataPlaneRouting\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.default_large_staging_disk_type) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"defaultLargeStagingDiskType\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"ebsEncryption\":");
     try aws.json.writeValue(@TypeOf(input.ebs_encryption), input.ebs_encryption, allocator, &body_buf);
@@ -156,14 +170,22 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationConfig
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.internet_protocol) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"internetProtocol\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"pitPolicy\":");
     try aws.json.writeValue(@TypeOf(input.pit_policy), input.pit_policy, allocator, &body_buf);
     has_prev = true;
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"replicationServerInstanceType\":");
-    try aws.json.writeValue(@TypeOf(input.replication_server_instance_type), input.replication_server_instance_type, allocator, &body_buf);
-    has_prev = true;
+    if (input.replication_server_instance_type) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"replicationServerInstanceType\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"replicationServersSecurityGroupsIDs\":");
     try aws.json.writeValue(@TypeOf(input.replication_servers_security_groups_i_ds), input.replication_servers_security_groups_i_ds, allocator, &body_buf);
@@ -182,10 +204,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationConfig
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"useDedicatedReplicationServer\":");
-    try aws.json.writeValue(@TypeOf(input.use_dedicated_replication_server), input.use_dedicated_replication_server, allocator, &body_buf);
-    has_prev = true;
+    if (input.use_dedicated_replication_server) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"useDedicatedReplicationServer\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);

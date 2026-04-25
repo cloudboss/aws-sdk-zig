@@ -18,6 +18,14 @@ pub const UpdateMlflowTrackingServerInput = struct {
     /// `False`
     automatic_model_registration: ?bool = null,
 
+    /// The new expected Amazon Web Services account ID that owns the Amazon S3
+    /// bucket for artifact storage.
+    s3_bucket_owner_account_id: ?[]const u8 = null,
+
+    /// Whether to enable or disable Amazon S3 Bucket Owenrship Verifaction whenever
+    /// the MLflow Tracking Server interacts with Amazon Amazon S3.
+    s3_bucket_owner_verification: ?bool = null,
+
     /// The name of the MLflow Tracking Server to update.
     tracking_server_name: []const u8,
 
@@ -32,6 +40,8 @@ pub const UpdateMlflowTrackingServerInput = struct {
     pub const json_field_names = .{
         .artifact_store_uri = "ArtifactStoreUri",
         .automatic_model_registration = "AutomaticModelRegistration",
+        .s3_bucket_owner_account_id = "S3BucketOwnerAccountId",
+        .s3_bucket_owner_verification = "S3BucketOwnerVerification",
         .tracking_server_name = "TrackingServerName",
         .tracking_server_size = "TrackingServerSize",
         .weekly_maintenance_window_start = "WeeklyMaintenanceWindowStart",

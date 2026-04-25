@@ -6,6 +6,7 @@ const Client = @import("client.zig").Client;
 
 const list_identity_sources = @import("list_identity_sources.zig");
 const list_policies = @import("list_policies.zig");
+const list_policy_store_aliases = @import("list_policy_store_aliases.zig");
 const list_policy_stores = @import("list_policy_stores.zig");
 const list_policy_templates = @import("list_policy_templates.zig");
 
@@ -65,6 +66,46 @@ pub const ListPoliciesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_policies.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListPolicyStoreAliasesPaginator = struct {
+    client: *Client,
+    params: list_policy_store_aliases.ListPolicyStoreAliasesInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_policy_store_aliases.ListPolicyStoreAliasesOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_policy_store_aliases.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

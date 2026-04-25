@@ -2,8 +2,7 @@ const Resource = @import("resource.zig").Resource;
 const Service = @import("service.zig").Service;
 
 /// Contains information about the finding that is generated when abnormal or
-/// suspicious
-/// activity is detected.
+/// suspicious activity is detected.
 pub const Finding = struct {
     /// The ID of the account in which the finding was generated.
     account_id: []const u8,
@@ -29,13 +28,9 @@ pub const Finding = struct {
     /// The partition associated with the finding.
     partition: ?[]const u8 = null,
 
-    /// The Region where the finding was generated. For findings generated
-    /// from [Global Service
-    /// Events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-global-service-events), the Region value in the finding might differ from the Region where
-    /// GuardDuty identifies the potential threat. For more information,
-    /// see [How GuardDuty
-    /// handles Amazon Web Services CloudTrail global
-    /// events](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_data-sources.html#cloudtrail_global) in the *Amazon GuardDuty User Guide*.
+    /// The Region where the finding was generated. For findings generated from
+    /// [Global Service
+    /// Events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-global-service-events), the Region value in the finding might differ from the Region where GuardDuty identifies the potential threat. For more information, see [How GuardDuty handles Amazon Web Services CloudTrail global events](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_data-sources.html#cloudtrail_global) in the *Amazon GuardDuty User Guide*.
     region: []const u8,
 
     resource: Resource,

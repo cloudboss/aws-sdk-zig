@@ -8,6 +8,7 @@ const QueueBlockedReason = @import("queue_blocked_reason.zig").QueueBlockedReaso
 const DefaultQueueBudgetAction = @import("default_queue_budget_action.zig").DefaultQueueBudgetAction;
 const JobAttachmentSettings = @import("job_attachment_settings.zig").JobAttachmentSettings;
 const JobRunAsUser = @import("job_run_as_user.zig").JobRunAsUser;
+const SchedulingConfiguration = @import("scheduling_configuration.zig").SchedulingConfiguration;
 const QueueStatus = @import("queue_status.zig").QueueStatus;
 
 pub const GetQueueInput = struct {
@@ -71,6 +72,10 @@ pub const GetQueueOutput = struct {
     /// The IAM role ARN.
     role_arn: ?[]const u8 = null,
 
+    /// The scheduling configuration for the queue. This configuration determines
+    /// how workers are assigned to jobs in the queue.
+    scheduling_configuration: ?SchedulingConfiguration = null,
+
     /// The status of the queue.
     ///
     /// * `ACTIVE`–The queue is active.
@@ -99,6 +104,7 @@ pub const GetQueueOutput = struct {
         .queue_id = "queueId",
         .required_file_system_location_names = "requiredFileSystemLocationNames",
         .role_arn = "roleArn",
+        .scheduling_configuration = "schedulingConfiguration",
         .status = "status",
         .updated_at = "updatedAt",
         .updated_by = "updatedBy",

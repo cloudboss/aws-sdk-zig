@@ -3,16 +3,19 @@ const std = @import("std");
 pub const ContactInteractionType = enum {
     agent,
     automated,
+    customer,
 
     pub const json_field_names = .{
         .agent = "AGENT",
         .automated = "AUTOMATED",
+        .customer = "CUSTOMER",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .agent => "AGENT",
             .automated => "AUTOMATED",
+            .customer => "CUSTOMER",
         };
     }
 

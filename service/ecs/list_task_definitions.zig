@@ -15,42 +15,37 @@ pub const ListTaskDefinitionsInput = struct {
 
     /// The maximum number of task definition results that `ListTaskDefinitions`
     /// returned in paginated output. When this parameter is used,
-    /// `ListTaskDefinitions` only returns `maxResults` results in a
-    /// single page along with a `nextToken` response element. The remaining results
-    /// of the initial request can be seen by sending another `ListTaskDefinitions`
-    /// request with the returned `nextToken` value. This value can be between 1 and
-    /// 100. If this parameter isn't used, then `ListTaskDefinitions` returns up to
-    /// 100 results and a `nextToken` value if applicable.
+    /// `ListTaskDefinitions` only returns `maxResults` results in a single page
+    /// along with a `nextToken` response element. The remaining results of the
+    /// initial request can be seen by sending another `ListTaskDefinitions` request
+    /// with the returned `nextToken` value. This value can be between 1 and 100. If
+    /// this parameter isn't used, then `ListTaskDefinitions` returns up to 100
+    /// results and a `nextToken` value if applicable.
     max_results: ?i32 = null,
 
-    /// The `nextToken` value returned from a `ListTaskDefinitions`
-    /// request indicating that more results are available to fulfill the request
-    /// and further
-    /// calls will be needed. If `maxResults` was provided, it is possible the
-    /// number
-    /// of results to be fewer than `maxResults`.
+    /// The `nextToken` value returned from a `ListTaskDefinitions` request
+    /// indicating that more results are available to fulfill the request and
+    /// further calls will be needed. If `maxResults` was provided, it is possible
+    /// the number of results to be fewer than `maxResults`.
     ///
     /// This token should be treated as an opaque identifier that is only used to
-    /// retrieve
-    /// the next items in a list and not for other programmatic purposes.
+    /// retrieve the next items in a list and not for other programmatic purposes.
     next_token: ?[]const u8 = null,
 
-    /// The order to sort the results in. Valid values are `ASC` and
-    /// `DESC`. By default, (`ASC`) task definitions are listed
-    /// lexicographically by family name and in ascending numerical order by
-    /// revision so that
-    /// the newest task definitions in a family are listed last. Setting this
-    /// parameter to
-    /// `DESC` reverses the sort order on family name and revision. This is so
-    /// that the newest task definitions in a family are listed first.
+    /// The order to sort the results in. Valid values are `ASC` and `DESC`. By
+    /// default, (`ASC`) task definitions are listed lexicographically by family
+    /// name and in ascending numerical order by revision so that the newest task
+    /// definitions in a family are listed last. Setting this parameter to `DESC`
+    /// reverses the sort order on family name and revision. This is so that the
+    /// newest task definitions in a family are listed first.
     sort: ?SortOrder = null,
 
-    /// The task definition status to filter the `ListTaskDefinitions` results
-    /// with. By default, only `ACTIVE` task definitions are listed. By setting this
-    /// parameter to `INACTIVE`, you can view task definitions that are
-    /// `INACTIVE` as long as an active task or service still references them. If
-    /// you paginate the resulting output, be sure to keep the `status` value
-    /// constant in each subsequent request.
+    /// The task definition status to filter the `ListTaskDefinitions` results with.
+    /// By default, only `ACTIVE` task definitions are listed. By setting this
+    /// parameter to `INACTIVE`, you can view task definitions that are `INACTIVE`
+    /// as long as an active task or service still references them. If you paginate
+    /// the resulting output, be sure to keep the `status` value constant in each
+    /// subsequent request.
     status: ?TaskDefinitionStatus = null,
 
     pub const json_field_names = .{
@@ -63,11 +58,10 @@ pub const ListTaskDefinitionsInput = struct {
 };
 
 pub const ListTaskDefinitionsOutput = struct {
-    /// The `nextToken` value to include in a future
-    /// `ListTaskDefinitions` request. When the results of a
-    /// `ListTaskDefinitions` request exceed `maxResults`, this value
-    /// can be used to retrieve the next page of results. This value is `null` when
-    /// there are no more results to return.
+    /// The `nextToken` value to include in a future `ListTaskDefinitions` request.
+    /// When the results of a `ListTaskDefinitions` request exceed `maxResults`,
+    /// this value can be used to retrieve the next page of results. This value is
+    /// `null` when there are no more results to return.
     next_token: ?[]const u8 = null,
 
     /// The list of task definition Amazon Resource Name (ARN) entries for the
@@ -204,6 +198,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

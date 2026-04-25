@@ -8,8 +8,8 @@ pub const KubernetesUserDetails = struct {
     /// Information about the impersonated user.
     impersonated_user: ?ImpersonatedUser = null,
 
-    /// Entity that assumes the IAM role
-    /// when Kubernetes RBAC permissions are assigned to that role.
+    /// Entity that assumes the IAM role when Kubernetes RBAC permissions are
+    /// assigned to that role.
     session_name: ?[]const []const u8 = null,
 
     /// The user ID of the user who called the Kubernetes API.

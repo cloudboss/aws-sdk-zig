@@ -1,6 +1,7 @@
 pub const AbpV1_0_x = @import("abp_v1_0_x.zig").AbpV1_0_x;
 pub const AbpV1_1 = @import("abp_v1_1.zig").AbpV1_1;
 pub const Accuracy = @import("accuracy.zig").Accuracy;
+pub const AdvancedConfiguration = @import("advanced_configuration.zig").AdvancedConfiguration;
 pub const AggregationPeriod = @import("aggregation_period.zig").AggregationPeriod;
 pub const ApplicationConfig = @import("application_config.zig").ApplicationConfig;
 pub const ApplicationConfigType = @import("application_config_type.zig").ApplicationConfigType;
@@ -165,6 +166,7 @@ pub const WcdmaLocalId = @import("wcdma_local_id.zig").WcdmaLocalId;
 pub const WcdmaNmrObj = @import("wcdma_nmr_obj.zig").WcdmaNmrObj;
 pub const WcdmaObj = @import("wcdma_obj.zig").WcdmaObj;
 pub const WiFiAccessPoint = @import("wi_fi_access_point.zig").WiFiAccessPoint;
+pub const WiFiCellular = @import("wi_fi_cellular.zig").WiFiCellular;
 pub const WirelessDeviceEvent = @import("wireless_device_event.zig").WirelessDeviceEvent;
 pub const WirelessDeviceEventLogOption = @import("wireless_device_event_log_option.zig").WirelessDeviceEventLogOption;
 pub const WirelessDeviceFrameInfo = @import("wireless_device_frame_info.zig").WirelessDeviceFrameInfo;

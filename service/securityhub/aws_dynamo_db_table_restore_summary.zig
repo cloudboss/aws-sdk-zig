@@ -3,7 +3,7 @@ pub const AwsDynamoDbTableRestoreSummary = struct {
     /// Indicates the point in time that the table was restored to.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     restore_date_time: ?[]const u8 = null,
 

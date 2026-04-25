@@ -19,6 +19,8 @@ pub const PutBackupVaultLockConfigurationInput = struct {
     /// and becomes immutable. Therefore, you must set `ChangeableForDays` to 3 or
     /// greater.
     ///
+    /// The maximum value you can specify is 36,500 days (approximately 100 years).
+    ///
     /// Before the lock date, you can delete Vault Lock from the vault using
     /// `DeleteBackupVaultLockConfiguration` or change the Vault Lock configuration
     /// using `PutBackupVaultLockConfiguration`. On and after the lock date, the

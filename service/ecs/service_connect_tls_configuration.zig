@@ -5,13 +5,11 @@ pub const ServiceConnectTlsConfiguration = struct {
     /// The signer certificate authority.
     issuer_certificate_authority: ServiceConnectTlsCertificateAuthority,
 
-    /// The Amazon Web
-    /// Services Key Management Service key.
+    /// The Amazon Web Services Key Management Service key.
     kms_key: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role that's associated with the
-    /// Service
-    /// Connect TLS.
+    /// Service Connect TLS.
     role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{

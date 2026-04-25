@@ -10,8 +10,7 @@ pub const DetectorAdditionalConfigurationResult = struct {
     status: ?FeatureStatus = null,
 
     /// The timestamp at which the additional configuration was last updated. This
-    /// is in UTC
-    /// format.
+    /// is in UTC format.
     updated_at: ?i64 = null,
 
     pub const json_field_names = .{

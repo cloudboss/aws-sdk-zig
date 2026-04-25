@@ -21,8 +21,9 @@ pub const CreateEvaluatorInput = struct {
     /// criteria.
     description: ?[]const u8 = null,
 
-    /// The configuration for the evaluator, including LLM-as-a-Judge settings with
-    /// instructions, rating scale, and model configuration.
+    /// The configuration for the evaluator. Specify either LLM-as-a-Judge settings
+    /// with instructions, rating scale, and model configuration, or code-based
+    /// settings with a customer-managed Lambda function.
     evaluator_config: EvaluatorConfig,
 
     /// The name of the evaluator. Must be unique within your account.

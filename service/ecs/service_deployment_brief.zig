@@ -30,8 +30,7 @@ pub const ServiceDeploymentBrief = struct {
     status: ?ServiceDeploymentStatus = null,
 
     /// Information about why the service deployment is in the current status. For
-    /// example,
-    /// the circuit breaker detected a deployment failure.
+    /// example, the circuit breaker detected a deployment failure.
     status_reason: ?[]const u8 = null,
 
     /// The ARN of the service revision being deplyed.

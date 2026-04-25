@@ -11,7 +11,8 @@ const ReverseGeocodeResultItem = @import("reverse_geocode_result_item.zig").Reve
 
 pub const ReverseGeocodeInput = struct {
     /// A list of optional additional parameters, such as time zone that can be
-    /// requested for each result.
+    /// requested for each result. For
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only the `TimeZone` value.
     additional_features: ?[]const ReverseGeocodeAdditionalFeature = null,
 
     /// A structure which contains a set of inclusion/exclusion properties that
@@ -25,12 +26,13 @@ pub const ReverseGeocodeInput = struct {
     /// and West is `270` degrees.
     heading: ?f64 = null,
 
-    /// Indicates if the results will be stored. Defaults to `SingleUse`, if left
-    /// empty.
+    /// Indicates if the query results will be persisted in customer infrastructure.
+    /// Defaults to `SingleUse` (not stored).
     ///
-    /// Storing the response of an ReverseGeocode query is required to comply with
-    /// service terms, but charged at a higher cost per request. Please review the
-    /// [user agreement](https://aws.amazon.com/location/sla/) and [service pricing
+    /// When storing `ReverseGeocode` responses, you *must* set this field to
+    /// `Storage` to comply with the terms of service. These requests will be
+    /// charged at a higher rate. Please review the [user
+    /// agreement](https://aws.amazon.com/location/sla/) and [service pricing
     /// structure](https://aws.amazon.com/location/pricing/) to determine the
     /// correct setting for your use case.
     intended_use: ?ReverseGeocodeIntendedUse = null,
@@ -42,7 +44,8 @@ pub const ReverseGeocodeInput = struct {
     /// A list of [BCP 47](https://en.wikipedia.org/wiki/IETF_language_tag)
     /// compliant language codes for the results to be rendered in. If there is no
     /// data for the result in the requested language, data will be returned in the
-    /// default language for the entry.
+    /// default language for the entry. For
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only the following codes: `en, id, km, lo, ms, my, pt, th, tl, vi, zh`
     language: ?[]const u8 = null,
 
     /// An optional limit for the number of results returned in a single call.
@@ -53,7 +56,8 @@ pub const ReverseGeocodeInput = struct {
     /// The alpha-2 or alpha-3 character code for the political view of a country.
     /// The political view applies to the results of the request to represent
     /// unresolved territorial claims through the point of view of the specified
-    /// country.
+    /// country. Not supported in `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     political_view: ?[]const u8 = null,
 
     /// The position in World Geodetic System (WGS 84) format: [longitude, latitude]
@@ -62,7 +66,8 @@ pub const ReverseGeocodeInput = struct {
     query_position: []const f64,
 
     /// The maximum distance in meters from the QueryPosition from which a result
-    /// will be returned.
+    /// will be returned. For
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only up to a maximum value of 100,000.
     query_radius: ?i64 = null,
 
     pub const json_field_names = .{
@@ -127,7 +132,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ReverseGeocodeInput, co
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    const path = "/reverse-geocode";
+    const path = "/v2/reverse-geocode";
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;

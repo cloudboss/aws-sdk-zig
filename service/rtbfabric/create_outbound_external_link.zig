@@ -9,6 +9,7 @@ const LinkLogSettings = @import("link_log_settings.zig").LinkLogSettings;
 const LinkStatus = @import("link_status.zig").LinkStatus;
 
 pub const CreateOutboundExternalLinkInput = struct {
+    /// Attributes of the link.
     attributes: ?LinkAttributes = null,
 
     /// The unique client token.
@@ -17,6 +18,7 @@ pub const CreateOutboundExternalLinkInput = struct {
     /// The unique identifier of the gateway.
     gateway_id: []const u8,
 
+    /// Settings for the application logs.
     log_settings: LinkLogSettings,
 
     /// The public endpoint of the link.

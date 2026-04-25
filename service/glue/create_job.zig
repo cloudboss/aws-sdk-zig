@@ -100,7 +100,7 @@ pub const CreateJobInput = struct {
     /// developer
     /// guide.
     ///
-    /// Jobs that are created without specifying a Glue version default to Glue 0.9.
+    /// Jobs that are created without specifying a Glue version default to Glue 5.1.
     glue_version: ?[]const u8 = null,
 
     /// A mode that describes how a job was created. Valid values are:

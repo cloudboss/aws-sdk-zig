@@ -6,7 +6,10 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CredentialProviderConfiguration = @import("credential_provider_configuration.zig").CredentialProviderConfiguration;
 const MetadataConfiguration = @import("metadata_configuration.zig").MetadataConfiguration;
+const PrivateEndpoint = @import("private_endpoint.zig").PrivateEndpoint;
 const TargetConfiguration = @import("target_configuration.zig").TargetConfiguration;
+const AuthorizationData = @import("authorization_data.zig").AuthorizationData;
+const ManagedResourceDetails = @import("managed_resource_details.zig").ManagedResourceDetails;
 const TargetStatus = @import("target_status.zig").TargetStatus;
 
 pub const UpdateGatewayTargetInput = struct {
@@ -26,6 +29,10 @@ pub const UpdateGatewayTargetInput = struct {
     /// The updated name for the gateway target.
     name: []const u8,
 
+    /// The private endpoint configuration for the gateway target. Use this to
+    /// connect the gateway to private resources in your VPC.
+    private_endpoint: ?PrivateEndpoint = null,
+
     target_configuration: TargetConfiguration,
 
     /// The unique identifier of the gateway target to update.
@@ -37,12 +44,18 @@ pub const UpdateGatewayTargetInput = struct {
         .gateway_identifier = "gatewayIdentifier",
         .metadata_configuration = "metadataConfiguration",
         .name = "name",
+        .private_endpoint = "privateEndpoint",
         .target_configuration = "targetConfiguration",
         .target_id = "targetId",
     };
 };
 
 pub const UpdateGatewayTargetOutput = struct {
+    /// OAuth2 authorization data for the updated gateway target. This data is
+    /// returned when a target is configured with a credential provider with
+    /// authorization code grant type and requires user federation.
+    authorization_data: ?AuthorizationData = null,
+
     /// The timestamp when the gateway target was created.
     created_at: i64,
 
@@ -64,6 +77,13 @@ pub const UpdateGatewayTargetOutput = struct {
     /// The updated name of the gateway target.
     name: []const u8,
 
+    /// The private endpoint configuration for the gateway target.
+    private_endpoint: ?PrivateEndpoint = null,
+
+    /// The managed resources created by the gateway for private endpoint
+    /// connectivity.
+    private_endpoint_managed_resources: ?[]const ManagedResourceDetails = null,
+
     /// The current status of the updated gateway target.
     status: TargetStatus,
 
@@ -79,6 +99,7 @@ pub const UpdateGatewayTargetOutput = struct {
     updated_at: i64,
 
     pub const json_field_names = .{
+        .authorization_data = "authorizationData",
         .created_at = "createdAt",
         .credential_provider_configurations = "credentialProviderConfigurations",
         .description = "description",
@@ -86,6 +107,8 @@ pub const UpdateGatewayTargetOutput = struct {
         .last_synchronized_at = "lastSynchronizedAt",
         .metadata_configuration = "metadataConfiguration",
         .name = "name",
+        .private_endpoint = "privateEndpoint",
+        .private_endpoint_managed_resources = "privateEndpointManagedResources",
         .status = "status",
         .status_reasons = "statusReasons",
         .target_configuration = "targetConfiguration",
@@ -160,6 +183,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateGatewayTargetInpu
     try body_buf.appendSlice(allocator, "\"name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
     has_prev = true;
+    if (input.private_endpoint) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"privateEndpoint\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"targetConfiguration\":");
     try aws.json.writeValue(@TypeOf(input.target_configuration), input.target_configuration, allocator, &body_buf);

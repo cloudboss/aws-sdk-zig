@@ -33,17 +33,17 @@ pub const FindingHistoryRecord = struct {
     /// integrated
     /// Amazon Web Services service or third-party partner integration may call [
     /// `BatchImportFindings`
-    /// ](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html), or an Security Hub customer
+    /// ](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html), or an Security Hub CSPM customer
     /// may call [
     /// `BatchUpdateFindings`
     /// ](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html).
     update_source: ?FindingHistoryUpdateSource = null,
 
-    /// A timestamp that indicates when Security Hub
+    /// A timestamp that indicates when Security Hub CSPM
     /// processed the updated finding record.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     update_time: ?i64 = null,
 

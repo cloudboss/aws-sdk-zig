@@ -31,6 +31,14 @@ pub const GetGroupProfileOutput = struct {
     /// The identifier of the group profile.
     id: ?[]const u8 = null,
 
+    /// The ARN of the IAM role principal. This role is associated with the group
+    /// profile.
+    role_principal_arn: ?[]const u8 = null,
+
+    /// The unique identifier of the IAM role principal. This principal is
+    /// associated with the group profile.
+    role_principal_id: ?[]const u8 = null,
+
     /// The identifier of the group profile.
     status: ?GroupProfileStatus = null,
 
@@ -38,6 +46,8 @@ pub const GetGroupProfileOutput = struct {
         .domain_id = "domainId",
         .group_name = "groupName",
         .id = "id",
+        .role_principal_arn = "rolePrincipalArn",
+        .role_principal_id = "rolePrincipalId",
         .status = "status",
     };
 };

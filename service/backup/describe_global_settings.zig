@@ -9,14 +9,22 @@ pub const DescribeGlobalSettingsInput = struct {
 };
 
 pub const DescribeGlobalSettingsOutput = struct {
-    /// The status of the flags `isCrossAccountBackupEnabled`,
-    /// `isMpaEnabled` ('Mpa' refers to multi-party approval), and
-    /// `isDelegatedAdministratorEnabled`.
+    /// The status of the flags `isCrossAccountBackupEnabled`, `isMpaEnabled` ('Mpa'
+    /// refers to multi-party approval), and `isDelegatedAdministratorEnabled`.
+    ///
+    /// * `isCrossAccountBackupEnabled`: Allow accounts in your organization to copy
+    ///   backups to other accounts.
+    ///
+    /// * `isMpaEnabled`: Add cross-account access to your organization with the
+    ///   option to assign a Multi-party approval team to a logically air-gapped
+    ///   vault.
+    ///
+    /// * `isDelegatedAdministratorEnabled`: Allow Backup to automatically
+    ///   synchronize delegated administrator permissions with Organizations.
     global_settings: ?[]const aws.map.StringMapEntry = null,
 
-    /// The date and time that the flag `isCrossAccountBackupEnabled` was last
-    /// updated. This update is in Unix format and Coordinated Universal Time (UTC).
-    /// The value of
+    /// The date and time that the supported flags were last updated. This update is
+    /// in Unix format and Coordinated Universal Time (UTC). The value of
     /// `LastUpdateTime` is accurate to milliseconds. For example, the value
     /// 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
     last_update_time: ?i64 = null,

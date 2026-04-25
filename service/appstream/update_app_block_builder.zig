@@ -22,6 +22,10 @@ pub const UpdateAppBlockBuilderInput = struct {
     /// The description of the app block builder.
     description: ?[]const u8 = null,
 
+    /// Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and
+    /// enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    disable_imdsv1: ?bool = null,
+
     /// The display name of the app block builder.
     display_name: ?[]const u8 = null,
 
@@ -77,6 +81,7 @@ pub const UpdateAppBlockBuilderInput = struct {
         .access_endpoints = "AccessEndpoints",
         .attributes_to_delete = "AttributesToDelete",
         .description = "Description",
+        .disable_imdsv1 = "DisableIMDSV1",
         .display_name = "DisplayName",
         .enable_default_internet_access = "EnableDefaultInternetAccess",
         .iam_role_arn = "IamRoleArn",

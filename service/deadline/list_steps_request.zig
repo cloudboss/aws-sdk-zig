@@ -1,3 +1,4 @@
+/// Shared pagination fields for List operation inputs (nextToken + maxResults).
 pub const ListStepsRequest = struct {
     /// The farm ID to include on the list of steps.
     farm_id: []const u8,

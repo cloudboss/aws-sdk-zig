@@ -13,9 +13,10 @@ const UserSettings = @import("user_settings.zig").UserSettings;
 pub const UpdateUserSettingsInput = struct {
     /// The branding configuration that customizes the appearance of the web portal
     /// for end users. When updating user settings without an existing branding
-    /// configuration, all fields (logo, favicon, wallpaper, localized strings, and
-    /// color theme) are required except for terms of service. When updating user
-    /// settings with an existing branding configuration, all fields are optional.
+    /// configuration, all fields (logo, favicon, localized strings, and color
+    /// theme) are required except for wallpaper and terms of service. When updating
+    /// user settings with an existing branding configuration, all fields are
+    /// optional.
     branding_configuration_input: ?BrandingConfigurationUpdateInput = null,
 
     /// A unique, case-sensitive identifier that you provide to ensure the

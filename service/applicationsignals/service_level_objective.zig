@@ -45,7 +45,10 @@ pub const ServiceLevelObjective = struct {
     ///
     /// * Service operation
     /// * Service dependency
+    /// * Service
     /// * CloudWatch metric
+    /// * AppMonitor
+    /// * Canary
     metric_source_type: ?MetricSourceType = null,
 
     /// The name of this SLO.

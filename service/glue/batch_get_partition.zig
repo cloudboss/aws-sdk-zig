@@ -4,10 +4,14 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const AuditContext = @import("audit_context.zig").AuditContext;
 const PartitionValueList = @import("partition_value_list.zig").PartitionValueList;
+const QuerySessionContext = @import("query_session_context.zig").QuerySessionContext;
 const Partition = @import("partition.zig").Partition;
 
 pub const BatchGetPartitionInput = struct {
+    audit_context: ?AuditContext = null,
+
     /// The ID of the Data Catalog where the partitions in question reside.
     /// If none is supplied, the Amazon Web Services account ID is used by default.
     catalog_id: ?[]const u8 = null,
@@ -18,13 +22,17 @@ pub const BatchGetPartitionInput = struct {
     /// A list of partition values identifying the partitions to retrieve.
     partitions_to_get: []const PartitionValueList,
 
+    query_session_context: ?QuerySessionContext = null,
+
     /// The name of the partitions' table.
     table_name: []const u8,
 
     pub const json_field_names = .{
+        .audit_context = "AuditContext",
         .catalog_id = "CatalogId",
         .database_name = "DatabaseName",
         .partitions_to_get = "PartitionsToGet",
+        .query_session_context = "QuerySessionContext",
         .table_name = "TableName",
     };
 };

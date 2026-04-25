@@ -8,9 +8,9 @@ pub const AutomatedDiscoveryAccountUpdateError = struct {
     account_id: ?[]const u8 = null,
 
     /// The error code for the error that caused the request to fail for the account
-    /// (accountId). Possible values are: ACCOUNT_NOT_FOUND, the account doesn’t
+    /// (accountId). Possible values are: ACCOUNT_NOT_FOUND, the account doesn't
     /// exist or you're not the Amazon Macie administrator for the account; and,
-    /// ACCOUNT_PAUSED, Macie isn’t enabled for the account in the current Amazon
+    /// ACCOUNT_PAUSED, Macie isn't enabled for the account in the current Amazon
     /// Web Services Region.
     error_code: ?AutomatedDiscoveryAccountUpdateErrorCode = null,
 

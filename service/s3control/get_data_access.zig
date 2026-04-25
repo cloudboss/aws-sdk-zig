@@ -15,6 +15,11 @@ pub const GetDataAccessInput = struct {
     /// The Amazon Web Services account ID of the S3 Access Grants instance.
     account_id: []const u8,
 
+    /// The context to identify the job or query associated with the credential
+    /// request. This information will be displayed in CloudTrail log in your
+    /// account.
+    audit_context: ?[]const u8 = null,
+
     /// The session duration, in seconds, of the temporary access credential that S3
     /// Access Grants vends to the grantee or client application. The default value
     /// is 1 hour, but the grantee can specify a range from 900 seconds (15 minutes)
@@ -106,6 +111,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDataAccessInput, con
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
+    if (input.audit_context) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "auditContext=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
     if (input.duration_seconds) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "durationSeconds=");

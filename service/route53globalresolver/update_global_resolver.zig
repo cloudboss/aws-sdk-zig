@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const GlobalResolverIpAddressType = @import("global_resolver_ip_address_type.zig").GlobalResolverIpAddressType;
 const CRResourceStatus = @import("cr_resource_status.zig").CRResourceStatus;
 
 pub const UpdateGlobalResolverInput = struct {
@@ -13,16 +14,21 @@ pub const UpdateGlobalResolverInput = struct {
     /// The ID of the Global Resolver.
     global_resolver_id: []const u8,
 
+    /// The IP address type for the Global Resolver. Valid values are IPV4 or
+    /// DUAL_STACK for both IPv4 and IPv6 support.
+    ip_address_type: ?GlobalResolverIpAddressType = null,
+
     /// The name of the Global Resolver.
     name: ?[]const u8 = null,
 
-    /// The AWS Regions in which the users' Global Resolver query resolution logs
-    /// will be propagated.
+    /// The Amazon Web Services Regions in which the users' Global Resolver query
+    /// resolution logs will be propagated.
     observability_region: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "description",
         .global_resolver_id = "globalResolverId",
+        .ip_address_type = "ipAddressType",
         .name = "name",
         .observability_region = "observabilityRegion",
     };
@@ -50,17 +56,24 @@ pub const UpdateGlobalResolverOutput = struct {
     /// The ID of the Global Resolver.
     id: []const u8,
 
+    /// The IP address type configured for the updated Global Resolver.
+    ip_address_type: ?GlobalResolverIpAddressType = null,
+
     /// List of anycast IPv4 addresses associated with the Global Resolver instance.
     ipv_4_addresses: ?[]const []const u8 = null,
+
+    /// List of anycast IPv6 addresses associated with the updated Global Resolver
+    /// instance. This field is only populated when ipAddressType is DUAL_STACK.
+    ipv_6_addresses: ?[]const []const u8 = null,
 
     /// Name of the Global Resolver.
     name: []const u8,
 
-    /// The AWS Regions in which the users' Global Resolver query resolution logs
-    /// will be propagated.
+    /// The Amazon Web Services Regions in which the users' Global Resolver query
+    /// resolution logs will be propagated.
     observability_region: ?[]const u8 = null,
 
-    /// The AWS Regions in which the Global Resolver will operate.
+    /// The Amazon Web Services Regions in which the Global Resolver will operate.
     regions: ?[]const []const u8 = null,
 
     /// The operational status of the Global Resolver.
@@ -76,7 +89,9 @@ pub const UpdateGlobalResolverOutput = struct {
         .description = "description",
         .dns_name = "dnsName",
         .id = "id",
+        .ip_address_type = "ipAddressType",
         .ipv_4_addresses = "ipv4Addresses",
+        .ipv_6_addresses = "ipv6Addresses",
         .name = "name",
         .observability_region = "observabilityRegion",
         .regions = "regions",
@@ -129,6 +144,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateGlobalResolverInp
     if (input.description) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"description\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.ip_address_type) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"ipAddressType\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

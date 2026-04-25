@@ -4,16 +4,13 @@ const S3DataAccessDetails = @import("s3_data_access_details.zig").S3DataAccessDe
 
 /// Details about the scope of the notifications such as the affected resources.
 pub const ScopeDetails = struct {
-    /// Underlying
-    /// LF resources that will be affected by this notification.
+    /// Underlying LF resources that will be affected by this notification.
     lake_formation_tag_policies: ?[]const LakeFormationTagPolicyDetails = null,
 
-    /// Underlying
-    /// Redshift resources that will be affected by this notification.
+    /// Underlying Redshift resources that will be affected by this notification.
     redshift_data_shares: ?[]const RedshiftDataShareDetails = null,
 
-    /// Underlying
-    /// S3 resources that will be affected by this notification.
+    /// Underlying S3 resources that will be affected by this notification.
     s3_data_accesses: ?[]const S3DataAccessDetails = null,
 
     pub const json_field_names = .{

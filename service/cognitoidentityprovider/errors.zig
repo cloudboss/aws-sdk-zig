@@ -5,6 +5,7 @@ pub const ServiceError = struct {
     kind: Kind,
 
     pub const Kind = union(enum) {
+        access_denied_exception: AccessDeniedException,
         alias_exists_exception: AliasExistsException,
         code_delivery_failure_exception: CodeDeliveryFailureException,
         code_mismatch_exception: CodeMismatchException,
@@ -17,6 +18,7 @@ pub const ServiceError = struct {
         forbidden_exception: ForbiddenException,
         group_exists_exception: GroupExistsException,
         internal_error_exception: InternalErrorException,
+        internal_server_exception: InternalServerException,
         invalid_email_role_access_policy_exception: InvalidEmailRoleAccessPolicyException,
         invalid_lambda_response_exception: InvalidLambdaResponseException,
         invalid_o_auth_flow_exception: InvalidOAuthFlowException,
@@ -64,6 +66,7 @@ pub const ServiceError = struct {
 
         pub fn code(self: Kind) []const u8 {
             return switch (self) {
+                .access_denied_exception => "AccessDeniedException",
                 .alias_exists_exception => "AliasExistsException",
                 .code_delivery_failure_exception => "CodeDeliveryFailureException",
                 .code_mismatch_exception => "CodeMismatchException",
@@ -76,6 +79,7 @@ pub const ServiceError = struct {
                 .forbidden_exception => "ForbiddenException",
                 .group_exists_exception => "GroupExistsException",
                 .internal_error_exception => "InternalErrorException",
+                .internal_server_exception => "InternalServerException",
                 .invalid_email_role_access_policy_exception => "InvalidEmailRoleAccessPolicyException",
                 .invalid_lambda_response_exception => "InvalidLambdaResponseException",
                 .invalid_o_auth_flow_exception => "InvalidOAuthFlowException",
@@ -125,6 +129,7 @@ pub const ServiceError = struct {
 
         pub fn message(self: Kind) []const u8 {
             return switch (self) {
+                .access_denied_exception => |e| e.message,
                 .alias_exists_exception => |e| e.message,
                 .code_delivery_failure_exception => |e| e.message,
                 .code_mismatch_exception => |e| e.message,
@@ -137,6 +142,7 @@ pub const ServiceError = struct {
                 .forbidden_exception => |e| e.message,
                 .group_exists_exception => |e| e.message,
                 .internal_error_exception => |e| e.message,
+                .internal_server_exception => |e| e.message,
                 .invalid_email_role_access_policy_exception => |e| e.message,
                 .invalid_lambda_response_exception => |e| e.message,
                 .invalid_o_auth_flow_exception => |e| e.message,
@@ -186,6 +192,7 @@ pub const ServiceError = struct {
 
         pub fn httpStatus(self: Kind) u16 {
             return switch (self) {
+                .access_denied_exception => 403,
                 .alias_exists_exception => 400,
                 .code_delivery_failure_exception => 400,
                 .code_mismatch_exception => 400,
@@ -198,6 +205,7 @@ pub const ServiceError = struct {
                 .forbidden_exception => 403,
                 .group_exists_exception => 400,
                 .internal_error_exception => 500,
+                .internal_server_exception => 500,
                 .invalid_email_role_access_policy_exception => 400,
                 .invalid_lambda_response_exception => 400,
                 .invalid_o_auth_flow_exception => 400,
@@ -247,6 +255,7 @@ pub const ServiceError = struct {
 
         pub fn requestId(self: Kind) []const u8 {
             return switch (self) {
+                .access_denied_exception => |e| e.request_id,
                 .alias_exists_exception => |e| e.request_id,
                 .code_delivery_failure_exception => |e| e.request_id,
                 .code_mismatch_exception => |e| e.request_id,
@@ -259,6 +268,7 @@ pub const ServiceError = struct {
                 .forbidden_exception => |e| e.request_id,
                 .group_exists_exception => |e| e.request_id,
                 .internal_error_exception => |e| e.request_id,
+                .internal_server_exception => |e| e.request_id,
                 .invalid_email_role_access_policy_exception => |e| e.request_id,
                 .invalid_lambda_response_exception => |e| e.request_id,
                 .invalid_o_auth_flow_exception => |e| e.request_id,
@@ -328,6 +338,11 @@ pub const ServiceError = struct {
     }
 };
 
+pub const AccessDeniedException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
 pub const AliasExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
@@ -384,6 +399,11 @@ pub const GroupExistsException = struct {
 };
 
 pub const InternalErrorException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };

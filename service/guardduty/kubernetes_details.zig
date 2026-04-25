@@ -2,8 +2,7 @@ const KubernetesUserDetails = @import("kubernetes_user_details.zig").KubernetesU
 const KubernetesWorkloadDetails = @import("kubernetes_workload_details.zig").KubernetesWorkloadDetails;
 
 /// Details about Kubernetes resources such as a Kubernetes user or workload
-/// resource involved
-/// in a Kubernetes finding.
+/// resource involved in a Kubernetes finding.
 pub const KubernetesDetails = struct {
     /// Details about the Kubernetes user involved in a Kubernetes finding.
     kubernetes_user_details: ?KubernetesUserDetails = null,

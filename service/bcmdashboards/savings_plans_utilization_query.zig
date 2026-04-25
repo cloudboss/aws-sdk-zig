@@ -7,7 +7,7 @@ const DateTimeRange = @import("date_time_range.zig").DateTimeRange;
 pub const SavingsPlansUtilizationQuery = struct {
     filter: ?Expression = null,
 
-    /// The time granularity of the retrieved data: HOURLY, DAILY, or MONTHLY.
+    /// The time granularity of the retrieved data: `HOURLY`, `DAILY`, or `MONTHLY`.
     granularity: ?Granularity = null,
 
     time_range: DateTimeRange,

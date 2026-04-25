@@ -22,7 +22,7 @@ pub const GetHypervisorPropertyMappingsOutput = struct {
     /// The Amazon Resource Name (ARN) of the IAM role.
     iam_role_arn: ?[]const u8 = null,
 
-    /// This is a display of the mappings of on-premises VMware tags to the
+    /// This is a display of the mappings of VMware tags to the
     /// Amazon Web Services tags.
     vmware_to_aws_tag_mappings: ?[]const VmwareToAwsTagMapping = null,
 

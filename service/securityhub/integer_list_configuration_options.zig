@@ -1,8 +1,8 @@
 /// The options for customizing a security control parameter that is a list of
 /// integers.
 pub const IntegerListConfigurationOptions = struct {
-    /// The Security Hub default value for a control parameter that is a list of
-    /// integers.
+    /// The Security Hub CSPM default value for a control parameter that is a list
+    /// of integers.
     default_value: ?[]const i32 = null,
 
     /// The maximum valid value for a control parameter that is a list of integers.

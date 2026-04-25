@@ -1,4 +1,5 @@
 const AmazonQInQuickSightConsoleConfigurations = @import("amazon_q_in_quick_sight_console_configurations.zig").AmazonQInQuickSightConsoleConfigurations;
+const DashboardCustomizationSummaryConfigurations = @import("dashboard_customization_summary_configurations.zig").DashboardCustomizationSummaryConfigurations;
 const RecentSnapshotsConfigurations = @import("recent_snapshots_configurations.zig").RecentSnapshotsConfigurations;
 const SchedulesConfigurations = @import("schedules_configurations.zig").SchedulesConfigurations;
 const SharedViewConfigurations = @import("shared_view_configurations.zig").SharedViewConfigurations;
@@ -10,6 +11,10 @@ pub const RegisteredUserConsoleFeatureConfigurations = struct {
     /// The Amazon Q configurations of an embedded Amazon Quick Sight
     /// console.
     amazon_q_in_quick_sight: ?AmazonQInQuickSightConsoleConfigurations = null,
+
+    /// The dashboard customization summary configuration for an embedded Quick
+    /// Sight console.
+    dashboard_customization_summary: ?DashboardCustomizationSummaryConfigurations = null,
 
     /// The recent snapshots configuration for an embedded Quick Sight dashboard.
     recent_snapshots: ?RecentSnapshotsConfigurations = null,
@@ -29,6 +34,7 @@ pub const RegisteredUserConsoleFeatureConfigurations = struct {
 
     pub const json_field_names = .{
         .amazon_q_in_quick_sight = "AmazonQInQuickSight",
+        .dashboard_customization_summary = "DashboardCustomizationSummary",
         .recent_snapshots = "RecentSnapshots",
         .schedules = "Schedules",
         .shared_view = "SharedView",

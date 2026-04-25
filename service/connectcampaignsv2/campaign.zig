@@ -3,6 +3,7 @@ const aws = @import("aws");
 const ChannelSubtypeConfig = @import("channel_subtype_config.zig").ChannelSubtypeConfig;
 const CommunicationLimitsConfig = @import("communication_limits_config.zig").CommunicationLimitsConfig;
 const CommunicationTimeConfig = @import("communication_time_config.zig").CommunicationTimeConfig;
+const EntryLimitsConfig = @import("entry_limits_config.zig").EntryLimitsConfig;
 const Schedule = @import("schedule.zig").Schedule;
 const Source = @import("source.zig").Source;
 const ExternalCampaignType = @import("external_campaign_type.zig").ExternalCampaignType;
@@ -20,6 +21,8 @@ pub const Campaign = struct {
     connect_campaign_flow_arn: ?[]const u8 = null,
 
     connect_instance_id: []const u8,
+
+    entry_limits_config: ?EntryLimitsConfig = null,
 
     id: []const u8,
 
@@ -40,6 +43,7 @@ pub const Campaign = struct {
         .communication_time_config = "communicationTimeConfig",
         .connect_campaign_flow_arn = "connectCampaignFlowArn",
         .connect_instance_id = "connectInstanceId",
+        .entry_limits_config = "entryLimitsConfig",
         .id = "id",
         .name = "name",
         .schedule = "schedule",

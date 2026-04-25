@@ -20,6 +20,11 @@ pub const ListProfileObjectTypeItem = struct {
     /// The name of the profile object type.
     object_type_name: []const u8,
 
+    /// An integer that determines the priority of this object type when data from
+    /// multiple sources is ingested. Lower values take priority. Object types
+    /// without a specified source priority default to the lowest priority.
+    source_priority: ?i32 = null,
+
     /// The tags used to organize, track, or control access for this resource.
     tags: ?[]const aws.map.StringMapEntry = null,
 
@@ -30,6 +35,7 @@ pub const ListProfileObjectTypeItem = struct {
         .max_available_profile_object_count = "MaxAvailableProfileObjectCount",
         .max_profile_object_count = "MaxProfileObjectCount",
         .object_type_name = "ObjectTypeName",
+        .source_priority = "SourcePriority",
         .tags = "Tags",
     };
 };

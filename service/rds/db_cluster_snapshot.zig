@@ -1,3 +1,4 @@
+const StorageEncryptionType = @import("storage_encryption_type.zig").StorageEncryptionType;
 const Tag = @import("tag.zig").Tag;
 
 /// Contains the details for an Amazon RDS DB cluster snapshot
@@ -11,6 +12,9 @@ pub const DBClusterSnapshot = struct {
     /// The list of Availability Zones (AZs) where instances in the DB cluster
     /// snapshot can be restored.
     availability_zones: ?[]const []const u8 = null,
+
+    /// The number of days for which automatic DB snapshots are retained.
+    backup_retention_period: ?i32 = null,
 
     /// The time when the DB cluster was created, in Universal Coordinated Time
     /// (UTC).
@@ -65,6 +69,10 @@ pub const DBClusterSnapshot = struct {
     /// The port that the DB cluster was listening on at the time of the snapshot.
     port: ?i32 = null,
 
+    /// The daily time range during which automated backups are created if automated
+    /// backups are enabled, as determined by the `BackupRetentionPeriod`.
+    preferred_backup_window: ?[]const u8 = null,
+
     /// The time when the snapshot was taken, in Universal Coordinated Time (UTC).
     snapshot_create_time: ?i64 = null,
 
@@ -85,6 +93,16 @@ pub const DBClusterSnapshot = struct {
 
     /// Indicates whether the DB cluster snapshot is encrypted.
     storage_encrypted: ?bool = null,
+
+    /// The type of encryption used to protect data at rest in the DB cluster
+    /// snapshot. Possible values:
+    ///
+    /// * `none` - The DB cluster snapshot is not encrypted.
+    /// * `sse-rds` - The DB cluster snapshot is encrypted using an Amazon Web
+    ///   Services owned KMS key.
+    /// * `sse-kms` - The DB cluster snapshot is encrypted using a customer managed
+    ///   KMS key or Amazon Web Services managed KMS key.
+    storage_encryption_type: ?StorageEncryptionType = null,
 
     /// The storage throughput for the DB cluster snapshot. The throughput is
     /// automatically set based on the IOPS that you provision, and is not

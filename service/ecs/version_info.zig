@@ -1,6 +1,5 @@
 /// The Docker and Amazon ECS container agent version information about a
-/// container
-/// instance.
+/// container instance.
 pub const VersionInfo = struct {
     /// The Git commit hash for the Amazon ECS container agent build on the
     /// [amazon-ecs-agent ](https://github.com/aws/amazon-ecs-agent) GitHub

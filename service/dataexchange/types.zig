@@ -1,6 +1,7 @@
 pub const AcceptanceStateFilterValue = @import("acceptance_state_filter_value.zig").AcceptanceStateFilterValue;
 pub const Action = @import("action.zig").Action;
 pub const ApiGatewayApiAsset = @import("api_gateway_api_asset.zig").ApiGatewayApiAsset;
+pub const AssetConfiguration = @import("asset_configuration.zig").AssetConfiguration;
 pub const AssetDestinationEntry = @import("asset_destination_entry.zig").AssetDestinationEntry;
 pub const AssetDetails = @import("asset_details.zig").AssetDetails;
 pub const AssetEntry = @import("asset_entry.zig").AssetEntry;
@@ -90,6 +91,7 @@ pub const State = @import("state.zig").State;
 pub const TableLFTagPolicy = @import("table_lf_tag_policy.zig").TableLFTagPolicy;
 pub const TableLFTagPolicyAndPermissions = @import("table_lf_tag_policy_and_permissions.zig").TableLFTagPolicyAndPermissions;
 pub const TableTagPolicyLFPermission = @import("table_tag_policy_lf_permission.zig").TableTagPolicyLFPermission;
+pub const Tag = @import("tag.zig").Tag;
 pub const TagResourceRequest = @import("tag_resource_request.zig").TagResourceRequest;
 pub const Type = @import("type.zig").Type;
 pub const UntagResourceRequest = @import("untag_resource_request.zig").UntagResourceRequest;

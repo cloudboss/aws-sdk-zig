@@ -61,7 +61,7 @@ pub const FunctionConfiguration = struct {
     ephemeral_storage: ?EphemeralStorage = null,
 
     /// Connection settings for an [Amazon EFS file
-    /// system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html).
+    /// system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html) or an [Amazon S3 Files file system](https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html).
     file_system_configs: ?[]const FileSystemConfig = null,
 
     /// The function's Amazon Resource Name (ARN).

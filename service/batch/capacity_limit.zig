@@ -1,23 +1,28 @@
-/// Defines the capacity limit for a service environment. This structure
-/// specifies the maximum amount of resources that can be used by service jobs
-/// in the environment.
+/// Defines the type and maximum quantity of resources that can be allocated to
+/// service jobs in a service environment.
 pub const CapacityLimit = struct {
-    /// The unit of measure for the capacity limit. This defines how the maxCapacity
-    /// value should be interpreted. For `SAGEMAKER_TRAINING` jobs, use
-    /// `NUM_INSTANCES`.
+    /// The unit of measure for the capacity limit, which defines how `maxCapacity`
+    /// is interpreted. For `SAGEMAKER_TRAINING` jobs in a quota management
+    /// enabled service environment, specify the [instance
+    /// type](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ResourceConfig.html#sagemaker-Type-ResourceConfig-InstanceType)
+    /// (for example, `ml.m5.large`). Otherwise, use `NUM_INSTANCES`.
     capacity_unit: ?[]const u8 = null,
 
-    /// The maximum capacity available for the service environment. This value
-    /// represents the maximum amount of resources that can be allocated to service
-    /// jobs.
+    /// The maximum capacity available for the service environment. For a quota
+    /// management enabled service environment, this value represents
+    /// the maximum quantity of a particular resource type (specified by
+    /// `capacityUnit`) that can be allocated to service jobs.
+    /// For other service environments, this value represents the maximum quantity
+    /// of all resources that can be allocated to service jobs.
     ///
-    /// For example, `maxCapacity=50`, `capacityUnit=NUM_INSTANCES`. This indicates
-    /// that the
-    /// maximum number of instances that can be run on this service environment is
-    /// 50. You could
-    /// then run 5 SageMaker Training jobs that each use 10 instances. However, if
-    /// you submit another job that
-    /// requires 10 instances, it will wait in the queue.
+    /// For example, if `maxCapacity=50` and `capacityUnit=NUM_INSTANCES`, you can
+    /// run up to 50 instances concurrently.
+    /// If you run 5 SageMaker Training jobs that each use 10 instances, a
+    /// subsequent job requiring 10 instances waits in the queue until
+    /// capacity is available. In a quota management enabled service environment
+    /// with `capacityUnit=ml.m5.large`, only
+    /// `ml.m5.large` instances count against this limit, and jobs requiring other
+    /// instance types wait until a matching capacity limit is configured.
     max_capacity: ?i32 = null,
 
     pub const json_field_names = .{

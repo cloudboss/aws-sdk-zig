@@ -14,6 +14,7 @@ const associate_instance_storage_config = @import("associate_instance_storage_co
 const associate_lambda_function = @import("associate_lambda_function.zig");
 const associate_lex_bot = @import("associate_lex_bot.zig");
 const associate_phone_number_contact_flow = @import("associate_phone_number_contact_flow.zig");
+const associate_queue_email_addresses = @import("associate_queue_email_addresses.zig");
 const associate_queue_quick_connects = @import("associate_queue_quick_connects.zig");
 const associate_routing_profile_queues = @import("associate_routing_profile_queues.zig");
 const associate_security_key = @import("associate_security_key.zig");
@@ -47,6 +48,7 @@ const create_hours_of_operation = @import("create_hours_of_operation.zig");
 const create_hours_of_operation_override = @import("create_hours_of_operation_override.zig");
 const create_instance = @import("create_instance.zig");
 const create_integration_association = @import("create_integration_association.zig");
+const create_notification = @import("create_notification.zig");
 const create_participant = @import("create_participant.zig");
 const create_persistent_contact_association = @import("create_persistent_contact_association.zig");
 const create_predefined_attribute = @import("create_predefined_attribute.zig");
@@ -84,6 +86,7 @@ const delete_hours_of_operation = @import("delete_hours_of_operation.zig");
 const delete_hours_of_operation_override = @import("delete_hours_of_operation_override.zig");
 const delete_instance = @import("delete_instance.zig");
 const delete_integration_association = @import("delete_integration_association.zig");
+const delete_notification = @import("delete_notification.zig");
 const delete_predefined_attribute = @import("delete_predefined_attribute.zig");
 const delete_prompt = @import("delete_prompt.zig");
 const delete_push_notification_registration = @import("delete_push_notification_registration.zig");
@@ -120,6 +123,7 @@ const describe_hours_of_operation_override = @import("describe_hours_of_operatio
 const describe_instance = @import("describe_instance.zig");
 const describe_instance_attribute = @import("describe_instance_attribute.zig");
 const describe_instance_storage_config = @import("describe_instance_storage_config.zig");
+const describe_notification = @import("describe_notification.zig");
 const describe_phone_number = @import("describe_phone_number.zig");
 const describe_predefined_attribute = @import("describe_predefined_attribute.zig");
 const describe_prompt = @import("describe_prompt.zig");
@@ -146,6 +150,7 @@ const disassociate_instance_storage_config = @import("disassociate_instance_stor
 const disassociate_lambda_function = @import("disassociate_lambda_function.zig");
 const disassociate_lex_bot = @import("disassociate_lex_bot.zig");
 const disassociate_phone_number_contact_flow = @import("disassociate_phone_number_contact_flow.zig");
+const disassociate_queue_email_addresses = @import("disassociate_queue_email_addresses.zig");
 const disassociate_queue_quick_connects = @import("disassociate_queue_quick_connects.zig");
 const disassociate_routing_profile_queues = @import("disassociate_routing_profile_queues.zig");
 const disassociate_security_key = @import("disassociate_security_key.zig");
@@ -203,10 +208,12 @@ const list_instances = @import("list_instances.zig");
 const list_integration_associations = @import("list_integration_associations.zig");
 const list_lambda_functions = @import("list_lambda_functions.zig");
 const list_lex_bots = @import("list_lex_bots.zig");
+const list_notifications = @import("list_notifications.zig");
 const list_phone_numbers = @import("list_phone_numbers.zig");
 const list_phone_numbers_v2 = @import("list_phone_numbers_v2.zig");
 const list_predefined_attributes = @import("list_predefined_attributes.zig");
 const list_prompts = @import("list_prompts.zig");
+const list_queue_email_addresses = @import("list_queue_email_addresses.zig");
 const list_queue_quick_connects = @import("list_queue_quick_connects.zig");
 const list_queues = @import("list_queues.zig");
 const list_quick_connects = @import("list_quick_connects.zig");
@@ -229,6 +236,7 @@ const list_traffic_distribution_group_users = @import("list_traffic_distribution
 const list_traffic_distribution_groups = @import("list_traffic_distribution_groups.zig");
 const list_use_cases = @import("list_use_cases.zig");
 const list_user_hierarchy_groups = @import("list_user_hierarchy_groups.zig");
+const list_user_notifications = @import("list_user_notifications.zig");
 const list_user_proficiencies = @import("list_user_proficiencies.zig");
 const list_users = @import("list_users.zig");
 const list_view_versions = @import("list_view_versions.zig");
@@ -254,6 +262,7 @@ const search_email_addresses = @import("search_email_addresses.zig");
 const search_evaluation_forms = @import("search_evaluation_forms.zig");
 const search_hours_of_operation_overrides = @import("search_hours_of_operation_overrides.zig");
 const search_hours_of_operations = @import("search_hours_of_operations.zig");
+const search_notifications = @import("search_notifications.zig");
 const search_predefined_attributes = @import("search_predefined_attributes.zig");
 const search_prompts = @import("search_prompts.zig");
 const search_queues = @import("search_queues.zig");
@@ -318,6 +327,7 @@ const update_hours_of_operation = @import("update_hours_of_operation.zig");
 const update_hours_of_operation_override = @import("update_hours_of_operation_override.zig");
 const update_instance_attribute = @import("update_instance_attribute.zig");
 const update_instance_storage_config = @import("update_instance_storage_config.zig");
+const update_notification_content = @import("update_notification_content.zig");
 const update_participant_authentication = @import("update_participant_authentication.zig");
 const update_participant_role_config = @import("update_participant_role_config.zig");
 const update_phone_number = @import("update_phone_number.zig");
@@ -342,10 +352,12 @@ const update_security_profile = @import("update_security_profile.zig");
 const update_task_template = @import("update_task_template.zig");
 const update_test_case = @import("update_test_case.zig");
 const update_traffic_distribution = @import("update_traffic_distribution.zig");
+const update_user_config = @import("update_user_config.zig");
 const update_user_hierarchy = @import("update_user_hierarchy.zig");
 const update_user_hierarchy_group_name = @import("update_user_hierarchy_group_name.zig");
 const update_user_hierarchy_structure = @import("update_user_hierarchy_structure.zig");
 const update_user_identity_info = @import("update_user_identity_info.zig");
+const update_user_notification_status = @import("update_user_notification_status.zig");
 const update_user_phone_config = @import("update_user_phone_config.zig");
 const update_user_proficiencies = @import("update_user_proficiencies.zig");
 const update_user_routing_profile = @import("update_user_routing_profile.zig");
@@ -602,6 +614,33 @@ pub const Client = struct {
     /// this scenario, you will receive a `ResourceNotFoundException`.
     pub fn associatePhoneNumberContactFlow(self: *Self, allocator: std.mem.Allocator, input: associate_phone_number_contact_flow.AssociatePhoneNumberContactFlowInput, options: CallOptions) !associate_phone_number_contact_flow.AssociatePhoneNumberContactFlowOutput {
         return associate_phone_number_contact_flow.execute(self, allocator, input, options);
+    }
+
+    /// Associates a set of email addresses with a queue to enable agents to select
+    /// different "From" (system) email addresses when replying to inbound email
+    /// contacts or initiating outbound email contacts. This allows agents to handle
+    /// email contacts across different brands and business units within the same
+    /// queue.
+    ///
+    /// **Important things to know**
+    ///
+    /// * You can associate up to 49 additional email addresses with a single queue,
+    ///   plus 1 default outbound email address, for a total of 50.
+    ///
+    /// * The email addresses must already exist in the Amazon Connect instance
+    ///   before they can be associated with a queue.
+    ///
+    /// * Agents will be able to select from these associated email addresses when
+    ///   handling email contacts in the queue.
+    ///
+    /// * For inbound email contacts, agents can select from email addresses
+    ///   associated with the queue where the contact was accepted.
+    ///
+    /// * For outbound email contacts, agents can select from email addresses
+    ///   associated with their default outbound queue configured in their routing
+    ///   profile.
+    pub fn associateQueueEmailAddresses(self: *Self, allocator: std.mem.Allocator, input: associate_queue_email_addresses.AssociateQueueEmailAddressesInput, options: CallOptions) !associate_queue_email_addresses.AssociateQueueEmailAddressesOutput {
+        return associate_queue_email_addresses.execute(self, allocator, input, options);
     }
 
     /// Associates a set of quick connects with a queue.
@@ -929,6 +968,14 @@ pub const Client = struct {
         return create_integration_association.execute(self, allocator, input, options);
     }
 
+    /// Creates a new notification to be delivered to specified recipients.
+    /// Notifications can include localized content with links, and an optional
+    /// expiration time. Recipients can be specified as individual user ARNs or
+    /// instance ARNs to target all users in an instance.
+    pub fn createNotification(self: *Self, allocator: std.mem.Allocator, input: create_notification.CreateNotificationInput, options: CallOptions) !create_notification.CreateNotificationOutput {
+        return create_notification.execute(self, allocator, input, options);
+    }
+
     /// Adds a new participant into an on-going chat contact or webRTC call. For
     /// more information, see [Customize chat flow experiences by
     /// integrating custom
@@ -1098,6 +1145,25 @@ pub const Client = struct {
     /// `FirstName` and `LastName` are required if you are using Amazon Connect or
     /// SAML for
     /// identity management.
+    ///
+    /// Fields in `PhoneConfig` cannot be set simultaneously with their
+    /// corresponding channel-specific configuration parameters. Specifically:
+    ///
+    /// * `PhoneConfig.AutoAccept` conflicts with `AutoAcceptConfigs`
+    ///
+    /// * `PhoneConfig.AfterContactWorkTimeLimit` conflicts with
+    ///   `AfterContactWorkConfigs`
+    ///
+    /// * `PhoneConfig.PhoneType` and `PhoneConfig.PhoneNumber` conflict with
+    ///   `PhoneNumberConfigs`
+    ///
+    /// * `PhoneConfig.PersistentConnection` conflicts with
+    ///   `PersistentConnectionConfigs`
+    ///
+    /// We recommend using channel-specific parameters such as `AutoAcceptConfigs`,
+    /// `AfterContactWorkConfigs`, `PhoneNumberConfigs`,
+    /// `PersistentConnectionConfigs`, and `VoiceEnhancementConfigs` for per-channel
+    /// configuration.
     ///
     /// For information about how to create users using the Amazon Connect admin
     /// website, see [Add
@@ -1274,6 +1340,12 @@ pub const Client = struct {
     /// have any use cases associated with it.
     pub fn deleteIntegrationAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_integration_association.DeleteIntegrationAssociationInput, options: CallOptions) !delete_integration_association.DeleteIntegrationAssociationOutput {
         return delete_integration_association.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a notification. Once deleted, the notification is no longer visible
+    /// to all users and cannot be managed through the Admin Website or APIs.
+    pub fn deleteNotification(self: *Self, allocator: std.mem.Allocator, input: delete_notification.DeleteNotificationInput, options: CallOptions) !delete_notification.DeleteNotificationOutput {
+        return delete_notification.execute(self, allocator, input, options);
     }
 
     /// Deletes a predefined attribute from the specified Amazon Connect instance.
@@ -1589,6 +1661,12 @@ pub const Client = struct {
         return describe_instance_storage_config.execute(self, allocator, input, options);
     }
 
+    /// Retrieves detailed information about a specific notification, including its
+    /// content, priority, recipients, and metadata.
+    pub fn describeNotification(self: *Self, allocator: std.mem.Allocator, input: describe_notification.DescribeNotificationInput, options: CallOptions) !describe_notification.DescribeNotificationOutput {
+        return describe_notification.execute(self, allocator, input, options);
+    }
+
     /// Gets details and status of a phone number that’s claimed to your Amazon
     /// Connect instance or traffic distribution group.
     ///
@@ -1878,6 +1956,25 @@ pub const Client = struct {
     /// `ResourceNotFoundException`.
     pub fn disassociatePhoneNumberContactFlow(self: *Self, allocator: std.mem.Allocator, input: disassociate_phone_number_contact_flow.DisassociatePhoneNumberContactFlowInput, options: CallOptions) !disassociate_phone_number_contact_flow.DisassociatePhoneNumberContactFlowOutput {
         return disassociate_phone_number_contact_flow.execute(self, allocator, input, options);
+    }
+
+    /// Removes the association between a set of email addresses and a queue. After
+    /// disassociation, agents will no longer be able to select these email
+    /// addresses as "From" addresses when replying to inbound email contacts or
+    /// initiating outbound email contacts in this queue.
+    ///
+    /// **Important things to know**
+    ///
+    /// * Agents will no longer see these email addresses in their "From" address
+    ///   selection options for this queue.
+    ///
+    /// * The email addresses themselves are not deleted from the instance, only
+    ///   their availability for agent selection in this queue is removed.
+    ///
+    /// * Changes take effect immediately and will affect the agent experience in
+    ///   the Contact Control Panel (CCP).
+    pub fn disassociateQueueEmailAddresses(self: *Self, allocator: std.mem.Allocator, input: disassociate_queue_email_addresses.DisassociateQueueEmailAddressesInput, options: CallOptions) !disassociate_queue_email_addresses.DisassociateQueueEmailAddressesOutput {
+        return disassociate_queue_email_addresses.execute(self, allocator, input, options);
     }
 
     /// Disassociates a set of quick connects from a queue.
@@ -2430,6 +2527,12 @@ pub const Client = struct {
         return list_lex_bots.execute(self, allocator, input, options);
     }
 
+    /// Retrieves a paginated list of all notifications in the Amazon Connect
+    /// instance.
+    pub fn listNotifications(self: *Self, allocator: std.mem.Allocator, input: list_notifications.ListNotificationsInput, options: CallOptions) !list_notifications.ListNotificationsOutput {
+        return list_notifications.execute(self, allocator, input, options);
+    }
+
     /// Provides information about the phone numbers for the specified Amazon
     /// Connect instance.
     ///
@@ -2501,6 +2604,30 @@ pub const Client = struct {
     /// instance.
     pub fn listPrompts(self: *Self, allocator: std.mem.Allocator, input: list_prompts.ListPromptsInput, options: CallOptions) !list_prompts.ListPromptsOutput {
         return list_prompts.execute(self, allocator, input, options);
+    }
+
+    /// Lists all email addresses that are currently associated with a specific
+    /// queue, providing details about which "From" email addresses agents can
+    /// select when handling email contacts. This helps administrators manage agent
+    /// email address options and understand the available choices for different
+    /// brands and business units.
+    ///
+    /// **Important things to know**
+    ///
+    /// * The response includes metadata about each email address available for
+    ///   agent selection, including whether it's configured as the default outbound
+    ///   email.
+    ///
+    /// * Agents can select from these email addresses when replying to inbound
+    ///   contacts or initiating outbound contacts in this queue.
+    ///
+    /// * The list includes both explicitly associated email addresses and any
+    ///   default outbound email address configured for the queue.
+    ///
+    /// * Results are paginated to handle queues with many associated email
+    ///   addresses (up to 50 per queue).
+    pub fn listQueueEmailAddresses(self: *Self, allocator: std.mem.Allocator, input: list_queue_email_addresses.ListQueueEmailAddressesInput, options: CallOptions) !list_queue_email_addresses.ListQueueEmailAddressesOutput {
+        return list_queue_email_addresses.execute(self, allocator, input, options);
     }
 
     /// Lists the quick connects associated with a queue.
@@ -2685,6 +2812,12 @@ pub const Client = struct {
         return list_user_hierarchy_groups.execute(self, allocator, input, options);
     }
 
+    /// Retrieves a paginated list of notifications for a specific user, including
+    /// the notification status for that user.
+    pub fn listUserNotifications(self: *Self, allocator: std.mem.Allocator, input: list_user_notifications.ListUserNotificationsInput, options: CallOptions) !list_user_notifications.ListUserNotificationsOutput {
+        return list_user_notifications.execute(self, allocator, input, options);
+    }
+
     /// Lists proficiencies associated with a user.
     pub fn listUserProficiencies(self: *Self, allocator: std.mem.Allocator, input: list_user_proficiencies.ListUserProficienciesInput, options: CallOptions) !list_user_proficiencies.ListUserProficienciesOutput {
         return list_user_proficiencies.execute(self, allocator, input, options);
@@ -2850,9 +2983,7 @@ pub const Client = struct {
     ///   to resource (create, update or
     /// delete). If you don't see updated information for recently changed contact
     /// evaluations, try calling the API again
-    /// in a few seconds. Contact Evaluations may not be fully backfilled with
-    /// historical data in all regions yet, however
-    /// all recently created Contact Evaluations should be available for search.
+    /// in a few seconds.
     ///
     /// **Endpoints**: See [Amazon Connect endpoints and
     /// quotas](https://docs.aws.amazon.com/general/latest/gr/connect_region.html).
@@ -2927,6 +3058,13 @@ pub const Client = struct {
     /// filtering.
     pub fn searchHoursOfOperations(self: *Self, allocator: std.mem.Allocator, input: search_hours_of_operations.SearchHoursOfOperationsInput, options: CallOptions) !search_hours_of_operations.SearchHoursOfOperationsOutput {
         return search_hours_of_operations.execute(self, allocator, input, options);
+    }
+
+    /// Searches for notifications based on specified criteria and filters. Returns
+    /// a paginated list of notifications matching the search parameters, ordered by
+    /// descending creation time. Supports filtering by content and tags.
+    pub fn searchNotifications(self: *Self, allocator: std.mem.Allocator, input: search_notifications.SearchNotificationsInput, options: CallOptions) !search_notifications.SearchNotificationsOutput {
+        return search_notifications.execute(self, allocator, input, options);
     }
 
     /// Searches predefined attributes that meet certain criteria. A *predefined
@@ -3706,6 +3844,12 @@ pub const Client = struct {
         return update_instance_storage_config.execute(self, allocator, input, options);
     }
 
+    /// Updates the localized content of an existing notification. This operation
+    /// applies to all users for whom the notification was sent.
+    pub fn updateNotificationContent(self: *Self, allocator: std.mem.Allocator, input: update_notification_content.UpdateNotificationContentInput, options: CallOptions) !update_notification_content.UpdateNotificationContentOutput {
+        return update_notification_content.execute(self, allocator, input, options);
+    }
+
     /// Instructs Amazon Connect to resume the authentication process. The
     /// subsequent actions depend on the request
     /// body contents:
@@ -3962,8 +4106,24 @@ pub const Client = struct {
     /// [Update telephony traffic distribution
     /// across Amazon Web Services Regions
     /// ](https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html) in the *Amazon Connect Administrator Guide*.
+    ///
+    /// **Important things to know**
+    ///
+    /// * Invoke the UpdateTrafficDistribution API in the region that should handle
+    ///   traffic.
     pub fn updateTrafficDistribution(self: *Self, allocator: std.mem.Allocator, input: update_traffic_distribution.UpdateTrafficDistributionInput, options: CallOptions) !update_traffic_distribution.UpdateTrafficDistributionOutput {
         return update_traffic_distribution.execute(self, allocator, input, options);
+    }
+
+    /// Updates the configuration settings for the specified user, including
+    /// per-channel auto-accept and after contact work (ACW) timeout settings.
+    ///
+    /// This operation replaces the UpdateUserPhoneConfig API. While
+    /// UpdateUserPhoneConfig applies the same ACW timeout to all channels,
+    /// UpdateUserConfig allows you to set different auto-accept and ACW timeout
+    /// values for each channel type.
+    pub fn updateUserConfig(self: *Self, allocator: std.mem.Allocator, input: update_user_config.UpdateUserConfigInput, options: CallOptions) !update_user_config.UpdateUserConfigOutput {
+        return update_user_config.execute(self, allocator, input, options);
     }
 
     /// Assigns the specified hierarchy group to the specified user.
@@ -3998,7 +4158,19 @@ pub const Client = struct {
         return update_user_identity_info.execute(self, allocator, input, options);
     }
 
+    /// Updates the status of a notification for a specific user, such as marking it
+    /// as read or hidden. Users can only update notification status for
+    /// notifications that have been sent to them. READ status deprioritizes the
+    /// notification and greys it out, while HIDDEN status removes it from the
+    /// notification widget.
+    pub fn updateUserNotificationStatus(self: *Self, allocator: std.mem.Allocator, input: update_user_notification_status.UpdateUserNotificationStatusInput, options: CallOptions) !update_user_notification_status.UpdateUserNotificationStatusOutput {
+        return update_user_notification_status.execute(self, allocator, input, options);
+    }
+
     /// Updates the phone configuration settings for the specified user.
+    ///
+    /// We recommend using the
+    /// [UpdateUserConfig](https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateUserConfig.html) API, which supports additional functionality that is not available in the UpdateUserPhoneConfig API, such as voice enhancement settings and per-channel configuration for auto-accept and After Contact Work (ACW) timeouts. In comparison, the UpdateUserPhoneConfig API will always set the same ACW timeouts to all channels the user handles.
     pub fn updateUserPhoneConfig(self: *Self, allocator: std.mem.Allocator, input: update_user_phone_config.UpdateUserPhoneConfigInput, options: CallOptions) !update_user_phone_config.UpdateUserPhoneConfigOutput {
         return update_user_phone_config.execute(self, allocator, input, options);
     }

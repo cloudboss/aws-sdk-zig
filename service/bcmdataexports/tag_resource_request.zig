@@ -5,8 +5,7 @@ pub const TagResourceRequest = struct {
     resource_arn: []const u8,
 
     /// The tags to associate with the resource. Each tag consists of a key and a
-    /// value, and each
-    /// key must be unique for the resource.
+    /// value, and each key must be unique for the resource.
     resource_tags: []const ResourceTag,
 
     pub const json_field_names = .{

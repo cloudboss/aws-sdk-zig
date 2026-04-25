@@ -50,6 +50,14 @@ pub const DescribeMlflowTrackingServerOutput = struct {
     /// S3.
     role_arn: ?[]const u8 = null,
 
+    /// Expected Amazon Web Services account ID that owns the Amazon S3 bucket for
+    /// artifact storage.
+    s3_bucket_owner_account_id: ?[]const u8 = null,
+
+    /// Whether Amazon S3 Bucket Ownership checks are enabled whenever the tracking
+    /// server interacts with Amazon Amazon S3.
+    s3_bucket_owner_verification: ?bool = null,
+
     /// The ARN of the described tracking server.
     tracking_server_arn: ?[]const u8 = null,
 
@@ -83,6 +91,8 @@ pub const DescribeMlflowTrackingServerOutput = struct {
         .last_modified_time = "LastModifiedTime",
         .mlflow_version = "MlflowVersion",
         .role_arn = "RoleArn",
+        .s3_bucket_owner_account_id = "S3BucketOwnerAccountId",
+        .s3_bucket_owner_verification = "S3BucketOwnerVerification",
         .tracking_server_arn = "TrackingServerArn",
         .tracking_server_maintenance_status = "TrackingServerMaintenanceStatus",
         .tracking_server_name = "TrackingServerName",

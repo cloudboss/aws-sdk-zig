@@ -122,7 +122,7 @@ pub const RedshiftSettings = struct {
     /// 10.
     file_transfer_upload_streams: ?i32 = null,
 
-    /// The amount of time to wait (in milliseconds) before timing out of operations
+    /// The amount of time to wait (in seconds) before timing out of operations
     /// performed
     /// by DMS on a Redshift cluster, such as Redshift COPY, INSERT, DELETE, and
     /// UPDATE.

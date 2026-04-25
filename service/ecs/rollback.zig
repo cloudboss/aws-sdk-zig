@@ -1,8 +1,7 @@
 /// Information about the service deployment rollback.
 pub const Rollback = struct {
     /// The reason the rollback happened. For example, the circuit breaker initiated
-    /// the
-    /// rollback operation.
+    /// the rollback operation.
     reason: ?[]const u8 = null,
 
     /// The ARN of the service revision deployed as part of the rollback.

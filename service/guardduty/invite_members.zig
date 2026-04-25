@@ -8,26 +8,23 @@ const UnprocessedAccount = @import("unprocessed_account.zig").UnprocessedAccount
 
 pub const InviteMembersInput = struct {
     /// A list of account IDs of the accounts that you want to invite to GuardDuty
-    /// as
-    /// members.
+    /// as members.
     account_ids: []const []const u8,
 
     /// The unique ID of the detector of the GuardDuty account with which you want
     /// to invite members.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 
     /// A Boolean value that specifies whether you want to disable email
-    /// notification to the
-    /// accounts that you are inviting to GuardDuty as members.
+    /// notification to the accounts that you are inviting to GuardDuty as members.
     disable_email_notification: ?bool = null,
 
     /// The invitation message that you want to send to the accounts that you're
-    /// inviting to
-    /// GuardDuty as members.
+    /// inviting to GuardDuty as members.
     message: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -40,8 +37,7 @@ pub const InviteMembersInput = struct {
 
 pub const InviteMembersOutput = struct {
     /// A list of objects that contain the unprocessed account and a result string
-    /// that explains
-    /// why it was unprocessed.
+    /// that explains why it was unprocessed.
     unprocessed_accounts: ?[]const UnprocessedAccount = null,
 
     pub const json_field_names = .{

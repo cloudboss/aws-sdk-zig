@@ -2,14 +2,17 @@ const std = @import("std");
 
 pub const SupportedAdditionalProcessorFeature = enum {
     amd_sev_snp,
+    nested_virtualization,
 
     pub const json_field_names = .{
         .amd_sev_snp = "amd-sev-snp",
+        .nested_virtualization = "nested-virtualization",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .amd_sev_snp => "amd-sev-snp",
+            .nested_virtualization => "nested-virtualization",
         };
     }
 

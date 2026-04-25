@@ -7,16 +7,16 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Policy = @import("policy.zig").Policy;
 
 pub const CreateConfigurationPolicyInput = struct {
-    /// An object that defines how Security Hub is configured. It includes whether
-    /// Security Hub is enabled or
+    /// An object that defines how Security Hub CSPM is configured. It includes
+    /// whether Security Hub CSPM is enabled or
     /// disabled, a list of enabled security standards, a list of enabled or
     /// disabled security controls, and a list of custom parameter values for
     /// specified controls.
     /// If you provide a list of security controls that are enabled in the
-    /// configuration policy, Security Hub disables all other controls (including
-    /// newly
+    /// configuration policy, Security Hub CSPM disables all other controls
+    /// (including newly
     /// released controls). If you provide a list of security controls that are
-    /// disabled in the configuration policy, Security Hub
+    /// disabled in the configuration policy, Security Hub CSPM
     /// enables all other controls (including newly released controls).
     configuration_policy: Policy,
 
@@ -30,9 +30,9 @@ pub const CreateConfigurationPolicyInput = struct {
 
     /// User-defined tags associated with a configuration policy. For more
     /// information, see
-    /// [Tagging Security Hub
+    /// [Tagging Security Hub CSPM
     /// resources](https://docs.aws.amazon.com/securityhub/latest/userguide/tagging-resources.html)
-    /// in the *Security Hub user guide*.
+    /// in the *Security Hub CSPM user guide*.
     tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
@@ -47,16 +47,17 @@ pub const CreateConfigurationPolicyOutput = struct {
     /// The Amazon Resource Name (ARN) of the configuration policy.
     arn: ?[]const u8 = null,
 
-    /// An object that defines how Security Hub is configured. It includes whether
-    /// Security Hub is enabled or disabled, a
+    /// An object that defines how Security Hub CSPM is configured. It includes
+    /// whether Security Hub CSPM is enabled or disabled, a
     /// list of enabled security standards, a list of enabled or disabled security
     /// controls, and a list of custom parameter values for specified controls.
     /// If the request included a list of security controls that are enabled in the
-    /// configuration policy, Security Hub disables all other controls (including
-    /// newly
+    /// configuration policy, Security Hub CSPM disables all other controls
+    /// (including newly
     /// released controls). If the request included a list of security controls that
     /// are disabled in the configuration policy,
-    /// Security Hub enables all other controls (including newly released controls).
+    /// Security Hub CSPM enables all other controls (including newly released
+    /// controls).
     configuration_policy: ?Policy = null,
 
     /// The date and time, in UTC and ISO 8601 format, that the configuration policy
@@ -224,6 +225,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "LimitExceededException")) {
         return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organization_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationalUnitNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organizational_unit_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

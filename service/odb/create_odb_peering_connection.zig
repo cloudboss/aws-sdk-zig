@@ -30,6 +30,10 @@ pub const CreateOdbPeeringConnectionInput = struct {
     /// another ODB network ID.
     peer_network_id: []const u8,
 
+    /// The unique identifier of the VPC route table for which a route to the ODB
+    /// network is automatically created during peering connection establishment.
+    peer_network_route_table_ids: ?[]const []const u8 = null,
+
     /// The tags to assign to the ODB peering connection.
     tags: ?[]const aws.map.StringMapEntry = null,
 
@@ -39,6 +43,7 @@ pub const CreateOdbPeeringConnectionInput = struct {
         .odb_network_id = "odbNetworkId",
         .peer_network_cidrs_to_be_added = "peerNetworkCidrsToBeAdded",
         .peer_network_id = "peerNetworkId",
+        .peer_network_route_table_ids = "peerNetworkRouteTableIds",
         .tags = "tags",
     };
 };

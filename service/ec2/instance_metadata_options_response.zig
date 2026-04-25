@@ -36,9 +36,9 @@ pub const InstanceMetadataOptionsResponse = struct {
 
     /// Indicates whether access to instance tags from the instance metadata is
     /// enabled or
-    /// disabled. For more information, see [Work with
-    /// instance tags using the instance
-    /// metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS).
+    /// disabled. For more information, see [View tags for your EC2
+    /// instances using instance
+    /// metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-tags-in-IMDS.html).
     instance_metadata_tags: ?InstanceMetadataTagsState = null,
 
     /// The state of the metadata option changes.

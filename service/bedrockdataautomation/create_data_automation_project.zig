@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CustomOutputConfiguration = @import("custom_output_configuration.zig").CustomOutputConfiguration;
+const DataAutomationLibraryConfiguration = @import("data_automation_library_configuration.zig").DataAutomationLibraryConfiguration;
 const EncryptionConfiguration = @import("encryption_configuration.zig").EncryptionConfiguration;
 const OverrideConfiguration = @import("override_configuration.zig").OverrideConfiguration;
 const DataAutomationProjectStage = @import("data_automation_project_stage.zig").DataAutomationProjectStage;
@@ -17,6 +18,8 @@ pub const CreateDataAutomationProjectInput = struct {
     client_token: ?[]const u8 = null,
 
     custom_output_configuration: ?CustomOutputConfiguration = null,
+
+    data_automation_library_configuration: ?DataAutomationLibraryConfiguration = null,
 
     encryption_configuration: ?EncryptionConfiguration = null,
 
@@ -37,6 +40,7 @@ pub const CreateDataAutomationProjectInput = struct {
     pub const json_field_names = .{
         .client_token = "clientToken",
         .custom_output_configuration = "customOutputConfiguration",
+        .data_automation_library_configuration = "dataAutomationLibraryConfiguration",
         .encryption_configuration = "encryptionConfiguration",
         .override_configuration = "overrideConfiguration",
         .project_description = "projectDescription",
@@ -109,6 +113,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDataAutomationPro
     if (input.custom_output_configuration) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"customOutputConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.data_automation_library_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"dataAutomationLibraryConfiguration\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

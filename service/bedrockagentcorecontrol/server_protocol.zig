@@ -4,11 +4,13 @@ pub const ServerProtocol = enum {
     mcp,
     http,
     a2_a,
+    agui,
 
     pub const json_field_names = .{
         .mcp = "MCP",
         .http = "HTTP",
         .a2_a = "A2A",
+        .agui = "AGUI",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const ServerProtocol = enum {
             .mcp => "MCP",
             .http => "HTTP",
             .a2_a => "A2A",
+            .agui => "AGUI",
         };
     }
 

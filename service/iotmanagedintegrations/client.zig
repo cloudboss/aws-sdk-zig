@@ -175,10 +175,9 @@ pub const Client = struct {
         return create_ota_task_configuration.execute(self, allocator, input, options);
     }
 
-    /// Create a provisioning profile for a device to execute the provisioning flows
-    /// using a provisioning template. The provisioning template is a document that
-    /// defines the set of resources and policies applied to a device during the
-    /// provisioning process.
+    /// Create a provisioning profile for executing device provisioning flows. The
+    /// provisioning profile is a document that defines the set of resources and
+    /// policies applied to a device during the provisioning process.
     pub fn createProvisioningProfile(self: *Self, allocator: std.mem.Allocator, input: create_provisioning_profile.CreateProvisioningProfileInput, options: CallOptions) !create_provisioning_profile.CreateProvisioningProfileOutput {
         return create_provisioning_profile.execute(self, allocator, input, options);
     }
@@ -361,7 +360,7 @@ pub const Client = struct {
         return get_ota_task_configuration.execute(self, allocator, input, options);
     }
 
-    /// Get a provisioning profile by template name.
+    /// Get details of a provisioning profile.
     pub fn getProvisioningProfile(self: *Self, allocator: std.mem.Allocator, input: get_provisioning_profile.GetProvisioningProfileInput, options: CallOptions) !get_provisioning_profile.GetProvisioningProfileOutput {
         return get_provisioning_profile.execute(self, allocator, input, options);
     }

@@ -9,6 +9,7 @@ const get_device_position_history = @import("get_device_position_history.zig");
 const list_device_positions = @import("list_device_positions.zig");
 const list_geofence_collections = @import("list_geofence_collections.zig");
 const list_geofences = @import("list_geofences.zig");
+const list_jobs = @import("list_jobs.zig");
 const list_keys = @import("list_keys.zig");
 const list_maps = @import("list_maps.zig");
 const list_place_indexes = @import("list_place_indexes.zig");
@@ -192,6 +193,46 @@ pub const ListGeofencesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_geofences.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListJobsPaginator = struct {
+    client: *Client,
+    params: list_jobs.ListJobsInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_jobs.ListJobsOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_jobs.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

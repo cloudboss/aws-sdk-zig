@@ -11,30 +11,23 @@ pub const StreamEvent = struct {
     ///   with multitrack input, but multitrack input was not enabled on the
     ///   channel. Check your broadcast software settings or set
     ///   `MultitrackInputConfiguration.Policy` to `ALLOW` or `REQUIRE`.
-    ///
     /// * `MultitrackInputRequired` — The broadcast client attempted to connect with
     ///   single-track video, but multitrack input is required on this channel.
     ///   Enable multitrack video in your broadcast software or configure the
     ///   channel’s `MultitrackInputConfiguration.Policy` to `ALLOW`.
-    ///
     /// * `InvalidGetClientConfigurationStreamKey` — The broadcast client attempted
     ///   to connect with an invalid, expired, or corrupt stream key.
-    ///
     /// * `GetClientConfigurationStreamKeyRequired` — The broadcast client attempted
     ///   to stream multitrack video without providing an authenticated stream key
     ///   from GetClientConfiguration.
-    ///
     /// * `InvalidMultitrackInputTrackCount` — The multitrack input stream contained
     ///   an invalid number of tracks.
-    ///
     /// * `InvalidMultitrackInputVideoTrackMediaProperties` — The multitrack input
     ///   stream contained one or more tracks with an invalid codec, resolution,
     ///   bitrate, or framerate.
-    ///
     /// * `StreamTakeoverMediaMismatch` — The broadcast client attempted to take
     ///   over with different media properties (e.g., codec, resolution, or video
     ///   track type) from the original stream.
-    ///
     /// * `StreamTakeoverInvalidPriority` — The broadcast client attempted a
     ///   takeover with either a priority integer value equal to or lower than the
     ///   original stream's value or a value outside the allowed range of 1 to
@@ -45,8 +38,7 @@ pub const StreamEvent = struct {
     code: ?[]const u8 = null,
 
     /// Time when the event occurred. This is an ISO 8601 timestamp; *note that this
-    /// is
-    /// returned as a string*.
+    /// is returned as a string*.
     event_time: ?i64 = null,
 
     /// Name that identifies the stream event within a `type`.

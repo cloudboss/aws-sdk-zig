@@ -12,8 +12,7 @@ pub const KubernetesRoleBindingDetails = struct {
     role_ref_kind: ?[]const u8 = null,
 
     /// The name of the role being referenced. This must match the name of the
-    /// `Role`
-    /// or `ClusterRole` that you want to bind to.
+    /// `Role` or `ClusterRole` that you want to bind to.
     role_ref_name: ?[]const u8 = null,
 
     /// The unique identifier of the role binding.

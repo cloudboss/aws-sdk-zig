@@ -6,7 +6,7 @@ const EntitlementValue = @import("entitlement_value.zig").EntitlementValue;
 /// some amount of
 /// data capacity in a multi-tenant database.
 pub const Entitlement = struct {
-    /// The `CustomerAWSAccountID` parameter specifies the AWS account ID of the
+    /// The `CustomerAWSAccountId` parameter specifies the AWS account ID of the
     /// buyer.
     customer_aws_account_id: ?[]const u8 = null,
 
@@ -33,6 +33,10 @@ pub const Entitlement = struct {
     /// date.
     expiration_date: ?i64 = null,
 
+    /// The `LicenseArn` is a unique identifier for a specific granted license.
+    /// These are used for software purchased through AWS Marketplace.
+    license_arn: ?[]const u8 = null,
+
     /// The product code for which the given entitlement applies. Product codes are
     /// provided by
     /// AWS Marketplace when the product listing is created.
@@ -48,6 +52,7 @@ pub const Entitlement = struct {
         .customer_identifier = "CustomerIdentifier",
         .dimension = "Dimension",
         .expiration_date = "ExpirationDate",
+        .license_arn = "LicenseArn",
         .product_code = "ProductCode",
         .value = "Value",
     };

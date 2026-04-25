@@ -1,3 +1,4 @@
+pub const ClusterConfiguration = @import("cluster_configuration.zig").ClusterConfiguration;
 pub const ClusterDeploymentType = @import("cluster_deployment_type.zig").ClusterDeploymentType;
 pub const ClusterStatus = @import("cluster_status.zig").ClusterStatus;
 pub const DataFusionRuntimeType = @import("data_fusion_runtime_type.zig").DataFusionRuntimeType;
@@ -21,6 +22,7 @@ pub const ListTagsForResourceResponse = @import("list_tags_for_resource_response
 pub const LogDeliveryConfiguration = @import("log_delivery_configuration.zig").LogDeliveryConfiguration;
 pub const LogFormats = @import("log_formats.zig").LogFormats;
 pub const LogLevel = @import("log_level.zig").LogLevel;
+pub const MaintenanceSchedule = @import("maintenance_schedule.zig").MaintenanceSchedule;
 pub const NetworkType = @import("network_type.zig").NetworkType;
 pub const Parameters = @import("parameters.zig").Parameters;
 pub const PercentOrAbsoluteLong = @import("percent_or_absolute_long.zig").PercentOrAbsoluteLong;

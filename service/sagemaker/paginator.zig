@@ -5,7 +5,11 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
 const create_hub_content_presigned_urls = @import("create_hub_content_presigned_urls.zig");
+const describe_training_plan_extension_history = @import("describe_training_plan_extension_history.zig");
 const list_actions = @import("list_actions.zig");
+const list_ai_benchmark_jobs = @import("list_ai_benchmark_jobs.zig");
+const list_ai_recommendation_jobs = @import("list_ai_recommendation_jobs.zig");
+const list_ai_workload_configs = @import("list_ai_workload_configs.zig");
 const list_algorithms = @import("list_algorithms.zig");
 const list_aliases = @import("list_aliases.zig");
 const list_app_image_configs = @import("list_app_image_configs.zig");
@@ -130,6 +134,46 @@ pub const CreateHubContentPresignedUrlsPaginator = struct {
     }
 };
 
+pub const DescribeTrainingPlanExtensionHistoryPaginator = struct {
+    client: *Client,
+    params: describe_training_plan_extension_history.DescribeTrainingPlanExtensionHistoryInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_training_plan_extension_history.DescribeTrainingPlanExtensionHistoryOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try describe_training_plan_extension_history.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
 pub const ListActionsPaginator = struct {
     client: *Client,
     params: list_actions.ListActionsInput,
@@ -146,6 +190,126 @@ pub const ListActionsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_actions.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListAIBenchmarkJobsPaginator = struct {
+    client: *Client,
+    params: list_ai_benchmark_jobs.ListAIBenchmarkJobsInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_ai_benchmark_jobs.ListAIBenchmarkJobsOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_ai_benchmark_jobs.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListAIRecommendationJobsPaginator = struct {
+    client: *Client,
+    params: list_ai_recommendation_jobs.ListAIRecommendationJobsInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_ai_recommendation_jobs.ListAIRecommendationJobsOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_ai_recommendation_jobs.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListAIWorkloadConfigsPaginator = struct {
+    client: *Client,
+    params: list_ai_workload_configs.ListAIWorkloadConfigsInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_ai_workload_configs.ListAIWorkloadConfigsOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_ai_workload_configs.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

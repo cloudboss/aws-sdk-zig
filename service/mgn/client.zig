@@ -9,12 +9,14 @@ const change_server_life_cycle_state = @import("change_server_life_cycle_state.z
 const create_application = @import("create_application.zig");
 const create_connector = @import("create_connector.zig");
 const create_launch_configuration_template = @import("create_launch_configuration_template.zig");
+const create_network_migration_definition = @import("create_network_migration_definition.zig");
 const create_replication_configuration_template = @import("create_replication_configuration_template.zig");
 const create_wave = @import("create_wave.zig");
 const delete_application = @import("delete_application.zig");
 const delete_connector = @import("delete_connector.zig");
 const delete_job = @import("delete_job.zig");
 const delete_launch_configuration_template = @import("delete_launch_configuration_template.zig");
+const delete_network_migration_definition = @import("delete_network_migration_definition.zig");
 const delete_replication_configuration_template = @import("delete_replication_configuration_template.zig");
 const delete_source_server = @import("delete_source_server.zig");
 const delete_vcenter_client = @import("delete_vcenter_client.zig");
@@ -30,6 +32,8 @@ const disassociate_source_servers = @import("disassociate_source_servers.zig");
 const disconnect_from_service = @import("disconnect_from_service.zig");
 const finalize_cutover = @import("finalize_cutover.zig");
 const get_launch_configuration = @import("get_launch_configuration.zig");
+const get_network_migration_definition = @import("get_network_migration_definition.zig");
+const get_network_migration_mapper_segment_construct = @import("get_network_migration_mapper_segment_construct.zig");
 const get_replication_configuration = @import("get_replication_configuration.zig");
 const initialize_service = @import("initialize_service.zig");
 const list_applications = @import("list_applications.zig");
@@ -37,8 +41,21 @@ const list_connectors = @import("list_connectors.zig");
 const list_export_errors = @import("list_export_errors.zig");
 const list_exports = @import("list_exports.zig");
 const list_import_errors = @import("list_import_errors.zig");
+const list_import_file_enrichments = @import("list_import_file_enrichments.zig");
 const list_imports = @import("list_imports.zig");
 const list_managed_accounts = @import("list_managed_accounts.zig");
+const list_network_migration_analyses = @import("list_network_migration_analyses.zig");
+const list_network_migration_analysis_results = @import("list_network_migration_analysis_results.zig");
+const list_network_migration_code_generation_segments = @import("list_network_migration_code_generation_segments.zig");
+const list_network_migration_code_generations = @import("list_network_migration_code_generations.zig");
+const list_network_migration_definitions = @import("list_network_migration_definitions.zig");
+const list_network_migration_deployed_stacks = @import("list_network_migration_deployed_stacks.zig");
+const list_network_migration_deployments = @import("list_network_migration_deployments.zig");
+const list_network_migration_executions = @import("list_network_migration_executions.zig");
+const list_network_migration_mapper_segment_constructs = @import("list_network_migration_mapper_segment_constructs.zig");
+const list_network_migration_mapper_segments = @import("list_network_migration_mapper_segments.zig");
+const list_network_migration_mapping_updates = @import("list_network_migration_mapping_updates.zig");
+const list_network_migration_mappings = @import("list_network_migration_mappings.zig");
 const list_source_server_actions = @import("list_source_server_actions.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const list_template_actions = @import("list_template_actions.zig");
@@ -54,6 +71,12 @@ const retry_data_replication = @import("retry_data_replication.zig");
 const start_cutover = @import("start_cutover.zig");
 const start_export = @import("start_export.zig");
 const start_import = @import("start_import.zig");
+const start_import_file_enrichment = @import("start_import_file_enrichment.zig");
+const start_network_migration_analysis = @import("start_network_migration_analysis.zig");
+const start_network_migration_code_generation = @import("start_network_migration_code_generation.zig");
+const start_network_migration_deployment = @import("start_network_migration_deployment.zig");
+const start_network_migration_mapping = @import("start_network_migration_mapping.zig");
+const start_network_migration_mapping_update = @import("start_network_migration_mapping_update.zig");
 const start_replication = @import("start_replication.zig");
 const start_test = @import("start_test.zig");
 const stop_replication = @import("stop_replication.zig");
@@ -66,6 +89,8 @@ const update_application = @import("update_application.zig");
 const update_connector = @import("update_connector.zig");
 const update_launch_configuration = @import("update_launch_configuration.zig");
 const update_launch_configuration_template = @import("update_launch_configuration_template.zig");
+const update_network_migration_definition = @import("update_network_migration_definition.zig");
+const update_network_migration_mapper_segment = @import("update_network_migration_mapper_segment.zig");
 const update_replication_configuration = @import("update_replication_configuration.zig");
 const update_replication_configuration_template = @import("update_replication_configuration_template.zig");
 const update_source_server = @import("update_source_server.zig");
@@ -145,6 +170,12 @@ pub const Client = struct {
         return create_launch_configuration_template.execute(self, allocator, input, options);
     }
 
+    /// Creates a new network migration definition that specifies the source and
+    /// target network configuration for a migration.
+    pub fn createNetworkMigrationDefinition(self: *Self, allocator: std.mem.Allocator, input: create_network_migration_definition.CreateNetworkMigrationDefinitionInput, options: CallOptions) !create_network_migration_definition.CreateNetworkMigrationDefinitionOutput {
+        return create_network_migration_definition.execute(self, allocator, input, options);
+    }
+
     /// Creates a new ReplicationConfigurationTemplate.
     pub fn createReplicationConfigurationTemplate(self: *Self, allocator: std.mem.Allocator, input: create_replication_configuration_template.CreateReplicationConfigurationTemplateInput, options: CallOptions) !create_replication_configuration_template.CreateReplicationConfigurationTemplateOutput {
         return create_replication_configuration_template.execute(self, allocator, input, options);
@@ -173,6 +204,12 @@ pub const Client = struct {
     /// Deletes a single Launch Configuration Template by ID.
     pub fn deleteLaunchConfigurationTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_launch_configuration_template.DeleteLaunchConfigurationTemplateInput, options: CallOptions) !delete_launch_configuration_template.DeleteLaunchConfigurationTemplateOutput {
         return delete_launch_configuration_template.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a network migration definition. This operation removes the migration
+    /// definition and all associated metadata.
+    pub fn deleteNetworkMigrationDefinition(self: *Self, allocator: std.mem.Allocator, input: delete_network_migration_definition.DeleteNetworkMigrationDefinitionInput, options: CallOptions) !delete_network_migration_definition.DeleteNetworkMigrationDefinitionOutput {
+        return delete_network_migration_definition.execute(self, allocator, input, options);
     }
 
     /// Deletes a single Replication Configuration Template by ID
@@ -279,6 +316,18 @@ pub const Client = struct {
         return get_launch_configuration.execute(self, allocator, input, options);
     }
 
+    /// Retrieves the details of a network migration definition including source and
+    /// target configurations.
+    pub fn getNetworkMigrationDefinition(self: *Self, allocator: std.mem.Allocator, input: get_network_migration_definition.GetNetworkMigrationDefinitionInput, options: CallOptions) !get_network_migration_definition.GetNetworkMigrationDefinitionOutput {
+        return get_network_migration_definition.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves detailed information about a specific construct within a mapper
+    /// segment, including its properties and configuration data.
+    pub fn getNetworkMigrationMapperSegmentConstruct(self: *Self, allocator: std.mem.Allocator, input: get_network_migration_mapper_segment_construct.GetNetworkMigrationMapperSegmentConstructInput, options: CallOptions) !get_network_migration_mapper_segment_construct.GetNetworkMigrationMapperSegmentConstructOutput {
+        return get_network_migration_mapper_segment_construct.execute(self, allocator, input, options);
+    }
+
     /// Lists all ReplicationConfigurations, filtered by Source Server ID.
     pub fn getReplicationConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_replication_configuration.GetReplicationConfigurationInput, options: CallOptions) !get_replication_configuration.GetReplicationConfigurationOutput {
         return get_replication_configuration.execute(self, allocator, input, options);
@@ -314,6 +363,11 @@ pub const Client = struct {
         return list_import_errors.execute(self, allocator, input, options);
     }
 
+    /// Lists import file enrichment jobs with optional filtering by job IDs.
+    pub fn listImportFileEnrichments(self: *Self, allocator: std.mem.Allocator, input: list_import_file_enrichments.ListImportFileEnrichmentsInput, options: CallOptions) !list_import_file_enrichments.ListImportFileEnrichmentsOutput {
+        return list_import_file_enrichments.execute(self, allocator, input, options);
+    }
+
     /// List imports.
     pub fn listImports(self: *Self, allocator: std.mem.Allocator, input: list_imports.ListImportsInput, options: CallOptions) !list_imports.ListImportsOutput {
         return list_imports.execute(self, allocator, input, options);
@@ -322,6 +376,77 @@ pub const Client = struct {
     /// List Managed Accounts.
     pub fn listManagedAccounts(self: *Self, allocator: std.mem.Allocator, input: list_managed_accounts.ListManagedAccountsInput, options: CallOptions) !list_managed_accounts.ListManagedAccountsOutput {
         return list_managed_accounts.execute(self, allocator, input, options);
+    }
+
+    /// Lists network migration analysis jobs for a specified execution. Returns
+    /// information about analysis job status and results.
+    pub fn listNetworkMigrationAnalyses(self: *Self, allocator: std.mem.Allocator, input: list_network_migration_analyses.ListNetworkMigrationAnalysesInput, options: CallOptions) !list_network_migration_analyses.ListNetworkMigrationAnalysesOutput {
+        return list_network_migration_analyses.execute(self, allocator, input, options);
+    }
+
+    /// Lists the results of network migration analyses, showing connectivity and
+    /// compatibility findings for migrated resources.
+    pub fn listNetworkMigrationAnalysisResults(self: *Self, allocator: std.mem.Allocator, input: list_network_migration_analysis_results.ListNetworkMigrationAnalysisResultsInput, options: CallOptions) !list_network_migration_analysis_results.ListNetworkMigrationAnalysisResultsOutput {
+        return list_network_migration_analysis_results.execute(self, allocator, input, options);
+    }
+
+    /// Lists code generation segments, which represent individual infrastructure
+    /// components generated as code templates.
+    pub fn listNetworkMigrationCodeGenerationSegments(self: *Self, allocator: std.mem.Allocator, input: list_network_migration_code_generation_segments.ListNetworkMigrationCodeGenerationSegmentsInput, options: CallOptions) !list_network_migration_code_generation_segments.ListNetworkMigrationCodeGenerationSegmentsOutput {
+        return list_network_migration_code_generation_segments.execute(self, allocator, input, options);
+    }
+
+    /// Lists network migration code generation jobs, which convert network mappings
+    /// into infrastructure-as-code templates.
+    pub fn listNetworkMigrationCodeGenerations(self: *Self, allocator: std.mem.Allocator, input: list_network_migration_code_generations.ListNetworkMigrationCodeGenerationsInput, options: CallOptions) !list_network_migration_code_generations.ListNetworkMigrationCodeGenerationsOutput {
+        return list_network_migration_code_generations.execute(self, allocator, input, options);
+    }
+
+    /// Lists all network migration definitions in the account, with optional
+    /// filtering.
+    pub fn listNetworkMigrationDefinitions(self: *Self, allocator: std.mem.Allocator, input: list_network_migration_definitions.ListNetworkMigrationDefinitionsInput, options: CallOptions) !list_network_migration_definitions.ListNetworkMigrationDefinitionsOutput {
+        return list_network_migration_definitions.execute(self, allocator, input, options);
+    }
+
+    /// Lists CloudFormation stacks that have been deployed as part of the network
+    /// migration.
+    pub fn listNetworkMigrationDeployedStacks(self: *Self, allocator: std.mem.Allocator, input: list_network_migration_deployed_stacks.ListNetworkMigrationDeployedStacksInput, options: CallOptions) !list_network_migration_deployed_stacks.ListNetworkMigrationDeployedStacksOutput {
+        return list_network_migration_deployed_stacks.execute(self, allocator, input, options);
+    }
+
+    /// Lists network migration deployment jobs and their current status.
+    pub fn listNetworkMigrationDeployments(self: *Self, allocator: std.mem.Allocator, input: list_network_migration_deployments.ListNetworkMigrationDeploymentsInput, options: CallOptions) !list_network_migration_deployments.ListNetworkMigrationDeploymentsOutput {
+        return list_network_migration_deployments.execute(self, allocator, input, options);
+    }
+
+    /// Lists network migration execution instances for a given definition, showing
+    /// the status and progress of each execution.
+    pub fn listNetworkMigrationExecutions(self: *Self, allocator: std.mem.Allocator, input: list_network_migration_executions.ListNetworkMigrationExecutionsInput, options: CallOptions) !list_network_migration_executions.ListNetworkMigrationExecutionsOutput {
+        return list_network_migration_executions.execute(self, allocator, input, options);
+    }
+
+    /// Lists constructs within a mapper segment, representing individual
+    /// infrastructure components like VPCs, subnets, or security groups.
+    pub fn listNetworkMigrationMapperSegmentConstructs(self: *Self, allocator: std.mem.Allocator, input: list_network_migration_mapper_segment_constructs.ListNetworkMigrationMapperSegmentConstructsInput, options: CallOptions) !list_network_migration_mapper_segment_constructs.ListNetworkMigrationMapperSegmentConstructsOutput {
+        return list_network_migration_mapper_segment_constructs.execute(self, allocator, input, options);
+    }
+
+    /// Lists mapper segments, which represent logical groupings of network
+    /// resources to be migrated together.
+    pub fn listNetworkMigrationMapperSegments(self: *Self, allocator: std.mem.Allocator, input: list_network_migration_mapper_segments.ListNetworkMigrationMapperSegmentsInput, options: CallOptions) !list_network_migration_mapper_segments.ListNetworkMigrationMapperSegmentsOutput {
+        return list_network_migration_mapper_segments.execute(self, allocator, input, options);
+    }
+
+    /// Lists mapping update jobs, which apply customer modifications to the
+    /// generated network mappings.
+    pub fn listNetworkMigrationMappingUpdates(self: *Self, allocator: std.mem.Allocator, input: list_network_migration_mapping_updates.ListNetworkMigrationMappingUpdatesInput, options: CallOptions) !list_network_migration_mapping_updates.ListNetworkMigrationMappingUpdatesOutput {
+        return list_network_migration_mapping_updates.execute(self, allocator, input, options);
+    }
+
+    /// Lists network migration mapping jobs, which analyze and create relationships
+    /// between source and target network resources.
+    pub fn listNetworkMigrationMappings(self: *Self, allocator: std.mem.Allocator, input: list_network_migration_mappings.ListNetworkMigrationMappingsInput, options: CallOptions) !list_network_migration_mappings.ListNetworkMigrationMappingsOutput {
+        return list_network_migration_mappings.execute(self, allocator, input, options);
     }
 
     /// List source server post migration custom actions.
@@ -407,6 +532,42 @@ pub const Client = struct {
         return start_import.execute(self, allocator, input, options);
     }
 
+    /// Starts an import file enrichment job to process and enrich network migration
+    /// import files with additional metadata and IP assignment strategies.
+    pub fn startImportFileEnrichment(self: *Self, allocator: std.mem.Allocator, input: start_import_file_enrichment.StartImportFileEnrichmentInput, options: CallOptions) !start_import_file_enrichment.StartImportFileEnrichmentOutput {
+        return start_import_file_enrichment.execute(self, allocator, input, options);
+    }
+
+    /// Starts a network migration analysis job to evaluate connectivity and
+    /// compatibility of the migration mappings.
+    pub fn startNetworkMigrationAnalysis(self: *Self, allocator: std.mem.Allocator, input: start_network_migration_analysis.StartNetworkMigrationAnalysisInput, options: CallOptions) !start_network_migration_analysis.StartNetworkMigrationAnalysisOutput {
+        return start_network_migration_analysis.execute(self, allocator, input, options);
+    }
+
+    /// Starts a code generation job to convert network migration mappings into
+    /// infrastructure-as-code templates.
+    pub fn startNetworkMigrationCodeGeneration(self: *Self, allocator: std.mem.Allocator, input: start_network_migration_code_generation.StartNetworkMigrationCodeGenerationInput, options: CallOptions) !start_network_migration_code_generation.StartNetworkMigrationCodeGenerationOutput {
+        return start_network_migration_code_generation.execute(self, allocator, input, options);
+    }
+
+    /// Starts a deployment job to create the target network infrastructure based on
+    /// the generated code templates.
+    pub fn startNetworkMigrationDeployment(self: *Self, allocator: std.mem.Allocator, input: start_network_migration_deployment.StartNetworkMigrationDeploymentInput, options: CallOptions) !start_network_migration_deployment.StartNetworkMigrationDeploymentOutput {
+        return start_network_migration_deployment.execute(self, allocator, input, options);
+    }
+
+    /// Starts the network migration mapping process for a given network migration
+    /// execution.
+    pub fn startNetworkMigrationMapping(self: *Self, allocator: std.mem.Allocator, input: start_network_migration_mapping.StartNetworkMigrationMappingInput, options: CallOptions) !start_network_migration_mapping.StartNetworkMigrationMappingOutput {
+        return start_network_migration_mapping.execute(self, allocator, input, options);
+    }
+
+    /// Starts a job to apply customer modifications to network migration mappings,
+    /// such as changing properties.
+    pub fn startNetworkMigrationMappingUpdate(self: *Self, allocator: std.mem.Allocator, input: start_network_migration_mapping_update.StartNetworkMigrationMappingUpdateInput, options: CallOptions) !start_network_migration_mapping_update.StartNetworkMigrationMappingUpdateOutput {
+        return start_network_migration_mapping_update.execute(self, allocator, input, options);
+    }
+
     /// Start replication for source server irrespective of its replication type.
     pub fn startReplication(self: *Self, allocator: std.mem.Allocator, input: start_replication.StartReplicationInput, options: CallOptions) !start_replication.StartReplicationOutput {
         return start_replication.execute(self, allocator, input, options);
@@ -475,6 +636,17 @@ pub const Client = struct {
     /// Updates an existing Launch Configuration Template by ID.
     pub fn updateLaunchConfigurationTemplate(self: *Self, allocator: std.mem.Allocator, input: update_launch_configuration_template.UpdateLaunchConfigurationTemplateInput, options: CallOptions) !update_launch_configuration_template.UpdateLaunchConfigurationTemplateOutput {
         return update_launch_configuration_template.execute(self, allocator, input, options);
+    }
+
+    /// Updates an existing network migration definition with new source or target
+    /// configurations.
+    pub fn updateNetworkMigrationDefinition(self: *Self, allocator: std.mem.Allocator, input: update_network_migration_definition.UpdateNetworkMigrationDefinitionInput, options: CallOptions) !update_network_migration_definition.UpdateNetworkMigrationDefinitionOutput {
+        return update_network_migration_definition.execute(self, allocator, input, options);
+    }
+
+    /// Updates a mapper segment's configuration, such as changing its scope tags.
+    pub fn updateNetworkMigrationMapperSegment(self: *Self, allocator: std.mem.Allocator, input: update_network_migration_mapper_segment.UpdateNetworkMigrationMapperSegmentInput, options: CallOptions) !update_network_migration_mapper_segment.UpdateNetworkMigrationMapperSegmentOutput {
+        return update_network_migration_mapper_segment.execute(self, allocator, input, options);
     }
 
     /// Allows you to update multiple ReplicationConfigurations by Source Server ID.
@@ -582,6 +754,13 @@ pub const Client = struct {
         };
     }
 
+    pub fn listImportFileEnrichmentsPaginator(self: *Self, params: list_import_file_enrichments.ListImportFileEnrichmentsInput) paginator.ListImportFileEnrichmentsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listImportsPaginator(self: *Self, params: list_imports.ListImportsInput) paginator.ListImportsPaginator {
         return .{
             .client = self,
@@ -590,6 +769,90 @@ pub const Client = struct {
     }
 
     pub fn listManagedAccountsPaginator(self: *Self, params: list_managed_accounts.ListManagedAccountsInput) paginator.ListManagedAccountsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listNetworkMigrationAnalysesPaginator(self: *Self, params: list_network_migration_analyses.ListNetworkMigrationAnalysesInput) paginator.ListNetworkMigrationAnalysesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listNetworkMigrationAnalysisResultsPaginator(self: *Self, params: list_network_migration_analysis_results.ListNetworkMigrationAnalysisResultsInput) paginator.ListNetworkMigrationAnalysisResultsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listNetworkMigrationCodeGenerationSegmentsPaginator(self: *Self, params: list_network_migration_code_generation_segments.ListNetworkMigrationCodeGenerationSegmentsInput) paginator.ListNetworkMigrationCodeGenerationSegmentsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listNetworkMigrationCodeGenerationsPaginator(self: *Self, params: list_network_migration_code_generations.ListNetworkMigrationCodeGenerationsInput) paginator.ListNetworkMigrationCodeGenerationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listNetworkMigrationDefinitionsPaginator(self: *Self, params: list_network_migration_definitions.ListNetworkMigrationDefinitionsInput) paginator.ListNetworkMigrationDefinitionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listNetworkMigrationDeployedStacksPaginator(self: *Self, params: list_network_migration_deployed_stacks.ListNetworkMigrationDeployedStacksInput) paginator.ListNetworkMigrationDeployedStacksPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listNetworkMigrationDeploymentsPaginator(self: *Self, params: list_network_migration_deployments.ListNetworkMigrationDeploymentsInput) paginator.ListNetworkMigrationDeploymentsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listNetworkMigrationExecutionsPaginator(self: *Self, params: list_network_migration_executions.ListNetworkMigrationExecutionsInput) paginator.ListNetworkMigrationExecutionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listNetworkMigrationMapperSegmentConstructsPaginator(self: *Self, params: list_network_migration_mapper_segment_constructs.ListNetworkMigrationMapperSegmentConstructsInput) paginator.ListNetworkMigrationMapperSegmentConstructsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listNetworkMigrationMapperSegmentsPaginator(self: *Self, params: list_network_migration_mapper_segments.ListNetworkMigrationMapperSegmentsInput) paginator.ListNetworkMigrationMapperSegmentsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listNetworkMigrationMappingUpdatesPaginator(self: *Self, params: list_network_migration_mapping_updates.ListNetworkMigrationMappingUpdatesInput) paginator.ListNetworkMigrationMappingUpdatesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listNetworkMigrationMappingsPaginator(self: *Self, params: list_network_migration_mappings.ListNetworkMigrationMappingsInput) paginator.ListNetworkMigrationMappingsPaginator {
         return .{
             .client = self,
             .params = params,

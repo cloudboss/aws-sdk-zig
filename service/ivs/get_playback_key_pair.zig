@@ -148,6 +148,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "ServiceUnavailable")) {
+        return .{ .arena = arena, .kind = .{ .service_unavailable = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "StreamUnavailable")) {
         return .{ .arena = arena, .kind = .{ .stream_unavailable = .{
             .message = owned_message,

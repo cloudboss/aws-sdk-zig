@@ -12,8 +12,7 @@ pub const CreateStreamKeyInput = struct {
 
     /// Array of 1-50 maps, each of the form `string:string (key:value)`. See [Best
     /// practices and
-    /// strategies](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html) in *Tagging Amazon Web Services Resources and Tag Editor* for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is
-    /// documented there.
+    /// strategies](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html) in *Tagging Amazon Web Services Resources and Tag Editor* for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.
     tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
@@ -158,6 +157,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
         return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceUnavailable")) {
+        return .{ .arena = arena, .kind = .{ .service_unavailable = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

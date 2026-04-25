@@ -30,13 +30,11 @@ pub const Service = struct {
     ebs_volume_scan_details: ?EbsVolumeScanDetails = null,
 
     /// The first-seen timestamp of the activity that prompted GuardDuty to generate
-    /// this
-    /// finding.
+    /// this finding.
     event_first_seen: ?[]const u8 = null,
 
     /// The last-seen timestamp of the activity that prompted GuardDuty to generate
-    /// this
-    /// finding.
+    /// this finding.
     event_last_seen: ?[]const u8 = null,
 
     /// An evidence object associated with the service.

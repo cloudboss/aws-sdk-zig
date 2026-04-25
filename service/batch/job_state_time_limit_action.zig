@@ -6,7 +6,11 @@ const JobStateTimeLimitActionsState = @import("job_state_time_limit_actions_stat
 pub const JobStateTimeLimitAction = struct {
     /// The action to take when a job is at the head of the job queue in the
     /// specified state for the specified period of
-    /// time. The only supported value is `CANCEL`, which will cancel the job.
+    /// time. For job queues connected to a `ECS`, `FARGATE` or `EKS` compute
+    /// environment, the only supported value is `CANCEL`, which will cancel the
+    /// job.
+    /// For job queues connected to a `SAGEMAKER_TRAINING` service environment, the
+    /// only supported value is `TERMINATE`, which will terminate the job.
     action: JobStateTimeLimitActionsAction,
 
     /// The approximate amount of time, in seconds, that must pass with the job in

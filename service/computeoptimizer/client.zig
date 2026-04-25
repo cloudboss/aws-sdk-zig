@@ -81,7 +81,7 @@ pub const Client = struct {
         return describe_recommendation_export_jobs.execute(self, allocator, input, options);
     }
 
-    /// Exports optimization recommendations for Amazon EC2 Auto Scaling groups.
+    /// Exports optimization recommendations for Auto Scaling groups.
     ///
     /// Recommendations are exported in a comma-separated values (.csv) file, and
     /// its metadata
@@ -91,8 +91,8 @@ pub const Client = struct {
     /// Recommendations](https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html) in the *Compute Optimizer User
     /// Guide*.
     ///
-    /// You can have only one Amazon EC2 Auto Scaling group export job in progress
-    /// per Amazon Web Services Region.
+    /// You can have only one Auto Scaling group export job in progress per Amazon
+    /// Web Services Region.
     pub fn exportAutoScalingGroupRecommendations(self: *Self, allocator: std.mem.Allocator, input: export_auto_scaling_group_recommendations.ExportAutoScalingGroupRecommendationsInput, options: CallOptions) !export_auto_scaling_group_recommendations.ExportAutoScalingGroupRecommendationsOutput {
         return export_auto_scaling_group_recommendations.execute(self, allocator, input, options);
     }
@@ -208,7 +208,7 @@ pub const Client = struct {
         return export_rds_database_recommendations.execute(self, allocator, input, options);
     }
 
-    /// Returns Amazon EC2 Auto Scaling group recommendations.
+    /// Returns Auto Scaling group recommendations.
     ///
     /// Compute Optimizer generates recommendations for Amazon EC2 Auto Scaling
     /// groups that
@@ -366,7 +366,7 @@ pub const Client = struct {
     /// Use the `scope` parameter to specify which preferences to return. You can
     /// specify to return preferences for an organization, a specific account ID, or
     /// a specific
-    /// EC2 instance or Amazon EC2 Auto Scaling group Amazon Resource Name (ARN).
+    /// EC2 instance or Auto Scaling group Amazon Resource Name (ARN).
     ///
     /// For more information, see [Activating
     /// enhanced infrastructure
@@ -384,8 +384,7 @@ pub const Client = struct {
     /// `Underprovisioned`, `Overprovisioned`, or
     /// `Optimized`.
     ///
-    /// * EC2Amazon EC2 Auto Scaling groups in an account that are `NotOptimized`,
-    ///   or
+    /// * EC2Auto Scaling groups in an account that are `NotOptimized`, or
     /// `Optimized`.
     ///
     /// * Amazon EBS volumes in an account that are `NotOptimized`,

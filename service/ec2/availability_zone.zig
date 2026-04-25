@@ -1,9 +1,15 @@
+const AvailabilityZoneGeography = @import("availability_zone_geography.zig").AvailabilityZoneGeography;
 const AvailabilityZoneMessage = @import("availability_zone_message.zig").AvailabilityZoneMessage;
 const AvailabilityZoneOptInStatus = @import("availability_zone_opt_in_status.zig").AvailabilityZoneOptInStatus;
 const AvailabilityZoneState = @import("availability_zone_state.zig").AvailabilityZoneState;
+const AvailabilityZoneSubGeography = @import("availability_zone_sub_geography.zig").AvailabilityZoneSubGeography;
 
 /// Describes Availability Zones, Local Zones, and Wavelength Zones.
 pub const AvailabilityZone = struct {
+    /// The geography information for the Availability Zone or Local Zone. The
+    /// geography is returned as a list.
+    geography: ?[]const AvailabilityZoneGeography = null,
+
     /// The long name of the Availability Zone group, Local Zone group, or
     /// Wavelength Zone
     /// group.
@@ -49,6 +55,11 @@ pub const AvailabilityZone = struct {
     /// possible values are
     /// `available`, `unavailable`, and `constrained`.
     state: ?AvailabilityZoneState = null,
+
+    /// The sub-geography information for the Availability Zone or Local Zone. The
+    /// sub-geography is returned
+    /// as a list.
+    sub_geography: ?[]const AvailabilityZoneSubGeography = null,
 
     /// The ID of the Availability Zone, Local Zone, or Wavelength Zone.
     zone_id: ?[]const u8 = null,

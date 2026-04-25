@@ -4,9 +4,8 @@ pub const RevisionDestinationEntry = struct {
     bucket: []const u8,
 
     /// A string representing the pattern for generated names of the individual
-    /// assets in the
-    /// revision. For more information about key patterns, see [Key patterns when
-    /// exporting
+    /// assets in the revision. For more information about key patterns, see [Key
+    /// patterns when exporting
     /// revisions](https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns).
     key_pattern: ?[]const u8 = null,
 

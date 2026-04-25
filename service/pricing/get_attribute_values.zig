@@ -19,8 +19,7 @@ pub const GetAttributeValuesInput = struct {
     next_token: ?[]const u8 = null,
 
     /// The service code for the service whose attributes you want to retrieve. For
-    /// example, if you want
-    /// the retrieve an EC2 attribute, use `AmazonEC2`.
+    /// example, if you want the retrieve an EC2 attribute, use `AmazonEC2`.
     service_code: []const u8,
 
     pub const json_field_names = .{
@@ -33,8 +32,7 @@ pub const GetAttributeValuesInput = struct {
 
 pub const GetAttributeValuesOutput = struct {
     /// The list of values for an attribute. For example, `Throughput Optimized HDD`
-    /// and
-    /// `Provisioned IOPS` are two available values for the `AmazonEC2`
+    /// and `Provisioned IOPS` are two available values for the `AmazonEC2`
     /// `volumeType`.
     attribute_values: ?[]const AttributeValue = null,
 

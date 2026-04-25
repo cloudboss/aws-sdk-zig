@@ -21,25 +21,22 @@ pub const ResendConfirmationCodeInput = struct {
 
     /// A map of custom key-value pairs that you can provide as input for any custom
     /// workflows
-    /// that this action triggers.
+    /// that this action triggers. You create custom workflows by assigning Lambda
+    /// functions
+    /// to user pool triggers.
     ///
-    /// You create custom workflows by assigning Lambda functions to user pool
-    /// triggers.
-    /// When you use the ResendConfirmationCode API action, Amazon Cognito invokes
-    /// the function that is
-    /// assigned to the *custom message* trigger. When Amazon Cognito invokes this
-    /// function, it passes a JSON payload, which the function receives as input.
-    /// This payload
-    /// contains a `clientMetadata` attribute, which provides the data that you
-    /// assigned to the ClientMetadata parameter in your ResendConfirmationCode
-    /// request. In your
-    /// function code in Lambda, you can process the `clientMetadata` value to
-    /// enhance
-    /// your workflow for your specific needs.
+    /// When Amazon Cognito invokes any of these functions, it passes a JSON
+    /// payload, which the
+    /// function receives as input. This payload contains a `clientMetadata`
+    /// attribute that provides the data that you assigned to the ClientMetadata
+    /// parameter in
+    /// your request. In your function code, you can process the `clientMetadata`
+    /// value to enhance your workflow for your specific needs.
     ///
-    /// For more information, see [
-    /// Using Lambda
-    /// triggers](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html) in the *Amazon Cognito Developer Guide*.
+    /// To review the Lambda trigger types that Amazon Cognito invokes at runtime
+    /// with API requests, see [
+    /// Connecting API actions to Lambda
+    /// triggers](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event) in the *Amazon Cognito Developer Guide*.
     ///
     /// When you use the `ClientMetadata` parameter, note that Amazon Cognito won't
     /// do the
@@ -172,6 +169,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     const owned_message = try arena_alloc.dupe(u8, error_message);
     const owned_request_id = try arena_alloc.dupe(u8, "");
 
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "AliasExistsException")) {
         return .{ .arena = arena, .kind = .{ .alias_exists_exception = .{
             .message = owned_message,
@@ -240,6 +243,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "InternalErrorException")) {
         return .{ .arena = arena, .kind = .{ .internal_error_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

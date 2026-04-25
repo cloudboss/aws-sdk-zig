@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AccessEndpoint = @import("access_endpoint.zig").AccessEndpoint;
 const ApplicationSettings = @import("application_settings.zig").ApplicationSettings;
+const ContentRedirection = @import("content_redirection.zig").ContentRedirection;
 const StorageConnector = @import("storage_connector.zig").StorageConnector;
 const StreamingExperienceSettings = @import("streaming_experience_settings.zig").StreamingExperienceSettings;
 const UserSetting = @import("user_setting.zig").UserSetting;
@@ -22,6 +23,8 @@ pub const CreateStackInput = struct {
     /// settings are automatically saved after each session and applied to the next
     /// session.
     application_settings: ?ApplicationSettings = null,
+
+    content_redirection: ?ContentRedirection = null,
 
     /// The description to display.
     description: ?[]const u8 = null,
@@ -73,6 +76,7 @@ pub const CreateStackInput = struct {
     pub const json_field_names = .{
         .access_endpoints = "AccessEndpoints",
         .application_settings = "ApplicationSettings",
+        .content_redirection = "ContentRedirection",
         .description = "Description",
         .display_name = "DisplayName",
         .embed_host_domains = "EmbedHostDomains",

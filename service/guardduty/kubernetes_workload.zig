@@ -1,8 +1,7 @@
 const KubernetesResourcesTypes = @import("kubernetes_resources_types.zig").KubernetesResourcesTypes;
 
 /// Contains information about Kubernetes workloads involved in a GuardDuty
-/// finding,
-/// including pods, deployments, and other Kubernetes resources.
+/// finding, including pods, deployments, and other Kubernetes resources.
 pub const KubernetesWorkload = struct {
     /// A list of unique identifiers for the containers that are part of the
     /// Kubernetes workload.

@@ -1,3 +1,4 @@
+/// Input for the `ListTagsForResource` operation.
 pub const ListTagsForResourceRequest = struct {
     /// ARN of a resource.
     resource_arn: []const u8,

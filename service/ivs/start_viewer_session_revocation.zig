@@ -10,13 +10,13 @@ pub const StartViewerSessionRevocationInput = struct {
     channel_arn: []const u8,
 
     /// The ID of the viewer associated with the viewer session to revoke. Do not
-    /// use this field
-    /// for personally identifying, confidential, or sensitive information.
+    /// use this field for personally identifying, confidential, or sensitive
+    /// information.
     viewer_id: []const u8,
 
     /// An optional filter on which versions of the viewer session to revoke. All
-    /// versions less
-    /// than or equal to the specified version will be revoked. Default: 0.
+    /// versions less than or equal to the specified version will be revoked.
+    /// Default: 0.
     viewer_session_versions_less_than_or_equal_to: ?i32 = null,
 
     pub const json_field_names = .{
@@ -159,6 +159,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
         return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceUnavailable")) {
+        return .{ .arena = arena, .kind = .{ .service_unavailable = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

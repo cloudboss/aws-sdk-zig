@@ -26,7 +26,7 @@ pub const AwsApiCallAction = struct {
     /// observed.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     first_seen: ?[]const u8 = null,
 
@@ -34,7 +34,7 @@ pub const AwsApiCallAction = struct {
     /// observed.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     last_seen: ?[]const u8 = null,
 

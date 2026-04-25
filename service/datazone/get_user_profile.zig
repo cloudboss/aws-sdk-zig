@@ -13,6 +13,9 @@ pub const GetUserProfileInput = struct {
     /// get.
     domain_identifier: []const u8,
 
+    /// The session name for IAM role sessions.
+    session_name: ?[]const u8 = null,
+
     /// The type of the user profile.
     @"type": ?UserProfileType = null,
 
@@ -21,6 +24,7 @@ pub const GetUserProfileInput = struct {
 
     pub const json_field_names = .{
         .domain_identifier = "domainIdentifier",
+        .session_name = "sessionName",
         .@"type" = "type",
         .user_identifier = "userIdentifier",
     };
@@ -93,6 +97,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetUserProfileInput, co
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
+    if (input.session_name) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "sessionName=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
     if (input.@"type") |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "type=");

@@ -1,4 +1,5 @@
 const ResourceShareFeatureSet = @import("resource_share_feature_set.zig").ResourceShareFeatureSet;
+const ResourceShareConfiguration = @import("resource_share_configuration.zig").ResourceShareConfiguration;
 const ResourceShareStatus = @import("resource_share_status.zig").ResourceShareStatus;
 const Tag = @import("tag.zig").Tag;
 
@@ -63,6 +64,9 @@ pub const ResourceShare = struct {
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share
     resource_share_arn: ?[]const u8 = null,
 
+    /// The configuration of the resource share
+    resource_share_configuration: ?ResourceShareConfiguration = null,
+
     /// The current status of the resource share.
     status: ?ResourceShareStatus = null,
 
@@ -80,6 +84,7 @@ pub const ResourceShare = struct {
         .name = "name",
         .owning_account_id = "owningAccountId",
         .resource_share_arn = "resourceShareArn",
+        .resource_share_configuration = "resourceShareConfiguration",
         .status = "status",
         .status_message = "statusMessage",
         .tags = "tags",

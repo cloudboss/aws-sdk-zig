@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConsumerGroupReplicationUpdate = @import("consumer_group_replication_update.zig").ConsumerGroupReplicationUpdate;
+const LogDelivery = @import("log_delivery.zig").LogDelivery;
 const TopicReplicationUpdate = @import("topic_replication_update.zig").TopicReplicationUpdate;
 const ReplicatorState = @import("replicator_state.zig").ReplicatorState;
 
@@ -15,14 +16,23 @@ pub const UpdateReplicationInfoInput = struct {
     /// Current replicator version.
     current_version: []const u8,
 
+    /// Configuration for delivering replicator logs to customer destinations.
+    log_delivery: ?LogDelivery = null,
+
     /// The Amazon Resource Name (ARN) of the replicator to be updated.
     replicator_arn: []const u8,
 
     /// The ARN of the source Kafka cluster.
-    source_kafka_cluster_arn: []const u8,
+    source_kafka_cluster_arn: ?[]const u8 = null,
+
+    /// The ID of the source Kafka cluster.
+    source_kafka_cluster_id: ?[]const u8 = null,
 
     /// The ARN of the target Kafka cluster.
-    target_kafka_cluster_arn: []const u8,
+    target_kafka_cluster_arn: ?[]const u8 = null,
+
+    /// The ID of the target Kafka cluster.
+    target_kafka_cluster_id: ?[]const u8 = null,
 
     /// Updated topic replication information.
     topic_replication: ?TopicReplicationUpdate = null,
@@ -30,9 +40,12 @@ pub const UpdateReplicationInfoInput = struct {
     pub const json_field_names = .{
         .consumer_group_replication = "ConsumerGroupReplication",
         .current_version = "CurrentVersion",
+        .log_delivery = "LogDelivery",
         .replicator_arn = "ReplicatorArn",
         .source_kafka_cluster_arn = "SourceKafkaClusterArn",
+        .source_kafka_cluster_id = "SourceKafkaClusterId",
         .target_kafka_cluster_arn = "TargetKafkaClusterArn",
+        .target_kafka_cluster_id = "TargetKafkaClusterId",
         .topic_replication = "TopicReplication",
     };
 };
@@ -102,14 +115,36 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateReplicationInfoIn
     try body_buf.appendSlice(allocator, "\"CurrentVersion\":");
     try aws.json.writeValue(@TypeOf(input.current_version), input.current_version, allocator, &body_buf);
     has_prev = true;
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"SourceKafkaClusterArn\":");
-    try aws.json.writeValue(@TypeOf(input.source_kafka_cluster_arn), input.source_kafka_cluster_arn, allocator, &body_buf);
-    has_prev = true;
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"TargetKafkaClusterArn\":");
-    try aws.json.writeValue(@TypeOf(input.target_kafka_cluster_arn), input.target_kafka_cluster_arn, allocator, &body_buf);
-    has_prev = true;
+    if (input.log_delivery) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"LogDelivery\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.source_kafka_cluster_arn) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"SourceKafkaClusterArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.source_kafka_cluster_id) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"SourceKafkaClusterId\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.target_kafka_cluster_arn) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"TargetKafkaClusterArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.target_kafka_cluster_id) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"TargetKafkaClusterId\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.topic_replication) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"TopicReplication\":");
@@ -163,8 +198,20 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "ClusterConnectivityException")) {
+        return .{ .arena = arena, .kind = .{ .cluster_connectivity_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ControllerMovedException")) {
+        return .{ .arena = arena, .kind = .{ .controller_moved_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };
@@ -175,14 +222,44 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "GroupSubscribedToTopicException")) {
+        return .{ .arena = arena, .kind = .{ .group_subscribed_to_topic_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "InternalServerErrorException")) {
         return .{ .arena = arena, .kind = .{ .internal_server_error_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "KafkaRequestException")) {
+        return .{ .arena = arena, .kind = .{ .kafka_request_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "KafkaTimeoutException")) {
+        return .{ .arena = arena, .kind = .{ .kafka_timeout_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "NotControllerException")) {
+        return .{ .arena = arena, .kind = .{ .not_controller_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "NotFoundException")) {
         return .{ .arena = arena, .kind = .{ .not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ReassignmentInProgressException")) {
+        return .{ .arena = arena, .kind = .{ .reassignment_in_progress_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };
@@ -199,8 +276,20 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "TopicExistsException")) {
+        return .{ .arena = arena, .kind = .{ .topic_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "UnauthorizedException")) {
         return .{ .arena = arena, .kind = .{ .unauthorized_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnknownTopicOrPartitionException")) {
+        return .{ .arena = arena, .kind = .{ .unknown_topic_or_partition_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

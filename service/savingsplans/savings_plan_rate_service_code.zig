@@ -15,6 +15,7 @@ pub const SavingsPlanRateServiceCode = enum {
     timestream,
     mcs,
     dms,
+    es,
 
     pub const json_field_names = .{
         .ec2 = "AmazonEC2",
@@ -31,6 +32,7 @@ pub const SavingsPlanRateServiceCode = enum {
         .timestream = "AmazonTimestream",
         .mcs = "AmazonMCS",
         .dms = "AWSDatabaseMigrationSvc",
+        .es = "AmazonES",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -49,6 +51,7 @@ pub const SavingsPlanRateServiceCode = enum {
             .timestream => "AmazonTimestream",
             .mcs => "AmazonMCS",
             .dms => "AWSDatabaseMigrationSvc",
+            .es => "AmazonES",
         };
     }
 

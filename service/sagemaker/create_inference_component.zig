@@ -20,7 +20,7 @@ pub const CreateInferenceComponentInput = struct {
 
     /// Details about the resources to deploy with this inference component,
     /// including the model, container, and compute resources.
-    specification: InferenceComponentSpecification,
+    specification: ?InferenceComponentSpecification = null,
 
     /// A list of key-value pairs associated with the model. For more information,
     /// see [Tagging Amazon Web Services

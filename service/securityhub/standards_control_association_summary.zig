@@ -26,7 +26,7 @@ pub const StandardsControlAssociationSummary = struct {
     standards_arn: []const u8,
 
     /// The description of a control. This typically summarizes how Security Hub
-    /// evaluates the control and the
+    /// CSPM evaluates the control and the
     /// conditions under which it produces a failed finding. The parameter may
     /// reference a specific standard.
     standards_control_description: ?[]const u8 = null,

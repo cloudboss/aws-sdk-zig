@@ -14,7 +14,7 @@ pub const UpdateBrandInput = struct {
     /// The definition of the brand.
     brand_definition: ?BrandDefinition = null,
 
-    /// The ID of the Quick Suite brand.
+    /// The ID of the Quick brand.
     brand_id: []const u8,
 
     pub const json_field_names = .{

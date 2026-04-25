@@ -1,8 +1,7 @@
 /// This structure defines which groups defined in the SAML assertion attribute
-/// are to be
-/// mapped to the Grafana `Admin` and `Editor` roles in the workspace.
-/// SAML authenticated users not part of `Admin` or `Editor` role
-/// groups have `Viewer` permission over the workspace.
+/// are to be mapped to the Grafana `Admin` and `Editor` roles in the workspace.
+/// SAML authenticated users not part of `Admin` or `Editor` role groups have
+/// `Viewer` permission over the workspace.
 pub const RoleValues = struct {
     /// A list of groups from the SAML assertion attribute to grant the Grafana
     /// `Admin` role to.

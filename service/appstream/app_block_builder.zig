@@ -24,6 +24,10 @@ pub const AppBlockBuilder = struct {
     /// The description of the app block builder.
     description: ?[]const u8 = null,
 
+    /// Indicates whether Instance Metadata Service Version 1 (IMDSv1) is disabled
+    /// for the app block builder.
+    disable_imdsv1: ?bool = null,
+
     /// The display name of the app block builder.
     display_name: ?[]const u8 = null,
 
@@ -60,6 +64,7 @@ pub const AppBlockBuilder = struct {
         .arn = "Arn",
         .created_time = "CreatedTime",
         .description = "Description",
+        .disable_imdsv1 = "DisableIMDSV1",
         .display_name = "DisplayName",
         .enable_default_internet_access = "EnableDefaultInternetAccess",
         .iam_role_arn = "IamRoleArn",

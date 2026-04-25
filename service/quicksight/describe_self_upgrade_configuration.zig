@@ -7,12 +7,12 @@ const ServiceError = @import("errors.zig").ServiceError;
 const SelfUpgradeConfiguration = @import("self_upgrade_configuration.zig").SelfUpgradeConfiguration;
 
 pub const DescribeSelfUpgradeConfigurationInput = struct {
-    /// The ID of the Amazon Web Services account that contains the Quick Suite
+    /// The ID of the Amazon Web Services account that contains the Quick
     /// self-upgrade configuration.
     aws_account_id: []const u8,
 
-    /// The Quick Suite namespace that you want to describe the Quick Suite
-    /// self-upgrade configuration for.
+    /// The Quick namespace that you want to describe the Quick self-upgrade
+    /// configuration for.
     namespace: []const u8,
 
     pub const json_field_names = .{
@@ -25,7 +25,7 @@ pub const DescribeSelfUpgradeConfigurationOutput = struct {
     /// The Amazon Web Services request ID for this operation.
     request_id: ?[]const u8 = null,
 
-    /// The self-upgrade configuration for the Quick Suite account.
+    /// The self-upgrade configuration for the Quick account.
     self_upgrade_configuration: ?SelfUpgradeConfiguration = null,
 
     /// The HTTP status of the request.

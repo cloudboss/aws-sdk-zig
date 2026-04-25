@@ -4,11 +4,13 @@ pub const SessionStatusCode = enum {
     rejected,
     expired,
     configuration_changed,
+    all_approvers_in_session,
 
     pub const json_field_names = .{
         .rejected = "REJECTED",
         .expired = "EXPIRED",
         .configuration_changed = "CONFIGURATION_CHANGED",
+        .all_approvers_in_session = "ALL_APPROVERS_IN_SESSION",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const SessionStatusCode = enum {
             .rejected => "REJECTED",
             .expired => "EXPIRED",
             .configuration_changed => "CONFIGURATION_CHANGED",
+            .all_approvers_in_session => "ALL_APPROVERS_IN_SESSION",
         };
     }
 

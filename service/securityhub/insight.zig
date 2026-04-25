@@ -1,6 +1,6 @@
 const AwsSecurityFindingFilters = @import("aws_security_finding_filters.zig").AwsSecurityFindingFilters;
 
-/// Contains information about a Security Hub insight.
+/// Contains information about a Security Hub CSPM insight.
 pub const Insight = struct {
     /// One or more attributes used to filter the findings included in the insight.
     /// You can filter by up to ten finding attributes. For each attribute, you can
@@ -18,10 +18,10 @@ pub const Insight = struct {
     /// identifiers.
     group_by_attribute: []const u8,
 
-    /// The ARN of a Security Hub insight.
+    /// The ARN of a Security Hub CSPM insight.
     insight_arn: []const u8,
 
-    /// The name of a Security Hub insight.
+    /// The name of a Security Hub CSPM insight.
     name: []const u8,
 
     pub const json_field_names = .{

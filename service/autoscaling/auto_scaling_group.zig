@@ -25,6 +25,9 @@ pub const AutoScalingGroup = struct {
     /// Auto Scaling group.
     availability_zone_distribution: ?AvailabilityZoneDistribution = null,
 
+    /// The Availability Zone IDs where the Auto Scaling group can launch instances.
+    availability_zone_ids: ?[]const []const u8 = null,
+
     /// The Availability Zone impairment policy for the Auto Scaling group.
     availability_zone_impairment_policy: ?AvailabilityZoneImpairmentPolicy = null,
 

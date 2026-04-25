@@ -5,8 +5,13 @@ pub const DataSource = struct {
     /// Detailed description of a data source.
     data_source_description: ?[]const u8 = null,
 
+    /// The ARN of the IAM role to be used for cross account/region data source
+    /// association.
+    iam_role_for_data_source_arn: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .data_source_arn = "dataSourceArn",
         .data_source_description = "dataSourceDescription",
+        .iam_role_for_data_source_arn = "iamRoleForDataSourceArn",
     };
 };

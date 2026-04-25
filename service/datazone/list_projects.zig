@@ -29,6 +29,9 @@ pub const ListProjectsInput = struct {
     /// in a subsequent call to `ListProjects` to list the next set of projects.
     next_token: ?[]const u8 = null,
 
+    /// A parameter to filter projects by their category.
+    project_category: ?[]const u8 = null,
+
     /// The identifier of the Amazon DataZone user.
     user_identifier: ?[]const u8 = null,
 
@@ -38,6 +41,7 @@ pub const ListProjectsInput = struct {
         .max_results = "maxResults",
         .name = "name",
         .next_token = "nextToken",
+        .project_category = "projectCategory",
         .user_identifier = "userIdentifier",
     };
 };
@@ -123,6 +127,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListProjectsInput, conf
     if (input.next_token) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "nextToken=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
+    if (input.project_category) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "projectCategory=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }

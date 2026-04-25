@@ -1,6 +1,5 @@
 /// Contains information about which data sources are enabled for the GuardDuty
-/// member
-/// account.
+/// member account.
 pub const DataSourceFreeTrial = struct {
     /// A value that specifies the number of days left to use each enabled data
     /// source.

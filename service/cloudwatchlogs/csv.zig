@@ -17,6 +17,11 @@ pub const CSV = struct {
     /// delimiter.
     delimiter: ?[]const u8 = null,
 
+    /// The path to the parent field to put transformed key value pairs under.
+    /// If you omit this value, the key value pairs will be placed under the root
+    /// node.
+    destination: ?[]const u8 = null,
+
     /// The character used used as a text qualifier for a single column of data. If
     /// you omit this,
     /// the double quotation mark `"` character is used.
@@ -30,6 +35,7 @@ pub const CSV = struct {
     pub const json_field_names = .{
         .columns = "columns",
         .delimiter = "delimiter",
+        .destination = "destination",
         .quote_character = "quoteCharacter",
         .source = "source",
     };

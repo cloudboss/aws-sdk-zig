@@ -11,8 +11,8 @@ const CoverageStatistics = @import("coverage_statistics.zig").CoverageStatistics
 pub const GetCoverageStatisticsInput = struct {
     /// The unique ID of the GuardDuty detector.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 
@@ -30,8 +30,7 @@ pub const GetCoverageStatisticsInput = struct {
 };
 
 pub const GetCoverageStatisticsOutput = struct {
-    /// Represents the count aggregated by the `statusCode` and
-    /// `resourceType`.
+    /// Represents the count aggregated by the `statusCode` and `resourceType`.
     coverage_statistics: ?CoverageStatistics = null,
 
     pub const json_field_names = .{

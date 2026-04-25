@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const IpAddressType = @import("ip_address_type.zig").IpAddressType;
+const IpamCidrConfig = @import("ipam_cidr_config.zig").IpamCidrConfig;
 const AnycastIpList = @import("anycast_ip_list.zig").AnycastIpList;
 const serde = @import("serde.zig");
 
@@ -23,6 +24,10 @@ pub const UpdateAnycastIpListInput = struct {
     /// * `ipv6` only
     /// * `dualstack` - Allocate a list of both IPv4 and IPv6 addresses
     ip_address_type: ?IpAddressType = null,
+
+    /// A list of IPAM CIDR configurations that specify the IP address ranges and
+    /// IPAM pool settings for updating the Anycast static IP list.
+    ipam_cidr_configs: ?[]const IpamCidrConfig = null,
 };
 
 pub const UpdateAnycastIpListOutput = struct {
@@ -75,6 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAnycastIpListInpu
         try body_buf.appendSlice(allocator, "<IpAddressType>");
         try body_buf.appendSlice(allocator, v.wireName());
         try body_buf.appendSlice(allocator, "</IpAddressType>");
+    }
+    if (input.ipam_cidr_configs) |v| {
+        try body_buf.appendSlice(allocator, "<IpamCidrConfigs>");
+        try serde.serializeIpamCidrConfigList(allocator, &body_buf, v, "IpamCidrConfig");
+        try body_buf.appendSlice(allocator, "</IpamCidrConfigs>");
     }
     try body_buf.appendSlice(allocator, "</UpdateAnycastIpListRequest>");
     const body = try body_buf.toOwnedSlice(allocator);

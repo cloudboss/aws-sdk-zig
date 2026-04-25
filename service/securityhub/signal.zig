@@ -5,8 +5,8 @@ const Indicator = @import("indicator.zig").Indicator;
 /// type of threat detected by GuardDuty. GuardDuty generates an attack sequence
 /// finding when multiple events, or
 /// signals, align to a potentially suspicious activity. When GuardDuty and
-/// Security Hub are integrated, GuardDuty
-/// sends attack sequence findings to Security Hub.
+/// Security Hub CSPM are integrated, GuardDuty
+/// sends attack sequence findings to Security Hub CSPM.
 ///
 /// A signal can be an API activity or a finding that GuardDuty uses to detect
 /// an attack sequence finding.

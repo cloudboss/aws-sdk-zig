@@ -660,8 +660,8 @@ pub const Client = struct {
     /// supported
     /// service per user.
     ///
-    /// You can create service-specific credentials for Amazon Bedrock, CodeCommit
-    /// and Amazon Keyspaces (for Apache Cassandra).
+    /// You can create service-specific credentials for Amazon Bedrock, Amazon
+    /// CloudWatch Logs, CodeCommit and Amazon Keyspaces (for Apache Cassandra).
     ///
     /// You can reset the password to a new service-generated value by calling
     /// [ResetServiceSpecificCredential](https://docs.aws.amazon.com/IAM/latest/APIReference/API_ResetServiceSpecificCredential.html).

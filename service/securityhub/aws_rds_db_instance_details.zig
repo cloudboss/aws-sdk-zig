@@ -135,7 +135,7 @@ pub const AwsRdsDbInstanceDetails = struct {
     /// Indicates when the DB instance was created.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     instance_create_time: ?[]const u8 = null,
 
@@ -152,7 +152,7 @@ pub const AwsRdsDbInstanceDetails = struct {
     /// restore.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     latest_restorable_time: ?[]const u8 = null,
 

@@ -4,12 +4,18 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const EmailAddressConfig = @import("email_address_config.zig").EmailAddressConfig;
 const OutboundCallerConfig = @import("outbound_caller_config.zig").OutboundCallerConfig;
 const OutboundEmailConfig = @import("outbound_email_config.zig").OutboundEmailConfig;
 
 pub const CreateQueueInput = struct {
     /// The description of the queue.
     description: ?[]const u8 = null,
+
+    /// Configuration list containing the email addresses to associate with the
+    /// queue during creation. Each configuration specifies an email address ID that
+    /// agents can select when handling email contacts in this queue.
+    email_addresses_config: ?[]const EmailAddressConfig = null,
 
     /// The identifier for the hours of operation.
     hours_of_operation_id: []const u8,
@@ -40,6 +46,7 @@ pub const CreateQueueInput = struct {
 
     pub const json_field_names = .{
         .description = "Description",
+        .email_addresses_config = "EmailAddressesConfig",
         .hours_of_operation_id = "HoursOfOperationId",
         .instance_id = "InstanceId",
         .max_contacts = "MaxContacts",
@@ -108,6 +115,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateQueueInput, confi
     if (input.description) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"Description\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.email_addresses_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"EmailAddressesConfig\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

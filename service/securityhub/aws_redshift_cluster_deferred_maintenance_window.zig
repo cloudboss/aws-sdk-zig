@@ -4,7 +4,7 @@ pub const AwsRedshiftClusterDeferredMaintenanceWindow = struct {
     /// The end of the time window for which maintenance was deferred.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     defer_maintenance_end_time: ?[]const u8 = null,
 
@@ -14,7 +14,7 @@ pub const AwsRedshiftClusterDeferredMaintenanceWindow = struct {
     /// The start of the time window for which maintenance was deferred.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     defer_maintenance_start_time: ?[]const u8 = null,
 

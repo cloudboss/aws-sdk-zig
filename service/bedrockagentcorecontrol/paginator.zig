@@ -14,6 +14,7 @@ const list_code_interpreters = @import("list_code_interpreters.zig");
 const list_evaluators = @import("list_evaluators.zig");
 const list_gateway_targets = @import("list_gateway_targets.zig");
 const list_gateways = @import("list_gateways.zig");
+const list_harnesses = @import("list_harnesses.zig");
 const list_memories = @import("list_memories.zig");
 const list_oauth_2_credential_providers = @import("list_oauth_2_credential_providers.zig");
 const list_online_evaluation_configs = @import("list_online_evaluation_configs.zig");
@@ -21,6 +22,8 @@ const list_policies = @import("list_policies.zig");
 const list_policy_engines = @import("list_policy_engines.zig");
 const list_policy_generation_assets = @import("list_policy_generation_assets.zig");
 const list_policy_generations = @import("list_policy_generations.zig");
+const list_registries = @import("list_registries.zig");
+const list_registry_records = @import("list_registry_records.zig");
 const list_workload_identities = @import("list_workload_identities.zig");
 
 pub const ListAgentRuntimeEndpointsPaginator = struct {
@@ -423,6 +426,46 @@ pub const ListGatewaysPaginator = struct {
     }
 };
 
+pub const ListHarnessesPaginator = struct {
+    client: *Client,
+    params: list_harnesses.ListHarnessesInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_harnesses.ListHarnessesOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_harnesses.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
 pub const ListMemoriesPaginator = struct {
     client: *Client,
     params: list_memories.ListMemoriesInput,
@@ -679,6 +722,86 @@ pub const ListPolicyGenerationsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_policy_generations.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListRegistriesPaginator = struct {
+    client: *Client,
+    params: list_registries.ListRegistriesInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_registries.ListRegistriesOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_registries.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListRegistryRecordsPaginator = struct {
+    client: *Client,
+    params: list_registry_records.ListRegistryRecordsInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_registry_records.ListRegistryRecordsOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_registry_records.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

@@ -4,9 +4,11 @@ const std = @import("std");
 const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
+const describe_bot_analyzer_recommendation = @import("describe_bot_analyzer_recommendation.zig");
 const list_aggregated_utterances = @import("list_aggregated_utterances.zig");
 const list_bot_alias_replicas = @import("list_bot_alias_replicas.zig");
 const list_bot_aliases = @import("list_bot_aliases.zig");
+const list_bot_analyzer_history = @import("list_bot_analyzer_history.zig");
 const list_bot_locales = @import("list_bot_locales.zig");
 const list_bot_recommendations = @import("list_bot_recommendations.zig");
 const list_bot_resource_generations = @import("list_bot_resource_generations.zig");
@@ -32,6 +34,46 @@ const list_test_set_records = @import("list_test_set_records.zig");
 const list_test_sets = @import("list_test_sets.zig");
 const list_utterance_analytics_data = @import("list_utterance_analytics_data.zig");
 const list_utterance_metrics = @import("list_utterance_metrics.zig");
+
+pub const DescribeBotAnalyzerRecommendationPaginator = struct {
+    client: *Client,
+    params: describe_bot_analyzer_recommendation.DescribeBotAnalyzerRecommendationInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_bot_analyzer_recommendation.DescribeBotAnalyzerRecommendationOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try describe_bot_analyzer_recommendation.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
 
 pub const ListAggregatedUtterancesPaginator = struct {
     client: *Client,
@@ -129,6 +171,46 @@ pub const ListBotAliasesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_bot_aliases.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListBotAnalyzerHistoryPaginator = struct {
+    client: *Client,
+    params: list_bot_analyzer_history.ListBotAnalyzerHistoryInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_bot_analyzer_history.ListBotAnalyzerHistoryOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_bot_analyzer_history.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

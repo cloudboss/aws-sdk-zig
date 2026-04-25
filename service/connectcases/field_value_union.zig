@@ -2,8 +2,9 @@ const EmptyFieldValue = @import("empty_field_value.zig").EmptyFieldValue;
 
 /// Object to store union of Field values.
 ///
-/// The `Summary` system field accepts 3000 characters while all other fields
-/// accept 500 characters.
+/// The `Summary` system field accepts up to 3000 characters, while all other
+/// fields accept up to 4100 characters. If you use multi-byte characters, the
+/// effective character limit may be lower.
 pub const FieldValueUnion = union(enum) {
     /// Can be either null, or have a Boolean value type. Only one value can be
     /// provided.

@@ -2,6 +2,7 @@ const ParticipantCapabilities = @import("participant_capabilities.zig").Particip
 const DeviceInfo = @import("device_info.zig").DeviceInfo;
 const HierarchyGroups = @import("hierarchy_groups.zig").HierarchyGroups;
 const StateTransition = @import("state_transition.zig").StateTransition;
+const VoiceEnhancementMode = @import("voice_enhancement_mode.zig").VoiceEnhancementMode;
 
 /// Information about the agent who accepted the contact.
 pub const AgentInfo = struct {
@@ -52,6 +53,11 @@ pub const AgentInfo = struct {
     /// List of `StateTransition` for a supervisor.
     state_transitions: ?[]const StateTransition = null,
 
+    /// The voice enhancement mode used by the agent as the call is ending.
+    /// Valid values: VOICE_ISOLATION | NOISE_SUPPRESSION | NONE.
+    /// A value of null indicates this mode has not yet been set for this user.
+    voice_enhancement_mode: ?VoiceEnhancementMode = null,
+
     pub const json_field_names = .{
         .accepted_by_agent_timestamp = "AcceptedByAgentTimestamp",
         .after_contact_work_duration = "AfterContactWorkDuration",
@@ -66,5 +72,6 @@ pub const AgentInfo = struct {
         .id = "Id",
         .preview_end_timestamp = "PreviewEndTimestamp",
         .state_transitions = "StateTransitions",
+        .voice_enhancement_mode = "VoiceEnhancementMode",
     };
 };

@@ -13,20 +13,18 @@ pub const S3DataAccessAsset = struct {
     keys: ?[]const []const u8 = null,
 
     /// List of AWS KMS CMKs (Key Management System Customer Managed Keys) and ARNs
-    /// used to
-    /// encrypt S3 objects being shared in this S3 Data Access asset. Providers must
-    /// include all
-    /// AWS KMS keys used to encrypt these shared S3 objects.
+    /// used to encrypt S3 objects being shared in this S3 Data Access asset.
+    /// Providers must include all AWS KMS keys used to encrypt these shared S3
+    /// objects.
     kms_keys_to_grant: ?[]const KmsKeyToGrant = null,
 
     /// The automatically-generated bucket-style alias for your Amazon S3 Access
-    /// Point.
-    /// Customers can access their entitled data using the S3 Access Point alias.
+    /// Point. Customers can access their entitled data using the S3 Access Point
+    /// alias.
     s3_access_point_alias: ?[]const u8 = null,
 
     /// The ARN for your Amazon S3 Access Point. Customers can also access their
-    /// entitled data
-    /// using the S3 Access Point ARN.
+    /// entitled data using the S3 Access Point ARN.
     s3_access_point_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{

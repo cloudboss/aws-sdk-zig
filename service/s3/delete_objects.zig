@@ -76,9 +76,19 @@ pub const DeleteObjectsInput = struct {
     ///
     /// * `CRC64NVME`
     ///
+    /// * `MD5`
+    ///
     /// * `SHA1`
     ///
     /// * `SHA256`
+    ///
+    /// * `SHA512`
+    ///
+    /// * `XXHASH3`
+    ///
+    /// * `XXHASH64`
+    ///
+    /// * `XXHASH128`
     ///
     /// For more
     /// information, see [Checking object

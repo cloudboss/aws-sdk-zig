@@ -15,6 +15,8 @@ pub const ServiceError = struct {
         cluster_contains_tasks_exception: ClusterContainsTasksException,
         cluster_not_found_exception: ClusterNotFoundException,
         conflict_exception: ConflictException,
+        daemon_not_active_exception: DaemonNotActiveException,
+        daemon_not_found_exception: DaemonNotFoundException,
         invalid_parameter_exception: InvalidParameterException,
         limit_exceeded_exception: LimitExceededException,
         missing_version_exception: MissingVersionException,
@@ -47,6 +49,8 @@ pub const ServiceError = struct {
                 .cluster_contains_tasks_exception => "ClusterContainsTasksException",
                 .cluster_not_found_exception => "ClusterNotFoundException",
                 .conflict_exception => "ConflictException",
+                .daemon_not_active_exception => "DaemonNotActiveException",
+                .daemon_not_found_exception => "DaemonNotFoundException",
                 .invalid_parameter_exception => "InvalidParameterException",
                 .limit_exceeded_exception => "LimitExceededException",
                 .missing_version_exception => "MissingVersionException",
@@ -81,6 +85,8 @@ pub const ServiceError = struct {
                 .cluster_contains_tasks_exception => |e| e.message,
                 .cluster_not_found_exception => |e| e.message,
                 .conflict_exception => |e| e.message,
+                .daemon_not_active_exception => |e| e.message,
+                .daemon_not_found_exception => |e| e.message,
                 .invalid_parameter_exception => |e| e.message,
                 .limit_exceeded_exception => |e| e.message,
                 .missing_version_exception => |e| e.message,
@@ -105,7 +111,7 @@ pub const ServiceError = struct {
 
         pub fn httpStatus(self: Kind) u16 {
             return switch (self) {
-                .access_denied_exception => 400,
+                .access_denied_exception => 403,
                 .attribute_limit_exceeded_exception => 400,
                 .blocked_exception => 400,
                 .client_exception => 400,
@@ -115,6 +121,8 @@ pub const ServiceError = struct {
                 .cluster_contains_tasks_exception => 400,
                 .cluster_not_found_exception => 400,
                 .conflict_exception => 400,
+                .daemon_not_active_exception => 400,
+                .daemon_not_found_exception => 400,
                 .invalid_parameter_exception => 400,
                 .limit_exceeded_exception => 400,
                 .missing_version_exception => 400,
@@ -149,6 +157,8 @@ pub const ServiceError = struct {
                 .cluster_contains_tasks_exception => |e| e.request_id,
                 .cluster_not_found_exception => |e| e.request_id,
                 .conflict_exception => |e| e.request_id,
+                .daemon_not_active_exception => |e| e.request_id,
+                .daemon_not_found_exception => |e| e.request_id,
                 .invalid_parameter_exception => |e| e.request_id,
                 .limit_exceeded_exception => |e| e.request_id,
                 .missing_version_exception => |e| e.request_id,
@@ -239,6 +249,16 @@ pub const ClusterNotFoundException = struct {
 };
 
 pub const ConflictException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const DaemonNotActiveException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const DaemonNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };

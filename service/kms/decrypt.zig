@@ -4,18 +4,34 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const DryRunModifierType = @import("dry_run_modifier_type.zig").DryRunModifierType;
 const EncryptionAlgorithmSpec = @import("encryption_algorithm_spec.zig").EncryptionAlgorithmSpec;
 const RecipientInfo = @import("recipient_info.zig").RecipientInfo;
 
 pub const DecryptInput = struct {
     /// Ciphertext to be decrypted. The blob includes metadata.
-    ciphertext_blob: []const u8,
+    ///
+    /// This parameter is required in all cases except when `DryRun` is `true` and
+    /// `DryRunModifiers` is set to `IGNORE_CIPHERTEXT`.
+    ciphertext_blob: ?[]const u8 = null,
 
     /// Checks if your request will succeed. `DryRun` is an optional parameter.
     ///
     /// To learn more about how to use this parameter, see [Testing your
     /// permissions](https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html) in the *Key Management Service Developer Guide*.
     dry_run: ?bool = null,
+
+    /// Specifies the modifiers to apply to the dry run operation. `DryRunModifiers`
+    /// is an optional parameter that only applies when `DryRun` is
+    /// set to `true`.
+    ///
+    /// When set to `IGNORE_CIPHERTEXT`, KMS performs only authorization validation
+    /// without ciphertext validation. This allows you to test permissions
+    /// without requiring a valid ciphertext blob.
+    ///
+    /// To learn more about how to use this parameter, see [Testing your
+    /// permissions](https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html) in the *Key Management Service Developer Guide*.
+    dry_run_modifiers: ?[]const DryRunModifierType = null,
 
     /// Specifies the encryption algorithm that will be used to decrypt the
     /// ciphertext. Specify
@@ -65,8 +81,9 @@ pub const DecryptInput = struct {
     ///
     /// This parameter is required only when the ciphertext was encrypted under an
     /// asymmetric KMS
-    /// key. If you used a symmetric encryption KMS key, KMS can get the KMS key
-    /// from metadata that
+    /// key or when `DryRun` is `true` and `DryRunModifiers` is set to
+    /// `IGNORE_CIPHERTEXT`. If you used a symmetric encryption KMS key, KMS can get
+    /// the KMS key from metadata that
     /// it adds to the symmetric ciphertext blob. However, it is always recommended
     /// as a best
     /// practice. This practice ensures that you use the KMS key that you intend.
@@ -120,6 +137,7 @@ pub const DecryptInput = struct {
     pub const json_field_names = .{
         .ciphertext_blob = "CiphertextBlob",
         .dry_run = "DryRun",
+        .dry_run_modifiers = "DryRunModifiers",
         .encryption_algorithm = "EncryptionAlgorithm",
         .encryption_context = "EncryptionContext",
         .grant_tokens = "GrantTokens",

@@ -1982,6 +1982,7 @@ pub fn deserializeFailoverState(allocator: std.mem.Allocator, reader: *aws.xml.R
 
 pub fn deserializeGlobalCluster(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !GlobalCluster {
     var result: GlobalCluster = undefined;
+    result.database_name = null;
     result.deletion_protection = null;
     result.engine = null;
     result.engine_version = null;
@@ -1992,10 +1993,13 @@ pub fn deserializeGlobalCluster(allocator: std.mem.Allocator, reader: *aws.xml.R
     result.global_cluster_resource_id = null;
     result.status = null;
     result.storage_encrypted = null;
+    result.tag_list = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
-                if (std.mem.eql(u8, e.local, "DeletionProtection")) {
+                if (std.mem.eql(u8, e.local, "DatabaseName")) {
+                    result.database_name = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "DeletionProtection")) {
                     result.deletion_protection = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "Engine")) {
                     result.engine = try allocator.dupe(u8, try reader.readElementText());
@@ -2015,6 +2019,8 @@ pub fn deserializeGlobalCluster(allocator: std.mem.Allocator, reader: *aws.xml.R
                     result.status = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StorageEncrypted")) {
                     result.storage_encrypted = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "TagList")) {
+                    result.tag_list = try deserializeTagList(allocator, reader, "Tag");
                 } else {
                     try reader.skipElement();
                 }

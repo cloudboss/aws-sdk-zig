@@ -9,6 +9,7 @@ const LastModifiedDate = @import("last_modified_date.zig").LastModifiedDate;
 const ReviewStatus = @import("review_status.zig").ReviewStatus;
 const Stage = @import("stage.zig").Stage;
 const OpportunitySort = @import("opportunity_sort.zig").OpportunitySort;
+const TargetCloseDateFilter = @import("target_close_date_filter.zig").TargetCloseDateFilter;
 const OpportunitySummary = @import("opportunity_summary.zig").OpportunitySummary;
 
 pub const ListOpportunitiesInput = struct {
@@ -64,6 +65,11 @@ pub const ListOpportunitiesInput = struct {
     /// `Sort.SortBy` value is `LastModifiedDate`.
     sort: ?OpportunitySort = null,
 
+    /// Filters opportunities based on their target close date. This filter helps
+    /// retrieve opportunities with an expected close date before or after a
+    /// specified date.
+    target_close_date: ?TargetCloseDateFilter = null,
+
     pub const json_field_names = .{
         .catalog = "Catalog",
         .created_date = "CreatedDate",
@@ -75,6 +81,7 @@ pub const ListOpportunitiesInput = struct {
         .max_results = "MaxResults",
         .next_token = "NextToken",
         .sort = "Sort",
+        .target_close_date = "TargetCloseDate",
     };
 };
 

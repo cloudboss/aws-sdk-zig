@@ -4,8 +4,7 @@ const FrequencyOption = @import("frequency_option.zig").FrequencyOption;
 /// bucket.
 pub const RefreshCadence = struct {
     /// The frequency that data exports are updated. The export refreshes each time
-    /// the source
-    /// data updates, up to three times daily.
+    /// the source data updates, up to three times daily.
     frequency: FrequencyOption,
 
     pub const json_field_names = .{

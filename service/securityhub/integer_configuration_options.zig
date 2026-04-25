@@ -1,6 +1,7 @@
 /// The options for customizing a security control parameter that is an integer.
 pub const IntegerConfigurationOptions = struct {
-    /// The Security Hub default value for a control parameter that is an integer.
+    /// The Security Hub CSPM default value for a control parameter that is an
+    /// integer.
     default_value: ?i32 = null,
 
     /// The maximum valid value for a control parameter that is an integer.

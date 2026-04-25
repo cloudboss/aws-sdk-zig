@@ -5,6 +5,8 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ImageLoggingConfiguration = @import("image_logging_configuration.zig").ImageLoggingConfiguration;
+const RegisterImageOptions = @import("register_image_options.zig").RegisterImageOptions;
+const WindowsConfiguration = @import("windows_configuration.zig").WindowsConfiguration;
 
 pub const ImportDiskImageInput = struct {
     /// Unique, case-sensitive identifier you provide to ensure
@@ -40,6 +42,10 @@ pub const ImportDiskImageInput = struct {
     /// the following: `Windows`.
     platform: []const u8,
 
+    /// Configures Secure Boot and UEFI settings for the
+    /// imported image.
+    register_image_options: ?RegisterImageOptions = null,
+
     /// The semantic version to attach to the image that's created during the import
     /// process. This version follows the semantic version syntax.
     semantic_version: []const u8,
@@ -50,6 +56,9 @@ pub const ImportDiskImageInput = struct {
     /// The `uri` of the ISO disk file that's stored in Amazon S3.
     uri: []const u8,
 
+    /// Specifies Windows settings for ISO imports.
+    windows_configuration: ?WindowsConfiguration = null,
+
     pub const json_field_names = .{
         .client_token = "clientToken",
         .description = "description",
@@ -59,9 +68,11 @@ pub const ImportDiskImageInput = struct {
         .name = "name",
         .os_version = "osVersion",
         .platform = "platform",
+        .register_image_options = "registerImageOptions",
         .semantic_version = "semanticVersion",
         .tags = "tags",
         .uri = "uri",
+        .windows_configuration = "windowsConfiguration",
     };
 };
 
@@ -155,6 +166,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportDiskImageInput, c
     try body_buf.appendSlice(allocator, "\"platform\":");
     try aws.json.writeValue(@TypeOf(input.platform), input.platform, allocator, &body_buf);
     has_prev = true;
+    if (input.register_image_options) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"registerImageOptions\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"semanticVersion\":");
     try aws.json.writeValue(@TypeOf(input.semantic_version), input.semantic_version, allocator, &body_buf);
@@ -169,6 +186,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportDiskImageInput, c
     try body_buf.appendSlice(allocator, "\"uri\":");
     try aws.json.writeValue(@TypeOf(input.uri), input.uri, allocator, &body_buf);
     has_prev = true;
+    if (input.windows_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"windowsConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);

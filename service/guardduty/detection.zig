@@ -3,8 +3,8 @@ const Sequence = @import("sequence.zig").Sequence;
 
 /// Contains information about the detected behavior.
 pub const Detection = struct {
-    /// The details about the anomalous activity that caused GuardDuty to
-    /// generate the finding.
+    /// The details about the anomalous activity that caused GuardDuty to generate
+    /// the finding.
     anomaly: ?Anomaly = null,
 
     /// The details about the attack sequence.

@@ -41,6 +41,11 @@ pub const UpdateParamType = enum {
     node_repair_config,
     updated_tier,
     previous_tier,
+    warm_pool_enabled,
+    warm_pool_max_group_prepared_capacity,
+    warm_pool_min_size,
+    warm_pool_state,
+    warm_pool_reuse_on_scale_in,
 
     pub const json_field_names = .{
         .version = "Version",
@@ -83,6 +88,11 @@ pub const UpdateParamType = enum {
         .node_repair_config = "NodeRepairConfig",
         .updated_tier = "UpdatedTier",
         .previous_tier = "PreviousTier",
+        .warm_pool_enabled = "WarmPoolEnabled",
+        .warm_pool_max_group_prepared_capacity = "WarmPoolMaxGroupPreparedCapacity",
+        .warm_pool_min_size = "WarmPoolMinSize",
+        .warm_pool_state = "WarmPoolState",
+        .warm_pool_reuse_on_scale_in = "WarmPoolReuseOnScaleIn",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -127,6 +137,11 @@ pub const UpdateParamType = enum {
             .node_repair_config => "NodeRepairConfig",
             .updated_tier => "UpdatedTier",
             .previous_tier => "PreviousTier",
+            .warm_pool_enabled => "WarmPoolEnabled",
+            .warm_pool_max_group_prepared_capacity => "WarmPoolMaxGroupPreparedCapacity",
+            .warm_pool_min_size => "WarmPoolMinSize",
+            .warm_pool_state => "WarmPoolState",
+            .warm_pool_reuse_on_scale_in => "WarmPoolReuseOnScaleIn",
         };
     }
 

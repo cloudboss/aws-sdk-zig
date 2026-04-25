@@ -22,6 +22,9 @@ pub const BackupVaultEvent = enum {
     recovery_point_index_completed,
     recovery_point_index_deleted,
     recovery_point_indexing_failed,
+    eks_restore_object_failed,
+    eks_restore_object_skipped,
+    eks_backup_object_failed,
 
     pub const json_field_names = .{
         .backup_job_started = "BACKUP_JOB_STARTED",
@@ -45,6 +48,9 @@ pub const BackupVaultEvent = enum {
         .recovery_point_index_completed = "RECOVERY_POINT_INDEX_COMPLETED",
         .recovery_point_index_deleted = "RECOVERY_POINT_INDEX_DELETED",
         .recovery_point_indexing_failed = "RECOVERY_POINT_INDEXING_FAILED",
+        .eks_restore_object_failed = "EKS_RESTORE_OBJECT_FAILED",
+        .eks_restore_object_skipped = "EKS_RESTORE_OBJECT_SKIPPED",
+        .eks_backup_object_failed = "EKS_BACKUP_OBJECT_FAILED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -70,6 +76,9 @@ pub const BackupVaultEvent = enum {
             .recovery_point_index_completed => "RECOVERY_POINT_INDEX_COMPLETED",
             .recovery_point_index_deleted => "RECOVERY_POINT_INDEX_DELETED",
             .recovery_point_indexing_failed => "RECOVERY_POINT_INDEXING_FAILED",
+            .eks_restore_object_failed => "EKS_RESTORE_OBJECT_FAILED",
+            .eks_restore_object_skipped => "EKS_RESTORE_OBJECT_SKIPPED",
+            .eks_backup_object_failed => "EKS_BACKUP_OBJECT_FAILED",
         };
     }
 

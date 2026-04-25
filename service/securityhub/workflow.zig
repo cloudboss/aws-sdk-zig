@@ -11,7 +11,7 @@ pub const Workflow = struct {
     ///
     /// * `NEW` - The initial state of a finding, before it is reviewed.
     ///
-    /// Security Hub also resets the workflow status from `NOTIFIED` or
+    /// Security Hub CSPM also resets the workflow status from `NOTIFIED` or
     /// `RESOLVED` to `NEW` in the following cases:
     ///
     /// * `RecordState` changes from `ARCHIVED` to

@@ -85,5 +85,7 @@ pub const UpdateFieldInput = @import("update_field.zig").UpdateFieldInput;
 pub const UpdateFieldOutput = @import("update_field.zig").UpdateFieldOutput;
 pub const UpdateLayoutInput = @import("update_layout.zig").UpdateLayoutInput;
 pub const UpdateLayoutOutput = @import("update_layout.zig").UpdateLayoutOutput;
+pub const UpdateRelatedItemInput = @import("update_related_item.zig").UpdateRelatedItemInput;
+pub const UpdateRelatedItemOutput = @import("update_related_item.zig").UpdateRelatedItemOutput;
 pub const UpdateTemplateInput = @import("update_template.zig").UpdateTemplateInput;
 pub const UpdateTemplateOutput = @import("update_template.zig").UpdateTemplateOutput;

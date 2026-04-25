@@ -12,13 +12,17 @@ const RouteVehicleLegDetails = @import("route_vehicle_leg_details.zig").RouteVeh
 /// legs corresponding to the journey via Ferry.
 pub const RouteLeg = struct {
     /// FerryLegDetails is populated when the Leg type is Ferry, and provides
-    /// additional information that is specific
+    /// additional information that is specific to ferry travel. Not supported in
+    /// `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ferry_leg_details: ?RouteFerryLegDetails = null,
 
     /// Geometry of the area to be avoided.
     geometry: RouteLegGeometry,
 
-    /// List of languages for instructions within steps in the response.
+    /// List of languages for instructions within steps in the response. Not
+    /// supported in `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     language: ?[]const u8 = null,
 
     /// Details related to the pedestrian leg.
@@ -27,7 +31,7 @@ pub const RouteLeg = struct {
     /// Specifies the mode of transport when calculating a route. Used in estimating
     /// the speed of travel and road compatibility.
     ///
-    /// Default Value: `Car`
+    /// Default value: `Car`
     travel_mode: RouteLegTravelMode,
 
     /// Type of the leg.

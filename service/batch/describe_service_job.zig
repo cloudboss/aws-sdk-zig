@@ -5,7 +5,10 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ServiceJobAttemptDetail = @import("service_job_attempt_detail.zig").ServiceJobAttemptDetail;
+const ServiceJobCapacityUsageDetail = @import("service_job_capacity_usage_detail.zig").ServiceJobCapacityUsageDetail;
 const LatestServiceJobAttempt = @import("latest_service_job_attempt.zig").LatestServiceJobAttempt;
+const ServiceJobPreemptionConfiguration = @import("service_job_preemption_configuration.zig").ServiceJobPreemptionConfiguration;
+const ServiceJobPreemptionSummary = @import("service_job_preemption_summary.zig").ServiceJobPreemptionSummary;
 const ServiceJobRetryStrategy = @import("service_job_retry_strategy.zig").ServiceJobRetryStrategy;
 const ServiceJobType = @import("service_job_type.zig").ServiceJobType;
 const ServiceJobStatus = @import("service_job_status.zig").ServiceJobStatus;
@@ -23,6 +26,12 @@ pub const DescribeServiceJobInput = struct {
 pub const DescribeServiceJobOutput = struct {
     /// A list of job attempts associated with the service job.
     attempts: ?[]const ServiceJobAttemptDetail = null,
+
+    /// The configured capacity for the service job, such as the number of
+    /// instances. The
+    /// number of instances should be the same value as the
+    /// `serviceRequestPayload.InstanceCount` field.
+    capacity_usage: ?[]const ServiceJobCapacityUsageDetail = null,
 
     /// The Unix timestamp (in milliseconds) for when the service job was created.
     created_at: ?i64 = null,
@@ -45,9 +54,27 @@ pub const DescribeServiceJobOutput = struct {
     /// The latest attempt associated with the service job.
     latest_attempt: ?LatestServiceJobAttempt = null,
 
+    /// Specifies the service job behavior when preempted.
+    preemption_configuration: ?ServiceJobPreemptionConfiguration = null,
+
+    /// Summarizes the preemptions of the service job. This field appears on a
+    /// service job
+    /// when it has been preempted.
+    preemption_summary: ?ServiceJobPreemptionSummary = null,
+
+    /// The name of the quota share that the service job is associated with.
+    quota_share_name: ?[]const u8 = null,
+
     /// The retry strategy to use for failed service jobs that are submitted with
     /// this service job.
     retry_strategy: ?ServiceJobRetryStrategy = null,
+
+    /// The Unix timestamp (in milliseconds) for when the service job was scheduled.
+    /// This
+    /// represents when the service job was dispatched to SageMaker and the service
+    /// job transitioned to the
+    /// `SCHEDULED` state.
+    scheduled_at: ?i64 = null,
 
     /// The scheduling priority of the service job.
     scheduling_priority: ?i32 = null,
@@ -88,6 +115,7 @@ pub const DescribeServiceJobOutput = struct {
 
     pub const json_field_names = .{
         .attempts = "attempts",
+        .capacity_usage = "capacityUsage",
         .created_at = "createdAt",
         .is_terminated = "isTerminated",
         .job_arn = "jobArn",
@@ -95,7 +123,11 @@ pub const DescribeServiceJobOutput = struct {
         .job_name = "jobName",
         .job_queue = "jobQueue",
         .latest_attempt = "latestAttempt",
+        .preemption_configuration = "preemptionConfiguration",
+        .preemption_summary = "preemptionSummary",
+        .quota_share_name = "quotaShareName",
         .retry_strategy = "retryStrategy",
+        .scheduled_at = "scheduledAt",
         .scheduling_priority = "schedulingPriority",
         .service_job_type = "serviceJobType",
         .service_request_payload = "serviceRequestPayload",

@@ -8,18 +8,16 @@ const ConnectorSummary = @import("connector_summary.zig").ConnectorSummary;
 
 pub const ListConnectorsInput = struct {
     /// The maximum number of objects that you want Connector for SCEP to return for
-    /// this request. If more
-    /// objects are available, in the response, Connector for SCEP provides a
-    /// `NextToken` value that you can use in a subsequent call to get the next
-    /// batch of objects.
+    /// this request. If more objects are available, in the response, Connector for
+    /// SCEP provides a `NextToken` value that you can use in a subsequent call to
+    /// get the next batch of objects.
     max_results: ?i32 = null,
 
     /// When you request a list of objects with a `MaxResults` setting, if the
-    /// number of objects that are still available
-    /// for retrieval exceeds the maximum you requested, Connector for SCEP returns
-    /// a `NextToken`
-    /// value in the response. To retrieve the next batch of objects, use the token
-    /// returned from the prior request in your next request.
+    /// number of objects that are still available for retrieval exceeds the maximum
+    /// you requested, Connector for SCEP returns a `NextToken` value in the
+    /// response. To retrieve the next batch of objects, use the token returned from
+    /// the prior request in your next request.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -33,11 +31,10 @@ pub const ListConnectorsOutput = struct {
     connectors: ?[]const ConnectorSummary = null,
 
     /// When you request a list of objects with a `MaxResults` setting, if the
-    /// number of objects that are still available
-    /// for retrieval exceeds the maximum you requested, Connector for SCEP returns
-    /// a `NextToken`
-    /// value in the response. To retrieve the next batch of objects, use the token
-    /// returned from the prior request in your next request.
+    /// number of objects that are still available for retrieval exceeds the maximum
+    /// you requested, Connector for SCEP returns a `NextToken` value in the
+    /// response. To retrieve the next batch of objects, use the token returned from
+    /// the prior request in your next request.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{

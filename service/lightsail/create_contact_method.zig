@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ContactProtocol = @import("contact_protocol.zig").ContactProtocol;
+const Tag = @import("tag.zig").Tag;
 const Operation = @import("operation.zig").Operation;
 
 pub const CreateContactMethodInput = struct {
@@ -54,9 +55,15 @@ pub const CreateContactMethodInput = struct {
     /// Lightsail](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-notifications).
     protocol: ContactProtocol,
 
+    /// The tag keys and optional values to add to the contact method during create.
+    ///
+    /// Use the `TagResource` action to tag a resource after it's created.
+    tags: ?[]const Tag = null,
+
     pub const json_field_names = .{
         .contact_endpoint = "contactEndpoint",
         .protocol = "protocol",
+        .tags = "tags",
     };
 };
 

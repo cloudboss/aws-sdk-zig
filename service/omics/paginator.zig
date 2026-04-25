@@ -7,6 +7,8 @@ const Client = @import("client.zig").Client;
 const list_annotation_import_jobs = @import("list_annotation_import_jobs.zig");
 const list_annotation_store_versions = @import("list_annotation_store_versions.zig");
 const list_annotation_stores = @import("list_annotation_stores.zig");
+const list_batch = @import("list_batch.zig");
+const list_configurations = @import("list_configurations.zig");
 const list_multipart_read_set_uploads = @import("list_multipart_read_set_uploads.zig");
 const list_read_set_activation_jobs = @import("list_read_set_activation_jobs.zig");
 const list_read_set_export_jobs = @import("list_read_set_export_jobs.zig");
@@ -20,6 +22,7 @@ const list_run_caches = @import("list_run_caches.zig");
 const list_run_groups = @import("list_run_groups.zig");
 const list_run_tasks = @import("list_run_tasks.zig");
 const list_runs = @import("list_runs.zig");
+const list_runs_in_batch = @import("list_runs_in_batch.zig");
 const list_sequence_stores = @import("list_sequence_stores.zig");
 const list_shares = @import("list_shares.zig");
 const list_variant_import_jobs = @import("list_variant_import_jobs.zig");
@@ -123,6 +126,86 @@ pub const ListAnnotationStoresPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_annotation_stores.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListBatchPaginator = struct {
+    client: *Client,
+    params: list_batch.ListBatchInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_batch.ListBatchOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.starting_token = self.next_token;
+
+        const output = try list_batch.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListConfigurationsPaginator = struct {
+    client: *Client,
+    params: list_configurations.ListConfigurationsInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_configurations.ListConfigurationsOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.starting_token = self.next_token;
+
+        const output = try list_configurations.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -643,6 +726,46 @@ pub const ListRunsPaginator = struct {
         self.params.starting_token = self.next_token;
 
         const output = try list_runs.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListRunsInBatchPaginator = struct {
+    client: *Client,
+    params: list_runs_in_batch.ListRunsInBatchInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_runs_in_batch.ListRunsInBatchOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.starting_token = self.next_token;
+
+        const output = try list_runs_in_batch.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

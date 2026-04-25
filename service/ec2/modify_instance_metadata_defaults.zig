@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DefaultInstanceMetadataEndpointState = @import("default_instance_metadata_endpoint_state.zig").DefaultInstanceMetadataEndpointState;
 const MetadataDefaultHttpTokensState = @import("metadata_default_http_tokens_state.zig").MetadataDefaultHttpTokensState;
+const DefaultHttpTokensEnforcedState = @import("default_http_tokens_enforced_state.zig").DefaultHttpTokensEnforcedState;
 const DefaultInstanceMetadataTagsState = @import("default_instance_metadata_tags_state.zig").DefaultInstanceMetadataTagsState;
 
 pub const ModifyInstanceMetadataDefaultsInput = struct {
@@ -38,11 +39,20 @@ pub const ModifyInstanceMetadataDefaultsInput = struct {
     /// disabled, and you must use IMDSv2.
     http_tokens: ?MetadataDefaultHttpTokensState = null,
 
+    /// Specifies whether to enforce the requirement of IMDSv2 on an instance at the
+    /// time of
+    /// launch. When enforcement is enabled, the instance can't launch unless IMDSv2
+    /// (`HttpTokens`) is set to `required`. For more information, see
+    /// [Enforce IMDSv2 at the account
+    /// level](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#enforce-imdsv2-at-the-account-level) in the
+    /// *Amazon EC2 User Guide*.
+    http_tokens_enforced: ?DefaultHttpTokensEnforcedState = null,
+
     /// Enables or disables access to an instance's tags from the instance metadata.
     /// For more
-    /// information, see [Work with
-    /// instance tags using the instance
-    /// metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS) in the
+    /// information, see [View tags for your EC2
+    /// instances using instance
+    /// metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-tags-in-IMDS.html) in the
     /// *Amazon EC2 User Guide*.
     instance_metadata_tags: ?DefaultInstanceMetadataTagsState = null,
 };
@@ -102,6 +112,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyInstanceMetadataD
     }
     if (input.http_tokens) |v| {
         try body_buf.appendSlice(allocator, "&HttpTokens=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
+    }
+    if (input.http_tokens_enforced) |v| {
+        try body_buf.appendSlice(allocator, "&HttpTokensEnforced=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.instance_metadata_tags) |v| {

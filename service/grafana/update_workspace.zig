@@ -14,26 +14,21 @@ const WorkspaceDescription = @import("workspace_description.zig").WorkspaceDescr
 
 pub const UpdateWorkspaceInput = struct {
     /// Specifies whether the workspace can access Amazon Web Services resources in
-    /// this
-    /// Amazon Web Services account only, or whether it can also access Amazon Web
-    /// Services
-    /// resources in other accounts in the same organization. If you specify
-    /// `ORGANIZATION`, you must specify which organizational units the workspace
-    /// can access in the `workspaceOrganizationalUnits` parameter.
+    /// this Amazon Web Services account only, or whether it can also access Amazon
+    /// Web Services resources in other accounts in the same organization. If you
+    /// specify `ORGANIZATION`, you must specify which organizational units the
+    /// workspace can access in the `workspaceOrganizationalUnits` parameter.
     account_access_type: ?AccountAccessType = null,
 
     /// The configuration settings for network access to your workspace.
     ///
     /// When this is configured, only listed IP addresses and VPC endpoints will be
-    /// able to
-    /// access your workspace. Standard Grafana authentication and authorization
-    /// will still be
-    /// required.
+    /// able to access your workspace. Standard Grafana authentication and
+    /// authorization will still be required.
     ///
     /// If this is not configured, or is removed, then all IP addresses and VPC
-    /// endpoints will
-    /// be allowed. Standard Grafana authentication and authorization will still be
-    /// required.
+    /// endpoints will be allowed. Standard Grafana authentication and authorization
+    /// will still be required.
     network_access_control: ?NetworkAccessConfiguration = null,
 
     /// The name of an IAM role that already exists to use to access resources
@@ -44,53 +39,48 @@ pub const UpdateWorkspaceInput = struct {
     /// Use this parameter if you want to change a workspace from `SERVICE_MANAGED`
     /// to `CUSTOMER_MANAGED`. This allows you to manage the permissions that the
     /// workspace uses to access datasources and notification channels. If the
-    /// workspace is
-    /// in a member Amazon Web Services account of an organization, and that account
-    /// is not
-    /// a delegated administrator account, and you want the workspace to access data
-    /// sources in
-    /// other Amazon Web Services accounts in the organization, you must choose
-    /// `CUSTOMER_MANAGED`.
+    /// workspace is in a member Amazon Web Services account of an organization, and
+    /// that account is not a delegated administrator account, and you want the
+    /// workspace to access data sources in other Amazon Web Services accounts in
+    /// the organization, you must choose `CUSTOMER_MANAGED`.
     ///
     /// If you specify this as `CUSTOMER_MANAGED`, you must also specify a
     /// `workspaceRoleArn` that the workspace will use for accessing Amazon Web
-    /// Services
-    /// resources.
+    /// Services resources.
     ///
     /// For more information on the role and permissions needed, see [Amazon Managed
-    /// Grafana permissions and policies for Amazon Web Services data sources
-    /// and notification
+    /// Grafana permissions and policies for Amazon Web Services data sources and
+    /// notification
     /// channels](https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html)
     ///
     /// Do not use this to convert a `CUSTOMER_MANAGED` workspace to
-    /// `SERVICE_MANAGED`. Do not include this
-    /// parameter if you want to leave the workspace as `SERVICE_MANAGED`.
+    /// `SERVICE_MANAGED`. Do not include this parameter if you want to leave the
+    /// workspace as `SERVICE_MANAGED`.
     ///
-    /// You can convert a `CUSTOMER_MANAGED` workspace to
-    /// `SERVICE_MANAGED` using the Amazon Managed Grafana console. For more
-    /// information, see [Managing permissions for data sources and notification
+    /// You can convert a `CUSTOMER_MANAGED` workspace to `SERVICE_MANAGED` using
+    /// the Amazon Managed Grafana console. For more information, see [Managing
+    /// permissions for data sources and notification
     /// channels](https://docs.aws.amazon.com/grafana/latest/userguide/AMG-datasource-and-notification.html).
     permission_type: ?PermissionType = null,
 
     /// Whether to remove the network access configuration from the workspace.
     ///
-    /// Setting this to `true` and providing a `networkAccessControl` to
-    /// set will return an error.
+    /// Setting this to `true` and providing a `networkAccessControl` to set will
+    /// return an error.
     ///
     /// If you remove this configuration by setting this to `true`, then all IP
     /// addresses and VPC endpoints will be allowed. Standard Grafana authentication
-    /// and
-    /// authorization will still be required.
+    /// and authorization will still be required.
     remove_network_access_configuration: ?bool = null,
 
     /// Whether to remove the VPC configuration from the workspace.
     ///
-    /// Setting this to `true` and providing a `vpcConfiguration` to set
-    /// will return an error.
+    /// Setting this to `true` and providing a `vpcConfiguration` to set will return
+    /// an error.
     remove_vpc_configuration: ?bool = null,
 
-    /// The name of the CloudFormation stack set to use to generate IAM
-    /// roles to be used for this workspace.
+    /// The name of the CloudFormation stack set to use to generate IAM roles to be
+    /// used for this workspace.
     stack_set_name: ?[]const u8 = null,
 
     /// The configuration settings for an Amazon VPC that contains data sources for
@@ -111,24 +101,20 @@ pub const UpdateWorkspaceInput = struct {
     workspace_name: ?[]const u8 = null,
 
     /// Specify the Amazon Web Services notification channels that you plan to use
-    /// in this
-    /// workspace. Specifying these data sources here enables Amazon Managed Grafana
-    /// to create
-    /// IAM roles and permissions that allow Amazon Managed Grafana to use these
-    /// channels.
+    /// in this workspace. Specifying these data sources here enables Amazon Managed
+    /// Grafana to create IAM roles and permissions that allow Amazon Managed
+    /// Grafana to use these channels.
     workspace_notification_destinations: ?[]const NotificationDestinationType = null,
 
     /// Specifies the organizational units that this workspace is allowed to use
-    /// data sources
-    /// from, if this workspace is in an account that is part of an organization.
+    /// data sources from, if this workspace is in an account that is part of an
+    /// organization.
     workspace_organizational_units: ?[]const []const u8 = null,
 
     /// Specifies an IAM role that grants permissions to Amazon Web Services
     /// resources that the workspace accesses, such as data sources and notification
-    /// channels.
-    /// If this workspace has `permissionType`
-    /// `CUSTOMER_MANAGED`,
-    /// then this role is required.
+    /// channels. If this workspace has `permissionType` `CUSTOMER_MANAGED`, then
+    /// this role is required.
     workspace_role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{

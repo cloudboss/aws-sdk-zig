@@ -73,6 +73,7 @@ const describe_analysis_definition = @import("describe_analysis_definition.zig")
 const describe_analysis_permissions = @import("describe_analysis_permissions.zig");
 const describe_asset_bundle_export_job = @import("describe_asset_bundle_export_job.zig");
 const describe_asset_bundle_import_job = @import("describe_asset_bundle_import_job.zig");
+const describe_automation_job = @import("describe_automation_job.zig");
 const describe_brand = @import("describe_brand.zig");
 const describe_brand_assignment = @import("describe_brand_assignment.zig");
 const describe_brand_published_version = @import("describe_brand_published_version.zig");
@@ -177,6 +178,7 @@ const search_groups = @import("search_groups.zig");
 const search_topics = @import("search_topics.zig");
 const start_asset_bundle_export_job = @import("start_asset_bundle_export_job.zig");
 const start_asset_bundle_import_job = @import("start_asset_bundle_import_job.zig");
+const start_automation_job = @import("start_automation_job.zig");
 const start_dashboard_snapshot_job = @import("start_dashboard_snapshot_job.zig");
 const start_dashboard_snapshot_job_schedule = @import("start_dashboard_snapshot_job_schedule.zig");
 const tag_resource = @import("tag_resource.zig");
@@ -961,6 +963,12 @@ pub const Client = struct {
         return describe_asset_bundle_import_job.execute(self, allocator, input, options);
     }
 
+    /// Retrieves the status and details of a specified automation job, including
+    /// its status and outputs.
+    pub fn describeAutomationJob(self: *Self, allocator: std.mem.Allocator, input: describe_automation_job.DescribeAutomationJobInput, options: CallOptions) !describe_automation_job.DescribeAutomationJobOutput {
+        return describe_automation_job.execute(self, allocator, input, options);
+    }
+
     /// Describes a brand.
     pub fn describeBrand(self: *Self, allocator: std.mem.Allocator, input: describe_brand.DescribeBrandInput, options: CallOptions) !describe_brand.DescribeBrandOutput {
         return describe_brand.execute(self, allocator, input, options);
@@ -1197,7 +1205,7 @@ pub const Client = struct {
         return describe_role_custom_permission.execute(self, allocator, input, options);
     }
 
-    /// Describes the self-upgrade configuration for a Quick Suite account.
+    /// Describes the self-upgrade configuration for a Quick account.
     pub fn describeSelfUpgradeConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_self_upgrade_configuration.DescribeSelfUpgradeConfigurationInput, options: CallOptions) !describe_self_upgrade_configuration.DescribeSelfUpgradeConfigurationOutput {
         return describe_self_upgrade_configuration.execute(self, allocator, input, options);
     }
@@ -1275,8 +1283,8 @@ pub const Client = struct {
         return describe_vpc_connection.execute(self, allocator, input, options);
     }
 
-    /// Generates an embed URL that you can use to embed an Amazon Quick Suite
-    /// dashboard or
+    /// Generates an embed URL that you can use to embed an Amazon Quick dashboard
+    /// or
     /// visual in your website, without having to register any reader users. Before
     /// you use this
     /// action, make sure that you have configured the dashboards and permissions.
@@ -1295,27 +1303,25 @@ pub const Client = struct {
     /// session duration is 10 hours.
     ///
     /// * You are charged only when the URL is used or there is interaction with
-    ///   Amazon Quick Suite.
+    ///   Amazon Quick.
     ///
     /// For more information, see [Embedded
     /// Analytics](https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html) in
-    /// the *Amazon Quick Suite User Guide*.
+    /// the *Amazon Quick User Guide*.
     ///
     /// For more information about the high-level steps for embedding and for an
     /// interactive
-    /// demo of the ways you can customize embedding, visit the [Amazon Quick Suite
+    /// demo of the ways you can customize embedding, visit the [Amazon Quick
     /// Developer
     /// Portal](https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html).
     pub fn generateEmbedUrlForAnonymousUser(self: *Self, allocator: std.mem.Allocator, input: generate_embed_url_for_anonymous_user.GenerateEmbedUrlForAnonymousUserInput, options: CallOptions) !generate_embed_url_for_anonymous_user.GenerateEmbedUrlForAnonymousUserOutput {
         return generate_embed_url_for_anonymous_user.execute(self, allocator, input, options);
     }
 
-    /// Generates an embed URL that you can use to embed an Amazon Quick Suite
-    /// experience
+    /// Generates an embed URL that you can use to embed an Amazon Quick experience
     /// in your website. This action can be used for any type of user registered in
-    /// an Amazon Quick Suite account. Before you use this action, make sure that
-    /// you have
-    /// configured the relevant Amazon Quick Suite resource and permissions.
+    /// an Amazon Quick account. Before you use this action, make sure that you have
+    /// configured the relevant Amazon Quick resource and permissions.
     ///
     /// The following rules apply to the generated URL:
     ///
@@ -1332,15 +1338,15 @@ pub const Client = struct {
     /// (maximum). The default session duration is 10 hours.
     ///
     /// * You are charged only when the URL is used or there is interaction with
-    ///   Amazon Quick Suite.
+    ///   Amazon Quick.
     ///
     /// For more information, see [Embedded
     /// Analytics](https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html) in
-    /// the *Amazon Quick Suite User Guide*.
+    /// the *Amazon Quick User Guide*.
     ///
     /// For more information about the high-level steps for embedding and for an
     /// interactive
-    /// demo of the ways you can customize embedding, visit the [Amazon Quick Suite
+    /// demo of the ways you can customize embedding, visit the [Amazon Quick
     /// Developer
     /// Portal](https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html).
     pub fn generateEmbedUrlForRegisteredUser(self: *Self, allocator: std.mem.Allocator, input: generate_embed_url_for_registered_user.GenerateEmbedUrlForRegisteredUserInput, options: CallOptions) !generate_embed_url_for_registered_user.GenerateEmbedUrlForRegisteredUserOutput {
@@ -1389,7 +1395,7 @@ pub const Client = struct {
     /// * They are valid for 5 minutes after you run this command.
     ///
     /// * You are charged only when the URL is used or there is interaction with
-    ///   Quick Suite.
+    ///   Quick.
     ///
     /// * The resulting user session is valid for 15 minutes (default) up to 10
     ///   hours
@@ -1398,12 +1404,12 @@ pub const Client = struct {
     ///
     /// For more information, see [Embedding Analytics
     /// Using
-    /// GetDashboardEmbedUrl](https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-deprecated.html) in the *Amazon Quick Suite User
+    /// GetDashboardEmbedUrl](https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-deprecated.html) in the *Amazon Quick User
     /// Guide*.
     ///
     /// For more information about the high-level steps for embedding and for an
     /// interactive
-    /// demo of the ways you can customize embedding, visit the [Amazon Quick Suite
+    /// demo of the ways you can customize embedding, visit the [Amazon Quick
     /// Developer
     /// Portal](https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html).
     pub fn getDashboardEmbedUrl(self: *Self, allocator: std.mem.Allocator, input: get_dashboard_embed_url.GetDashboardEmbedUrlInput, options: CallOptions) !get_dashboard_embed_url.GetDashboardEmbedUrlOutput {
@@ -1505,12 +1511,12 @@ pub const Client = struct {
     /// ` API operation to add a new user with a custom
     /// permission profile attached. For more information, see the following
     /// sections in the
-    /// *Amazon Quick Suite User Guide*:
+    /// *Amazon Quick User Guide*:
     ///
     /// * [Embedding
     /// Analytics](https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html)
     ///
-    /// * [Customizing Access to the Amazon Quick Suite
+    /// * [Customizing Access to the Amazon Quick
     ///   Console](https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html)
     pub fn getSessionEmbedUrl(self: *Self, allocator: std.mem.Allocator, input: get_session_embed_url.GetSessionEmbedUrlInput, options: CallOptions) !get_session_embed_url.GetSessionEmbedUrlOutput {
         return get_session_embed_url.execute(self, allocator, input, options);
@@ -1668,7 +1674,7 @@ pub const Client = struct {
         return list_role_memberships.execute(self, allocator, input, options);
     }
 
-    /// Lists all self-upgrade requests for a Quick Suite account.
+    /// Lists all self-upgrade requests for a Quick account.
     pub fn listSelfUpgrades(self: *Self, allocator: std.mem.Allocator, input: list_self_upgrades.ListSelfUpgradesInput, options: CallOptions) !list_self_upgrades.ListSelfUpgradesOutput {
         return list_self_upgrades.execute(self, allocator, input, options);
     }
@@ -1747,7 +1753,7 @@ pub const Client = struct {
     /// Predicts existing visuals or generates new visuals to answer a given query.
     ///
     /// This API uses [trusted identity
-    /// propagation](https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation.html) to ensure that an end user is authenticated and receives the embed URL that is specific to that user. The IAM Identity Center application that the user has logged into needs to have [trusted Identity Propagation enabled for Quick Suite](https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-using-customermanagedapps-specify-trusted-apps.html) with the scope value set to `quicksight:read`. Before you use this action, make sure that you have configured the relevant Quick Suite resource and permissions.
+    /// propagation](https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation.html) to ensure that an end user is authenticated and receives the embed URL that is specific to that user. The IAM Identity Center application that the user has logged into needs to have [trusted Identity Propagation enabled for Quick](https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-using-customermanagedapps-specify-trusted-apps.html) with the scope value set to `quicksight:read`. Before you use this action, make sure that you have configured the relevant Quick resource and permissions.
     ///
     /// We recommend enabling the `QSearchStatus` API to unlock the full potential
     /// of `PredictQnA`. When `QSearchStatus` is enabled, it first checks the
@@ -1834,7 +1840,7 @@ pub const Client = struct {
         return search_groups.execute(self, allocator, input, options);
     }
 
-    /// Searches for any Q topic that exists in an Quick Suite account.
+    /// Searches for any Q topic that exists in an Quick account.
     pub fn searchTopics(self: *Self, allocator: std.mem.Allocator, input: search_topics.SearchTopicsInput, options: CallOptions) !search_topics.SearchTopicsOutput {
         return search_topics.execute(self, allocator, input, options);
     }
@@ -1877,6 +1883,12 @@ pub const Client = struct {
     /// imported.
     pub fn startAssetBundleImportJob(self: *Self, allocator: std.mem.Allocator, input: start_asset_bundle_import_job.StartAssetBundleImportJobInput, options: CallOptions) !start_asset_bundle_import_job.StartAssetBundleImportJobOutput {
         return start_asset_bundle_import_job.execute(self, allocator, input, options);
+    }
+
+    /// Starts a new job for a specified automation. The job runs the automation
+    /// with the provided input payload.
+    pub fn startAutomationJob(self: *Self, allocator: std.mem.Allocator, input: start_automation_job.StartAutomationJobInput, options: CallOptions) !start_automation_job.StartAutomationJobOutput {
+        return start_automation_job.execute(self, allocator, input, options);
     }
 
     /// Starts an asynchronous job that generates a snapshot of a dashboard's
@@ -2139,9 +2151,9 @@ pub const Client = struct {
         return update_analysis_permissions.execute(self, allocator, input, options);
     }
 
-    /// Updates an Quick Suite application with a token exchange grant. This
-    /// operation only supports Quick Suite applications that are registered with
-    /// IAM Identity Center.
+    /// Updates an Quick application with a token exchange grant. This operation
+    /// only supports Quick applications that are registered with IAM Identity
+    /// Center.
     pub fn updateApplicationWithTokenExchangeGrant(self: *Self, allocator: std.mem.Allocator, input: update_application_with_token_exchange_grant.UpdateApplicationWithTokenExchangeGrantInput, options: CallOptions) !update_application_with_token_exchange_grant.UpdateApplicationWithTokenExchangeGrantOutput {
         return update_application_with_token_exchange_grant.execute(self, allocator, input, options);
     }
@@ -2306,7 +2318,7 @@ pub const Client = struct {
     /// public
     /// sharing permissions to an administrative user in the Identity and Access
     /// Management (IAM) console. For more information on using IAM with Amazon
-    /// Quick Sight, see [Using Quick Suite with
+    /// Quick Sight, see [Using Quick with
     /// IAM](https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html) in the *Amazon Quick Sight
     /// User Guide*.
     pub fn updatePublicSharingSettings(self: *Self, allocator: std.mem.Allocator, input: update_public_sharing_settings.UpdatePublicSharingSettingsInput, options: CallOptions) !update_public_sharing_settings.UpdatePublicSharingSettingsOutput {
@@ -2333,13 +2345,13 @@ pub const Client = struct {
         return update_role_custom_permission.execute(self, allocator, input, options);
     }
 
-    /// Updates a self-upgrade request for a Quick Suite user by approving, denying,
-    /// or verifying the request.
+    /// Updates a self-upgrade request for a Quick user by approving, denying, or
+    /// verifying the request.
     pub fn updateSelfUpgrade(self: *Self, allocator: std.mem.Allocator, input: update_self_upgrade.UpdateSelfUpgradeInput, options: CallOptions) !update_self_upgrade.UpdateSelfUpgradeOutput {
         return update_self_upgrade.execute(self, allocator, input, options);
     }
 
-    /// Updates the self-upgrade configuration for a Quick Suite account.
+    /// Updates the self-upgrade configuration for a Quick account.
     pub fn updateSelfUpgradeConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_self_upgrade_configuration.UpdateSelfUpgradeConfigurationInput, options: CallOptions) !update_self_upgrade_configuration.UpdateSelfUpgradeConfigurationOutput {
         return update_self_upgrade_configuration.execute(self, allocator, input, options);
     }

@@ -19,7 +19,8 @@ pub const CreateServerlessCacheSnapshotInput = struct {
 
     /// The name for the snapshot being created. Must be unique for the customer
     /// account. Available for Valkey, Redis OSS and Serverless Memcached only.
-    /// Must be between 1 and 255 characters.
+    /// Must be between 1 and 255 characters. This value is stored as a lowercase
+    /// string.
     serverless_cache_snapshot_name: []const u8,
 
     /// A list of tags to be added to the snapshot resource. A tag is a key-value

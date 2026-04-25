@@ -6,8 +6,7 @@ const ThreatsDetectedItemCount = @import("threats_detected_item_count.zig").Thre
 /// Contains a complete view providing malware scan result details.
 pub const ScanDetections = struct {
     /// Details of the highest severity threat detected during malware scan and
-    /// number of infected
-    /// files.
+    /// number of infected files.
     highest_severity_threat_details: ?HighestSeverityThreatDetails = null,
 
     /// Total number of scanned files.

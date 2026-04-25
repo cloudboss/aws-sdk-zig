@@ -22,7 +22,7 @@ pub const SecurityControlDefinition = struct {
 
     /// The description of a security control across standards. This typically
     /// summarizes how
-    /// Security Hub evaluates the control and the conditions under which it
+    /// Security Hub CSPM evaluates the control and the conditions under which it
     /// produces a
     /// failed finding. This parameter doesn't reference a specific standard.
     description: []const u8,
@@ -32,8 +32,8 @@ pub const SecurityControlDefinition = struct {
     /// object is excluded for a control that doesn't support custom parameters.
     parameter_definitions: ?[]const aws.map.MapEntry(ParameterDefinition) = null,
 
-    /// A link to Security Hub documentation that explains how to remediate a failed
-    /// finding for a security control.
+    /// A link to Security Hub CSPM documentation that explains how to remediate a
+    /// failed finding for a security control.
     remediation_url: []const u8,
 
     /// The unique identifier of a security control across standards. Values for
@@ -47,10 +47,10 @@ pub const SecurityControlDefinition = struct {
     security_control_id: []const u8,
 
     /// The severity of a security control. For more information about how Security
-    /// Hub determines control severity,
+    /// Hub CSPM determines control severity,
     /// see [Assigning severity to control
     /// findings](https://docs.aws.amazon.com/securityhub/latest/userguide/controls-findings-create-update.html#control-findings-severity) in the
-    /// *Security Hub User Guide*.
+    /// *Security Hub CSPM User Guide*.
     severity_rating: SeverityRating,
 
     /// The title of a security control.

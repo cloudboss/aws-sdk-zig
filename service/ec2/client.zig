@@ -4,6 +4,7 @@ const std = @import("std");
 const accept_address_transfer = @import("accept_address_transfer.zig");
 const accept_capacity_reservation_billing_ownership = @import("accept_capacity_reservation_billing_ownership.zig");
 const accept_reserved_instances_exchange_quote = @import("accept_reserved_instances_exchange_quote.zig");
+const accept_transit_gateway_client_vpn_attachment = @import("accept_transit_gateway_client_vpn_attachment.zig");
 const accept_transit_gateway_multicast_domain_associations = @import("accept_transit_gateway_multicast_domain_associations.zig");
 const accept_transit_gateway_peering_attachment = @import("accept_transit_gateway_peering_attachment.zig");
 const accept_transit_gateway_vpc_attachment = @import("accept_transit_gateway_vpc_attachment.zig");
@@ -123,6 +124,8 @@ const create_route_server = @import("create_route_server.zig");
 const create_route_server_endpoint = @import("create_route_server_endpoint.zig");
 const create_route_server_peer = @import("create_route_server_peer.zig");
 const create_route_table = @import("create_route_table.zig");
+const create_secondary_network = @import("create_secondary_network.zig");
+const create_secondary_subnet = @import("create_secondary_subnet.zig");
 const create_security_group = @import("create_security_group.zig");
 const create_snapshot = @import("create_snapshot.zig");
 const create_snapshots = @import("create_snapshots.zig");
@@ -215,6 +218,8 @@ const delete_route_server = @import("delete_route_server.zig");
 const delete_route_server_endpoint = @import("delete_route_server_endpoint.zig");
 const delete_route_server_peer = @import("delete_route_server_peer.zig");
 const delete_route_table = @import("delete_route_table.zig");
+const delete_secondary_network = @import("delete_secondary_network.zig");
+const delete_secondary_subnet = @import("delete_secondary_subnet.zig");
 const delete_security_group = @import("delete_security_group.zig");
 const delete_snapshot = @import("delete_snapshot.zig");
 const delete_spot_datafeed_subscription = @import("delete_spot_datafeed_subscription.zig");
@@ -226,6 +231,7 @@ const delete_traffic_mirror_filter_rule = @import("delete_traffic_mirror_filter_
 const delete_traffic_mirror_session = @import("delete_traffic_mirror_session.zig");
 const delete_traffic_mirror_target = @import("delete_traffic_mirror_target.zig");
 const delete_transit_gateway = @import("delete_transit_gateway.zig");
+const delete_transit_gateway_client_vpn_attachment = @import("delete_transit_gateway_client_vpn_attachment.zig");
 const delete_transit_gateway_connect = @import("delete_transit_gateway_connect.zig");
 const delete_transit_gateway_connect_peer = @import("delete_transit_gateway_connect_peer.zig");
 const delete_transit_gateway_metering_policy = @import("delete_transit_gateway_metering_policy.zig");
@@ -383,6 +389,9 @@ const describe_route_servers = @import("describe_route_servers.zig");
 const describe_route_tables = @import("describe_route_tables.zig");
 const describe_scheduled_instance_availability = @import("describe_scheduled_instance_availability.zig");
 const describe_scheduled_instances = @import("describe_scheduled_instances.zig");
+const describe_secondary_interfaces = @import("describe_secondary_interfaces.zig");
+const describe_secondary_networks = @import("describe_secondary_networks.zig");
+const describe_secondary_subnets = @import("describe_secondary_subnets.zig");
 const describe_security_group_references = @import("describe_security_group_references.zig");
 const describe_security_group_rules = @import("describe_security_group_rules.zig");
 const describe_security_group_vpc_associations = @import("describe_security_group_vpc_associations.zig");
@@ -525,6 +534,7 @@ const get_aws_network_performance_data = @import("get_aws_network_performance_da
 const get_capacity_manager_attributes = @import("get_capacity_manager_attributes.zig");
 const get_capacity_manager_metric_data = @import("get_capacity_manager_metric_data.zig");
 const get_capacity_manager_metric_dimensions = @import("get_capacity_manager_metric_dimensions.zig");
+const get_capacity_manager_monitored_tag_keys = @import("get_capacity_manager_monitored_tag_keys.zig");
 const get_capacity_reservation_usage = @import("get_capacity_reservation_usage.zig");
 const get_coip_pool_usage = @import("get_coip_pool_usage.zig");
 const get_console_output = @import("get_console_output.zig");
@@ -558,6 +568,7 @@ const get_ipam_resource_cidrs = @import("get_ipam_resource_cidrs.zig");
 const get_launch_template_data = @import("get_launch_template_data.zig");
 const get_managed_prefix_list_associations = @import("get_managed_prefix_list_associations.zig");
 const get_managed_prefix_list_entries = @import("get_managed_prefix_list_entries.zig");
+const get_managed_resource_visibility = @import("get_managed_resource_visibility.zig");
 const get_network_insights_access_scope_analysis_findings = @import("get_network_insights_access_scope_analysis_findings.zig");
 const get_network_insights_access_scope_content = @import("get_network_insights_access_scope_content.zig");
 const get_password_data = @import("get_password_data.zig");
@@ -631,6 +642,7 @@ const modify_ipam_scope = @import("modify_ipam_scope.zig");
 const modify_launch_template = @import("modify_launch_template.zig");
 const modify_local_gateway_route = @import("modify_local_gateway_route.zig");
 const modify_managed_prefix_list = @import("modify_managed_prefix_list.zig");
+const modify_managed_resource_visibility = @import("modify_managed_resource_visibility.zig");
 const modify_network_interface_attribute = @import("modify_network_interface_attribute.zig");
 const modify_private_dns_name_options = @import("modify_private_dns_name_options.zig");
 const modify_public_ip_dns_name_options = @import("modify_public_ip_dns_name_options.zig");
@@ -691,6 +703,7 @@ const register_instance_event_notification_attributes = @import("register_instan
 const register_transit_gateway_multicast_group_members = @import("register_transit_gateway_multicast_group_members.zig");
 const register_transit_gateway_multicast_group_sources = @import("register_transit_gateway_multicast_group_sources.zig");
 const reject_capacity_reservation_billing_ownership = @import("reject_capacity_reservation_billing_ownership.zig");
+const reject_transit_gateway_client_vpn_attachment = @import("reject_transit_gateway_client_vpn_attachment.zig");
 const reject_transit_gateway_multicast_domain_associations = @import("reject_transit_gateway_multicast_domain_associations.zig");
 const reject_transit_gateway_peering_attachment = @import("reject_transit_gateway_peering_attachment.zig");
 const reject_transit_gateway_vpc_attachment = @import("reject_transit_gateway_vpc_attachment.zig");
@@ -745,6 +758,7 @@ const unassign_private_ip_addresses = @import("unassign_private_ip_addresses.zig
 const unassign_private_nat_gateway_address = @import("unassign_private_nat_gateway_address.zig");
 const unlock_snapshot = @import("unlock_snapshot.zig");
 const unmonitor_instances = @import("unmonitor_instances.zig");
+const update_capacity_manager_monitored_tag_keys = @import("update_capacity_manager_monitored_tag_keys.zig");
 const update_capacity_manager_organizations_access = @import("update_capacity_manager_organizations_access.zig");
 const update_interruptible_capacity_reservation_allocation = @import("update_interruptible_capacity_reservation_allocation.zig");
 const update_security_group_rule_descriptions_egress = @import("update_security_group_rule_descriptions_egress.zig");
@@ -803,6 +817,13 @@ pub const Client = struct {
     /// GetReservedInstancesExchangeQuote call.
     pub fn acceptReservedInstancesExchangeQuote(self: *Self, allocator: std.mem.Allocator, input: accept_reserved_instances_exchange_quote.AcceptReservedInstancesExchangeQuoteInput, options: CallOptions) !accept_reserved_instances_exchange_quote.AcceptReservedInstancesExchangeQuoteOutput {
         return accept_reserved_instances_exchange_quote.execute(self, allocator, input, options);
+    }
+
+    /// Accepts a Transit Gateway attachment request for a Client VPN endpoint. The
+    /// Transit Gateway owner must accept the attachment request before the Client
+    /// VPN endpoint can route traffic through the Transit Gateway.
+    pub fn acceptTransitGatewayClientVpnAttachment(self: *Self, allocator: std.mem.Allocator, input: accept_transit_gateway_client_vpn_attachment.AcceptTransitGatewayClientVpnAttachmentInput, options: CallOptions) !accept_transit_gateway_client_vpn_attachment.AcceptTransitGatewayClientVpnAttachmentOutput {
+        return accept_transit_gateway_client_vpn_attachment.execute(self, allocator, input, options);
     }
 
     /// Accepts a request to associate subnets with a transit gateway multicast
@@ -1464,9 +1485,11 @@ pub const Client = struct {
     /// instance
     /// store volumes is not preserved.
     ///
-    /// This action is not applicable for Linux/Unix instances or Windows instances
-    /// that are
-    /// backed by Amazon EBS.
+    /// This action is no longer supported. To create an AMI, use
+    /// [CreateImage](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html).
+    /// For more information, see [
+    /// Create an Amazon EBS-backed
+    /// AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html) in the *Amazon EC2 User Guide*.
     pub fn bundleInstance(self: *Self, allocator: std.mem.Allocator, input: bundle_instance.BundleInstanceInput, options: CallOptions) !bundle_instance.BundleInstanceOutput {
         return bundle_instance.execute(self, allocator, input, options);
     }
@@ -2765,6 +2788,28 @@ pub const Client = struct {
         return create_route_table.execute(self, allocator, input, options);
     }
 
+    /// Creates a secondary network.
+    ///
+    /// The allowed size for a secondary network CIDR block is between /28 netmask
+    /// (16 IP addresses) and /12 netmask (1,048,576 IP addresses).
+    pub fn createSecondaryNetwork(self: *Self, allocator: std.mem.Allocator, input: create_secondary_network.CreateSecondaryNetworkInput, options: CallOptions) !create_secondary_network.CreateSecondaryNetworkOutput {
+        return create_secondary_network.execute(self, allocator, input, options);
+    }
+
+    /// Creates a secondary subnet in a secondary network.
+    ///
+    /// A secondary subnet CIDR block must not overlap with the CIDR block of an
+    /// existing secondary subnet in the secondary network. After you create a
+    /// secondary subnet, you can't change its CIDR block.
+    ///
+    /// The allowed size for a secondary subnet CIDR block is between /28 netmask
+    /// (16 IP addresses) and /12 netmask (1,048,576 IP addresses). Amazon reserves
+    /// the first four IP addresses and the last IP address in each secondary subnet
+    /// for internal use.
+    pub fn createSecondarySubnet(self: *Self, allocator: std.mem.Allocator, input: create_secondary_subnet.CreateSecondarySubnetInput, options: CallOptions) !create_secondary_subnet.CreateSecondarySubnetOutput {
+        return create_secondary_subnet.execute(self, allocator, input, options);
+    }
+
     /// Creates a security group.
     ///
     /// A security group acts as a virtual firewall for your instance to control
@@ -3888,6 +3933,18 @@ pub const Client = struct {
         return delete_route_table.execute(self, allocator, input, options);
     }
 
+    /// Deletes a secondary network. You must delete all secondary subnets in the
+    /// secondary network before you can delete the secondary network.
+    pub fn deleteSecondaryNetwork(self: *Self, allocator: std.mem.Allocator, input: delete_secondary_network.DeleteSecondaryNetworkInput, options: CallOptions) !delete_secondary_network.DeleteSecondaryNetworkOutput {
+        return delete_secondary_network.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a secondary subnet. A secondary subnet must not contain any
+    /// secondary interfaces prior to deletion.
+    pub fn deleteSecondarySubnet(self: *Self, allocator: std.mem.Allocator, input: delete_secondary_subnet.DeleteSecondarySubnetInput, options: CallOptions) !delete_secondary_subnet.DeleteSecondarySubnetOutput {
+        return delete_secondary_subnet.execute(self, allocator, input, options);
+    }
+
     /// Deletes a security group.
     ///
     /// If you attempt to delete a security group that is associated with an
@@ -3978,6 +4035,13 @@ pub const Client = struct {
     /// Deletes the specified transit gateway.
     pub fn deleteTransitGateway(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway.DeleteTransitGatewayInput, options: CallOptions) !delete_transit_gateway.DeleteTransitGatewayOutput {
         return delete_transit_gateway.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a Transit Gateway attachment for a Client VPN endpoint. The Transit
+    /// Gateway owner can delete the attachment to remove the association between
+    /// the Client VPN endpoint and the Transit Gateway.
+    pub fn deleteTransitGatewayClientVpnAttachment(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_client_vpn_attachment.DeleteTransitGatewayClientVpnAttachmentInput, options: CallOptions) !delete_transit_gateway_client_vpn_attachment.DeleteTransitGatewayClientVpnAttachmentOutput {
+        return delete_transit_gateway_client_vpn_attachment.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified Connect attachment. You must first delete any Connect
@@ -5798,6 +5862,21 @@ pub const Client = struct {
         return describe_scheduled_instances.execute(self, allocator, input, options);
     }
 
+    /// Describes one or more of your secondary interfaces.
+    pub fn describeSecondaryInterfaces(self: *Self, allocator: std.mem.Allocator, input: describe_secondary_interfaces.DescribeSecondaryInterfacesInput, options: CallOptions) !describe_secondary_interfaces.DescribeSecondaryInterfacesOutput {
+        return describe_secondary_interfaces.execute(self, allocator, input, options);
+    }
+
+    /// Describes one or more secondary networks.
+    pub fn describeSecondaryNetworks(self: *Self, allocator: std.mem.Allocator, input: describe_secondary_networks.DescribeSecondaryNetworksInput, options: CallOptions) !describe_secondary_networks.DescribeSecondaryNetworksOutput {
+        return describe_secondary_networks.execute(self, allocator, input, options);
+    }
+
+    /// Describes one or more of your secondary subnets.
+    pub fn describeSecondarySubnets(self: *Self, allocator: std.mem.Allocator, input: describe_secondary_subnets.DescribeSecondarySubnetsInput, options: CallOptions) !describe_secondary_subnets.DescribeSecondarySubnetsOutput {
+        return describe_secondary_subnets.execute(self, allocator, input, options);
+    }
+
     /// Describes the VPCs on the other side of a VPC peering or Transit Gateway
     /// connection that are referencing the security groups you've specified in this
     /// request.
@@ -7435,6 +7514,13 @@ pub const Client = struct {
         return get_capacity_manager_metric_dimensions.execute(self, allocator, input, options);
     }
 
+    /// Retrieves the tag keys that are currently being monitored by EC2 Capacity
+    /// Manager. Monitored tag keys are included as dimensions in capacity metric
+    /// data, enabling you to group and filter metrics by tag values.
+    pub fn getCapacityManagerMonitoredTagKeys(self: *Self, allocator: std.mem.Allocator, input: get_capacity_manager_monitored_tag_keys.GetCapacityManagerMonitoredTagKeysInput, options: CallOptions) !get_capacity_manager_monitored_tag_keys.GetCapacityManagerMonitoredTagKeysOutput {
+        return get_capacity_manager_monitored_tag_keys.execute(self, allocator, input, options);
+    }
+
     /// Gets usage information about a Capacity Reservation. If the Capacity
     /// Reservation is
     /// shared, it shows usage information for the Capacity Reservation owner and
@@ -7828,6 +7914,13 @@ pub const Client = struct {
     /// Gets information about the entries for a specified managed prefix list.
     pub fn getManagedPrefixListEntries(self: *Self, allocator: std.mem.Allocator, input: get_managed_prefix_list_entries.GetManagedPrefixListEntriesInput, options: CallOptions) !get_managed_prefix_list_entries.GetManagedPrefixListEntriesOutput {
         return get_managed_prefix_list_entries.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the managed resource visibility configuration for the account. The
+    /// response
+    /// indicates whether managed resources are hidden or visible by default.
+    pub fn getManagedResourceVisibility(self: *Self, allocator: std.mem.Allocator, input: get_managed_resource_visibility.GetManagedResourceVisibilityInput, options: CallOptions) !get_managed_resource_visibility.GetManagedResourceVisibilityOutput {
+        return get_managed_resource_visibility.execute(self, allocator, input, options);
     }
 
     /// Gets the findings for the specified Network Access Scope analysis.
@@ -8800,6 +8893,17 @@ pub const Client = struct {
         return modify_managed_prefix_list.execute(self, allocator, input, options);
     }
 
+    /// Modifies the managed resource visibility configuration for the account. Use
+    /// this
+    /// operation to control whether managed resources are hidden or visible by
+    /// default.
+    /// Visibility settings are account-wide and affect all IAM principals
+    /// uniformly. Hidden
+    /// resources remain fully operational and billable.
+    pub fn modifyManagedResourceVisibility(self: *Self, allocator: std.mem.Allocator, input: modify_managed_resource_visibility.ModifyManagedResourceVisibilityInput, options: CallOptions) !modify_managed_resource_visibility.ModifyManagedResourceVisibilityOutput {
+        return modify_managed_resource_visibility.execute(self, allocator, input, options);
+    }
+
     /// Modifies the specified network interface attribute. You can specify only one
     /// attribute
     /// at a time. You can use this action to attach and detach security groups from
@@ -9649,6 +9753,13 @@ pub const Client = struct {
     /// Reservations](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/assign-billing.html).
     pub fn rejectCapacityReservationBillingOwnership(self: *Self, allocator: std.mem.Allocator, input: reject_capacity_reservation_billing_ownership.RejectCapacityReservationBillingOwnershipInput, options: CallOptions) !reject_capacity_reservation_billing_ownership.RejectCapacityReservationBillingOwnershipOutput {
         return reject_capacity_reservation_billing_ownership.execute(self, allocator, input, options);
+    }
+
+    /// Rejects a Transit Gateway attachment request for a Client VPN endpoint. The
+    /// Transit Gateway owner can reject the attachment request to prevent the
+    /// Client VPN endpoint from routing traffic through the Transit Gateway.
+    pub fn rejectTransitGatewayClientVpnAttachment(self: *Self, allocator: std.mem.Allocator, input: reject_transit_gateway_client_vpn_attachment.RejectTransitGatewayClientVpnAttachmentInput, options: CallOptions) !reject_transit_gateway_client_vpn_attachment.RejectTransitGatewayClientVpnAttachmentOutput {
+        return reject_transit_gateway_client_vpn_attachment.execute(self, allocator, input, options);
     }
 
     /// Rejects a request to associate cross-account subnets with a transit gateway
@@ -10571,6 +10682,13 @@ pub const Client = struct {
         return unmonitor_instances.execute(self, allocator, input, options);
     }
 
+    /// Activates or deactivates tag keys for monitoring by EC2 Capacity Manager.
+    /// Activated tag keys are included as dimensions in capacity metric data,
+    /// enabling you to group and filter metrics by tag values.
+    pub fn updateCapacityManagerMonitoredTagKeys(self: *Self, allocator: std.mem.Allocator, input: update_capacity_manager_monitored_tag_keys.UpdateCapacityManagerMonitoredTagKeysInput, options: CallOptions) !update_capacity_manager_monitored_tag_keys.UpdateCapacityManagerMonitoredTagKeysOutput {
+        return update_capacity_manager_monitored_tag_keys.execute(self, allocator, input, options);
+    }
+
     /// Updates the Organizations access setting for EC2 Capacity Manager. This
     /// controls whether Capacity Manager can aggregate
     /// data from all accounts in your Amazon Web Services Organization or only from
@@ -11243,6 +11361,27 @@ pub const Client = struct {
         };
     }
 
+    pub fn describeSecondaryInterfacesPaginator(self: *Self, params: describe_secondary_interfaces.DescribeSecondaryInterfacesInput) paginator.DescribeSecondaryInterfacesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn describeSecondaryNetworksPaginator(self: *Self, params: describe_secondary_networks.DescribeSecondaryNetworksInput) paginator.DescribeSecondaryNetworksPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn describeSecondarySubnetsPaginator(self: *Self, params: describe_secondary_subnets.DescribeSecondarySubnetsInput) paginator.DescribeSecondarySubnetsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn describeSecurityGroupRulesPaginator(self: *Self, params: describe_security_group_rules.DescribeSecurityGroupRulesInput) paginator.DescribeSecurityGroupRulesPaginator {
         return .{
             .client = self,
@@ -11572,6 +11711,13 @@ pub const Client = struct {
         };
     }
 
+    pub fn getCapacityManagerMonitoredTagKeysPaginator(self: *Self, params: get_capacity_manager_monitored_tag_keys.GetCapacityManagerMonitoredTagKeysInput) paginator.GetCapacityManagerMonitoredTagKeysPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn getGroupsForCapacityReservationPaginator(self: *Self, params: get_groups_for_capacity_reservation.GetGroupsForCapacityReservationInput) paginator.GetGroupsForCapacityReservationPaginator {
         return .{
             .client = self,
@@ -11810,6 +11956,16 @@ pub const Client = struct {
 
     pub fn waitUntilNetworkInterfaceAvailable(self: *Self, params: describe_network_interfaces.DescribeNetworkInterfacesInput) aws.waiter.WaiterError!void {
         var w = waiters.NetworkInterfaceAvailableWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilSecondaryNetworkCreateComplete(self: *Self, params: describe_secondary_networks.DescribeSecondaryNetworksInput) aws.waiter.WaiterError!void {
+        var w = waiters.SecondaryNetworkCreateCompleteWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilSecondarySubnetCreateComplete(self: *Self, params: describe_secondary_subnets.DescribeSecondarySubnetsInput) aws.waiter.WaiterError!void {
+        var w = waiters.SecondarySubnetCreateCompleteWaiter{ .client = self, .params = params };
         return w.wait();
     }
 

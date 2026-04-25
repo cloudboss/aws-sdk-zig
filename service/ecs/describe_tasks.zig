@@ -10,16 +10,13 @@ const Task = @import("task.zig").Task;
 
 pub const DescribeTasksInput = struct {
     /// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-    /// the task
-    /// or tasks to describe. If you do not specify a cluster, the default cluster
-    /// is
-    /// assumed.
+    /// the task or tasks to describe. If you do not specify a cluster, the default
+    /// cluster is assumed.
     cluster: ?[]const u8 = null,
 
     /// Specifies whether you want to see the resource tags for the task. If `TAGS`
     /// is specified, the tags are included in the response. If this field is
-    /// omitted, tags
-    /// aren't included in the response.
+    /// omitted, tags aren't included in the response.
     include: ?[]const TaskField = null,
 
     /// A list of up to 100 task IDs or full ARN entries.
@@ -169,6 +166,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

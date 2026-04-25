@@ -4,9 +4,49 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const CmkSecretConfig = @import("cmk_secret_config.zig").CmkSecretConfig;
+const CustomSecretConfig = @import("custom_secret_config.zig").CustomSecretConfig;
 const TagListEntry = @import("tag_list_entry.zig").TagListEntry;
 
 pub const CreateLocationFsxWindowsInput = struct {
+    /// Specifies configuration information for a DataSync-managed secret, which
+    /// includes the password that DataSync uses to access a specific FSx Windows
+    /// storage location, with a customer-managed KMS key.
+    ///
+    /// When you include this parameter as part of a `CreateLocationFsxWindows`
+    /// request,
+    /// you provide only the KMS key ARN. DataSync uses this KMS key together with
+    /// the `Password` you specify for
+    /// to create a DataSync-managed secret to store the location access
+    /// credentials.
+    ///
+    /// Make sure that DataSync has permission to access the KMS key that
+    /// you specify. For more information, see [
+    /// Using a service-managed secret encrypted with a custom KMS
+    /// key](https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key).
+    ///
+    /// You can use either `CmkSecretConfig` (with `Password`) or
+    /// `CustomSecretConfig` (without `Password`) to provide
+    /// credentials for a `CreateLocationFsxWindows` request. Do not provide both
+    /// parameters for the same request.
+    cmk_secret_config: ?CmkSecretConfig = null,
+
+    /// Specifies configuration information for a customer-managed Secrets Manager
+    /// secret where
+    /// the password for an FSx for Windows File Server storage location is stored
+    /// in plain text, in Secrets
+    /// Manager. This configuration includes the secret ARN, and the ARN for an IAM
+    /// role
+    /// that provides access to the secret. For more information, see [
+    /// Using a secret that you
+    /// manage](https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key).
+    ///
+    /// You can use either `CmkSecretConfig` (with `Password`) or
+    /// `CustomSecretConfig` (without `Password`) to provide
+    /// credentials for a `CreateLocationFsxWindows` request. Do not provide both
+    /// parameters for the same request.
+    custom_secret_config: ?CustomSecretConfig = null,
+
     /// Specifies the name of the Windows domain that the FSx for Windows File
     /// Server file system
     /// belongs to.
@@ -24,7 +64,7 @@ pub const CreateLocationFsxWindowsInput = struct {
     /// Specifies the password of the user with the permissions to mount and access
     /// the files,
     /// folders, and file metadata in your FSx for Windows File Server file system.
-    password: []const u8,
+    password: ?[]const u8 = null,
 
     /// Specifies the ARNs of the Amazon EC2 security groups that provide access to
     /// your
@@ -71,6 +111,8 @@ pub const CreateLocationFsxWindowsInput = struct {
     user: []const u8,
 
     pub const json_field_names = .{
+        .cmk_secret_config = "CmkSecretConfig",
+        .custom_secret_config = "CustomSecretConfig",
         .domain = "Domain",
         .fsx_filesystem_arn = "FsxFilesystemArn",
         .password = "Password",

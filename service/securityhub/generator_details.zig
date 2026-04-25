@@ -4,7 +4,8 @@
 /// violations and
 /// vulnerabilities in Lambda function code based on internal detectors
 /// developed
-/// in collaboration with Amazon CodeGuru. Security Hub receives those findings.
+/// in collaboration with Amazon CodeGuru. Security Hub CSPM receives those
+/// findings.
 pub const GeneratorDetails = struct {
     /// The description of the detector used to identify the code vulnerability.
     description: ?[]const u8 = null,

@@ -3,9 +3,9 @@ pub const RegistrationFieldValueInformation = struct {
     /// A description of why the registration was denied.
     denied_reason: ?[]const u8 = null,
 
-    /// Feedback provided for this specific field during the registration review
-    /// process. This may include validation errors, suggestions for improvement, or
-    /// additional requirements.
+    /// Generative AI feedback information provided for this specific field during
+    /// the registration review process. This may include validation errors,
+    /// suggestions for improvement, or additional requirements.
     feedback: ?[]const u8 = null,
 
     /// The path to the registration form field. You can use

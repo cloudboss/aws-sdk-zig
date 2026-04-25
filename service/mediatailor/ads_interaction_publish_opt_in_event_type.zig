@@ -2,14 +2,17 @@ const std = @import("std");
 
 pub const AdsInteractionPublishOptInEventType = enum {
     raw_ads_response,
+    raw_ads_request,
 
     pub const json_field_names = .{
         .raw_ads_response = "RAW_ADS_RESPONSE",
+        .raw_ads_request = "RAW_ADS_REQUEST",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .raw_ads_response => "RAW_ADS_RESPONSE",
+            .raw_ads_request => "RAW_ADS_REQUEST",
         };
     }
 

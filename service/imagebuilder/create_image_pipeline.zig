@@ -51,6 +51,9 @@ pub const CreateImagePipelineInput = struct {
     /// Contains settings for vulnerability scans.
     image_scanning_configuration: ?ImageScanningConfiguration = null,
 
+    /// The tags to be applied to the images produced by this pipeline.
+    image_tags: ?[]const aws.map.StringMapEntry = null,
+
     /// The image test configuration of the image pipeline.
     image_tests_configuration: ?ImageTestsConfiguration = null,
 
@@ -86,6 +89,7 @@ pub const CreateImagePipelineInput = struct {
         .execution_role = "executionRole",
         .image_recipe_arn = "imageRecipeArn",
         .image_scanning_configuration = "imageScanningConfiguration",
+        .image_tags = "imageTags",
         .image_tests_configuration = "imageTestsConfiguration",
         .infrastructure_configuration_arn = "infrastructureConfigurationArn",
         .logging_configuration = "loggingConfiguration",
@@ -197,6 +201,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImagePipelineInpu
     if (input.image_scanning_configuration) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"imageScanningConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.image_tags) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"imageTags\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

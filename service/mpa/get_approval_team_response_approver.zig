@@ -1,3 +1,4 @@
+const ApproverLastActivity = @import("approver_last_activity.zig").ApproverLastActivity;
 const MfaMethod = @import("mfa_method.zig").MfaMethod;
 const IdentityStatus = @import("identity_status.zig").IdentityStatus;
 
@@ -6,8 +7,18 @@ pub const GetApprovalTeamResponseApprover = struct {
     /// ID for the approver.
     approver_id: ?[]const u8 = null,
 
+    /// Last Activity performed by the approver.
+    last_activity: ?ApproverLastActivity = null,
+
+    /// Timestamp when the approver last responded to an operation or invitation
+    /// request.
+    last_activity_time: ?i64 = null,
+
     /// Multi-factor authentication configuration for the approver
     mfa_methods: ?[]const MfaMethod = null,
+
+    /// Amazon Resource Name (ARN) for the pending baseline session.
+    pending_baseline_session_arn: ?[]const u8 = null,
 
     /// ID for the user.
     primary_identity_id: ?[]const u8 = null,
@@ -26,7 +37,10 @@ pub const GetApprovalTeamResponseApprover = struct {
 
     pub const json_field_names = .{
         .approver_id = "ApproverId",
+        .last_activity = "LastActivity",
+        .last_activity_time = "LastActivityTime",
         .mfa_methods = "MfaMethods",
+        .pending_baseline_session_arn = "PendingBaselineSessionArn",
         .primary_identity_id = "PrimaryIdentityId",
         .primary_identity_source_arn = "PrimaryIdentitySourceArn",
         .primary_identity_status = "PrimaryIdentityStatus",

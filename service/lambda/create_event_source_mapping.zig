@@ -681,6 +681,24 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "S3FilesMountConnectivityException")) {
+        return .{ .arena = arena, .kind = .{ .s3_files_mount_connectivity_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "S3FilesMountFailureException")) {
+        return .{ .arena = arena, .kind = .{ .s3_files_mount_failure_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "S3FilesMountTimeoutException")) {
+        return .{ .arena = arena, .kind = .{ .s3_files_mount_timeout_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "SerializedRequestEntityTooLargeException")) {
         return .{ .arena = arena, .kind = .{ .serialized_request_entity_too_large_exception = .{
             .message = owned_message,

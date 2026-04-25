@@ -1,31 +1,32 @@
-/// Specifies the total weight for the specified axle group. Meant for usage in
-/// countries that have different regulations based on the axle group type.
+/// Specifies the total weight for different axle group configurations. Used in
+/// regions where regulations set different weight limits based on axle group
+/// types.
 ///
-/// **Unit**: `Kilograms`
+/// **Unit**: `kilograms`
 pub const WeightPerAxleGroup = struct {
-    /// Weight for quad axle group.
+    /// Total weight in kilograms for quad (four adjacent) axle configurations.
     ///
-    /// **Unit**: `Kilograms`
+    /// **Unit**: `kilograms`
     quad: i64 = 0,
 
-    /// Weight for quad quint group.
+    /// Total weight in kilograms for quint (five adjacent) axle configurations.
     ///
-    /// **Unit**: `Kilograms`
+    /// **Unit**: `kilograms`
     quint: i64 = 0,
 
-    /// Weight for single axle group.
+    /// Total weight in kilograms for single axle configurations.
     ///
-    /// **Unit**: `Kilograms`
+    /// **Unit**: `kilograms`
     single: i64 = 0,
 
-    /// Weight for tandem axle group.
+    /// Total weight in kilograms for tandem (two adjacent) axle configurations.
     ///
-    /// **Unit**: `Kilograms`
+    /// **Unit**: `kilograms`
     tandem: i64 = 0,
 
-    /// Weight for triple axle group.
+    /// Total weight in kilograms for triple (three adjacent) axle configurations.
     ///
-    /// **Unit**: `Kilograms`
+    /// **Unit**: `kilograms`
     triple: i64 = 0,
 
     pub const json_field_names = .{

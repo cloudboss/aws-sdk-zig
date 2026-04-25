@@ -13,6 +13,9 @@ pub const IdentityCenterOptionsInput = struct {
     /// uses IAM Identity Center for authentication.
     identity_center_instance_arn: ?[]const u8 = null,
 
+    /// The Region of the IAM Identity Center instance.
+    identity_center_instance_region: ?[]const u8 = null,
+
     /// Specifies the attribute that contains the backend role identifier (such as
     /// group name or
     /// group ID) in IAM Identity Center.
@@ -26,6 +29,7 @@ pub const IdentityCenterOptionsInput = struct {
     pub const json_field_names = .{
         .enabled_api_access = "EnabledAPIAccess",
         .identity_center_instance_arn = "IdentityCenterInstanceARN",
+        .identity_center_instance_region = "IdentityCenterInstanceRegion",
         .roles_key = "RolesKey",
         .subject_key = "SubjectKey",
     };

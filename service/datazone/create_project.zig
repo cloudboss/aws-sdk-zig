@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const ProjectMembershipAssignment = @import("project_membership_assignment.zig").ProjectMembershipAssignment;
 const EnvironmentConfigurationUserParameter = @import("environment_configuration_user_parameter.zig").EnvironmentConfigurationUserParameter;
 const EnvironmentDeploymentDetails = @import("environment_deployment_details.zig").EnvironmentDeploymentDetails;
 const ProjectDeletionError = @import("project_deletion_error.zig").ProjectDeletionError;
@@ -24,8 +25,19 @@ pub const CreateProjectInput = struct {
     /// The glossary terms that can be used in this Amazon DataZone project.
     glossary_terms: ?[]const []const u8 = null,
 
+    /// The members to be assigned to the project.
+    membership_assignments: ?[]const ProjectMembershipAssignment = null,
+
     /// The name of the Amazon DataZone project.
     name: []const u8,
+
+    /// The category of the project. Set to 'ADMIN' designates this as an
+    /// administrative project for the Amazon DataZone domain.
+    project_category: ?[]const u8 = null,
+
+    /// The default project IAM role that is used to access project resources and
+    /// run computes such as Glue and Sagemaker.
+    project_execution_role: ?[]const u8 = null,
 
     /// The ID of the project profile.
     project_profile_id: ?[]const u8 = null,
@@ -41,7 +53,10 @@ pub const CreateProjectInput = struct {
         .domain_identifier = "domainIdentifier",
         .domain_unit_id = "domainUnitId",
         .glossary_terms = "glossaryTerms",
+        .membership_assignments = "membershipAssignments",
         .name = "name",
+        .project_category = "projectCategory",
+        .project_execution_role = "projectExecutionRole",
         .project_profile_id = "projectProfileId",
         .resource_tags = "resourceTags",
         .user_parameters = "userParameters",
@@ -84,6 +99,9 @@ pub const CreateProjectOutput = struct {
     /// The name of the project.
     name: []const u8,
 
+    /// The category of the project.
+    project_category: ?[]const u8 = null,
+
     /// The project profile ID.
     project_profile_id: ?[]const u8 = null,
 
@@ -108,6 +126,7 @@ pub const CreateProjectOutput = struct {
         .id = "id",
         .last_updated_at = "lastUpdatedAt",
         .name = "name",
+        .project_category = "projectCategory",
         .project_profile_id = "projectProfileId",
         .project_status = "projectStatus",
         .resource_tags = "resourceTags",
@@ -175,10 +194,28 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateProjectInput, con
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.membership_assignments) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"membershipAssignments\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
     has_prev = true;
+    if (input.project_category) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"projectCategory\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.project_execution_role) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"projectExecutionRole\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.project_profile_id) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"projectProfileId\":");

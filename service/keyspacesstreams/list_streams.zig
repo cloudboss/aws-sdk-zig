@@ -13,7 +13,8 @@ pub const ListStreamsInput = struct {
     keyspace_name: ?[]const u8 = null,
 
     /// The maximum number of streams to return in a single `ListStreams` request.
-    /// Default value is 100. The minimum value is 1 and the maximum value is 100.
+    /// The default value is 100. The minimum value is 1 and the maximum value is
+    /// 100.
     max_results: ?i32 = null,
 
     /// An optional pagination token provided by a previous `ListStreams` operation.
@@ -37,7 +38,7 @@ pub const ListStreamsInput = struct {
 pub const ListStreamsOutput = struct {
     /// A pagination token that can be used in a subsequent `ListStreams` request.
     /// This token is returned if the response contains more streams than can be
-    /// returned in a single response based on the `MaxResults` parameter.
+    /// returned in a single response based on the `maxResults` parameter.
     next_token: ?[]const u8 = null,
 
     /// An array of stream objects, each containing summary information about a

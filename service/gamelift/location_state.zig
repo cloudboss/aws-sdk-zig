@@ -1,3 +1,4 @@
+const PlayerGatewayStatus = @import("player_gateway_status.zig").PlayerGatewayStatus;
 const FleetStatus = @import("fleet_status.zig").FleetStatus;
 
 /// A fleet location and its life-cycle state. A location state object might be
@@ -35,11 +36,26 @@ pub const LocationState = struct {
     /// `us-west-2`.
     location: ?[]const u8 = null,
 
+    /// The current status of player gateway in this location for this fleet. Note,
+    /// even if a fleet has PlayerGatewayMode configured as `ENABLED`, player
+    /// gateway might not be available in a specific location. For more information
+    /// about locations where player gateway is supported, see [Amazon GameLift
+    /// Servers service
+    /// locations](https://docs.aws.amazon.com/gameliftservers/latest/developerguide/gamelift-regions.html).
+    ///
+    /// Possible values include:
+    ///
+    /// * `ENABLED` -- Player gateway is available for this fleet location.
+    ///
+    /// * `DISABLED` -- Player gateway is not available for this fleet location.
+    player_gateway_status: ?PlayerGatewayStatus = null,
+
     /// The life-cycle status of a fleet location.
     status: ?FleetStatus = null,
 
     pub const json_field_names = .{
         .location = "Location",
+        .player_gateway_status = "PlayerGatewayStatus",
         .status = "Status",
     };
 };

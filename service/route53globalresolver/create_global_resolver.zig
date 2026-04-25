@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const GlobalResolverIpAddressType = @import("global_resolver_ip_address_type.zig").GlobalResolverIpAddressType;
 const CRResourceStatus = @import("cr_resource_status.zig").CRResourceStatus;
 
 pub const CreateGlobalResolverInput = struct {
@@ -16,17 +17,21 @@ pub const CreateGlobalResolverInput = struct {
     /// length of 1024 characters.
     description: ?[]const u8 = null,
 
+    /// The IP address type for the Route 53 Global Resolver. Valid values are IPV4
+    /// (default) or DUAL_STACK for both IPv4 and IPv6 support.
+    ip_address_type: ?GlobalResolverIpAddressType = null,
+
     /// A descriptive name for the Route 53 Global Resolver instance. Maximum length
     /// of 64 characters.
     name: []const u8,
 
-    /// The AWS region where query resolution logs and metrics will be aggregated
-    /// and delivered. If not specified, logging is not enabled.
+    /// The Amazon Web Services Region where query resolution logs and metrics will
+    /// be aggregated and delivered. If not specified, logging is not enabled.
     observability_region: ?[]const u8 = null,
 
-    /// List of AWS regions where the Route 53 Global Resolver will operate. The
-    /// resolver will be distributed across these regions to provide global
-    /// availability and low-latency DNS resolution.
+    /// List of Amazon Web Services Regions where the Route 53 Global Resolver will
+    /// operate. The resolver will be distributed across these Regions to provide
+    /// global availability and low-latency DNS resolution.
     regions: []const []const u8,
 
     /// Tags to associate with the Route 53 Global Resolver. Tags are key-value
@@ -36,6 +41,7 @@ pub const CreateGlobalResolverInput = struct {
     pub const json_field_names = .{
         .client_token = "clientToken",
         .description = "description",
+        .ip_address_type = "ipAddressType",
         .name = "name",
         .observability_region = "observabilityRegion",
         .regions = "regions",
@@ -64,20 +70,29 @@ pub const CreateGlobalResolverOutput = struct {
     /// The unique identifier for the Route 53 Global Resolver.
     id: []const u8,
 
+    /// The IP address type configured for the Route 53 Global Resolver (IPV4 or
+    /// DUAL_STACK).
+    ip_address_type: ?GlobalResolverIpAddressType = null,
+
     /// The global anycast IPv4 addresses associated with the Route 53 Global
     /// Resolver. DNS clients can send queries to these addresses from anywhere on
     /// the internet.
     ipv_4_addresses: ?[]const []const u8 = null,
 
+    /// The global anycast IPv6 addresses associated with the Route 53 Global
+    /// Resolver. This field is only populated when ipAddressType is DUAL_STACK. DNS
+    /// clients can send queries to these addresses from anywhere on the internet.
+    ipv_6_addresses: ?[]const []const u8 = null,
+
     /// The name of the Route 53 Global Resolver.
     name: []const u8,
 
-    /// The AWS Region where observability data for the Route 53 Global Resolver is
-    /// stored.
+    /// The Amazon Web Services Region where observability data for the Route 53
+    /// Global Resolver is stored.
     observability_region: ?[]const u8 = null,
 
-    /// The AWS Regions where the Route 53 Global Resolver is deployed and
-    /// operational.
+    /// The Amazon Web Services Regions where the Route 53 Global Resolver is
+    /// deployed and operational.
     regions: ?[]const []const u8 = null,
 
     /// The current status of the Route 53 Global Resolver. Possible values are
@@ -95,7 +110,9 @@ pub const CreateGlobalResolverOutput = struct {
         .description = "description",
         .dns_name = "dnsName",
         .id = "id",
+        .ip_address_type = "ipAddressType",
         .ipv_4_addresses = "ipv4Addresses",
+        .ipv_6_addresses = "ipv6Addresses",
         .name = "name",
         .observability_region = "observabilityRegion",
         .regions = "regions",
@@ -151,6 +168,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateGlobalResolverInp
     if (input.description) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"description\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.ip_address_type) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"ipAddressType\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

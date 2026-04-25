@@ -244,6 +244,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchTemplateInp
             try body_buf.appendSlice(allocator, "&LaunchTemplateData.CpuOptions.CoreCount=");
             try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv2}) catch "");
         }
+        if (sv.nested_virtualization) |sv2| {
+            try body_buf.appendSlice(allocator, "&LaunchTemplateData.CpuOptions.NestedVirtualization=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
+        }
         if (sv.threads_per_core) |sv2| {
             try body_buf.appendSlice(allocator, "&LaunchTemplateData.CpuOptions.ThreadsPerCore=");
             try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv2}) catch "");
@@ -938,6 +942,72 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLaunchTemplateInp
     if (input.launch_template_data.ram_disk_id) |sv| {
         try body_buf.appendSlice(allocator, "&LaunchTemplateData.RamDiskId=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
+    }
+    if (input.launch_template_data.secondary_interfaces) |list_d0| {
+        for (list_d0, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.delete_on_termination) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateData.SecondaryInterface.{d}.DeleteOnTermination=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_1) "true" else "false");
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.device_index) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateData.SecondaryInterface.{d}.DeviceIndex=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.interface_type) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateData.SecondaryInterface.{d}.InterfaceType=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.network_card_index) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateData.SecondaryInterface.{d}.NetworkCardIndex=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.private_ip_address_count) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateData.SecondaryInterface.{d}.PrivateIpAddressCount=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
+                }
+            }
+            if (item.private_ip_addresses) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        if (item_1.private_ip_address) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateData.SecondaryInterface.{d}.PrivateIpAddress.{d}.PrivateIpAddress=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
+                        }
+                    }
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.secondary_subnet_id) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateData.SecondaryInterface.{d}.SecondarySubnetId=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
+                }
+            }
+        }
     }
     if (input.launch_template_data.security_group_ids) |list_d0| {
         for (list_d0, 0..) |item, idx| {

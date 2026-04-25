@@ -8,16 +8,14 @@ const Session = @import("session.zig").Session;
 
 pub const ExecuteCommandInput = struct {
     /// The Amazon Resource Name (ARN) or short name of the cluster the task is
-    /// running in. If
-    /// you do not specify a cluster, the default cluster is assumed.
+    /// running in. If you do not specify a cluster, the default cluster is assumed.
     cluster: ?[]const u8 = null,
 
     /// The command to run on the container.
     command: []const u8,
 
     /// The name of the container to execute the command on. A container name only
-    /// needs to be
-    /// specified for tasks containing multiple containers.
+    /// needs to be specified for tasks containing multiple containers.
     container: ?[]const u8 = null,
 
     /// Use this flag to run your command in interactive mode.
@@ -46,10 +44,8 @@ pub const ExecuteCommandOutput = struct {
     container_name: ?[]const u8 = null,
 
     /// Determines whether the execute command session is running in interactive
-    /// mode. Amazon
-    /// ECS only supports initiating interactive sessions, so you must specify
-    /// `true`
-    /// for this value.
+    /// mode. Amazon ECS only supports initiating interactive sessions, so you must
+    /// specify `true` for this value.
     interactive: ?bool = null,
 
     /// The details of the SSM session that was created for this instance of
@@ -193,6 +189,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

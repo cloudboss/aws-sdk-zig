@@ -27,8 +27,7 @@ pub const DataSourceConfigurationsResult = struct {
     malware_protection: ?MalwareProtectionConfigurationResult = null,
 
     /// An object that contains information on the status of S3 Data event logs as a
-    /// data
-    /// source.
+    /// data source.
     s3_logs: S3LogsConfigurationResult,
 
     pub const json_field_names = .{

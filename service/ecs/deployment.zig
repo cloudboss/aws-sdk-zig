@@ -9,8 +9,7 @@ const ServiceVolumeConfiguration = @import("service_volume_configuration.zig").S
 const VpcLatticeConfiguration = @import("vpc_lattice_configuration.zig").VpcLatticeConfiguration;
 
 /// The details of an Amazon ECS service deployment. This is used only when a
-/// service uses
-/// the `ECS` deployment controller type.
+/// service uses the `ECS` deployment controller type.
 pub const Deployment = struct {
     /// The capacity provider strategy that the deployment is using.
     capacity_provider_strategy: ?[]const CapacityProviderStrategyItem = null,
@@ -19,20 +18,16 @@ pub const Deployment = struct {
     created_at: ?i64 = null,
 
     /// The most recent desired count of tasks that was specified for the service to
-    /// deploy or
-    /// maintain.
+    /// deploy or maintain.
     desired_count: i32 = 0,
 
     /// The number of consecutively failed tasks in the deployment. A task is
-    /// considered a
-    /// failure if the service scheduler can't launch the task, the task doesn't
-    /// transition to a
-    /// `RUNNING` state, or if it fails any of its defined health checks and is
-    /// stopped.
+    /// considered a failure if the service scheduler can't launch the task, the
+    /// task doesn't transition to a `RUNNING` state, or if it fails any of its
+    /// defined health checks and is stopped.
     ///
     /// Once a service deployment has one or more successfully running tasks, the
-    /// failed
-    /// task count resets to zero and stops being evaluated.
+    /// failed task count resets to zero and stops being evaluated.
     failed_tasks: i32 = 0,
 
     /// The Fargate ephemeral storage settings for the deployment.
@@ -42,88 +37,70 @@ pub const Deployment = struct {
     id: ?[]const u8 = null,
 
     /// The launch type the tasks in the service are using. For more information,
-    /// see [Amazon
-    /// ECS Launch
-    /// Types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer
-    /// Guide*.
+    /// see [Amazon ECS Launch
+    /// Types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer Guide*.
     launch_type: ?LaunchType = null,
 
     /// The VPC subnet and security group configuration for tasks that receive their
-    /// own
-    /// elastic network interface by using the `awsvpc` networking mode.
+    /// own elastic network interface by using the `awsvpc` networking mode.
     network_configuration: ?NetworkConfiguration = null,
 
-    /// The number of tasks in the deployment that are in the `PENDING`
-    /// status.
+    /// The number of tasks in the deployment that are in the `PENDING` status.
     pending_count: i32 = 0,
 
     /// The operating system that your tasks in the service, or tasks are running
-    /// on. A
-    /// platform family is specified only for tasks using the Fargate launch type.
+    /// on. A platform family is specified only for tasks using the Fargate launch
+    /// type.
     ///
     /// All tasks that run as part of this service must use the same
-    /// `platformFamily` value as the service, for example, `
-    /// LINUX.`.
+    /// `platformFamily` value as the service, for example, ` LINUX.`.
     platform_family: ?[]const u8 = null,
 
     /// The platform version that your tasks in the service run on. A platform
-    /// version is only
-    /// specified for tasks using the Fargate launch type. If one isn't specified,
-    /// the
-    /// `LATEST` platform version is used. For more information, see [Fargate
-    /// Platform
-    /// Versions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html) in the *Amazon Elastic
-    /// Container Service Developer Guide*.
+    /// version is only specified for tasks using the Fargate launch type. If one
+    /// isn't specified, the `LATEST` platform version is used. For more
+    /// information, see [Fargate Platform
+    /// Versions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html) in the *Amazon Elastic Container Service Developer Guide*.
     platform_version: ?[]const u8 = null,
 
-    /// The `rolloutState` of a service is only returned for services that use
-    /// the rolling update (`ECS`) deployment type that aren't behind a Classic
-    /// Load Balancer.
+    /// The `rolloutState` of a service is only returned for services that use the
+    /// rolling update (`ECS`) deployment type that aren't behind a Classic Load
+    /// Balancer.
     ///
     /// The rollout state of the deployment. When a service deployment is started,
-    /// it begins
-    /// in an `IN_PROGRESS` state. When the service reaches a steady state, the
-    /// deployment transitions to a `COMPLETED` state. If the service fails to reach
-    /// a steady state and circuit breaker is turned on, the deployment transitions
-    /// to a
-    /// `FAILED` state. A deployment in `FAILED` state doesn't launch
-    /// any new tasks. For more information, see
+    /// it begins in an `IN_PROGRESS` state. When the service reaches a steady
+    /// state, the deployment transitions to a `COMPLETED` state. If the service
+    /// fails to reach a steady state and circuit breaker is turned on, the
+    /// deployment transitions to a `FAILED` state. A deployment in `FAILED` state
+    /// doesn't launch any new tasks. For more information, see
     /// [DeploymentCircuitBreaker](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeploymentCircuitBreaker.html).
     rollout_state: ?DeploymentRolloutState = null,
 
     /// A description of the rollout state of a deployment.
     rollout_state_reason: ?[]const u8 = null,
 
-    /// The number of tasks in the deployment that are in the `RUNNING`
-    /// status.
+    /// The number of tasks in the deployment that are in the `RUNNING` status.
     running_count: i32 = 0,
 
     /// The details of the Service Connect configuration that's used by this
-    /// deployment.
-    /// Compare the configuration between multiple deployments when troubleshooting
-    /// issues with
-    /// new deployments.
+    /// deployment. Compare the configuration between multiple deployments when
+    /// troubleshooting issues with new deployments.
     ///
     /// The configuration for this service to discover and connect to services, and
-    /// be
-    /// discovered by, and connected from, other services within a namespace.
+    /// be discovered by, and connected from, other services within a namespace.
     ///
     /// Tasks that run in a namespace can use short names to connect to services in
-    /// the
-    /// namespace. Tasks can connect to services across all of the clusters in the
-    /// namespace.
-    /// Tasks connect through a managed proxy container that collects logs and
-    /// metrics for
-    /// increased visibility. Only the tasks that Amazon ECS services create are
-    /// supported with
-    /// Service Connect. For more information, see [Service
-    /// Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
-    /// in the *Amazon Elastic Container Service Developer Guide*.
+    /// the namespace. Tasks can connect to services across all of the clusters in
+    /// the namespace. Tasks connect through a managed proxy container that collects
+    /// logs and metrics for increased visibility. Only the tasks that Amazon ECS
+    /// services create are supported with Service Connect. For more information,
+    /// see [Service
+    /// Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.
     service_connect_configuration: ?ServiceConnectConfiguration = null,
 
     /// The list of Service Connect resources that are associated with this
-    /// deployment. Each
-    /// list entry maps a discovery name to a Cloud Map service name.
+    /// deployment. Each list entry maps a discovery name to a Cloud Map service
+    /// name.
     service_connect_resources: ?[]const ServiceConnectServiceResource = null,
 
     /// The status of the deployment. The following describes each state.
@@ -134,8 +111,8 @@ pub const Deployment = struct {
     ///
     /// **ACTIVE**
     ///
-    /// A service deployment that still has running tasks, but are in the process
-    /// of being replaced with a new `PRIMARY` deployment.
+    /// A service deployment that still has running tasks, but are in the process of
+    /// being replaced with a new `PRIMARY` deployment.
     ///
     /// **INACTIVE**
     ///
@@ -143,8 +120,7 @@ pub const Deployment = struct {
     status: ?[]const u8 = null,
 
     /// The most recent task definition that was specified for the tasks in the
-    /// service to
-    /// use.
+    /// service to use.
     task_definition: ?[]const u8 = null,
 
     /// The Unix timestamp for the time when the service deployment was last
@@ -153,8 +129,7 @@ pub const Deployment = struct {
 
     /// The details of the volume that was `configuredAtLaunch`. You can configure
     /// different settings like the size, throughput, volumeType, and ecryption in
-    /// [ServiceManagedEBSVolumeConfiguration](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ServiceManagedEBSVolumeConfiguration.html). The `name` of the volume
-    /// must match the `name` from the task definition.
+    /// [ServiceManagedEBSVolumeConfiguration](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ServiceManagedEBSVolumeConfiguration.html). The `name` of the volume must match the `name` from the task definition.
     volume_configurations: ?[]const ServiceVolumeConfiguration = null,
 
     /// The VPC Lattice configuration for the service deployment.

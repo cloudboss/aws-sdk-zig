@@ -20,7 +20,10 @@ pub const AuditEvent = struct {
     /// The Type of the related item.
     related_item_type: ?RelatedItemType = null,
 
-    /// The Type of an audit history event.
+    /// The type of audit history event.
+    ///
+    /// Valid Values: `Case.Created` | `Case.Updated` | `RelatedItem.Created` |
+    /// `RelatedItem.Updated` | `RelatedItem.Deleted`
     @"type": AuditEventType,
 
     pub const json_field_names = .{

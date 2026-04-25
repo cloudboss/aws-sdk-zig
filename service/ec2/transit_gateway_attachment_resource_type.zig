@@ -9,6 +9,7 @@ pub const TransitGatewayAttachmentResourceType = enum {
     peering,
     tgw_peering,
     network_function,
+    client_vpn,
 
     pub const json_field_names = .{
         .vpc = "vpc",
@@ -19,6 +20,7 @@ pub const TransitGatewayAttachmentResourceType = enum {
         .peering = "peering",
         .tgw_peering = "tgw-peering",
         .network_function = "network-function",
+        .client_vpn = "client-vpn",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -31,6 +33,7 @@ pub const TransitGatewayAttachmentResourceType = enum {
             .peering => "peering",
             .tgw_peering => "tgw-peering",
             .network_function => "network-function",
+            .client_vpn => "client-vpn",
         };
     }
 

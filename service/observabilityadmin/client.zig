@@ -355,7 +355,7 @@ pub const Client = struct {
     /// **Okta Sources (SSO, Auth0)**
     ///
     /// **Updatable:** All Amazon Web Services Secrets Manager attributes, `domain`,
-    /// `range` (SSO only), OAuth2 credentials (`client_id`, `client_secret`)
+    /// `range`, OAuth2 credentials (`client_id`, `client_secret`)
     ///
     /// **Palo Alto Networks**
     ///

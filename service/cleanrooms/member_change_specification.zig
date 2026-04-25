@@ -15,11 +15,14 @@ pub const MemberChangeSpecification = struct {
     /// The abilities granted to the collaboration member. These determine what
     /// actions the member can perform within the collaboration.
     ///
-    /// The following values are currently not supported: `CAN_QUERY`,
-    /// `CAN_RECEIVE_RESULTS,` and `CAN_RUN_JOB`.
+    /// The following values are currently not supported: `CAN_QUERY` and
+    /// `CAN_RUN_JOB`.
     ///
     /// Set the value of `memberAbilities` to `[]` to allow a member to contribute
     /// data.
+    ///
+    /// Set the value of `memberAbilities` to `[CAN_RECEIVE_RESULTS]` to allow a
+    /// member to contribute data and receive results.
     member_abilities: []const MemberAbility,
 
     pub const json_field_names = .{

@@ -21,7 +21,8 @@ pub const CreateSnapshotInput = struct {
     /// replication group.
     replication_group_id: ?[]const u8 = null,
 
-    /// A name for the snapshot being created.
+    /// A name for the snapshot being created. This value is stored as a lowercase
+    /// string.
     snapshot_name: []const u8,
 
     /// A list of tags to be added to this resource. A tag is a key-value pair. A

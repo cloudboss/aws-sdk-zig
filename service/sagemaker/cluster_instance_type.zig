@@ -116,6 +116,13 @@ pub const ClusterInstanceType = enum {
     ml_r7_i_16_xlarge,
     ml_r7_i_24_xlarge,
     ml_r7_i_48_xlarge,
+    ml_r5_d_16_xlarge,
+    ml_g7_e_2_xlarge,
+    ml_g7_e_4_xlarge,
+    ml_g7_e_8_xlarge,
+    ml_g7_e_12_xlarge,
+    ml_g7_e_24_xlarge,
+    ml_g7_e_48_xlarge,
     ml_p6_b300_48_xlarge,
 
     pub const json_field_names = .{
@@ -234,6 +241,13 @@ pub const ClusterInstanceType = enum {
         .ml_r7_i_16_xlarge = "ml.r7i.16xlarge",
         .ml_r7_i_24_xlarge = "ml.r7i.24xlarge",
         .ml_r7_i_48_xlarge = "ml.r7i.48xlarge",
+        .ml_r5_d_16_xlarge = "ml.r5d.16xlarge",
+        .ml_g7_e_2_xlarge = "ml.g7e.2xlarge",
+        .ml_g7_e_4_xlarge = "ml.g7e.4xlarge",
+        .ml_g7_e_8_xlarge = "ml.g7e.8xlarge",
+        .ml_g7_e_12_xlarge = "ml.g7e.12xlarge",
+        .ml_g7_e_24_xlarge = "ml.g7e.24xlarge",
+        .ml_g7_e_48_xlarge = "ml.g7e.48xlarge",
         .ml_p6_b300_48_xlarge = "ml.p6-b300.48xlarge",
     };
 
@@ -354,6 +368,13 @@ pub const ClusterInstanceType = enum {
             .ml_r7_i_16_xlarge => "ml.r7i.16xlarge",
             .ml_r7_i_24_xlarge => "ml.r7i.24xlarge",
             .ml_r7_i_48_xlarge => "ml.r7i.48xlarge",
+            .ml_r5_d_16_xlarge => "ml.r5d.16xlarge",
+            .ml_g7_e_2_xlarge => "ml.g7e.2xlarge",
+            .ml_g7_e_4_xlarge => "ml.g7e.4xlarge",
+            .ml_g7_e_8_xlarge => "ml.g7e.8xlarge",
+            .ml_g7_e_12_xlarge => "ml.g7e.12xlarge",
+            .ml_g7_e_24_xlarge => "ml.g7e.24xlarge",
+            .ml_g7_e_48_xlarge => "ml.g7e.48xlarge",
             .ml_p6_b300_48_xlarge => "ml.p6-b300.48xlarge",
         };
     }

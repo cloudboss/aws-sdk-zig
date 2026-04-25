@@ -5,7 +5,7 @@
 /// the field before the change, and the value of the field after the change.
 pub const FindingHistoryUpdate = struct {
     /// The value of the ASFF field after the finding change event. To preserve
-    /// storage and readability, Security Hub omits this value
+    /// storage and readability, Security Hub CSPM omits this value
     /// if [
     /// `FindingHistoryRecord`
     /// ](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_FindingHistoryRecord.html) exceeds database limits.

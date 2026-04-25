@@ -3,16 +3,19 @@ const std = @import("std");
 pub const VerificationStatus = enum {
     pending,
     verified,
+    unsupported,
 
     pub const json_field_names = .{
         .pending = "PENDING",
         .verified = "VERIFIED",
+        .unsupported = "UNSUPPORTED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .pending => "PENDING",
             .verified => "VERIFIED",
+            .unsupported => "UNSUPPORTED",
         };
     }
 

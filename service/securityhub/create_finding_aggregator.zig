@@ -8,8 +8,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 pub const CreateFindingAggregatorInput = struct {
     /// Indicates whether to aggregate findings from all of the available Regions in
     /// the current partition. Also determines whether to automatically aggregate
-    /// findings from new Regions as Security Hub supports them and you opt into
-    /// them.
+    /// findings from new Regions as Security Hub CSPM supports them and you opt
+    /// into them.
     ///
     /// The selected option also determines how to use the Regions provided in the
     /// Regions list.
@@ -17,19 +17,19 @@ pub const CreateFindingAggregatorInput = struct {
     /// The options are as follows:
     ///
     /// * `ALL_REGIONS` - Aggregates findings from all of the Regions where Security
-    ///   Hub is enabled. When you choose this option, Security Hub also
-    ///   automatically aggregates findings from new Regions as Security Hub
+    ///   Hub CSPM is enabled. When you choose this option, Security Hub CSPM also
+    ///   automatically aggregates findings from new Regions as Security Hub CSPM
     ///   supports them and you opt into them.
     ///
     /// * `ALL_REGIONS_EXCEPT_SPECIFIED` - Aggregates findings from all of the
-    ///   Regions where Security Hub is enabled, except for the Regions listed in
-    ///   the `Regions` parameter. When you choose this option, Security Hub also
-    ///   automatically aggregates findings from new Regions as Security Hub
-    ///   supports them and you opt into them.
+    ///   Regions where Security Hub CSPM is enabled, except for the Regions listed
+    ///   in the `Regions` parameter. When you choose this option, Security Hub CSPM
+    ///   also automatically aggregates findings from new Regions as Security Hub
+    ///   CSPM supports them and you opt into them.
     ///
     /// * `SPECIFIED_REGIONS` - Aggregates findings only from the Regions listed in
-    ///   the `Regions` parameter. Security Hub does not automatically aggregate
-    ///   findings from new Regions.
+    ///   the `Regions` parameter. Security Hub CSPM does not automatically
+    ///   aggregate findings from new Regions.
     ///
     /// * `NO_REGIONS` - Aggregates no data because no Regions are selected as
     ///   linked Regions.
@@ -205,6 +205,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "LimitExceededException")) {
         return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organization_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationalUnitNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organizational_unit_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

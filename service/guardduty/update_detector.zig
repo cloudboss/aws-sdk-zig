@@ -13,15 +13,14 @@ pub const UpdateDetectorInput = struct {
     ///
     /// There might be regional differences because some data sources might not be
     /// available in all the Amazon Web Services Regions where GuardDuty is
-    /// presently supported. For more
-    /// information, see [Regions and
+    /// presently supported. For more information, see [Regions and
     /// endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
     data_sources: ?DataSourceConfigurations = null,
 
     /// The unique ID of the detector to update.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 
@@ -32,8 +31,7 @@ pub const UpdateDetectorInput = struct {
     features: ?[]const DetectorFeatureConfiguration = null,
 
     /// An enum value that specifies how frequently findings are exported, such as
-    /// to CloudWatch
-    /// Events.
+    /// to CloudWatch Events.
     finding_publishing_frequency: ?FindingPublishingFrequency = null,
 
     pub const json_field_names = .{

@@ -16,15 +16,15 @@ pub const EnableIpamPolicyInput = struct {
     /// The ID of the IPAM policy to enable.
     ipam_policy_id: []const u8,
 
+    /// A target can be an individual Amazon Web Services account or an entity
+    /// within an Amazon Web Services Organization to which an IPAM policy can be
+    /// applied.
+    ///
     /// The ID of the Amazon Web Services Organizations target for which to enable
     /// the IPAM policy. This parameter is required only when IPAM is integrated
     /// with Amazon Web Services Organizations. When IPAM is not integrated with
     /// Amazon Web Services Organizations, omit this parameter and the policy will
     /// apply to the current account.
-    ///
-    /// A target can be an individual Amazon Web Services account or an entity
-    /// within an Amazon Web Services Organization to which an IPAM policy can be
-    /// applied.
     organization_target_id: ?[]const u8 = null,
 };
 

@@ -20,8 +20,9 @@ pub const UpdateEvaluatorInput = struct {
     /// The updated description of the evaluator.
     description: ?[]const u8 = null,
 
-    /// The updated configuration for the evaluator, including LLM-as-a-Judge
-    /// settings with instructions, rating scale, and model configuration.
+    /// The updated configuration for the evaluator. Specify either LLM-as-a-Judge
+    /// settings with instructions, rating scale, and model configuration, or
+    /// code-based settings with a customer-managed Lambda function.
     evaluator_config: ?EvaluatorConfig = null,
 
     /// The unique identifier of the evaluator to update.

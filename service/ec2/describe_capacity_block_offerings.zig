@@ -8,6 +8,14 @@ const CapacityBlockOffering = @import("capacity_block_offering.zig").CapacityBlo
 const serde = @import("serde.zig");
 
 pub const DescribeCapacityBlockOfferingsInput = struct {
+    /// Include all Availability Zones and Local Zones, regardless of your opt-in
+    /// status.
+    /// If you do not use this parameter, the results include available offerings
+    /// from all
+    /// Availability Zones in the Amazon Web Services Region and Local Zones you are
+    /// opted into.
+    all_availability_zones: ?bool = null,
+
     /// The reservation duration for the Capacity Block, in hours. You must specify
     /// the
     /// duration in 1-day increments up 14 days, and in 7-day increments up to 182
@@ -97,6 +105,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeCapacityBlockOf
     var body_buf: std.ArrayList(u8) = .{};
 
     try body_buf.appendSlice(allocator, "Action=DescribeCapacityBlockOfferings&Version=2016-11-15");
+    if (input.all_availability_zones) |v| {
+        try body_buf.appendSlice(allocator, "&AllAvailabilityZones=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
+    }
     try body_buf.appendSlice(allocator, "&CapacityDurationHours=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.capacity_duration_hours}) catch "");
     if (input.dry_run) |v| {

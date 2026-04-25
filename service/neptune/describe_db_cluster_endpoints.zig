@@ -56,7 +56,7 @@ pub const DescribeDBClusterEndpointsOutput = struct {
     /// and matching any filter conditions.
     db_cluster_endpoints: ?[]const DBClusterEndpoint = null,
 
-    /// n optional pagination token provided by a previous
+    /// An optional pagination token provided by a previous
     /// `DescribeDBClusterEndpoints` request.
     /// If this parameter is specified, the response includes
     /// only records beyond the marker,

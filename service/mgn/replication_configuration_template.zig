@@ -49,6 +49,9 @@ pub const ReplicationConfigurationTemplate = struct {
     /// Replication Configuration template Staging Area Tags.
     staging_area_tags: ?[]const aws.map.StringMapEntry = null,
 
+    /// Replication Configuration template store snapshot on local zone.
+    store_snapshot_on_local_zone: ?bool = null,
+
     /// Replication Configuration template Tags.
     tags: ?[]const aws.map.StringMapEntry = null,
 
@@ -73,6 +76,7 @@ pub const ReplicationConfigurationTemplate = struct {
         .replication_servers_security_groups_i_ds = "replicationServersSecurityGroupsIDs",
         .staging_area_subnet_id = "stagingAreaSubnetId",
         .staging_area_tags = "stagingAreaTags",
+        .store_snapshot_on_local_zone = "storeSnapshotOnLocalZone",
         .tags = "tags",
         .use_dedicated_replication_server = "useDedicatedReplicationServer",
         .use_fips_endpoint = "useFipsEndpoint",

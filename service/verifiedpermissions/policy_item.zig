@@ -27,6 +27,10 @@ pub const PolicyItem = struct {
     /// The date and time the policy was most recently updated.
     last_updated_date: i64,
 
+    /// The name of the policy, if one was assigned when the policy was created or
+    /// last updated.
+    name: ?[]const u8 = null,
+
     /// The identifier of the policy you want information about.
     policy_id: []const u8,
 
@@ -52,6 +56,7 @@ pub const PolicyItem = struct {
         .definition = "definition",
         .effect = "effect",
         .last_updated_date = "lastUpdatedDate",
+        .name = "name",
         .policy_id = "policyId",
         .policy_store_id = "policyStoreId",
         .policy_type = "policyType",

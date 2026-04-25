@@ -13,5 +13,7 @@ pub const MetricsAndOperator = struct {
     prefix: ?[]const u8 = null,
 
     /// The list of tags used when evaluating an AND predicate.
+    ///
+    /// `Tag` filters are not supported for directory buckets.
     tags: ?[]const Tag = null,
 };

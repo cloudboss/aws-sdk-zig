@@ -1,6 +1,7 @@
 const aws = @import("aws");
 
 const CustomOutputConfiguration = @import("custom_output_configuration.zig").CustomOutputConfiguration;
+const DataAutomationLibraryConfiguration = @import("data_automation_library_configuration.zig").DataAutomationLibraryConfiguration;
 const OverrideConfiguration = @import("override_configuration.zig").OverrideConfiguration;
 const DataAutomationProjectStage = @import("data_automation_project_stage.zig").DataAutomationProjectStage;
 const DataAutomationProjectType = @import("data_automation_project_type.zig").DataAutomationProjectType;
@@ -12,6 +13,8 @@ pub const DataAutomationProject = struct {
     creation_time: i64,
 
     custom_output_configuration: ?CustomOutputConfiguration = null,
+
+    data_automation_library_configuration: ?DataAutomationLibraryConfiguration = null,
 
     kms_encryption_context: ?[]const aws.map.StringMapEntry = null,
 
@@ -38,6 +41,7 @@ pub const DataAutomationProject = struct {
     pub const json_field_names = .{
         .creation_time = "creationTime",
         .custom_output_configuration = "customOutputConfiguration",
+        .data_automation_library_configuration = "dataAutomationLibraryConfiguration",
         .kms_encryption_context = "kmsEncryptionContext",
         .kms_key_id = "kmsKeyId",
         .last_modified_time = "lastModifiedTime",

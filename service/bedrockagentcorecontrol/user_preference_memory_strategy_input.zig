@@ -9,9 +9,13 @@ pub const UserPreferenceMemoryStrategyInput = struct {
     /// The namespaces associated with the user preference memory strategy.
     namespaces: ?[]const []const u8 = null,
 
+    /// The namespaceTemplates associated with the user preference memory strategy.
+    namespace_templates: ?[]const []const u8 = null,
+
     pub const json_field_names = .{
         .description = "description",
         .name = "name",
         .namespaces = "namespaces",
+        .namespace_templates = "namespaceTemplates",
     };
 };

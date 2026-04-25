@@ -122,6 +122,12 @@ pub const ProcessingInstanceType = enum {
     ml_r7_i_24_xlarge,
     ml_r7_i_48_xlarge,
     ml_p5_4_xlarge,
+    ml_g7_e_2_xlarge,
+    ml_g7_e_4_xlarge,
+    ml_g7_e_8_xlarge,
+    ml_g7_e_12_xlarge,
+    ml_g7_e_24_xlarge,
+    ml_g7_e_48_xlarge,
 
     pub const json_field_names = .{
         .ml_t3_medium = "ml.t3.medium",
@@ -245,6 +251,12 @@ pub const ProcessingInstanceType = enum {
         .ml_r7_i_24_xlarge = "ml.r7i.24xlarge",
         .ml_r7_i_48_xlarge = "ml.r7i.48xlarge",
         .ml_p5_4_xlarge = "ml.p5.4xlarge",
+        .ml_g7_e_2_xlarge = "ml.g7e.2xlarge",
+        .ml_g7_e_4_xlarge = "ml.g7e.4xlarge",
+        .ml_g7_e_8_xlarge = "ml.g7e.8xlarge",
+        .ml_g7_e_12_xlarge = "ml.g7e.12xlarge",
+        .ml_g7_e_24_xlarge = "ml.g7e.24xlarge",
+        .ml_g7_e_48_xlarge = "ml.g7e.48xlarge",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -370,6 +382,12 @@ pub const ProcessingInstanceType = enum {
             .ml_r7_i_24_xlarge => "ml.r7i.24xlarge",
             .ml_r7_i_48_xlarge => "ml.r7i.48xlarge",
             .ml_p5_4_xlarge => "ml.p5.4xlarge",
+            .ml_g7_e_2_xlarge => "ml.g7e.2xlarge",
+            .ml_g7_e_4_xlarge => "ml.g7e.4xlarge",
+            .ml_g7_e_8_xlarge => "ml.g7e.8xlarge",
+            .ml_g7_e_12_xlarge => "ml.g7e.12xlarge",
+            .ml_g7_e_24_xlarge => "ml.g7e.24xlarge",
+            .ml_g7_e_48_xlarge => "ml.g7e.48xlarge",
         };
     }
 

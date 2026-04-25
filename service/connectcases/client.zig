@@ -42,6 +42,7 @@ const update_case = @import("update_case.zig");
 const update_case_rule = @import("update_case_rule.zig");
 const update_field = @import("update_field.zig");
 const update_layout = @import("update_layout.zig");
+const update_related_item = @import("update_related_item.zig");
 const update_template = @import("update_template.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
@@ -245,8 +246,7 @@ pub const Client = struct {
         return delete_domain.execute(self, allocator, input, options);
     }
 
-    /// Deletes a field from a cases template. You can delete up to 100 fields per
-    /// domain.
+    /// Deletes a field from a cases template.
     ///
     /// After a field is deleted:
     ///
@@ -511,6 +511,32 @@ pub const Client = struct {
     /// configurable.
     pub fn updateLayout(self: *Self, allocator: std.mem.Allocator, input: update_layout.UpdateLayoutInput, options: CallOptions) !update_layout.UpdateLayoutOutput {
         return update_layout.execute(self, allocator, input, options);
+    }
+
+    /// Updates the content of a related item associated with a case. The following
+    /// related item types are supported:
+    ///
+    /// * **Comment** - Update the text content of an existing comment
+    /// * **Custom** - Update the fields of a custom related item. You can add,
+    ///   modify, and remove fields from a custom related item. There's a quota for
+    ///   the number of fields allowed in a Custom type related item. See [Amazon
+    ///   Connect Cases
+    ///   quotas](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#cases-quotas).
+    ///
+    /// **Important things to know**
+    ///
+    /// * When updating a Custom related item, all existing and new fields, and
+    ///   their associated values should be included in the request. Fields not
+    ///   included as part of this request will be removed.
+    /// * If you provide a value for `performedBy.userArn` you must also have
+    ///   [DescribeUser](https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html) permission on the ARN of the user that you provide.
+    /// * [System case
+    ///   fields](https://docs.aws.amazon.com/connect/latest/adminguide/case-fields.html#system-case-fields) cannot be used in a custom related item.
+    ///
+    /// **Endpoints**: See [Amazon Connect endpoints and
+    /// quotas](https://docs.aws.amazon.com/general/latest/gr/connect_region.html).
+    pub fn updateRelatedItem(self: *Self, allocator: std.mem.Allocator, input: update_related_item.UpdateRelatedItemInput, options: CallOptions) !update_related_item.UpdateRelatedItemOutput {
+        return update_related_item.execute(self, allocator, input, options);
     }
 
     /// Updates the attributes of an existing template. The template attributes that

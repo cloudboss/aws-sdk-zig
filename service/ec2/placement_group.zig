@@ -1,3 +1,4 @@
+const OperatorResponse = @import("operator_response.zig").OperatorResponse;
 const SpreadLevel = @import("spread_level.zig").SpreadLevel;
 const PlacementGroupState = @import("placement_group_state.zig").PlacementGroupState;
 const PlacementStrategy = @import("placement_strategy.zig").PlacementStrategy;
@@ -16,6 +17,9 @@ pub const PlacementGroup = struct {
 
     /// Reserved for future use.
     linked_group_id: ?[]const u8 = null,
+
+    /// The service provider that manages the Placement Group.
+    operator: ?OperatorResponse = null,
 
     /// The number of partitions. Valid only if **strategy** is
     /// set to `partition`.

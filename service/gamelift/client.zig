@@ -73,6 +73,7 @@ const get_compute_access = @import("get_compute_access.zig");
 const get_compute_auth_token = @import("get_compute_auth_token.zig");
 const get_game_session_log_url = @import("get_game_session_log_url.zig");
 const get_instance_access = @import("get_instance_access.zig");
+const get_player_connection_details = @import("get_player_connection_details.zig");
 const list_aliases = @import("list_aliases.zig");
 const list_builds = @import("list_builds.zig");
 const list_compute = @import("list_compute.zig");
@@ -1799,7 +1800,7 @@ pub const Client = struct {
         return describe_ec2_instance_limits.execute(self, allocator, input, options);
     }
 
-    /// **This API works with the following fleet types:** EC2, Anywhere, Container
+    /// **This API works with the following fleet types:** EC2, Anywhere
     ///
     /// Retrieves core fleet-wide properties for fleets in an Amazon Web Services
     /// Region. Properties include the computing
@@ -2241,7 +2242,11 @@ pub const Client = struct {
     /// you must configure an Amazon Simple Notification Service (SNS) topic to
     /// receive notifications from FlexMatch or
     /// queues. Continuously polling with `DescribeGameSessionPlacement` should only
-    /// be used for games in development with low game session usage.
+    /// be used for games in development with low game session usage. For a
+    /// reference
+    /// implementation of event-based game session placement tracking, see [
+    /// Event-based game session placement
+    /// guidance](https://github.com/amazon-gamelift/amazon-gamelift-toolkit/tree/main/event-based-session-placement) in the Amazon GameLift Toolkit.
     pub fn describeGameSessionPlacement(self: *Self, allocator: std.mem.Allocator, input: describe_game_session_placement.DescribeGameSessionPlacementInput, options: CallOptions) !describe_game_session_placement.DescribeGameSessionPlacementOutput {
         return describe_game_session_placement.execute(self, allocator, input, options);
     }
@@ -2319,7 +2324,7 @@ pub const Client = struct {
         return describe_game_sessions.execute(self, allocator, input, options);
     }
 
-    /// **This API works with the following fleet types:** EC2
+    /// **This API works with the following fleet types:**EC2, Container
     ///
     /// Retrieves information about the EC2 instances in an Amazon GameLift Servers
     /// managed fleet, including
@@ -2736,6 +2741,35 @@ pub const Client = struct {
         return get_instance_access.execute(self, allocator, input, options);
     }
 
+    /// **This API works with the following fleet types:** EC2 (server SDK 5.x or
+    /// later), Container
+    ///
+    /// Retrieves connection details for game clients to connect to game sessions.
+    ///
+    /// **Player gateway benefits:** DDoS protection with negligible impact to
+    /// latency.
+    ///
+    /// To enable player gateway on your fleet, set `PlayerGatewayMode` to `ENABLED`
+    /// or `REQUIRED` when calling
+    /// [CreateFleet](https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateFleet.html) or
+    /// [CreateContainerFleet](https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateContainerFleet.html).
+    ///
+    /// **How to use:** After creating a game session and adding players, call this
+    /// operation with the game session ID and player IDs. When player gateway is
+    /// enabled, the response includes connection endpoints and player gateway
+    /// tokens that your game clients can use to connect to the game session through
+    /// player gateway. To learn more about player gateway integration, see [DDoS
+    /// protection with Amazon GameLift Servers player
+    /// gateway](https://docs.aws.amazon.com/gameliftservers/latest/developerguide/ddos-protection-intro.html).
+    ///
+    /// When player gateway is disabled or in locations where player gateway is not
+    /// supported, this operation returns game server connection information without
+    /// player gateway tokens, so that your game clients directly connect to the
+    /// game server endpoint.
+    pub fn getPlayerConnectionDetails(self: *Self, allocator: std.mem.Allocator, input: get_player_connection_details.GetPlayerConnectionDetailsInput, options: CallOptions) !get_player_connection_details.GetPlayerConnectionDetailsOutput {
+        return get_player_connection_details.execute(self, allocator, input, options);
+    }
+
     /// **This API works with the following fleet types:** EC2, Anywhere, Container
     ///
     /// Retrieves all aliases for this Amazon Web Services account. You can filter
@@ -2995,20 +3029,14 @@ pub const Client = struct {
         return list_game_servers.execute(self, allocator, input, options);
     }
 
-    /// **This API works with the following fleet types:** Anywhere
+    /// **This API works with the following fleet types:** EC2, Anywhere, Container
     ///
     /// Lists all custom and Amazon Web Services locations where Amazon GameLift
     /// Servers can host game servers.
-    ///
-    /// Note that if you call this API using a location that doesn't have a service
-    /// endpoint,
-    /// such as one that can only be a remote location in a multi-location fleet,
-    /// the API
-    /// returns an error.
-    ///
-    /// Consult the table of supported locations in [Amazon GameLift Servers service
-    /// locations](https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html) to identify home Regions that support single and multi-location
-    /// fleets.
+    /// This operation also returns UDP ping beacon information for
+    /// locations, which you can use to measure network latency between player
+    /// devices
+    /// and potential hosting locations.
     ///
     /// **Learn more**
     ///
@@ -3383,10 +3411,15 @@ pub const Client = struct {
     /// [Search game sessions by game
     /// property](https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-search).
     ///
-    /// Avoid using periods (".") in property keys if you plan to search for game
-    /// sessions by properties. Property keys containing periods cannot be searched
-    /// and will be filtered out from search results due to search index
-    /// limitations.
+    /// * Avoid using periods (".") in property keys if you plan to search for game
+    ///   sessions by properties. Property keys containing periods cannot be
+    ///   searched and will be filtered out from search results due to search index
+    ///   limitations.
+    ///
+    /// * If you use SearchGameSessions API, there is a limit of 500 game property
+    ///   keys across all game sessions and all fleets per region. If the limit is
+    ///   exceeded, there will potentially be game session entries missing from
+    ///   SearchGameSessions API results.
     ///
     /// * **maximumSessions** -- Maximum number of player
     /// sessions allowed for a game session.

@@ -10,8 +10,8 @@ pub const FlinkRunConfiguration = struct {
     /// corresponds to valid application data. For more information, see
     /// [
     /// Allowing Non-Restored
-    /// State](https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/ops/state/savepoints/#allowing-non-restored-state) in the [Apache Flink
-    /// documentation](https://nightlies.apache.org/flink/flink-docs-release-1.20/).
+    /// State](https://nightlies.apache.org/flink/flink-docs-release-2.2/docs/ops/state/savepoints/#allowing-non-restored-state) in the [Apache Flink
+    /// documentation](https://nightlies.apache.org/flink/flink-docs-release-2.2/).
     ///
     /// This value defaults to `false`. If you update your application without
     /// specifying this parameter, `AllowNonRestoredState` will be set to `false`,

@@ -12,10 +12,25 @@ const EntityIdentifier = @import("entity_identifier.zig").EntityIdentifier;
 
 pub const GetPolicyInput = struct {
     /// Specifies the ID of the policy you want information about.
+    ///
+    /// You can use the policy name in place of the policy ID. When using a name,
+    /// prefix it with `name/`. For example:
+    ///
+    /// * ID: `SPEXAMPLEabcdefg111111`
+    /// * Name: `name/example-policy`
     policy_id: []const u8,
 
     /// Specifies the ID of the policy store that contains the policy that you want
     /// information about.
+    ///
+    /// To specify a policy store, use its ID or alias name. When using an alias
+    /// name, prefix it with `policy-store-alias/`. For example:
+    ///
+    /// * ID: `PSEXAMPLEabcdefg111111`
+    /// * Alias name: `policy-store-alias/example-policy-store`
+    ///
+    /// To view aliases, use
+    /// [ListPolicyStoreAliases](https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html).
     policy_store_id: []const u8,
 
     pub const json_field_names = .{
@@ -43,6 +58,10 @@ pub const GetPolicyOutput = struct {
     /// The date and time that the policy was last updated.
     last_updated_date: i64,
 
+    /// The name of the policy, if one was assigned when the policy was created or
+    /// last updated.
+    name: ?[]const u8 = null,
+
     /// The unique ID of the policy that you want information about.
     policy_id: []const u8,
 
@@ -67,6 +86,7 @@ pub const GetPolicyOutput = struct {
         .definition = "definition",
         .effect = "effect",
         .last_updated_date = "lastUpdatedDate",
+        .name = "name",
         .policy_id = "policyId",
         .policy_store_id = "policyStoreId",
         .policy_type = "policyType",

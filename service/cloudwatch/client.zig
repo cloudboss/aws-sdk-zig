@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const delete_alarm_mute_rule = @import("delete_alarm_mute_rule.zig");
 const delete_alarms = @import("delete_alarms.zig");
 const delete_anomaly_detector = @import("delete_anomaly_detector.zig");
 const delete_dashboards = @import("delete_dashboards.zig");
@@ -16,17 +17,21 @@ const disable_alarm_actions = @import("disable_alarm_actions.zig");
 const disable_insight_rules = @import("disable_insight_rules.zig");
 const enable_alarm_actions = @import("enable_alarm_actions.zig");
 const enable_insight_rules = @import("enable_insight_rules.zig");
+const get_alarm_mute_rule = @import("get_alarm_mute_rule.zig");
 const get_dashboard = @import("get_dashboard.zig");
 const get_insight_rule_report = @import("get_insight_rule_report.zig");
 const get_metric_data = @import("get_metric_data.zig");
 const get_metric_statistics = @import("get_metric_statistics.zig");
 const get_metric_stream = @import("get_metric_stream.zig");
 const get_metric_widget_image = @import("get_metric_widget_image.zig");
+const get_o_tel_enrichment = @import("get_o_tel_enrichment.zig");
+const list_alarm_mute_rules = @import("list_alarm_mute_rules.zig");
 const list_dashboards = @import("list_dashboards.zig");
 const list_managed_insight_rules = @import("list_managed_insight_rules.zig");
 const list_metric_streams = @import("list_metric_streams.zig");
 const list_metrics = @import("list_metrics.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
+const put_alarm_mute_rule = @import("put_alarm_mute_rule.zig");
 const put_anomaly_detector = @import("put_anomaly_detector.zig");
 const put_composite_alarm = @import("put_composite_alarm.zig");
 const put_dashboard = @import("put_dashboard.zig");
@@ -37,11 +42,14 @@ const put_metric_data = @import("put_metric_data.zig");
 const put_metric_stream = @import("put_metric_stream.zig");
 const set_alarm_state = @import("set_alarm_state.zig");
 const start_metric_streams = @import("start_metric_streams.zig");
+const start_o_tel_enrichment = @import("start_o_tel_enrichment.zig");
 const stop_metric_streams = @import("stop_metric_streams.zig");
+const stop_o_tel_enrichment = @import("stop_o_tel_enrichment.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
+const waiters = @import("waiters.zig");
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -69,6 +77,23 @@ pub const Client = struct {
 
     pub fn deinit(self: *Self) void {
         self.http_client.deinit();
+    }
+
+    /// Deletes a specific alarm mute rule.
+    ///
+    /// When you delete a mute rule, any alarms that are currently being muted by
+    /// that rule are immediately unmuted. If those alarms are in an ALARM state,
+    /// their configured actions will trigger.
+    ///
+    /// This operation is idempotent. If you delete a mute rule that does not exist,
+    /// the operation succeeds without returning an error.
+    ///
+    /// **Permissions**
+    ///
+    /// To delete a mute rule, you need the `cloudwatch:DeleteAlarmMuteRule`
+    /// permission on the alarm mute rule resource.
+    pub fn deleteAlarmMuteRule(self: *Self, allocator: std.mem.Allocator, input: delete_alarm_mute_rule.DeleteAlarmMuteRuleInput, options: CallOptions) !delete_alarm_mute_rule.DeleteAlarmMuteRuleOutput {
+        return delete_alarm_mute_rule.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified alarms. You can delete up to 100 alarms in one
@@ -234,6 +259,29 @@ pub const Client = struct {
     /// immediately begin analyzing log data.
     pub fn enableInsightRules(self: *Self, allocator: std.mem.Allocator, input: enable_insight_rules.EnableInsightRulesInput, options: CallOptions) !enable_insight_rules.EnableInsightRulesOutput {
         return enable_insight_rules.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves details for a specific alarm mute rule.
+    ///
+    /// This operation returns complete information about the mute rule, including
+    /// its configuration, status, targeted alarms, and metadata.
+    ///
+    /// The returned status indicates the current state of the mute rule:
+    ///
+    /// * **SCHEDULED**: The mute rule is configured and will become active in the
+    ///   future
+    ///
+    /// * **ACTIVE**: The mute rule is currently muting alarm actions
+    ///
+    /// * **EXPIRED**: The mute rule has passed its expiration date and will no
+    ///   longer become active
+    ///
+    /// **Permissions**
+    ///
+    /// To retrieve details for a mute rule, you need the
+    /// `cloudwatch:GetAlarmMuteRule` permission on the alarm mute rule resource.
+    pub fn getAlarmMuteRule(self: *Self, allocator: std.mem.Allocator, input: get_alarm_mute_rule.GetAlarmMuteRuleInput, options: CallOptions) !get_alarm_mute_rule.GetAlarmMuteRuleOutput {
+        return get_alarm_mute_rule.execute(self, allocator, input, options);
     }
 
     /// Displays the details of the dashboard that you specify.
@@ -483,6 +531,34 @@ pub const Client = struct {
         return get_metric_widget_image.execute(self, allocator, input, options);
     }
 
+    /// Returns the current status of vended metric enrichment for the account,
+    /// including
+    /// whether CloudWatch vended metrics are enriched with resource ARN and
+    /// resource tag
+    /// labels and queryable using PromQL. For the list of supported resources, see
+    /// [Supported AWS infrastructure
+    /// metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html).
+    pub fn getOTelEnrichment(self: *Self, allocator: std.mem.Allocator, input: get_o_tel_enrichment.GetOTelEnrichmentInput, options: CallOptions) !get_o_tel_enrichment.GetOTelEnrichmentOutput {
+        return get_o_tel_enrichment.execute(self, allocator, input, options);
+    }
+
+    /// Lists alarm mute rules in your Amazon Web Services account and region.
+    ///
+    /// You can filter the results by alarm name to find all mute rules targeting a
+    /// specific alarm, or by status to find rules that are scheduled, active, or
+    /// expired.
+    ///
+    /// This operation supports pagination for accounts with many mute rules. Use
+    /// the `MaxRecords` and `NextToken` parameters to retrieve results in multiple
+    /// calls.
+    ///
+    /// **Permissions**
+    ///
+    /// To list mute rules, you need the `cloudwatch:ListAlarmMuteRules` permission.
+    pub fn listAlarmMuteRules(self: *Self, allocator: std.mem.Allocator, input: list_alarm_mute_rules.ListAlarmMuteRulesInput, options: CallOptions) !list_alarm_mute_rules.ListAlarmMuteRulesOutput {
+        return list_alarm_mute_rules.execute(self, allocator, input, options);
+    }
+
     /// Returns a list of the dashboards for your account. If you include
     /// `DashboardNamePrefix`, only those dashboards with names starting with the
     /// prefix are listed. Otherwise, all dashboards in your account are listed.
@@ -538,6 +614,44 @@ pub const Client = struct {
     /// Contributor Insights rules support tagging.
     pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
+    }
+
+    /// Creates or updates an alarm mute rule.
+    ///
+    /// Alarm mute rules automatically mute alarm actions during predefined time
+    /// windows. When a mute rule is active, targeted alarms continue to evaluate
+    /// metrics and transition between states, but their configured actions (such as
+    /// Amazon SNS notifications or Auto Scaling actions) are muted.
+    ///
+    /// You can create mute rules with recurring schedules using `cron` expressions
+    /// or one-time mute windows using `at` expressions. Each mute rule can target
+    /// up to 100 specific alarms by name.
+    ///
+    /// If you specify a rule name that already exists, this operation updates the
+    /// existing rule with the new configuration.
+    ///
+    /// **Permissions**
+    ///
+    /// To create or update a mute rule, you must have the
+    /// `cloudwatch:PutAlarmMuteRule` permission on two types of resources: the
+    /// alarm mute rule resource itself, and each alarm that the rule targets.
+    ///
+    /// For example, If you want to allow a user to create mute rules that target
+    /// only specific alarms named "WebServerCPUAlarm" and
+    /// "DatabaseConnectionAlarm", you would create an IAM policy with one statement
+    /// granting `cloudwatch:PutAlarmMuteRule` on the alarm mute rule resource
+    /// (`arn:aws:cloudwatch:[REGION]:123456789012:alarm-mute-rule:*`), and another
+    /// statement granting `cloudwatch:PutAlarmMuteRule` on the targeted alarm
+    /// resources
+    /// (`arn:aws:cloudwatch:[REGION]:123456789012:alarm:WebServerCPUAlarm` and
+    /// `arn:aws:cloudwatch:[REGION]:123456789012:alarm:DatabaseConnectionAlarm`).
+    ///
+    /// You can also use IAM policy conditions to allow targeting alarms based on
+    /// resource tags. For example, you can restrict users to create/update mute
+    /// rules to only target alarms that have a specific tag key-value pair, such as
+    /// `Team=TeamA`.
+    pub fn putAlarmMuteRule(self: *Self, allocator: std.mem.Allocator, input: put_alarm_mute_rule.PutAlarmMuteRuleInput, options: CallOptions) !put_alarm_mute_rule.PutAlarmMuteRuleOutput {
+        return put_alarm_mute_rule.execute(self, allocator, input, options);
     }
 
     /// Creates an anomaly detection model for a CloudWatch metric. You can use the
@@ -695,8 +809,8 @@ pub const Client = struct {
 
     /// Creates or updates an alarm and associates it with the specified metric,
     /// metric
-    /// math expression, anomaly detection model, or Metrics Insights query. For
-    /// more
+    /// math expression, anomaly detection model, Metrics Insights query, or PromQL
+    /// query. For more
     /// information about using a Metrics Insights query for an alarm, see [Create
     /// alarms on Metrics Insights
     /// queries](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html).
@@ -704,7 +818,8 @@ pub const Client = struct {
     /// Alarms based on anomaly detection models cannot have Auto Scaling actions.
     ///
     /// When this operation creates an alarm, the alarm state is immediately set to
-    /// `INSUFFICIENT_DATA`. The alarm is then evaluated and its state is set
+    /// `INSUFFICIENT_DATA`. For PromQL alarms, the alarm state is instead
+    /// immediately set to `OK`. The alarm is then evaluated and its state is set
     /// appropriately. Any actions associated with the new state are then executed.
     ///
     /// When you update an existing alarm, its state is left unchanged, but the
@@ -920,9 +1035,35 @@ pub const Client = struct {
         return start_metric_streams.execute(self, allocator, input, options);
     }
 
+    /// Enables enrichment and PromQL access for CloudWatch vended metrics for
+    /// [supported AWS
+    /// resources](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html) in the account. Once enabled, metrics that
+    /// contain a resource identifier dimension (for example, EC2
+    /// `CPUUtilization` with an `InstanceId` dimension) are enriched
+    /// with resource ARN and resource tag labels and become queryable using
+    /// PromQL.
+    ///
+    /// Before calling this operation, you must enable resource tags on telemetry
+    /// for
+    /// your account. For more information, see [Enable resource tags on
+    /// telemetry](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/EnableResourceTagsOnTelemetry.html).
+    pub fn startOTelEnrichment(self: *Self, allocator: std.mem.Allocator, input: start_o_tel_enrichment.StartOTelEnrichmentInput, options: CallOptions) !start_o_tel_enrichment.StartOTelEnrichmentOutput {
+        return start_o_tel_enrichment.execute(self, allocator, input, options);
+    }
+
     /// Stops the streaming of metrics for one or more of your metric streams.
     pub fn stopMetricStreams(self: *Self, allocator: std.mem.Allocator, input: stop_metric_streams.StopMetricStreamsInput, options: CallOptions) !stop_metric_streams.StopMetricStreamsOutput {
         return stop_metric_streams.execute(self, allocator, input, options);
+    }
+
+    /// Disables enrichment and PromQL access for CloudWatch vended metrics for
+    /// [supported AWS
+    /// resources](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html) in the account. After disabling, these metrics
+    /// are no longer enriched with resource ARN and resource tag labels, and cannot
+    /// be
+    /// queried using PromQL.
+    pub fn stopOTelEnrichment(self: *Self, allocator: std.mem.Allocator, input: stop_o_tel_enrichment.StopOTelEnrichmentInput, options: CallOptions) !stop_o_tel_enrichment.StopOTelEnrichmentOutput {
+        return stop_o_tel_enrichment.execute(self, allocator, input, options);
     }
 
     /// Assigns one or more tags (key-value pairs) to the specified CloudWatch
@@ -995,6 +1136,13 @@ pub const Client = struct {
         };
     }
 
+    pub fn listAlarmMuteRulesPaginator(self: *Self, params: list_alarm_mute_rules.ListAlarmMuteRulesInput) paginator.ListAlarmMuteRulesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listDashboardsPaginator(self: *Self, params: list_dashboards.ListDashboardsInput) paginator.ListDashboardsPaginator {
         return .{
             .client = self,
@@ -1021,5 +1169,10 @@ pub const Client = struct {
             .client = self,
             .params = params,
         };
+    }
+
+    pub fn waitUntilAlarmMuteRuleExists(self: *Self, params: get_alarm_mute_rule.GetAlarmMuteRuleInput) aws.waiter.WaiterError!void {
+        var w = waiters.AlarmMuteRuleExistsWaiter{ .client = self, .params = params };
+        return w.wait();
     }
 };

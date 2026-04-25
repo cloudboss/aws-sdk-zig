@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const QueryParameter = @import("query_parameter.zig").QueryParameter;
 const QueryLanguage = @import("query_language.zig").QueryLanguage;
 
 pub const PutQueryDefinitionInput = struct {
@@ -31,6 +32,16 @@ pub const PutQueryDefinitionInput = struct {
     /// of the name as a filter in the `queryDefinitionNamePrefix` parameter of
     /// [DescribeQueryDefinitions](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html).
     name: []const u8,
+
+    /// Use this parameter to include specific query parameters as part of your
+    /// query definition.
+    /// Query parameters are supported only for Logs Insights QL queries. Query
+    /// parameters allow you
+    /// to use placeholder variables in your query string that are substituted with
+    /// values at execution
+    /// time. Use the `{{parameterName}}` syntax in your query string to reference a
+    /// parameter.
+    parameters: ?[]const QueryParameter = null,
 
     /// If you are updating a query definition, use this parameter to specify the ID
     /// of the query
@@ -63,6 +74,7 @@ pub const PutQueryDefinitionInput = struct {
         .client_token = "clientToken",
         .log_group_names = "logGroupNames",
         .name = "name",
+        .parameters = "parameters",
         .query_definition_id = "queryDefinitionId",
         .query_language = "queryLanguage",
         .query_string = "queryString",

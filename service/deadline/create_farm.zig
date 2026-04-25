@@ -10,6 +10,12 @@ pub const CreateFarmInput = struct {
     /// request.
     client_token: ?[]const u8 = null,
 
+    /// A multiplier applied to the farm's calculated costs for usage data and
+    /// budget tracking. A value less than 1 represents a discount, a value greater
+    /// than 1 represents a premium, and a value of 1 represents no adjustment. The
+    /// default value is 1.
+    cost_scale_factor: ?f32 = null,
+
     /// The description of the farm.
     ///
     /// This field can store any content. Escape or encode this content before
@@ -34,6 +40,7 @@ pub const CreateFarmInput = struct {
 
     pub const json_field_names = .{
         .client_token = "clientToken",
+        .cost_scale_factor = "costScaleFactor",
         .description = "description",
         .display_name = "displayName",
         .kms_key_arn = "kmsKeyArn",
@@ -88,6 +95,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFarmInput, config
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.cost_scale_factor) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"costScaleFactor\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.description) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"description\":");

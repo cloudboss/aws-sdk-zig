@@ -15,8 +15,7 @@ pub const CreateWorkspaceApiKeyInput = struct {
     key_role: []const u8,
 
     /// Specifies the time in seconds until the key expires. Keys can be valid for
-    /// up to 30
-    /// days.
+    /// up to 30 days.
     seconds_to_live: i32,
 
     /// The ID of the workspace to create an API key.
@@ -32,8 +31,7 @@ pub const CreateWorkspaceApiKeyInput = struct {
 
 pub const CreateWorkspaceApiKeyOutput = struct {
     /// The key token. Use this value as a bearer token to authenticate HTTP
-    /// requests to the
-    /// workspace.
+    /// requests to the workspace.
     key: []const u8,
 
     /// The name of the key that was created.

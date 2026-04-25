@@ -7,24 +7,21 @@ const ServiceError = @import("errors.zig").ServiceError;
 
 pub const UpdateThreatEntitySetInput = struct {
     /// A boolean value that indicates whether GuardDuty is to start using this
-    /// updated threat entity set. After you
-    /// update an entity set, you will need to activate it again. It might take up
-    /// to 15 minutes for the updated
-    /// entity set to be effective.
+    /// updated threat entity set. After you update an entity set, you will need to
+    /// activate it again. It might take up to 15 minutes for the updated entity set
+    /// to be effective.
     activate: ?bool = null,
 
     /// The unique ID of the GuardDuty detector associated with the threat entity
-    /// set that you want to
-    /// update.
+    /// set that you want to update.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 
     /// The Amazon Web Services account ID that owns the Amazon S3 bucket specified
-    /// in the **location**
-    /// parameter.
+    /// in the **location** parameter.
     expected_bucket_owner: ?[]const u8 = null,
 
     /// The URI of the file that contains the trusted entity set.
@@ -32,8 +29,8 @@ pub const UpdateThreatEntitySetInput = struct {
 
     /// A user-friendly name to identify the trusted entity set.
     ///
-    /// The name of your list can include
-    /// lowercase letters, uppercase letters, numbers, dash (-), and underscore (_).
+    /// The name of your list can include lowercase letters, uppercase letters,
+    /// numbers, dash (-), and underscore (_).
     name: ?[]const u8 = null,
 
     /// The ID returned by GuardDuty after updating the threat entity set resource.

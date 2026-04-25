@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const LinkAttributes = @import("link_attributes.zig").LinkAttributes;
 const LinkLogSettings = @import("link_log_settings.zig").LinkLogSettings;
+const ConnectivityType = @import("connectivity_type.zig").ConnectivityType;
 const LinkDirection = @import("link_direction.zig").LinkDirection;
 const ModuleConfiguration = @import("module_configuration.zig").ModuleConfiguration;
 const LinkStatus = @import("link_status.zig").LinkStatus;
@@ -29,6 +30,9 @@ pub const CreateLinkInput = struct {
     /// A map of the key-value pairs of the tag or tags to assign to the resource.
     tags: ?[]const aws.map.StringMapEntry = null,
 
+    /// The timeout value in milliseconds.
+    timeout_in_millis: ?i64 = null,
+
     pub const json_field_names = .{
         .attributes = "attributes",
         .gateway_id = "gatewayId",
@@ -36,12 +40,16 @@ pub const CreateLinkInput = struct {
         .log_settings = "logSettings",
         .peer_gateway_id = "peerGatewayId",
         .tags = "tags",
+        .timeout_in_millis = "timeoutInMillis",
     };
 };
 
 pub const CreateLinkOutput = struct {
     /// Attributes of the link.
     attributes: ?LinkAttributes = null,
+
+    /// The connectivity type of the link.
+    connectivity_type: ?ConnectivityType = null,
 
     /// The timestamp of when the link was created.
     created_at: i64,
@@ -61,6 +69,8 @@ pub const CreateLinkOutput = struct {
     /// The unique identifier of the link.
     link_id: []const u8,
 
+    log_settings: ?LinkLogSettings = null,
+
     /// The unique identifier of the peer gateway.
     peer_gateway_id: []const u8,
 
@@ -75,12 +85,14 @@ pub const CreateLinkOutput = struct {
 
     pub const json_field_names = .{
         .attributes = "attributes",
+        .connectivity_type = "connectivityType",
         .created_at = "createdAt",
         .customer_provided_id = "customerProvidedId",
         .direction = "direction",
         .flow_modules = "flowModules",
         .gateway_id = "gatewayId",
         .link_id = "linkId",
+        .log_settings = "logSettings",
         .peer_gateway_id = "peerGatewayId",
         .pending_flow_modules = "pendingFlowModules",
         .status = "status",
@@ -153,6 +165,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLinkInput, config
     if (input.tags) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"tags\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.timeout_in_millis) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"timeoutInMillis\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

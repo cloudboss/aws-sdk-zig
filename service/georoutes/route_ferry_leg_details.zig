@@ -9,7 +9,7 @@ const RouteFerrySummary = @import("route_ferry_summary.zig").RouteFerrySummary;
 const RouteFerryTravelStep = @import("route_ferry_travel_step.zig").RouteFerryTravelStep;
 
 /// FerryLegDetails is populated when the Leg type is Ferry, and provides
-/// additional information that is specific
+/// additional information that is specific to ferry travel.
 pub const RouteFerryLegDetails = struct {
     /// Steps of a leg that must be performed after the travel portion of the leg.
     after_travel_steps: []const RouteFerryAfterTravelStep,

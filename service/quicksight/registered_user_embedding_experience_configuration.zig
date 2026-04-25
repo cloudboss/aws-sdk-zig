@@ -6,7 +6,7 @@ const RegisteredUserQuickChatEmbeddingConfiguration = @import("registered_user_q
 const RegisteredUserQuickSightConsoleEmbeddingConfiguration = @import("registered_user_quick_sight_console_embedding_configuration.zig").RegisteredUserQuickSightConsoleEmbeddingConfiguration;
 
 /// The type of experience you want to embed. For registered users, you can
-/// embed Quick Suite dashboards or the Amazon Quick Sight console.
+/// embed Quick dashboards or the Amazon Quick Sight console.
 ///
 /// Exactly one of the experience configurations is required. You can choose
 /// `Dashboard` or `QuickSightConsole`. You cannot choose more
@@ -43,7 +43,7 @@ pub const RegisteredUserEmbeddingExperienceConfiguration = struct {
     /// features. For more information, see [Customizing Access to the Amazon Quick
     /// Sight
     /// Console](https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html) in the
-    /// *Amazon Quick Suite User Guide*.
+    /// *Amazon Quick User Guide*.
     ///
     /// Use `
     /// [GenerateEmbedUrlForRegisteredUser](https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html)
@@ -61,18 +61,18 @@ pub const RegisteredUserEmbeddingExperienceConfiguration = struct {
     /// ` API operation to add a new user with a custom
     /// permission profile attached. For more information, see the following
     /// sections in the
-    /// *Amazon Quick Suite User Guide*:
+    /// *Amazon Quick User Guide*:
     ///
     /// * [Embedding the Full Functionality of the Amazon Quick Sight Console for
     /// Authenticated
     /// Users](https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-full-console-for-authenticated-users.html)
     ///
-    /// * [Customizing Access to the Amazon Quick Suite
+    /// * [Customizing Access to the Amazon Quick
     ///   Console](https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html)
     ///
     /// For more information about the high-level steps for embedding and for an
     /// interactive
-    /// demo of the ways you can customize embedding, visit the [Amazon Quick Suite
+    /// demo of the ways you can customize embedding, visit the [Amazon Quick
     /// Developer
     /// Portal](https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html).
     quick_sight_console: ?RegisteredUserQuickSightConsoleEmbeddingConfiguration = null,

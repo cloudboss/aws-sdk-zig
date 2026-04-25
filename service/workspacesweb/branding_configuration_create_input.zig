@@ -29,8 +29,9 @@ pub const BrandingConfigurationCreateInput = struct {
     terms_of_service: ?[]const u8 = null,
 
     /// The wallpaper image for the portal. Provide either a binary image file or an
-    /// S3 URI pointing to the image file. Maximum 5 MB in JPEG or PNG format.
-    wallpaper: WallpaperImageInput,
+    /// S3 URI pointing to the image file. Maximum 5 MB in JPEG or PNG format. If
+    /// not provided, a default wallpaper will be used as the background image.
+    wallpaper: ?WallpaperImageInput = null,
 
     pub const json_field_names = .{
         .color_theme = "colorTheme",

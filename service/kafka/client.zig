@@ -7,11 +7,13 @@ const create_cluster = @import("create_cluster.zig");
 const create_cluster_v2 = @import("create_cluster_v2.zig");
 const create_configuration = @import("create_configuration.zig");
 const create_replicator = @import("create_replicator.zig");
+const create_topic = @import("create_topic.zig");
 const create_vpc_connection = @import("create_vpc_connection.zig");
 const delete_cluster = @import("delete_cluster.zig");
 const delete_cluster_policy = @import("delete_cluster_policy.zig");
 const delete_configuration = @import("delete_configuration.zig");
 const delete_replicator = @import("delete_replicator.zig");
+const delete_topic = @import("delete_topic.zig");
 const delete_vpc_connection = @import("delete_vpc_connection.zig");
 const describe_cluster = @import("describe_cluster.zig");
 const describe_cluster_operation = @import("describe_cluster_operation.zig");
@@ -57,6 +59,7 @@ const update_rebalancing = @import("update_rebalancing.zig");
 const update_replication_info = @import("update_replication_info.zig");
 const update_security = @import("update_security.zig");
 const update_storage = @import("update_storage.zig");
+const update_topic = @import("update_topic.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
@@ -118,6 +121,11 @@ pub const Client = struct {
         return create_replicator.execute(self, allocator, input, options);
     }
 
+    /// Creates a topic in the specified MSK cluster.
+    pub fn createTopic(self: *Self, allocator: std.mem.Allocator, input: create_topic.CreateTopicInput, options: CallOptions) !create_topic.CreateTopicOutput {
+        return create_topic.execute(self, allocator, input, options);
+    }
+
     /// Creates a new MSK VPC connection.
     pub fn createVpcConnection(self: *Self, allocator: std.mem.Allocator, input: create_vpc_connection.CreateVpcConnectionInput, options: CallOptions) !create_vpc_connection.CreateVpcConnectionOutput {
         return create_vpc_connection.execute(self, allocator, input, options);
@@ -143,6 +151,11 @@ pub const Client = struct {
     /// Deletes a replicator.
     pub fn deleteReplicator(self: *Self, allocator: std.mem.Allocator, input: delete_replicator.DeleteReplicatorInput, options: CallOptions) !delete_replicator.DeleteReplicatorOutput {
         return delete_replicator.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a topic in the specified MSK cluster.
+    pub fn deleteTopic(self: *Self, allocator: std.mem.Allocator, input: delete_topic.DeleteTopicInput, options: CallOptions) !delete_topic.DeleteTopicOutput {
+        return delete_topic.execute(self, allocator, input, options);
     }
 
     /// Deletes a MSK VPC connection.
@@ -385,6 +398,11 @@ pub const Client = struct {
     /// Updates cluster broker volume size (or) sets cluster storage mode to TIERED.
     pub fn updateStorage(self: *Self, allocator: std.mem.Allocator, input: update_storage.UpdateStorageInput, options: CallOptions) !update_storage.UpdateStorageOutput {
         return update_storage.execute(self, allocator, input, options);
+    }
+
+    /// Updates the configuration of the specified topic.
+    pub fn updateTopic(self: *Self, allocator: std.mem.Allocator, input: update_topic.UpdateTopicInput, options: CallOptions) !update_topic.UpdateTopicOutput {
+        return update_topic.execute(self, allocator, input, options);
     }
 
     pub fn describeTopicPartitionsPaginator(self: *Self, params: describe_topic_partitions.DescribeTopicPartitionsInput) paginator.DescribeTopicPartitionsPaginator {

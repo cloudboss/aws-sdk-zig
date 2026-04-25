@@ -13,8 +13,7 @@ pub const SubmitTaskStateChangeInput = struct {
     attachments: ?[]const AttachmentStateChange = null,
 
     /// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-    /// the
-    /// task.
+    /// the task.
     cluster: ?[]const u8 = null,
 
     /// Any containers that's associated with the state change request.
@@ -188,6 +187,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

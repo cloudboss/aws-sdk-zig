@@ -45,7 +45,7 @@ pub const AwsRedshiftClusterDetails = struct {
     /// Indicates when the cluster was created.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     cluster_create_time: ?[]const u8 = null,
 
@@ -128,7 +128,7 @@ pub const AwsRedshiftClusterDetails = struct {
     /// snapshot schedule and have backups enabled.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     expected_next_snapshot_schedule_time: ?[]const u8 = null,
 
@@ -175,7 +175,7 @@ pub const AwsRedshiftClusterDetails = struct {
     /// Indicates the start of the next maintenance window.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     next_maintenance_window_start_time: ?[]const u8 = null,
 

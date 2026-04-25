@@ -3,8 +3,7 @@ const KubernetesDataSourceFreeTrial = @import("kubernetes_data_source_free_trial
 const MalwareProtectionDataSourceFreeTrial = @import("malware_protection_data_source_free_trial.zig").MalwareProtectionDataSourceFreeTrial;
 
 /// Contains information about which data sources are enabled for the GuardDuty
-/// member
-/// account.
+/// member account.
 pub const DataSourcesFreeTrial = struct {
     /// Describes whether any Amazon Web Services CloudTrail management event logs
     /// are enabled as data sources.

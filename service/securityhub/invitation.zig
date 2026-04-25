@@ -1,7 +1,7 @@
 /// Details about an invitation.
 pub const Invitation = struct {
-    /// The account ID of the Security Hub administrator account that the invitation
-    /// was sent from.
+    /// The account ID of the Security Hub CSPM administrator account that the
+    /// invitation was sent from.
     account_id: ?[]const u8 = null,
 
     /// The ID of the invitation sent to the member account.

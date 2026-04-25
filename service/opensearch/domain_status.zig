@@ -6,6 +6,7 @@ const AutoTuneOptionsOutput = @import("auto_tune_options_output.zig").AutoTuneOp
 const ChangeProgressDetails = @import("change_progress_details.zig").ChangeProgressDetails;
 const ClusterConfig = @import("cluster_config.zig").ClusterConfig;
 const CognitoOptions = @import("cognito_options.zig").CognitoOptions;
+const DeploymentStrategyOptions = @import("deployment_strategy_options.zig").DeploymentStrategyOptions;
 const DomainEndpointOptions = @import("domain_endpoint_options.zig").DomainEndpointOptions;
 const DomainProcessingStatusType = @import("domain_processing_status_type.zig").DomainProcessingStatusType;
 const EBSOptions = @import("ebs_options.zig").EBSOptions;
@@ -66,6 +67,9 @@ pub const DomainStatus = struct {
     /// status of the domain is
     /// no longer returned.
     deleted: ?bool = null,
+
+    /// The current status of the domain's deployment strategy options.
+    deployment_strategy_options: ?DeploymentStrategyOptions = null,
 
     /// Additional options for the domain endpoint, such as whether to require HTTPS
     /// for all
@@ -179,6 +183,7 @@ pub const DomainStatus = struct {
         .cognito_options = "CognitoOptions",
         .created = "Created",
         .deleted = "Deleted",
+        .deployment_strategy_options = "DeploymentStrategyOptions",
         .domain_endpoint_options = "DomainEndpointOptions",
         .domain_endpoint_v2_hosted_zone_id = "DomainEndpointV2HostedZoneId",
         .domain_id = "DomainId",

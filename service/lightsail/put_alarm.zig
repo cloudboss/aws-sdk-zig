@@ -8,6 +8,7 @@ const ComparisonOperator = @import("comparison_operator.zig").ComparisonOperator
 const ContactProtocol = @import("contact_protocol.zig").ContactProtocol;
 const MetricName = @import("metric_name.zig").MetricName;
 const AlarmState = @import("alarm_state.zig").AlarmState;
+const Tag = @import("tag.zig").Tag;
 const TreatMissingData = @import("treat_missing_data.zig").TreatMissingData;
 const Operation = @import("operation.zig").Operation;
 
@@ -139,6 +140,11 @@ pub const PutAlarmInput = struct {
     /// parameter.
     notification_triggers: ?[]const AlarmState = null,
 
+    /// The tag keys and optional values to add to the alarm during create.
+    ///
+    /// Use the `TagResource` action to tag a resource after it's created.
+    tags: ?[]const Tag = null,
+
     /// The value against which the specified statistic is compared.
     threshold: f64,
 
@@ -173,6 +179,7 @@ pub const PutAlarmInput = struct {
         .monitored_resource_name = "monitoredResourceName",
         .notification_enabled = "notificationEnabled",
         .notification_triggers = "notificationTriggers",
+        .tags = "tags",
         .threshold = "threshold",
         .treat_missing_data = "treatMissingData",
     };

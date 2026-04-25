@@ -4,13 +4,11 @@ const Tag = @import("tag.zig").Tag;
 /// GuardDuty finding.
 pub const RdsDbInstanceDetails = struct {
     /// The identifier of the database cluster that contains the database instance
-    /// ID involved in
-    /// the finding.
+    /// ID involved in the finding.
     db_cluster_identifier: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) that identifies the database instance
-    /// involved in the
-    /// finding.
+    /// involved in the finding.
     db_instance_arn: ?[]const u8 = null,
 
     /// The identifier associated to the database instance that was involved in the
@@ -18,8 +16,7 @@ pub const RdsDbInstanceDetails = struct {
     db_instance_identifier: ?[]const u8 = null,
 
     /// The unique ID of the database resource involved in the activity that
-    /// prompted GuardDuty
-    /// to generate the finding.
+    /// prompted GuardDuty to generate the finding.
     dbi_resource_id: ?[]const u8 = null,
 
     /// The database engine of the database instance involved in the finding.

@@ -10,7 +10,7 @@ pub const SnapshotAnonymousUser = struct {
     /// These are not the tags that are used for Amazon Web Services resource
     /// tagging. For more information on row level security in Amazon Quick Sight,
     /// see [Using Row-Level Security (RLS) with
-    /// Tags](https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html)in the *Amazon Quick Suite User Guide*.
+    /// Tags](https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html)in the *Amazon Quick User Guide*.
     row_level_permission_tags: ?[]const SessionTag = null,
 
     pub const json_field_names = .{

@@ -7,8 +7,8 @@ pub const RegistrationVersionInformation = struct {
     /// An array of RegistrationDeniedReasonInformation objects.
     denied_reasons: ?[]const RegistrationDeniedReasonInformation = null,
 
-    /// Feedback information provided during the registration review process. This
-    /// includes comments, suggestions, or additional requirements.
+    /// Generative AI feedback information provided during the registration review
+    /// process. This includes comments, suggestions, or additional requirements.
     feedback: ?[]const u8 = null,
 
     /// The status of the registration.

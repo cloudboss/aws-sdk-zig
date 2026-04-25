@@ -1,6 +1,7 @@
 const aws = @import("aws");
 
 const DependencyConfig = @import("dependency_config.zig").DependencyConfig;
+const MetricSource = @import("metric_source.zig").MetricSource;
 const ServiceLevelIndicatorMetricType = @import("service_level_indicator_metric_type.zig").ServiceLevelIndicatorMetricType;
 const MonitoredRequestCountMetricDataQueries = @import("monitored_request_count_metric_data_queries.zig").MonitoredRequestCountMetricDataQueries;
 const MetricDataQuery = @import("metric_data_query.zig").MetricDataQuery;
@@ -27,6 +28,10 @@ pub const RequestBasedServiceLevelIndicatorMetric = struct {
     ///   it belongs to.
     key_attributes: ?[]const aws.map.StringMapEntry = null,
 
+    /// Identifies the metric source for SLOs on resources other than Application
+    /// Signals services.
+    metric_source: ?MetricSource = null,
+
     /// If the SLO monitors either the `LATENCY` or `AVAILABILITY` metric that
     /// Application Signals collects, this field displays which of those metrics is
     /// used.
@@ -52,6 +57,7 @@ pub const RequestBasedServiceLevelIndicatorMetric = struct {
     pub const json_field_names = .{
         .dependency_config = "DependencyConfig",
         .key_attributes = "KeyAttributes",
+        .metric_source = "MetricSource",
         .metric_type = "MetricType",
         .monitored_request_count_metric = "MonitoredRequestCountMetric",
         .operation_name = "OperationName",

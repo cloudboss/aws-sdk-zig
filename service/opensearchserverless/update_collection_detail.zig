@@ -1,5 +1,6 @@
 const CollectionStatus = @import("collection_status.zig").CollectionStatus;
 const CollectionType = @import("collection_type.zig").CollectionType;
+const VectorOptions = @import("vector_options.zig").VectorOptions;
 
 /// Details about an updated OpenSearch Serverless collection.
 pub const UpdateCollectionDetail = struct {
@@ -27,6 +28,9 @@ pub const UpdateCollectionDetail = struct {
     /// The collection type.
     @"type": ?CollectionType = null,
 
+    /// Configuration options for vector search capabilities in the collection.
+    vector_options: ?VectorOptions = null,
+
     pub const json_field_names = .{
         .arn = "arn",
         .created_date = "createdDate",
@@ -36,5 +40,6 @@ pub const UpdateCollectionDetail = struct {
         .name = "name",
         .status = "status",
         .@"type" = "type",
+        .vector_options = "vectorOptions",
     };
 };

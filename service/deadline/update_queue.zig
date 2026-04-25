@@ -7,6 +7,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const DefaultQueueBudgetAction = @import("default_queue_budget_action.zig").DefaultQueueBudgetAction;
 const JobAttachmentSettings = @import("job_attachment_settings.zig").JobAttachmentSettings;
 const JobRunAsUser = @import("job_run_as_user.zig").JobRunAsUser;
+const SchedulingConfiguration = @import("scheduling_configuration.zig").SchedulingConfiguration;
 
 pub const UpdateQueueInput = struct {
     /// The storage profile IDs to add.
@@ -56,6 +57,16 @@ pub const UpdateQueueInput = struct {
     /// The IAM role ARN that's used to run jobs from this queue.
     role_arn: ?[]const u8 = null,
 
+    /// The scheduling configuration for the queue. This configuration determines
+    /// how workers are assigned to jobs in the queue.
+    ///
+    /// When updating the scheduling configuration, the entire configuration is
+    /// replaced.
+    ///
+    /// In-progress tasks run to completion before the new scheduling configuration
+    /// takes effect.
+    scheduling_configuration: ?SchedulingConfiguration = null,
+
     pub const json_field_names = .{
         .allowed_storage_profile_ids_to_add = "allowedStorageProfileIdsToAdd",
         .allowed_storage_profile_ids_to_remove = "allowedStorageProfileIdsToRemove",
@@ -70,6 +81,7 @@ pub const UpdateQueueInput = struct {
         .required_file_system_location_names_to_add = "requiredFileSystemLocationNamesToAdd",
         .required_file_system_location_names_to_remove = "requiredFileSystemLocationNamesToRemove",
         .role_arn = "roleArn",
+        .scheduling_configuration = "schedulingConfiguration",
     };
 };
 
@@ -176,6 +188,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateQueueInput, confi
     if (input.role_arn) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"roleArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.scheduling_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"schedulingConfiguration\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

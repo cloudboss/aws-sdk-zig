@@ -20,6 +20,15 @@ pub const UpdatePolicyStoreInput = struct {
     description: ?[]const u8 = null,
 
     /// Specifies the ID of the policy store that you want to update
+    ///
+    /// To specify a policy store, use its ID or alias name. When using an alias
+    /// name, prefix it with `policy-store-alias/`. For example:
+    ///
+    /// * ID: `PSEXAMPLEabcdefg111111`
+    /// * Alias name: `policy-store-alias/example-policy-store`
+    ///
+    /// To view aliases, use
+    /// [ListPolicyStoreAliases](https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html).
     policy_store_id: []const u8,
 
     /// A structure that defines the validation settings that want to enable for the

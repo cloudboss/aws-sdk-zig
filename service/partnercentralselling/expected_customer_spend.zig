@@ -9,8 +9,8 @@ pub const ExpectedCustomerSpend = struct {
     /// from the opportunity. This helps in forecasting financial returns.
     amount: []const u8 = "",
 
-    /// Indicates the currency in which the revenue estimate is provided. This helps
-    /// in understanding the financial impact across different markets.
+    /// Currency code for the expected customer spend. Supported currencies: USD,
+    /// EUR
     currency_code: CurrencyCode,
 
     /// A URL providing additional information or context about the spend

@@ -9,8 +9,7 @@ pub const BucketLevelPermissions = struct {
     access_control_list: ?AccessControlList = null,
 
     /// Contains information on which account level S3 Block Public Access settings
-    /// are applied to
-    /// the S3 bucket.
+    /// are applied to the S3 bucket.
     block_public_access: ?BlockPublicAccess = null,
 
     /// Contains information on the bucket policies for the S3 bucket.

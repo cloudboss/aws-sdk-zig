@@ -3,8 +3,7 @@ const OrganizationEbsVolumes = @import("organization_ebs_volumes.zig").Organizat
 /// Organization-wide EC2 instances with findings scan configuration.
 pub const OrganizationScanEc2InstanceWithFindings = struct {
     /// Whether scanning EBS volumes should be auto-enabled for new members joining
-    /// the
-    /// organization.
+    /// the organization.
     ebs_volumes: ?OrganizationEbsVolumes = null,
 
     pub const json_field_names = .{

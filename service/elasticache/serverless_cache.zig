@@ -1,5 +1,6 @@
 const CacheUsageLimits = @import("cache_usage_limits.zig").CacheUsageLimits;
 const Endpoint = @import("endpoint.zig").Endpoint;
+const NetworkType = @import("network_type.zig").NetworkType;
 
 /// The resource representing a serverless cache.
 pub const ServerlessCache = struct {
@@ -37,6 +38,13 @@ pub const ServerlessCache = struct {
     /// The version number of the engine the serverless cache is compatible with.
     major_engine_version: ?[]const u8 = null,
 
+    /// The type of IP address protocol used by the serverless cache.
+    /// Must be either `ipv4` | `ipv6` | `dual_stack`.
+    /// `ipv6` is only supported with IPv6-only subnets.
+    /// If not specified, defaults to `ipv4`, unless all provided subnets are
+    /// IPv6-only, in which case it defaults to `ipv6`.
+    network_type: ?NetworkType = null,
+
     reader_endpoint: ?Endpoint = null,
 
     /// The IDs of the EC2 security groups associated with the serverless
@@ -46,8 +54,9 @@ pub const ServerlessCache = struct {
     /// The unique identifier of the serverless cache.
     serverless_cache_name: ?[]const u8 = null,
 
-    /// The current setting for the number of serverless cache snapshots the system
-    /// will retain. Available for Valkey, Redis OSS and Serverless Memcached only.
+    /// The number of days for which ElastiCache retains automatic snapshots before
+    /// deleting them. Available for Valkey, Redis OSS and Serverless Memcached
+    /// only. The maximum value allowed is 35 days.
     snapshot_retention_limit: ?i32 = null,
 
     /// The current status of the serverless cache. The allowed values are CREATING,

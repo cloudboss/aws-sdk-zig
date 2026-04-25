@@ -5,7 +5,9 @@ const RouteTrailerOptions = @import("route_trailer_options.zig").RouteTrailerOpt
 const RouteTruckType = @import("route_truck_type.zig").RouteTruckType;
 const WeightPerAxleGroup = @import("weight_per_axle_group.zig").WeightPerAxleGroup;
 
-/// Travel mode options when the provided travel mode is "Truck"
+/// Travel mode options when the provided travel mode is `Truck`. Not supported
+/// in `ap-southeast-1` and `ap-southeast-5` regions for
+/// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
 pub const RouteTruckOptions = struct {
     /// Total number of axles of the vehicle.
     axle_count: ?i32 = null,
@@ -15,7 +17,7 @@ pub const RouteTruckOptions = struct {
 
     /// Gross weight of the vehicle including trailers, and goods at capacity.
     ///
-    /// **Unit**: `Kilograms`
+    /// **Unit**: `kilograms`
     gross_weight: i64 = 0,
 
     /// List of Hazardous cargo contained in the vehicle.
@@ -46,12 +48,12 @@ pub const RouteTruckOptions = struct {
 
     /// Maximum speed
     ///
-    /// **Unit**: `KilometersPerHour`
+    /// **Unit**: `kilometers per hour`
     max_speed: ?f64 = null,
 
     /// The number of occupants in the vehicle.
     ///
-    /// Default Value: `1`
+    /// Default value: `1`
     occupancy: ?i32 = null,
 
     /// Payload capacity of the vehicle and trailers attached.
@@ -65,7 +67,9 @@ pub const RouteTruckOptions = struct {
     /// Trailer options corresponding to the vehicle.
     trailer: ?RouteTrailerOptions = null,
 
-    /// Type of the truck.
+    /// The type of truck: `LightTruck` for smaller delivery vehicles, `
+    /// StraightTruck` for rigid body trucks, or `Tractor` for tractor-trailer
+    /// combinations.
     truck_type: ?RouteTruckType = null,
 
     /// The tunnel restriction code.
@@ -99,13 +103,13 @@ pub const RouteTruckOptions = struct {
     /// Meant for usage in countries where the differences in axle types or axle
     /// groups are not distinguished.
     ///
-    /// **Unit**: `Kilograms`
+    /// **Unit**: `kilograms`
     weight_per_axle: i64 = 0,
 
     /// Specifies the total weight for the specified axle group. Meant for usage in
     /// countries that have different regulations based on the axle group type.
     ///
-    /// **Unit**: `Kilograms`
+    /// **Unit**: `kilograms`
     weight_per_axle_group: ?WeightPerAxleGroup = null,
 
     /// Width of the vehicle.

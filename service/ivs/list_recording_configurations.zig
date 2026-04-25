@@ -8,13 +8,11 @@ const RecordingConfigurationSummary = @import("recording_configuration_summary.z
 
 pub const ListRecordingConfigurationsInput = struct {
     /// Maximum number of recording configurations to return. Default: your service
-    /// quota or 100,
-    /// whichever is smaller.
+    /// quota or 100, whichever is smaller.
     max_results: ?i32 = null,
 
     /// The first recording configuration to retrieve. This is used for pagination;
-    /// see the
-    /// `nextToken` response field.
+    /// see the `nextToken` response field.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -166,6 +164,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
         return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceUnavailable")) {
+        return .{ .arena = arena, .kind = .{ .service_unavailable = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

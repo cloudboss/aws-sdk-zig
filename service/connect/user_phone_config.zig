@@ -25,7 +25,7 @@ pub const UserPhoneConfig = struct {
     persistent_connection: ?bool = null,
 
     /// The phone type.
-    phone_type: PhoneType,
+    phone_type: PhoneType = .soft_phone,
 
     pub const json_field_names = .{
         .after_contact_work_time_limit = "AfterContactWorkTimeLimit",

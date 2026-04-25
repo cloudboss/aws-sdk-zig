@@ -13,6 +13,7 @@ const EndpointIpAddressType = @import("endpoint_ip_address_type.zig").EndpointIp
 const SelfServicePortal = @import("self_service_portal.zig").SelfServicePortal;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TrafficIpAddressType = @import("traffic_ip_address_type.zig").TrafficIpAddressType;
+const TransitGatewayConfigurationInputStructure = @import("transit_gateway_configuration_input_structure.zig").TransitGatewayConfigurationInputStructure;
 const TransportProtocol = @import("transport_protocol.zig").TransportProtocol;
 const ClientVpnEndpointStatus = @import("client_vpn_endpoint_status.zig").ClientVpnEndpointStatus;
 const serde = @import("serde.zig");
@@ -141,6 +142,12 @@ pub const CreateClientVpnEndpointInput = struct {
     /// or `dual-stack` for both IPv4 and IPv6 traffic. When set to `dual-stack`,
     /// clients can access both IPv4 and IPv6 resources through the VPN .
     traffic_ip_address_type: ?TrafficIpAddressType = null,
+
+    /// The Transit Gateway configuration for the Client VPN endpoint. Use this
+    /// parameter to associate the endpoint with a Transit Gateway instead of a VPC.
+    /// You cannot specify both `TransitGatewayConfiguration` and
+    /// `VpcId`/`SecurityGroupIds`.
+    transit_gateway_configuration: ?TransitGatewayConfigurationInputStructure = null,
 
     /// The transport protocol to be used by the VPN session.
     ///
@@ -387,6 +394,30 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateClientVpnEndpoint
     if (input.traffic_ip_address_type) |v| {
         try body_buf.appendSlice(allocator, "&TrafficIpAddressType=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
+    }
+    if (input.transit_gateway_configuration) |v| {
+        if (v.availability_zone_ids) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TransitGatewayConfiguration.AvailabilityZoneId.{d}=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+            }
+        }
+        if (v.availability_zones) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TransitGatewayConfiguration.AvailabilityZone.{d}=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+            }
+        }
+        if (v.transit_gateway_id) |sv| {
+            try body_buf.appendSlice(allocator, "&TransitGatewayConfiguration.TransitGatewayId=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
+        }
     }
     if (input.transport_protocol) |v| {
         try body_buf.appendSlice(allocator, "&TransportProtocol=");

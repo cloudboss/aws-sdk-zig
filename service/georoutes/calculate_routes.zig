@@ -25,10 +25,14 @@ const RouteResponseNotice = @import("route_response_notice.zig").RouteResponseNo
 const Route = @import("route.zig").Route;
 
 pub const CalculateRoutesInput = struct {
-    /// Features that are allowed while calculating a route.
+    /// Features that are allowed while calculating a route. Not supported in
+    /// `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     allow: ?RouteAllowOptions = null,
 
-    /// Time of arrival at the destination.
+    /// Time of arrival at the destination. Not supported in `ap-southeast-1` and
+    /// `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
     /// Time format:`YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm`
     ///
@@ -42,13 +46,14 @@ pub const CalculateRoutesInput = struct {
     /// Features that are avoided while calculating a route. Avoidance is on a
     /// best-case basis. If an avoidance can't be satisfied for a particular case,
     /// it violates the avoidance and the returned response produces a notice for
-    /// the violation.
+    /// the violation. For
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only `ControlledAccessHighways`, `Ferries`, and `TollRoads`
     avoid: ?RouteAvoidanceOptions = null,
 
     /// Uses the current time as the time of departure.
     depart_now: ?bool = null,
 
-    /// Time of departure from thr origin.
+    /// Time of departure from the origin.
     ///
     /// Time format:`YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm`
     ///
@@ -63,13 +68,19 @@ pub const CalculateRoutesInput = struct {
     /// format: `[longitude, latitude]`.
     destination: []const f64,
 
-    /// Destination related options.
+    /// Destination related options. Not supported in `ap-southeast-1` and
+    /// `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     destination_options: ?RouteDestinationOptions = null,
 
-    /// Driver related options.
+    /// Driver related options. Not supported in `ap-southeast-1` and
+    /// `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     driver: ?RouteDriverOptions = null,
 
-    /// Features to be strictly excluded while calculating the route.
+    /// Features to be strictly excluded while calculating the route. Not supported
+    /// in `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     exclude: ?RouteExclusionOptions = null,
 
     /// Measurement system to be used for instructions within steps in the response.
@@ -79,14 +90,17 @@ pub const CalculateRoutesInput = struct {
     /// valid SigV4 signature must be provided when making a request.
     key: ?[]const u8 = null,
 
-    /// List of languages for instructions within steps in the response.
+    /// List of languages for instructions within steps in the response. Not
+    /// supported in `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
     /// Instructions in the requested language are returned only if they are
     /// available.
     languages: ?[]const []const u8 = null,
 
     /// A list of optional additional parameters such as timezone that can be
-    /// requested for each result.
+    /// requested for each result. For
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only `PassThroughWaypoints`, `Summary`, and `TravelStepInstructions`
     ///
     /// * `Elevation`: Retrieves the elevation information for each location.
     /// * `Incidents`: Provides information on traffic incidents along the route.
@@ -108,53 +122,73 @@ pub const CalculateRoutesInput = struct {
     ///
     /// `FlexiblePolyline`: A compact and precise encoding format for the leg
     /// geometry. For more information on the format, see the GitHub repository for
-    /// [ `FlexiblePolyline` ](https://github.com/heremaps/flexible-polyline).
+    /// [https://github.com/aws-geospatial/polyline](https://github.com/aws-geospatial/polyline).
     ///
     /// `Simple`: A less compact encoding, which is easier to decode but may be less
     /// precise and result in larger payloads.
     leg_geometry_format: ?GeometryFormat = null,
 
     /// Maximum number of alternative routes to be provided in the response, if
-    /// available.
+    /// available. For
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only up to 3 alternative routes.
     max_alternatives: ?i32 = null,
 
-    /// Specifies the optimization criteria for calculating a route.
+    /// Controls the trade-off between achieving the shortest travel time
+    /// (`FastestRoute`) and achieving the shortest physical distance
+    /// ((`ShortestRoute`) when calculating each route in the matrix.
     ///
-    /// Default Value: `FastestRoute`
+    /// Default value: `FastestRoute`
     optimize_routing_for: ?RoutingObjective = null,
 
-    /// The start position for the route.
+    /// The start position for the route in World Geodetic System (WGS 84) format:
+    /// [longitude, latitude].
     origin: []const f64,
 
-    /// Origin related options.
+    /// Specifies how the origin point should be matched to the road network and any
+    /// routing constraints that apply when the traveler is departing the origin.
+    /// Not supported in `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     origin_options: ?RouteOriginOptions = null,
 
-    /// A list of optional features such as SpeedLimit that can be requested for a
+    /// A list of optional features such as `SpeedLimit` that can be requested for a
     /// Span. A span is a section of a Leg for which the requested features have the
-    /// same values.
+    /// same values. Not supported in `ap-southeast-1` and `ap-southeast-5` regions
+    /// for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     span_additional_features: ?[]const RouteSpanAdditionalFeature = null,
 
-    /// Toll related options.
+    /// Toll related options. Not supported in `ap-southeast-1` and `ap-southeast-5`
+    /// regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     tolls: ?RouteTollOptions = null,
 
-    /// Traffic related options.
+    /// Traffic related options. Not supported in `ap-southeast-1` and
+    /// `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     traffic: ?RouteTrafficOptions = null,
 
     /// Specifies the mode of transport when calculating a route. Used in estimating
-    /// the speed of travel and road compatibility.
+    /// the speed of travel and road compatibility. For
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only `Car`, `Pedestrian`, and `Scooter` values.
     ///
-    /// Default Value: `Car`
+    /// Default value: `Car`
     travel_mode: ?RouteTravelMode = null,
 
-    /// Travel mode related options for the provided travel mode.
+    /// Travel mode related options for the provided travel mode. For
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only `Car` and `Pedestrian` travel mode options.
     travel_mode_options: ?RouteTravelModeOptions = null,
 
-    /// Type of step returned by the response. Default provides basic steps intended
-    /// for web based applications. TurnByTurn provides detailed instructions with
-    /// more granularity intended for a turn based navigation system.
+    /// Type of step returned by the response. `Default` provides basic steps
+    /// intended for web based applications. `TurnByTurn` provides detailed
+    /// instructions with more granularity intended for a turn based navigation
+    /// system. For
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions `Default` does not return any steps.
     travel_step_type: ?RouteTravelStepType = null,
 
-    /// List of waypoints between the Origin and Destination.
+    /// List of waypoints between the Origin and Destination. For
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions max length is `100`.
+    ///
+    /// Max length: `23`
     waypoints: ?[]const RouteWaypoint = null,
 
     pub const json_field_names = .{
@@ -191,7 +225,9 @@ pub const CalculateRoutesOutput = struct {
     leg_geometry_format: GeometryFormat,
 
     /// Notices are additional information returned that indicate issues that
-    /// occurred during route calculation.
+    /// occurred during route calculation. Not supported in `ap-southeast-1` and
+    /// `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     notices: ?[]const RouteResponseNotice = null,
 
     /// The pricing bucket for which the query is charged at.

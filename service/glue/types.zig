@@ -358,6 +358,7 @@ pub const Order = @import("order.zig").Order;
 pub const OrphanFileDeletionConfiguration = @import("orphan_file_deletion_configuration.zig").OrphanFileDeletionConfiguration;
 pub const OrphanFileDeletionMetrics = @import("orphan_file_deletion_metrics.zig").OrphanFileDeletionMetrics;
 pub const OtherMetadataValueListItem = @import("other_metadata_value_list_item.zig").OtherMetadataValueListItem;
+pub const OverwriteChildResourcePermissionsWithDefaultEnum = @import("overwrite_child_resource_permissions_with_default_enum.zig").OverwriteChildResourcePermissionsWithDefaultEnum;
 pub const PaginationConfiguration = @import("pagination_configuration.zig").PaginationConfiguration;
 pub const ParamType = @import("param_type.zig").ParamType;
 pub const ParquetCompressionType = @import("parquet_compression_type.zig").ParquetCompressionType;

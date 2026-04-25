@@ -8,20 +8,23 @@ const TileAdditionalFeature = @import("tile_additional_feature.zig").TileAdditio
 
 pub const GetTileInput = struct {
     /// A list of optional additional parameters such as map styles that can be
-    /// requested for each result.
+    /// requested for each result. Not supported in `ap-southeast-1` and
+    /// `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     additional_features: ?[]const TileAdditionalFeature = null,
 
     /// Optional: The API key to be used for authorization. Either an API key or
     /// valid SigV4 signature must be provided when making a request.
     key: ?[]const u8 = null,
 
-    /// Specifies the desired tile set.
+    /// Specifies the desired tile set. For
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only the `vector.basemap` value.
     ///
     /// Valid Values: `raster.satellite | vector.basemap | vector.traffic |
     /// raster.dem`
     tileset: []const u8,
 
-    /// The X axis value for the map tile. Must be between 0 and 19.
+    /// The X axis value for the map tile.
     x: []const u8,
 
     /// The Y axis value for the map tile.

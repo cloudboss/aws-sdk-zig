@@ -9,26 +9,19 @@ const Setting = @import("setting.zig").Setting;
 
 pub const DeleteAccountSettingInput = struct {
     /// The resource name to disable the account setting for. If
-    /// `serviceLongArnFormat` is specified, the ARN for your Amazon ECS services
-    /// is affected. If `taskLongArnFormat` is specified, the ARN and resource ID
-    /// for
+    /// `serviceLongArnFormat` is specified, the ARN for your Amazon ECS services is
+    /// affected. If `taskLongArnFormat` is specified, the ARN and resource ID for
     /// your Amazon ECS tasks is affected. If `containerInstanceLongArnFormat` is
     /// specified, the ARN and resource ID for your Amazon ECS container instances
-    /// is affected.
-    /// If `awsvpcTrunking` is specified, the ENI limit for your Amazon ECS
-    /// container
-    /// instances is affected.
+    /// is affected. If `awsvpcTrunking` is specified, the ENI limit for your Amazon
+    /// ECS container instances is affected.
     name: SettingName,
 
     /// The Amazon Resource Name (ARN) of the principal. It can be a user, role, or
-    /// the root
-    /// user. If you specify the root user, it disables the account setting for all
-    /// users,
-    /// roles, and the root user of the account unless a user or role explicitly
-    /// overrides these
-    /// settings. If this field is omitted, the setting is changed only for the
-    /// authenticated
-    /// user.
+    /// the root user. If you specify the root user, it disables the account setting
+    /// for all users, roles, and the root user of the account unless a user or role
+    /// explicitly overrides these settings. If this field is omitted, the setting
+    /// is changed only for the authenticated user.
     ///
     /// In order to use this parameter, you must be the root user, or the principal.
     principal_arn: ?[]const u8 = null,
@@ -172,6 +165,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

@@ -12,6 +12,10 @@ pub const TargetSummary = struct {
     /// The name of the target.
     name: []const u8,
 
+    /// Priority for resolving resource URI conflicts across targets. Lower values
+    /// take precedence. Defaults to 1000 when not set.
+    resource_priority: ?i32 = null,
+
     /// The current status of the target.
     status: TargetStatus,
 
@@ -25,6 +29,7 @@ pub const TargetSummary = struct {
         .created_at = "createdAt",
         .description = "description",
         .name = "name",
+        .resource_priority = "resourcePriority",
         .status = "status",
         .target_id = "targetId",
         .updated_at = "updatedAt",

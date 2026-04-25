@@ -5,6 +5,8 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BrowserSigningConfigInput = @import("browser_signing_config_input.zig").BrowserSigningConfigInput;
+const Certificate = @import("certificate.zig").Certificate;
+const BrowserEnterprisePolicy = @import("browser_enterprise_policy.zig").BrowserEnterprisePolicy;
 const BrowserNetworkConfiguration = @import("browser_network_configuration.zig").BrowserNetworkConfiguration;
 const RecordingConfig = @import("recording_config.zig").RecordingConfig;
 const BrowserStatus = @import("browser_status.zig").BrowserStatus;
@@ -14,6 +16,9 @@ pub const CreateBrowserInput = struct {
     /// identification using HTTP message signatures for web bot authentication.
     browser_signing: ?BrowserSigningConfigInput = null,
 
+    /// A list of certificates to install in the browser.
+    certificates: ?[]const Certificate = null,
+
     /// A unique, case-sensitive identifier to ensure that the operation completes
     /// no more than one time. If this token matches a previous request, Amazon
     /// Bedrock AgentCore ignores the request but does not return an error.
@@ -21,6 +26,9 @@ pub const CreateBrowserInput = struct {
 
     /// The description of the browser.
     description: ?[]const u8 = null,
+
+    /// A list of enterprise policy files for the browser.
+    enterprise_policies: ?[]const BrowserEnterprisePolicy = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role that provides permissions for
     /// the browser to access Amazon Web Services services.
@@ -44,8 +52,10 @@ pub const CreateBrowserInput = struct {
 
     pub const json_field_names = .{
         .browser_signing = "browserSigning",
+        .certificates = "certificates",
         .client_token = "clientToken",
         .description = "description",
+        .enterprise_policies = "enterprisePolicies",
         .execution_role_arn = "executionRoleArn",
         .name = "name",
         .network_configuration = "networkConfiguration",
@@ -119,6 +129,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBrowserInput, con
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.certificates) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"certificates\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.client_token) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"clientToken\":");
@@ -128,6 +144,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBrowserInput, con
     if (input.description) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"description\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.enterprise_policies) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"enterprisePolicies\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

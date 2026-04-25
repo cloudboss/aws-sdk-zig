@@ -15,8 +15,7 @@ pub const ImportAssetFromApiGatewayApiRequestDetails = struct {
     api_name: []const u8,
 
     /// The Base64-encoded MD5 hash of the OpenAPI 3.0 JSON API specification file.
-    /// It is used
-    /// to ensure the integrity of the file.
+    /// It is used to ensure the integrity of the file.
     api_specification_md_5_hash: []const u8,
 
     /// The data set ID.

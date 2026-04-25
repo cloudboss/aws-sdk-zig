@@ -18,7 +18,11 @@ pub const RetrieveMemoryRecordsInput = struct {
 
     /// The namespace prefix to filter memory records by. Searches for memory
     /// records in namespaces that start with the provided prefix.
-    namespace: []const u8,
+    namespace: ?[]const u8 = null,
+
+    /// Use namespacePath for hierarchical retrievals. Return all memory records
+    /// where namespace falls under the same parent hierarchy.
+    namespace_path: ?[]const u8 = null,
 
     /// The token for the next set of results. Use the value returned in the
     /// previous response in the next request to retrieve the next set of results.
@@ -32,6 +36,7 @@ pub const RetrieveMemoryRecordsInput = struct {
         .max_results = "maxResults",
         .memory_id = "memoryId",
         .namespace = "namespace",
+        .namespace_path = "namespacePath",
         .next_token = "nextToken",
         .search_criteria = "searchCriteria",
     };
@@ -100,10 +105,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RetrieveMemoryRecordsIn
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"namespace\":");
-    try aws.json.writeValue(@TypeOf(input.namespace), input.namespace, allocator, &body_buf);
-    has_prev = true;
+    if (input.namespace) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"namespace\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.namespace_path) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"namespacePath\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.next_token) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"nextToken\":");

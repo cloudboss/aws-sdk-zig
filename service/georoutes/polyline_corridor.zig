@@ -11,7 +11,7 @@ pub const PolylineCorridor = struct {
     /// destination to. The roads that are considered are determined by the provided
     /// Strategy.
     ///
-    /// **Unit**: `Meters`
+    /// **Unit**: `meters`
     radius: i32,
 
     pub const json_field_names = .{

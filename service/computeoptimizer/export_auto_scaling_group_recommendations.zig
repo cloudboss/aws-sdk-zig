@@ -12,8 +12,8 @@ const S3DestinationConfig = @import("s3_destination_config.zig").S3DestinationCo
 const S3Destination = @import("s3_destination.zig").S3Destination;
 
 pub const ExportAutoScalingGroupRecommendationsInput = struct {
-    /// The IDs of the Amazon Web Services accounts for which to export Amazon EC2
-    /// Auto Scaling group
+    /// The IDs of the Amazon Web Services accounts for which to export Auto Scaling
+    /// group
     /// recommendations.
     ///
     /// If your account is the management account of an organization, use this
@@ -43,7 +43,7 @@ pub const ExportAutoScalingGroupRecommendationsInput = struct {
     file_format: ?FileFormat = null,
 
     /// An array of objects to specify a filter that exports a more specific set of
-    /// Amazon EC2 Auto Scaling group recommendations.
+    /// Auto Scaling group recommendations.
     filters: ?[]const Filter = null,
 
     /// Indicates whether to include recommendations for resources in all member
@@ -72,7 +72,7 @@ pub const ExportAutoScalingGroupRecommendationsInput = struct {
     /// or the account IDs parameter, is omitted.
     include_member_accounts: ?bool = null,
 
-    /// An object to specify the preferences for the Amazon EC2 Auto Scaling group
+    /// An object to specify the preferences for the Auto Scaling group
     /// recommendations
     /// to export.
     recommendation_preferences: ?RecommendationPreferences = null,

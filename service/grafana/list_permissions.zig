@@ -15,8 +15,7 @@ pub const ListPermissionsInput = struct {
     max_results: ?i32 = null,
 
     /// The token to use when requesting the next set of results. You received this
-    /// token from
-    /// a previous `ListPermissions` operation.
+    /// token from a previous `ListPermissions` operation.
     next_token: ?[]const u8 = null,
 
     /// (Optional) Limits the results to only the user that matches this ID.

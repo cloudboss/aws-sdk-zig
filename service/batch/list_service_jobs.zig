@@ -10,10 +10,14 @@ const ServiceJobSummary = @import("service_job_summary.zig").ServiceJobSummary;
 
 pub const ListServiceJobsInput = struct {
     /// The filter to apply to the query. Only one filter can be used at a time.
-    /// When the filter
-    /// is used, `jobStatus` is ignored. The results are sorted by the `createdAt`
-    /// field,
-    /// with the most recent jobs being first.
+    /// When the
+    /// filter is used, `jobStatus` is ignored with the exception that
+    /// `SHARE_IDENTIFIER` or `QUOTA_SHARE_NAME` and `jobStatus` can be used
+    /// together. The results are sorted by the
+    /// `createdAt` field, with the most recent jobs being first.
+    ///
+    /// The `SHARE_IDENTIFIER` or `QUOTA_SHARE_NAME` filter and the `jobStatus`
+    /// field can be used together to filter results.
     ///
     /// **JOB_NAME**
     ///
@@ -40,12 +44,31 @@ pub const ListServiceJobsInput = struct {
     /// corresponds to the `createdAt` value. The value is a string representation
     /// of
     /// the number of milliseconds since 00:00:00 UTC (midnight) on January 1, 1970.
+    ///
+    /// **SHARE_IDENTIFIER**
+    ///
+    /// The value for the filter is the fairshare scheduling share identifier.
+    ///
+    /// **QUOTA_SHARE_NAME**
+    ///
+    /// The value for the filter is the quota management share name.
     filters: ?[]const KeyValuesPair = null,
 
     /// The name or ARN of the job queue with which to list service jobs.
     job_queue: ?[]const u8 = null,
 
-    /// The job status with which to filter service jobs.
+    /// The job status used to filter service jobs in the specified queue. If the
+    /// `filters`
+    /// parameter is specified, the `jobStatus` parameter is ignored and jobs with
+    /// any
+    /// status are returned. The exceptions are the `SHARE_IDENTIFIER` filter and
+    /// `QUOTA_SHARE_NAME` filter, which
+    /// can be used with `jobStatus`. If you don't specify a status, only `RUNNING`
+    /// jobs are
+    /// returned.
+    ///
+    /// The `SHARE_IDENTIFIER` filter or `QUOTA_SHARE_NAME` filter can be used with
+    /// the `jobStatus` field to filter results.
     job_status: ?ServiceJobStatus = null,
 
     /// The maximum number of results returned by `ListServiceJobs` in paginated

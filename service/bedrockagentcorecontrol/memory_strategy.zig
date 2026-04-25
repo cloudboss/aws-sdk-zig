@@ -19,6 +19,9 @@ pub const MemoryStrategy = struct {
     /// The namespaces associated with the memory strategy.
     namespaces: []const []const u8,
 
+    /// The namespaceTemplates associated with the memory strategy.
+    namespace_templates: []const []const u8,
+
     /// The current status of the memory strategy.
     status: ?MemoryStrategyStatus = null,
 
@@ -37,6 +40,7 @@ pub const MemoryStrategy = struct {
         .description = "description",
         .name = "name",
         .namespaces = "namespaces",
+        .namespace_templates = "namespaceTemplates",
         .status = "status",
         .strategy_id = "strategyId",
         .@"type" = "type",

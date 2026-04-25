@@ -10,8 +10,8 @@ pub const GetDashboardEmbedUrlInput = struct {
     /// A list of one or more dashboard IDs that you want anonymous users to have
     /// tempporary
     /// access to. Currently, the `IdentityType` parameter must be set to
-    /// `ANONYMOUS` because other identity types authenticate as Quick Suite or IAM
-    /// users. For example, if you set "`--dashboard-id
+    /// `ANONYMOUS` because other identity types authenticate as Quick or IAM users.
+    /// For example, if you set "`--dashboard-id
     /// dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS`", the
     /// session can access all three dashboards.
     additional_dashboard_ids: ?[]const []const u8 = null,
@@ -61,10 +61,9 @@ pub const GetDashboardEmbedUrlInput = struct {
     /// enables the undo/redo button.
     undo_redo_disabled: ?bool = null,
 
-    /// The Amazon Quick Suite user's Amazon Resource Name (ARN), for use with
-    /// `QUICKSIGHT` identity type. You can use this for any Amazon Quick Suite
-    /// users in your account (readers, authors, or admins) authenticated as one of
-    /// the
+    /// The Amazon Quick user's Amazon Resource Name (ARN), for use with
+    /// `QUICKSIGHT` identity type. You can use this for any Amazon Quick users in
+    /// your account (readers, authors, or admins) authenticated as one of the
     /// following:
     ///
     /// * Active Directory (AD) users or group members

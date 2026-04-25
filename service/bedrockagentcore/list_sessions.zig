@@ -4,11 +4,15 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const SessionFilter = @import("session_filter.zig").SessionFilter;
 const SessionSummary = @import("session_summary.zig").SessionSummary;
 
 pub const ListSessionsInput = struct {
     /// The identifier of the actor for which to list sessions.
     actor_id: []const u8,
+
+    /// Filter criteria to apply when listing sessions.
+    filter: ?SessionFilter = null,
 
     /// The maximum number of results to return in a single call. The default value
     /// is 20.
@@ -23,6 +27,7 @@ pub const ListSessionsInput = struct {
 
     pub const json_field_names = .{
         .actor_id = "actorId",
+        .filter = "filter",
         .max_results = "maxResults",
         .memory_id = "memoryId",
         .next_token = "nextToken",
@@ -87,6 +92,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListSessionsInput, conf
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.filter) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"filter\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.max_results) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"maxResults\":");

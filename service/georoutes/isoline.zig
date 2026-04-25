@@ -1,20 +1,25 @@
 const IsolineConnection = @import("isoline_connection.zig").IsolineConnection;
 const IsolineShapeGeometry = @import("isoline_shape_geometry.zig").IsolineShapeGeometry;
 
-/// Calculated isolines and associated properties.
+/// Represents a single reachable area calculated for a specific threshold.
 pub const Isoline = struct {
-    /// Isolines may contain multiple components, if these components are connected
-    /// by ferry links. These components are returned as separate polygons while the
-    /// ferry links are returned as connections.
+    /// Lines connecting separate parts of the reachable area that can be reached
+    /// within the same threshold. These occur when areas are reachable but not
+    /// contiguous, such as when separated by water or unroutable areas. When
+    /// present, these lines represent actual transportation network segments (such
+    /// as ferry routes or bridges) that connect the separated areas.
     connections: []const IsolineConnection,
 
-    /// Distance threshold corresponding to the calculated Isoline.
+    /// The travel distance in meters used to calculate this isoline, if
+    /// distance-based thresholds were specified in the request.
     distance_threshold: i64 = 0,
 
-    /// Geometries for the Calculated isolines.
+    /// The shapes that define the reachable area, provided in the requested
+    /// geometry format.
     geometries: []const IsolineShapeGeometry,
 
-    /// Time threshold corresponding to the calculated isoline.
+    /// The travel time in seconds used to calculate this isoline, if time-based
+    /// thresholds were specified in the request.
     time_threshold: i64 = 0,
 
     pub const json_field_names = .{

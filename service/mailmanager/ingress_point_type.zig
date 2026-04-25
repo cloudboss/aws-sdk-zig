@@ -3,16 +3,19 @@ const std = @import("std");
 pub const IngressPointType = enum {
     open,
     auth,
+    mtls,
 
     pub const json_field_names = .{
         .open = "OPEN",
         .auth = "AUTH",
+        .mtls = "MTLS",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .open => "OPEN",
             .auth => "AUTH",
+            .mtls => "MTLS",
         };
     }
 

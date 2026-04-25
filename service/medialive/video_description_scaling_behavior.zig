@@ -4,16 +4,19 @@ const std = @import("std");
 pub const VideoDescriptionScalingBehavior = enum {
     default,
     stretch_to_output,
+    smart_crop,
 
     pub const json_field_names = .{
         .default = "DEFAULT",
         .stretch_to_output = "STRETCH_TO_OUTPUT",
+        .smart_crop = "SMART_CROP",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .default => "DEFAULT",
             .stretch_to_output => "STRETCH_TO_OUTPUT",
+            .smart_crop => "SMART_CROP",
         };
     }
 

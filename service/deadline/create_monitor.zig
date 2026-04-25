@@ -22,6 +22,10 @@ pub const CreateMonitorInput = struct {
     /// authenticates monitor users.
     identity_center_instance_arn: []const u8,
 
+    /// The AWS region where IAM Identity Center is enabled. Required when Identity
+    /// Center is in a different region than the monitor.
+    identity_center_region: ?[]const u8 = null,
+
     /// The Amazon Resource Name of the IAM role that the monitor uses to connect to
     /// Deadline Cloud. Every user that signs in to the monitor using IAM Identity
     /// Center uses this role to access Deadline Cloud resources.
@@ -40,6 +44,7 @@ pub const CreateMonitorInput = struct {
         .client_token = "clientToken",
         .display_name = "displayName",
         .identity_center_instance_arn = "identityCenterInstanceArn",
+        .identity_center_region = "identityCenterRegion",
         .role_arn = "roleArn",
         .subdomain = "subdomain",
         .tags = "tags",
@@ -105,6 +110,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateMonitorInput, con
     try body_buf.appendSlice(allocator, "\"identityCenterInstanceArn\":");
     try aws.json.writeValue(@TypeOf(input.identity_center_instance_arn), input.identity_center_instance_arn, allocator, &body_buf);
     has_prev = true;
+    if (input.identity_center_region) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"identityCenterRegion\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"roleArn\":");
     try aws.json.writeValue(@TypeOf(input.role_arn), input.role_arn, allocator, &body_buf);

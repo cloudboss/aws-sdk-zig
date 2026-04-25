@@ -11,8 +11,7 @@ pub const SubmitAttachmentStateChangesInput = struct {
     attachments: []const AttachmentStateChange,
 
     /// The short name or full ARN of the cluster that hosts the container instance
-    /// the
-    /// attachment belongs to.
+    /// the attachment belongs to.
     cluster: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -154,6 +153,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

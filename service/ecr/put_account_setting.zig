@@ -6,15 +6,14 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const PutAccountSettingInput = struct {
-    /// The name of the account setting, such as `BASIC_SCAN_TYPE_VERSION` or
-    /// `REGISTRY_POLICY_SCOPE`.
+    /// The name of the account setting, such as `BASIC_SCAN_TYPE_VERSION`,
+    /// `REGISTRY_POLICY_SCOPE`, or `BLOB_MOUNTING`.
     name: []const u8,
 
-    /// Setting value that is specified. The following are valid values for the
-    /// basic scan
-    /// type being used: `AWS_NATIVE` or `CLAIR`. The following are valid
-    /// values for the registry policy scope being used: `V1` or
-    /// `V2`.
+    /// Setting value that is specified. Valid value for basic scan type:
+    /// `AWS_NATIVE`.
+    /// Valid values for registry policy scope: `V1` or `V2`.
+    /// Valid values for blob mounting: `ENABLED` or `DISABLED`.
     value: []const u8,
 
     pub const json_field_names = .{
@@ -352,6 +351,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "UnableToGetUpstreamLayerException")) {
         return .{ .arena = arena, .kind = .{ .unable_to_get_upstream_layer_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnableToListUpstreamImageReferrersException")) {
+        return .{ .arena = arena, .kind = .{ .unable_to_list_upstream_image_referrers_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

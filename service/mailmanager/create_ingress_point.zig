@@ -7,6 +7,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const IngressPointConfiguration = @import("ingress_point_configuration.zig").IngressPointConfiguration;
 const NetworkConfiguration = @import("network_configuration.zig").NetworkConfiguration;
 const Tag = @import("tag.zig").Tag;
+const TlsPolicy = @import("tls_policy.zig").TlsPolicy;
 const IngressPointType = @import("ingress_point_type.zig").IngressPointType;
 
 pub const CreateIngressPointInput = struct {
@@ -34,6 +35,10 @@ pub const CreateIngressPointInput = struct {
     /// example, { "tags": {"key1":"value1", "key2":"value2"} }.
     tags: ?[]const Tag = null,
 
+    /// The Transport Layer Security (TLS) policy for the ingress point. The FIPS
+    /// value is only valid in US and Canada regions.
+    tls_policy: ?TlsPolicy = null,
+
     /// The identifier of an existing traffic policy that you attach to an ingress
     /// endpoint resource.
     traffic_policy_id: []const u8,
@@ -48,6 +53,7 @@ pub const CreateIngressPointInput = struct {
         .network_configuration = "NetworkConfiguration",
         .rule_set_id = "RuleSetId",
         .tags = "Tags",
+        .tls_policy = "TlsPolicy",
         .traffic_policy_id = "TrafficPolicyId",
         .@"type" = "Type",
     };

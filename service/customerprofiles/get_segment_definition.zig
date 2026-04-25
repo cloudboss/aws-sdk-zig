@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const SegmentGroup = @import("segment_group.zig").SegmentGroup;
+const SegmentSort = @import("segment_sort.zig").SegmentSort;
 const SegmentType = @import("segment_type.zig").SegmentType;
 
 pub const GetSegmentDefinitionInput = struct {
@@ -39,6 +40,9 @@ pub const GetSegmentDefinitionOutput = struct {
     /// The segment criteria associated with this definition.
     segment_groups: ?SegmentGroup = null,
 
+    /// The segment sort.
+    segment_sort: ?SegmentSort = null,
+
     /// The segment SQL query.
     segment_sql_query: ?[]const u8 = null,
 
@@ -59,6 +63,7 @@ pub const GetSegmentDefinitionOutput = struct {
         .segment_definition_arn = "SegmentDefinitionArn",
         .segment_definition_name = "SegmentDefinitionName",
         .segment_groups = "SegmentGroups",
+        .segment_sort = "SegmentSort",
         .segment_sql_query = "SegmentSqlQuery",
         .segment_type = "SegmentType",
         .tags = "Tags",

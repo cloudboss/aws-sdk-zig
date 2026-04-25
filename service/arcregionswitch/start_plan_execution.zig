@@ -28,6 +28,11 @@ pub const StartPlanExecutionInput = struct {
     /// The Amazon Resource Name (ARN) of the plan to execute.
     plan_arn: []const u8,
 
+    /// The execution identifier of the recovery execution that ran in the opposite
+    /// region post-recovery is ran in. Required when starting a post-recovery
+    /// execution.
+    recovery_execution_id: ?[]const u8 = null,
+
     /// The Amazon Web Services Region to target with this execution. This is the
     /// Region that traffic will be shifted to or from, depending on the action.
     target_region: []const u8,
@@ -38,6 +43,7 @@ pub const StartPlanExecutionInput = struct {
         .latest_version = "latestVersion",
         .mode = "mode",
         .plan_arn = "planArn",
+        .recovery_execution_id = "recoveryExecutionId",
         .target_region = "targetRegion",
     };
 };

@@ -1,4 +1,5 @@
 const CascadingControlConfiguration = @import("cascading_control_configuration.zig").CascadingControlConfiguration;
+const ControlSortConfiguration = @import("control_sort_configuration.zig").ControlSortConfiguration;
 const ListControlDisplayOptions = @import("list_control_display_options.zig").ListControlDisplayOptions;
 const ParameterSelectableValues = @import("parameter_selectable_values.zig").ParameterSelectableValues;
 const SheetControlListType = @import("sheet_control_list_type.zig").SheetControlListType;
@@ -9,6 +10,10 @@ pub const ParameterListControl = struct {
     /// The values that are displayed in a control can be configured to only show
     /// values that are valid based on what's selected in other controls.
     cascading_control_configuration: ?CascadingControlConfiguration = null,
+
+    /// The sort configuration for the values displayed in the control. Only one
+    /// sort configuration can be applied per control.
+    control_sort_configurations: ?[]const ControlSortConfiguration = null,
 
     /// The display options of a control.
     display_options: ?ListControlDisplayOptions = null,
@@ -30,6 +35,7 @@ pub const ParameterListControl = struct {
 
     pub const json_field_names = .{
         .cascading_control_configuration = "CascadingControlConfiguration",
+        .control_sort_configurations = "ControlSortConfigurations",
         .display_options = "DisplayOptions",
         .parameter_control_id = "ParameterControlId",
         .selectable_values = "SelectableValues",

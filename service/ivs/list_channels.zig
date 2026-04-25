@@ -7,6 +7,9 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ChannelSummary = @import("channel_summary.zig").ChannelSummary;
 
 pub const ListChannelsInput = struct {
+    /// Filters the channel list to match the specified ad configuration ARN.
+    filter_by_ad_configuration_arn: ?[]const u8 = null,
+
     /// Filters the channel list to match the specified name.
     filter_by_name: ?[]const u8 = null,
 
@@ -20,11 +23,11 @@ pub const ListChannelsInput = struct {
     max_results: ?i32 = null,
 
     /// The first channel to retrieve. This is used for pagination; see the
-    /// `nextToken`
-    /// response field.
+    /// `nextToken` response field.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .filter_by_ad_configuration_arn = "filterByAdConfigurationArn",
         .filter_by_name = "filterByName",
         .filter_by_playback_restriction_policy_arn = "filterByPlaybackRestrictionPolicyArn",
         .filter_by_recording_configuration_arn = "filterByRecordingConfigurationArn",
@@ -37,8 +40,8 @@ pub const ListChannelsOutput = struct {
     /// List of the matching channels.
     channels: ?[]const ChannelSummary = null,
 
-    /// If there are more channels than `maxResults`, use `nextToken` in the
-    /// request to get the next set.
+    /// If there are more channels than `maxResults`, use `nextToken` in the request
+    /// to get the next set.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -85,6 +88,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListChannelsInput, conf
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.filter_by_ad_configuration_arn) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"filterByAdConfigurationArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.filter_by_name) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"filterByName\":");
@@ -194,6 +203,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
         return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceUnavailable")) {
+        return .{ .arena = arena, .kind = .{ .service_unavailable = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

@@ -1,5 +1,6 @@
 const GameProperty = @import("game_property.zig").GameProperty;
 const PlacedPlayerSession = @import("placed_player_session.zig").PlacedPlayerSession;
+const PlayerGatewayStatus = @import("player_gateway_status.zig").PlayerGatewayStatus;
 const PlayerLatency = @import("player_latency.zig").PlayerLatency;
 const PriorityConfigurationOverride = @import("priority_configuration_override.zig").PriorityConfigurationOverride;
 const GameSessionPlacementState = @import("game_session_placement_state.zig").GameSessionPlacementState;
@@ -40,10 +41,15 @@ pub const GameSessionPlacement = struct {
     /// A set of key-value pairs that can store custom data in a game session.
     /// For example: `{"Key": "difficulty", "Value": "novice"}`.
     ///
-    /// Avoid using periods (".") in property keys if you plan to search for game
-    /// sessions by properties. Property keys containing periods cannot be searched
-    /// and will be filtered out from search results due to search index
-    /// limitations.
+    /// * Avoid using periods (".") in property keys if you plan to search for game
+    ///   sessions by properties. Property keys containing periods cannot be
+    ///   searched and will be filtered out from search results due to search index
+    ///   limitations.
+    ///
+    /// * If you use SearchGameSessions API, there is a limit of 500 game property
+    ///   keys across all game sessions and all fleets per region. If the limit is
+    ///   exceeded, there will potentially be game session entries missing from
+    ///   SearchGameSessions API results.
     game_properties: ?[]const GameProperty = null,
 
     /// Identifier for the game session created by this placement request. This
@@ -108,6 +114,21 @@ pub const GameSessionPlacement = struct {
 
     /// A unique identifier for a game session placement.
     placement_id: ?[]const u8 = null,
+
+    /// The current status of player gateway for the game session placement. Note,
+    /// even if a fleet has PlayerGatewayMode configured as `ENABLED`, player
+    /// gateway might not be available in a specific location. For more information
+    /// about locations where player gateway is supported, see [Amazon GameLift
+    /// Servers service
+    /// locations](https://docs.aws.amazon.com/gameliftservers/latest/developerguide/gamelift-regions.html).
+    ///
+    /// Possible values include:
+    ///
+    /// * `ENABLED` -- Player gateway is available for this game session placement.
+    ///
+    /// * `DISABLED` -- Player gateway is not available for this game session
+    ///   placement.
+    player_gateway_status: ?PlayerGatewayStatus = null,
 
     /// A set of values, expressed in milliseconds, that indicates the amount of
     /// latency that a player experiences when connected to Amazon Web Services
@@ -175,6 +196,7 @@ pub const GameSessionPlacement = struct {
         .maximum_player_session_count = "MaximumPlayerSessionCount",
         .placed_player_sessions = "PlacedPlayerSessions",
         .placement_id = "PlacementId",
+        .player_gateway_status = "PlayerGatewayStatus",
         .player_latencies = "PlayerLatencies",
         .port = "Port",
         .priority_configuration_override = "PriorityConfigurationOverride",

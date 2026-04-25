@@ -11,6 +11,7 @@ pub const RegistrationVersionStatus = enum {
     denied,
     revoked,
     archived,
+    requires_offline_review,
 
     pub const json_field_names = .{
         .draft = "DRAFT",
@@ -23,6 +24,7 @@ pub const RegistrationVersionStatus = enum {
         .denied = "DENIED",
         .revoked = "REVOKED",
         .archived = "ARCHIVED",
+        .requires_offline_review = "REQUIRES_OFFLINE_REVIEW",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -37,6 +39,7 @@ pub const RegistrationVersionStatus = enum {
             .denied => "DENIED",
             .revoked => "REVOKED",
             .archived => "ARCHIVED",
+            .requires_offline_review => "REQUIRES_OFFLINE_REVIEW",
         };
     }
 

@@ -7,12 +7,12 @@ pub const RouteMatrixCarOptions = struct {
 
     /// Maximum speed
     ///
-    /// **Unit**: `KilometersPerHour`
+    /// **Unit**: `kilometers per hour`
     max_speed: ?f64 = null,
 
     /// The number of occupants in the vehicle.
     ///
-    /// Default Value: `1`
+    /// Default value: `1`
     occupancy: ?i32 = null,
 
     pub const json_field_names = .{

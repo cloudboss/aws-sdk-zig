@@ -15,8 +15,8 @@ pub const DescribePublishingDestinationInput = struct {
     /// The unique ID of the detector associated with the publishing destination to
     /// retrieve.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 
@@ -30,8 +30,8 @@ pub const DescribePublishingDestinationOutput = struct {
     /// The ID of the publishing destination.
     destination_id: []const u8,
 
-    /// A `DestinationProperties` object that includes the `DestinationArn`
-    /// and `KmsKeyArn` of the publishing destination.
+    /// A `DestinationProperties` object that includes the `DestinationArn` and
+    /// `KmsKeyArn` of the publishing destination.
     destination_properties: ?DestinationProperties = null,
 
     /// The type of publishing destination. Currently, only Amazon S3 buckets are
@@ -39,8 +39,7 @@ pub const DescribePublishingDestinationOutput = struct {
     destination_type: DestinationType,
 
     /// The time, in epoch millisecond format, at which GuardDuty was first unable
-    /// to publish
-    /// findings to the destination.
+    /// to publish findings to the destination.
     publishing_failure_start_timestamp: i64,
 
     /// The status of the publishing destination.

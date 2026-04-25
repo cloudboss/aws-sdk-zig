@@ -1,3 +1,5 @@
+pub const AdConfiguration = @import("ad_configuration.zig").AdConfiguration;
+pub const AdConfigurationSummary = @import("ad_configuration_summary.zig").AdConfigurationSummary;
 pub const AudioConfiguration = @import("audio_configuration.zig").AudioConfiguration;
 pub const BatchError = @import("batch_error.zig").BatchError;
 pub const BatchStartViewerSessionRevocationError = @import("batch_start_viewer_session_revocation_error.zig").BatchStartViewerSessionRevocationError;
@@ -16,6 +18,7 @@ pub const ListStreamSessionsRequest = @import("list_stream_sessions_request.zig"
 pub const ListStreamSessionsResponse = @import("list_stream_sessions_response.zig").ListStreamSessionsResponse;
 pub const ListTagsForResourceRequest = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
 pub const ListTagsForResourceResponse = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+pub const MediaTailorPlaybackConfiguration = @import("media_tailor_playback_configuration.zig").MediaTailorPlaybackConfiguration;
 pub const MultitrackInputConfiguration = @import("multitrack_input_configuration.zig").MultitrackInputConfiguration;
 pub const MultitrackMaximumResolution = @import("multitrack_maximum_resolution.zig").MultitrackMaximumResolution;
 pub const MultitrackPolicy = @import("multitrack_policy.zig").MultitrackPolicy;

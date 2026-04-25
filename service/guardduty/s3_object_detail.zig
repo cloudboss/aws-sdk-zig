@@ -1,8 +1,7 @@
 /// Information about the S3 object that was scanned
 pub const S3ObjectDetail = struct {
     /// The entity tag is a hash of the S3 object. The ETag reflects changes only to
-    /// the contents of
-    /// an object, and not its metadata.
+    /// the contents of an object, and not its metadata.
     e_tag: ?[]const u8 = null,
 
     /// Hash of the threat detected in this finding.

@@ -36,7 +36,7 @@ pub const StartConfigurationPolicyAssociationOutput = struct {
 
     /// Indicates whether the association between the specified target and the
     /// configuration was directly applied by the
-    /// Security Hub delegated administrator or inherited from a parent.
+    /// Security Hub CSPM delegated administrator or inherited from a parent.
     association_type: ?AssociationType = null,
 
     /// The UUID of the configuration policy.
@@ -190,6 +190,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "LimitExceededException")) {
         return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organization_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationalUnitNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organizational_unit_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

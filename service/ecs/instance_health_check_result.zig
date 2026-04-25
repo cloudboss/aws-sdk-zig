@@ -15,6 +15,9 @@ pub const InstanceHealthCheckResult = struct {
     /// The container instance health status.
     status: ?InstanceHealthCheckState = null,
 
+    /// The reason for the container instance health status.
+    status_reason: ?[]const u8 = null,
+
     /// The type of container instance health status that was verified.
     @"type": ?InstanceHealthCheckType = null,
 
@@ -22,6 +25,7 @@ pub const InstanceHealthCheckResult = struct {
         .last_status_change = "lastStatusChange",
         .last_updated = "lastUpdated",
         .status = "status",
+        .status_reason = "statusReason",
         .@"type" = "type",
     };
 };

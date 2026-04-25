@@ -7,6 +7,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const DefaultQueueBudgetAction = @import("default_queue_budget_action.zig").DefaultQueueBudgetAction;
 const JobAttachmentSettings = @import("job_attachment_settings.zig").JobAttachmentSettings;
 const JobRunAsUser = @import("job_run_as_user.zig").JobRunAsUser;
+const SchedulingConfiguration = @import("scheduling_configuration.zig").SchedulingConfiguration;
 
 pub const CreateQueueInput = struct {
     /// The storage profile IDs to include in the queue.
@@ -49,6 +50,13 @@ pub const CreateQueueInput = struct {
     /// The IAM role ARN that workers will use while running jobs for this queue.
     role_arn: ?[]const u8 = null,
 
+    /// The scheduling configuration for the queue. This configuration determines
+    /// how workers are assigned to jobs in the queue.
+    ///
+    /// If not specified, the queue defaults to the `priorityFifo` scheduling
+    /// configuration.
+    scheduling_configuration: ?SchedulingConfiguration = null,
+
     /// Each tag consists of a tag key and a tag value. Tag keys and values are both
     /// required, but tag values can be empty strings.
     tags: ?[]const aws.map.StringMapEntry = null,
@@ -64,6 +72,7 @@ pub const CreateQueueInput = struct {
         .job_run_as_user = "jobRunAsUser",
         .required_file_system_location_names = "requiredFileSystemLocationNames",
         .role_arn = "roleArn",
+        .scheduling_configuration = "schedulingConfiguration",
         .tags = "tags",
     };
 };
@@ -162,6 +171,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateQueueInput, confi
     if (input.role_arn) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"roleArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.scheduling_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"schedulingConfiguration\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

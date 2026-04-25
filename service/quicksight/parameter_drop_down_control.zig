@@ -1,5 +1,6 @@
 const CascadingControlConfiguration = @import("cascading_control_configuration.zig").CascadingControlConfiguration;
 const CommitMode = @import("commit_mode.zig").CommitMode;
+const ControlSortConfiguration = @import("control_sort_configuration.zig").ControlSortConfiguration;
 const DropDownControlDisplayOptions = @import("drop_down_control_display_options.zig").DropDownControlDisplayOptions;
 const ParameterSelectableValues = @import("parameter_selectable_values.zig").ParameterSelectableValues;
 const SheetControlListType = @import("sheet_control_list_type.zig").SheetControlListType;
@@ -14,6 +15,10 @@ pub const ParameterDropDownControl = struct {
     /// The visibility configuration of the Apply button on a
     /// `ParameterDropDownControl`.
     commit_mode: ?CommitMode = null,
+
+    /// The sort configuration for the values displayed in the control. Only one
+    /// sort configuration can be applied per control.
+    control_sort_configurations: ?[]const ControlSortConfiguration = null,
 
     /// The display options of a control.
     display_options: ?DropDownControlDisplayOptions = null,
@@ -36,6 +41,7 @@ pub const ParameterDropDownControl = struct {
     pub const json_field_names = .{
         .cascading_control_configuration = "CascadingControlConfiguration",
         .commit_mode = "CommitMode",
+        .control_sort_configurations = "ControlSortConfigurations",
         .display_options = "DisplayOptions",
         .parameter_control_id = "ParameterControlId",
         .selectable_values = "SelectableValues",

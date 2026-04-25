@@ -11,8 +11,8 @@ const CoverageResource = @import("coverage_resource.zig").CoverageResource;
 pub const ListCoverageInput = struct {
     /// The unique ID of the detector whose coverage details you want to retrieve.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 
@@ -23,12 +23,9 @@ pub const ListCoverageInput = struct {
     max_results: ?i32 = null,
 
     /// A token to use for paginating results that are returned in the response. Set
-    /// the value of
-    /// this parameter to null for the first request to a list action. For
-    /// subsequent calls, use the
-    /// NextToken value returned from the previous request to continue listing
-    /// results after the first
-    /// page.
+    /// the value of this parameter to null for the first request to a list action.
+    /// For subsequent calls, use the NextToken value returned from the previous
+    /// request to continue listing results after the first page.
     next_token: ?[]const u8 = null,
 
     /// Represents the criteria used to sort the coverage details.
@@ -45,8 +42,7 @@ pub const ListCoverageInput = struct {
 
 pub const ListCoverageOutput = struct {
     /// The pagination parameter to be used on the next list operation to retrieve
-    /// more
-    /// items.
+    /// more items.
     next_token: ?[]const u8 = null,
 
     /// A list of resources and their attributes providing cluster details.

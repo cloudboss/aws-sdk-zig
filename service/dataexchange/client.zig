@@ -75,8 +75,7 @@ pub const Client = struct {
     }
 
     /// This operation cancels a job. Jobs can be cancelled only when they are in
-    /// the WAITING
-    /// state.
+    /// the WAITING state.
     pub fn cancelJob(self: *Self, allocator: std.mem.Allocator, input: cancel_job.CancelJobInput, options: CallOptions) !cancel_job.CancelJobOutput {
         return cancel_job.execute(self, allocator, input, options);
     }
@@ -172,16 +171,14 @@ pub const Client = struct {
     }
 
     /// This operation lists a data set's revisions sorted by CreatedAt in
-    /// descending
-    /// order.
+    /// descending order.
     pub fn listDataSetRevisions(self: *Self, allocator: std.mem.Allocator, input: list_data_set_revisions.ListDataSetRevisionsInput, options: CallOptions) !list_data_set_revisions.ListDataSetRevisionsOutput {
         return list_data_set_revisions.execute(self, allocator, input, options);
     }
 
     /// This operation lists your data sets. When listing by origin OWNED, results
-    /// are sorted by
-    /// CreatedAt in descending order. When listing by origin ENTITLED, there is no
-    /// order.
+    /// are sorted by CreatedAt in descending order. When listing by origin
+    /// ENTITLED, there is no order.
     pub fn listDataSets(self: *Self, allocator: std.mem.Allocator, input: list_data_sets.ListDataSetsInput, options: CallOptions) !list_data_sets.ListDataSetsOutput {
         return list_data_sets.execute(self, allocator, input, options);
     }
@@ -218,8 +215,7 @@ pub const Client = struct {
     }
 
     /// This operation invokes an API Gateway API asset. The request is proxied to
-    /// the
-    /// provider’s API Gateway API.
+    /// the provider’s API Gateway API.
     pub fn sendApiAsset(self: *Self, allocator: std.mem.Allocator, input: send_api_asset.SendApiAssetInput, options: CallOptions) !send_api_asset.SendApiAssetOutput {
         return send_api_asset.execute(self, allocator, input, options);
     }

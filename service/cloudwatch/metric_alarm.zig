@@ -1,5 +1,6 @@
 const ComparisonOperator = @import("comparison_operator.zig").ComparisonOperator;
 const Dimension = @import("dimension.zig").Dimension;
+const EvaluationCriteria = @import("evaluation_criteria.zig").EvaluationCriteria;
 const EvaluationState = @import("evaluation_state.zig").EvaluationState;
 const MetricDataQuery = @import("metric_data_query.zig").MetricDataQuery;
 const StateValue = @import("state_value.zig").StateValue;
@@ -46,16 +47,29 @@ pub const MetricAlarm = struct {
     /// and possibly changes state no matter how many data points are available.
     evaluate_low_sample_count_percentile: ?[]const u8 = null,
 
+    /// The evaluation criteria for the alarm.
+    evaluation_criteria: ?EvaluationCriteria = null,
+
+    /// The frequency, in seconds, at which the alarm is evaluated.
+    evaluation_interval: ?i32 = null,
+
     /// The number of periods over which data is compared to the specified
     /// threshold.
     evaluation_periods: ?i32 = null,
 
-    /// If the value of this field is `PARTIAL_DATA`, the alarm is being evaluated
-    /// based on only partial data. This happens if the query used for the alarm
-    /// returns more
-    /// than 10,000 metrics. For more information, see [Create
+    /// If the value of this field is `PARTIAL_DATA`, it indicates that not all the
+    /// available data was able to be retrieved due to quota limitations. For more
+    /// information, see [Create
     /// alarms on Metrics Insights
     /// queries](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html).
+    ///
+    /// If the value of this field is `EVALUATION_ERROR`, it indicates configuration
+    /// errors in alarm setup that require review and correction. Refer to
+    /// StateReason field of the alarm for more details.
+    ///
+    /// If the value of this field is `EVALUATION_FAILURE`, it indicates temporary
+    /// CloudWatch issues. We recommend manual monitoring until the issue is
+    /// resolved
     evaluation_state: ?EvaluationState = null,
 
     /// The percentile statistic for the metric associated with the alarm. Specify a
@@ -131,6 +145,8 @@ pub const MetricAlarm = struct {
     ///
     /// If this parameter is omitted, the default behavior of `missing` is
     /// used.
+    ///
+    /// This parameter is not applicable to PromQL alarms.
     treat_missing_data: ?[]const u8 = null,
 
     /// The unit of the metric associated with the alarm.
@@ -147,6 +163,8 @@ pub const MetricAlarm = struct {
         .datapoints_to_alarm = "DatapointsToAlarm",
         .dimensions = "Dimensions",
         .evaluate_low_sample_count_percentile = "EvaluateLowSampleCountPercentile",
+        .evaluation_criteria = "EvaluationCriteria",
+        .evaluation_interval = "EvaluationInterval",
         .evaluation_periods = "EvaluationPeriods",
         .evaluation_state = "EvaluationState",
         .extended_statistic = "ExtendedStatistic",

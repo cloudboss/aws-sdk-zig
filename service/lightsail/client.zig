@@ -390,6 +390,11 @@ pub const Client = struct {
     /// more information,
     /// see [Notifications in Amazon
     /// Lightsail](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-notifications).
+    ///
+    /// The `create contact method` operation supports tag-based access control via
+    /// request
+    /// tags. For more information, see the [Lightsail Developer
+    /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
     pub fn createContactMethod(self: *Self, allocator: std.mem.Allocator, input: create_contact_method.CreateContactMethodInput, options: CallOptions) !create_contact_method.CreateContactMethodOutput {
         return create_contact_method.execute(self, allocator, input, options);
     }
@@ -1693,6 +1698,10 @@ pub const Client = struct {
     /// overwrites the previous configuration of the alarm. The alarm is then
     /// evaluated with the
     /// updated configuration.
+    ///
+    /// The `put alarm` operation supports tag-based access control via request
+    /// tags. For more information, see the [Lightsail Developer
+    /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags).
     pub fn putAlarm(self: *Self, allocator: std.mem.Allocator, input: put_alarm.PutAlarmInput, options: CallOptions) !put_alarm.PutAlarmOutput {
         return put_alarm.execute(self, allocator, input, options);
     }

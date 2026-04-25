@@ -3,20 +3,15 @@ const ExpressGatewayServiceStatus = @import("express_gateway_service_status.zig"
 const Tag = @import("tag.zig").Tag;
 
 /// Represents an Express service, which provides a simplified way to deploy
-/// containerized
-/// web applications on Amazon ECS with managed Amazon Web Services
-/// infrastructure. An Express service
-/// automatically provisions and manages Application Load Balancers, target
-/// groups, security
-/// groups, and auto-scaling policies.
+/// containerized web applications on Amazon ECS with managed Amazon Web
+/// Services infrastructure. An Express service automatically provisions and
+/// manages Application Load Balancers, target groups, security groups, and
+/// auto-scaling policies.
 ///
 /// Express services use a service revision architecture where each service can
-/// have
-/// multiple active configurations, enabling blue-green deployments and gradual
-/// rollouts. The
-/// service maintains a list of active configurations and manages the lifecycle
-/// of the
-/// underlying Amazon Web Services resources.
+/// have multiple active configurations, enabling blue-green deployments and
+/// gradual rollouts. The service maintains a list of active configurations and
+/// manages the lifecycle of the underlying Amazon Web Services resources.
 pub const ECSExpressGatewayService = struct {
     /// The list of active service configurations for the Express service.
     active_configurations: ?[]const ExpressGatewayServiceConfiguration = null,
@@ -31,8 +26,7 @@ pub const ECSExpressGatewayService = struct {
     current_deployment: ?[]const u8 = null,
 
     /// The ARN of the infrastructure role that manages Amazon Web Services
-    /// resources for the Express
-    /// service.
+    /// resources for the Express service.
     infrastructure_role_arn: ?[]const u8 = null,
 
     /// The ARN that identifies the Express service.

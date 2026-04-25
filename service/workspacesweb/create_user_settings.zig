@@ -15,8 +15,8 @@ pub const CreateUserSettingsInput = struct {
     additional_encryption_context: ?[]const aws.map.StringMapEntry = null,
 
     /// The branding configuration input that customizes the appearance of the web
-    /// portal for end users. This includes a custom logo, favicon, wallpaper,
-    /// localized strings, color theme, and an optional terms of service.
+    /// portal for end users. This includes a custom logo, favicon, localized
+    /// strings, color theme, and optionally a wallpaper and terms of service.
     branding_configuration_input: ?BrandingConfigurationCreateInput = null,
 
     /// A unique, case-sensitive identifier that you provide to ensure the

@@ -23,14 +23,11 @@ pub const FindingStatistics = struct {
     /// Represents a list of map of finding types with a count of total findings
     /// generated for each type.
     ///
-    /// Based on the `orderBy`
-    /// parameter, this request returns either the most occurring finding types or
-    /// the least occurring finding types. If the
+    /// Based on the `orderBy` parameter, this request returns either the most
+    /// occurring finding types or the least occurring finding types. If the
     /// `orderBy` parameter is `ASC`, this will represent the least occurring
-    /// finding types in
-    /// your account; otherwise, this will represent the most occurring finding
-    /// types. The default
-    /// value of `orderBy` is `DESC`.
+    /// finding types in your account; otherwise, this will represent the most
+    /// occurring finding types. The default value of `orderBy` is `DESC`.
     grouped_by_finding_type: ?[]const FindingTypeStatistics = null,
 
     /// Represents a list of map of top resources with a count of total findings.

@@ -8,10 +8,8 @@ const Failure = @import("failure.zig").Failure;
 const TaskDefinition = @import("task_definition.zig").TaskDefinition;
 
 pub const DeleteTaskDefinitionsInput = struct {
-    /// The `family` and `revision` (`family:revision`) or
-    /// full Amazon Resource Name (ARN) of the task definition to delete. You must
-    /// specify a
-    /// `revision`.
+    /// The `family` and `revision` (`family:revision`) or full Amazon Resource Name
+    /// (ARN) of the task definition to delete. You must specify a `revision`.
     ///
     /// You can specify up to 10 task definitions as a comma separated list.
     task_definitions: []const []const u8,
@@ -158,6 +156,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

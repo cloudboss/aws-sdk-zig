@@ -8,8 +8,7 @@ const PlaybackKeyPairSummary = @import("playback_key_pair_summary.zig").Playback
 
 pub const ListPlaybackKeyPairsInput = struct {
     /// Maximum number of key pairs to return. Default: your service quota or 100,
-    /// whichever is
-    /// smaller.
+    /// whichever is smaller.
     max_results: ?i32 = null,
 
     /// The first key pair to retrieve. This is used for pagination; see the
@@ -26,8 +25,8 @@ pub const ListPlaybackKeyPairsOutput = struct {
     /// List of key pairs.
     key_pairs: ?[]const PlaybackKeyPairSummary = null,
 
-    /// If there are more key pairs than `maxResults`, use `nextToken` in
-    /// the request to get the next set.
+    /// If there are more key pairs than `maxResults`, use `nextToken` in the
+    /// request to get the next set.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -165,6 +164,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
         return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceUnavailable")) {
+        return .{ .arena = arena, .kind = .{ .service_unavailable = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

@@ -4,11 +4,13 @@ pub const DefaultTargetCapacityType = enum {
     spot,
     on_demand,
     capacity_block,
+    reserved_capacity,
 
     pub const json_field_names = .{
         .spot = "spot",
         .on_demand = "on-demand",
         .capacity_block = "capacity-block",
+        .reserved_capacity = "reserved-capacity",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const DefaultTargetCapacityType = enum {
             .spot => "spot",
             .on_demand => "on-demand",
             .capacity_block => "capacity-block",
+            .reserved_capacity => "reserved-capacity",
         };
     }
 

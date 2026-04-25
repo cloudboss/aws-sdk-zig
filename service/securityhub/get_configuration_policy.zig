@@ -20,16 +20,16 @@ pub const GetConfigurationPolicyOutput = struct {
     /// The ARN of the configuration policy.
     arn: ?[]const u8 = null,
 
-    /// An object that defines how Security Hub is configured. It includes whether
-    /// Security Hub is enabled or
+    /// An object that defines how Security Hub CSPM is configured. It includes
+    /// whether Security Hub CSPM is enabled or
     /// disabled, a list of enabled security standards, a list of enabled or
     /// disabled security controls, and a list of custom parameter values for
     /// specified controls.
     /// If the policy includes a list of security controls that are enabled,
-    /// Security Hub disables all other controls (including newly released
+    /// Security Hub CSPM disables all other controls (including newly released
     /// controls).
     /// If the policy includes a list of security controls that are disabled,
-    /// Security Hub enables all other controls (including
+    /// Security Hub CSPM enables all other controls (including
     /// newly released controls).
     configuration_policy: ?Policy = null,
 
@@ -175,6 +175,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "LimitExceededException")) {
         return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organization_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationalUnitNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organizational_unit_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

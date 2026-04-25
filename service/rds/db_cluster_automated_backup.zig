@@ -1,4 +1,5 @@
 const RestoreWindow = @import("restore_window.zig").RestoreWindow;
+const StorageEncryptionType = @import("storage_encryption_type.zig").StorageEncryptionType;
 const Tag = @import("tag.zig").Tag;
 
 /// An automated backup of a DB cluster. It consists of system backups,
@@ -79,6 +80,10 @@ pub const DBClusterAutomatedBackup = struct {
     /// Valid Values: `1150-65535`
     port: ?i32 = null,
 
+    /// The daily time range during which automated backups are created if automated
+    /// backups are enabled, as determined by the `BackupRetentionPeriod`.
+    preferred_backup_window: ?[]const u8 = null,
+
     /// The Amazon Web Services Region associated with the automated backup.
     region: ?[]const u8 = null,
 
@@ -91,6 +96,16 @@ pub const DBClusterAutomatedBackup = struct {
 
     /// Indicates whether the source DB cluster is encrypted.
     storage_encrypted: ?bool = null,
+
+    /// The type of encryption used to protect data at rest in the automated backup.
+    /// Possible values:
+    ///
+    /// * `none` - The automated backup is not encrypted.
+    /// * `sse-rds` - The automated backup is encrypted using an Amazon Web Services
+    ///   owned KMS key.
+    /// * `sse-kms` - The automated backup is encrypted using a customer managed KMS
+    ///   key or Amazon Web Services managed KMS key.
+    storage_encryption_type: ?StorageEncryptionType = null,
 
     /// The storage throughput for the automated backup. The throughput is
     /// automatically set based on the IOPS that you provision, and is not

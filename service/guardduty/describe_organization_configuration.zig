@@ -12,22 +12,19 @@ pub const DescribeOrganizationConfigurationInput = struct {
     /// The detector ID of the delegated administrator for which you need to
     /// retrieve the information.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 
     /// You can use this parameter to indicate the maximum number of items that you
-    /// want in the
-    /// response.
+    /// want in the response.
     max_results: ?i32 = null,
 
     /// You can use this parameter when paginating results. Set the value of this
-    /// parameter to
-    /// null on your first call to the list action. For subsequent calls to the
-    /// action, fill
-    /// `nextToken` in the request with the value of `NextToken` from the
-    /// previous response to continue listing data.
+    /// parameter to null on your first call to the list action. For subsequent
+    /// calls to the action, fill `nextToken` in the request with the value of
+    /// `NextToken` from the previous response to continue listing data.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -39,42 +36,32 @@ pub const DescribeOrganizationConfigurationInput = struct {
 
 pub const DescribeOrganizationConfigurationOutput = struct {
     /// Indicates whether GuardDuty is automatically enabled for accounts added to
-    /// the
-    /// organization.
+    /// the organization.
     ///
     /// Even though this is still supported, we recommend using
     /// `AutoEnableOrganizationMembers` to achieve the similar results.
     auto_enable: ?bool = null,
 
     /// Indicates the auto-enablement configuration of GuardDuty or any of the
-    /// corresponding protection plans for the member accounts in the
-    /// organization.
+    /// corresponding protection plans for the member accounts in the organization.
     ///
     /// * `NEW`: Indicates that when a new account joins the organization, they will
-    /// have GuardDuty or any of the corresponding protection plans enabled
-    /// automatically.
-    ///
+    ///   have GuardDuty or any of the corresponding protection plans enabled
+    ///   automatically.
     /// * `ALL`: Indicates that all accounts in the organization have GuardDuty and
-    ///   any of the corresponding
-    /// protection plans enabled automatically. This includes `NEW` accounts that
-    /// join the organization
-    /// and accounts that may have been suspended or removed from the organization
-    /// in
-    /// GuardDuty.
-    ///
+    ///   any of the corresponding protection plans enabled automatically. This
+    ///   includes `NEW` accounts that join the organization and accounts that may
+    ///   have been suspended or removed from the organization in GuardDuty.
     /// * `NONE`: Indicates that GuardDuty or any of the corresponding protection
-    ///   plans
-    /// will not be automatically enabled for any
-    /// account in the organization. The administrator must manage GuardDuty for
-    /// each account in
-    /// the organization individually.
+    ///   plans will not be automatically enabled for any account in the
+    ///   organization. The administrator must manage GuardDuty for each account in
+    ///   the organization individually.
     ///
-    /// When you update the auto-enable setting from `ALL` or `NEW` to
-    /// `NONE`, this action doesn't disable the corresponding option for your
-    /// existing accounts. This
-    /// configuration will apply to the new accounts that join the organization.
-    /// After you update the auto-enable settings,
-    /// no new account will have the corresponding option as enabled.
+    /// When you update the auto-enable setting from `ALL` or `NEW` to `NONE`, this
+    /// action doesn't disable the corresponding option for your existing accounts.
+    /// This configuration will apply to the new accounts that join the
+    /// organization. After you update the auto-enable settings, no new account will
+    /// have the corresponding option as enabled.
     auto_enable_organization_members: ?AutoEnableMembers = null,
 
     /// Describes which data sources are enabled automatically for member accounts.
@@ -84,13 +71,11 @@ pub const DescribeOrganizationConfigurationOutput = struct {
     features: ?[]const OrganizationFeatureConfigurationResult = null,
 
     /// Indicates whether the maximum number of allowed member accounts are already
-    /// associated
-    /// with the delegated administrator account for your organization.
+    /// associated with the delegated administrator account for your organization.
     member_account_limit_reached: bool,
 
     /// The pagination parameter to be used on the next list operation to retrieve
-    /// more
-    /// items.
+    /// more items.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{

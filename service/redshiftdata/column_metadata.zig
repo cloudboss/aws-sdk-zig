@@ -24,7 +24,8 @@ pub const ColumnMetadata = struct {
     /// A value that indicates whether the column is nullable.
     nullable: i32 = 0,
 
-    /// The precision value of a decimal number column.
+    /// The precision value of a decimal number column, or the column length for a
+    /// non-numeric column.
     precision: i32 = 0,
 
     /// The scale value of a decimal number column.

@@ -61,14 +61,14 @@ pub const PutRecommendationPreferencesInput = struct {
     /// Amazon Web Services resource are analyzed.
     /// When this preference isn't specified, we use the default value `DAYS_14`.
     ///
-    /// You can only set this preference for the Amazon EC2 instance and Amazon EC2
-    /// Auto Scaling group resource types.
+    /// You can only set this preference for the Amazon EC2 instance and Auto
+    /// Scaling group resource types.
     ///
     /// * Amazon EC2 instance lookback preferences can be set at the organization,
     ///   account, and resource levels.
     ///
-    /// * Amazon EC2 Auto Scaling group lookback preferences can only be set at the
-    ///   resource level.
+    /// * Auto Scaling group lookback preferences can only be set at the resource
+    ///   level.
     look_back_period: ?LookBackPeriodPreference = null,
 
     /// The preference to control which resource type values are considered when
@@ -79,17 +79,15 @@ pub const PutRecommendationPreferencesInput = struct {
     /// resource type values,
     /// an error occurs.
     ///
-    /// You can only set this preference for the Amazon EC2 instance and Amazon EC2
-    /// Auto Scaling group resource types.
+    /// You can only set this preference for the Amazon EC2 instance and Auto
+    /// Scaling group resource types.
     preferred_resources: ?[]const PreferredResource = null,
 
     /// The target resource type of the recommendation preference to create.
     ///
     /// The `Ec2Instance` option encompasses standalone instances and instances
-    /// that are part of Amazon EC2 Auto Scaling groups. The `AutoScalingGroup`
-    /// option
-    /// encompasses only instances that are part of an Amazon EC2 Auto Scaling
-    /// group.
+    /// that are part of Auto Scaling groups. The `AutoScalingGroup` option
+    /// encompasses only instances that are part of an Auto Scaling group.
     resource_type: ResourceType,
 
     /// The status of the savings estimation mode preference to create or update.
@@ -117,21 +115,18 @@ pub const PutRecommendationPreferencesInput = struct {
     /// metrics](https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html) in the *Compute Optimizer User
     /// Guide*.
     ///
-    /// You cannot create recommendation preferences for Amazon EC2 Auto Scaling
-    /// groups at the
+    /// You cannot create recommendation preferences for Auto Scaling groups at the
     /// organization and account levels. You can create recommendation preferences
     /// for
-    /// Amazon EC2 Auto Scaling groups only at the resource level by specifying a
-    /// scope name
-    /// of `ResourceArn` and a scope value of the Amazon EC2 Auto Scaling group
-    /// Amazon
+    /// Auto Scaling groups only at the resource level by specifying a scope name
+    /// of `ResourceArn` and a scope value of the Auto Scaling group Amazon
     /// Resource Name (ARN). This will configure the preference for all instances
     /// that are
-    /// part of the specified Amazon EC2 Auto Scaling group. You also cannot create
+    /// part of the specified Auto Scaling group. You also cannot create
     /// recommendation
-    /// preferences at the resource level for instances that are part of an Amazon
-    /// EC2 Auto Scaling group. You can create recommendation preferences at the
-    /// resource level only for
+    /// preferences at the resource level for instances that are part of an Auto
+    /// Scaling group. You can create recommendation preferences at the resource
+    /// level only for
     /// standalone instances.
     scope: ?Scope = null,
 

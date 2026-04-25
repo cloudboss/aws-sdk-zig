@@ -6,6 +6,7 @@ const IpPermission = @import("ip_permission.zig").IpPermission;
 const ContainerFleetLocationAttributes = @import("container_fleet_location_attributes.zig").ContainerFleetLocationAttributes;
 const LogConfiguration = @import("log_configuration.zig").LogConfiguration;
 const ProtectionPolicy = @import("protection_policy.zig").ProtectionPolicy;
+const PlayerGatewayMode = @import("player_gateway_mode.zig").PlayerGatewayMode;
 const ContainerFleetStatus = @import("container_fleet_status.zig").ContainerFleetStatus;
 
 /// Describes an Amazon GameLift Servers managed container fleet.
@@ -143,6 +144,15 @@ pub const ContainerFleet = struct {
     /// The name of the fleet's per-instance container group definition.
     per_instance_container_group_definition_name: ?[]const u8 = null,
 
+    /// Indicates whether player gateway is enabled for this container fleet. Player
+    /// gateway provides benefits such as DDoS protection with negligible impact to
+    /// latency.
+    ///
+    /// If `ENABLED` or `REQUIRED`, game clients can use player gateway to connect
+    /// with the game server. If `DISABLED`, game clients cannot use player gateway.
+    /// Instead, they have to directly connect to the game server.
+    player_gateway_mode: ?PlayerGatewayMode = null,
+
     /// The current status of the container fleet.
     ///
     /// * `PENDING` -- A new container fleet has been requested.
@@ -186,6 +196,7 @@ pub const ContainerFleet = struct {
         .new_game_session_protection_policy = "NewGameSessionProtectionPolicy",
         .per_instance_container_group_definition_arn = "PerInstanceContainerGroupDefinitionArn",
         .per_instance_container_group_definition_name = "PerInstanceContainerGroupDefinitionName",
+        .player_gateway_mode = "PlayerGatewayMode",
         .status = "Status",
     };
 };

@@ -3,16 +3,19 @@ const std = @import("std");
 pub const DnsAdvancedProtection = enum {
     dga,
     dns_tunneling,
+    dictionary_dga,
 
     pub const json_field_names = .{
         .dga = "DGA",
         .dns_tunneling = "DNS_TUNNELING",
+        .dictionary_dga = "DICTIONARY_DGA",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .dga => "DGA",
             .dns_tunneling => "DNS_TUNNELING",
+            .dictionary_dga => "DICTIONARY_DGA",
         };
     }
 

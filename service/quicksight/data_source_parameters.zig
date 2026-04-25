@@ -21,6 +21,7 @@ const RdsParameters = @import("rds_parameters.zig").RdsParameters;
 const RedshiftParameters = @import("redshift_parameters.zig").RedshiftParameters;
 const S3KnowledgeBaseParameters = @import("s3_knowledge_base_parameters.zig").S3KnowledgeBaseParameters;
 const S3Parameters = @import("s3_parameters.zig").S3Parameters;
+const S3TablesParameters = @import("s3_tables_parameters.zig").S3TablesParameters;
 const ServiceNowParameters = @import("service_now_parameters.zig").ServiceNowParameters;
 const SnowflakeParameters = @import("snowflake_parameters.zig").SnowflakeParameters;
 const SparkParameters = @import("spark_parameters.zig").SparkParameters;
@@ -84,6 +85,8 @@ pub const DataSourceParameters = union(enum) {
     s3_knowledge_base_parameters: ?S3KnowledgeBaseParameters,
     /// The parameters for S3.
     s3_parameters: ?S3Parameters,
+    /// The parameters for S3 Tables.
+    s3_tables_parameters: ?S3TablesParameters,
     /// The parameters for ServiceNow.
     service_now_parameters: ?ServiceNowParameters,
     /// The parameters for Snowflake.
@@ -127,6 +130,7 @@ pub const DataSourceParameters = union(enum) {
         .redshift_parameters = "RedshiftParameters",
         .s3_knowledge_base_parameters = "S3KnowledgeBaseParameters",
         .s3_parameters = "S3Parameters",
+        .s3_tables_parameters = "S3TablesParameters",
         .service_now_parameters = "ServiceNowParameters",
         .snowflake_parameters = "SnowflakeParameters",
         .spark_parameters = "SparkParameters",

@@ -12,19 +12,17 @@ pub const CreatePublishingDestinationInput = struct {
     client_token: ?[]const u8 = null,
 
     /// The properties of the publishing destination, including the ARNs for the
-    /// destination and
-    /// the KMS key used for encryption.
+    /// destination and the KMS key used for encryption.
     destination_properties: DestinationProperties,
 
     /// The type of resource for the publishing destination. Currently only Amazon
-    /// S3 buckets are
-    /// supported.
+    /// S3 buckets are supported.
     destination_type: DestinationType,
 
     /// The ID of the GuardDuty detector associated with the publishing destination.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 

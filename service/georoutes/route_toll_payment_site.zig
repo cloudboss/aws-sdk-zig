@@ -3,7 +3,7 @@ pub const RouteTollPaymentSite = struct {
     /// Name of the payment site.
     name: ?[]const u8 = null,
 
-    /// Position defined as `[longitude, latitude]`.
+    /// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
     position: []const f64,
 
     pub const json_field_names = .{

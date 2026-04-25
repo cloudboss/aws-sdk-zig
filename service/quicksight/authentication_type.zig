@@ -2,11 +2,13 @@ const std = @import("std");
 
 pub const AuthenticationType = enum {
     password,
+    keypair,
     token,
     x509,
 
     pub const json_field_names = .{
         .password = "PASSWORD",
+        .keypair = "KEYPAIR",
         .token = "TOKEN",
         .x509 = "X509",
     };
@@ -14,6 +16,7 @@ pub const AuthenticationType = enum {
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .password => "PASSWORD",
+            .keypair => "KEYPAIR",
             .token => "TOKEN",
             .x509 => "X509",
         };

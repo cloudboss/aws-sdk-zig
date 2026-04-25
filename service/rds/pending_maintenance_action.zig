@@ -11,6 +11,7 @@ pub const PendingMaintenanceAction = struct {
     /// * `db-upgrade`
     /// * `hardware-maintenance`
     /// * `os-upgrade`
+    /// * `serverless-platform-version-update`
     /// * `system-update`
     ///
     /// For more information about these actions, see [Maintenance actions for

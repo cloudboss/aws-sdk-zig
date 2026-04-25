@@ -10,6 +10,7 @@ const ChannelClass = @import("channel_class.zig").ChannelClass;
 const ChannelEngineVersionRequest = @import("channel_engine_version_request.zig").ChannelEngineVersionRequest;
 const OutputDestination = @import("output_destination.zig").OutputDestination;
 const EncoderSettings = @import("encoder_settings.zig").EncoderSettings;
+const InferenceSettings = @import("inference_settings.zig").InferenceSettings;
 const InputAttachment = @import("input_attachment.zig").InputAttachment;
 const InputSpecification = @import("input_specification.zig").InputSpecification;
 const LinkedChannelSettings = @import("linked_channel_settings.zig").LinkedChannelSettings;
@@ -40,6 +41,10 @@ pub const CreateChannelInput = struct {
     dry_run: ?bool = null,
 
     encoder_settings: ?EncoderSettings = null,
+
+    /// Include this setting to include Elemental Inference features in this
+    /// channel.
+    inference_settings: ?InferenceSettings = null,
 
     /// List of input attachments for channel.
     input_attachments: ?[]const InputAttachment = null,
@@ -85,6 +90,7 @@ pub const CreateChannelInput = struct {
         .destinations = "Destinations",
         .dry_run = "DryRun",
         .encoder_settings = "EncoderSettings",
+        .inference_settings = "InferenceSettings",
         .input_attachments = "InputAttachments",
         .input_specification = "InputSpecification",
         .linked_channel_settings = "LinkedChannelSettings",
@@ -190,6 +196,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateChannelInput, con
     if (input.encoder_settings) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"EncoderSettings\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.inference_settings) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"InferenceSettings\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

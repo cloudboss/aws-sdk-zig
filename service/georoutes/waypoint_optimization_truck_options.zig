@@ -2,11 +2,11 @@ const WaypointOptimizationHazardousCargoType = @import("waypoint_optimization_ha
 const WaypointOptimizationTrailerOptions = @import("waypoint_optimization_trailer_options.zig").WaypointOptimizationTrailerOptions;
 const WaypointOptimizationTruckType = @import("waypoint_optimization_truck_type.zig").WaypointOptimizationTruckType;
 
-/// Travel mode options when the provided travel mode is "Truck"
+/// Travel mode options when the provided travel mode is `Truck`.
 pub const WaypointOptimizationTruckOptions = struct {
     /// Gross weight of the vehicle including trailers, and goods at capacity.
     ///
-    /// **Unit**: `Kilograms`
+    /// **Unit**: `kilograms`
     gross_weight: i64 = 0,
 
     /// List of Hazardous cargo contained in the vehicle.
@@ -25,7 +25,9 @@ pub const WaypointOptimizationTruckOptions = struct {
     /// Trailer options corresponding to the vehicle.
     trailer: ?WaypointOptimizationTrailerOptions = null,
 
-    /// Type of the truck.
+    /// The type of truck: `LightTruck` for smaller delivery vehicles, `
+    /// StraightTruck` for rigid body trucks, or `Tractor` for tractor-trailer
+    /// combinations.
     truck_type: ?WaypointOptimizationTruckType = null,
 
     /// The tunnel restriction code.
@@ -59,7 +61,7 @@ pub const WaypointOptimizationTruckOptions = struct {
     /// Meant for usage in countries where the differences in axle types or axle
     /// groups are not distinguished.
     ///
-    /// **Unit**: `Kilograms`
+    /// **Unit**: `kilograms`
     weight_per_axle: i64 = 0,
 
     /// Width of the vehicle.

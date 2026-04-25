@@ -13,8 +13,8 @@ pub const GetMemberDetectorsInput = struct {
 
     /// The detector ID for the administrator account.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 
@@ -30,8 +30,7 @@ pub const GetMemberDetectorsOutput = struct {
     member_data_source_configurations: ?[]const MemberDataSourceConfiguration = null,
 
     /// A list of member account IDs that were unable to be processed along with an
-    /// explanation
-    /// for why they were not processed.
+    /// explanation for why they were not processed.
     unprocessed_accounts: ?[]const UnprocessedAccount = null,
 
     pub const json_field_names = .{

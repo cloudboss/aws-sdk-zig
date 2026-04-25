@@ -6,6 +6,9 @@ pub const RunListItem = struct {
     /// The run's ARN.
     arn: ?[]const u8 = null,
 
+    /// The run's batch ID.
+    batch_id: ?[]const u8 = null,
+
     /// When the run was created.
     creation_time: ?i64 = null,
 
@@ -43,6 +46,7 @@ pub const RunListItem = struct {
 
     pub const json_field_names = .{
         .arn = "arn",
+        .batch_id = "batchId",
         .creation_time = "creationTime",
         .id = "id",
         .name = "name",

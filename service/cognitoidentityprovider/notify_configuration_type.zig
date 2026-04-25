@@ -26,7 +26,10 @@ pub const NotifyConfigurationType = struct {
     /// in response to a detected risk.
     no_action_email: ?NotifyEmailType = null,
 
-    /// The reply-to email address of an email template.
+    /// The reply-to email address of an email template. Can be an email address in
+    /// the format
+    /// `admin@example.com` or `Administrator
+    /// `.
     reply_to: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the identity that is associated with the

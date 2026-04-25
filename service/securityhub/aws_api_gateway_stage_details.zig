@@ -27,7 +27,7 @@ pub const AwsApiGatewayStageDetails = struct {
     /// Indicates when the stage was created.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     created_date: ?[]const u8 = null,
 
@@ -43,7 +43,7 @@ pub const AwsApiGatewayStageDetails = struct {
     /// Indicates when the stage was most recently updated.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     last_updated_date: ?[]const u8 = null,
 

@@ -50,7 +50,7 @@ pub const Client = struct {
     /// authority (CA). Your SCEP clients include the challenge password as part of
     /// their certificate request to Connector for SCEP. To retrieve the connector
     /// Amazon Resource Names (ARNs) for the connectors in your account, call
-    /// [ListConnectors](https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_ListConnectors.html).
+    /// [ListConnectors](https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_ListConnectors.html).
     ///
     /// To create additional challenge passwords for the connector, call
     /// `CreateChallenge` again. We recommend frequently rotating your challenge
@@ -71,31 +71,31 @@ pub const Client = struct {
     }
 
     /// Deletes the specified
-    /// [Challenge](https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_Challenge.html).
+    /// [Challenge](https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_Challenge.html).
     pub fn deleteChallenge(self: *Self, allocator: std.mem.Allocator, input: delete_challenge.DeleteChallengeInput, options: CallOptions) !delete_challenge.DeleteChallengeOutput {
         return delete_challenge.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified
-    /// [Connector](https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_Connector.html). This operation also deletes any challenges associated with the connector.
+    /// [Connector](https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_Connector.html). This operation also deletes any challenges associated with the connector.
     pub fn deleteConnector(self: *Self, allocator: std.mem.Allocator, input: delete_connector.DeleteConnectorInput, options: CallOptions) !delete_connector.DeleteConnectorOutput {
         return delete_connector.execute(self, allocator, input, options);
     }
 
     /// Retrieves the metadata for the specified
-    /// [Challenge](https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_Challenge.html).
+    /// [Challenge](https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_Challenge.html).
     pub fn getChallengeMetadata(self: *Self, allocator: std.mem.Allocator, input: get_challenge_metadata.GetChallengeMetadataInput, options: CallOptions) !get_challenge_metadata.GetChallengeMetadataOutput {
         return get_challenge_metadata.execute(self, allocator, input, options);
     }
 
     /// Retrieves the challenge password for the specified
-    /// [Challenge](https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_Challenge.html).
+    /// [Challenge](https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_Challenge.html).
     pub fn getChallengePassword(self: *Self, allocator: std.mem.Allocator, input: get_challenge_password.GetChallengePasswordInput, options: CallOptions) !get_challenge_password.GetChallengePasswordOutput {
         return get_challenge_password.execute(self, allocator, input, options);
     }
 
     /// Retrieves details about the specified
-    /// [Connector](https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_Connector.html). Calling this action returns important details about the connector, such as the public SCEP URL where your clients can request certificates.
+    /// [Connector](https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_Connector.html). Calling this action returns important details about the connector, such as the public SCEP URL where your clients can request certificates.
     pub fn getConnector(self: *Self, allocator: std.mem.Allocator, input: get_connector.GetConnectorInput, options: CallOptions) !get_connector.GetConnectorOutput {
         return get_connector.execute(self, allocator, input, options);
     }
@@ -111,13 +111,10 @@ pub const Client = struct {
     }
 
     /// Retrieves the tags associated with the specified resource. Tags are
-    /// key-value pairs that
-    /// you can use to categorize and manage your resources, for purposes like
-    /// billing. For
-    /// example, you might set the tag key to "customer" and the value to the
-    /// customer name or ID.
-    /// You can specify one or more tags to add to each Amazon Web Services
-    /// resource, up to 50 tags for a
+    /// key-value pairs that you can use to categorize and manage your resources,
+    /// for purposes like billing. For example, you might set the tag key to
+    /// "customer" and the value to the customer name or ID. You can specify one or
+    /// more tags to add to each Amazon Web Services resource, up to 50 tags for a
     /// resource.
     pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);

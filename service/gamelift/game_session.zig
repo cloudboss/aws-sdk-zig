@@ -1,4 +1,5 @@
 const GameProperty = @import("game_property.zig").GameProperty;
+const PlayerGatewayStatus = @import("player_gateway_status.zig").PlayerGatewayStatus;
 const PlayerSessionCreationPolicy = @import("player_session_creation_policy.zig").PlayerSessionCreationPolicy;
 const GameSessionStatus = @import("game_session_status.zig").GameSessionStatus;
 const GameSessionStatusReason = @import("game_session_status_reason.zig").GameSessionStatusReason;
@@ -18,6 +19,13 @@ const GameSessionStatusReason = @import("game_session_status_reason.zig").GameSe
 /// [All APIs by
 /// task](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 pub const GameSession = struct {
+    /// A descriptive label for the compute resource. The compute resource that is
+    /// hosting the game session. For EC2 fleets, this is the EC2 instance ID. For
+    /// Container fleets, each game server container group on a fleet instance is
+    /// assigned a compute name. For Anywhere fleets, this is the custom compute
+    /// name.
+    compute_name: ?[]const u8 = null,
+
     /// A time stamp indicating when this data object was created. Format is a
     /// number expressed in Unix time as milliseconds (for example
     /// `"1469498468.057"`).
@@ -56,10 +64,15 @@ pub const GameSession = struct {
     /// A set of key-value pairs that can store custom data in a game session.
     /// For example: `{"Key": "difficulty", "Value": "novice"}`.
     ///
-    /// Avoid using periods (".") in property keys if you plan to search for game
-    /// sessions by properties. Property keys containing periods cannot be searched
-    /// and will be filtered out from search results due to search index
-    /// limitations.
+    /// * Avoid using periods (".") in property keys if you plan to search for game
+    ///   sessions by properties. Property keys containing periods cannot be
+    ///   searched and will be filtered out from search results due to search index
+    ///   limitations.
+    ///
+    /// * If you use SearchGameSessions API, there is a limit of 500 game property
+    ///   keys across all game sessions and all fleets per region. If the limit is
+    ///   exceeded, there will potentially be game session entries missing from
+    ///   SearchGameSessions API results.
     game_properties: ?[]const GameProperty = null,
 
     /// A set of custom game session properties, formatted as a single string value.
@@ -104,6 +117,21 @@ pub const GameSession = struct {
     /// not need to be unique.
     name: ?[]const u8 = null,
 
+    /// Indicates whether player gateway is available for use for this game session.
+    /// Note, even if a fleet has PlayerGatewayMode configured as `ENABLED`, player
+    /// gateway might not be available in a specific location. For more information
+    /// about locations where player gateway is supported, see [Amazon GameLift
+    /// Servers service
+    /// locations](https://docs.aws.amazon.com/gameliftservers/latest/developerguide/gamelift-regions.html).
+    ///
+    /// Possible values include:
+    ///
+    /// * `ENABLED` -- Player gateway is available for routing player connections
+    ///   for this game session.
+    ///
+    /// * `DISABLED` -- Player gateway is not available for this game session.
+    player_gateway_status: ?PlayerGatewayStatus = null,
+
     /// Indicates whether the game session is accepting new players.
     player_session_creation_policy: ?PlayerSessionCreationPolicy = null,
 
@@ -136,6 +164,7 @@ pub const GameSession = struct {
     termination_time: ?i64 = null,
 
     pub const json_field_names = .{
+        .compute_name = "ComputeName",
         .creation_time = "CreationTime",
         .creator_id = "CreatorId",
         .current_player_session_count = "CurrentPlayerSessionCount",
@@ -150,6 +179,7 @@ pub const GameSession = struct {
         .matchmaker_data = "MatchmakerData",
         .maximum_player_session_count = "MaximumPlayerSessionCount",
         .name = "Name",
+        .player_gateway_status = "PlayerGatewayStatus",
         .player_session_creation_policy = "PlayerSessionCreationPolicy",
         .port = "Port",
         .status = "Status",

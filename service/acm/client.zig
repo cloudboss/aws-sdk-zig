@@ -16,6 +16,7 @@ const renew_certificate = @import("renew_certificate.zig");
 const request_certificate = @import("request_certificate.zig");
 const resend_validation_email = @import("resend_validation_email.zig");
 const revoke_certificate = @import("revoke_certificate.zig");
+const search_certificates = @import("search_certificates.zig");
 const update_certificate_options = @import("update_certificate_options.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
@@ -73,14 +74,28 @@ pub const Client = struct {
     }
 
     /// Deletes a certificate and its associated private key. If this action
-    /// succeeds, the certificate no longer appears in the list that can be
-    /// displayed by calling the ListCertificates action or be retrieved by calling
-    /// the GetCertificate action. The certificate will not be available for use by
-    /// Amazon Web Services services integrated with ACM.
+    /// succeeds, the certificate is not available for use by Amazon Web Services
+    /// services integrated with ACM. Deleting a certificate is eventually
+    /// consistent. The may be a short delay before the certificate no longer
+    /// appears in the list that can be displayed by calling the ListCertificates
+    /// action or be retrieved by calling the GetCertificate action.
     ///
     /// You cannot delete an ACM certificate that is being used by another Amazon
-    /// Web Services service. To delete a certificate that is in use, the
-    /// certificate association must first be removed.
+    /// Web Services service. To delete a certificate that is in use, you must first
+    /// remove the certificate association using the console or the CLI for the
+    /// associated service.
+    ///
+    /// Deleting a certificate issued by a private certificate authority (CA) has no
+    /// effect on the CA. You will continue to be charged for the CA until it is
+    /// deleted. For more information, see [ Deleting Your Private
+    /// CA](https://docs.aws.amazon.com/privateca/latest/userguide/PCADeleteCA.html)
+    /// in the *Private Certificate Authority User Guide*.
+    ///
+    /// Deleting a certificate issued by a private certificate authority (CA) has no
+    /// effect on the CA. You will continue to be charged for the CA until it is
+    /// deleted. For more information, see [Deleting your private
+    /// CA](https://docs.aws.amazon.com/privateca/latest/userguide/PCADeleteCA.html)
+    /// in the *Amazon Web Services Private Certificate Authority User Guide*.
     pub fn deleteCertificate(self: *Self, allocator: std.mem.Allocator, input: delete_certificate.DeleteCertificateInput, options: CallOptions) !delete_certificate.DeleteCertificateOutput {
         return delete_certificate.execute(self, allocator, input, options);
     }
@@ -95,7 +110,7 @@ pub const Client = struct {
     }
 
     /// Exports a private certificate issued by a private certificate authority (CA)
-    /// or public certificate for use anywhere. The exported file contains the
+    /// or a public certificate for use anywhere. The exported file contains the
     /// certificate, the certificate chain, and the encrypted private key associated
     /// with the public key that is embedded in the certificate. For security, you
     /// must assign a passphrase for the private key when exporting it.
@@ -103,6 +118,8 @@ pub const Client = struct {
     /// For information about exporting and formatting a certificate using the ACM
     /// console or CLI, see [Export a private
     /// certificate](https://docs.aws.amazon.com/acm/latest/userguide/export-private.html) and [Export a public certificate](https://docs.aws.amazon.com/acm/latest/userguide/export-public-certificate).
+    ///
+    /// ACM public certificates created prior to June 17, 2025 cannot be exported.
     pub fn exportCertificate(self: *Self, allocator: std.mem.Allocator, input: export_certificate.ExportCertificateInput, options: CallOptions) !export_certificate.ExportCertificateOutput {
         return export_certificate.execute(self, allocator, input, options);
     }
@@ -208,7 +225,7 @@ pub const Client = struct {
     }
 
     /// Renews an [eligible ACM
-    /// certificate](https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html). In order to renew your Amazon Web Services Private CA certificates with ACM, you must first [grant the ACM service principal permission to do so](https://docs.aws.amazon.com/privateca/latest/userguide/PcaPermissions.html). For more information, see [Testing Managed Renewal](https://docs.aws.amazon.com/acm/latest/userguide/manual-renewal.html) in the ACM User Guide.
+    /// certificate](https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html). In order to renew your Amazon Web Services Private CA certificates with ACM, you must first [grant the ACM service principal permission to do so](https://docs.aws.amazon.com/privateca/latest/userguide/assign-permissions.html#PcaPermissions). For more information, see [Testing Managed Renewal](https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html) in the ACM User Guide.
     pub fn renewCertificate(self: *Self, allocator: std.mem.Allocator, input: renew_certificate.RenewCertificateInput, options: CallOptions) !renew_certificate.RenewCertificateOutput {
         return renew_certificate.execute(self, allocator, input, options);
     }
@@ -255,8 +272,20 @@ pub const Client = struct {
 
     /// Revokes a public ACM certificate. You can only revoke certificates that have
     /// been previously exported.
+    ///
+    /// Once a certificate is revoked, you cannot reuse the certificate. Revoking a
+    /// certificate is permanent.
     pub fn revokeCertificate(self: *Self, allocator: std.mem.Allocator, input: revoke_certificate.RevokeCertificateInput, options: CallOptions) !revoke_certificate.RevokeCertificateOutput {
         return revoke_certificate.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves a list of certificates matching search criteria. You can filter
+    /// certificates by X.509 attributes and ACM specific properties like
+    /// certificate status, type and renewal eligibility. This operation provides
+    /// more flexible filtering than ListCertificates by supporting complex filter
+    /// statements.
+    pub fn searchCertificates(self: *Self, allocator: std.mem.Allocator, input: search_certificates.SearchCertificatesInput, options: CallOptions) !search_certificates.SearchCertificatesOutput {
+        return search_certificates.execute(self, allocator, input, options);
     }
 
     /// Updates a certificate. You can use this function to specify whether to opt
@@ -269,6 +298,13 @@ pub const Client = struct {
     }
 
     pub fn listCertificatesPaginator(self: *Self, params: list_certificates.ListCertificatesInput) paginator.ListCertificatesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn searchCertificatesPaginator(self: *Self, params: search_certificates.SearchCertificatesInput) paginator.SearchCertificatesPaginator {
         return .{
             .client = self,
             .params = params,

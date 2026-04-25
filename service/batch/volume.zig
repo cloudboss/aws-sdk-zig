@@ -1,5 +1,6 @@
 const EFSVolumeConfiguration = @import("efs_volume_configuration.zig").EFSVolumeConfiguration;
 const Host = @import("host.zig").Host;
+const S3FilesVolumeConfiguration = @import("s3_files_volume_configuration.zig").S3FilesVolumeConfiguration;
 
 /// A data volume that's used in a job's container properties.
 pub const Volume = struct {
@@ -29,9 +30,14 @@ pub const Volume = struct {
     /// `sourceVolume` parameter of container definition `mountPoints`.
     name: ?[]const u8 = null,
 
+    /// This parameter is specified when you're using an S3Files file system for job
+    /// storage.
+    s_3_files_volume_configuration: ?S3FilesVolumeConfiguration = null,
+
     pub const json_field_names = .{
         .efs_volume_configuration = "efsVolumeConfiguration",
         .host = "host",
         .name = "name",
+        .s_3_files_volume_configuration = "s3filesVolumeConfiguration",
     };
 };

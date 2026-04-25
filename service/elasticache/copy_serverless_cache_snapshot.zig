@@ -23,7 +23,8 @@ pub const CopyServerlessCacheSnapshotInput = struct {
     tags: ?[]const Tag = null,
 
     /// The identifier for the snapshot to be created. Available for Valkey, Redis
-    /// OSS and Serverless Memcached only.
+    /// OSS and Serverless Memcached only. This value is stored as a lowercase
+    /// string.
     target_serverless_cache_snapshot_name: []const u8,
 };
 

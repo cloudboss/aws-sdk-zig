@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const ListenerConfig = @import("listener_config.zig").ListenerConfig;
 const ManagedEndpointConfiguration = @import("managed_endpoint_configuration.zig").ManagedEndpointConfiguration;
 const Protocol = @import("protocol.zig").Protocol;
 const TrustStoreConfiguration = @import("trust_store_configuration.zig").TrustStoreConfiguration;
@@ -22,6 +23,9 @@ pub const UpdateResponderGatewayInput = struct {
     /// The unique identifier of the gateway.
     gateway_id: []const u8,
 
+    /// The listener configuration for the responder gateway.
+    listener_config: ?ListenerConfig = null,
+
     /// The configuration for the managed endpoint.
     managed_endpoint_configuration: ?ManagedEndpointConfiguration = null,
 
@@ -39,6 +43,7 @@ pub const UpdateResponderGatewayInput = struct {
         .description = "description",
         .domain_name = "domainName",
         .gateway_id = "gatewayId",
+        .listener_config = "listenerConfig",
         .managed_endpoint_configuration = "managedEndpointConfiguration",
         .port = "port",
         .protocol = "protocol",
@@ -114,6 +119,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateResponderGatewayI
     if (input.domain_name) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"domainName\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.listener_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"listenerConfig\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

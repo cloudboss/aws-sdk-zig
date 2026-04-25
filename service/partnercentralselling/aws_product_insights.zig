@@ -11,7 +11,9 @@ pub const AwsProductInsights = struct {
     /// Product-level details including costs and optimization recommendations.
     aws_products: []const AwsProductDetails,
 
-    /// ISO 4217 currency code.
+    /// ISO 4217 currency code. Supported values are `USD` and `EUR`. Returns `EUR`
+    /// when the opportunity is in the `aws-eusc` (AWS European Sovereign Cloud)
+    /// partition.
     currency_code: CurrencyCode,
 
     /// Time period for spend amounts.

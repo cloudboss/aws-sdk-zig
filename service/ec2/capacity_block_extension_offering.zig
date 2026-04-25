@@ -53,4 +53,7 @@ pub const CapacityBlockExtensionOffering = struct {
     /// The total price of the Capacity Block extension offering, to be paid up
     /// front.
     upfront_fee: ?[]const u8 = null,
+
+    /// The type of zone where the Capacity Block extension offering is available.
+    zone_type: ?[]const u8 = null,
 };

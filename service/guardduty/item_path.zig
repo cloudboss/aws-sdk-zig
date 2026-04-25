@@ -1,5 +1,4 @@
-/// Information about the nested item path and hash of the protected
-/// resource.
+/// Information about the nested item path and hash of the protected resource.
 pub const ItemPath = struct {
     /// The hash value of the infected resource.
     hash: ?[]const u8 = null,

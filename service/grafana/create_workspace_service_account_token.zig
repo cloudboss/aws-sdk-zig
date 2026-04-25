@@ -11,8 +11,7 @@ pub const CreateWorkspaceServiceAccountTokenInput = struct {
     name: []const u8,
 
     /// Sets how long the token will be valid, in seconds. You can set the time up
-    /// to 30
-    /// days in the future.
+    /// to 30 days in the future.
     seconds_to_live: i32,
 
     /// The ID of the service account for which to create a token.
@@ -34,8 +33,7 @@ pub const CreateWorkspaceServiceAccountTokenOutput = struct {
     service_account_id: []const u8,
 
     /// Information about the created token, including the key. Be sure to store the
-    /// key
-    /// securely.
+    /// key securely.
     service_account_token: ?ServiceAccountTokenSummaryWithKey = null,
 
     /// The ID of the workspace where the token was created.

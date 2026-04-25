@@ -8,9 +8,24 @@ const ServiceError = @import("errors.zig").ServiceError;
 pub const GetPolicyTemplateInput = struct {
     /// Specifies the ID of the policy store that contains the policy template that
     /// you want information about.
+    ///
+    /// To specify a policy store, use its ID or alias name. When using an alias
+    /// name, prefix it with `policy-store-alias/`. For example:
+    ///
+    /// * ID: `PSEXAMPLEabcdefg111111`
+    /// * Alias name: `policy-store-alias/example-policy-store`
+    ///
+    /// To view aliases, use
+    /// [ListPolicyStoreAliases](https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html).
     policy_store_id: []const u8,
 
     /// Specifies the ID of the policy template that you want information about.
+    ///
+    /// You can use the policy template name in place of the policy template ID.
+    /// When using a name, prefix it with `name/`. For example:
+    ///
+    /// * ID: `PTEXAMPLEabcdefg111111`
+    /// * Name: `name/example-policy-template`
     policy_template_id: []const u8,
 
     pub const json_field_names = .{
@@ -29,6 +44,10 @@ pub const GetPolicyTemplateOutput = struct {
     /// The date and time that the policy template was most recently updated.
     last_updated_date: i64,
 
+    /// The name of the policy template, if one was assigned when the policy
+    /// template was created or last updated.
+    name: ?[]const u8 = null,
+
     /// The ID of the policy store that contains the policy template.
     policy_store_id: []const u8,
 
@@ -43,6 +62,7 @@ pub const GetPolicyTemplateOutput = struct {
         .created_date = "createdDate",
         .description = "description",
         .last_updated_date = "lastUpdatedDate",
+        .name = "name",
         .policy_store_id = "policyStoreId",
         .policy_template_id = "policyTemplateId",
         .statement = "statement",

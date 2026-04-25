@@ -8,14 +8,14 @@ pub const DateFilter = struct {
     /// A timestamp that provides the end date for the date filter.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     end: ?[]const u8 = null,
 
     /// A timestamp that provides the start date for the date filter.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     start: ?[]const u8 = null,
 

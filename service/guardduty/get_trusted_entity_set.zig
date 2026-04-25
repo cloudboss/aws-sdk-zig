@@ -29,8 +29,7 @@ pub const GetTrustedEntitySetOutput = struct {
     error_details: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID that owns the Amazon S3 bucket specified
-    /// in the **location**
-    /// parameter.
+    /// in the **location** parameter.
     expected_bucket_owner: ?[]const u8 = null,
 
     /// The format of the file that contains the trusted entity set.

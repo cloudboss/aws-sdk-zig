@@ -10,48 +10,39 @@ const ServiceDeploymentBrief = @import("service_deployment_brief.zig").ServiceDe
 
 pub const ListServiceDeploymentsInput = struct {
     /// The cluster that hosts the service. This can either be the cluster name or
-    /// ARN.
-    /// Starting April 15, 2023, Amazon Web Services will not onboard new customers
-    /// to Amazon
-    /// Elastic Inference (EI), and will help current customers migrate their
-    /// workloads to
-    /// options that offer better price and performance. If you don't specify a
-    /// cluster,
-    /// `default` is used.
+    /// ARN. Starting April 15, 2023, Amazon Web Services will not onboard new
+    /// customers to Amazon Elastic Inference (EI), and will help current customers
+    /// migrate their workloads to options that offer better price and performance.
+    /// If you don't specify a cluster, `default` is used.
     cluster: ?[]const u8 = null,
 
     /// An optional filter you can use to narrow the results by the service creation
-    /// date. If
-    /// you do not specify a value, the result includes all services created before
-    /// the current
-    /// time. The format is yyyy-MM-dd HH:mm:ss.SSSSSS.
+    /// date. If you do not specify a value, the result includes all services
+    /// created before the current time. The format is yyyy-MM-dd HH:mm:ss.SSSSSS.
     created_at: ?CreatedAt = null,
 
     /// The maximum number of service deployment results that
-    /// `ListServiceDeployments` returned in paginated output. When this
-    /// parameter is used, `ListServiceDeployments` only returns
-    /// `maxResults` results in a single page along with a `nextToken`
-    /// response element. The remaining results of the initial request can be seen
-    /// by sending
-    /// another `ListServiceDeployments` request with the returned
-    /// `nextToken` value. This value can be between 1 and 100. If this parameter
-    /// isn't used, then `ListServiceDeployments` returns up to 20 results and a
-    /// `nextToken` value if applicable.
+    /// `ListServiceDeployments` returned in paginated output. When this parameter
+    /// is used, `ListServiceDeployments` only returns `maxResults` results in a
+    /// single page along with a `nextToken` response element. The remaining results
+    /// of the initial request can be seen by sending another
+    /// `ListServiceDeployments` request with the returned `nextToken` value. This
+    /// value can be between 1 and 100. If this parameter isn't used, then
+    /// `ListServiceDeployments` returns up to 20 results and a `nextToken` value if
+    /// applicable.
     max_results: ?i32 = null,
 
-    /// The `nextToken` value returned from a `ListServiceDeployments`
-    /// request indicating that more results are available to fulfill the request
-    /// and further
-    /// calls are needed. If you provided `maxResults`, it's possible the number of
-    /// results is fewer than `maxResults`.
+    /// The `nextToken` value returned from a `ListServiceDeployments` request
+    /// indicating that more results are available to fulfill the request and
+    /// further calls are needed. If you provided `maxResults`, it's possible the
+    /// number of results is fewer than `maxResults`.
     next_token: ?[]const u8 = null,
 
     /// The ARN or name of the service
     service: []const u8,
 
     /// An optional filter you can use to narrow the results. If you do not specify
-    /// a status,
-    /// then all status values are included in the result.
+    /// a status, then all status values are included in the result.
     status: ?[]const ServiceDeploymentStatus = null,
 
     pub const json_field_names = .{
@@ -65,31 +56,21 @@ pub const ListServiceDeploymentsInput = struct {
 };
 
 pub const ListServiceDeploymentsOutput = struct {
-    /// The `nextToken` value to include in a future
-    /// `ListServiceDeployments` request. When the results of a
-    /// `ListServiceDeployments` request exceed `maxResults`, this
-    /// value can be used to retrieve the next page of results. This value is null
-    /// when there
-    /// are no more results to return.
+    /// The `nextToken` value to include in a future `ListServiceDeployments`
+    /// request. When the results of a `ListServiceDeployments` request exceed
+    /// `maxResults`, this value can be used to retrieve the next page of results.
+    /// This value is null when there are no more results to return.
     next_token: ?[]const u8 = null,
 
     /// An overview of the service deployment, including the following properties:
     ///
     /// * The ARN of the service deployment.
-    ///
     /// * The ARN of the service being deployed.
-    ///
-    /// * The ARN of the cluster that hosts the service in the service
-    /// deployment.
-    ///
+    /// * The ARN of the cluster that hosts the service in the service deployment.
     /// * The time that the service deployment started.
-    ///
     /// * The time that the service deployment completed.
-    ///
     /// * The service deployment status.
-    ///
     /// * Information about why the service deployment is in the current state.
-    ///
     /// * The ARN of the service revision that is being deployed.
     service_deployments: ?[]const ServiceDeploymentBrief = null,
 
@@ -223,6 +204,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

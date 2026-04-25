@@ -9,6 +9,7 @@ const DbStorageType = @import("db_storage_type.zig").DbStorageType;
 const ClusterDeploymentType = @import("cluster_deployment_type.zig").ClusterDeploymentType;
 const FailoverMode = @import("failover_mode.zig").FailoverMode;
 const LogDeliveryConfiguration = @import("log_delivery_configuration.zig").LogDeliveryConfiguration;
+const MaintenanceSchedule = @import("maintenance_schedule.zig").MaintenanceSchedule;
 const NetworkType = @import("network_type.zig").NetworkType;
 const ClusterStatus = @import("cluster_status.zig").ClusterStatus;
 
@@ -52,6 +53,10 @@ pub const CreateDbClusterInput = struct {
 
     /// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
     log_delivery_configuration: ?LogDeliveryConfiguration = null,
+
+    /// Specifies the maintenance schedule for the DB cluster, including the
+    /// preferred maintenance window and timezone.
+    maintenance_schedule: ?MaintenanceSchedule = null,
 
     /// The name that uniquely identifies the DB cluster when interacting with the
     /// Amazon Timestream for InfluxDB API and CLI commands. This name will also be
@@ -118,6 +123,7 @@ pub const CreateDbClusterInput = struct {
         .deployment_type = "deploymentType",
         .failover_mode = "failoverMode",
         .log_delivery_configuration = "logDeliveryConfiguration",
+        .maintenance_schedule = "maintenanceSchedule",
         .name = "name",
         .network_type = "networkType",
         .organization = "organization",

@@ -11,11 +11,10 @@ pub const StartMonitoringMembersInput = struct {
     account_ids: []const []const u8,
 
     /// The unique ID of the detector of the GuardDuty administrator account
-    /// associated with the
-    /// member accounts to monitor.
+    /// associated with the member accounts to monitor.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 
@@ -27,8 +26,7 @@ pub const StartMonitoringMembersInput = struct {
 
 pub const StartMonitoringMembersOutput = struct {
     /// A list of objects that contain the unprocessed account and a result string
-    /// that explains
-    /// why it was unprocessed.
+    /// that explains why it was unprocessed.
     unprocessed_accounts: ?[]const UnprocessedAccount = null,
 
     pub const json_field_names = .{

@@ -7,6 +7,7 @@ pub const OnlineEvaluationConfigStatus = enum {
     updating,
     update_failed,
     deleting,
+    @"error",
 
     pub const json_field_names = .{
         .active = "ACTIVE",
@@ -15,6 +16,7 @@ pub const OnlineEvaluationConfigStatus = enum {
         .updating = "UPDATING",
         .update_failed = "UPDATE_FAILED",
         .deleting = "DELETING",
+        .@"error" = "ERROR",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -25,6 +27,7 @@ pub const OnlineEvaluationConfigStatus = enum {
             .updating => "UPDATING",
             .update_failed => "UPDATE_FAILED",
             .deleting => "DELETING",
+            .@"error" => "ERROR",
         };
     }
 

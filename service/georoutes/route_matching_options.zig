@@ -16,7 +16,7 @@ pub const RouteMatchingOptions = struct {
     /// destination to. The roads that are considered are determined by the provided
     /// Strategy.
     ///
-    /// **Unit**: `Meters`
+    /// **Unit**: `meters`
     radius: i64 = 0,
 
     /// Strategy that defines matching of the position onto the road network.

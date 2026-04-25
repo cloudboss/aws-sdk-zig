@@ -41,6 +41,9 @@ pub const ServiceError = struct {
         resource_in_use_exception: ResourceInUseException,
         resource_not_found_exception: ResourceNotFoundException,
         resource_not_ready_exception: ResourceNotReadyException,
+        s3_files_mount_connectivity_exception: S3FilesMountConnectivityException,
+        s3_files_mount_failure_exception: S3FilesMountFailureException,
+        s3_files_mount_timeout_exception: S3FilesMountTimeoutException,
         serialized_request_entity_too_large_exception: SerializedRequestEntityTooLargeException,
         service_exception: ServiceException,
         snap_start_exception: SnapStartException,
@@ -89,6 +92,9 @@ pub const ServiceError = struct {
                 .resource_in_use_exception => "ResourceInUseException",
                 .resource_not_found_exception => "ResourceNotFoundException",
                 .resource_not_ready_exception => "ResourceNotReadyException",
+                .s3_files_mount_connectivity_exception => "S3FilesMountConnectivityException",
+                .s3_files_mount_failure_exception => "S3FilesMountFailureException",
+                .s3_files_mount_timeout_exception => "S3FilesMountTimeoutException",
                 .serialized_request_entity_too_large_exception => "SerializedRequestEntityTooLargeException",
                 .service_exception => "ServiceException",
                 .snap_start_exception => "SnapStartException",
@@ -139,6 +145,9 @@ pub const ServiceError = struct {
                 .resource_in_use_exception => |e| e.message,
                 .resource_not_found_exception => |e| e.message,
                 .resource_not_ready_exception => |e| e.message,
+                .s3_files_mount_connectivity_exception => |e| e.message,
+                .s3_files_mount_failure_exception => |e| e.message,
+                .s3_files_mount_timeout_exception => |e| e.message,
                 .serialized_request_entity_too_large_exception => |e| e.message,
                 .service_exception => |e| e.message,
                 .snap_start_exception => |e| e.message,
@@ -189,6 +198,9 @@ pub const ServiceError = struct {
                 .resource_in_use_exception => 400,
                 .resource_not_found_exception => 404,
                 .resource_not_ready_exception => 502,
+                .s3_files_mount_connectivity_exception => 408,
+                .s3_files_mount_failure_exception => 403,
+                .s3_files_mount_timeout_exception => 408,
                 .serialized_request_entity_too_large_exception => 413,
                 .service_exception => 500,
                 .snap_start_exception => 400,
@@ -239,6 +251,9 @@ pub const ServiceError = struct {
                 .resource_in_use_exception => |e| e.request_id,
                 .resource_not_found_exception => |e| e.request_id,
                 .resource_not_ready_exception => |e| e.request_id,
+                .s3_files_mount_connectivity_exception => |e| e.request_id,
+                .s3_files_mount_failure_exception => |e| e.request_id,
+                .s3_files_mount_timeout_exception => |e| e.request_id,
                 .serialized_request_entity_too_large_exception => |e| e.request_id,
                 .service_exception => |e| e.request_id,
                 .snap_start_exception => |e| e.request_id,
@@ -449,6 +464,21 @@ pub const ResourceNotFoundException = struct {
 };
 
 pub const ResourceNotReadyException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const S3FilesMountConnectivityException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const S3FilesMountFailureException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const S3FilesMountTimeoutException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };

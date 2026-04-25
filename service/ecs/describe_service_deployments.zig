@@ -22,10 +22,8 @@ pub const DescribeServiceDeploymentsOutput = struct {
     /// Any failures associated with the call.
     ///
     /// If you decsribe a deployment with a service revision created before October
-    /// 25, 2024,
-    /// the call fails. The failure includes the service revision ARN and the reason
-    /// set to
-    /// `MISSING`.
+    /// 25, 2024, the call fails. The failure includes the service revision ARN and
+    /// the reason set to `MISSING`.
     failures: ?[]const Failure = null,
 
     /// The list of service deployments described.
@@ -161,6 +159,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

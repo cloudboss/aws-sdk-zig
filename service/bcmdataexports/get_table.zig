@@ -11,12 +11,9 @@ pub const GetTableInput = struct {
     table_name: []const u8,
 
     /// TableProperties are additional configurations you can provide to change the
-    /// data and
-    /// schema of a table. Each table can have different TableProperties. Tables are
-    /// not required to
-    /// have any TableProperties. Each table property has a default value that it
-    /// assumes if not
-    /// specified.
+    /// data and schema of a table. Each table can have different TableProperties.
+    /// Tables are not required to have any TableProperties. Each table property has
+    /// a default value that it assumes if not specified.
     table_properties: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
@@ -36,12 +33,9 @@ pub const GetTableOutput = struct {
     table_name: ?[]const u8 = null,
 
     /// TableProperties are additional configurations you can provide to change the
-    /// data and
-    /// schema of a table. Each table can have different TableProperties. Tables are
-    /// not required to
-    /// have any TableProperties. Each table property has a default value that it
-    /// assumes if not
-    /// specified.
+    /// data and schema of a table. Each table can have different TableProperties.
+    /// Tables are not required to have any TableProperties. Each table property has
+    /// a default value that it assumes if not specified.
     table_properties: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
@@ -120,6 +114,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     const owned_message = try arena_alloc.dupe(u8, error_message);
     const owned_request_id = try arena_alloc.dupe(u8, "");
 
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "InternalServerException")) {
         return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
             .message = owned_message,

@@ -34,6 +34,7 @@ const delete_marketplace_model_endpoint = @import("delete_marketplace_model_endp
 const delete_model_invocation_logging_configuration = @import("delete_model_invocation_logging_configuration.zig");
 const delete_prompt_router = @import("delete_prompt_router.zig");
 const delete_provisioned_model_throughput = @import("delete_provisioned_model_throughput.zig");
+const delete_resource_policy = @import("delete_resource_policy.zig");
 const deregister_marketplace_model_endpoint = @import("deregister_marketplace_model_endpoint.zig");
 const export_automated_reasoning_policy_version = @import("export_automated_reasoning_policy_version.zig");
 const get_automated_reasoning_policy = @import("get_automated_reasoning_policy.zig");
@@ -59,6 +60,7 @@ const get_model_invocation_job = @import("get_model_invocation_job.zig");
 const get_model_invocation_logging_configuration = @import("get_model_invocation_logging_configuration.zig");
 const get_prompt_router = @import("get_prompt_router.zig");
 const get_provisioned_model_throughput = @import("get_provisioned_model_throughput.zig");
+const get_resource_policy = @import("get_resource_policy.zig");
 const get_use_case_for_model_access = @import("get_use_case_for_model_access.zig");
 const list_automated_reasoning_policies = @import("list_automated_reasoning_policies.zig");
 const list_automated_reasoning_policy_build_workflows = @import("list_automated_reasoning_policy_build_workflows.zig");
@@ -83,6 +85,7 @@ const list_provisioned_model_throughputs = @import("list_provisioned_model_throu
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const put_enforced_guardrail_configuration = @import("put_enforced_guardrail_configuration.zig");
 const put_model_invocation_logging_configuration = @import("put_model_invocation_logging_configuration.zig");
+const put_resource_policy = @import("put_resource_policy.zig");
 const put_use_case_for_model_access = @import("put_use_case_for_model_access.zig");
 const register_marketplace_model_endpoint = @import("register_marketplace_model_endpoint.zig");
 const start_automated_reasoning_policy_build_workflow = @import("start_automated_reasoning_policy_build_workflow.zig");
@@ -449,6 +452,11 @@ pub const Client = struct {
         return delete_provisioned_model_throughput.execute(self, allocator, input, options);
     }
 
+    /// Deletes a previously created Bedrock resource policy.
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: CallOptions) !delete_resource_policy.DeleteResourcePolicyOutput {
+        return delete_resource_policy.execute(self, allocator, input, options);
+    }
+
     /// Deregisters an endpoint for a model from Amazon Bedrock Marketplace. This
     /// operation removes the endpoint's association with Amazon Bedrock but does
     /// not delete the underlying Amazon SageMaker endpoint.
@@ -614,6 +622,11 @@ pub const Client = struct {
     /// Throughput](https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html) in the [Amazon Bedrock User Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
     pub fn getProvisionedModelThroughput(self: *Self, allocator: std.mem.Allocator, input: get_provisioned_model_throughput.GetProvisionedModelThroughputInput, options: CallOptions) !get_provisioned_model_throughput.GetProvisionedModelThroughputOutput {
         return get_provisioned_model_throughput.execute(self, allocator, input, options);
+    }
+
+    /// Gets the resource policy document for a Bedrock resource
+    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: CallOptions) !get_resource_policy.GetResourcePolicyOutput {
+        return get_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Get usecase for model access.
@@ -792,6 +805,11 @@ pub const Client = struct {
     /// Set the configuration values for model invocation logging.
     pub fn putModelInvocationLoggingConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_model_invocation_logging_configuration.PutModelInvocationLoggingConfigurationInput, options: CallOptions) !put_model_invocation_logging_configuration.PutModelInvocationLoggingConfigurationOutput {
         return put_model_invocation_logging_configuration.execute(self, allocator, input, options);
+    }
+
+    /// Adds a resource policy for a Bedrock resource.
+    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: CallOptions) !put_resource_policy.PutResourcePolicyOutput {
+        return put_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Put usecase for model access.

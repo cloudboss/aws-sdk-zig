@@ -84,6 +84,10 @@ pub const GetPlanExecutionOutput = struct {
     /// The Amazon Resource Name (ARN) of the plan.
     plan_arn: []const u8,
 
+    /// The unique identifier of the most recent recovery execution. Required when
+    /// starting a post-recovery execution.
+    recovery_execution_id: ?[]const u8 = null,
+
     /// The time (UTC) when the plan execution started.
     start_time: i64,
 
@@ -109,6 +113,7 @@ pub const GetPlanExecutionOutput = struct {
         .next_token = "nextToken",
         .plan = "plan",
         .plan_arn = "planArn",
+        .recovery_execution_id = "recoveryExecutionId",
         .start_time = "startTime",
         .step_states = "stepStates",
         .updated_at = "updatedAt",

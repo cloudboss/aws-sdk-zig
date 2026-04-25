@@ -24,6 +24,7 @@ pub const GroupByField = enum {
     compliance_standards,
     cloud_account_name,
     vendor_attributes_severity,
+    metadata_product_vendor_name,
 
     pub const json_field_names = .{
         .activity_name = "activity_name",
@@ -49,6 +50,7 @@ pub const GroupByField = enum {
         .compliance_standards = "compliance.standards",
         .cloud_account_name = "cloud.account.name",
         .vendor_attributes_severity = "vendor_attributes.severity",
+        .metadata_product_vendor_name = "metadata.product.vendor_name",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -76,6 +78,7 @@ pub const GroupByField = enum {
             .compliance_standards => "compliance.standards",
             .cloud_account_name => "cloud.account.name",
             .vendor_attributes_severity => "vendor_attributes.severity",
+            .metadata_product_vendor_name => "metadata.product.vendor_name",
         };
     }
 

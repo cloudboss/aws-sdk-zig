@@ -1,5 +1,8 @@
 /// The Amazon S3 properties patch of a connection.
 pub const S3PropertiesPatch = struct {
+    /// Specifies whether to register the Amazon S3 Access Grant location.
+    register_s3_access_grant_location: ?bool = null,
+
     /// The Amazon S3 Access Grant location ID that's part of the Amazon S3
     /// properties patch of a connection.
     s_3_access_grant_location_id: ?[]const u8 = null,
@@ -9,6 +12,7 @@ pub const S3PropertiesPatch = struct {
     s_3_uri: []const u8,
 
     pub const json_field_names = .{
+        .register_s3_access_grant_location = "registerS3AccessGrantLocation",
         .s_3_access_grant_location_id = "s3AccessGrantLocationId",
         .s_3_uri = "s3Uri",
     };

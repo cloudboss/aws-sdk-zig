@@ -18,6 +18,10 @@ pub const GetBootstrapBrokersOutput = struct {
     /// A string containing one or more hostname:port pairs.
     bootstrap_broker_string: ?[]const u8 = null,
 
+    /// A string that contains one or more DNS names (or IP) and port pairs for IPv6
+    /// connectivity.
+    bootstrap_broker_string_ipv_6: ?[]const u8 = null,
+
     /// A string that contains one or more DNS names (or IP addresses) and SASL IAM
     /// port pairs.
     bootstrap_broker_string_public_sasl_iam: ?[]const u8 = null,
@@ -32,11 +36,23 @@ pub const GetBootstrapBrokersOutput = struct {
     /// port pairs.
     bootstrap_broker_string_sasl_iam: ?[]const u8 = null,
 
+    /// A string that contains one or more DNS names (or IP) and SASL IAM port pairs
+    /// for IPv6 connectivity.
+    bootstrap_broker_string_sasl_iam_ipv_6: ?[]const u8 = null,
+
     /// A string containing one or more DNS names (or IP) and Sasl Scram port pairs.
     bootstrap_broker_string_sasl_scram: ?[]const u8 = null,
 
+    /// A string that contains one or more DNS names (or IP) and SASL SCRAM port
+    /// pairs for IPv6 connectivity.
+    bootstrap_broker_string_sasl_scram_ipv_6: ?[]const u8 = null,
+
     /// A string containing one or more DNS names (or IP) and TLS port pairs.
     bootstrap_broker_string_tls: ?[]const u8 = null,
+
+    /// A string that contains one or more DNS names (or IP) and TLS port pairs for
+    /// IPv6 connectivity.
+    bootstrap_broker_string_tls_ipv_6: ?[]const u8 = null,
 
     /// A string containing one or more DNS names (or IP) and SASL/IAM port pairs
     /// for VPC connectivity.
@@ -52,12 +68,16 @@ pub const GetBootstrapBrokersOutput = struct {
 
     pub const json_field_names = .{
         .bootstrap_broker_string = "BootstrapBrokerString",
+        .bootstrap_broker_string_ipv_6 = "BootstrapBrokerStringIpv6",
         .bootstrap_broker_string_public_sasl_iam = "BootstrapBrokerStringPublicSaslIam",
         .bootstrap_broker_string_public_sasl_scram = "BootstrapBrokerStringPublicSaslScram",
         .bootstrap_broker_string_public_tls = "BootstrapBrokerStringPublicTls",
         .bootstrap_broker_string_sasl_iam = "BootstrapBrokerStringSaslIam",
+        .bootstrap_broker_string_sasl_iam_ipv_6 = "BootstrapBrokerStringSaslIamIpv6",
         .bootstrap_broker_string_sasl_scram = "BootstrapBrokerStringSaslScram",
+        .bootstrap_broker_string_sasl_scram_ipv_6 = "BootstrapBrokerStringSaslScramIpv6",
         .bootstrap_broker_string_tls = "BootstrapBrokerStringTls",
+        .bootstrap_broker_string_tls_ipv_6 = "BootstrapBrokerStringTlsIpv6",
         .bootstrap_broker_string_vpc_connectivity_sasl_iam = "BootstrapBrokerStringVpcConnectivitySaslIam",
         .bootstrap_broker_string_vpc_connectivity_sasl_scram = "BootstrapBrokerStringVpcConnectivitySaslScram",
         .bootstrap_broker_string_vpc_connectivity_tls = "BootstrapBrokerStringVpcConnectivityTls",
@@ -147,8 +167,20 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "ClusterConnectivityException")) {
+        return .{ .arena = arena, .kind = .{ .cluster_connectivity_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ControllerMovedException")) {
+        return .{ .arena = arena, .kind = .{ .controller_moved_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };
@@ -159,14 +191,44 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "GroupSubscribedToTopicException")) {
+        return .{ .arena = arena, .kind = .{ .group_subscribed_to_topic_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "InternalServerErrorException")) {
         return .{ .arena = arena, .kind = .{ .internal_server_error_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "KafkaRequestException")) {
+        return .{ .arena = arena, .kind = .{ .kafka_request_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "KafkaTimeoutException")) {
+        return .{ .arena = arena, .kind = .{ .kafka_timeout_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "NotControllerException")) {
+        return .{ .arena = arena, .kind = .{ .not_controller_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "NotFoundException")) {
         return .{ .arena = arena, .kind = .{ .not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ReassignmentInProgressException")) {
+        return .{ .arena = arena, .kind = .{ .reassignment_in_progress_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };
@@ -183,8 +245,20 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "TopicExistsException")) {
+        return .{ .arena = arena, .kind = .{ .topic_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "UnauthorizedException")) {
         return .{ .arena = arena, .kind = .{ .unauthorized_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnknownTopicOrPartitionException")) {
+        return .{ .arena = arena, .kind = .{ .unknown_topic_or_partition_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

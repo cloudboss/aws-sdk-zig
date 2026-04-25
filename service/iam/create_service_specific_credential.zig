@@ -10,8 +10,8 @@ const serde = @import("serde.zig");
 pub const CreateServiceSpecificCredentialInput = struct {
     /// The number of days until the service specific credential expires. This field
     /// is only
-    /// valid for Bedrock API keys and must be a positive integer. When not
-    /// specified, the
+    /// valid for Bedrock and CloudWatch Logs API keys and must be a positive
+    /// integer. When not specified, the
     /// credential will not expire.
     credential_age_days: ?i32 = null,
 

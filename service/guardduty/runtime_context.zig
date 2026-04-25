@@ -3,8 +3,7 @@ const ProcessDetails = @import("process_details.zig").ProcessDetails;
 /// Additional information about the suspicious activity.
 pub const RuntimeContext = struct {
     /// Represents the communication protocol associated with the address. For
-    /// example, the address
-    /// family `AF_INET` is used for IP version of 4 protocol.
+    /// example, the address family `AF_INET` is used for IP version of 4 protocol.
     address_family: ?[]const u8 = null,
 
     /// Example of the command line involved in the suspicious activity.
@@ -14,15 +13,13 @@ pub const RuntimeContext = struct {
     file_system_type: ?[]const u8 = null,
 
     /// Represents options that control the behavior of a runtime operation or
-    /// action. For
-    /// example, a filesystem mount operation may contain a read-only flag.
+    /// action. For example, a filesystem mount operation may contain a read-only
+    /// flag.
     flags: ?[]const []const u8 = null,
 
     /// Specifies a particular protocol within the address family. Usually there is
-    /// a single
-    /// protocol in address families. For example, the address family `AF_INET` only
-    /// has
-    /// the IP protocol.
+    /// a single protocol in address families. For example, the address family
+    /// `AF_INET` only has the IP protocol.
     iana_protocol_number: ?i32 = null,
 
     /// The value of the LD_PRELOAD environment variable.
@@ -35,13 +32,11 @@ pub const RuntimeContext = struct {
     memory_regions: ?[]const []const u8 = null,
 
     /// The timestamp at which the process modified the current process. The
-    /// timestamp is in UTC date string
-    /// format.
+    /// timestamp is in UTC date string format.
     modified_at: ?i64 = null,
 
     /// Information about the process that modified the current process. This is
-    /// available for
-    /// multiple finding types.
+    /// available for multiple finding types.
     modifying_process: ?ProcessDetails = null,
 
     /// The path to the module loaded into the kernel.
@@ -85,8 +80,8 @@ pub const RuntimeContext = struct {
     /// found.
     threat_file_path: ?[]const u8 = null,
 
-    /// Category that the tool belongs to. Some of the examples
-    /// are Backdoor Tool, Pentest Tool, Network Scanner, and Network Sniffer.
+    /// Category that the tool belongs to. Some of the examples are Backdoor Tool,
+    /// Pentest Tool, Network Scanner, and Network Sniffer.
     tool_category: ?[]const u8 = null,
 
     /// Name of the potentially suspicious tool.

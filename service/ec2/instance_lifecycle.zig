@@ -3,16 +3,19 @@ const std = @import("std");
 pub const InstanceLifecycle = enum {
     spot,
     on_demand,
+    interruptible_capacity_reservation,
 
     pub const json_field_names = .{
         .spot = "spot",
         .on_demand = "on-demand",
+        .interruptible_capacity_reservation = "interruptible-capacity-reservation",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .spot => "spot",
             .on_demand => "on-demand",
+            .interruptible_capacity_reservation => "interruptible-capacity-reservation",
         };
     }
 

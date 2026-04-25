@@ -11,11 +11,16 @@ pub const UpdateIngestConfigurationInput = struct {
     /// updated.
     arn: []const u8,
 
+    /// Indicates whether redundant ingest is enabled for the ingest configuration.
+    /// Default: `false`.
+    redundant_ingest: ?bool = null,
+
     /// Stage ARN that needs to be updated.
     stage_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",
+        .redundant_ingest = "redundantIngest",
         .stage_arn = "stageArn",
     };
 };
@@ -71,6 +76,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateIngestConfigurati
     try body_buf.appendSlice(allocator, "\"arn\":");
     try aws.json.writeValue(@TypeOf(input.arn), input.arn, allocator, &body_buf);
     has_prev = true;
+    if (input.redundant_ingest) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"redundantIngest\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.stage_arn) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"stageArn\":");

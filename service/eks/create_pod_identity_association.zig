@@ -43,6 +43,29 @@ pub const CreatePodIdentityAssociationInput = struct {
     /// namespace.
     namespace: []const u8,
 
+    /// An optional IAM policy in JSON format (as an escaped string) that applies
+    /// additional
+    /// restrictions to this pod identity association beyond the IAM policies
+    /// attached to the
+    /// IAM role. This policy is applied as the intersection of the role's policies
+    /// and this
+    /// policy, allowing you to reduce the permissions that applications in the pods
+    /// can use.
+    /// Use this policy to enforce least privilege access while still leveraging a
+    /// shared IAM
+    /// role across multiple applications.
+    ///
+    /// **Important considerations**
+    ///
+    /// * **Session tags:** When using this policy,
+    /// `disableSessionTags` must be set to `true`.
+    ///
+    /// * **Target role permissions:** If you specify both
+    /// a `TargetRoleArn` and a policy, the policy restrictions apply only to
+    /// the target role's permissions, not to the initial role used for assuming the
+    /// target role.
+    policy: ?[]const u8 = null,
+
     /// The Amazon Resource Name (ARN) of the IAM role to associate with the service
     /// account. The EKS Pod Identity
     /// agent manages credentials to assume this role for applications in the
@@ -121,6 +144,7 @@ pub const CreatePodIdentityAssociationInput = struct {
         .cluster_name = "clusterName",
         .disable_session_tags = "disableSessionTags",
         .namespace = "namespace",
+        .policy = "policy",
         .role_arn = "roleArn",
         .service_account = "serviceAccount",
         .tags = "tags",
@@ -199,6 +223,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePodIdentityAssoci
     try body_buf.appendSlice(allocator, "\"namespace\":");
     try aws.json.writeValue(@TypeOf(input.namespace), input.namespace, allocator, &body_buf);
     has_prev = true;
+    if (input.policy) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"policy\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"roleArn\":");
     try aws.json.writeValue(@TypeOf(input.role_arn), input.role_arn, allocator, &body_buf);

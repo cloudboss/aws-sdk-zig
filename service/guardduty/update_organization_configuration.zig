@@ -10,48 +10,40 @@ const OrganizationFeatureConfiguration = @import("organization_feature_configura
 
 pub const UpdateOrganizationConfigurationInput = struct {
     /// Represents whether to automatically enable member accounts in the
-    /// organization. This
-    /// applies to only new member accounts, not the existing member accounts. When
-    /// a new account joins the organization,
-    /// the chosen features will be enabled for them by default.
+    /// organization. This applies to only new member accounts, not the existing
+    /// member accounts. When a new account joins the organization, the chosen
+    /// features will be enabled for them by default.
     ///
     /// Even though this is still supported, we recommend using
     /// `AutoEnableOrganizationMembers` to achieve the similar results. You must
-    /// provide a
-    /// value for either `autoEnableOrganizationMembers` or `autoEnable`.
+    /// provide a value for either `autoEnableOrganizationMembers` or `autoEnable`.
     auto_enable: ?bool = null,
 
     /// Indicates the auto-enablement configuration of GuardDuty for the member
-    /// accounts in the
-    /// organization. You must provide a value for either
+    /// accounts in the organization. You must provide a value for either
     /// `autoEnableOrganizationMembers` or `autoEnable`.
     ///
-    /// Use one of the
-    /// following configuration values for `autoEnableOrganizationMembers`:
+    /// Use one of the following configuration values for
+    /// `autoEnableOrganizationMembers`:
     ///
     /// * `NEW`: Indicates that when a new account joins the organization, they will
-    /// have GuardDuty enabled automatically.
-    ///
+    ///   have GuardDuty enabled automatically.
     /// * `ALL`: Indicates that all accounts in the organization have GuardDuty
-    /// enabled automatically. This includes `NEW` accounts that join the
-    /// organization
-    /// and accounts that may have been suspended or removed from the organization
-    /// in
-    /// GuardDuty.
+    ///   enabled automatically. This includes `NEW` accounts that join the
+    ///   organization and accounts that may have been suspended or removed from the
+    ///   organization in GuardDuty.
     ///
     /// It may take up to 24 hours to update the configuration for all the member
     /// accounts.
-    ///
     /// * `NONE`: Indicates that GuardDuty will not be automatically enabled for any
-    /// account in the organization. The administrator must manage GuardDuty for
-    /// each account in the organization individually.
+    ///   account in the organization. The administrator must manage GuardDuty for
+    ///   each account in the organization individually.
     ///
-    /// When you update the auto-enable setting from `ALL` or `NEW` to
-    /// `NONE`, this action doesn't disable the corresponding option for your
-    /// existing accounts. This
-    /// configuration will apply to the new accounts that join the organization.
-    /// After you update the auto-enable settings,
-    /// no new account will have the corresponding option as enabled.
+    /// When you update the auto-enable setting from `ALL` or `NEW` to `NONE`, this
+    /// action doesn't disable the corresponding option for your existing accounts.
+    /// This configuration will apply to the new accounts that join the
+    /// organization. After you update the auto-enable settings, no new account will
+    /// have the corresponding option as enabled.
     auto_enable_organization_members: ?AutoEnableMembers = null,
 
     /// Describes which data sources will be updated.
@@ -59,8 +51,8 @@ pub const UpdateOrganizationConfigurationInput = struct {
 
     /// The ID of the detector that configures the delegated administrator.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 

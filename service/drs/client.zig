@@ -255,10 +255,9 @@ pub const Client = struct {
     }
 
     /// Returns a list of source servers on a staging account that are extensible,
-    /// which means that:
-    /// a. The source server is not already extended into this Account.
-    /// b. The source server on the Account we’re reading from is not an extension
-    /// of another source server.
+    /// which means that: a. The source server is not already extended into this
+    /// Account. b. The source server on the Account we’re reading from is not an
+    /// extension of another source server.
     pub fn listExtensibleSourceServers(self: *Self, allocator: std.mem.Allocator, input: list_extensible_source_servers.ListExtensibleSourceServersInput, options: CallOptions) !list_extensible_source_servers.ListExtensibleSourceServersOutput {
         return list_extensible_source_servers.execute(self, allocator, input, options);
     }
@@ -283,21 +282,19 @@ pub const Client = struct {
         return put_launch_action.execute(self, allocator, input, options);
     }
 
-    /// WARNING: RetryDataReplication is deprecated.
-    /// Causes the data replication initiation sequence to begin immediately upon
-    /// next Handshake for the specified Source Server ID, regardless of when the
-    /// previous initiation started. This command will work only if the Source
-    /// Server is stalled or is in a DISCONNECTED or STOPPED state.
+    /// WARNING: RetryDataReplication is deprecated. Causes the data replication
+    /// initiation sequence to begin immediately upon next Handshake for the
+    /// specified Source Server ID, regardless of when the previous initiation
+    /// started. This command will work only if the Source Server is stalled or is
+    /// in a DISCONNECTED or STOPPED state.
     pub fn retryDataReplication(self: *Self, allocator: std.mem.Allocator, input: retry_data_replication.RetryDataReplicationInput, options: CallOptions) !retry_data_replication.RetryDataReplicationOutput {
         return retry_data_replication.execute(self, allocator, input, options);
     }
 
     /// Start replication to origin / target region - applies only to protected
-    /// instances that originated in EC2.
-    /// For recovery instances on target region - starts replication back to origin
-    /// region.
-    /// For failback instances on origin region - starts replication to target
-    /// region to re-protect them.
+    /// instances that originated in EC2. For recovery instances on target region -
+    /// starts replication back to origin region. For failback instances on origin
+    /// region - starts replication to target region to re-protect them.
     pub fn reverseReplication(self: *Self, allocator: std.mem.Allocator, input: reverse_replication.ReverseReplicationInput, options: CallOptions) !reverse_replication.ReverseReplicationOutput {
         return reverse_replication.execute(self, allocator, input, options);
     }

@@ -13,8 +13,7 @@ pub const S3DataAccessAssetSourceEntry = struct {
     keys: ?[]const []const u8 = null,
 
     /// List of AWS KMS CMKs (Key Management System Customer Managed Keys) and ARNs
-    /// used to
-    /// encrypt S3 objects being shared in this S3 Data Access asset.
+    /// used to encrypt S3 objects being shared in this S3 Data Access asset.
     kms_keys_to_grant: ?[]const KmsKeyToGrant = null,
 
     pub const json_field_names = .{

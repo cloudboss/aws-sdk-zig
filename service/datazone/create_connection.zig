@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AwsLocation = @import("aws_location.zig").AwsLocation;
+const Configuration = @import("configuration.zig").Configuration;
 const ConnectionPropertiesInput = @import("connection_properties_input.zig").ConnectionPropertiesInput;
 const ConnectionScope = @import("connection_scope.zig").ConnectionScope;
 const PhysicalEndpoint = @import("physical_endpoint.zig").PhysicalEndpoint;
@@ -18,6 +19,9 @@ pub const CreateConnectionInput = struct {
     /// A unique, case-sensitive identifier that is provided to ensure the
     /// idempotency of the request.
     client_token: ?[]const u8 = null,
+
+    /// The configurations of the connection.
+    configurations: ?[]const Configuration = null,
 
     /// A connection description.
     description: ?[]const u8 = null,
@@ -43,6 +47,7 @@ pub const CreateConnectionInput = struct {
     pub const json_field_names = .{
         .aws_location = "awsLocation",
         .client_token = "clientToken",
+        .configurations = "configurations",
         .description = "description",
         .domain_identifier = "domainIdentifier",
         .enable_trusted_identity_propagation = "enableTrustedIdentityPropagation",
@@ -54,6 +59,9 @@ pub const CreateConnectionInput = struct {
 };
 
 pub const CreateConnectionOutput = struct {
+    /// The configurations of the connection.
+    configurations: ?[]const Configuration = null,
+
     /// The ID of the connection.
     connection_id: []const u8,
 
@@ -88,6 +96,7 @@ pub const CreateConnectionOutput = struct {
     @"type": ConnectionType,
 
     pub const json_field_names = .{
+        .configurations = "configurations",
         .connection_id = "connectionId",
         .description = "description",
         .domain_id = "domainId",
@@ -153,6 +162,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateConnectionInput, 
     if (input.client_token) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"clientToken\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.configurations) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"configurations\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

@@ -6,6 +6,9 @@ pub const Instance = struct {
     /// The Availability Zone in which the instance is running.
     availability_zone: []const u8,
 
+    /// The Availability Zone ID where the instance was launched.
+    availability_zone_id: ?[]const u8 = null,
+
     /// The last reported health status of the instance. `Healthy` means that the
     /// instance is healthy and should remain in service. `Unhealthy` means that the
     /// instance is unhealthy and that Amazon EC2 Auto Scaling should terminate and

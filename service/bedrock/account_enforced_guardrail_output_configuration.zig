@@ -1,5 +1,7 @@
 const InputTags = @import("input_tags.zig").InputTags;
+const ModelEnforcement = @import("model_enforcement.zig").ModelEnforcement;
 const ConfigurationOwner = @import("configuration_owner.zig").ConfigurationOwner;
+const SelectiveContentGuarding = @import("selective_content_guarding.zig").SelectiveContentGuarding;
 
 /// Account enforced guardrail output configuration.
 pub const AccountEnforcedGuardrailOutputConfiguration = struct {
@@ -24,8 +26,14 @@ pub const AccountEnforcedGuardrailOutputConfiguration = struct {
     /// Whether to honor or ignore input tags at runtime.
     input_tags: ?InputTags = null,
 
+    /// Model-specific information for the enforced guardrail configuration.
+    model_enforcement: ?ModelEnforcement = null,
+
     /// Configuration owner type.
     owner: ?ConfigurationOwner = null,
+
+    /// Selective content guarding controls for enforced guardrails.
+    selective_content_guarding: ?SelectiveContentGuarding = null,
 
     /// Timestamp.
     updated_at: ?i64 = null,
@@ -41,7 +49,9 @@ pub const AccountEnforcedGuardrailOutputConfiguration = struct {
         .guardrail_id = "guardrailId",
         .guardrail_version = "guardrailVersion",
         .input_tags = "inputTags",
+        .model_enforcement = "modelEnforcement",
         .owner = "owner",
+        .selective_content_guarding = "selectiveContentGuarding",
         .updated_at = "updatedAt",
         .updated_by = "updatedBy",
     };

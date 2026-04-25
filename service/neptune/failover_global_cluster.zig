@@ -15,7 +15,7 @@ pub const FailoverGlobalClusterInput = struct {
     /// If you don't specify `AllowDataLoss`, the global database cluster operation
     /// defaults to a switchover.
     ///
-    /// Constraints:Can't be specified together with the `Switchover` parameter.
+    /// Constraints: Can't be specified together with the `Switchover` parameter.
     allow_data_loss: ?bool = null,
 
     /// Identifier of the Neptune global database that should be failed over.
@@ -29,7 +29,7 @@ pub const FailoverGlobalClusterInput = struct {
 
     /// Specifies whether to switch over this global database cluster.
     ///
-    /// Constraints:Can't be specified together with the `AllowDataLoss` parameter.
+    /// Constraints: Can't be specified together with the `AllowDataLoss` parameter.
     switchover: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the secondary Neptune DB cluster

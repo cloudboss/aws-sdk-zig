@@ -8,15 +8,13 @@ const Service = @import("service.zig").Service;
 
 pub const DeleteServiceInput = struct {
     /// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-    /// the
-    /// service to delete. If you do not specify a cluster, the default cluster is
-    /// assumed.
+    /// the service to delete. If you do not specify a cluster, the default cluster
+    /// is assumed.
     cluster: ?[]const u8 = null,
 
     /// If `true`, allows you to delete a service even if it wasn't scaled down to
     /// zero tasks. It's only necessary to use this if the service uses the
-    /// `REPLICA`
-    /// scheduling strategy.
+    /// `REPLICA` scheduling strategy.
     force: ?bool = null,
 
     /// The name of the service to delete.
@@ -162,6 +160,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

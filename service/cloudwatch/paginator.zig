@@ -9,6 +9,7 @@ const describe_alarms = @import("describe_alarms.zig");
 const describe_anomaly_detectors = @import("describe_anomaly_detectors.zig");
 const describe_insight_rules = @import("describe_insight_rules.zig");
 const get_metric_data = @import("get_metric_data.zig");
+const list_alarm_mute_rules = @import("list_alarm_mute_rules.zig");
 const list_dashboards = @import("list_dashboards.zig");
 const list_managed_insight_rules = @import("list_managed_insight_rules.zig");
 const list_metric_streams = @import("list_metric_streams.zig");
@@ -190,6 +191,46 @@ pub const GetMetricDataPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try get_metric_data.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListAlarmMuteRulesPaginator = struct {
+    client: *Client,
+    params: list_alarm_mute_rules.ListAlarmMuteRulesInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_alarm_mute_rules.ListAlarmMuteRulesOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_alarm_mute_rules.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

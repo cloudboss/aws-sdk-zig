@@ -1,3 +1,5 @@
+const VpcTransitConfiguration = @import("vpc_transit_configuration.zig").VpcTransitConfiguration;
+
 /// Configuration settings that define a stream group's stream capacity for a
 /// location. When configuring a location for the first time, you must specify a
 /// numeric value for at least one of the two capacity types. To update the
@@ -38,11 +40,21 @@ pub const LocationConfiguration = struct {
     /// intentional idle state.
     target_idle_capacity: ?i32 = null,
 
+    /// Configuration for connecting the stream group to resources in your Amazon
+    /// VPC using AWS Transit Gateway. This setting is optional. If specified,
+    /// Amazon GameLift Streams creates a Transit Gateway to enable private network
+    /// connectivity between the service VPC and your VPC. The VPC ID cannot be
+    /// changed after the stream group is created, but you can update the CIDR
+    /// blocks by calling
+    /// [UpdateStreamGroup](https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_UpdateStreamGroup.html).
+    vpc_transit_configuration: ?VpcTransitConfiguration = null,
+
     pub const json_field_names = .{
         .always_on_capacity = "AlwaysOnCapacity",
         .location_name = "LocationName",
         .maximum_capacity = "MaximumCapacity",
         .on_demand_capacity = "OnDemandCapacity",
         .target_idle_capacity = "TargetIdleCapacity",
+        .vpc_transit_configuration = "VpcTransitConfiguration",
     };
 };

@@ -3,8 +3,7 @@ const OrganizationKubernetesAuditLogsConfiguration = @import("organization_kuber
 /// Organization-wide Kubernetes data sources configurations.
 pub const OrganizationKubernetesConfiguration = struct {
     /// Whether Kubernetes audit logs data source should be auto-enabled for new
-    /// members joining
-    /// the organization.
+    /// members joining the organization.
     audit_logs: OrganizationKubernetesAuditLogsConfiguration,
 
     pub const json_field_names = .{

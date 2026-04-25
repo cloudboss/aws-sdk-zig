@@ -8,8 +8,15 @@ const AutomatedReasoningPolicyBuildResultAssetType = @import("automated_reasonin
 const AutomatedReasoningPolicyBuildResultAssets = @import("automated_reasoning_policy_build_result_assets.zig").AutomatedReasoningPolicyBuildResultAssets;
 
 pub const GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput = struct {
+    /// The unique identifier of the specific asset to retrieve when multiple assets
+    /// of the same type exist. This is required when retrieving SOURCE_DOCUMENT
+    /// assets, as multiple source documents may have been used in the workflow. The
+    /// asset ID can be obtained from the asset manifest.
+    asset_id: ?[]const u8 = null,
+
     /// The type of asset to retrieve (e.g., BUILD_LOG, QUALITY_REPORT,
-    /// POLICY_DEFINITION).
+    /// POLICY_DEFINITION, GENERATED_TEST_CASES, POLICY_SCENARIOS, FIDELITY_REPORT,
+    /// ASSET_MANIFEST, SOURCE_DOCUMENT).
     asset_type: AutomatedReasoningPolicyBuildResultAssetType,
 
     /// The unique identifier of the build workflow whose result assets you want to
@@ -21,6 +28,7 @@ pub const GetAutomatedReasoningPolicyBuildWorkflowResultAssetsInput = struct {
     policy_arn: []const u8,
 
     pub const json_field_names = .{
+        .asset_id = "assetId",
         .asset_type = "assetType",
         .build_workflow_id = "buildWorkflowId",
         .policy_arn = "policyArn",
@@ -88,6 +96,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAutomatedReasoningPo
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
+    if (input.asset_id) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "assetId=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "assetType=");
     try aws.url.appendUrlEncoded(allocator, &query_buf, input.asset_type.wireName());

@@ -24,7 +24,7 @@ pub const RouteAvoidanceAreaGeometry = struct {
     /// contains PolylinePolygon of the first linear ring (the outer ring) and from
     /// 2nd item to the last item (the inner rings). For more information on
     /// polyline encoding, see
-    /// [https://github.com/heremaps/flexiblepolyline/blob/master/README.md](https://github.com/heremaps/flexiblepolyline/blob/master/README.md).
+    /// [https://github.com/aws-geospatial/polyline](https://github.com/aws-geospatial/polyline).
     polyline_polygon: ?[]const []const u8 = null,
 
     pub const json_field_names = .{

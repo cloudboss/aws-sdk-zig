@@ -11,7 +11,8 @@ const SearchTextResultItem = @import("search_text_result_item.zig").SearchTextRe
 
 pub const SearchTextInput = struct {
     /// A list of optional additional parameters, such as time zone, that can be
-    /// requested for each result.
+    /// requested for each result. For
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only the `TimeZone` value.
     additional_features: ?[]const SearchTextAdditionalFeature = null,
 
     /// The position, in longitude and latitude, that the results should be close
@@ -26,12 +27,13 @@ pub const SearchTextInput = struct {
     /// results must possess in order to be returned as a result.
     filter: ?SearchTextFilter = null,
 
-    /// Indicates if the results will be stored. Defaults to `SingleUse`, if left
-    /// empty.
+    /// Indicates if the query results will be persisted in customer infrastructure.
+    /// Defaults to `SingleUse` (not stored).
     ///
-    /// Storing the response of an SearchText query is required to comply with
-    /// service terms, but charged at a higher cost per request. Please review the
-    /// [user agreement](https://aws.amazon.com/location/sla/) and [service pricing
+    /// When storing `SearchText` responses, you *must* set this field to `Storage`
+    /// to comply with the terms of service. These requests will be charged at a
+    /// higher rate. Please review the [user
+    /// agreement](https://aws.amazon.com/location/sla/) and [service pricing
     /// structure](https://aws.amazon.com/location/pricing/) to determine the
     /// correct setting for your use case.
     intended_use: ?SearchTextIntendedUse = null,
@@ -43,7 +45,8 @@ pub const SearchTextInput = struct {
     /// A list of [BCP 47](https://en.wikipedia.org/wiki/IETF_language_tag)
     /// compliant language codes for the results to be rendered in. If there is no
     /// data for the result in the requested language, data will be returned in the
-    /// default language for the entry.
+    /// default language for the entry. For
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only the following codes: `en, id, km, lo, ms, my, pt, th, tl, vi, zh`
     language: ?[]const u8 = null,
 
     /// An optional limit for the number of results returned in a single call.
@@ -58,12 +61,15 @@ pub const SearchTextInput = struct {
     /// The alpha-2 or alpha-3 character code for the political view of a country.
     /// The political view applies to the results of the request to represent
     /// unresolved territorial claims through the point of view of the specified
-    /// country.
+    /// country. Not available in `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     political_view: ?[]const u8 = null,
 
     /// The query Id returned by the suggest API. If passed in the request, the
     /// SearchText API will preform a SearchText query with the improved query terms
-    /// for the original query made to the suggest API.
+    /// for the original query made to the suggest API. Not available in
+    /// `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
     /// Exactly one of the following fields must be set: `QueryText` or `QueryId`.
     query_id: ?[]const u8 = null,
@@ -142,7 +148,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchTextInput, config
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    const path = "/search-text";
+    const path = "/v2/search-text";
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;

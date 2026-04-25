@@ -1,6 +1,5 @@
 /// Contains information about the user and authentication details for a
-/// database instance
-/// involved in the finding.
+/// database instance involved in the finding.
 pub const RdsDbUserDetails = struct {
     /// The application name used in the anomalous login attempt.
     application: ?[]const u8 = null,

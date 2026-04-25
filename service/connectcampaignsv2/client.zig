@@ -6,6 +6,7 @@ const delete_campaign = @import("delete_campaign.zig");
 const delete_campaign_channel_subtype_config = @import("delete_campaign_channel_subtype_config.zig");
 const delete_campaign_communication_limits = @import("delete_campaign_communication_limits.zig");
 const delete_campaign_communication_time = @import("delete_campaign_communication_time.zig");
+const delete_campaign_entry_limits = @import("delete_campaign_entry_limits.zig");
 const delete_connect_instance_config = @import("delete_connect_instance_config.zig");
 const delete_connect_instance_integration = @import("delete_connect_instance_integration.zig");
 const delete_instance_onboarding_job = @import("delete_instance_onboarding_job.zig");
@@ -32,6 +33,7 @@ const untag_resource = @import("untag_resource.zig");
 const update_campaign_channel_subtype_config = @import("update_campaign_channel_subtype_config.zig");
 const update_campaign_communication_limits = @import("update_campaign_communication_limits.zig");
 const update_campaign_communication_time = @import("update_campaign_communication_time.zig");
+const update_campaign_entry_limits = @import("update_campaign_entry_limits.zig");
 const update_campaign_flow_association = @import("update_campaign_flow_association.zig");
 const update_campaign_name = @import("update_campaign_name.zig");
 const update_campaign_schedule = @import("update_campaign_schedule.zig");
@@ -93,6 +95,11 @@ pub const Client = struct {
     /// idempotent.
     pub fn deleteCampaignCommunicationTime(self: *Self, allocator: std.mem.Allocator, input: delete_campaign_communication_time.DeleteCampaignCommunicationTimeInput, options: CallOptions) !delete_campaign_communication_time.DeleteCampaignCommunicationTimeOutput {
         return delete_campaign_communication_time.execute(self, allocator, input, options);
+    }
+
+    /// Deletes the entry limits config for a campaign. This API is idempotent.
+    pub fn deleteCampaignEntryLimits(self: *Self, allocator: std.mem.Allocator, input: delete_campaign_entry_limits.DeleteCampaignEntryLimitsInput, options: CallOptions) !delete_campaign_entry_limits.DeleteCampaignEntryLimitsOutput {
+        return delete_campaign_entry_limits.execute(self, allocator, input, options);
     }
 
     /// Deletes a connect instance config from the specified AWS account.
@@ -230,6 +237,11 @@ pub const Client = struct {
     /// idempotent.
     pub fn updateCampaignCommunicationTime(self: *Self, allocator: std.mem.Allocator, input: update_campaign_communication_time.UpdateCampaignCommunicationTimeInput, options: CallOptions) !update_campaign_communication_time.UpdateCampaignCommunicationTimeOutput {
         return update_campaign_communication_time.execute(self, allocator, input, options);
+    }
+
+    /// Updates the entry limits config for a campaign. This API is idempotent.
+    pub fn updateCampaignEntryLimits(self: *Self, allocator: std.mem.Allocator, input: update_campaign_entry_limits.UpdateCampaignEntryLimitsInput, options: CallOptions) !update_campaign_entry_limits.UpdateCampaignEntryLimitsOutput {
+        return update_campaign_entry_limits.execute(self, allocator, input, options);
     }
 
     /// Updates the campaign flow associated with a campaign. This API is

@@ -5,7 +5,7 @@ pub const AwsDynamoDbTableSseDescription = struct {
     /// inaccessible.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     inaccessible_encryption_date_time: ?[]const u8 = null,
 

@@ -25,6 +25,7 @@ const delete_index = @import("delete_index.zig");
 const delete_outbound_connection = @import("delete_outbound_connection.zig");
 const delete_package = @import("delete_package.zig");
 const delete_vpc_endpoint = @import("delete_vpc_endpoint.zig");
+const deregister_capability = @import("deregister_capability.zig");
 const describe_domain = @import("describe_domain.zig");
 const describe_domain_auto_tunes = @import("describe_domain_auto_tunes.zig");
 const describe_domain_change_progress = @import("describe_domain_change_progress.zig");
@@ -34,6 +35,7 @@ const describe_domain_nodes = @import("describe_domain_nodes.zig");
 const describe_domains = @import("describe_domains.zig");
 const describe_dry_run_progress = @import("describe_dry_run_progress.zig");
 const describe_inbound_connections = @import("describe_inbound_connections.zig");
+const describe_insight_details = @import("describe_insight_details.zig");
 const describe_instance_type_limits = @import("describe_instance_type_limits.zig");
 const describe_outbound_connections = @import("describe_outbound_connections.zig");
 const describe_packages = @import("describe_packages.zig");
@@ -43,6 +45,7 @@ const describe_vpc_endpoints = @import("describe_vpc_endpoints.zig");
 const dissociate_package = @import("dissociate_package.zig");
 const dissociate_packages = @import("dissociate_packages.zig");
 const get_application = @import("get_application.zig");
+const get_capability = @import("get_capability.zig");
 const get_compatible_versions = @import("get_compatible_versions.zig");
 const get_data_source = @import("get_data_source.zig");
 const get_default_application_setting = @import("get_default_application_setting.zig");
@@ -58,6 +61,7 @@ const list_direct_query_data_sources = @import("list_direct_query_data_sources.z
 const list_domain_maintenances = @import("list_domain_maintenances.zig");
 const list_domain_names = @import("list_domain_names.zig");
 const list_domains_for_package = @import("list_domains_for_package.zig");
+const list_insights = @import("list_insights.zig");
 const list_instance_type_details = @import("list_instance_type_details.zig");
 const list_packages_for_domain = @import("list_packages_for_domain.zig");
 const list_scheduled_actions = @import("list_scheduled_actions.zig");
@@ -68,9 +72,11 @@ const list_vpc_endpoints = @import("list_vpc_endpoints.zig");
 const list_vpc_endpoints_for_domain = @import("list_vpc_endpoints_for_domain.zig");
 const purchase_reserved_instance_offering = @import("purchase_reserved_instance_offering.zig");
 const put_default_application_setting = @import("put_default_application_setting.zig");
+const register_capability = @import("register_capability.zig");
 const reject_inbound_connection = @import("reject_inbound_connection.zig");
 const remove_tags = @import("remove_tags.zig");
 const revoke_vpc_endpoint_access = @import("revoke_vpc_endpoint_access.zig");
+const rollback_service_software_update = @import("rollback_service_software_update.zig");
 const start_domain_maintenance = @import("start_domain_maintenance.zig");
 const start_service_software_update = @import("start_service_software_update.zig");
 const update_application = @import("update_application.zig");
@@ -303,6 +309,12 @@ pub const Client = struct {
         return delete_vpc_endpoint.execute(self, allocator, input, options);
     }
 
+    /// Deregisters a capability from an OpenSearch UI application. This operation
+    /// removes the capability and its associated configuration.
+    pub fn deregisterCapability(self: *Self, allocator: std.mem.Allocator, input: deregister_capability.DeregisterCapabilityInput, options: CallOptions) !deregister_capability.DeregisterCapabilityOutput {
+        return deregister_capability.execute(self, allocator, input, options);
+    }
+
     /// Describes the domain configuration for the specified Amazon OpenSearch
     /// Service domain,
     /// including the domain ID, domain service endpoint, and domain ARN.
@@ -374,6 +386,15 @@ pub const Client = struct {
         return describe_inbound_connections.execute(self, allocator, input, options);
     }
 
+    /// Describes the details of an existing insight for an Amazon OpenSearch
+    /// Service domain.
+    /// Returns detailed fields associated with the specified insight, such as text
+    /// descriptions
+    /// and metric data.
+    pub fn describeInsightDetails(self: *Self, allocator: std.mem.Allocator, input: describe_insight_details.DescribeInsightDetailsInput, options: CallOptions) !describe_insight_details.DescribeInsightDetailsOutput {
+        return describe_insight_details.execute(self, allocator, input, options);
+    }
+
     /// Describes the instance count, storage, and master node limits for a given
     /// OpenSearch
     /// or Elasticsearch version and instance type.
@@ -443,6 +464,12 @@ pub const Client = struct {
     /// application.
     pub fn getApplication(self: *Self, allocator: std.mem.Allocator, input: get_application.GetApplicationInput, options: CallOptions) !get_application.GetApplicationOutput {
         return get_application.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves information about a registered capability for an OpenSearch UI
+    /// application, including its configuration and current status.
+    pub fn getCapability(self: *Self, allocator: std.mem.Allocator, input: get_capability.GetCapabilityInput, options: CallOptions) !get_capability.GetCapabilityOutput {
+        return get_capability.execute(self, allocator, input, options);
     }
 
     /// Returns a map of OpenSearch or Elasticsearch versions and the versions you
@@ -552,6 +579,15 @@ pub const Client = struct {
         return list_domains_for_package.execute(self, allocator, input, options);
     }
 
+    /// Lists insights for an Amazon OpenSearch Service domain or Amazon Web
+    /// Services account.
+    /// Returns a paginated list of insights based on the specified entity, filters,
+    /// time range,
+    /// and sort order.
+    pub fn listInsights(self: *Self, allocator: std.mem.Allocator, input: list_insights.ListInsightsInput, options: CallOptions) !list_insights.ListInsightsOutput {
+        return list_insights.execute(self, allocator, input, options);
+    }
+
     /// Lists all instance types and available features for a given OpenSearch or
     /// Elasticsearch version.
     pub fn listInstanceTypeDetails(self: *Self, allocator: std.mem.Allocator, input: list_instance_type_details.ListInstanceTypeDetailsInput, options: CallOptions) !list_instance_type_details.ListInstanceTypeDetailsOutput {
@@ -628,6 +664,16 @@ pub const Client = struct {
         return put_default_application_setting.execute(self, allocator, input, options);
     }
 
+    /// Registers a capability for an OpenSearch UI application. Use this operation
+    /// to enable specific capabilities, such as AI features, for a given
+    /// application. The capability configuration defines the type and settings of
+    /// the capability to register. For more information about the AI features, see
+    /// [Agentic AI for OpenSearch
+    /// UI](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/application-ai-assistant.html).
+    pub fn registerCapability(self: *Self, allocator: std.mem.Allocator, input: register_capability.RegisterCapabilityInput, options: CallOptions) !register_capability.RegisterCapabilityOutput {
+        return register_capability.execute(self, allocator, input, options);
+    }
+
     /// Allows the remote Amazon OpenSearch Service domain owner to reject an
     /// inbound
     /// cross-cluster connection request.
@@ -649,6 +695,15 @@ pub const Client = struct {
     /// interface VPC endpoint.
     pub fn revokeVpcEndpointAccess(self: *Self, allocator: std.mem.Allocator, input: revoke_vpc_endpoint_access.RevokeVpcEndpointAccessInput, options: CallOptions) !revoke_vpc_endpoint_access.RevokeVpcEndpointAccessOutput {
         return revoke_vpc_endpoint_access.execute(self, allocator, input, options);
+    }
+
+    /// Rolls back a service software update for a domain to the previous version.
+    /// For more
+    /// information, see [Service
+    /// software updates in Amazon OpenSearch
+    /// Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html).
+    pub fn rollbackServiceSoftwareUpdate(self: *Self, allocator: std.mem.Allocator, input: rollback_service_software_update.RollbackServiceSoftwareUpdateInput, options: CallOptions) !rollback_service_software_update.RollbackServiceSoftwareUpdateOutput {
+        return rollback_service_software_update.execute(self, allocator, input, options);
     }
 
     /// Starts the node maintenance process on the data node. These processes can

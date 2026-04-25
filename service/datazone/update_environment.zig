@@ -24,6 +24,9 @@ pub const UpdateEnvironmentInput = struct {
     /// The identifier of the domain in which the environment is to be updated.
     domain_identifier: []const u8,
 
+    /// The configuration name of the environment.
+    environment_configuration_name: ?[]const u8 = null,
+
     /// The glossary terms to be updated as part of the `UpdateEnvironment` action.
     glossary_terms: ?[]const []const u8 = null,
 
@@ -40,6 +43,7 @@ pub const UpdateEnvironmentInput = struct {
         .blueprint_version = "blueprintVersion",
         .description = "description",
         .domain_identifier = "domainIdentifier",
+        .environment_configuration_name = "environmentConfigurationName",
         .glossary_terms = "glossaryTerms",
         .identifier = "identifier",
         .name = "name",
@@ -80,6 +84,9 @@ pub const UpdateEnvironmentOutput = struct {
 
     /// The configuration ID of the environment.
     environment_configuration_id: ?[]const u8 = null,
+
+    /// The configuration name of the environment.
+    environment_configuration_name: ?[]const u8 = null,
 
     /// The profile identifier of the environment.
     environment_profile_id: ?[]const u8 = null,
@@ -130,6 +137,7 @@ pub const UpdateEnvironmentOutput = struct {
         .environment_actions = "environmentActions",
         .environment_blueprint_id = "environmentBlueprintId",
         .environment_configuration_id = "environmentConfigurationId",
+        .environment_configuration_name = "environmentConfigurationName",
         .environment_profile_id = "environmentProfileId",
         .glossary_terms = "glossaryTerms",
         .id = "id",
@@ -197,6 +205,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateEnvironmentInput,
     if (input.description) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"description\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.environment_configuration_name) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"environmentConfigurationName\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

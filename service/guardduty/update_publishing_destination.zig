@@ -10,15 +10,15 @@ pub const UpdatePublishingDestinationInput = struct {
     /// The ID of the publishing destination to update.
     destination_id: []const u8,
 
-    /// A `DestinationProperties` object that includes the `DestinationArn`
-    /// and `KmsKeyArn` of the publishing destination.
+    /// A `DestinationProperties` object that includes the `DestinationArn` and
+    /// `KmsKeyArn` of the publishing destination.
     destination_properties: ?DestinationProperties = null,
 
     /// The ID of the detector associated with the publishing destinations to
     /// update.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 

@@ -16,13 +16,11 @@ pub const SendApiAssetInput = struct {
     data_set_id: []const u8,
 
     /// HTTP method value for the API request. Alternatively, you can use the
-    /// appropriate verb
-    /// in your request.
+    /// appropriate verb in your request.
     method: ?[]const u8 = null,
 
     /// URI path value for the API request. Alternatively, you can set the URI path
-    /// directly by
-    /// invoking /v1/{pathValue}.
+    /// directly by invoking /v1/{pathValue}.
     path: ?[]const u8 = null,
 
     /// Attach query string parameters to the end of the URI (for example,
@@ -30,12 +28,9 @@ pub const SendApiAssetInput = struct {
     query_string_parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// Any header value prefixed with x-amzn-dataexchange-header- will have that
-    /// stripped
-    /// before sending the Asset API request. Use this when you want to override a
-    /// header that AWS
-    /// Data Exchange uses. Alternatively, you can use the header without a prefix
-    /// to the HTTP
-    /// request.
+    /// stripped before sending the Asset API request. Use this when you want to
+    /// override a header that AWS Data Exchange uses. Alternatively, you can use
+    /// the header without a prefix to the HTTP request.
     request_headers: ?[]const aws.map.StringMapEntry = null,
 
     /// Revision ID value for the API request.

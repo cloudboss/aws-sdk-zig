@@ -27,10 +27,26 @@ pub const RoutePedestrianSpan = struct {
 
     /// Dynamic speed details corresponding to the span.
     ///
-    /// **Unit**: `KilometersPerHour`
+    /// **Unit**: `kilometers per hour`
     dynamic_speed: ?RouteSpanDynamicSpeedDetails = null,
 
-    /// Functional classification of the road segment corresponding to the span.
+    /// A numerical value indicating the functional classification of the road
+    /// segment corresponding to the span.
+    ///
+    /// Classification values are part of the hierarchical network that helps
+    /// determine a logical and efficient route, and have the following definitions:
+    ///
+    /// * Roads that allow for high volume, maximum speed traffic movement between
+    ///   and through major metropolitan areas.
+    /// * Roads that are used to channel traffic to functional class 1 roads for
+    ///   travel between and through cities in the shortest amount of time.
+    /// * Roads that intersect functional class 2 roads and provide a high volume of
+    ///   traffic movement at a lower level of mobility than functional class 2
+    ///   roads.
+    /// * Roads that provide for a high volume of traffic movement at moderate
+    ///   speeds between neighborhoods.
+    /// * Roads with volume and traffic movement below the level of any other
+    ///   functional class.
     functional_classification: ?i32 = null,
 
     /// Offset in the leg geometry corresponding to the start of this span.
@@ -58,7 +74,7 @@ pub const RoutePedestrianSpan = struct {
 
     /// Speed limit details corresponding to the span.
     ///
-    /// **Unit**: `KilometersPerHour`
+    /// **Unit**: `kilometers per hour`
     speed_limit: ?RouteSpanSpeedLimitDetails = null,
 
     /// Duration of the computed span under typical traffic congestion.

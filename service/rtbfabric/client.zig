@@ -244,6 +244,11 @@ pub const Client = struct {
         return w.wait();
     }
 
+    pub fn waitUntilInboundExternalLinkDeleted(self: *Self, params: get_inbound_external_link.GetInboundExternalLinkInput) aws.waiter.WaiterError!void {
+        var w = waiters.InboundExternalLinkDeletedWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
     pub fn waitUntilLinkAccepted(self: *Self, params: get_link.GetLinkInput) aws.waiter.WaiterError!void {
         var w = waiters.LinkAcceptedWaiter{ .client = self, .params = params };
         return w.wait();
@@ -254,8 +259,18 @@ pub const Client = struct {
         return w.wait();
     }
 
+    pub fn waitUntilLinkDeleted(self: *Self, params: get_link.GetLinkInput) aws.waiter.WaiterError!void {
+        var w = waiters.LinkDeletedWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
     pub fn waitUntilOutboundExternalLinkActive(self: *Self, params: get_outbound_external_link.GetOutboundExternalLinkInput) aws.waiter.WaiterError!void {
         var w = waiters.OutboundExternalLinkActiveWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilOutboundExternalLinkDeleted(self: *Self, params: get_outbound_external_link.GetOutboundExternalLinkInput) aws.waiter.WaiterError!void {
+        var w = waiters.OutboundExternalLinkDeletedWaiter{ .client = self, .params = params };
         return w.wait();
     }
 

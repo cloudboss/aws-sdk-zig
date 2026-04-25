@@ -6,9 +6,11 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const CacheBehavior = @import("cache_behavior.zig").CacheBehavior;
 const RunLogLevel = @import("run_log_level.zig").RunLogLevel;
+const NetworkingMode = @import("networking_mode.zig").NetworkingMode;
 const RunRetentionMode = @import("run_retention_mode.zig").RunRetentionMode;
 const StorageType = @import("storage_type.zig").StorageType;
 const WorkflowType = @import("workflow_type.zig").WorkflowType;
+const ConfigurationDetails = @import("configuration_details.zig").ConfigurationDetails;
 const RunStatus = @import("run_status.zig").RunStatus;
 
 pub const StartRunInput = struct {
@@ -22,12 +24,19 @@ pub const StartRunInput = struct {
     /// cache ID, no task outputs are cached for this run.
     cache_id: ?[]const u8 = null,
 
+    /// Optional configuration name to use for the workflow run.
+    configuration_name: ?[]const u8 = null,
+
     /// A log level for the run.
     log_level: ?RunLogLevel = null,
 
     /// A name for the run. This is recommended to view and organize runs in the
     /// Amazon Web Services HealthOmics console and CloudWatch logs.
     name: ?[]const u8 = null,
+
+    /// Optional configuration for run networking behavior. If not specified, this
+    /// will default to RESTRICTED.
+    networking_mode: ?NetworkingMode = null,
 
     /// An output S3 URI for the run. The S3 bucket must be in the same region as
     /// the workflow. The role ARN must have permission to write to this S3 bucket.
@@ -128,8 +137,10 @@ pub const StartRunInput = struct {
     pub const json_field_names = .{
         .cache_behavior = "cacheBehavior",
         .cache_id = "cacheId",
+        .configuration_name = "configurationName",
         .log_level = "logLevel",
         .name = "name",
+        .networking_mode = "networkingMode",
         .output_uri = "outputUri",
         .parameters = "parameters",
         .priority = "priority",
@@ -152,8 +163,14 @@ pub const StartRunOutput = struct {
     /// Unique resource identifier for the run.
     arn: ?[]const u8 = null,
 
+    /// Configuration details for the workflow run.
+    configuration: ?ConfigurationDetails = null,
+
     /// The run's ID.
     id: ?[]const u8 = null,
+
+    /// Networking mode for the workflow run.
+    networking_mode: ?[]const u8 = null,
 
     /// The destination for workflow outputs.
     run_output_uri: ?[]const u8 = null,
@@ -169,7 +186,9 @@ pub const StartRunOutput = struct {
 
     pub const json_field_names = .{
         .arn = "arn",
+        .configuration = "configuration",
         .id = "id",
+        .networking_mode = "networkingMode",
         .run_output_uri = "runOutputUri",
         .status = "status",
         .tags = "tags",
@@ -227,6 +246,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartRunInput, config: 
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.configuration_name) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"configurationName\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.log_level) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"logLevel\":");
@@ -236,6 +261,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartRunInput, config: 
     if (input.name) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"name\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.networking_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"networkingMode\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

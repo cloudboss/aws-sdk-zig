@@ -13,12 +13,9 @@ pub const CreateRevisionInput = struct {
     data_set_id: []const u8,
 
     /// A revision tag is an optional label that you can assign to a revision when
-    /// you create
-    /// it. Each tag consists of a key and an optional value, both of which you
-    /// define. When you
-    /// use tagging, you can also use tag-based access control in IAM policies to
-    /// control access to
-    /// these data sets and revisions.
+    /// you create it. Each tag consists of a key and an optional value, both of
+    /// which you define. When you use tagging, you can also use tag-based access
+    /// control in IAM policies to control access to these data sets and revisions.
     tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
@@ -43,24 +40,20 @@ pub const CreateRevisionOutput = struct {
     data_set_id: ?[]const u8 = null,
 
     /// To publish a revision to a data set in a product, the revision must first be
-    /// finalized.
-    /// Finalizing a revision tells AWS Data Exchange that your changes to the
-    /// assets in the
-    /// revision are complete. After it's in this read-only state, you can publish
-    /// the revision to
-    /// your products. Finalized revisions can be published through the AWS Data
-    /// Exchange console
-    /// or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace
-    /// Catalog API
-    /// action. When using the API, revisions are uniquely identified by their ARN.
+    /// finalized. Finalizing a revision tells AWS Data Exchange that your changes
+    /// to the assets in the revision are complete. After it's in this read-only
+    /// state, you can publish the revision to your products. Finalized revisions
+    /// can be published through the AWS Data Exchange console or the AWS
+    /// Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog
+    /// API action. When using the API, revisions are uniquely identified by their
+    /// ARN.
     finalized: ?bool = null,
 
     /// The unique identifier for the revision.
     id: ?[]const u8 = null,
 
     /// A required comment to inform subscribers of the reason their access to the
-    /// revision was
-    /// revoked.
+    /// revision was revoked.
     revocation_comment: ?[]const u8 = null,
 
     /// A status indicating that subscribers' access to the revision was revoked.
@@ -70,10 +63,8 @@ pub const CreateRevisionOutput = struct {
     revoked_at: ?i64 = null,
 
     /// The revision ID of the owned revision corresponding to the entitled revision
-    /// being
-    /// viewed. This parameter is returned when a revision owner is viewing the
-    /// entitled copy of
-    /// its owned revision.
+    /// being viewed. This parameter is returned when a revision owner is viewing
+    /// the entitled copy of its owned revision.
     source_id: ?[]const u8 = null,
 
     /// The tags for the revision.

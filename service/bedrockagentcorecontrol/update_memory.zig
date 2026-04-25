@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ModifyMemoryStrategies = @import("modify_memory_strategies.zig").ModifyMemoryStrategies;
+const StreamDeliveryResources = @import("stream_delivery_resources.zig").StreamDeliveryResources;
 const Memory = @import("memory.zig").Memory;
 
 pub const UpdateMemoryInput = struct {
@@ -30,6 +31,9 @@ pub const UpdateMemoryInput = struct {
     /// The memory strategies to add, modify, or delete.
     memory_strategies: ?ModifyMemoryStrategies = null,
 
+    /// Configuration for streaming memory record data to external resources.
+    stream_delivery_resources: ?StreamDeliveryResources = null,
+
     pub const json_field_names = .{
         .client_token = "clientToken",
         .description = "description",
@@ -37,6 +41,7 @@ pub const UpdateMemoryInput = struct {
         .memory_execution_role_arn = "memoryExecutionRoleArn",
         .memory_id = "memoryId",
         .memory_strategies = "memoryStrategies",
+        .stream_delivery_resources = "streamDeliveryResources",
     };
 };
 
@@ -118,6 +123,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateMemoryInput, conf
     if (input.memory_strategies) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"memoryStrategies\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.stream_delivery_resources) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"streamDeliveryResources\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

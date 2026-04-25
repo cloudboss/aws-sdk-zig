@@ -15,7 +15,10 @@ pub const MessageHeader = struct {
     ///
     /// * Can contain any printable ASCII character.
     ///
-    /// * Can contain no more than 870 characters.
+    /// * Can contain no more than 995 characters.
+    ///
+    /// * The combined length of the header name and value must not exceed 996
+    ///   characters.
     value: []const u8,
 
     pub const json_field_names = .{

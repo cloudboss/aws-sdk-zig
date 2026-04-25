@@ -1,4 +1,5 @@
 const StreamGroupLocationStatus = @import("stream_group_location_status.zig").StreamGroupLocationStatus;
+const VpcTransitConfigurationResponse = @import("vpc_transit_configuration_response.zig").VpcTransitConfigurationResponse;
 
 /// Represents a location and its corresponding stream capacity and status.
 pub const LocationState = struct {
@@ -24,6 +25,10 @@ pub const LocationState = struct {
     /// streaming. It represents the stream group's ability to respond immediately
     /// to new stream requests with near-instant startup time.
     idle_capacity: ?i32 = null,
+
+    /// The CIDR block of the service VPC for this location. Add this CIDR block to
+    /// your VPC route table to enable traffic routing through the Transit Gateway.
+    internal_vpc_ipv_4_cidr_block: ?[]const u8 = null,
 
     /// A location's name. For example, `us-east-1`. For a complete list of
     /// locations that Amazon GameLift Streams supports, refer to [Regions, quotas,
@@ -76,15 +81,21 @@ pub const LocationState = struct {
     /// intentional idle state.
     target_idle_capacity: ?i32 = null,
 
+    /// The VPC transit configuration for this location, including the Transit
+    /// Gateway details needed to complete the VPC attachment setup.
+    vpc_transit_configuration: ?VpcTransitConfigurationResponse = null,
+
     pub const json_field_names = .{
         .allocated_capacity = "AllocatedCapacity",
         .always_on_capacity = "AlwaysOnCapacity",
         .idle_capacity = "IdleCapacity",
+        .internal_vpc_ipv_4_cidr_block = "InternalVpcIpv4CidrBlock",
         .location_name = "LocationName",
         .maximum_capacity = "MaximumCapacity",
         .on_demand_capacity = "OnDemandCapacity",
         .requested_capacity = "RequestedCapacity",
         .status = "Status",
         .target_idle_capacity = "TargetIdleCapacity",
+        .vpc_transit_configuration = "VpcTransitConfiguration",
     };
 };

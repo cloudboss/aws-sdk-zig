@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const MemoryStrategyInput = @import("memory_strategy_input.zig").MemoryStrategyInput;
+const StreamDeliveryResources = @import("stream_delivery_resources.zig").StreamDeliveryResources;
 const Memory = @import("memory.zig").Memory;
 
 pub const CreateMemoryInput = struct {
@@ -35,6 +36,9 @@ pub const CreateMemoryInput = struct {
     /// The name of the memory. The name must be unique within your account.
     name: []const u8,
 
+    /// Configuration for streaming memory record data to external resources.
+    stream_delivery_resources: ?StreamDeliveryResources = null,
+
     /// A map of tag keys and values to assign to an AgentCore Memory. Tags enable
     /// you to categorize your resources in different ways, for example, by purpose,
     /// owner, or environment.
@@ -48,6 +52,7 @@ pub const CreateMemoryInput = struct {
         .memory_execution_role_arn = "memoryExecutionRoleArn",
         .memory_strategies = "memoryStrategies",
         .name = "name",
+        .stream_delivery_resources = "streamDeliveryResources",
         .tags = "tags",
     };
 };
@@ -138,6 +143,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateMemoryInput, conf
     try body_buf.appendSlice(allocator, "\"name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
     has_prev = true;
+    if (input.stream_delivery_resources) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"streamDeliveryResources\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.tags) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"tags\":");

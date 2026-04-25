@@ -16,9 +16,8 @@ pub const DescribeWorkspaceConfigurationInput = struct {
 
 pub const DescribeWorkspaceConfigurationOutput = struct {
     /// The configuration string for the workspace that you requested. For more
-    /// information
-    /// about the format and configuration options available, see [Working in your
-    /// Grafana
+    /// information about the format and configuration options available, see
+    /// [Working in your Grafana
     /// workspace](https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html).
     configuration: []const u8,
 

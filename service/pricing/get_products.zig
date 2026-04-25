@@ -8,8 +8,7 @@ const Filter = @import("filter.zig").Filter;
 
 pub const GetProductsInput = struct {
     /// The list of filters that limit the returned products. only products that
-    /// match all filters
-    /// are returned.
+    /// match all filters are returned.
     filters: ?[]const Filter = null,
 
     /// The format version that you want the response to be in.
@@ -44,8 +43,7 @@ pub const GetProductsOutput = struct {
     next_token: ?[]const u8 = null,
 
     /// The list of products that match your filters. The list contains both the
-    /// product metadata and
-    /// the price information.
+    /// product metadata and the price information.
     price_list: ?[]const []const u8 = null,
 
     pub const json_field_names = .{

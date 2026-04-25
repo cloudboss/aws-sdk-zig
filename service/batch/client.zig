@@ -5,11 +5,13 @@ const cancel_job = @import("cancel_job.zig");
 const create_compute_environment = @import("create_compute_environment.zig");
 const create_consumable_resource = @import("create_consumable_resource.zig");
 const create_job_queue = @import("create_job_queue.zig");
+const create_quota_share = @import("create_quota_share.zig");
 const create_scheduling_policy = @import("create_scheduling_policy.zig");
 const create_service_environment = @import("create_service_environment.zig");
 const delete_compute_environment = @import("delete_compute_environment.zig");
 const delete_consumable_resource = @import("delete_consumable_resource.zig");
 const delete_job_queue = @import("delete_job_queue.zig");
+const delete_quota_share = @import("delete_quota_share.zig");
 const delete_scheduling_policy = @import("delete_scheduling_policy.zig");
 const delete_service_environment = @import("delete_service_environment.zig");
 const deregister_job_definition = @import("deregister_job_definition.zig");
@@ -18,6 +20,7 @@ const describe_consumable_resource = @import("describe_consumable_resource.zig")
 const describe_job_definitions = @import("describe_job_definitions.zig");
 const describe_job_queues = @import("describe_job_queues.zig");
 const describe_jobs = @import("describe_jobs.zig");
+const describe_quota_share = @import("describe_quota_share.zig");
 const describe_scheduling_policies = @import("describe_scheduling_policies.zig");
 const describe_service_environments = @import("describe_service_environments.zig");
 const describe_service_job = @import("describe_service_job.zig");
@@ -25,6 +28,7 @@ const get_job_queue_snapshot = @import("get_job_queue_snapshot.zig");
 const list_consumable_resources = @import("list_consumable_resources.zig");
 const list_jobs = @import("list_jobs.zig");
 const list_jobs_by_consumable_resource = @import("list_jobs_by_consumable_resource.zig");
+const list_quota_shares = @import("list_quota_shares.zig");
 const list_scheduling_policies = @import("list_scheduling_policies.zig");
 const list_service_jobs = @import("list_service_jobs.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
@@ -38,8 +42,10 @@ const untag_resource = @import("untag_resource.zig");
 const update_compute_environment = @import("update_compute_environment.zig");
 const update_consumable_resource = @import("update_consumable_resource.zig");
 const update_job_queue = @import("update_job_queue.zig");
+const update_quota_share = @import("update_quota_share.zig");
 const update_scheduling_policy = @import("update_scheduling_policy.zig");
 const update_service_environment = @import("update_service_environment.zig");
+const update_service_job = @import("update_service_job.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
@@ -162,6 +168,13 @@ pub const Client = struct {
         return create_job_queue.execute(self, allocator, input, options);
     }
 
+    /// Creates an Batch quota share. Each quota share operates as a virtual queue
+    /// with a configured compute capacity, resource sharing strategy, and borrow
+    /// limits.
+    pub fn createQuotaShare(self: *Self, allocator: std.mem.Allocator, input: create_quota_share.CreateQuotaShareInput, options: CallOptions) !create_quota_share.CreateQuotaShareOutput {
+        return create_quota_share.execute(self, allocator, input, options);
+    }
+
     /// Creates an Batch scheduling policy.
     pub fn createSchedulingPolicy(self: *Self, allocator: std.mem.Allocator, input: create_scheduling_policy.CreateSchedulingPolicyInput, options: CallOptions) !create_scheduling_policy.CreateSchedulingPolicyOutput {
         return create_scheduling_policy.execute(self, allocator, input, options);
@@ -196,15 +209,22 @@ pub const Client = struct {
     /// Deletes the specified job queue. You must first disable submissions for a
     /// queue with the
     /// UpdateJobQueue operation. All jobs in the queue are eventually terminated
-    /// when you delete a job queue. The jobs are terminated at a rate of about 16
-    /// jobs each
-    /// second.
+    /// when you delete a job queue.
     ///
     /// It's not necessary to disassociate compute environments from a queue before
     /// submitting a
     /// `DeleteJobQueue` request.
     pub fn deleteJobQueue(self: *Self, allocator: std.mem.Allocator, input: delete_job_queue.DeleteJobQueueInput, options: CallOptions) !delete_job_queue.DeleteJobQueueOutput {
         return delete_job_queue.execute(self, allocator, input, options);
+    }
+
+    /// Deletes the specified quota share. You must first disable submissions for
+    /// the share by
+    /// updating the state to `DISABLED` using the UpdateQuotaShare operation.
+    /// All jobs in the share are eventually terminated when you delete a quota
+    /// share.
+    pub fn deleteQuotaShare(self: *Self, allocator: std.mem.Allocator, input: delete_quota_share.DeleteQuotaShareInput, options: CallOptions) !delete_quota_share.DeleteQuotaShareOutput {
+        return delete_quota_share.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified scheduling policy.
@@ -259,6 +279,11 @@ pub const Client = struct {
         return describe_jobs.execute(self, allocator, input, options);
     }
 
+    /// Returns a description of the specified quota share.
+    pub fn describeQuotaShare(self: *Self, allocator: std.mem.Allocator, input: describe_quota_share.DescribeQuotaShareInput, options: CallOptions) !describe_quota_share.DescribeQuotaShareOutput {
+        return describe_quota_share.execute(self, allocator, input, options);
+    }
+
     /// Describes one or more of your scheduling policies.
     pub fn describeSchedulingPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_scheduling_policies.DescribeSchedulingPoliciesInput, options: CallOptions) !describe_scheduling_policies.DescribeSchedulingPoliciesOutput {
         return describe_scheduling_policies.execute(self, allocator, input, options);
@@ -274,8 +299,14 @@ pub const Client = struct {
         return describe_service_job.execute(self, allocator, input, options);
     }
 
-    /// Provides a list of the first 100 `RUNNABLE` jobs associated to a single job
-    /// queue.
+    /// Provides a snapshot of job queue state, including ordering of `RUNNABLE`
+    /// jobs, as well as capacity utilization for already dispatched jobs.
+    /// The first 100 `RUNNABLE` jobs in the job queue are listed in order of
+    /// dispatch. For job queues with an attached
+    /// quota-share policy, the first `RUNNABLE` job in each quota share is also
+    /// listed. Capacity utilization for the job queue is provided, as well as
+    /// break downs by share for job queues with attached fair-share or quota-share
+    /// scheduling policies.
     pub fn getJobQueueSnapshot(self: *Self, allocator: std.mem.Allocator, input: get_job_queue_snapshot.GetJobQueueSnapshotInput, options: CallOptions) !get_job_queue_snapshot.GetJobQueueSnapshotOutput {
         return get_job_queue_snapshot.execute(self, allocator, input, options);
     }
@@ -294,10 +325,6 @@ pub const Client = struct {
     /// * A multi-node parallel job ID to return a list of nodes for that job
     ///
     /// * An array job ID to return a list of the children for that job
-    ///
-    /// You can filter the results by job status with the `jobStatus` parameter. If
-    /// you
-    /// don't specify a status, only `RUNNING` jobs are returned.
     pub fn listJobs(self: *Self, allocator: std.mem.Allocator, input: list_jobs.ListJobsInput, options: CallOptions) !list_jobs.ListJobsOutput {
         return list_jobs.execute(self, allocator, input, options);
     }
@@ -305,6 +332,11 @@ pub const Client = struct {
     /// Returns a list of Batch jobs that require a specific consumable resource.
     pub fn listJobsByConsumableResource(self: *Self, allocator: std.mem.Allocator, input: list_jobs_by_consumable_resource.ListJobsByConsumableResourceInput, options: CallOptions) !list_jobs_by_consumable_resource.ListJobsByConsumableResourceOutput {
         return list_jobs_by_consumable_resource.execute(self, allocator, input, options);
+    }
+
+    /// Returns a list of Batch quota shares associated with a job queue.
+    pub fn listQuotaShares(self: *Self, allocator: std.mem.Allocator, input: list_quota_shares.ListQuotaSharesInput, options: CallOptions) !list_quota_shares.ListQuotaSharesOutput {
+        return list_quota_shares.execute(self, allocator, input, options);
     }
 
     /// Returns a list of Batch scheduling policies.
@@ -408,6 +440,11 @@ pub const Client = struct {
         return update_job_queue.execute(self, allocator, input, options);
     }
 
+    /// Updates a quota share.
+    pub fn updateQuotaShare(self: *Self, allocator: std.mem.Allocator, input: update_quota_share.UpdateQuotaShareInput, options: CallOptions) !update_quota_share.UpdateQuotaShareOutput {
+        return update_quota_share.execute(self, allocator, input, options);
+    }
+
     /// Updates a scheduling policy.
     pub fn updateSchedulingPolicy(self: *Self, allocator: std.mem.Allocator, input: update_scheduling_policy.UpdateSchedulingPolicyInput, options: CallOptions) !update_scheduling_policy.UpdateSchedulingPolicyOutput {
         return update_scheduling_policy.execute(self, allocator, input, options);
@@ -418,6 +455,11 @@ pub const Client = struct {
     /// being placed in the service environment.
     pub fn updateServiceEnvironment(self: *Self, allocator: std.mem.Allocator, input: update_service_environment.UpdateServiceEnvironmentInput, options: CallOptions) !update_service_environment.UpdateServiceEnvironmentOutput {
         return update_service_environment.execute(self, allocator, input, options);
+    }
+
+    /// Updates the priority of a specified service job in an Batch job queue.
+    pub fn updateServiceJob(self: *Self, allocator: std.mem.Allocator, input: update_service_job.UpdateServiceJobInput, options: CallOptions) !update_service_job.UpdateServiceJobOutput {
+        return update_service_job.execute(self, allocator, input, options);
     }
 
     pub fn describeComputeEnvironmentsPaginator(self: *Self, params: describe_compute_environments.DescribeComputeEnvironmentsInput) paginator.DescribeComputeEnvironmentsPaginator {
@@ -463,6 +505,13 @@ pub const Client = struct {
     }
 
     pub fn listJobsByConsumableResourcePaginator(self: *Self, params: list_jobs_by_consumable_resource.ListJobsByConsumableResourceInput) paginator.ListJobsByConsumableResourcePaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listQuotaSharesPaginator(self: *Self, params: list_quota_shares.ListQuotaSharesInput) paginator.ListQuotaSharesPaginator {
         return .{
             .client = self,
             .params = params,

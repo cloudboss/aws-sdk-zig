@@ -6,7 +6,9 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AgentRuntimeArtifact = @import("agent_runtime_artifact.zig").AgentRuntimeArtifact;
 const AuthorizerConfiguration = @import("authorizer_configuration.zig").AuthorizerConfiguration;
+const FilesystemConfiguration = @import("filesystem_configuration.zig").FilesystemConfiguration;
 const LifecycleConfiguration = @import("lifecycle_configuration.zig").LifecycleConfiguration;
+const RuntimeMetadataConfiguration = @import("runtime_metadata_configuration.zig").RuntimeMetadataConfiguration;
 const NetworkConfiguration = @import("network_configuration.zig").NetworkConfiguration;
 const ProtocolConfiguration = @import("protocol_configuration.zig").ProtocolConfiguration;
 const RequestHeaderConfiguration = @import("request_header_configuration.zig").RequestHeaderConfiguration;
@@ -57,11 +59,18 @@ pub const GetAgentRuntimeOutput = struct {
     /// The reason for failure if the AgentCore Runtime is in a failed state.
     failure_reason: ?[]const u8 = null,
 
+    /// The filesystem configurations mounted into the AgentCore Runtime.
+    filesystem_configurations: ?[]const FilesystemConfiguration = null,
+
     /// The timestamp when the AgentCore Runtime was last updated.
     last_updated_at: i64,
 
     /// The life cycle configuration for the AgentCore Runtime.
     lifecycle_configuration: ?LifecycleConfiguration = null,
+
+    /// Configuration for microVM Metadata Service (MMDS) settings for the AgentCore
+    /// Runtime.
+    metadata_configuration: ?RuntimeMetadataConfiguration = null,
 
     /// The network configuration for the AgentCore Runtime.
     network_configuration: ?NetworkConfiguration = null,
@@ -92,8 +101,10 @@ pub const GetAgentRuntimeOutput = struct {
         .description = "description",
         .environment_variables = "environmentVariables",
         .failure_reason = "failureReason",
+        .filesystem_configurations = "filesystemConfigurations",
         .last_updated_at = "lastUpdatedAt",
         .lifecycle_configuration = "lifecycleConfiguration",
+        .metadata_configuration = "metadataConfiguration",
         .network_configuration = "networkConfiguration",
         .protocol_configuration = "protocolConfiguration",
         .request_header_configuration = "requestHeaderConfiguration",

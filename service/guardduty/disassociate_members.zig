@@ -8,13 +8,11 @@ const UnprocessedAccount = @import("unprocessed_account.zig").UnprocessedAccount
 
 pub const DisassociateMembersInput = struct {
     /// A list of account IDs of the GuardDuty member accounts that you want to
-    /// disassociate from
-    /// the administrator account.
+    /// disassociate from the administrator account.
     account_ids: []const []const u8,
 
     /// The unique ID of the detector of the GuardDuty account whose members you
-    /// want to
-    /// disassociate from the administrator account.
+    /// want to disassociate from the administrator account.
     detector_id: []const u8,
 
     pub const json_field_names = .{
@@ -25,8 +23,7 @@ pub const DisassociateMembersInput = struct {
 
 pub const DisassociateMembersOutput = struct {
     /// A list of objects that contain the unprocessed account and a result string
-    /// that explains
-    /// why it was unprocessed.
+    /// that explains why it was unprocessed.
     unprocessed_accounts: ?[]const UnprocessedAccount = null,
 
     pub const json_field_names = .{

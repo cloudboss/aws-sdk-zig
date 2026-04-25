@@ -6,9 +6,11 @@ const associate_protect_configuration = @import("associate_protect_configuration
 const carrier_lookup = @import("carrier_lookup.zig");
 const create_configuration_set = @import("create_configuration_set.zig");
 const create_event_destination = @import("create_event_destination.zig");
+const create_notify_configuration = @import("create_notify_configuration.zig");
 const create_opt_out_list = @import("create_opt_out_list.zig");
 const create_pool = @import("create_pool.zig");
 const create_protect_configuration = @import("create_protect_configuration.zig");
+const create_rcs_agent = @import("create_rcs_agent.zig");
 const create_registration = @import("create_registration.zig");
 const create_registration_association = @import("create_registration_association.zig");
 const create_registration_attachment = @import("create_registration_attachment.zig");
@@ -21,11 +23,14 @@ const delete_default_sender_id = @import("delete_default_sender_id.zig");
 const delete_event_destination = @import("delete_event_destination.zig");
 const delete_keyword = @import("delete_keyword.zig");
 const delete_media_message_spend_limit_override = @import("delete_media_message_spend_limit_override.zig");
+const delete_notify_configuration = @import("delete_notify_configuration.zig");
+const delete_notify_message_spend_limit_override = @import("delete_notify_message_spend_limit_override.zig");
 const delete_opt_out_list = @import("delete_opt_out_list.zig");
 const delete_opted_out_number = @import("delete_opted_out_number.zig");
 const delete_pool = @import("delete_pool.zig");
 const delete_protect_configuration = @import("delete_protect_configuration.zig");
 const delete_protect_configuration_rule_set_number_override = @import("delete_protect_configuration_rule_set_number_override.zig");
+const delete_rcs_agent = @import("delete_rcs_agent.zig");
 const delete_registration = @import("delete_registration.zig");
 const delete_registration_attachment = @import("delete_registration_attachment.zig");
 const delete_registration_field_value = @import("delete_registration_field_value.zig");
@@ -37,11 +42,15 @@ const describe_account_attributes = @import("describe_account_attributes.zig");
 const describe_account_limits = @import("describe_account_limits.zig");
 const describe_configuration_sets = @import("describe_configuration_sets.zig");
 const describe_keywords = @import("describe_keywords.zig");
+const describe_notify_configurations = @import("describe_notify_configurations.zig");
+const describe_notify_templates = @import("describe_notify_templates.zig");
 const describe_opt_out_lists = @import("describe_opt_out_lists.zig");
 const describe_opted_out_numbers = @import("describe_opted_out_numbers.zig");
 const describe_phone_numbers = @import("describe_phone_numbers.zig");
 const describe_pools = @import("describe_pools.zig");
 const describe_protect_configurations = @import("describe_protect_configurations.zig");
+const describe_rcs_agent_country_launch_status = @import("describe_rcs_agent_country_launch_status.zig");
+const describe_rcs_agents = @import("describe_rcs_agents.zig");
 const describe_registration_attachments = @import("describe_registration_attachments.zig");
 const describe_registration_field_definitions = @import("describe_registration_field_definitions.zig");
 const describe_registration_field_values = @import("describe_registration_field_values.zig");
@@ -57,6 +66,7 @@ const disassociate_protect_configuration = @import("disassociate_protect_configu
 const discard_registration_version = @import("discard_registration_version.zig");
 const get_protect_configuration_country_rule_set = @import("get_protect_configuration_country_rule_set.zig");
 const get_resource_policy = @import("get_resource_policy.zig");
+const list_notify_countries = @import("list_notify_countries.zig");
 const list_pool_origination_identities = @import("list_pool_origination_identities.zig");
 const list_protect_configuration_rule_set_number_overrides = @import("list_protect_configuration_rule_set_number_overrides.zig");
 const list_registration_associations = @import("list_registration_associations.zig");
@@ -73,6 +83,8 @@ const request_phone_number = @import("request_phone_number.zig");
 const request_sender_id = @import("request_sender_id.zig");
 const send_destination_number_verification_code = @import("send_destination_number_verification_code.zig");
 const send_media_message = @import("send_media_message.zig");
+const send_notify_text_message = @import("send_notify_text_message.zig");
+const send_notify_voice_message = @import("send_notify_voice_message.zig");
 const send_text_message = @import("send_text_message.zig");
 const send_voice_message = @import("send_voice_message.zig");
 const set_account_default_protect_configuration = @import("set_account_default_protect_configuration.zig");
@@ -80,16 +92,19 @@ const set_default_message_feedback_enabled = @import("set_default_message_feedba
 const set_default_message_type = @import("set_default_message_type.zig");
 const set_default_sender_id = @import("set_default_sender_id.zig");
 const set_media_message_spend_limit_override = @import("set_media_message_spend_limit_override.zig");
+const set_notify_message_spend_limit_override = @import("set_notify_message_spend_limit_override.zig");
 const set_text_message_spend_limit_override = @import("set_text_message_spend_limit_override.zig");
 const set_voice_message_spend_limit_override = @import("set_voice_message_spend_limit_override.zig");
 const submit_registration_version = @import("submit_registration_version.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_event_destination = @import("update_event_destination.zig");
+const update_notify_configuration = @import("update_notify_configuration.zig");
 const update_phone_number = @import("update_phone_number.zig");
 const update_pool = @import("update_pool.zig");
 const update_protect_configuration = @import("update_protect_configuration.zig");
 const update_protect_configuration_country_rule_set = @import("update_protect_configuration_country_rule_set.zig");
+const update_rcs_agent = @import("update_rcs_agent.zig");
 const update_sender_id = @import("update_sender_id.zig");
 const verify_destination_number = @import("verify_destination_number.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
@@ -182,6 +197,13 @@ pub const Client = struct {
         return create_event_destination.execute(self, allocator, input, options);
     }
 
+    /// Creates a new notify configuration for managed messaging. A notify
+    /// configuration defines the settings for sending templated messages, including
+    /// the display name, use case, enabled channels, and enabled countries.
+    pub fn createNotifyConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_notify_configuration.CreateNotifyConfigurationInput, options: CallOptions) !create_notify_configuration.CreateNotifyConfigurationOutput {
+        return create_notify_configuration.execute(self, allocator, input, options);
+    }
+
     /// Creates a new opt-out list.
     ///
     /// If the opt-out list name already exists, an error is returned.
@@ -220,6 +242,13 @@ pub const Client = struct {
     /// protect configuration.
     pub fn createProtectConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_protect_configuration.CreateProtectConfigurationInput, options: CallOptions) !create_protect_configuration.CreateProtectConfigurationOutput {
         return create_protect_configuration.execute(self, allocator, input, options);
+    }
+
+    /// Creates a new RCS agent for sending rich messages through the RCS channel.
+    /// The RCS agent serves as an origination identity for sending RCS messages to
+    /// your recipients.
+    pub fn createRcsAgent(self: *Self, allocator: std.mem.Allocator, input: create_rcs_agent.CreateRcsAgentInput, options: CallOptions) !create_rcs_agent.CreateRcsAgentOutput {
+        return create_rcs_agent.execute(self, allocator, input, options);
     }
 
     /// Creates a new registration based on the **RegistrationType** field.
@@ -326,6 +355,23 @@ pub const Client = struct {
         return delete_media_message_spend_limit_override.execute(self, allocator, input, options);
     }
 
+    /// Deletes an existing notify configuration.
+    ///
+    /// If deletion protection is enabled, an error is returned.
+    pub fn deleteNotifyConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_notify_configuration.DeleteNotifyConfigurationInput, options: CallOptions) !delete_notify_configuration.DeleteNotifyConfigurationOutput {
+        return delete_notify_configuration.execute(self, allocator, input, options);
+    }
+
+    /// Deletes an account-level monthly spending limit override for sending notify
+    /// messages. Deleting a spend limit override will set the `EnforcedLimit` to
+    /// equal the `MaxLimit`, which is controlled by Amazon Web Services. For more
+    /// information on spend limits (quotas) see [Quotas
+    /// ](https://docs.aws.amazon.com/sms-voice/latest/userguide/quotas.html) in the
+    /// *End User Messaging SMS User Guide*.
+    pub fn deleteNotifyMessageSpendLimitOverride(self: *Self, allocator: std.mem.Allocator, input: delete_notify_message_spend_limit_override.DeleteNotifyMessageSpendLimitOverrideInput, options: CallOptions) !delete_notify_message_spend_limit_override.DeleteNotifyMessageSpendLimitOverrideOutput {
+        return delete_notify_message_spend_limit_override.execute(self, allocator, input, options);
+    }
+
     /// Deletes an existing opt-out list. All opted out phone numbers in the opt-out
     /// list are deleted.
     ///
@@ -369,6 +415,12 @@ pub const Client = struct {
     /// Permanently delete the protect configuration rule set number override.
     pub fn deleteProtectConfigurationRuleSetNumberOverride(self: *Self, allocator: std.mem.Allocator, input: delete_protect_configuration_rule_set_number_override.DeleteProtectConfigurationRuleSetNumberOverrideInput, options: CallOptions) !delete_protect_configuration_rule_set_number_override.DeleteProtectConfigurationRuleSetNumberOverrideOutput {
         return delete_protect_configuration_rule_set_number_override.execute(self, allocator, input, options);
+    }
+
+    /// Deletes an existing RCS agent. If deletion protection is enabled, an error
+    /// is returned.
+    pub fn deleteRcsAgent(self: *Self, allocator: std.mem.Allocator, input: delete_rcs_agent.DeleteRcsAgentInput, options: CallOptions) !delete_rcs_agent.DeleteRcsAgentOutput {
+        return delete_rcs_agent.execute(self, allocator, input, options);
     }
 
     /// Permanently delete an existing registration from your account.
@@ -473,6 +525,35 @@ pub const Client = struct {
         return describe_keywords.execute(self, allocator, input, options);
     }
 
+    /// Describes the specified notify configurations or all notify configurations
+    /// in your account.
+    ///
+    /// If you specify notify configuration IDs, the output includes information for
+    /// only the specified notify configurations. If you specify filters, the output
+    /// includes information for only those notify configurations that meet the
+    /// filter criteria. If you don't specify notify configuration IDs or filters,
+    /// the output includes information for all notify configurations.
+    ///
+    /// If you specify a notify configuration ID that isn't valid, an error is
+    /// returned.
+    pub fn describeNotifyConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_notify_configurations.DescribeNotifyConfigurationsInput, options: CallOptions) !describe_notify_configurations.DescribeNotifyConfigurationsOutput {
+        return describe_notify_configurations.execute(self, allocator, input, options);
+    }
+
+    /// Describes the specified notify templates or all notify templates in your
+    /// account.
+    ///
+    /// If you specify template IDs, the output includes information for only the
+    /// specified notify templates. If you specify filters, the output includes
+    /// information for only those notify templates that meet the filter criteria.
+    /// If you don't specify template IDs or filters, the output includes
+    /// information for all notify templates.
+    ///
+    /// If you specify a template ID that isn't valid, an error is returned.
+    pub fn describeNotifyTemplates(self: *Self, allocator: std.mem.Allocator, input: describe_notify_templates.DescribeNotifyTemplatesInput, options: CallOptions) !describe_notify_templates.DescribeNotifyTemplatesOutput {
+        return describe_notify_templates.execute(self, allocator, input, options);
+    }
+
     /// Describes the specified opt-out list or all opt-out lists in your account.
     ///
     /// If you specify opt-out list names, the output includes information for only
@@ -535,6 +616,24 @@ pub const Client = struct {
     /// isn’t provided then all protect configurations are returned.
     pub fn describeProtectConfigurations(self: *Self, allocator: std.mem.Allocator, input: describe_protect_configurations.DescribeProtectConfigurationsInput, options: CallOptions) !describe_protect_configurations.DescribeProtectConfigurationsOutput {
         return describe_protect_configurations.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the per-country launch status of an RCS agent, including
+    /// carrier-level details for each country.
+    pub fn describeRcsAgentCountryLaunchStatus(self: *Self, allocator: std.mem.Allocator, input: describe_rcs_agent_country_launch_status.DescribeRcsAgentCountryLaunchStatusInput, options: CallOptions) !describe_rcs_agent_country_launch_status.DescribeRcsAgentCountryLaunchStatusOutput {
+        return describe_rcs_agent_country_launch_status.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the specified RCS agents or all RCS agents associated with your
+    /// Amazon Web Services account.
+    ///
+    /// If you specify RCS agent IDs, the output includes information for only the
+    /// specified RCS agents. If you specify filters, the output includes
+    /// information for only those RCS agents that meet the filter criteria. If you
+    /// don't specify RCS agent IDs or filters, the output includes information for
+    /// all RCS agents.
+    pub fn describeRcsAgents(self: *Self, allocator: std.mem.Allocator, input: describe_rcs_agents.DescribeRcsAgentsInput, options: CallOptions) !describe_rcs_agents.DescribeRcsAgentsOutput {
+        return describe_rcs_agents.execute(self, allocator, input, options);
     }
 
     /// Retrieves the specified registration attachments or all registration
@@ -638,6 +737,12 @@ pub const Client = struct {
     /// Opt-out list, Sender Id, or Phone number.
     pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: CallOptions) !get_resource_policy.GetResourcePolicyOutput {
         return get_resource_policy.execute(self, allocator, input, options);
+    }
+
+    /// Lists countries that support notify messaging. You can optionally filter by
+    /// channel, use case, or tier.
+    pub fn listNotifyCountries(self: *Self, allocator: std.mem.Allocator, input: list_notify_countries.ListNotifyCountriesInput, options: CallOptions) !list_notify_countries.ListNotifyCountriesOutput {
+        return list_notify_countries.execute(self, allocator, input, options);
     }
 
     /// Lists all associated origination identities in your pool.
@@ -760,6 +865,18 @@ pub const Client = struct {
         return send_media_message.execute(self, allocator, input, options);
     }
 
+    /// Sends a templated text message through a notify configuration to a
+    /// recipient's phone number.
+    pub fn sendNotifyTextMessage(self: *Self, allocator: std.mem.Allocator, input: send_notify_text_message.SendNotifyTextMessageInput, options: CallOptions) !send_notify_text_message.SendNotifyTextMessageOutput {
+        return send_notify_text_message.execute(self, allocator, input, options);
+    }
+
+    /// Sends a templated voice message through a notify configuration to a
+    /// recipient's phone number.
+    pub fn sendNotifyVoiceMessage(self: *Self, allocator: std.mem.Allocator, input: send_notify_voice_message.SendNotifyVoiceMessageInput, options: CallOptions) !send_notify_voice_message.SendNotifyVoiceMessageOutput {
+        return send_notify_voice_message.execute(self, allocator, input, options);
+    }
+
     /// Creates a new text message and sends it to a recipient's phone number.
     /// SendTextMessage only sends an SMS message to one recipient each time it is
     /// invoked.
@@ -821,6 +938,13 @@ pub const Client = struct {
         return set_media_message_spend_limit_override.execute(self, allocator, input, options);
     }
 
+    /// Sets an account level monthly spend limit override for sending notify
+    /// messages. The requested spend limit must be less than or equal to the
+    /// `MaxLimit`, which is set by Amazon Web Services.
+    pub fn setNotifyMessageSpendLimitOverride(self: *Self, allocator: std.mem.Allocator, input: set_notify_message_spend_limit_override.SetNotifyMessageSpendLimitOverrideInput, options: CallOptions) !set_notify_message_spend_limit_override.SetNotifyMessageSpendLimitOverrideOutput {
+        return set_notify_message_spend_limit_override.execute(self, allocator, input, options);
+    }
+
     /// Sets an account level monthly spend limit override for sending text
     /// messages. The requested spend limit must be less than or equal to the
     /// `MaxLimit`, which is set by Amazon Web Services.
@@ -867,6 +991,13 @@ pub const Client = struct {
         return update_event_destination.execute(self, allocator, input, options);
     }
 
+    /// Updates an existing notify configuration. You can update the default
+    /// template, pool association, enabled channels, enabled countries, and
+    /// deletion protection settings.
+    pub fn updateNotifyConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_notify_configuration.UpdateNotifyConfigurationInput, options: CallOptions) !update_notify_configuration.UpdateNotifyConfigurationOutput {
+        return update_notify_configuration.execute(self, allocator, input, options);
+    }
+
     /// Updates the configuration of an existing origination phone number. You can
     /// update the opt-out list, enable or disable two-way messaging, change the
     /// TwoWayChannelArn, enable or disable self-managed opt-outs, and enable or
@@ -897,6 +1028,13 @@ pub const Client = struct {
     /// specified NumberCapability type.
     pub fn updateProtectConfigurationCountryRuleSet(self: *Self, allocator: std.mem.Allocator, input: update_protect_configuration_country_rule_set.UpdateProtectConfigurationCountryRuleSetInput, options: CallOptions) !update_protect_configuration_country_rule_set.UpdateProtectConfigurationCountryRuleSetOutput {
         return update_protect_configuration_country_rule_set.execute(self, allocator, input, options);
+    }
+
+    /// Updates the configuration of an existing RCS agent. You can update the
+    /// opt-out list, deletion protection, two-way messaging settings, and
+    /// self-managed opt-outs configuration.
+    pub fn updateRcsAgent(self: *Self, allocator: std.mem.Allocator, input: update_rcs_agent.UpdateRcsAgentInput, options: CallOptions) !update_rcs_agent.UpdateRcsAgentOutput {
+        return update_rcs_agent.execute(self, allocator, input, options);
     }
 
     /// Updates the configuration of an existing sender ID.
@@ -939,6 +1077,20 @@ pub const Client = struct {
         };
     }
 
+    pub fn describeNotifyConfigurationsPaginator(self: *Self, params: describe_notify_configurations.DescribeNotifyConfigurationsInput) paginator.DescribeNotifyConfigurationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn describeNotifyTemplatesPaginator(self: *Self, params: describe_notify_templates.DescribeNotifyTemplatesInput) paginator.DescribeNotifyTemplatesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn describeOptOutListsPaginator(self: *Self, params: describe_opt_out_lists.DescribeOptOutListsInput) paginator.DescribeOptOutListsPaginator {
         return .{
             .client = self,
@@ -968,6 +1120,20 @@ pub const Client = struct {
     }
 
     pub fn describeProtectConfigurationsPaginator(self: *Self, params: describe_protect_configurations.DescribeProtectConfigurationsInput) paginator.DescribeProtectConfigurationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn describeRcsAgentCountryLaunchStatusPaginator(self: *Self, params: describe_rcs_agent_country_launch_status.DescribeRcsAgentCountryLaunchStatusInput) paginator.DescribeRcsAgentCountryLaunchStatusPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn describeRcsAgentsPaginator(self: *Self, params: describe_rcs_agents.DescribeRcsAgentsInput) paginator.DescribeRcsAgentsPaginator {
         return .{
             .client = self,
             .params = params,
@@ -1038,6 +1204,13 @@ pub const Client = struct {
     }
 
     pub fn describeVerifiedDestinationNumbersPaginator(self: *Self, params: describe_verified_destination_numbers.DescribeVerifiedDestinationNumbersInput) paginator.DescribeVerifiedDestinationNumbersPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listNotifyCountriesPaginator(self: *Self, params: list_notify_countries.ListNotifyCountriesInput) paginator.ListNotifyCountriesPaginator {
         return .{
             .client = self,
             .params = params,

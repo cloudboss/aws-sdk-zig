@@ -16,16 +16,12 @@ pub const TaskOverride = struct {
     /// following platform versions:
     ///
     /// * Linux platform version `1.4.0` or later.
-    ///
     /// * Windows platform version `1.0.0` or later.
     ephemeral_storage: ?EphemeralStorage = null,
 
     /// The Amazon Resource Name (ARN) of the task execution role override for the
-    /// task. For
-    /// more information, see [Amazon ECS task
-    /// execution IAM
-    /// role](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html) in the *Amazon Elastic Container Service
-    /// Developer Guide*.
+    /// task. For more information, see [Amazon ECS task execution IAM
+    /// role](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html) in the *Amazon Elastic Container Service Developer Guide*.
     execution_role_arn: ?[]const u8 = null,
 
     /// The Elastic Inference accelerator override for the task.
@@ -35,12 +31,9 @@ pub const TaskOverride = struct {
     memory: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the role that containers in this task can
-    /// assume.
-    /// All containers in this task are granted the permissions that are specified
-    /// in this role.
-    /// For more information, see [IAM Role for
-    /// Tasks](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html)
-    /// in the *Amazon Elastic Container Service Developer Guide*.
+    /// assume. All containers in this task are granted the permissions that are
+    /// specified in this role. For more information, see [IAM Role for
+    /// Tasks](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html) in the *Amazon Elastic Container Service Developer Guide*.
     task_role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{

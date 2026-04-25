@@ -16,12 +16,10 @@ pub const S3OutputConfigurations = struct {
     output_type: S3OutputType,
 
     /// The rule to follow when generating a version of the data export file. You
-    /// have the choice
-    /// to overwrite the previous version or to be delivered in addition to the
-    /// previous versions.
-    /// Overwriting exports can save on Amazon S3 storage costs. Creating new export
-    /// versions allows
-    /// you to track the changes in cost and usage data over time.
+    /// have the choice to overwrite the previous version or to be delivered in
+    /// addition to the previous versions. Overwriting exports can save on Amazon S3
+    /// storage costs. Creating new export versions allows you to track the changes
+    /// in cost and usage data over time.
     overwrite: OverwriteOption,
 
     pub const json_field_names = .{

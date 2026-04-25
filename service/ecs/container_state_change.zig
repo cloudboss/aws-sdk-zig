@@ -6,8 +6,7 @@ pub const ContainerStateChange = struct {
     container_name: ?[]const u8 = null,
 
     /// The exit code for the container, if the state change is a result of the
-    /// container
-    /// exiting.
+    /// container exiting.
     exit_code: ?i32 = null,
 
     /// The container image SHA 256 digest.

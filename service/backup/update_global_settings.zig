@@ -8,22 +8,20 @@ const ServiceError = @import("errors.zig").ServiceError;
 pub const UpdateGlobalSettingsInput = struct {
     /// Inputs can include:
     ///
-    /// A value for `isCrossAccountBackupEnabled` and a Region. Example:
-    /// `update-global-settings --global-settings isCrossAccountBackupEnabled=false
-    /// --region us-west-2`.
+    /// A value for `isCrossAccountBackupEnabled`. Values can be true or false.
+    /// Example:
+    /// `update-global-settings --global-settings
+    /// isCrossAccountBackupEnabled=false`.
     ///
-    /// A value for Multi-party approval, styled as "Mpa": `isMpaEnabled`. Values
-    /// can
+    /// A value for Multi-party approval, styled as `isMpaEnabled`. Values can
     /// be true or false. Example:
-    /// `update-global-settings --global-settings isMpaEnabled=false
-    /// --region us-west-2`.
+    /// `update-global-settings --global-settings isMpaEnabled=false`.
     ///
-    /// A value for Backup Service-Linked Role creation, styled
-    /// as`isDelegatedAdministratorEnabled`.
+    /// A value for Backup Service-Linked Role creation, styled as
+    /// `isDelegatedAdministratorEnabled`.
     /// Values can be true or false. Example:
     /// `update-global-settings --global-settings
-    /// isDelegatedAdministratorEnabled=false
-    /// --region us-west-2`.
+    /// isDelegatedAdministratorEnabled=false`.
     global_settings: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{

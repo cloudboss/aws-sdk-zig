@@ -4,7 +4,7 @@ const AnonymousUserGenerativeQnAEmbeddingConfiguration = @import("anonymous_user
 const AnonymousUserQSearchBarEmbeddingConfiguration = @import("anonymous_user_q_search_bar_embedding_configuration.zig").AnonymousUserQSearchBarEmbeddingConfiguration;
 
 /// The type of experience you want to embed. For anonymous users, you can embed
-/// Quick Suite dashboards.
+/// Quick dashboards.
 pub const AnonymousUserEmbeddingExperienceConfiguration = struct {
     /// The type of embedding experience. In this case, Amazon Quick Sight
     /// dashboards.

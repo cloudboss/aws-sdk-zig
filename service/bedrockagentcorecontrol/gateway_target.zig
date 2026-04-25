@@ -1,10 +1,18 @@
+const AuthorizationData = @import("authorization_data.zig").AuthorizationData;
 const CredentialProviderConfiguration = @import("credential_provider_configuration.zig").CredentialProviderConfiguration;
 const MetadataConfiguration = @import("metadata_configuration.zig").MetadataConfiguration;
+const PrivateEndpoint = @import("private_endpoint.zig").PrivateEndpoint;
+const ManagedResourceDetails = @import("managed_resource_details.zig").ManagedResourceDetails;
 const TargetStatus = @import("target_status.zig").TargetStatus;
 const TargetConfiguration = @import("target_configuration.zig").TargetConfiguration;
 
 /// The gateway target.
 pub const GatewayTarget = struct {
+    /// OAuth2 authorization data for the gateway target. This data is returned when
+    /// a target is configured with a credential provider with authorization code
+    /// grant type and requires user federation.
+    authorization_data: ?AuthorizationData = null,
+
     /// The date and time at which the target was created.
     created_at: i64,
 
@@ -27,6 +35,13 @@ pub const GatewayTarget = struct {
     /// The name of the gateway target.
     name: []const u8,
 
+    private_endpoint: ?PrivateEndpoint = null,
+
+    /// A list of managed resources created by the gateway for private endpoint
+    /// connectivity. These resources are created in your account when you use a
+    /// managed VPC Lattice resource configuration.
+    private_endpoint_managed_resources: ?[]const ManagedResourceDetails = null,
+
     /// The status of the gateway target.
     status: TargetStatus,
 
@@ -42,6 +57,7 @@ pub const GatewayTarget = struct {
     updated_at: i64,
 
     pub const json_field_names = .{
+        .authorization_data = "authorizationData",
         .created_at = "createdAt",
         .credential_provider_configurations = "credentialProviderConfigurations",
         .description = "description",
@@ -49,6 +65,8 @@ pub const GatewayTarget = struct {
         .last_synchronized_at = "lastSynchronizedAt",
         .metadata_configuration = "metadataConfiguration",
         .name = "name",
+        .private_endpoint = "privateEndpoint",
+        .private_endpoint_managed_resources = "privateEndpointManagedResources",
         .status = "status",
         .status_reasons = "statusReasons",
         .target_configuration = "targetConfiguration",

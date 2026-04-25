@@ -56,6 +56,10 @@ pub const CreateReplicationConfigurationTemplateInput = struct {
     /// creation.
     staging_area_tags: []const aws.map.StringMapEntry,
 
+    /// Request to store snapshot on local zone during Replication Settings template
+    /// creation.
+    store_snapshot_on_local_zone: ?bool = null,
+
     /// Request to configure tags during Replication Settings template creation.
     tags: ?[]const aws.map.StringMapEntry = null,
 
@@ -79,6 +83,7 @@ pub const CreateReplicationConfigurationTemplateInput = struct {
         .replication_servers_security_groups_i_ds = "replicationServersSecurityGroupsIDs",
         .staging_area_subnet_id = "stagingAreaSubnetId",
         .staging_area_tags = "stagingAreaTags",
+        .store_snapshot_on_local_zone = "storeSnapshotOnLocalZone",
         .tags = "tags",
         .use_dedicated_replication_server = "useDedicatedReplicationServer",
         .use_fips_endpoint = "useFipsEndpoint",
@@ -177,6 +182,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationConfig
     try body_buf.appendSlice(allocator, "\"stagingAreaTags\":");
     try aws.json.writeValue(@TypeOf(input.staging_area_tags), input.staging_area_tags, allocator, &body_buf);
     has_prev = true;
+    if (input.store_snapshot_on_local_zone) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"storeSnapshotOnLocalZone\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.tags) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"tags\":");

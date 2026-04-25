@@ -37,7 +37,21 @@ pub const StartLoaderJobInput = struct {
     /// dependent on it to be cancelled.
     dependencies: ?[]const []const u8 = null,
 
-    /// ** `failOnError` **   –   A flag to toggle a complete stop on an error.
+    /// ** `edgeOnlyLoad` ** - A flag that controls file processing order during
+    /// bulk loading.
+    ///
+    /// *Allowed values*: `"TRUE"`, `"FALSE"`.
+    ///
+    /// *Default value*: `"FALSE"`.
+    ///
+    /// When this parameter is set to "FALSE", the loader automatically loads vertex
+    /// files first, then edge files afterwards. It does this by first scanning all
+    /// files to determine their contents (vertices or edges). When this parameter
+    /// is set to "TRUE", the loader skips the initial scanning phase and
+    /// immediately loads all files in the order they appear.
+    edge_only_load: ?bool = null,
+
+    /// ** `failOnError` ** - A flag to toggle a complete stop on an error.
     ///
     /// *Allowed values*: `"TRUE"`, `"FALSE"`.
     ///
@@ -81,22 +95,22 @@ pub const StartLoaderJobInput = struct {
     ///
     /// *Default value*: `AUTO`.
     ///
-    /// * `RESUME`   –   In RESUME mode, the loader looks for a previous load from
-    ///   this source, and if it finds one, resumes that load job. If no previous
-    ///   load job is found, the loader stops.
+    /// * `RESUME` - In RESUME mode, the loader looks for a previous load from this
+    ///   source, and if it finds one, resumes that load job. If no previous load
+    ///   job is found, the loader stops.
     ///
     /// The loader avoids reloading files that were successfully loaded in a
     /// previous job. It only tries to process failed files. If you dropped
     /// previously loaded data from your Neptune cluster, that data is not reloaded
     /// in this mode. If a previous load job loaded all files from the same source
     /// successfully, nothing is reloaded, and the loader returns success.
-    /// * `NEW`   –   In NEW mode, the creates a new load request regardless of any
+    /// * `NEW` - In NEW mode, the creates a new load request regardless of any
     ///   previous loads. You can use this mode to reload all the data from a source
     ///   after dropping previously loaded data from your Neptune cluster, or to
     ///   load new data available at the same source.
-    /// * `AUTO`   –   In AUTO mode, the loader looks for a previous load job from
-    ///   the same source, and if it finds one, resumes that job, just as in
-    ///   `RESUME` mode.
+    /// * `AUTO` - In AUTO mode, the loader looks for a previous load job from the
+    ///   same source, and if it finds one, resumes that job, just as in `RESUME`
+    ///   mode.
     ///
     /// If the loader doesn't find a previous load job from the same source, it
     /// loads all data from the source, just as in `NEW` mode.
@@ -132,17 +146,17 @@ pub const StartLoaderJobInput = struct {
     /// ** `parserConfiguration` **   –   An optional object with additional parser
     /// configuration values. Each of the child parameters is also optional:
     ///
-    /// * ** `namedGraphUri` **   –   The default graph for all RDF formats when no
+    /// * ** `namedGraphUri` ** - The default graph for all RDF formats when no
     ///   graph is specified (for non-quads formats and NQUAD entries with no
     ///   graph).
     ///
     /// The default is `https://aws.amazon.com/neptune/vocab/v01/DefaultNamedGraph`.
-    /// * ** `baseUri` **   –   The base URI for RDF/XML and Turtle formats.
+    /// * ** `baseUri` ** - The base URI for RDF/XML and Turtle formats.
     ///
     /// The default is `https://aws.amazon.com/neptune/default`.
-    /// * ** `allowEmptyStrings` **   –   Gremlin users need to be able to pass
-    ///   empty string values("") as node and edge properties when loading CSV data.
-    ///   If `allowEmptyStrings` is set to `false` (the default), such empty strings
+    /// * ** `allowEmptyStrings` ** - Gremlin users need to be able to pass empty
+    ///   string values("") as node and edge properties when loading CSV data. If
+    ///   `allowEmptyStrings` is set to `false` (the default), such empty strings
     ///   are treated as nulls and are not loaded.
     ///
     /// If `allowEmptyStrings` is set to `true`, the loader treats empty strings as
@@ -227,6 +241,7 @@ pub const StartLoaderJobInput = struct {
 
     pub const json_field_names = .{
         .dependencies = "dependencies",
+        .edge_only_load = "edgeOnlyLoad",
         .fail_on_error = "failOnError",
         .format = "format",
         .iam_role_arn = "iamRoleArn",
@@ -296,6 +311,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartLoaderJobInput, co
     if (input.dependencies) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"dependencies\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.edge_only_load) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"edgeOnlyLoad\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

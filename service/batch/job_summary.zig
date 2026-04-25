@@ -1,4 +1,5 @@
 const ArrayPropertiesSummary = @import("array_properties_summary.zig").ArrayPropertiesSummary;
+const JobCapacityUsageSummary = @import("job_capacity_usage_summary.zig").JobCapacityUsageSummary;
 const ContainerSummary = @import("container_summary.zig").ContainerSummary;
 const NodePropertiesSummary = @import("node_properties_summary.zig").NodePropertiesSummary;
 const JobStatus = @import("job_status.zig").JobStatus;
@@ -7,6 +8,11 @@ const JobStatus = @import("job_status.zig").JobStatus;
 pub const JobSummary = struct {
     /// The array properties of the job, if it's an array job.
     array_properties: ?ArrayPropertiesSummary = null,
+
+    /// The configured capacity usage information for this job, including the unit
+    /// of measure and
+    /// quantity of resources.
+    capacity_usage: ?[]const JobCapacityUsageSummary = null,
 
     /// An object that represents the details of the container that's associated
     /// with the
@@ -40,6 +46,15 @@ pub const JobSummary = struct {
     /// This isn't applicable to jobs that are running on Fargate resources.
     node_properties: ?NodePropertiesSummary = null,
 
+    /// The Unix timestamp (in milliseconds) for when the job was scheduled for
+    /// execution. For more information on job statues, see [Service job
+    /// status](https://docs.aws.amazon.com/batch/latest/userguide/service-job-status.html) in the *Batch User Guide*.
+    scheduled_at: ?i64 = null,
+
+    /// The share identifier for the fairshare scheduling queue that this job is
+    /// associated with.
+    share_identifier: ?[]const u8 = null,
+
     /// The Unix timestamp for when the job was started. More specifically, it's
     /// when the job
     /// transitioned from the `STARTING` state to the `RUNNING` state.
@@ -61,6 +76,7 @@ pub const JobSummary = struct {
 
     pub const json_field_names = .{
         .array_properties = "arrayProperties",
+        .capacity_usage = "capacityUsage",
         .container = "container",
         .created_at = "createdAt",
         .job_arn = "jobArn",
@@ -68,6 +84,8 @@ pub const JobSummary = struct {
         .job_id = "jobId",
         .job_name = "jobName",
         .node_properties = "nodeProperties",
+        .scheduled_at = "scheduledAt",
+        .share_identifier = "shareIdentifier",
         .started_at = "startedAt",
         .status = "status",
         .status_reason = "statusReason",

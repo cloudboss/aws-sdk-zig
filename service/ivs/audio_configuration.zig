@@ -17,7 +17,7 @@ pub const AudioConfiguration = struct {
     target_bitrate: i64 = 0,
 
     /// Name of the audio track (if the stream has an audio track). If multitrack is
-    /// not enabled, this is track0 (the sole track).
+    /// not enabled, this is Track0 (the sole track).
     track: ?[]const u8 = null,
 
     pub const json_field_names = .{

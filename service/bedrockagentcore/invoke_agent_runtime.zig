@@ -12,12 +12,13 @@ pub const InvokeAgentRuntimeInput = struct {
     accept: ?[]const u8 = null,
 
     /// The identifier of the Amazon Web Services account for the agent runtime
-    /// resource.
+    /// resource. This parameter is required when you specify an agent ID instead of
+    /// the full ARN for `agentRuntimeArn`.
     account_id: ?[]const u8 = null,
 
-    /// The Amazon Web Services Resource Name (ARN) of the agent runtime to invoke.
-    /// The ARN uniquely identifies the agent runtime resource in Amazon Bedrock
-    /// AgentCore.
+    /// The identifier of the agent runtime to invoke. You can specify either the
+    /// full Amazon Web Services Resource Name (ARN) or the agent ID. If you use the
+    /// agent ID, you must also provide the `accountId` query parameter.
     agent_runtime_arn: []const u8,
 
     /// Additional context information for distributed tracing.
@@ -39,9 +40,9 @@ pub const InvokeAgentRuntimeInput = struct {
     /// type. For most agents, this is a JSON object containing the user's request.
     payload: []const u8,
 
-    /// The qualifier to use for the agent runtime. This can be a version number or
-    /// an endpoint name that points to a specific version. If not specified, Amazon
-    /// Bedrock AgentCore uses the default version of the agent runtime.
+    /// The qualifier to use for the agent runtime. This is an endpoint name that
+    /// points to a specific version. If not specified, Amazon Bedrock AgentCore
+    /// uses the default endpoint of the agent runtime.
     qualifier: ?[]const u8 = null,
 
     /// The identifier of the runtime session.

@@ -9,6 +9,7 @@ pub const UpstreamRegistry = enum {
     git_hub_container_registry,
     azure_container_registry,
     git_lab_container_registry,
+    chainguard,
 
     pub const json_field_names = .{
         .ecr = "ecr",
@@ -19,6 +20,7 @@ pub const UpstreamRegistry = enum {
         .git_hub_container_registry = "github-container-registry",
         .azure_container_registry = "azure-container-registry",
         .git_lab_container_registry = "gitlab-container-registry",
+        .chainguard = "chainguard",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -31,6 +33,7 @@ pub const UpstreamRegistry = enum {
             .git_hub_container_registry => "github-container-registry",
             .azure_container_registry => "azure-container-registry",
             .git_lab_container_registry => "gitlab-container-registry",
+            .chainguard => "chainguard",
         };
     }
 

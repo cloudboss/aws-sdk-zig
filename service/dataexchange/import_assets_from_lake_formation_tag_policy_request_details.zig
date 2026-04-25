@@ -17,8 +17,8 @@ pub const ImportAssetsFromLakeFormationTagPolicyRequestDetails = struct {
     revision_id: []const u8,
 
     /// The IAM role's ARN that allows AWS Data Exchange to assume the role and
-    /// grant and revoke
-    /// permissions of subscribers to AWS Lake Formation data permissions.
+    /// grant and revoke permissions of subscribers to AWS Lake Formation data
+    /// permissions.
     role_arn: []const u8,
 
     /// A structure for the table object.

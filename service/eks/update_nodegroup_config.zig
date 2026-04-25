@@ -9,6 +9,7 @@ const NodeRepairConfig = @import("node_repair_config.zig").NodeRepairConfig;
 const NodegroupScalingConfig = @import("nodegroup_scaling_config.zig").NodegroupScalingConfig;
 const UpdateTaintsPayload = @import("update_taints_payload.zig").UpdateTaintsPayload;
 const NodegroupUpdateConfig = @import("nodegroup_update_config.zig").NodegroupUpdateConfig;
+const WarmPoolConfig = @import("warm_pool_config.zig").WarmPoolConfig;
 const Update = @import("update.zig").Update;
 
 pub const UpdateNodegroupConfigInput = struct {
@@ -43,6 +44,11 @@ pub const UpdateNodegroupConfigInput = struct {
     /// The node group update configuration.
     update_config: ?NodegroupUpdateConfig = null,
 
+    /// The warm pool configuration to apply to the node group. You can use this to
+    /// add a warm pool to an existing node group or modify the settings of an
+    /// existing warm pool.
+    warm_pool_config: ?WarmPoolConfig = null,
+
     pub const json_field_names = .{
         .client_request_token = "clientRequestToken",
         .cluster_name = "clusterName",
@@ -52,6 +58,7 @@ pub const UpdateNodegroupConfigInput = struct {
         .scaling_config = "scalingConfig",
         .taints = "taints",
         .update_config = "updateConfig",
+        .warm_pool_config = "warmPoolConfig",
     };
 };
 
@@ -140,6 +147,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateNodegroupConfigIn
     if (input.update_config) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"updateConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.warm_pool_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"warmPoolConfig\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

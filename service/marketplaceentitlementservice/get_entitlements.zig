@@ -14,8 +14,11 @@ pub const GetEntitlementsInput = struct {
     /// *unioned* for each value in the value list, and then
     /// *intersected* for each filter key.
     ///
-    /// `CustomerIdentifier` and `CustomerAWSAccountID` are mutually exclusive. You
-    /// can't specify both in the same request.
+    /// `CustomerIdentifier` and `CustomerAWSAccountId` are mutually exclusive
+    /// parameters. You must use one or the other, but not both in the same request.
+    ///
+    /// If you're migrating an existing integration, use [Account
+    /// Feeds](https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-account.html) to map `CustomerIdentifier` to `CustomerAWSAccountId`, and [Agreements Feeds](https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-agreements.html) to map `CustomerAWSAccountId` and `LicenseArn`.
     filter: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
     /// The maximum number of items to retrieve from the GetEntitlements operation.

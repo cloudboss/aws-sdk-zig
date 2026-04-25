@@ -1,8 +1,7 @@
 const Tag = @import("tag.zig").Tag;
 
 /// Contains information about the resource type `RDSLimitlessDB` that is
-/// involved in a GuardDuty
-/// finding.
+/// involved in a GuardDuty finding.
 pub const RdsLimitlessDbDetails = struct {
     /// The name of the database cluster that is a part of the Limitless Database.
     db_cluster_identifier: ?[]const u8 = null,

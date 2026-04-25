@@ -4,13 +4,56 @@ const std = @import("std");
 const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
+const list_antennas = @import("list_antennas.zig");
 const list_configs = @import("list_configs.zig");
+const list_contact_versions = @import("list_contact_versions.zig");
 const list_contacts = @import("list_contacts.zig");
 const list_dataflow_endpoint_groups = @import("list_dataflow_endpoint_groups.zig");
 const list_ephemerides = @import("list_ephemerides.zig");
+const list_ground_station_reservations = @import("list_ground_station_reservations.zig");
 const list_ground_stations = @import("list_ground_stations.zig");
 const list_mission_profiles = @import("list_mission_profiles.zig");
 const list_satellites = @import("list_satellites.zig");
+
+pub const ListAntennasPaginator = struct {
+    client: *Client,
+    params: list_antennas.ListAntennasInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_antennas.ListAntennasOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_antennas.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
 
 pub const ListConfigsPaginator = struct {
     client: *Client,
@@ -28,6 +71,46 @@ pub const ListConfigsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_configs.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListContactVersionsPaginator = struct {
+    client: *Client,
+    params: list_contact_versions.ListContactVersionsInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_contact_versions.ListContactVersionsOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_contact_versions.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {
@@ -148,6 +231,46 @@ pub const ListEphemeridesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_ephemerides.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListGroundStationReservationsPaginator = struct {
+    client: *Client,
+    params: list_ground_station_reservations.ListGroundStationReservationsInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_ground_station_reservations.ListGroundStationReservationsOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_ground_station_reservations.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

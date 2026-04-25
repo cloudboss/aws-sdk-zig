@@ -23,20 +23,16 @@ pub const DataSetEntry = struct {
     name: []const u8,
 
     /// A property that defines the data set as OWNED by the account (for providers)
-    /// or ENTITLED
-    /// to the account (for subscribers).
+    /// or ENTITLED to the account (for subscribers).
     origin: Origin,
 
     /// If the origin of this data set is ENTITLED, includes the details for the
-    /// product on AWS
-    /// Marketplace.
+    /// product on AWS Marketplace.
     origin_details: ?OriginDetails = null,
 
     /// The data set ID of the owned data set corresponding to the entitled data set
-    /// being
-    /// viewed. This parameter is returned when a data set owner is viewing the
-    /// entitled copy of
-    /// its owned data set.
+    /// being viewed. This parameter is returned when a data set owner is viewing
+    /// the entitled copy of its owned data set.
     source_id: ?[]const u8 = null,
 
     /// The date and time that the data set was last updated, in ISO 8601 format.

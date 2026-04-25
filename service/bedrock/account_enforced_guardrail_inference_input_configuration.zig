@@ -1,4 +1,5 @@
-const InputTags = @import("input_tags.zig").InputTags;
+const ModelEnforcement = @import("model_enforcement.zig").ModelEnforcement;
+const SelectiveContentGuarding = @import("selective_content_guarding.zig").SelectiveContentGuarding;
 
 /// Account-level enforced guardrail input configuration.
 pub const AccountEnforcedGuardrailInferenceInputConfiguration = struct {
@@ -8,12 +9,17 @@ pub const AccountEnforcedGuardrailInferenceInputConfiguration = struct {
     /// Numerical guardrail version.
     guardrail_version: []const u8,
 
-    /// Whether to honor or ignore input tags at runtime.
-    input_tags: InputTags,
+    /// Model-specific information for the enforced guardrail configuration. If not
+    /// present, the configuration is enforced on all models
+    model_enforcement: ?ModelEnforcement = null,
+
+    /// Selective content guarding controls for enforced guardrails.
+    selective_content_guarding: ?SelectiveContentGuarding = null,
 
     pub const json_field_names = .{
         .guardrail_identifier = "guardrailIdentifier",
         .guardrail_version = "guardrailVersion",
-        .input_tags = "inputTags",
+        .model_enforcement = "modelEnforcement",
+        .selective_content_guarding = "selectiveContentGuarding",
     };
 };

@@ -9,8 +9,8 @@ const UtilizationPreference = @import("utilization_preference.zig").UtilizationP
 
 /// Describes the effective recommendation preferences for a resource.
 pub const EffectiveRecommendationPreferences = struct {
-    /// Describes the CPU vendor and architecture for an instance or Amazon EC2 Auto
-    /// Scaling group
+    /// Describes the CPU vendor and architecture for an instance or Auto Scaling
+    /// group
     /// recommendations.
     ///
     /// For example, when you specify `AWS_ARM64` with:

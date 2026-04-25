@@ -1,8 +1,7 @@
 pub const UntagResourceRequest = struct {
     /// The Amazon Resource Name (ARN) of the resource to delete tags from.
-    /// Currently, the
-    /// supported resources are Amazon ECS capacity providers, tasks, services, task
-    /// definitions, clusters, and container instances.
+    /// Currently, the supported resources are Amazon ECS capacity providers, tasks,
+    /// services, task definitions, clusters, and container instances.
     resource_arn: []const u8,
 
     /// The keys of the tags to be removed.

@@ -30,7 +30,7 @@ pub const ModifyGlobalReplicationGroupInput = struct {
     cache_parameter_group_name: ?[]const u8 = null,
 
     /// Modifies the engine listed in a global replication group message. The
-    /// options are redis, memcached or valkey.
+    /// options are valkey, memcached or redis.
     engine: ?[]const u8 = null,
 
     /// The upgraded version of the cache engine to be run on the clusters in the

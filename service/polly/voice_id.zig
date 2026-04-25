@@ -101,6 +101,12 @@ pub const VoiceId = enum {
     sabrina,
     jasmine,
     jihye,
+    ambre,
+    beatrice,
+    florian,
+    lennart,
+    lorenzo,
+    tiffany,
 
     pub const json_field_names = .{
         .aditi = "Aditi",
@@ -203,6 +209,12 @@ pub const VoiceId = enum {
         .sabrina = "Sabrina",
         .jasmine = "Jasmine",
         .jihye = "Jihye",
+        .ambre = "Ambre",
+        .beatrice = "Beatrice",
+        .florian = "Florian",
+        .lennart = "Lennart",
+        .lorenzo = "Lorenzo",
+        .tiffany = "Tiffany",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -307,6 +319,12 @@ pub const VoiceId = enum {
             .sabrina => "Sabrina",
             .jasmine => "Jasmine",
             .jihye => "Jihye",
+            .ambre => "Ambre",
+            .beatrice => "Beatrice",
+            .florian => "Florian",
+            .lennart => "Lennart",
+            .lorenzo => "Lorenzo",
+            .tiffany => "Tiffany",
         };
     }
 

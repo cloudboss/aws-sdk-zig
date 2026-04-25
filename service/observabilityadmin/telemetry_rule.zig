@@ -6,9 +6,30 @@ const TelemetryType = @import("telemetry_type.zig").TelemetryType;
 /// Defines how telemetry should be configured for specific Amazon Web Services
 /// resources.
 pub const TelemetryRule = struct {
+    /// If set to `true`, Amazon CloudWatch Observability Admin detects and
+    /// remediates configuration drift in telemetry resources that it manages. For
+    /// example, if a VPC flow log's format, traffic type, or aggregation interval
+    /// no longer matches the rule's destination configuration, the flow log is
+    /// replaced with one that matches. Only Observability Admin-managed resources
+    /// are updated; customer-created resources are never modified. Currently
+    /// supported for `AWS::EC2::VPC` resources (VPC flow logs).
+    allow_field_updates: ?bool = null,
+
+    /// If set to `true`, the telemetry rule is replicated to all Amazon Web
+    /// Services Regions where Amazon CloudWatch Observability Admin is available in
+    /// the current partition. When new regions become available, the rule
+    /// automatically replicates to them. Mutually exclusive with `Regions`.
+    all_regions: ?bool = null,
+
     /// Configuration specifying where and how the telemetry data should be
     /// delivered.
     destination_configuration: ?TelemetryDestinationConfiguration = null,
+
+    /// An optional list of Amazon Web Services Regions where this telemetry rule
+    /// should be replicated. When specified, the rule is created in the home region
+    /// and automatically replicated to all listed regions. Mutually exclusive with
+    /// `AllRegions`.
+    regions: ?[]const []const u8 = null,
 
     /// The type of Amazon Web Services resource to configure telemetry for (e.g.,
     /// "AWS::EC2::VPC", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL").
@@ -31,7 +52,10 @@ pub const TelemetryRule = struct {
     telemetry_type: TelemetryType,
 
     pub const json_field_names = .{
+        .allow_field_updates = "AllowFieldUpdates",
+        .all_regions = "AllRegions",
         .destination_configuration = "DestinationConfiguration",
+        .regions = "Regions",
         .resource_type = "ResourceType",
         .scope = "Scope",
         .selection_criteria = "SelectionCriteria",

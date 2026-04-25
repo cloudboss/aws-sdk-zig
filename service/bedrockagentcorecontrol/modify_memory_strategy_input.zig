@@ -14,10 +14,14 @@ pub const ModifyMemoryStrategyInput = struct {
     /// The updated namespaces for the memory strategy.
     namespaces: ?[]const []const u8 = null,
 
+    /// The updated namespaceTemplates for the memory strategy.
+    namespace_templates: ?[]const []const u8 = null,
+
     pub const json_field_names = .{
         .configuration = "configuration",
         .description = "description",
         .memory_strategy_id = "memoryStrategyId",
         .namespaces = "namespaces",
+        .namespace_templates = "namespaceTemplates",
     };
 };

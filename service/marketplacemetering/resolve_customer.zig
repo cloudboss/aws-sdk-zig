@@ -10,8 +10,8 @@ pub const ResolveCustomerInput = struct {
     /// submits a
     /// registration token through the browser. The registration token is resolved
     /// to obtain a
-    /// `CustomerIdentifier` along with the `CustomerAWSAccountId` and
-    /// `ProductCode`.
+    /// `CustomerIdentifier` along with the `CustomerAWSAccountId`,
+    /// `ProductCode`, and `LicenseArn`.
     registration_token: []const u8,
 
     pub const json_field_names = .{
@@ -22,13 +22,23 @@ pub const ResolveCustomerInput = struct {
 pub const ResolveCustomerOutput = struct {
     /// The `CustomerAWSAccountId` provides the Amazon Web Services account ID
     /// associated with
-    /// the `CustomerIdentifier` for the individual customer.
+    /// the `CustomerIdentifier` for the individual customer. Calls to
+    /// `BatchMeterUsage` require
+    /// `CustomerAWSAccountId` for each `UsageRecord`.
     customer_aws_account_id: ?[]const u8 = null,
 
     /// The `CustomerIdentifier` is used to identify an individual customer in your
-    /// application. Calls to `BatchMeterUsage` require
-    /// `CustomerIdentifiers` for each `UsageRecord`.
+    /// application.
     customer_identifier: ?[]const u8 = null,
+
+    /// The `LicenseArn` is a unique identifier for a specific granted license.
+    /// These are typically used for software purchased through Amazon Web Services
+    /// Marketplace. Calls to `BatchMeterUsage` require `LicenseArn` for each
+    /// `UsageRecord`.
+    ///
+    /// Once you receive the `CustomerAWSAccountId` and `LicenseArn` in the
+    /// response, store that for future purposes/API calls/integrations.
+    license_arn: ?[]const u8 = null,
 
     /// The product code is returned to confirm that the buyer is registering for
     /// your
@@ -40,6 +50,7 @@ pub const ResolveCustomerOutput = struct {
     pub const json_field_names = .{
         .customer_aws_account_id = "CustomerAWSAccountId",
         .customer_identifier = "CustomerIdentifier",
+        .license_arn = "LicenseArn",
         .product_code = "ProductCode",
     };
 };
@@ -156,6 +167,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "InvalidEndpointRegionException")) {
         return .{ .arena = arena, .kind = .{ .invalid_endpoint_region_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidLicenseException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_license_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

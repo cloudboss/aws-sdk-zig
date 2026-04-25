@@ -1,10 +1,8 @@
 const ManagedResourceStatus = @import("managed_resource_status.zig").ManagedResourceStatus;
 
 /// The target group associated with the Express service's Application Load
-/// Balancer. For
-/// more information about load balancer target groups, see
-/// [CreateTargetGroup](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_CreateTargetGroup.html) in the *Elastic Load Balancing API
-/// Reference*
+/// Balancer. For more information about load balancer target groups, see
+/// [CreateTargetGroup](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_CreateTargetGroup.html) in the *Elastic Load Balancing API Reference*
 pub const ManagedTargetGroup = struct {
     /// The Amazon Resource Name (ARN) of the target group.
     arn: ?[]const u8 = null,

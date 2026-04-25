@@ -1,7 +1,6 @@
 /// The minimum and maximum amount of memory per vCPU in gibibytes (GiB). This
-/// helps
-/// ensure that instance types have the appropriate memory-to-CPU ratio for your
-/// workloads.
+/// helps ensure that instance types have the appropriate memory-to-CPU ratio
+/// for your workloads.
 pub const MemoryGiBPerVCpuRequest = struct {
     /// The maximum amount of memory per vCPU in GiB. Instance types with a higher
     /// memory-to-vCPU ratio are excluded from selection.

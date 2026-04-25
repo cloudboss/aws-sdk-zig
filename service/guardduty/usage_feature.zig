@@ -10,8 +10,8 @@ pub const UsageFeature = enum {
     rds_login_events,
     lambda_network_logs,
     eks_runtime_monitoring,
-    fargate_runtime_monitoring,
     ec2_runtime_monitoring,
+    fargate_runtime_monitoring,
     rds_dbi_protection_provisioned,
     rds_dbi_protection_serverless,
 
@@ -25,8 +25,8 @@ pub const UsageFeature = enum {
         .rds_login_events = "RDS_LOGIN_EVENTS",
         .lambda_network_logs = "LAMBDA_NETWORK_LOGS",
         .eks_runtime_monitoring = "EKS_RUNTIME_MONITORING",
-        .fargate_runtime_monitoring = "FARGATE_RUNTIME_MONITORING",
         .ec2_runtime_monitoring = "EC2_RUNTIME_MONITORING",
+        .fargate_runtime_monitoring = "FARGATE_RUNTIME_MONITORING",
         .rds_dbi_protection_provisioned = "RDS_DBI_PROTECTION_PROVISIONED",
         .rds_dbi_protection_serverless = "RDS_DBI_PROTECTION_SERVERLESS",
     };
@@ -42,8 +42,8 @@ pub const UsageFeature = enum {
             .rds_login_events => "RDS_LOGIN_EVENTS",
             .lambda_network_logs => "LAMBDA_NETWORK_LOGS",
             .eks_runtime_monitoring => "EKS_RUNTIME_MONITORING",
-            .fargate_runtime_monitoring => "FARGATE_RUNTIME_MONITORING",
             .ec2_runtime_monitoring => "EC2_RUNTIME_MONITORING",
+            .fargate_runtime_monitoring => "FARGATE_RUNTIME_MONITORING",
             .rds_dbi_protection_provisioned => "RDS_DBI_PROTECTION_PROVISIONED",
             .rds_dbi_protection_serverless => "RDS_DBI_PROTECTION_SERVERLESS",
         };

@@ -10,13 +10,11 @@ pub const ListVersionsInput = struct {
     max_results: ?i32 = null,
 
     /// The token to use when requesting the next set of results. You receive this
-    /// token from
-    /// a previous `ListVersions` operation.
+    /// token from a previous `ListVersions` operation.
     next_token: ?[]const u8 = null,
 
     /// The ID of the workspace to list the available upgrade versions. If not
-    /// included,
-    /// lists all versions of Grafana that are supported for
+    /// included, lists all versions of Grafana that are supported for
     /// `CreateWorkspace`.
     workspace_id: ?[]const u8 = null,
 
@@ -29,12 +27,11 @@ pub const ListVersionsInput = struct {
 
 pub const ListVersionsOutput = struct {
     /// The Grafana versions available to create. If a workspace ID is included in
-    /// the
-    /// request, the Grafana versions to which this workspace can be upgraded.
+    /// the request, the Grafana versions to which this workspace can be upgraded.
     grafana_versions: ?[]const []const u8 = null,
 
-    /// The token to use in a subsequent `ListVersions` operation to return the
-    /// next set of results.
+    /// The token to use in a subsequent `ListVersions` operation to return the next
+    /// set of results.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{

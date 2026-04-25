@@ -1,17 +1,19 @@
 /// Object specifying a stream’s video configuration, as set up by the
-/// broadcaster (usually in
-/// an encoder). This is part of the IngestConfigurations object and the
-/// deprecated
-/// IngestConfiguration object. It is used for monitoring stream health.
+/// broadcaster (usually in an encoder). This is part of the
+/// IngestConfigurations object and the deprecated IngestConfiguration object.
+/// It is used for monitoring stream health.
 pub const VideoConfiguration = struct {
-    /// Indicates the degree of required decoder performance for a profile. Normally
-    /// this is set
-    /// automatically by the encoder. For details, see the H.264 specification.
+    /// (Deprecated) Indicates the degree of required decoder performance for a
+    /// profile. Normally this is set automatically by the encoder. For details, see
+    /// the H.264 specification. This is populated only when VideoConfiguration is
+    /// part of the deprecated IngestConfiguration; otherwise, this is an empty
+    /// string.
     avc_level: ?[]const u8 = null,
 
-    /// Indicates to the decoder the requirements for decoding the stream. For
-    /// definitions of the
-    /// valid values, see the H.264 specification.
+    /// (Deprecated) Indicates to the decoder the requirements for decoding the
+    /// stream. For definitions of the valid values, see the H.264 specification.
+    /// This is populated only when VideoConfiguration is part of the deprecated
+    /// IngestConfiguration; otherwise, this is an empty string.
     avc_profile: ?[]const u8 = null,
 
     /// Codec used for the video encoding.
@@ -36,7 +38,7 @@ pub const VideoConfiguration = struct {
     /// The expected ingest framerate. This is configured in the encoder.
     target_framerate: i64 = 0,
 
-    /// Name of the video track. If multitrack is not enabled, this is track0 (the
+    /// Name of the video track. If multitrack is not enabled, this is Track0 (the
     /// sole track).
     track: ?[]const u8 = null,
 

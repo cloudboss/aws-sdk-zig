@@ -1,6 +1,7 @@
 const aws = @import("aws");
 
 const IngestProtocol = @import("ingest_protocol.zig").IngestProtocol;
+const RedundantIngestCredential = @import("redundant_ingest_credential.zig").RedundantIngestCredential;
 const IngestConfigurationState = @import("ingest_configuration_state.zig").IngestConfigurationState;
 
 /// Object specifying an ingest configuration.
@@ -26,6 +27,16 @@ pub const IngestConfiguration = struct {
 
     /// ID of the participant within the stage.
     participant_id: []const u8,
+
+    /// Indicates whether redundant ingest is enabled for the ingest configuration.
+    redundant_ingest: bool = false,
+
+    /// A list of redundant ingest credentials, present only when `redundantIngest`
+    /// is set to `true`.
+    /// See [Redundant
+    /// Ingest](https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html#redundant-ingest) in
+    /// *IVS RTMP Publishing* for details.
+    redundant_ingest_credentials: ?[]const RedundantIngestCredential = null,
 
     /// ARN of the stage with which the IngestConfiguration is associated.
     stage_arn: []const u8,
@@ -64,6 +75,8 @@ pub const IngestConfiguration = struct {
         .ingest_protocol = "ingestProtocol",
         .name = "name",
         .participant_id = "participantId",
+        .redundant_ingest = "redundantIngest",
+        .redundant_ingest_credentials = "redundantIngestCredentials",
         .stage_arn = "stageArn",
         .state = "state",
         .stream_key = "streamKey",

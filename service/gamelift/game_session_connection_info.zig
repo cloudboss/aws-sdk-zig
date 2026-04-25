@@ -1,4 +1,5 @@
 const MatchedPlayerSession = @import("matched_player_session.zig").MatchedPlayerSession;
+const PlayerGatewayStatus = @import("player_gateway_status.zig").PlayerGatewayStatus;
 
 /// Connection information for a new game session that is created in response to
 /// a start
@@ -35,6 +36,19 @@ pub const GameSessionConnectionInfo = struct {
     /// original matchmaking request.
     matched_player_sessions: ?[]const MatchedPlayerSession = null,
 
+    /// The current status of player gateway for the game session. Note, even if a
+    /// fleet has PlayerGatewayMode configured as `ENABLED`, player gateway might
+    /// not be available in a specific location. For more information about
+    /// locations where player gateway is supported, see [supported
+    /// locations](https://docs.aws.amazon.com/gameliftservers/latest/developerguide/gamelift-regions.html).
+    ///
+    /// Possible values include:
+    ///
+    /// * `ENABLED` -- Player gateway is available for this game session.
+    ///
+    /// * `DISABLED` -- Player gateway is not available for this game session.
+    player_gateway_status: ?PlayerGatewayStatus = null,
+
     /// The port number for the game session. To connect to a Amazon GameLift
     /// Servers game server, an app needs both the IP address and port number.
     port: ?i32 = null,
@@ -44,6 +58,7 @@ pub const GameSessionConnectionInfo = struct {
         .game_session_arn = "GameSessionArn",
         .ip_address = "IpAddress",
         .matched_player_sessions = "MatchedPlayerSessions",
+        .player_gateway_status = "PlayerGatewayStatus",
         .port = "Port",
     };
 };

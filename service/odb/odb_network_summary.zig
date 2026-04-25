@@ -30,6 +30,9 @@ pub const OdbNetworkSummary = struct {
     /// The user-friendly name of the ODB network.
     display_name: ?[]const u8 = null,
 
+    /// The list of EC2 Placement Group IDs associated with your ODB network.
+    ec_2_placement_group_ids: ?[]const []const u8 = null,
+
     /// The managed services configuration for the ODB network.
     managed_services: ?ManagedServices = null,
 
@@ -82,6 +85,7 @@ pub const OdbNetworkSummary = struct {
         .custom_domain_name = "customDomainName",
         .default_dns_prefix = "defaultDnsPrefix",
         .display_name = "displayName",
+        .ec_2_placement_group_ids = "ec2PlacementGroupIds",
         .managed_services = "managedServices",
         .oci_dns_forwarding_configs = "ociDnsForwardingConfigs",
         .oci_network_anchor_id = "ociNetworkAnchorId",

@@ -7,11 +7,14 @@ const ServiceError = @import("errors.zig").ServiceError;
 const RunExport = @import("run_export.zig").RunExport;
 const Accelerators = @import("accelerators.zig").Accelerators;
 const CacheBehavior = @import("cache_behavior.zig").CacheBehavior;
+const ConfigurationDetails = @import("configuration_details.zig").ConfigurationDetails;
 const RunLogLevel = @import("run_log_level.zig").RunLogLevel;
 const RunLogLocation = @import("run_log_location.zig").RunLogLocation;
+const NetworkingMode = @import("networking_mode.zig").NetworkingMode;
 const RunRetentionMode = @import("run_retention_mode.zig").RunRetentionMode;
 const RunStatus = @import("run_status.zig").RunStatus;
 const StorageType = @import("storage_type.zig").StorageType;
+const VpcConfigResponse = @import("vpc_config_response.zig").VpcConfigResponse;
 const WorkflowType = @import("workflow_type.zig").WorkflowType;
 
 pub const GetRunInput = struct {
@@ -34,11 +37,17 @@ pub const GetRunOutput = struct {
     /// The run's ARN.
     arn: ?[]const u8 = null,
 
+    /// The run's batch ID.
+    batch_id: ?[]const u8 = null,
+
     /// The run cache behavior for the run.
     cache_behavior: ?CacheBehavior = null,
 
     /// The run cache associated with the run.
     cache_id: ?[]const u8 = null,
+
+    /// Configuration details for the workflow run.
+    configuration: ?ConfigurationDetails = null,
 
     /// When the run was created.
     creation_time: ?i64 = null,
@@ -68,6 +77,10 @@ pub const GetRunOutput = struct {
 
     /// The run's name.
     name: ?[]const u8 = null,
+
+    /// Configuration for run networking behavior. If absent, this will default to
+    /// RESTRICTED.
+    networking_mode: ?NetworkingMode = null,
 
     /// The run's output URI.
     output_uri: ?[]const u8 = null,
@@ -125,6 +138,9 @@ pub const GetRunOutput = struct {
     /// The universally unique identifier for a run.
     uuid: ?[]const u8 = null,
 
+    /// VPC configuration for the workflow run.
+    vpc_config: ?VpcConfigResponse = null,
+
     /// The run's workflow ID.
     workflow_id: ?[]const u8 = null,
 
@@ -143,8 +159,10 @@ pub const GetRunOutput = struct {
     pub const json_field_names = .{
         .accelerators = "accelerators",
         .arn = "arn",
+        .batch_id = "batchId",
         .cache_behavior = "cacheBehavior",
         .cache_id = "cacheId",
+        .configuration = "configuration",
         .creation_time = "creationTime",
         .definition = "definition",
         .digest = "digest",
@@ -154,6 +172,7 @@ pub const GetRunOutput = struct {
         .log_level = "logLevel",
         .log_location = "logLocation",
         .name = "name",
+        .networking_mode = "networkingMode",
         .output_uri = "outputUri",
         .parameters = "parameters",
         .priority = "priority",
@@ -172,6 +191,7 @@ pub const GetRunOutput = struct {
         .storage_type = "storageType",
         .tags = "tags",
         .uuid = "uuid",
+        .vpc_config = "vpcConfig",
         .workflow_id = "workflowId",
         .workflow_owner_id = "workflowOwnerId",
         .workflow_type = "workflowType",

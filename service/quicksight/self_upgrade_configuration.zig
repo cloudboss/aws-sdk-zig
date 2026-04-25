@@ -1,9 +1,9 @@
 const SelfUpgradeStatus = @import("self_upgrade_status.zig").SelfUpgradeStatus;
 
-/// The self-upgrade configuration for the Quick Suite account.
+/// The self-upgrade configuration for the Quick account.
 pub const SelfUpgradeConfiguration = struct {
-    /// Status set for the self-upgrade configuration for the Quick Suite account.
-    /// It can contain the following values:
+    /// Status set for the self-upgrade configuration for the Quick account. It can
+    /// contain the following values:
     ///
     /// * `AUTO_APPROVAL`: All the self-upgrade requests will be auto approved.
     ///

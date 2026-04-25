@@ -8,6 +8,12 @@ const DirectQueryDataSourceType = @import("direct_query_data_source_type.zig").D
 const Tag = @import("tag.zig").Tag;
 
 pub const AddDirectQueryDataSourceInput = struct {
+    /// An optional IAM access policy document that defines the permissions for
+    /// accessing the data source.
+    /// The policy document must be in valid JSON format and follow IAM policy
+    /// syntax.
+    data_source_access_policy: ?[]const u8 = null,
+
     /// A unique, user-defined label to identify the data source within your
     /// OpenSearch
     /// Service environment.
@@ -23,14 +29,17 @@ pub const AddDirectQueryDataSourceInput = struct {
     /// source.
     description: ?[]const u8 = null,
 
-    /// A list of Amazon Resource Names (ARNs) for the OpenSearch collections that
-    /// are
-    /// associated with the direct query data source.
-    open_search_arns: []const []const u8,
+    /// An optional list of Amazon Resource Names (ARNs) for the OpenSearch
+    /// collections that are
+    /// associated with the direct query data source. This field is required for
+    /// CloudWatchLogs
+    /// and SecurityLake datasource types.
+    open_search_arns: ?[]const []const u8 = null,
 
     tag_list: ?[]const Tag = null,
 
     pub const json_field_names = .{
+        .data_source_access_policy = "DataSourceAccessPolicy",
         .data_source_name = "DataSourceName",
         .data_source_type = "DataSourceType",
         .description = "Description",
@@ -86,6 +95,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AddDirectQueryDataSourc
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.data_source_access_policy) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"DataSourceAccessPolicy\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"DataSourceName\":");
     try aws.json.writeValue(@TypeOf(input.data_source_name), input.data_source_name, allocator, &body_buf);
@@ -100,10 +115,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AddDirectQueryDataSourc
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"OpenSearchArns\":");
-    try aws.json.writeValue(@TypeOf(input.open_search_arns), input.open_search_arns, allocator, &body_buf);
-    has_prev = true;
+    if (input.open_search_arns) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"OpenSearchArns\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.tag_list) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"TagList\":");
@@ -213,6 +230,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
         return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

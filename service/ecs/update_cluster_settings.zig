@@ -12,21 +12,15 @@ pub const UpdateClusterSettingsInput = struct {
     cluster: []const u8,
 
     /// The setting to use by default for a cluster. This parameter is used to turn
-    /// on
-    /// CloudWatch Container Insights for a cluster. If this value is specified, it
-    /// overrides
-    /// the `containerInsights` value set with
+    /// on CloudWatch Container Insights for a cluster. If this value is specified,
+    /// it overrides the `containerInsights` value set with
     /// [PutAccountSetting](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html) or [PutAccountSettingDefault](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html).
     ///
     /// Currently, if you delete an existing cluster that does not have Container
-    /// Insights
-    /// turned on, and then create a new cluster with the same name with Container
-    /// Insights
-    /// tuned on, Container Insights will not actually be turned on. If you want to
-    /// preserve
-    /// the same name for your existing cluster and turn on Container Insights, you
-    /// must
-    /// wait 7 days before you can re-create it.
+    /// Insights turned on, and then create a new cluster with the same name with
+    /// Container Insights tuned on, Container Insights will not actually be turned
+    /// on. If you want to preserve the same name for your existing cluster and turn
+    /// on Container Insights, you must wait 7 days before you can re-create it.
     settings: []const ClusterSetting,
 
     pub const json_field_names = .{
@@ -168,6 +162,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

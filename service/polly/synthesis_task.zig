@@ -36,7 +36,8 @@ pub const SynthesisTask = struct {
     lexicon_names: ?[]const []const u8 = null,
 
     /// The format in which the returned output will be encoded. For audio
-    /// stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will
+    /// stream, this will be mp3, ogg_vorbis, ogg_opus, mu-law, a-law, or pcm. For
+    /// speech marks, this will
     /// be json.
     output_format: ?OutputFormat = null,
 
@@ -55,6 +56,10 @@ pub const SynthesisTask = struct {
     ///
     /// Valid values for pcm are "8000" and "16000" The default value is
     /// "16000".
+    ///
+    /// Valid value for ogg_opus is "48000".
+    ///
+    /// Valid value for mu-law and a-law is "8000".
     sample_rate: ?[]const u8 = null,
 
     /// ARN for the SNS topic optionally used for providing status

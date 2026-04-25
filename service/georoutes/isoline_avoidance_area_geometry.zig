@@ -1,32 +1,32 @@
 const Corridor = @import("corridor.zig").Corridor;
 const PolylineCorridor = @import("polyline_corridor.zig").PolylineCorridor;
 
-/// The avoidance geometry, to be included while calculating an isoline.
+/// Defines an area to avoid during calculations using one of several supported
+/// geometry types. The service will prefer routes that avoid these areas when
+/// possible.
 pub const IsolineAvoidanceAreaGeometry = struct {
-    /// Geometry defined as a bounding box. The first pair represents the X and Y
-    /// coordinates (longitude and latitude,) of the southwest corner of the
-    /// bounding box; the second pair represents the X and Y coordinates (longitude
-    /// and latitude) of the northeast corner.
+    /// A rectangular area defined by its southwest and northeast corners: `[min
+    /// longitude, min latitude, max longitude, max latitude]`.
     bounding_box: ?[]const f64 = null,
 
-    /// Geometry defined as a corridor - a LineString with a radius that defines the
-    /// width of the corridor.
+    /// A buffer zone around a line, defined by a series of coordinates and a radius
+    /// in meters.
     corridor: ?Corridor = null,
 
-    /// A list of Polygon will be excluded for calculating isolines, the list can
-    /// only contain 1 polygon.
+    /// A polygon defined by a list of coordinate rings. The first ring defines the
+    /// outer boundary; subsequent rings will be ignored.
     polygon: ?[]const []const []const f64 = null,
 
-    /// Geometry defined as an encoded corridor – a polyline with a radius that
-    /// defines the width of the corridor. For more information on polyline
-    /// encoding, see
-    /// [https://github.com/heremaps/flexiblepolyline/blob/master/README.md](https://github.com/heremaps/flexiblepolyline/blob/master/README.md).
+    /// A buffer zone around a compressed polyline, defined by an encoded polyline
+    /// string and a radius in meters. For more information on polyline encoding,
+    /// see
+    /// [https://github.com/aws-geospatial/polyline](https://github.com/aws-geospatial/polyline).
     polyline_corridor: ?PolylineCorridor = null,
 
-    /// A list of PolylinePolygon's that are excluded for calculating isolines, the
-    /// list can only contain 1 polygon. For more information on polyline encoding,
-    /// see
-    /// [https://github.com/heremaps/flexiblepolyline/blob/master/README.md](https://github.com/heremaps/flexiblepolyline/blob/master/README.md).
+    /// A polygon defined by encoded polyline strings. The first string defines the
+    /// outer boundary; subsequent strings will be ignored. For more information on
+    /// polyline encoding, see
+    /// [https://github.com/aws-geospatial/polyline](https://github.com/aws-geospatial/polyline).
     polyline_polygon: ?[]const []const u8 = null,
 
     pub const json_field_names = .{

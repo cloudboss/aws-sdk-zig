@@ -1,23 +1,19 @@
 const ManagedResourceStatus = @import("managed_resource_status.zig").ManagedResourceStatus;
 
 /// The Application Auto Scaling policy created by Amazon ECS when you create an
-/// Express
-/// service.
+/// Express service.
 pub const ManagedApplicationAutoScalingPolicy = struct {
     /// The Amazon Resource Name (ARN) of the Application Auto Scaling policy
-    /// associated with
-    /// the Express service.
+    /// associated with the Express service.
     arn: ?[]const u8 = null,
 
     /// The metric used for auto scaling decisions. The available metrics are
-    /// `ECSServiceAverageCPUUtilization`,
-    /// `ECSServiceAverageMemoryUtilization`, and
+    /// `ECSServiceAverageCPUUtilization`, `ECSServiceAverageMemoryUtilization`, and
     /// `ALBRequestCOuntPerTarget`.
     metric: []const u8,
 
     /// The type of Application Auto Scaling policy associated with the Express
-    /// service. Valid
-    /// values are `TargetTrackingScaling`, `StepScaling`, and
+    /// service. Valid values are `TargetTrackingScaling`, `StepScaling`, and
     /// `PredictiveScaling`.
     policy_type: []const u8,
 

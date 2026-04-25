@@ -16,15 +16,14 @@
 pub const DashboardVisualId = struct {
     /// The ID of the dashboard that has the visual that you want to embed. The
     /// `DashboardId` can be found in the `IDs for developers` section
-    /// of the `Embed visual` pane of the visual's on-visual menu of the Quick Suite
+    /// of the `Embed visual` pane of the visual's on-visual menu of the Quick
     /// console. You can also get the `DashboardId` with a
     /// `ListDashboards` API operation.
     dashboard_id: []const u8,
 
     /// The ID of the sheet that the has visual that you want to embed. The
     /// `SheetId` can be found in the `IDs for developers` section of
-    /// the `Embed visual` pane of the visual's on-visual menu of the Quick Suite
-    /// console.
+    /// the `Embed visual` pane of the visual's on-visual menu of the Quick console.
     sheet_id: []const u8,
 
     /// The ID of the visual that you want to embed. The `VisualID` can be found in

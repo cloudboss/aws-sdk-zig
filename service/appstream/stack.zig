@@ -1,5 +1,6 @@
 const AccessEndpoint = @import("access_endpoint.zig").AccessEndpoint;
 const ApplicationSettingsResponse = @import("application_settings_response.zig").ApplicationSettingsResponse;
+const ContentRedirection = @import("content_redirection.zig").ContentRedirection;
 const StackError = @import("stack_error.zig").StackError;
 const StorageConnector = @import("storage_connector.zig").StorageConnector;
 const StreamingExperienceSettings = @import("streaming_experience_settings.zig").StreamingExperienceSettings;
@@ -17,6 +18,11 @@ pub const Stack = struct {
 
     /// The ARN of the stack.
     arn: ?[]const u8 = null,
+
+    /// Configuration for bidirectional URL redirection between the streaming
+    /// session and the local client. Use HostToClient to redirect URLs from the
+    /// remote desktop to the local browser.
+    content_redirection: ?ContentRedirection = null,
 
     /// The time the stack was created.
     created_time: ?i64 = null,
@@ -60,6 +66,7 @@ pub const Stack = struct {
         .access_endpoints = "AccessEndpoints",
         .application_settings = "ApplicationSettings",
         .arn = "Arn",
+        .content_redirection = "ContentRedirection",
         .created_time = "CreatedTime",
         .description = "Description",
         .display_name = "DisplayName",

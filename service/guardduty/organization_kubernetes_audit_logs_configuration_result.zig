@@ -2,8 +2,7 @@
 /// organization.
 pub const OrganizationKubernetesAuditLogsConfigurationResult = struct {
     /// Whether Kubernetes audit logs data source should be auto-enabled for new
-    /// members joining
-    /// the organization.
+    /// members joining the organization.
     auto_enable: bool,
 
     pub const json_field_names = .{

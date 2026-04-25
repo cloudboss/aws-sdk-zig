@@ -3,16 +3,19 @@ const std = @import("std");
 pub const SelectedTooltipType = enum {
     basic,
     detailed,
+    sheet,
 
     pub const json_field_names = .{
         .basic = "BASIC",
         .detailed = "DETAILED",
+        .sheet = "SHEET",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .basic => "BASIC",
             .detailed => "DETAILED",
+            .sheet => "SHEET",
         };
     }
 

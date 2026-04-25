@@ -2,6 +2,7 @@ const ResourceLocation = @import("resource_location.zig").ResourceLocation;
 const ContactProtocol = @import("contact_protocol.zig").ContactProtocol;
 const ResourceType = @import("resource_type.zig").ResourceType;
 const ContactMethodStatus = @import("contact_method_status.zig").ContactMethodStatus;
+const Tag = @import("tag.zig").Tag;
 
 /// Describes a contact method.
 ///
@@ -53,6 +54,12 @@ pub const ContactMethod = struct {
     /// Lightsail information more easily.
     support_code: ?[]const u8 = null,
 
+    /// The tag keys and optional values for the resource. For more information
+    /// about tags in
+    /// Lightsail, see the [Amazon Lightsail Developer
+    /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-tags).
+    tags: ?[]const Tag = null,
+
     pub const json_field_names = .{
         .arn = "arn",
         .contact_endpoint = "contactEndpoint",
@@ -63,5 +70,6 @@ pub const ContactMethod = struct {
         .resource_type = "resourceType",
         .status = "status",
         .support_code = "supportCode",
+        .tags = "tags",
     };
 };

@@ -5,6 +5,8 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FrontOfQueueDetail = @import("front_of_queue_detail.zig").FrontOfQueueDetail;
+const FrontOfQuotaSharesDetail = @import("front_of_quota_shares_detail.zig").FrontOfQuotaSharesDetail;
+const QueueSnapshotUtilizationDetail = @import("queue_snapshot_utilization_detail.zig").QueueSnapshotUtilizationDetail;
 
 pub const GetJobQueueSnapshotInput = struct {
     /// The job queue’s name or full queue Amazon Resource Name (ARN).
@@ -18,12 +20,24 @@ pub const GetJobQueueSnapshotInput = struct {
 pub const GetJobQueueSnapshotOutput = struct {
     /// The list of the first 100 `RUNNABLE` jobs in each job queue. For
     /// first-in-first-out (FIFO) job queues, jobs are ordered based on their
-    /// submission time. For fair-share scheduling (FSS) job queues, jobs are
-    /// ordered based on their job priority and share usage.
+    /// submission time. For job queues with an attached
+    /// fair-share scheduling (FSS) or quota-share policy, jobs are ordered based on
+    /// their job priority and share
+    /// usage.
     front_of_queue: ?FrontOfQueueDetail = null,
+
+    /// The first `RUNNABLE` job in each quota share. Jobs are ordered based on
+    /// their job priority and share usage.
+    front_of_quota_shares: ?FrontOfQuotaSharesDetail = null,
+
+    /// The job queue's capacity utilization, including total usage and
+    /// breakdown per given share.
+    queue_utilization: ?QueueSnapshotUtilizationDetail = null,
 
     pub const json_field_names = .{
         .front_of_queue = "frontOfQueue",
+        .front_of_quota_shares = "frontOfQuotaShares",
+        .queue_utilization = "queueUtilization",
     };
 };
 

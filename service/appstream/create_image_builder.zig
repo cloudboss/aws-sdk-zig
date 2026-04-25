@@ -24,6 +24,14 @@ pub const CreateImageBuilderInput = struct {
     /// The description to display.
     description: ?[]const u8 = null,
 
+    /// Set to true to disable Instance Metadata Service Version 1 (IMDSv1) and
+    /// enforce IMDSv2. Set to false to enable both IMDSv1 and IMDSv2.
+    ///
+    /// Before disabling IMDSv1, ensure your WorkSpaces Applications images are
+    /// running the agent version or managed image update released on or after
+    /// January 16, 2024 to support IMDSv2 enforcement.
+    disable_imdsv1: ?bool = null,
+
     /// The image builder name to display.
     display_name: ?[]const u8 = null,
 
@@ -287,6 +295,7 @@ pub const CreateImageBuilderInput = struct {
         .access_endpoints = "AccessEndpoints",
         .appstream_agent_version = "AppstreamAgentVersion",
         .description = "Description",
+        .disable_imdsv1 = "DisableIMDSV1",
         .display_name = "DisplayName",
         .domain_join_info = "DomainJoinInfo",
         .enable_default_internet_access = "EnableDefaultInternetAccess",

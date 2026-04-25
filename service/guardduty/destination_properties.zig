@@ -1,6 +1,6 @@
 /// Contains the Amazon Resource Name (ARN) of the resource to publish to, such
-/// as an S3
-/// bucket, and the ARN of the KMS key to use to encrypt published findings.
+/// as an S3 bucket, and the ARN of the KMS key to use to encrypt published
+/// findings.
 pub const DestinationProperties = struct {
     /// The ARN of the resource to publish to.
     ///

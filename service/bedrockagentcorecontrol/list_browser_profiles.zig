@@ -10,11 +10,15 @@ pub const ListBrowserProfilesInput = struct {
     /// The maximum number of results to return in the response.
     max_results: ?i32 = null,
 
+    /// The name of the browser profile to filter results by.
+    name: ?[]const u8 = null,
+
     /// A token to retrieve the next page of results.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .max_results = "maxResults",
+        .name = "name",
         .next_token = "nextToken",
     };
 };
@@ -85,7 +89,19 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListBrowserProfilesInpu
     }
     const query = try query_buf.toOwnedSlice(allocator);
 
-    const body: ?[]const u8 = null;
+    var body_buf: std.ArrayList(u8) = .{};
+    var has_prev = false;
+    try body_buf.appendSlice(allocator, "{");
+
+    if (input.name) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"name\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+
+    try body_buf.appendSlice(allocator, "}");
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;

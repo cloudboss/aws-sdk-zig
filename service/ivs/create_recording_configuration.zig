@@ -11,17 +11,15 @@ const RecordingConfiguration = @import("recording_configuration.zig").RecordingC
 
 pub const CreateRecordingConfigurationInput = struct {
     /// A complex type that contains a destination configuration for where recorded
-    /// video will be
-    /// stored.
+    /// video will be stored.
     destination_configuration: DestinationConfiguration,
 
     /// Recording-configuration name. The value does not need to be unique.
     name: ?[]const u8 = null,
 
     /// If a broadcast disconnects and then reconnects within the specified
-    /// interval, the multiple
-    /// streams will be considered a single broadcast and merged together. Default:
-    /// 0.
+    /// interval, the multiple streams will be considered a single broadcast and
+    /// merged together. Default: 0.
     recording_reconnect_window_seconds: ?i32 = null,
 
     /// Object that describes which renditions should be recorded for a stream.
@@ -29,14 +27,12 @@ pub const CreateRecordingConfigurationInput = struct {
 
     /// Array of 1-50 maps, each of the form `string:string (key:value)`. See [Best
     /// practices and
-    /// strategies](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html) in *Tagging Amazon Web Services Resources and Tag Editor* for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is
-    /// documented there.
+    /// strategies](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html) in *Tagging Amazon Web Services Resources and Tag Editor* for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// A complex type that allows you to enable/disable the recording of thumbnails
-    /// for a live
-    /// session and modify the interval at which thumbnails are generated for the
-    /// live session.
+    /// for a live session and modify the interval at which thumbnails are generated
+    /// for the live session.
     thumbnail_configuration: ?ThumbnailConfiguration = null,
 
     pub const json_field_names = .{
@@ -208,6 +204,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
         return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceUnavailable")) {
+        return .{ .arena = arena, .kind = .{ .service_unavailable = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

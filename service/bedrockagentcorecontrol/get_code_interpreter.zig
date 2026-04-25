@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const Certificate = @import("certificate.zig").Certificate;
 const CodeInterpreterNetworkConfiguration = @import("code_interpreter_network_configuration.zig").CodeInterpreterNetworkConfiguration;
 const CodeInterpreterStatus = @import("code_interpreter_status.zig").CodeInterpreterStatus;
 
@@ -17,6 +18,9 @@ pub const GetCodeInterpreterInput = struct {
 };
 
 pub const GetCodeInterpreterOutput = struct {
+    /// The list of certificates configured for the code interpreter.
+    certificates: ?[]const Certificate = null,
+
     /// The Amazon Resource Name (ARN) of the code interpreter.
     code_interpreter_arn: []const u8,
 
@@ -47,6 +51,7 @@ pub const GetCodeInterpreterOutput = struct {
     status: CodeInterpreterStatus,
 
     pub const json_field_names = .{
+        .certificates = "certificates",
         .code_interpreter_arn = "codeInterpreterArn",
         .code_interpreter_id = "codeInterpreterId",
         .created_at = "createdAt",

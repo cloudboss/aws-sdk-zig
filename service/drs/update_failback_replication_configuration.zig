@@ -4,11 +4,16 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const InternetProtocol = @import("internet_protocol.zig").InternetProtocol;
 
 pub const UpdateFailbackReplicationConfigurationInput = struct {
     /// Configure bandwidth throttling for the outbound data transfer rate of the
     /// Recovery Instance in Mbps.
     bandwidth_throttling: ?i64 = null,
+
+    /// Which version of the Internet Protocol to use for replication of data. (IPv4
+    /// or IPv6)
+    internet_protocol: ?InternetProtocol = null,
 
     /// The name of the Failback Replication Configuration.
     name: ?[]const u8 = null,
@@ -22,6 +27,7 @@ pub const UpdateFailbackReplicationConfigurationInput = struct {
 
     pub const json_field_names = .{
         .bandwidth_throttling = "bandwidthThrottling",
+        .internet_protocol = "internetProtocol",
         .name = "name",
         .recovery_instance_id = "recoveryInstanceID",
         .use_private_ip = "usePrivateIP",
@@ -71,6 +77,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateFailbackReplicati
     if (input.bandwidth_throttling) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"bandwidthThrottling\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.internet_protocol) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"internetProtocol\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

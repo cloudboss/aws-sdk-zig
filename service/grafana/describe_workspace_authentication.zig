@@ -17,8 +17,7 @@ pub const DescribeWorkspaceAuthenticationInput = struct {
 
 pub const DescribeWorkspaceAuthenticationOutput = struct {
     /// A structure containing information about the authentication methods used in
-    /// the
-    /// workspace.
+    /// the workspace.
     authentication: ?AuthenticationDescription = null,
 
     pub const json_field_names = .{

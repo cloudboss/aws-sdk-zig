@@ -9,26 +9,21 @@ const ProtectedTask = @import("protected_task.zig").ProtectedTask;
 
 pub const UpdateTaskProtectionInput = struct {
     /// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-    /// the
-    /// service that the task sets exist in.
+    /// the service that the task sets exist in.
     cluster: []const u8,
 
-    /// If you set `protectionEnabled` to `true`, you can specify the
-    /// duration for task protection in minutes. You can specify a value from 1
-    /// minute to up to
+    /// If you set `protectionEnabled` to `true`, you can specify the duration for
+    /// task protection in minutes. You can specify a value from 1 minute to up to
     /// 2,880 minutes (48 hours). During this time, your task will not be terminated
-    /// by scale-in
-    /// events from Service Auto Scaling or deployments. After this time period
-    /// lapses,
-    /// `protectionEnabled` will be reset to `false`.
+    /// by scale-in events from Service Auto Scaling or deployments. After this time
+    /// period lapses, `protectionEnabled` will be reset to `false`.
     ///
     /// If you don’t specify the time, then the task is automatically protected for
-    /// 120
-    /// minutes (2 hours).
+    /// 120 minutes (2 hours).
     expires_in_minutes: ?i32 = null,
 
-    /// Specify `true` to mark a task for protection and `false` to
-    /// unset protection, making it eligible for termination.
+    /// Specify `true` to mark a task for protection and `false` to unset
+    /// protection, making it eligible for termination.
     protection_enabled: ?bool = null,
 
     /// A list of up to 10 task IDs or full ARN entries.
@@ -49,13 +44,10 @@ pub const UpdateTaskProtectionOutput = struct {
     /// A list of tasks with the following information.
     ///
     /// * `taskArn`: The task ARN.
-    ///
     /// * `protectionEnabled`: The protection status of the task. If scale-in
-    /// protection is turned on for a task, the value is `true`. Otherwise,
-    /// it is `false`.
-    ///
-    /// * `expirationDate`: The epoch time when protection for the task will
-    /// expire.
+    ///   protection is turned on for a task, the value is `true`. Otherwise, it is
+    ///   `false`.
+    /// * `expirationDate`: The epoch time when protection for the task will expire.
     protected_tasks: ?[]const ProtectedTask = null,
 
     pub const json_field_names = .{
@@ -188,6 +180,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

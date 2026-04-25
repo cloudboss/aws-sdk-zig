@@ -99,6 +99,7 @@ const describe_orderable_db_instance_options = @import("describe_orderable_db_in
 const describe_pending_maintenance_actions = @import("describe_pending_maintenance_actions.zig");
 const describe_reserved_db_instances = @import("describe_reserved_db_instances.zig");
 const describe_reserved_db_instances_offerings = @import("describe_reserved_db_instances_offerings.zig");
+const describe_serverless_v2_platform_versions = @import("describe_serverless_v2_platform_versions.zig");
 const describe_source_regions = @import("describe_source_regions.zig");
 const describe_tenant_databases = @import("describe_tenant_databases.zig");
 const describe_valid_db_instance_modifications = @import("describe_valid_db_instance_modifications.zig");
@@ -404,6 +405,11 @@ pub const Client = struct {
     /// instance as the source. For more information about Multi-AZ DB clusters, see
     /// [Multi-AZ DB cluster
     /// deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide*.
+    ///
+    /// You can use the `WithExpressConfiguration` parameter to create an Aurora DB
+    /// Cluster with express configuration and create cluster in seconds. Express
+    /// configuration provides a cluster with a writer instance and feature specific
+    /// values set to all other input parameters of this API.
     pub fn createDbCluster(self: *Self, allocator: std.mem.Allocator, input: create_db_cluster.CreateDBClusterInput, options: CallOptions) !create_db_cluster.CreateDBClusterOutput {
         return create_db_cluster.execute(self, allocator, input, options);
     }
@@ -1236,6 +1242,12 @@ pub const Client = struct {
         return describe_reserved_db_instances_offerings.execute(self, allocator, input, options);
     }
 
+    /// Describes the properties of specific platform versions for Aurora Serverless
+    /// v2.
+    pub fn describeServerlessV2PlatformVersions(self: *Self, allocator: std.mem.Allocator, input: describe_serverless_v2_platform_versions.DescribeServerlessV2PlatformVersionsInput, options: CallOptions) !describe_serverless_v2_platform_versions.DescribeServerlessV2PlatformVersionsOutput {
+        return describe_serverless_v2_platform_versions.execute(self, allocator, input, options);
+    }
+
     /// Returns a list of the source Amazon Web Services Regions where the current
     /// Amazon Web Services Region can create a read replica, copy a DB snapshot
     /// from, or replicate automated backups from.
@@ -1869,6 +1881,17 @@ pub const Client = struct {
     /// configuration. If you don't specify a security group, the new DB cluster is
     /// associated with the default security group.
     ///
+    /// You can use the `EnableVPCNetworking` and `EnableInternetAccessGateway`
+    /// parameters together to restore an Aurora PostgreSQL cluster without VPC
+    /// networking and with internet-based connectivity. These two parameters must
+    /// always be specified together. Set `EnableVPCNetworking` to `false` to
+    /// disable the VPC network interface (ENI) for the cluster.
+    /// `EnableInternetAccessGateway` enables internet-based connectivity through an
+    /// internet access gateway. IAM database authentication is required and must be
+    /// enabled using `EnableIAMDatabaseAuthentication`. Once the cluster is
+    /// restored, you need to modify the DB cluster to update
+    /// `MasterUserAuthenticationType` to `iam-db-auth`.
+    ///
     /// This operation only restores the DB cluster, not the DB instances for that
     /// DB cluster. You must invoke the `CreateDBInstance` operation to create DB
     /// instances for the restored DB cluster, specifying the identifier of the
@@ -1894,6 +1917,17 @@ pub const Client = struct {
     /// occur in a different Availability Zone (AZ) from the original DB cluster.
     /// The AZ where RDS restores the DB cluster depends on the AZs in the specified
     /// subnet group.
+    ///
+    /// You can use the `EnableVPCNetworking` and `EnableInternetAccessGateway`
+    /// parameters together to restore an Aurora PostgreSQL cluster without VPC
+    /// networking and with internet-based connectivity. These two parameters must
+    /// always be specified together. Set `EnableVPCNetworking` to `false` to
+    /// disable the VPC network interface (ENI) for the cluster.
+    /// `EnableInternetAccessGateway` enables internet-based connectivity through an
+    /// internet access gateway. IAM database authentication is required and must be
+    /// enabled using `EnableIAMDatabaseAuthentication`. Once the cluster is
+    /// restored, you need to modify the DB cluster to update
+    /// `MasterUserAuthenticationType` to `iam-db-auth`.
     ///
     /// For Aurora, this operation only restores the DB cluster, not the DB
     /// instances for that DB cluster. You must invoke the `CreateDBInstance`
@@ -2406,6 +2440,13 @@ pub const Client = struct {
     }
 
     pub fn describeReservedDbInstancesOfferingsPaginator(self: *Self, params: describe_reserved_db_instances_offerings.DescribeReservedDBInstancesOfferingsInput) paginator.DescribeReservedDBInstancesOfferingsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn describeServerlessV2PlatformVersionsPaginator(self: *Self, params: describe_serverless_v2_platform_versions.DescribeServerlessV2PlatformVersionsInput) paginator.DescribeServerlessV2PlatformVersionsPaginator {
         return .{
             .client = self,
             .params = params,

@@ -17,6 +17,7 @@ pub const IndicatorType = enum {
     cryptomining_ip,
     cryptomining_domain,
     cryptomining_process,
+    malicious_file,
 
     pub const json_field_names = .{
         .suspicious_user_agent = "SUSPICIOUS_USER_AGENT",
@@ -35,6 +36,7 @@ pub const IndicatorType = enum {
         .cryptomining_ip = "CRYPTOMINING_IP",
         .cryptomining_domain = "CRYPTOMINING_DOMAIN",
         .cryptomining_process = "CRYPTOMINING_PROCESS",
+        .malicious_file = "MALICIOUS_FILE",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -55,6 +57,7 @@ pub const IndicatorType = enum {
             .cryptomining_ip => "CRYPTOMINING_IP",
             .cryptomining_domain => "CRYPTOMINING_DOMAIN",
             .cryptomining_process => "CRYPTOMINING_PROCESS",
+            .malicious_file => "MALICIOUS_FILE",
         };
     }
 

@@ -5,7 +5,27 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const StartTelemetryEvaluationInput = struct {};
+pub const StartTelemetryEvaluationInput = struct {
+    /// If set to `true`, telemetry evaluation starts in all Amazon Web Services
+    /// Regions where Amazon CloudWatch Observability Admin is available in the
+    /// current partition. The current region becomes the home region for managing
+    /// multi-region evaluation. When new regions become available, evaluation
+    /// automatically expands to include them. Mutually exclusive with `Regions`.
+    all_regions: ?bool = null,
+
+    /// An optional list of Amazon Web Services Regions to include in multi-region
+    /// telemetry evaluation. The current region is always implicitly included and
+    /// must not be specified in this list. When provided, telemetry evaluation
+    /// starts in the current region and propagates to all specified regions.
+    /// Mutually exclusive with `AllRegions`. If neither `Regions` nor `AllRegions`
+    /// is provided, the operation applies only to the current region.
+    regions: ?[]const []const u8 = null,
+
+    pub const json_field_names = .{
+        .all_regions = "AllRegions",
+        .regions = "Regions",
+    };
+};
 
 pub const StartTelemetryEvaluationOutput = struct {};
 
@@ -35,7 +55,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartTeleme
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: StartTelemetryEvaluationInput, config: *aws.Config) !aws.http.Request {
-    _ = input;
     const endpoint = try config.getEndpointForService("observabilityadmin", "ObservabilityAdmin", allocator);
 
     const host = aws.url.parseHost(endpoint);
@@ -44,7 +63,25 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartTelemetryEvaluatio
 
     const path = "/StartTelemetryEvaluation";
 
-    const body: ?[]const u8 = null;
+    var body_buf: std.ArrayList(u8) = .{};
+    var has_prev = false;
+    try body_buf.appendSlice(allocator, "{");
+
+    if (input.all_regions) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"AllRegions\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.regions) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"Regions\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+
+    try body_buf.appendSlice(allocator, "}");
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
     request.method = .POST;

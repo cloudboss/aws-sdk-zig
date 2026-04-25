@@ -21,11 +21,20 @@ pub const CompletedPart = struct {
     /// The Base64 encoded, 64-bit `CRC64NVME` checksum of the part. This checksum
     /// is present if
     /// the multipart upload request was created with the `CRC64NVME` checksum
-    /// algorithm to the
-    /// uploaded object). For more information, see [Checking object
+    /// algorithm. For more
+    /// information, see [Checking object
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
     /// the *Amazon S3 User Guide*.
     checksum_crc64_nvme: ?[]const u8 = null,
+
+    /// The Base64 encoded, 128-bit `MD5` digest of the part. This checksum is
+    /// present if
+    /// the multipart upload request was created with the `MD5` checksum algorithm.
+    /// For more
+    /// information, see [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
+    /// the *Amazon S3 User Guide*.
+    checksum_md5: ?[]const u8 = null,
 
     /// The Base64 encoded, 160-bit `SHA1` checksum of the part. This checksum is
     /// present if the
@@ -44,6 +53,42 @@ pub const CompletedPart = struct {
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
     /// the *Amazon S3 User Guide*.
     checksum_sha256: ?[]const u8 = null,
+
+    /// The Base64 encoded, 512-bit `SHA512` digest of the part. This checksum is
+    /// present if
+    /// the multipart upload request was created with the `SHA512` checksum
+    /// algorithm. For more
+    /// information, see [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
+    /// the *Amazon S3 User Guide*.
+    checksum_sha512: ?[]const u8 = null,
+
+    /// The Base64 encoded, 128-bit `XXHASH128` checksum of the part. This checksum
+    /// is present if
+    /// the multipart upload request was created with the `XXHASH128` checksum
+    /// algorithm. For more
+    /// information, see [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
+    /// the *Amazon S3 User Guide*.
+    checksum_xxhash128: ?[]const u8 = null,
+
+    /// The Base64 encoded, 64-bit `XXHASH3` checksum of the part. This checksum is
+    /// present if
+    /// the multipart upload request was created with the `XXHASH3` checksum
+    /// algorithm. For more
+    /// information, see [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
+    /// the *Amazon S3 User Guide*.
+    checksum_xxhash3: ?[]const u8 = null,
+
+    /// The Base64 encoded, 64-bit `XXHASH64` checksum of the part. This checksum is
+    /// present if
+    /// the multipart upload request was created with the `XXHASH64` checksum
+    /// algorithm. For more
+    /// information, see [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
+    /// the *Amazon S3 User Guide*.
+    checksum_xxhash64: ?[]const u8 = null,
 
     /// Entity tag returned when the part was uploaded.
     e_tag: ?[]const u8 = null,

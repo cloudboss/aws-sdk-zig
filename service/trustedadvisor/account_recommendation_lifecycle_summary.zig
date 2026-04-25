@@ -17,17 +17,15 @@ pub const AccountRecommendationLifecycleSummary = struct {
     lifecycle_stage: ?RecommendationLifecycleStage = null,
 
     /// The person on whose behalf a Technical Account Manager (TAM) updated the
-    /// recommendation. This information
-    /// is only available when a Technical Account Manager takes an action on a
-    /// recommendation managed by AWS
-    /// Trusted Advisor Priority
+    /// recommendation. This information is only available when a Technical Account
+    /// Manager takes an action on a recommendation managed by AWS Trusted Advisor
+    /// Priority
     updated_on_behalf_of: ?[]const u8 = null,
 
     /// The job title of the person on whose behalf a Technical Account Manager
-    /// (TAM) updated the recommendation.
-    /// This information is only available when a Technical Account Manager takes an
-    /// action on a recommendation
-    /// managed by AWS Trusted Advisor Priority
+    /// (TAM) updated the recommendation. This information is only available when a
+    /// Technical Account Manager takes an action on a recommendation managed by AWS
+    /// Trusted Advisor Priority
     updated_on_behalf_of_job_title: ?[]const u8 = null,
 
     /// Reason for the lifecycle stage change

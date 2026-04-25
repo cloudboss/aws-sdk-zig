@@ -80,6 +80,8 @@ pub const ListBackupJobsInput = struct {
     ///
     /// * `EFS` for Amazon Elastic File System
     ///
+    /// * `EKS` for Amazon Elastic Kubernetes Service
+    ///
     /// * `FSx` for Amazon FSx
     ///
     /// * `Neptune` for Amazon Neptune

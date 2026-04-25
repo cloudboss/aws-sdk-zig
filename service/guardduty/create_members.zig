@@ -9,16 +9,14 @@ const UnprocessedAccount = @import("unprocessed_account.zig").UnprocessedAccount
 
 pub const CreateMembersInput = struct {
     /// A list of account ID and email address pairs of the accounts that you want
-    /// to associate
-    /// with the GuardDuty administrator account.
+    /// to associate with the GuardDuty administrator account.
     account_details: []const AccountDetail,
 
     /// The unique ID of the detector of the GuardDuty account for which you want to
-    /// associate member
-    /// accounts.
+    /// associate member accounts.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 
@@ -30,8 +28,7 @@ pub const CreateMembersInput = struct {
 
 pub const CreateMembersOutput = struct {
     /// A list of objects that include the `accountIds` of the unprocessed accounts
-    /// and
-    /// a result string that explains why each was unprocessed.
+    /// and a result string that explains why each was unprocessed.
     unprocessed_accounts: ?[]const UnprocessedAccount = null,
 
     pub const json_field_names = .{

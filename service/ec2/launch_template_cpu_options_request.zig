@@ -1,4 +1,5 @@
 const AmdSevSnpSpecification = @import("amd_sev_snp_specification.zig").AmdSevSnpSpecification;
+const NestedVirtualizationSpecification = @import("nested_virtualization_specification.zig").NestedVirtualizationSpecification;
 
 /// The CPU options for the instance. Both the core count and threads per core
 /// must be
@@ -14,6 +15,13 @@ pub const LaunchTemplateCpuOptionsRequest = struct {
 
     /// The number of CPU cores for the instance.
     core_count: ?i32 = null,
+
+    /// Indicates whether to enable the instance for nested virtualization.
+    /// Nested virtualization is supported only on 8th generation Intel-based
+    /// instance types (c8i, m8i, r8i, and their flex variants).
+    /// When nested virtualization is enabled, Virtual Secure Mode (VSM) is
+    /// automatically disabled for the instance.
+    nested_virtualization: ?NestedVirtualizationSpecification = null,
 
     /// The number of threads per CPU core. To disable multithreading for the
     /// instance,

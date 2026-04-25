@@ -6,9 +6,11 @@ const ParticipantState = @import("participant_state.zig").ParticipantState;
 /// Summary object describing a participant that has joined a stage.
 pub const ParticipantSummary = struct {
     /// ISO 8601 timestamp (returned as a string) when the participant first joined
-    /// the stage
-    /// session.
+    /// the stage session.
     first_join_time: ?i64 = null,
+
+    /// The participant’s ingest configuration.
+    ingest_configuration_arn: ?[]const u8 = null,
 
     /// Unique identifier for this participant, assigned by IVS.
     participant_id: ?[]const u8 = null,
@@ -18,6 +20,9 @@ pub const ParticipantSummary = struct {
 
     /// The participant’s recording state.
     recording_state: ?ParticipantRecordingState = null,
+
+    /// Indicates whether redundant ingest is enabled for the participant.
+    redundant_ingest: bool = false,
 
     /// The participant's replication state.
     replication_state: ?ReplicationState = null,
@@ -47,9 +52,11 @@ pub const ParticipantSummary = struct {
 
     pub const json_field_names = .{
         .first_join_time = "firstJoinTime",
+        .ingest_configuration_arn = "ingestConfigurationArn",
         .participant_id = "participantId",
         .published = "published",
         .recording_state = "recordingState",
+        .redundant_ingest = "redundantIngest",
         .replication_state = "replicationState",
         .replication_type = "replicationType",
         .source_session_id = "sourceSessionId",

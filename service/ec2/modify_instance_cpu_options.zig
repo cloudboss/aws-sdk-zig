@@ -4,10 +4,11 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const NestedVirtualizationSpecification = @import("nested_virtualization_specification.zig").NestedVirtualizationSpecification;
 
 pub const ModifyInstanceCpuOptionsInput = struct {
     /// The number of CPU cores to activate for the specified instance.
-    core_count: i32,
+    core_count: ?i32 = null,
 
     /// Checks whether you have the required permissions for the operation, without
     /// actually making the
@@ -19,8 +20,14 @@ pub const ModifyInstanceCpuOptionsInput = struct {
     /// The ID of the instance to update.
     instance_id: []const u8,
 
+    /// Indicates whether to enable or disable nested virtualization for the
+    /// instance.
+    /// When nested virtualization is enabled, Virtual Secure Mode (VSM) is
+    /// automatically disabled for the instance.
+    nested_virtualization: ?NestedVirtualizationSpecification = null,
+
     /// The number of threads to run for each CPU core.
-    threads_per_core: i32,
+    threads_per_core: ?i32 = null,
 };
 
 pub const ModifyInstanceCpuOptionsOutput = struct {
@@ -31,6 +38,9 @@ pub const ModifyInstanceCpuOptionsOutput = struct {
 
     /// The ID of the instance that was updated.
     instance_id: ?[]const u8 = null,
+
+    /// Indicates whether nested virtualization has been enabled or disabled.
+    nested_virtualization: ?NestedVirtualizationSpecification = null,
 
     /// The number of threads that are running per CPU core for the specified
     /// instance after the update.
@@ -72,16 +82,24 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyInstanceCpuOption
     var body_buf: std.ArrayList(u8) = .{};
 
     try body_buf.appendSlice(allocator, "Action=ModifyInstanceCpuOptions&Version=2016-11-15");
-    try body_buf.appendSlice(allocator, "&CoreCount=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.core_count}) catch "");
+    if (input.core_count) |v| {
+        try body_buf.appendSlice(allocator, "&CoreCount=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
+    }
     if (input.dry_run) |v| {
         try body_buf.appendSlice(allocator, "&DryRun=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     try body_buf.appendSlice(allocator, "&InstanceId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.instance_id);
-    try body_buf.appendSlice(allocator, "&ThreadsPerCore=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.threads_per_core}) catch "");
+    if (input.nested_virtualization) |v| {
+        try body_buf.appendSlice(allocator, "&NestedVirtualization=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
+    }
+    if (input.threads_per_core) |v| {
+        try body_buf.appendSlice(allocator, "&ThreadsPerCore=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
+    }
 
     const body = try body_buf.toOwnedSlice(allocator);
 
@@ -116,6 +134,8 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                     result.core_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "instanceId")) {
                     result.instance_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "nestedVirtualization")) {
+                    result.nested_virtualization = NestedVirtualizationSpecification.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "threadsPerCore")) {
                     result.threads_per_core = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else {

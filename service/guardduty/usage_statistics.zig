@@ -5,8 +5,7 @@ const UsageResourceResult = @import("usage_resource_result.zig").UsageResourceRe
 const UsageTopAccountsResult = @import("usage_top_accounts_result.zig").UsageTopAccountsResult;
 
 /// Contains the result of GuardDuty usage. If a UsageStatisticType is provided
-/// the result for
-/// other types will be null.
+/// the result for other types will be null.
 pub const UsageStatistics = struct {
     /// The usage statistic sum organized by account ID.
     sum_by_account: ?[]const UsageAccountResult = null,
@@ -20,15 +19,14 @@ pub const UsageStatistics = struct {
     /// The usage statistic sum organized by resource.
     sum_by_resource: ?[]const UsageResourceResult = null,
 
-    /// Lists the top 50 accounts by feature that have generated the most
-    /// GuardDuty usage, in the order from most to least expensive.
+    /// Lists the top 50 accounts by feature that have generated the most GuardDuty
+    /// usage, in the order from most to least expensive.
     ///
     /// Currently, this doesn't support `RDS_LOGIN_EVENTS`.
     top_accounts_by_feature: ?[]const UsageTopAccountsResult = null,
 
     /// Lists the top 50 resources that have generated the most GuardDuty usage, in
-    /// order from
-    /// most to least expensive.
+    /// order from most to least expensive.
     top_resources: ?[]const UsageResourceResult = null,
 
     pub const json_field_names = .{

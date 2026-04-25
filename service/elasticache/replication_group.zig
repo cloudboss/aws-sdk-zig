@@ -92,8 +92,8 @@ pub const ReplicationGroup = struct {
     /// The user supplied description of the replication group.
     description: ?[]const u8 = null,
 
-    /// The engine used in a replication group. The options are redis, memcached or
-    /// valkey.
+    /// The engine used in a replication group. The options are valkey, memcached or
+    /// redis.
     engine: ?[]const u8 = null,
 
     /// The name of the Global datastore and role of this replication group in the

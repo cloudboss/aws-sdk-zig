@@ -2,6 +2,7 @@ const aws = @import("aws");
 
 const DependencyConfig = @import("dependency_config.zig").DependencyConfig;
 const MetricDataQuery = @import("metric_data_query.zig").MetricDataQuery;
+const MetricSource = @import("metric_source.zig").MetricSource;
 const ServiceLevelIndicatorMetricType = @import("service_level_indicator_metric_type.zig").ServiceLevelIndicatorMetricType;
 
 /// This structure contains the information about the metric that is used for a
@@ -31,6 +32,10 @@ pub const ServiceLevelIndicatorMetric = struct {
     /// metric or expression.
     metric_data_queries: []const MetricDataQuery,
 
+    /// Identifies the metric source for SLOs on resources other than Application
+    /// Signals services.
+    metric_source: ?MetricSource = null,
+
     /// If the SLO monitors either the `LATENCY` or `AVAILABILITY` metric that
     /// Application Signals collects, this field displays which of those metrics is
     /// used.
@@ -44,6 +49,7 @@ pub const ServiceLevelIndicatorMetric = struct {
         .dependency_config = "DependencyConfig",
         .key_attributes = "KeyAttributes",
         .metric_data_queries = "MetricDataQueries",
+        .metric_source = "MetricSource",
         .metric_type = "MetricType",
         .operation_name = "OperationName",
     };

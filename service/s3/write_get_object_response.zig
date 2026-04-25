@@ -72,6 +72,15 @@ pub const WriteGetObjectResponseInput = struct {
 
     /// This header can be used as a data integrity check to verify that the data
     /// received is the same data
+    /// that was originally sent. This header specifies the Base64 encoded, 128-bit
+    /// `MD5`
+    /// digest of the part. For more information, see [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
+    /// the *Amazon S3 User Guide*.
+    checksum_md5: ?[]const u8 = null,
+
+    /// This header can be used as a data integrity check to verify that the data
+    /// received is the same data
     /// that was originally sent. This specifies the Base64 encoded, 160-bit `SHA1`
     /// digest of the
     /// object returned by the Object Lambda function. This may not match the
@@ -103,6 +112,42 @@ pub const WriteGetObjectResponseInput = struct {
     /// checksum headers, this
     /// request will fail.
     checksum_sha256: ?[]const u8 = null,
+
+    /// This header can be used as a data integrity check to verify that the data
+    /// received is the same data
+    /// that was originally sent. This header specifies the Base64 encoded, 512-bit
+    /// `SHA512`
+    /// digest of the part. For more information, see [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
+    /// the *Amazon S3 User Guide*.
+    checksum_sha512: ?[]const u8 = null,
+
+    /// This header can be used as a data integrity check to verify that the data
+    /// received is the same data
+    /// that was originally sent. This header specifies the Base64 encoded, 128-bit
+    /// `XXHASH128`
+    /// checksum of the part. For more information, see [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
+    /// the *Amazon S3 User Guide*.
+    checksum_xxhash128: ?[]const u8 = null,
+
+    /// This header can be used as a data integrity check to verify that the data
+    /// received is the same data
+    /// that was originally sent. This header specifies the Base64 encoded, 64-bit
+    /// `XXHASH3`
+    /// checksum of the part. For more information, see [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
+    /// the *Amazon S3 User Guide*.
+    checksum_xxhash3: ?[]const u8 = null,
+
+    /// This header can be used as a data integrity check to verify that the data
+    /// received is the same data
+    /// that was originally sent. This header specifies the Base64 encoded, 64-bit
+    /// `XXHASH64`
+    /// checksum of the part. For more information, see [Checking object
+    /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in
+    /// the *Amazon S3 User Guide*.
+    checksum_xxhash64: ?[]const u8 = null,
 
     /// Specifies presentational information for the object.
     content_disposition: ?[]const u8 = null,
@@ -350,11 +395,26 @@ fn serializeRequest(allocator: std.mem.Allocator, input: WriteGetObjectResponseI
     if (input.checksum_crc64_nvme) |v| {
         try request.headers.put(allocator, "x-amz-fwd-header-x-amz-checksum-crc64nvme", v);
     }
+    if (input.checksum_md5) |v| {
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-checksum-md5", v);
+    }
     if (input.checksum_sha1) |v| {
         try request.headers.put(allocator, "x-amz-fwd-header-x-amz-checksum-sha1", v);
     }
     if (input.checksum_sha256) |v| {
         try request.headers.put(allocator, "x-amz-fwd-header-x-amz-checksum-sha256", v);
+    }
+    if (input.checksum_sha512) |v| {
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-checksum-sha512", v);
+    }
+    if (input.checksum_xxhash128) |v| {
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-checksum-xxhash128", v);
+    }
+    if (input.checksum_xxhash3) |v| {
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-checksum-xxhash3", v);
+    }
+    if (input.checksum_xxhash64) |v| {
+        try request.headers.put(allocator, "x-amz-fwd-header-x-amz-checksum-xxhash64", v);
     }
     if (input.content_disposition) |v| {
         try request.headers.put(allocator, "x-amz-fwd-header-Content-Disposition", v);

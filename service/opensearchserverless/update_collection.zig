@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const VectorOptions = @import("vector_options.zig").VectorOptions;
 const UpdateCollectionDetail = @import("update_collection_detail.zig").UpdateCollectionDetail;
 
 pub const UpdateCollectionInput = struct {
@@ -16,10 +17,14 @@ pub const UpdateCollectionInput = struct {
     /// The unique identifier of the collection.
     id: []const u8,
 
+    /// Configuration options for vector search capabilities in the collection.
+    vector_options: ?VectorOptions = null,
+
     pub const json_field_names = .{
         .client_token = "clientToken",
         .description = "description",
         .id = "id",
+        .vector_options = "vectorOptions",
     };
 };
 

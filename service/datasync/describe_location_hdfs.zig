@@ -5,6 +5,9 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const HdfsAuthenticationType = @import("hdfs_authentication_type.zig").HdfsAuthenticationType;
+const CmkSecretConfig = @import("cmk_secret_config.zig").CmkSecretConfig;
+const CustomSecretConfig = @import("custom_secret_config.zig").CustomSecretConfig;
+const ManagedSecretConfig = @import("managed_secret_config.zig").ManagedSecretConfig;
 const HdfsNameNode = @import("hdfs_name_node.zig").HdfsNameNode;
 const QopConfiguration = @import("qop_configuration.zig").QopConfiguration;
 
@@ -27,8 +30,20 @@ pub const DescribeLocationHdfsOutput = struct {
     /// The size of the data blocks to write into the HDFS cluster.
     block_size: ?i32 = null,
 
+    /// Describes configuration information for a DataSync-managed secret, such as a
+    /// `KerberosKeytab` that DataSync uses to access
+    /// a specific storage location, with a customer-managed KMS key.
+    cmk_secret_config: ?CmkSecretConfig = null,
+
     /// The time that the HDFS location was created.
     creation_time: ?i64 = null,
+
+    /// Describes configuration information for a customer-managed secret, such as a
+    /// `KerberosKeytab` that DataSync uses to access
+    /// a specific storage location, with a customer-managed Identity and Access
+    /// Management
+    /// (IAM) role that provides access to the secret.
+    custom_secret_config: ?CustomSecretConfig = null,
 
     /// The Kerberos principal with access to the files and folders on the HDFS
     /// cluster. This
@@ -44,6 +59,13 @@ pub const DescribeLocationHdfsOutput = struct {
 
     /// The URI of the HDFS location.
     location_uri: ?[]const u8 = null,
+
+    /// Describes configuration information for a DataSync-managed secret, such as a
+    /// `KerberosKeytab` that DataSync uses to access
+    /// a specific storage location. DataSync uses the default Amazon Web
+    /// Services-managed
+    /// KMS key to encrypt this secret in Secrets Manager.
+    managed_secret_config: ?ManagedSecretConfig = null,
 
     /// The NameNode that manages the HDFS namespace.
     name_nodes: ?[]const HdfsNameNode = null,
@@ -66,11 +88,14 @@ pub const DescribeLocationHdfsOutput = struct {
         .agent_arns = "AgentArns",
         .authentication_type = "AuthenticationType",
         .block_size = "BlockSize",
+        .cmk_secret_config = "CmkSecretConfig",
         .creation_time = "CreationTime",
+        .custom_secret_config = "CustomSecretConfig",
         .kerberos_principal = "KerberosPrincipal",
         .kms_key_provider_uri = "KmsKeyProviderUri",
         .location_arn = "LocationArn",
         .location_uri = "LocationUri",
+        .managed_secret_config = "ManagedSecretConfig",
         .name_nodes = "NameNodes",
         .qop_configuration = "QopConfiguration",
         .replication_factor = "ReplicationFactor",

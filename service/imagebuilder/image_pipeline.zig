@@ -82,6 +82,9 @@ pub const ImagePipeline = struct {
     /// Contains settings for vulnerability scans.
     image_scanning_configuration: ?ImageScanningConfiguration = null,
 
+    /// The tags to be applied to the images produced by this pipeline.
+    image_tags: ?[]const aws.map.StringMapEntry = null,
+
     /// The image tests configuration of the image pipeline.
     image_tests_configuration: ?ImageTestsConfiguration = null,
 
@@ -130,6 +133,7 @@ pub const ImagePipeline = struct {
         .execution_role = "executionRole",
         .image_recipe_arn = "imageRecipeArn",
         .image_scanning_configuration = "imageScanningConfiguration",
+        .image_tags = "imageTags",
         .image_tests_configuration = "imageTestsConfiguration",
         .infrastructure_configuration_arn = "infrastructureConfigurationArn",
         .last_run_status = "lastRunStatus",

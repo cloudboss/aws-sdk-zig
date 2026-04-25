@@ -48,6 +48,11 @@ pub const PutProfileObjectTypeInput = struct {
     /// The format of your `sourceLastUpdatedTimestamp` that was previously set up.
     source_last_updated_timestamp_format: ?[]const u8 = null,
 
+    /// An integer that determines the priority of this object type when data from
+    /// multiple sources is ingested. Lower values take priority. Object types
+    /// without a specified source priority default to the lowest priority.
+    source_priority: ?i32 = null,
+
     /// The tags used to organize, track, or control access for this resource.
     tags: ?[]const aws.map.StringMapEntry = null,
 
@@ -74,6 +79,7 @@ pub const PutProfileObjectTypeInput = struct {
         .max_profile_object_count = "MaxProfileObjectCount",
         .object_type_name = "ObjectTypeName",
         .source_last_updated_timestamp_format = "SourceLastUpdatedTimestampFormat",
+        .source_priority = "SourcePriority",
         .tags = "Tags",
         .template_id = "TemplateId",
     };
@@ -130,6 +136,11 @@ pub const PutProfileObjectTypeOutput = struct {
     /// field, you must set up `sourceLastUpdatedTimestampFormat`.
     source_last_updated_timestamp_format: ?[]const u8 = null,
 
+    /// An integer that determines the priority of this object type when data from
+    /// multiple sources is ingested. Lower values take priority. Object types
+    /// without a specified source priority default to the lowest priority.
+    source_priority: ?i32 = null,
+
     /// The tags used to organize, track, or control access for this resource.
     tags: ?[]const aws.map.StringMapEntry = null,
 
@@ -149,6 +160,7 @@ pub const PutProfileObjectTypeOutput = struct {
         .max_profile_object_count = "MaxProfileObjectCount",
         .object_type_name = "ObjectTypeName",
         .source_last_updated_timestamp_format = "SourceLastUpdatedTimestampFormat",
+        .source_priority = "SourcePriority",
         .tags = "Tags",
         .template_id = "TemplateId",
     };
@@ -240,6 +252,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutProfileObjectTypeInp
     if (input.source_last_updated_timestamp_format) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"SourceLastUpdatedTimestampFormat\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.source_priority) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"SourcePriority\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

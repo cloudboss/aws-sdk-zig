@@ -15,6 +15,11 @@ pub const GetFarmInput = struct {
 };
 
 pub const GetFarmOutput = struct {
+    /// A multiplier applied to the farm's calculated costs for usage data and
+    /// budget tracking. A value less than 1 represents a discount, a value greater
+    /// than 1 represents a premium, and a value of 1 represents no adjustment.
+    cost_scale_factor: ?f32 = null,
+
     /// The date and time the resource was created.
     created_at: i64,
 
@@ -48,6 +53,7 @@ pub const GetFarmOutput = struct {
     updated_by: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .cost_scale_factor = "costScaleFactor",
         .created_at = "createdAt",
         .created_by = "createdBy",
         .description = "description",

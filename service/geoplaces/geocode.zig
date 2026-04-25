@@ -24,11 +24,14 @@ pub const GeocodeInput = struct {
     /// results must possess in order to be returned as a result.
     filter: ?GeocodeFilter = null,
 
-    /// Indicates if the results will be stored. Defaults to `SingleUse`, if left
-    /// empty.
+    /// Indicates if the query results will be persisted in customer infrastructure.
+    /// Defaults to `SingleUse` (not stored). Not supported in `ap-southeast-1` and
+    /// `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
-    /// Storing the response of an Geocode query is required to comply with service
-    /// terms, but charged at a higher cost per request. Please review the [user
+    /// When storing `Geocode` responses, you *must* set this field to `Storage` to
+    /// comply with the terms of service. These requests will be charged at a higher
+    /// rate. Please review the [user
     /// agreement](https://aws.amazon.com/location/sla/) and [service pricing
     /// structure](https://aws.amazon.com/location/pricing/) to determine the
     /// correct setting for your use case.
@@ -124,7 +127,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GeocodeInput, config: *
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    const path = "/geocode";
+    const path = "/v2/geocode";
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;

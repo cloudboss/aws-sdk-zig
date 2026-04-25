@@ -12,6 +12,7 @@ pub const ServiceError = struct {
         pending_verification: PendingVerification,
         resource_not_found_exception: ResourceNotFoundException,
         service_quota_exceeded_exception: ServiceQuotaExceededException,
+        service_unavailable: ServiceUnavailable,
         stream_unavailable: StreamUnavailable,
         throttling_exception: ThrottlingException,
         validation_exception: ValidationException,
@@ -26,6 +27,7 @@ pub const ServiceError = struct {
                 .pending_verification => "PendingVerification",
                 .resource_not_found_exception => "ResourceNotFoundException",
                 .service_quota_exceeded_exception => "ServiceQuotaExceededException",
+                .service_unavailable => "ServiceUnavailable",
                 .stream_unavailable => "StreamUnavailable",
                 .throttling_exception => "ThrottlingException",
                 .validation_exception => "ValidationException",
@@ -42,6 +44,7 @@ pub const ServiceError = struct {
                 .pending_verification => |e| e.message,
                 .resource_not_found_exception => |e| e.message,
                 .service_quota_exceeded_exception => |e| e.message,
+                .service_unavailable => |e| e.message,
                 .stream_unavailable => |e| e.message,
                 .throttling_exception => |e| e.message,
                 .validation_exception => |e| e.message,
@@ -58,6 +61,7 @@ pub const ServiceError = struct {
                 .pending_verification => 403,
                 .resource_not_found_exception => 404,
                 .service_quota_exceeded_exception => 402,
+                .service_unavailable => 503,
                 .stream_unavailable => 503,
                 .throttling_exception => 429,
                 .validation_exception => 400,
@@ -74,6 +78,7 @@ pub const ServiceError = struct {
                 .pending_verification => |e| e.request_id,
                 .resource_not_found_exception => |e| e.request_id,
                 .service_quota_exceeded_exception => |e| e.request_id,
+                .service_unavailable => |e| e.request_id,
                 .stream_unavailable => |e| e.request_id,
                 .throttling_exception => |e| e.request_id,
                 .validation_exception => |e| e.request_id,
@@ -134,6 +139,11 @@ pub const ResourceNotFoundException = struct {
 };
 
 pub const ServiceQuotaExceededException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const ServiceUnavailable = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };

@@ -44,10 +44,15 @@ pub const CreateGameSessionInput = struct {
     /// For an example, see [Create a game session with custom
     /// properties](https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-create).
     ///
-    /// Avoid using periods (".") in property keys if you plan to search for game
-    /// sessions by properties. Property keys containing periods cannot be searched
-    /// and will be filtered out from search results due to search index
-    /// limitations.
+    /// * Avoid using periods (".") in property keys if you plan to search for game
+    ///   sessions by properties. Property keys containing periods cannot be
+    ///   searched and will be filtered out from search results due to search index
+    ///   limitations.
+    ///
+    /// * If you use SearchGameSessions API, there is a limit of 500 game property
+    ///   keys across all game sessions and all fleets per region. If the limit is
+    ///   exceeded, there will potentially be game session entries missing from
+    ///   SearchGameSessions API results.
     game_properties: ?[]const GameProperty = null,
 
     /// A set of custom game session properties, formatted as a single string value.

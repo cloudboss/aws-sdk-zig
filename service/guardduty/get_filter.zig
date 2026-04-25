@@ -10,8 +10,8 @@ const FindingCriteria = @import("finding_criteria.zig").FindingCriteria;
 pub const GetFilterInput = struct {
     /// The unique ID of the detector that is associated with this filter.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 
@@ -39,8 +39,7 @@ pub const GetFilterOutput = struct {
     name: []const u8,
 
     /// Specifies the position of the filter in the list of current filters. Also
-    /// specifies the
-    /// order in which this filter is applied to the findings.
+    /// specifies the order in which this filter is applied to the findings.
     rank: ?i32 = null,
 
     /// The tags of the filter resource.

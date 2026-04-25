@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AgentRuntimeArtifact = @import("agent_runtime_artifact.zig").AgentRuntimeArtifact;
 const AuthorizerConfiguration = @import("authorizer_configuration.zig").AuthorizerConfiguration;
+const FilesystemConfiguration = @import("filesystem_configuration.zig").FilesystemConfiguration;
 const LifecycleConfiguration = @import("lifecycle_configuration.zig").LifecycleConfiguration;
 const NetworkConfiguration = @import("network_configuration.zig").NetworkConfiguration;
 const ProtocolConfiguration = @import("protocol_configuration.zig").ProtocolConfiguration;
@@ -31,6 +32,11 @@ pub const CreateAgentRuntimeInput = struct {
 
     /// Environment variables to set in the AgentCore Runtime environment.
     environment_variables: ?[]const aws.map.StringMapEntry = null,
+
+    /// The filesystem configurations to mount into the AgentCore Runtime. Use
+    /// filesystem configurations to provide persistent storage to your AgentCore
+    /// Runtime sessions.
+    filesystem_configurations: ?[]const FilesystemConfiguration = null,
 
     /// The life cycle configuration for the AgentCore Runtime.
     lifecycle_configuration: ?LifecycleConfiguration = null,
@@ -59,6 +65,7 @@ pub const CreateAgentRuntimeInput = struct {
         .client_token = "clientToken",
         .description = "description",
         .environment_variables = "environmentVariables",
+        .filesystem_configurations = "filesystemConfigurations",
         .lifecycle_configuration = "lifecycleConfiguration",
         .network_configuration = "networkConfiguration",
         .protocol_configuration = "protocolConfiguration",
@@ -164,6 +171,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAgentRuntimeInput
     if (input.environment_variables) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"environmentVariables\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.filesystem_configurations) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"filesystemConfigurations\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

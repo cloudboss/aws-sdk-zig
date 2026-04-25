@@ -2,14 +2,20 @@ const std = @import("std");
 
 pub const InstanceHealthCheckType = enum {
     container_runtime,
+    accelerated_compute,
+    daemon,
 
     pub const json_field_names = .{
         .container_runtime = "CONTAINER_RUNTIME",
+        .accelerated_compute = "ACCELERATED_COMPUTE",
+        .daemon = "DAEMON",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .container_runtime => "CONTAINER_RUNTIME",
+            .accelerated_compute => "ACCELERATED_COMPUTE",
+            .daemon => "DAEMON",
         };
     }
 

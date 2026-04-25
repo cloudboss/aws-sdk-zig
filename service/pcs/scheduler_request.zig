@@ -12,7 +12,7 @@ pub const SchedulerRequest = struct {
     /// PCS](https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html)
     /// in the *PCS User Guide*.
     ///
-    /// Valid Values: `23.11 | 24.05 | 24.11`
+    /// Valid Values: `24.11 | 25.05 | 25.11`
     version: []const u8,
 
     pub const json_field_names = .{

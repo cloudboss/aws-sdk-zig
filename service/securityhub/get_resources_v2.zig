@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ResourcesFilters = @import("resources_filters.zig").ResourcesFilters;
+const ResourceScopes = @import("resource_scopes.zig").ResourceScopes;
 const SortCriterion = @import("sort_criterion.zig").SortCriterion;
 const ResourceResult = @import("resource_result.zig").ResourceResult;
 
@@ -21,13 +22,27 @@ pub const GetResourcesV2Input = struct {
     /// parameter to the value returned in the previous response.
     next_token: ?[]const u8 = null,
 
-    /// The finding attributes used to sort the list of returned findings.
+    /// Limits the results to resources from specific organizational units or from
+    /// the delegated administrator's organization.
+    /// Only the delegated administrator account can use this parameter. Other
+    /// accounts receive an `AccessDeniedException`.
+    ///
+    /// This parameter is optional. If you omit it, the delegated administrator sees
+    /// resources from all accounts across the entire organization. Other accounts
+    /// see only their own resources.
+    ///
+    /// You can specify up to 10 entries in `Scopes.AwsOrganizations`. If multiple
+    /// entries are specified, the entries are combined using OR logic.
+    scopes: ?ResourceScopes = null,
+
+    /// The resource attributes used to sort the list of returned resources.
     sort_criteria: ?[]const SortCriterion = null,
 
     pub const json_field_names = .{
         .filters = "Filters",
         .max_results = "MaxResults",
         .next_token = "NextToken",
+        .scopes = "Scopes",
         .sort_criteria = "SortCriteria",
     };
 };
@@ -37,7 +52,7 @@ pub const GetResourcesV2Output = struct {
     /// Otherwise, this parameter is null.
     next_token: ?[]const u8 = null,
 
-    /// Filters resources based on a set of criteria.
+    /// An array of resources returned by the operation.
     resources: ?[]const ResourceResult = null,
 
     pub const json_field_names = .{
@@ -99,6 +114,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetResourcesV2Input, co
     if (input.next_token) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"NextToken\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.scopes) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"Scopes\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
@@ -187,6 +208,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "LimitExceededException")) {
         return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organization_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationalUnitNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organizational_unit_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

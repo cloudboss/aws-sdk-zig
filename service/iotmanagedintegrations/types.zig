@@ -77,6 +77,7 @@ pub const OtaTaskTimeoutConfig = @import("ota_task_timeout_config.zig").OtaTaskT
 pub const OtaType = @import("ota_type.zig").OtaType;
 pub const ProactiveRefreshTokenRenewal = @import("proactive_refresh_token_renewal.zig").ProactiveRefreshTokenRenewal;
 pub const ProtocolType = @import("protocol_type.zig").ProtocolType;
+pub const ProvisioningProfileStatus = @import("provisioning_profile_status.zig").ProvisioningProfileStatus;
 pub const ProvisioningProfileSummary = @import("provisioning_profile_summary.zig").ProvisioningProfileSummary;
 pub const ProvisioningStatus = @import("provisioning_status.zig").ProvisioningStatus;
 pub const ProvisioningType = @import("provisioning_type.zig").ProvisioningType;

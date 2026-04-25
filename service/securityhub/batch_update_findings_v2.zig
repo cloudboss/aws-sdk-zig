@@ -25,14 +25,14 @@ pub const BatchUpdateFindingsV2Input = struct {
 
     /// The updated value for the normalized severity identifier.
     /// The severity ID is an integer with the allowed enum values [0, 1, 2, 3, 4,
-    /// 5, 99].
+    /// 5, 6, 99].
     /// When customer provides the updated severity ID, the string sibling severity
     /// will automatically be updated in the finding.
     severity_id: ?i32 = null,
 
     /// The updated value for the normalized status identifier.
     /// The status ID is an integer with the allowed enum values [0, 1, 2, 3, 4, 5,
-    /// 6, 99].
+    /// 99].
     /// When customer provides the updated status ID, the string sibling status will
     /// automatically be updated in the finding.
     status_id: ?i32 = null,
@@ -206,6 +206,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "LimitExceededException")) {
         return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organization_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationalUnitNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organizational_unit_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

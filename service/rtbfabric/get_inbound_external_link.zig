@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const LinkAttributes = @import("link_attributes.zig").LinkAttributes;
+const ConnectivityType = @import("connectivity_type.zig").ConnectivityType;
 const ModuleConfiguration = @import("module_configuration.zig").ModuleConfiguration;
 const LinkLogSettings = @import("link_log_settings.zig").LinkLogSettings;
 const LinkStatus = @import("link_status.zig").LinkStatus;
@@ -26,6 +27,9 @@ pub const GetInboundExternalLinkOutput = struct {
     /// Attributes of the link.
     attributes: ?LinkAttributes = null,
 
+    /// The connectivity type of the link.
+    connectivity_type: ?ConnectivityType = null,
+
     /// The timestamp of when the inbound external link was created.
     created_at: ?i64 = null,
 
@@ -41,6 +45,7 @@ pub const GetInboundExternalLinkOutput = struct {
     /// The unique identifier of the link.
     link_id: []const u8,
 
+    /// Settings for the application logs.
     log_settings: ?LinkLogSettings = null,
 
     /// The configuration of pending flow modules.
@@ -58,6 +63,7 @@ pub const GetInboundExternalLinkOutput = struct {
 
     pub const json_field_names = .{
         .attributes = "attributes",
+        .connectivity_type = "connectivityType",
         .created_at = "createdAt",
         .domain_name = "domainName",
         .flow_modules = "flowModules",

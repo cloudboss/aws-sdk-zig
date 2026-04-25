@@ -33,6 +33,10 @@ pub const ComputeAttributes = struct {
     /// resources is reduced. Amazon Web Services sends notifications for resources
     /// that must be stopped before
     /// the asset can be replaced.
+    ///
+    /// * INSTALLING - The asset is being installed and can't yet provide capacity
+    ///   for new compute
+    /// resources.
     state: ?ComputeAssetState = null,
 
     pub const json_field_names = .{

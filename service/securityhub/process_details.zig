@@ -3,7 +3,7 @@ pub const ProcessDetails = struct {
     /// Indicates when the process was launched.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     launched_at: ?[]const u8 = null,
 
@@ -27,7 +27,7 @@ pub const ProcessDetails = struct {
     /// Indicates when the process was terminated.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     terminated_at: ?[]const u8 = null,
 

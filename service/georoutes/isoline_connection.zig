@@ -1,18 +1,17 @@
 const IsolineConnectionGeometry = @import("isoline_connection_geometry.zig").IsolineConnectionGeometry;
 
-/// Isolines may contain multiple components, if these components are connected
-/// by ferry links. These components are returned as separate polygons while the
-/// ferry links are returned as connections.
+/// Represents a segment of the transportation network that connects separate
+/// parts of a reachable area. These connections show how discontinuous areas
+/// are linked, such as by ferry routes or bridges crossing unroutable terrain.
 pub const IsolineConnection = struct {
-    /// Index of the polygon corresponding to the "from" component of the
-    /// connection. The polygon is available from `Isoline[].Geometries`.
+    /// The index of the starting polygon in the isoline's `Geometries` list.
     from_polygon_index: i32,
 
-    /// The isoline geometry.
+    /// The shape of the connection, representing the actual path through the
+    /// transportation network that links the polygons.
     geometry: IsolineConnectionGeometry,
 
-    /// Index of the polygon corresponding to the "to" component of the connection.
-    /// The polygon is available from `Isoline[].Geometries`.
+    /// The index of the ending polygon in the isoline's `Geometries` list.
     to_polygon_index: i32,
 
     pub const json_field_names = .{

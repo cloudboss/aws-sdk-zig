@@ -12,6 +12,10 @@ pub const NetworkSettings = struct {
     /// Wickr backend server for service improvement and troubleshooting.
     enable_client_metrics: ?bool = null,
 
+    /// Configuration for OpenTDF integration at the network level, enforcing ABAC
+    /// decision making when operating in TDF enabled rooms.
+    enable_trusted_data_format: ?bool = null,
+
     /// Configuration for read receipts at the network level, controlling the
     /// default behavior for whether senders can see when their messages have been
     /// read.
@@ -20,6 +24,7 @@ pub const NetworkSettings = struct {
     pub const json_field_names = .{
         .data_retention = "dataRetention",
         .enable_client_metrics = "enableClientMetrics",
+        .enable_trusted_data_format = "enableTrustedDataFormat",
         .read_receipt_config = "readReceiptConfig",
     };
 };

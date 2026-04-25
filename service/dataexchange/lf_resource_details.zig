@@ -2,8 +2,7 @@ const DatabaseLFTagPolicy = @import("database_lf_tag_policy.zig").DatabaseLFTagP
 const TableLFTagPolicy = @import("table_lf_tag_policy.zig").TableLFTagPolicy;
 
 /// Details about the AWS Lake Formation resource (Table or Database) included
-/// in the AWS
-/// Lake Formation data permission.
+/// in the AWS Lake Formation data permission.
 pub const LFResourceDetails = struct {
     /// Details about the database resource included in the AWS Lake Formation data
     /// permission.

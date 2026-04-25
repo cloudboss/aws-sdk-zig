@@ -18,6 +18,7 @@ pub const RecommendationStatus = @import("recommendation_status.zig").Recommenda
 pub const RecommendationSummary = @import("recommendation_summary.zig").RecommendationSummary;
 pub const RecommendationType = @import("recommendation_type.zig").RecommendationType;
 pub const ResourceStatus = @import("resource_status.zig").ResourceStatus;
+pub const StatusReason = @import("status_reason.zig").StatusReason;
 pub const UpdateRecommendationLifecycleStage = @import("update_recommendation_lifecycle_stage.zig").UpdateRecommendationLifecycleStage;
 pub const UpdateRecommendationLifecycleStageReasonCode = @import("update_recommendation_lifecycle_stage_reason_code.zig").UpdateRecommendationLifecycleStageReasonCode;
 pub const UpdateRecommendationResourceExclusionError = @import("update_recommendation_resource_exclusion_error.zig").UpdateRecommendationResourceExclusionError;

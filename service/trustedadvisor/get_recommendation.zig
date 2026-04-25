@@ -4,13 +4,19 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const RecommendationLanguage = @import("recommendation_language.zig").RecommendationLanguage;
 const Recommendation = @import("recommendation.zig").Recommendation;
 
 pub const GetRecommendationInput = struct {
+    /// The ISO 639-1 code for the language that you want your recommendations to
+    /// appear in.
+    language: ?RecommendationLanguage = null,
+
     /// The Recommendation identifier
     recommendation_identifier: []const u8,
 
     pub const json_field_names = .{
+        .language = "language",
         .recommendation_identifier = "recommendationIdentifier",
     };
 };
@@ -61,6 +67,16 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRecommendationInput,
     try path_buf.appendSlice(allocator, input.recommendation_identifier);
     const path = try path_buf.toOwnedSlice(allocator);
 
+    var query_buf: std.ArrayList(u8) = .{};
+    var query_has_prev = false;
+    if (input.language) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "language=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
+        query_has_prev = true;
+    }
+    const query = try query_buf.toOwnedSlice(allocator);
+
     const body: ?[]const u8 = null;
 
     var request = aws.http.Request.init(host);
@@ -69,6 +85,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRecommendationInput,
     request.tls = tls;
     request.port = port;
     request.body = body;
+    request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;

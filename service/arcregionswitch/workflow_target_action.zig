@@ -3,16 +3,19 @@ const std = @import("std");
 pub const WorkflowTargetAction = enum {
     activate,
     deactivate,
+    post_recovery,
 
     pub const json_field_names = .{
         .activate = "activate",
         .deactivate = "deactivate",
+        .post_recovery = "postRecovery",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .activate => "activate",
             .deactivate => "deactivate",
+            .post_recovery => "postRecovery",
         };
     }
 

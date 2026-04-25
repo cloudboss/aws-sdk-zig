@@ -2,14 +2,17 @@ const std = @import("std");
 
 pub const Traffic = enum {
     all,
+    congestion,
 
     pub const json_field_names = .{
         .all = "All",
+        .congestion = "Congestion",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .all => "All",
+            .congestion => "Congestion",
         };
     }
 

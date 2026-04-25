@@ -1,6 +1,7 @@
 const aws = @import("aws");
 
 const FairsharePolicy = @import("fairshare_policy.zig").FairsharePolicy;
+const QuotaSharePolicy = @import("quota_share_policy.zig").QuotaSharePolicy;
 
 /// An object that represents a scheduling policy.
 pub const SchedulingPolicyDetail = struct {
@@ -15,6 +16,9 @@ pub const SchedulingPolicyDetail = struct {
     /// The name of the fair-share scheduling policy.
     name: []const u8,
 
+    /// The quota share scheduling policy details.
+    quota_share_policy: ?QuotaSharePolicy = null,
+
     /// The tags that you apply to the fair-share scheduling policy to categorize
     /// and organize your resources.
     /// Each tag consists of a key and an optional value. For more information, see
@@ -28,6 +32,7 @@ pub const SchedulingPolicyDetail = struct {
         .arn = "arn",
         .fairshare_policy = "fairsharePolicy",
         .name = "name",
+        .quota_share_policy = "quotaSharePolicy",
         .tags = "tags",
     };
 };

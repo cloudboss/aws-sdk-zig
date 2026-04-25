@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const InternetProtocol = @import("internet_protocol.zig").InternetProtocol;
 
 pub const GetFailbackReplicationConfigurationInput = struct {
     /// The ID of the Recovery Instance whose failback replication configuration
@@ -20,6 +21,10 @@ pub const GetFailbackReplicationConfigurationOutput = struct {
     /// Recovery Instance in Mbps.
     bandwidth_throttling: ?i64 = null,
 
+    /// Which version of the Internet Protocol to use for replication of data. (IPv4
+    /// or IPv6)
+    internet_protocol: ?InternetProtocol = null,
+
     /// The name of the Failback Replication Configuration.
     name: ?[]const u8 = null,
 
@@ -32,6 +37,7 @@ pub const GetFailbackReplicationConfigurationOutput = struct {
 
     pub const json_field_names = .{
         .bandwidth_throttling = "bandwidthThrottling",
+        .internet_protocol = "internetProtocol",
         .name = "name",
         .recovery_instance_id = "recoveryInstanceID",
         .use_private_ip = "usePrivateIP",

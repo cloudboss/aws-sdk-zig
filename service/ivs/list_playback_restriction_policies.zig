@@ -11,8 +11,7 @@ pub const ListPlaybackRestrictionPoliciesInput = struct {
     max_results: ?i32 = null,
 
     /// The first policy to retrieve. This is used for pagination; see the
-    /// `nextToken`
-    /// response field.
+    /// `nextToken` response field.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -22,8 +21,8 @@ pub const ListPlaybackRestrictionPoliciesInput = struct {
 };
 
 pub const ListPlaybackRestrictionPoliciesOutput = struct {
-    /// If there are more channels than `maxResults`, use `nextToken` in the
-    /// request to get the next set.
+    /// If there are more channels than `maxResults`, use `nextToken` in the request
+    /// to get the next set.
     next_token: ?[]const u8 = null,
 
     /// List of the matching policies.
@@ -164,6 +163,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
         return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceUnavailable")) {
+        return .{ .arena = arena, .kind = .{ .service_unavailable = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

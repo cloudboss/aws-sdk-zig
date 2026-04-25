@@ -5,17 +5,24 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FairsharePolicy = @import("fairshare_policy.zig").FairsharePolicy;
+const QuotaSharePolicy = @import("quota_share_policy.zig").QuotaSharePolicy;
 
 pub const UpdateSchedulingPolicyInput = struct {
     /// The Amazon Resource Name (ARN) of the scheduling policy to update.
     arn: []const u8,
 
-    /// The fair-share policy scheduling details.
+    /// The fair-share policy scheduling details. Once set during creation, a
+    /// fairsharePolicy cannot be removed or changed to a quotaSharePolicy.
     fairshare_policy: ?FairsharePolicy = null,
+
+    /// The quota share scheduling policy details. Once set during creation, a
+    /// quotaSharePolicy cannot be removed or changed to a fairsharePolicy.
+    quota_share_policy: ?QuotaSharePolicy = null,
 
     pub const json_field_names = .{
         .arn = "arn",
         .fairshare_policy = "fairsharePolicy",
+        .quota_share_policy = "quotaSharePolicy",
     };
 };
 
@@ -67,6 +74,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateSchedulingPolicyI
     if (input.fairshare_policy) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"fairsharePolicy\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.quota_share_policy) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"quotaSharePolicy\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

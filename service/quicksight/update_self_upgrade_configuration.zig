@@ -7,15 +7,15 @@ const ServiceError = @import("errors.zig").ServiceError;
 const SelfUpgradeStatus = @import("self_upgrade_status.zig").SelfUpgradeStatus;
 
 pub const UpdateSelfUpgradeConfigurationInput = struct {
-    /// The ID of the Amazon Web Services account that contains the Quick Suite
+    /// The ID of the Amazon Web Services account that contains the Quick
     /// self-upgrade configuration that you want to update.
     aws_account_id: []const u8,
 
-    /// The Quick Suite namespace that you want to update the Quick Suite
-    /// self-upgrade configuration for.
+    /// The Quick namespace that you want to update the Quick self-upgrade
+    /// configuration for.
     namespace: []const u8,
 
-    /// The self-upgrade status that you want to set for the Quick Suite account.
+    /// The self-upgrade status that you want to set for the Quick account.
     self_upgrade_status: SelfUpgradeStatus,
 
     pub const json_field_names = .{

@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AwsLocation = @import("aws_location.zig").AwsLocation;
+const Configuration = @import("configuration.zig").Configuration;
 const ConnectionPropertiesPatch = @import("connection_properties_patch.zig").ConnectionPropertiesPatch;
 const PhysicalEndpoint = @import("physical_endpoint.zig").PhysicalEndpoint;
 const ConnectionPropertiesOutput = @import("connection_properties_output.zig").ConnectionPropertiesOutput;
@@ -14,6 +15,9 @@ const ConnectionType = @import("connection_type.zig").ConnectionType;
 pub const UpdateConnectionInput = struct {
     /// The location where a connection is to be updated.
     aws_location: ?AwsLocation = null,
+
+    /// The configurations of the connection.
+    configurations: ?[]const Configuration = null,
 
     /// The description of a connection.
     description: ?[]const u8 = null,
@@ -29,6 +33,7 @@ pub const UpdateConnectionInput = struct {
 
     pub const json_field_names = .{
         .aws_location = "awsLocation",
+        .configurations = "configurations",
         .description = "description",
         .domain_identifier = "domainIdentifier",
         .identifier = "identifier",
@@ -37,6 +42,9 @@ pub const UpdateConnectionInput = struct {
 };
 
 pub const UpdateConnectionOutput = struct {
+    /// The configurations of the connection.
+    configurations: ?[]const Configuration = null,
+
     /// The ID of the connection.
     connection_id: []const u8,
 
@@ -71,6 +79,7 @@ pub const UpdateConnectionOutput = struct {
     @"type": ConnectionType,
 
     pub const json_field_names = .{
+        .configurations = "configurations",
         .connection_id = "connectionId",
         .description = "description",
         .domain_id = "domainId",
@@ -131,6 +140,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateConnectionInput, 
     if (input.aws_location) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"awsLocation\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.configurations) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"configurations\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

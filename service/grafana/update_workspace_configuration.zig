@@ -7,21 +7,18 @@ const ServiceError = @import("errors.zig").ServiceError;
 
 pub const UpdateWorkspaceConfigurationInput = struct {
     /// The new configuration string for the workspace. For more information about
-    /// the format
-    /// and configuration options available, see [Working in your Grafana
+    /// the format and configuration options available, see [Working in your Grafana
     /// workspace](https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html).
     configuration: []const u8,
 
     /// Specifies the version of Grafana to support in the workspace. If not
-    /// specified,
-    /// keeps the current version of the workspace.
+    /// specified, keeps the current version of the workspace.
     ///
-    /// Can only be used to upgrade (for example, from 8.4 to 9.4), not
-    /// downgrade (for example, from 9.4 to 8.4).
+    /// Can only be used to upgrade (for example, from 8.4 to 9.4), not downgrade
+    /// (for example, from 9.4 to 8.4).
     ///
     /// To know what versions are available to upgrade to for a specific workspace,
-    /// see
-    /// the
+    /// see the
     /// [ListVersions](https://docs.aws.amazon.com/grafana/latest/APIReference/API_ListVersions.html) operation.
     grafana_version: ?[]const u8 = null,
 

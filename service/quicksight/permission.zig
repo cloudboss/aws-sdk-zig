@@ -49,8 +49,8 @@ pub const Permission = struct {
     actions: []const []const u8,
 
     /// The Amazon Resource Name (ARN) of the principal.
-    /// This can be an Amazon Quick Suite user, group or namespace associated with
-    /// the flow.
+    /// This can be an Amazon Quick user, group or namespace associated with the
+    /// flow.
     /// Namespace principal can only be set as a viewer and will grant everyone in
     /// the same namespace viewer permissions.
     principal: []const u8,

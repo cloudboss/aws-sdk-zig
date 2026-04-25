@@ -3,8 +3,8 @@ pub const Member = struct {
     /// The Amazon Web Services account ID of the member account.
     account_id: ?[]const u8 = null,
 
-    /// The Amazon Web Services account ID of the Security Hub administrator account
-    /// associated with this member account.
+    /// The Amazon Web Services account ID of the Security Hub CSPM administrator
+    /// account associated with this member account.
     administrator_id: ?[]const u8 = null,
 
     /// The email address of the member account.
@@ -16,8 +16,8 @@ pub const Member = struct {
 
     /// This is replaced by `AdministratorID`.
     ///
-    /// The Amazon Web Services account ID of the Security Hub administrator account
-    /// associated with this member account.
+    /// The Amazon Web Services account ID of the Security Hub CSPM administrator
+    /// account associated with this member account.
     master_id: ?[]const u8 = null,
 
     /// The status of the relationship between the member account and its

@@ -17,6 +17,7 @@ pub const UpdateType = enum {
     remote_network_config_update,
     deletion_protection_update,
     control_plane_scaling_config_update,
+    vended_logs_update,
 
     pub const json_field_names = .{
         .version_update = "VersionUpdate",
@@ -35,6 +36,7 @@ pub const UpdateType = enum {
         .remote_network_config_update = "RemoteNetworkConfigUpdate",
         .deletion_protection_update = "DeletionProtectionUpdate",
         .control_plane_scaling_config_update = "ControlPlaneScalingConfigUpdate",
+        .vended_logs_update = "VendedLogsUpdate",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -55,6 +57,7 @@ pub const UpdateType = enum {
             .remote_network_config_update => "RemoteNetworkConfigUpdate",
             .deletion_protection_update => "DeletionProtectionUpdate",
             .control_plane_scaling_config_update => "ControlPlaneScalingConfigUpdate",
+            .vended_logs_update => "VendedLogsUpdate",
         };
     }
 

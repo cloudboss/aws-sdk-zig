@@ -1,5 +1,6 @@
 const FieldBasedTooltip = @import("field_based_tooltip.zig").FieldBasedTooltip;
 const SelectedTooltipType = @import("selected_tooltip_type.zig").SelectedTooltipType;
+const SheetTooltip = @import("sheet_tooltip.zig").SheetTooltip;
 const Visibility = @import("visibility.zig").Visibility;
 
 /// The display options for the visual tooltip.
@@ -15,12 +16,15 @@ pub const TooltipOptions = struct {
     /// * `DETAILED`: A detailed tooltip.
     selected_tooltip_type: ?SelectedTooltipType = null,
 
+    sheet_tooltip: ?SheetTooltip = null,
+
     /// Determines whether or not the tooltip is visible.
     tooltip_visibility: ?Visibility = null,
 
     pub const json_field_names = .{
         .field_based_tooltip = "FieldBasedTooltip",
         .selected_tooltip_type = "SelectedTooltipType",
+        .sheet_tooltip = "SheetTooltip",
         .tooltip_visibility = "TooltipVisibility",
     };
 };

@@ -8,10 +8,10 @@ pub const FreeTrialFeatureResult = enum {
     eks_audit_logs,
     ebs_malware_protection,
     rds_login_events,
-    eks_runtime_monitoring,
     lambda_network_logs,
-    fargate_runtime_monitoring,
+    eks_runtime_monitoring,
     ec2_runtime_monitoring,
+    fargate_runtime_monitoring,
 
     pub const json_field_names = .{
         .flow_logs = "FLOW_LOGS",
@@ -21,10 +21,10 @@ pub const FreeTrialFeatureResult = enum {
         .eks_audit_logs = "EKS_AUDIT_LOGS",
         .ebs_malware_protection = "EBS_MALWARE_PROTECTION",
         .rds_login_events = "RDS_LOGIN_EVENTS",
-        .eks_runtime_monitoring = "EKS_RUNTIME_MONITORING",
         .lambda_network_logs = "LAMBDA_NETWORK_LOGS",
-        .fargate_runtime_monitoring = "FARGATE_RUNTIME_MONITORING",
+        .eks_runtime_monitoring = "EKS_RUNTIME_MONITORING",
         .ec2_runtime_monitoring = "EC2_RUNTIME_MONITORING",
+        .fargate_runtime_monitoring = "FARGATE_RUNTIME_MONITORING",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -36,10 +36,10 @@ pub const FreeTrialFeatureResult = enum {
             .eks_audit_logs => "EKS_AUDIT_LOGS",
             .ebs_malware_protection => "EBS_MALWARE_PROTECTION",
             .rds_login_events => "RDS_LOGIN_EVENTS",
-            .eks_runtime_monitoring => "EKS_RUNTIME_MONITORING",
             .lambda_network_logs => "LAMBDA_NETWORK_LOGS",
-            .fargate_runtime_monitoring => "FARGATE_RUNTIME_MONITORING",
+            .eks_runtime_monitoring => "EKS_RUNTIME_MONITORING",
             .ec2_runtime_monitoring => "EC2_RUNTIME_MONITORING",
+            .fargate_runtime_monitoring => "FARGATE_RUNTIME_MONITORING",
         };
     }
 

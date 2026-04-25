@@ -10,7 +10,7 @@
 ///
 /// * RebootDBInstance
 pub const DBParameterGroupStatus = struct {
-    /// The name of the DP parameter group.
+    /// The name of the DB parameter group.
     db_parameter_group_name: ?[]const u8 = null,
 
     /// The status of parameter updates.

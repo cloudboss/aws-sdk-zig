@@ -4,11 +4,13 @@ pub const UserType = enum {
     iam_user,
     iam_role,
     sso_user,
+    iam_role_session,
 
     pub const json_field_names = .{
         .iam_user = "IAM_USER",
         .iam_role = "IAM_ROLE",
         .sso_user = "SSO_USER",
+        .iam_role_session = "IAM_ROLE_SESSION",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const UserType = enum {
             .iam_user => "IAM_USER",
             .iam_role => "IAM_ROLE",
             .sso_user => "SSO_USER",
+            .iam_role_session => "IAM_ROLE_SESSION",
         };
     }
 

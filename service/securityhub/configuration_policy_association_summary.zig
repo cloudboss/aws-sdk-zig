@@ -15,7 +15,7 @@ pub const ConfigurationPolicyAssociationSummary = struct {
 
     /// Indicates whether the association between the specified target and the
     /// configuration was directly applied by the
-    /// Security Hub delegated administrator or inherited from a parent.
+    /// Security Hub CSPM delegated administrator or inherited from a parent.
     association_type: ?AssociationType = null,
 
     /// The universally unique identifier (UUID) of the configuration policy.

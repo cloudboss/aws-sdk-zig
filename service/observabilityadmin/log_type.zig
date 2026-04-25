@@ -3,16 +3,25 @@ const std = @import("std");
 pub const LogType = enum {
     application,
     usage,
+    security_finding,
+    access,
+    connection,
 
     pub const json_field_names = .{
         .application = "APPLICATION_LOGS",
         .usage = "USAGE_LOGS",
+        .security_finding = "SECURITY_FINDING_LOGS",
+        .access = "ACCESS_LOGS",
+        .connection = "CONNECTION_LOGS",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .application => "APPLICATION_LOGS",
             .usage => "USAGE_LOGS",
+            .security_finding => "SECURITY_FINDING_LOGS",
+            .access => "ACCESS_LOGS",
+            .connection => "CONNECTION_LOGS",
         };
     }
 

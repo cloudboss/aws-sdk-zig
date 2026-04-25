@@ -14,8 +14,8 @@ pub const CopyDBClusterSnapshotInput = struct {
     /// snapshot, and otherwise false. The default is false.
     copy_tags: ?bool = null,
 
-    /// The Amazon Amazon KMS key ID for an encrypted DB cluster snapshot. The KMS
-    /// key ID is the Amazon
+    /// The Amazon KMS key ID for an encrypted DB cluster snapshot. The KMS key ID
+    /// is the Amazon
     /// Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS
     /// encryption key.
     ///

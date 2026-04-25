@@ -1,5 +1,6 @@
 const InputContentBlock = @import("input_content_block.zig").InputContentBlock;
 const ProgrammingLanguage = @import("programming_language.zig").ProgrammingLanguage;
+const LanguageRuntime = @import("language_runtime.zig").LanguageRuntime;
 
 /// The collection of arguments that specify the operation to perform and its
 /// parameters when invoking a tool in Amazon Bedrock AgentCore. Different tools
@@ -24,8 +25,7 @@ pub const ToolArguments = struct {
     directory_path: ?[]const u8 = null,
 
     /// The programming language of the code to execute. This tells the code
-    /// interpreter which language runtime to use for execution. Common values
-    /// include 'python', 'javascript', and 'r'.
+    /// interpreter which language runtime to use for execution.
     language: ?ProgrammingLanguage = null,
 
     /// The path for the tool operation.
@@ -33,6 +33,10 @@ pub const ToolArguments = struct {
 
     /// The paths for the tool operation.
     paths: ?[]const []const u8 = null,
+
+    /// The runtime environment to use for code execution. If not specified,
+    /// defaults to `deno` for JavaScript and TypeScript.
+    runtime: ?LanguageRuntime = null,
 
     /// The identifier of the task for the tool operation.
     task_id: ?[]const u8 = null,
@@ -46,6 +50,7 @@ pub const ToolArguments = struct {
         .language = "language",
         .path = "path",
         .paths = "paths",
+        .runtime = "runtime",
         .task_id = "taskId",
     };
 };

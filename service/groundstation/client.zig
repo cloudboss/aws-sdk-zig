@@ -12,6 +12,7 @@ const delete_dataflow_endpoint_group = @import("delete_dataflow_endpoint_group.z
 const delete_ephemeris = @import("delete_ephemeris.zig");
 const delete_mission_profile = @import("delete_mission_profile.zig");
 const describe_contact = @import("describe_contact.zig");
+const describe_contact_version = @import("describe_contact_version.zig");
 const describe_ephemeris = @import("describe_ephemeris.zig");
 const get_agent_configuration = @import("get_agent_configuration.zig");
 const get_agent_task_response_url = @import("get_agent_task_response_url.zig");
@@ -20,10 +21,13 @@ const get_dataflow_endpoint_group = @import("get_dataflow_endpoint_group.zig");
 const get_minute_usage = @import("get_minute_usage.zig");
 const get_mission_profile = @import("get_mission_profile.zig");
 const get_satellite = @import("get_satellite.zig");
+const list_antennas = @import("list_antennas.zig");
 const list_configs = @import("list_configs.zig");
+const list_contact_versions = @import("list_contact_versions.zig");
 const list_contacts = @import("list_contacts.zig");
 const list_dataflow_endpoint_groups = @import("list_dataflow_endpoint_groups.zig");
 const list_ephemerides = @import("list_ephemerides.zig");
+const list_ground_station_reservations = @import("list_ground_station_reservations.zig");
 const list_ground_stations = @import("list_ground_stations.zig");
 const list_mission_profiles = @import("list_mission_profiles.zig");
 const list_satellites = @import("list_satellites.zig");
@@ -34,6 +38,7 @@ const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_agent_status = @import("update_agent_status.zig");
 const update_config = @import("update_config.zig");
+const update_contact = @import("update_contact.zig");
 const update_ephemeris = @import("update_ephemeris.zig");
 const update_mission_profile = @import("update_mission_profile.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
@@ -149,6 +154,11 @@ pub const Client = struct {
         return describe_contact.execute(self, allocator, input, options);
     }
 
+    /// Describes a specific version of a contact.
+    pub fn describeContactVersion(self: *Self, allocator: std.mem.Allocator, input: describe_contact_version.DescribeContactVersionInput, options: CallOptions) !describe_contact_version.DescribeContactVersionOutput {
+        return describe_contact_version.execute(self, allocator, input, options);
+    }
+
     /// Retrieve information about an existing ephemeris.
     pub fn describeEphemeris(self: *Self, allocator: std.mem.Allocator, input: describe_ephemeris.DescribeEphemerisInput, options: CallOptions) !describe_ephemeris.DescribeEphemerisOutput {
         return describe_ephemeris.execute(self, allocator, input, options);
@@ -195,9 +205,19 @@ pub const Client = struct {
         return get_satellite.execute(self, allocator, input, options);
     }
 
+    /// Returns a list of antennas at a specified ground station.
+    pub fn listAntennas(self: *Self, allocator: std.mem.Allocator, input: list_antennas.ListAntennasInput, options: CallOptions) !list_antennas.ListAntennasOutput {
+        return list_antennas.execute(self, allocator, input, options);
+    }
+
     /// Returns a list of `Config` objects.
     pub fn listConfigs(self: *Self, allocator: std.mem.Allocator, input: list_configs.ListConfigsInput, options: CallOptions) !list_configs.ListConfigsOutput {
         return list_configs.execute(self, allocator, input, options);
+    }
+
+    /// Returns a list of versions for a specified contact.
+    pub fn listContactVersions(self: *Self, allocator: std.mem.Allocator, input: list_contact_versions.ListContactVersionsInput, options: CallOptions) !list_contact_versions.ListContactVersionsOutput {
+        return list_contact_versions.execute(self, allocator, input, options);
     }
 
     /// Returns a list of contacts.
@@ -216,6 +236,11 @@ pub const Client = struct {
     /// List your existing ephemerides.
     pub fn listEphemerides(self: *Self, allocator: std.mem.Allocator, input: list_ephemerides.ListEphemeridesInput, options: CallOptions) !list_ephemerides.ListEphemeridesOutput {
         return list_ephemerides.execute(self, allocator, input, options);
+    }
+
+    /// Returns a list of reservations for a specified ground station.
+    pub fn listGroundStationReservations(self: *Self, allocator: std.mem.Allocator, input: list_ground_station_reservations.ListGroundStationReservationsInput, options: CallOptions) !list_ground_station_reservations.ListGroundStationReservationsOutput {
+        return list_ground_station_reservations.execute(self, allocator, input, options);
     }
 
     /// Returns a list of ground stations.
@@ -275,6 +300,11 @@ pub const Client = struct {
         return update_config.execute(self, allocator, input, options);
     }
 
+    /// Updates a specific contact.
+    pub fn updateContact(self: *Self, allocator: std.mem.Allocator, input: update_contact.UpdateContactInput, options: CallOptions) !update_contact.UpdateContactOutput {
+        return update_contact.execute(self, allocator, input, options);
+    }
+
     /// Update an existing ephemeris.
     pub fn updateEphemeris(self: *Self, allocator: std.mem.Allocator, input: update_ephemeris.UpdateEphemerisInput, options: CallOptions) !update_ephemeris.UpdateEphemerisOutput {
         return update_ephemeris.execute(self, allocator, input, options);
@@ -288,7 +318,21 @@ pub const Client = struct {
         return update_mission_profile.execute(self, allocator, input, options);
     }
 
+    pub fn listAntennasPaginator(self: *Self, params: list_antennas.ListAntennasInput) paginator.ListAntennasPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listConfigsPaginator(self: *Self, params: list_configs.ListConfigsInput) paginator.ListConfigsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listContactVersionsPaginator(self: *Self, params: list_contact_versions.ListContactVersionsInput) paginator.ListContactVersionsPaginator {
         return .{
             .client = self,
             .params = params,
@@ -310,6 +354,13 @@ pub const Client = struct {
     }
 
     pub fn listEphemeridesPaginator(self: *Self, params: list_ephemerides.ListEphemeridesInput) paginator.ListEphemeridesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listGroundStationReservationsPaginator(self: *Self, params: list_ground_station_reservations.ListGroundStationReservationsInput) paginator.ListGroundStationReservationsPaginator {
         return .{
             .client = self,
             .params = params,
@@ -339,6 +390,11 @@ pub const Client = struct {
 
     pub fn waitUntilContactScheduled(self: *Self, params: describe_contact.DescribeContactInput) aws.waiter.WaiterError!void {
         var w = waiters.ContactScheduledWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilContactUpdated(self: *Self, params: describe_contact_version.DescribeContactVersionInput) aws.waiter.WaiterError!void {
+        var w = waiters.ContactUpdatedWaiter{ .client = self, .params = params };
         return w.wait();
     }
 };

@@ -4,6 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const LinkAttributes = @import("link_attributes.zig").LinkAttributes;
+const ConnectivityType = @import("connectivity_type.zig").ConnectivityType;
+const ModuleConfiguration = @import("module_configuration.zig").ModuleConfiguration;
 const LinkLogSettings = @import("link_log_settings.zig").LinkLogSettings;
 const LinkStatus = @import("link_status.zig").LinkStatus;
 
@@ -21,8 +24,16 @@ pub const GetOutboundExternalLinkInput = struct {
 };
 
 pub const GetOutboundExternalLinkOutput = struct {
+    attributes: ?LinkAttributes = null,
+
+    /// The connectivity type of the link.
+    connectivity_type: ?ConnectivityType = null,
+
     /// The timestamp of when the outbound external link was created.
     created_at: ?i64 = null,
+
+    /// The configuration of flow modules.
+    flow_modules: ?[]const ModuleConfiguration = null,
 
     /// The unique identifier of the gateway.
     gateway_id: []const u8,
@@ -30,7 +41,11 @@ pub const GetOutboundExternalLinkOutput = struct {
     /// The unique identifier of the link.
     link_id: []const u8,
 
+    /// Settings for the application logs.
     log_settings: ?LinkLogSettings = null,
+
+    /// The configuration of pending flow modules.
+    pending_flow_modules: ?[]const ModuleConfiguration = null,
 
     /// The public endpoint for the link.
     public_endpoint: []const u8,
@@ -46,10 +61,14 @@ pub const GetOutboundExternalLinkOutput = struct {
     updated_at: ?i64 = null,
 
     pub const json_field_names = .{
+        .attributes = "attributes",
+        .connectivity_type = "connectivityType",
         .created_at = "createdAt",
+        .flow_modules = "flowModules",
         .gateway_id = "gatewayId",
         .link_id = "linkId",
         .log_settings = "logSettings",
+        .pending_flow_modules = "pendingFlowModules",
         .public_endpoint = "publicEndpoint",
         .status = "status",
         .tags = "tags",

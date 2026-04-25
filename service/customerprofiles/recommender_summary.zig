@@ -33,6 +33,9 @@ pub const RecommenderSummary = struct {
     /// The name of the recommender.
     recommender_name: ?[]const u8 = null,
 
+    /// The name of the recommender schema associated with this recommender.
+    recommender_schema_name: ?[]const u8 = null,
+
     /// The current operational status of the recommender.
     status: ?RecommenderStatus = null,
 
@@ -48,6 +51,7 @@ pub const RecommenderSummary = struct {
         .recipe_name = "RecipeName",
         .recommender_config = "RecommenderConfig",
         .recommender_name = "RecommenderName",
+        .recommender_schema_name = "RecommenderSchemaName",
         .status = "Status",
         .tags = "Tags",
     };

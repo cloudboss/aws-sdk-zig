@@ -1,6 +1,5 @@
 /// Contains details of the highest severity threat detected during scan and
-/// number of
-/// infected files.
+/// number of infected files.
 pub const HighestSeverityThreatDetails = struct {
     /// Total number of infected files with the highest severity threat detected.
     count: ?i32 = null,

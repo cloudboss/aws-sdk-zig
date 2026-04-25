@@ -68,6 +68,13 @@ pub const UpdateProgramOutput = struct {
     /// The name to assign to the source location for this program.
     source_location_name: ?[]const u8 = null,
 
+    /// The tags assigned to the program. Tags are key-value pairs that you can
+    /// associate with Amazon resources to help with organization, access control,
+    /// and cost tracking. For more information, see [Tagging AWS Elemental
+    /// MediaTailor
+    /// Resources](https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
+    tags: ?[]const aws.map.StringMapEntry = null,
+
     /// The name that's used to refer to a VOD source.
     vod_source_name: ?[]const u8 = null,
 
@@ -83,6 +90,7 @@ pub const UpdateProgramOutput = struct {
         .program_name = "ProgramName",
         .scheduled_start_time = "ScheduledStartTime",
         .source_location_name = "SourceLocationName",
+        .tags = "Tags",
         .vod_source_name = "VodSourceName",
     };
 };

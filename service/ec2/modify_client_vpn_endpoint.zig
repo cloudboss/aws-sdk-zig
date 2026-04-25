@@ -10,6 +10,7 @@ const ClientRouteEnforcementOptions = @import("client_route_enforcement_options.
 const ConnectionLogOptions = @import("connection_log_options.zig").ConnectionLogOptions;
 const DnsServersOptionsModifyStructure = @import("dns_servers_options_modify_structure.zig").DnsServersOptionsModifyStructure;
 const SelfServicePortal = @import("self_service_portal.zig").SelfServicePortal;
+const TransitGatewayConfigurationInputStructure = @import("transit_gateway_configuration_input_structure.zig").TransitGatewayConfigurationInputStructure;
 const serde = @import("serde.zig");
 
 pub const ModifyClientVpnEndpointInput = struct {
@@ -98,6 +99,10 @@ pub const ModifyClientVpnEndpointInput = struct {
     /// endpoint](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html) in the
     /// *Client VPN Administrator Guide*.
     split_tunnel: ?bool = null,
+
+    /// The Transit Gateway configuration for the Client VPN endpoint. This option
+    /// is currently not supported.
+    transit_gateway_configuration: ?TransitGatewayConfigurationInputStructure = null,
 
     /// The ID of the VPC to associate with the Client VPN endpoint.
     vpc_id: ?[]const u8 = null,
@@ -244,6 +249,30 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyClientVpnEndpoint
     if (input.split_tunnel) |v| {
         try body_buf.appendSlice(allocator, "&SplitTunnel=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
+    }
+    if (input.transit_gateway_configuration) |v| {
+        if (v.availability_zone_ids) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TransitGatewayConfiguration.AvailabilityZoneId.{d}=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+            }
+        }
+        if (v.availability_zones) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TransitGatewayConfiguration.AvailabilityZone.{d}=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+            }
+        }
+        if (v.transit_gateway_id) |sv| {
+            try body_buf.appendSlice(allocator, "&TransitGatewayConfiguration.TransitGatewayId=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
+        }
     }
     if (input.vpc_id) |v| {
         try body_buf.appendSlice(allocator, "&VpcId=");

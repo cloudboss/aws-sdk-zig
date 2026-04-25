@@ -8,8 +8,7 @@ const IpSetFormat = @import("ip_set_format.zig").IpSetFormat;
 
 pub const CreateIPSetInput = struct {
     /// A Boolean value that indicates whether GuardDuty is to start using the
-    /// uploaded
-    /// IPSet.
+    /// uploaded IPSet.
     activate: bool,
 
     /// The idempotency token for the create request.
@@ -18,8 +17,8 @@ pub const CreateIPSetInput = struct {
     /// The unique ID of the detector of the GuardDuty account for which you want to
     /// create an IPSet.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 

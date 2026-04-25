@@ -11,7 +11,8 @@ pub const OrganizationRecommendationResourceSummary = struct {
     /// The ARN of the Recommendation Resource
     arn: []const u8,
 
-    /// The AWS resource identifier
+    /// The AWS resource identifier. There are certain checks that generate
+    /// recommendation resources without an awsResourceId.
     aws_resource_id: []const u8,
 
     /// The exclusion status of the Recommendation Resource

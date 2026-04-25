@@ -5,12 +5,12 @@ const ControlStatus = @import("control_status.zig").ControlStatus;
 const SeverityRating = @import("severity_rating.zig").SeverityRating;
 const UpdateStatus = @import("update_status.zig").UpdateStatus;
 
-/// A security control in Security Hub describes a security best practice
+/// A security control in Security Hub CSPM describes a security best practice
 /// related to a specific resource.
 pub const SecurityControl = struct {
     /// The description of a security control across standards. This typically
     /// summarizes how
-    /// Security Hub evaluates the control and the conditions under which it
+    /// Security Hub CSPM evaluates the control and the conditions under which it
     /// produces a
     /// failed finding. This parameter doesn't reference a specific standard.
     description: []const u8,
@@ -29,8 +29,8 @@ pub const SecurityControl = struct {
     /// value, and whether it has been customized.
     parameters: ?[]const aws.map.MapEntry(ParameterConfiguration) = null,
 
-    /// A link to Security Hub documentation that explains how to remediate a failed
-    /// finding for a security control.
+    /// A link to Security Hub CSPM documentation that explains how to remediate a
+    /// failed finding for a security control.
     remediation_url: []const u8,
 
     /// The Amazon Resource Name (ARN) for a security control across standards, such
@@ -48,18 +48,18 @@ pub const SecurityControl = struct {
     security_control_status: ControlStatus,
 
     /// The severity of a security control. For more information about how Security
-    /// Hub determines control severity, see
+    /// Hub CSPM determines control severity, see
     /// [Assigning severity to control
     /// findings](https://docs.aws.amazon.com/securityhub/latest/userguide/controls-findings-create-update.html#control-findings-severity) in the
-    /// *Security Hub User Guide*.
+    /// *Security Hub CSPM User Guide*.
     severity_rating: SeverityRating,
 
     /// The title of a security control.
     title: []const u8,
 
     /// Identifies whether customizable properties of a security control are
-    /// reflected in Security Hub findings. A status of
-    /// `READY` indicates that Security Hub uses the current control parameter
+    /// reflected in Security Hub CSPM findings. A status of
+    /// `READY` indicates that Security Hub CSPM uses the current control parameter
     /// values when running security checks of the control.
     /// A status of `UPDATING` indicates that all security checks might not use the
     /// current parameter values.

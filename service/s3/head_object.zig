@@ -263,6 +263,13 @@ pub const HeadObjectOutput = struct {
     /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
     checksum_crc64_nvme: ?[]const u8 = null,
 
+    /// The Base64 encoded, 128-bit `MD5` digest of the object. For more
+    /// information, see
+    /// [Checking
+    /// object integrity in the Amazon S3 User
+    /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
+    checksum_md5: ?[]const u8 = null,
+
     /// The Base64 encoded, 160-bit `SHA1` digest of the object. This checksum is
     /// only present if the checksum was uploaded
     /// with the object. When you use the API operation on an object that was
@@ -287,6 +294,13 @@ pub const HeadObjectOutput = struct {
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums) in the *Amazon S3 User Guide*.
     checksum_sha256: ?[]const u8 = null,
 
+    /// The Base64 encoded, 512-bit `SHA512` digest of the object. For more
+    /// information, see
+    /// [Checking
+    /// object integrity in the Amazon S3 User
+    /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
+    checksum_sha512: ?[]const u8 = null,
+
     /// The checksum type, which determines how part-level checksums are combined to
     /// create an object-level
     /// checksum for multipart objects. You can use this header response to verify
@@ -297,6 +311,27 @@ pub const HeadObjectOutput = struct {
     /// User
     /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
     checksum_type: ?ChecksumType = null,
+
+    /// The Base64 encoded, 128-bit `XXHASH128` checksum of the object. For more
+    /// information, see
+    /// [Checking
+    /// object integrity in the Amazon S3 User
+    /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
+    checksum_xxhash128: ?[]const u8 = null,
+
+    /// The Base64 encoded, 64-bit `XXHASH3` checksum of the object. For more
+    /// information, see
+    /// [Checking
+    /// object integrity in the Amazon S3 User
+    /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
+    checksum_xxhash3: ?[]const u8 = null,
+
+    /// The Base64 encoded, 64-bit `XXHASH64` checksum of the object. For more
+    /// information, see
+    /// [Checking
+    /// object integrity in the Amazon S3 User
+    /// Guide](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html).
+    checksum_xxhash64: ?[]const u8 = null,
 
     /// Specifies presentational information for the object.
     content_disposition: ?[]const u8 = null,
@@ -761,14 +796,29 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
     if (headers.get("x-amz-checksum-crc64nvme")) |value| {
         result.checksum_crc64_nvme = try allocator.dupe(u8, value);
     }
+    if (headers.get("x-amz-checksum-md5")) |value| {
+        result.checksum_md5 = try allocator.dupe(u8, value);
+    }
     if (headers.get("x-amz-checksum-sha1")) |value| {
         result.checksum_sha1 = try allocator.dupe(u8, value);
     }
     if (headers.get("x-amz-checksum-sha256")) |value| {
         result.checksum_sha256 = try allocator.dupe(u8, value);
     }
+    if (headers.get("x-amz-checksum-sha512")) |value| {
+        result.checksum_sha512 = try allocator.dupe(u8, value);
+    }
     if (headers.get("x-amz-checksum-type")) |value| {
         result.checksum_type = ChecksumType.fromWireName(value);
+    }
+    if (headers.get("x-amz-checksum-xxhash128")) |value| {
+        result.checksum_xxhash128 = try allocator.dupe(u8, value);
+    }
+    if (headers.get("x-amz-checksum-xxhash3")) |value| {
+        result.checksum_xxhash3 = try allocator.dupe(u8, value);
+    }
+    if (headers.get("x-amz-checksum-xxhash64")) |value| {
+        result.checksum_xxhash64 = try allocator.dupe(u8, value);
     }
     if (headers.get("content-disposition")) |value| {
         result.content_disposition = try allocator.dupe(u8, value);

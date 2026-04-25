@@ -4,8 +4,8 @@ pub const RegisteredUserGenerativeQnAEmbeddingConfiguration = struct {
     /// The ID of the new Q reader experience topic that you want to make the
     /// starting topic
     /// in the Generative Q&A experience. You can find a topic ID by navigating to
-    /// the Topics pane in the Quick Suite application and opening a topic. The ID
-    /// is in the URL for the topic that
+    /// the Topics pane in the Quick application and opening a topic. The ID is in
+    /// the URL for the topic that
     /// you open.
     ///
     /// If you don't specify an initial topic or you specify a legacy topic, a list

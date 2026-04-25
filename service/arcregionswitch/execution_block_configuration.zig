@@ -7,6 +7,8 @@ const EksResourceScalingConfiguration = @import("eks_resource_scaling_configurat
 const ExecutionApprovalConfiguration = @import("execution_approval_configuration.zig").ExecutionApprovalConfiguration;
 const GlobalAuroraConfiguration = @import("global_aurora_configuration.zig").GlobalAuroraConfiguration;
 const ParallelExecutionBlockConfiguration = @import("parallel_execution_block_configuration.zig").ParallelExecutionBlockConfiguration;
+const RdsCreateCrossRegionReplicaConfiguration = @import("rds_create_cross_region_replica_configuration.zig").RdsCreateCrossRegionReplicaConfiguration;
+const RdsPromoteReadReplicaConfiguration = @import("rds_promote_read_replica_configuration.zig").RdsPromoteReadReplicaConfiguration;
 const RegionSwitchPlanConfiguration = @import("region_switch_plan_configuration.zig").RegionSwitchPlanConfiguration;
 const Route53HealthCheckConfiguration = @import("route_53_health_check_configuration.zig").Route53HealthCheckConfiguration;
 
@@ -31,6 +33,10 @@ pub const ExecutionBlockConfiguration = union(enum) {
     global_aurora_config: ?GlobalAuroraConfiguration,
     /// A parallel configuration execution block.
     parallel_config: ?ParallelExecutionBlockConfiguration,
+    /// An Amazon RDS create cross-Region replica execution block.
+    rds_create_cross_region_read_replica_config: ?RdsCreateCrossRegionReplicaConfiguration,
+    /// An Amazon RDS promote read replica execution block.
+    rds_promote_read_replica_config: ?RdsPromoteReadReplicaConfiguration,
     /// A Region switch plan execution block.
     region_switch_plan_config: ?RegionSwitchPlanConfiguration,
     /// The Amazon Route 53 health check configuration.
@@ -46,6 +52,8 @@ pub const ExecutionBlockConfiguration = union(enum) {
         .execution_approval_config = "executionApprovalConfig",
         .global_aurora_config = "globalAuroraConfig",
         .parallel_config = "parallelConfig",
+        .rds_create_cross_region_read_replica_config = "rdsCreateCrossRegionReadReplicaConfig",
+        .rds_promote_read_replica_config = "rdsPromoteReadReplicaConfig",
         .region_switch_plan_config = "regionSwitchPlanConfig",
         .route_53_health_check_config = "route53HealthCheckConfig",
     };

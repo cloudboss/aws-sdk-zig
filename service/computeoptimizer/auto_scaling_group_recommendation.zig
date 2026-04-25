@@ -7,51 +7,51 @@ const InferredWorkloadType = @import("inferred_workload_type.zig").InferredWorkl
 const AutoScalingGroupRecommendationOption = @import("auto_scaling_group_recommendation_option.zig").AutoScalingGroupRecommendationOption;
 const UtilizationMetric = @import("utilization_metric.zig").UtilizationMetric;
 
-/// Describes an Amazon EC2 Auto Scaling group recommendation.
+/// Describes an Auto Scaling group recommendation.
 pub const AutoScalingGroupRecommendation = struct {
-    /// The Amazon Web Services account ID of the Amazon EC2 Auto Scaling group.
+    /// The Amazon Web Services account ID of the Auto Scaling group.
     account_id: ?[]const u8 = null,
 
-    /// The Amazon Resource Name (ARN) of the Amazon EC2 Auto Scaling group.
+    /// The Amazon Resource Name (ARN) of the Auto Scaling group.
     auto_scaling_group_arn: ?[]const u8 = null,
 
-    /// The name of the Amazon EC2 Auto Scaling group.
+    /// The name of the Auto Scaling group.
     auto_scaling_group_name: ?[]const u8 = null,
 
-    /// An array of objects that describe the current configuration of the Amazon
-    /// EC2 Auto Scaling
+    /// An array of objects that describe the current configuration of the Auto
+    /// Scaling
     /// group.
     current_configuration: ?AutoScalingGroupConfiguration = null,
 
     /// Describes the GPU accelerator settings for the current instance type of the
-    /// Amazon EC2 Auto Scaling group.
+    /// Auto Scaling group.
     current_instance_gpu_info: ?GpuInfo = null,
 
-    /// The risk of the current Amazon EC2 Auto Scaling group not meeting the
-    /// performance needs of
-    /// its workloads. The higher the risk, the more likely the current Amazon EC2
-    /// Auto Scaling group
+    /// The risk of the current Auto Scaling group not meeting the performance needs
+    /// of
+    /// its workloads. The higher the risk, the more likely the current Auto Scaling
+    /// group
     /// configuration has insufficient capacity and cannot meet workload
     /// requirements.
     current_performance_risk: ?CurrentPerformanceRisk = null,
 
     /// An object that describes the effective recommendation preferences for the
-    /// Amazon EC2 Auto Scaling group.
+    /// Auto Scaling group.
     effective_recommendation_preferences: ?EffectiveRecommendationPreferences = null,
 
-    /// The finding classification of the Amazon EC2 Auto Scaling group.
+    /// The finding classification of the Auto Scaling group.
     ///
-    /// Findings for Amazon EC2 Auto Scaling groups include:
+    /// Findings for Auto Scaling groups include:
     ///
     /// * **
     /// `NotOptimized`
-    /// **—An Amazon EC2 Auto Scaling group is considered not optimized when Compute
-    /// Optimizer identifies a
+    /// **—An Auto Scaling group is considered not optimized when Compute Optimizer
+    /// identifies a
     /// recommendation that can provide better performance for your workload.
     ///
     /// * **
     /// `Optimized`
-    /// **—An Amazon EC2 Auto Scaling
+    /// **—An Auto Scaling
     /// group is considered optimized when Compute Optimizer determines that the
     /// group
     /// is correctly provisioned to run your workload based on the chosen instance
@@ -60,8 +60,8 @@ pub const AutoScalingGroupRecommendation = struct {
     /// instance type.
     finding: ?Finding = null,
 
-    /// The applications that might be running on the instances in the Amazon EC2
-    /// Auto Scaling group
+    /// The applications that might be running on the instances in the Auto Scaling
+    /// group
     /// as inferred by Compute Optimizer.
     ///
     /// Compute Optimizer can infer if one of the following applications might be
@@ -96,22 +96,21 @@ pub const AutoScalingGroupRecommendation = struct {
     /// instance.
     inferred_workload_types: ?[]const InferredWorkloadType = null,
 
-    /// The timestamp of when the Amazon EC2 Auto Scaling group recommendation was
-    /// last
+    /// The timestamp of when the Auto Scaling group recommendation was last
     /// generated.
     last_refresh_timestamp: ?i64 = null,
 
-    /// The number of days for which utilization metrics were analyzed for the
-    /// Amazon EC2 Auto Scaling group.
+    /// The number of days for which utilization metrics were analyzed for the Auto
+    /// Scaling group.
     look_back_period_in_days: f64 = 0,
 
-    /// An array of objects that describe the recommendation options for the Amazon
-    /// EC2 Auto Scaling
+    /// An array of objects that describe the recommendation options for the Auto
+    /// Scaling
     /// group.
     recommendation_options: ?[]const AutoScalingGroupRecommendationOption = null,
 
-    /// An array of objects that describe the utilization metrics of the Amazon EC2
-    /// Auto Scaling
+    /// An array of objects that describe the utilization metrics of the Auto
+    /// Scaling
     /// group.
     utilization_metrics: ?[]const UtilizationMetric = null,
 

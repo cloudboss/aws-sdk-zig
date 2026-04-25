@@ -1,15 +1,21 @@
 const std = @import("std");
 
 pub const ContourDensity = enum {
+    low,
     medium,
+    high,
 
     pub const json_field_names = .{
+        .low = "Low",
         .medium = "Medium",
+        .high = "High",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
+            .low => "Low",
             .medium => "Medium",
+            .high => "High",
         };
     }
 

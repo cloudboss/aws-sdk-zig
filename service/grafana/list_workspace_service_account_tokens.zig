@@ -11,8 +11,7 @@ pub const ListWorkspaceServiceAccountTokensInput = struct {
     max_results: ?i32 = null,
 
     /// The token for the next set of service accounts to return. (You receive this
-    /// token
-    /// from a previous `ListWorkspaceServiceAccountTokens` operation.)
+    /// token from a previous `ListWorkspaceServiceAccountTokens` operation.)
     next_token: ?[]const u8 = null,
 
     /// The ID of the service account for which to return tokens.

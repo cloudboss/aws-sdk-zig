@@ -19,5 +19,7 @@ pub const MetricsFilter = union(enum) {
     /// The prefix used when evaluating a metrics filter.
     prefix: ?[]const u8,
     /// The tag used when evaluating a metrics filter.
+    ///
+    /// `Tag` filters are not supported for directory buckets.
     tag: ?Tag,
 };

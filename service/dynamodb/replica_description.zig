@@ -44,6 +44,9 @@ pub const ReplicaDescription = struct {
     /// The name of the Region.
     region_name: ?[]const u8 = null,
 
+    /// The Amazon Resource Name (ARN) of the global table replica.
+    replica_arn: ?[]const u8 = null,
+
     /// The time at which the replica was first detected as inaccessible. To
     /// determine cause
     /// of inaccessibility check the `ReplicaStatus` property.
@@ -96,6 +99,7 @@ pub const ReplicaDescription = struct {
         .on_demand_throughput_override = "OnDemandThroughputOverride",
         .provisioned_throughput_override = "ProvisionedThroughputOverride",
         .region_name = "RegionName",
+        .replica_arn = "ReplicaArn",
         .replica_inaccessible_date_time = "ReplicaInaccessibleDateTime",
         .replica_status = "ReplicaStatus",
         .replica_status_description = "ReplicaStatusDescription",

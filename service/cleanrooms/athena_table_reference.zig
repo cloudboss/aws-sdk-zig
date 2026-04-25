@@ -2,6 +2,9 @@ const CommercialRegion = @import("commercial_region.zig").CommercialRegion;
 
 /// A reference to a table within Athena.
 pub const AthenaTableReference = struct {
+    /// The catalog name.
+    catalog_name: ?[]const u8 = null,
+
     /// The database name.
     database_name: []const u8,
 
@@ -20,6 +23,7 @@ pub const AthenaTableReference = struct {
     work_group: []const u8,
 
     pub const json_field_names = .{
+        .catalog_name = "catalogName",
         .database_name = "databaseName",
         .output_location = "outputLocation",
         .region = "region",

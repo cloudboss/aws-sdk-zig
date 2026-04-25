@@ -1,5 +1,6 @@
 const AmazonQInQuickSightDashboardConfigurations = @import("amazon_q_in_quick_sight_dashboard_configurations.zig").AmazonQInQuickSightDashboardConfigurations;
 const BookmarksConfigurations = @import("bookmarks_configurations.zig").BookmarksConfigurations;
+const DashboardCustomizationSummaryConfigurations = @import("dashboard_customization_summary_configurations.zig").DashboardCustomizationSummaryConfigurations;
 const RecentSnapshotsConfigurations = @import("recent_snapshots_configurations.zig").RecentSnapshotsConfigurations;
 const SchedulesConfigurations = @import("schedules_configurations.zig").SchedulesConfigurations;
 const SharedViewConfigurations = @import("shared_view_configurations.zig").SharedViewConfigurations;
@@ -14,6 +15,10 @@ pub const RegisteredUserDashboardFeatureConfigurations = struct {
 
     /// The bookmarks configuration for an embedded dashboard in Amazon Quick Sight.
     bookmarks: ?BookmarksConfigurations = null,
+
+    /// The dashboard customization summary configuration for an embedded Quick
+    /// Sight dashboard.
+    dashboard_customization_summary: ?DashboardCustomizationSummaryConfigurations = null,
 
     /// The recent snapshots configuration for an Quick Sight embedded dashboard
     recent_snapshots: ?RecentSnapshotsConfigurations = null,
@@ -33,6 +38,7 @@ pub const RegisteredUserDashboardFeatureConfigurations = struct {
     pub const json_field_names = .{
         .amazon_q_in_quick_sight = "AmazonQInQuickSight",
         .bookmarks = "Bookmarks",
+        .dashboard_customization_summary = "DashboardCustomizationSummary",
         .recent_snapshots = "RecentSnapshots",
         .schedules = "Schedules",
         .shared_view = "SharedView",

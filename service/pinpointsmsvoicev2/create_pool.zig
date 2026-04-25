@@ -20,8 +20,10 @@ pub const CreatePoolInput = struct {
     deletion_protection_enabled: ?bool = null,
 
     /// The new two-character code, in ISO 3166-1 alpha-2 format, for the country or
-    /// region of the new pool.
-    iso_country_code: []const u8,
+    /// region of the new pool. This field is optional and is not required for
+    /// origination identity types that are not country-specific, such as RCS
+    /// agents.
+    iso_country_code: ?[]const u8 = null,
 
     /// The type of message. Valid values are TRANSACTIONAL for messages that are
     /// critical or time-sensitive and PROMOTIONAL for messages that aren't critical

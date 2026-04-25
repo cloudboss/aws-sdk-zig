@@ -32,6 +32,12 @@ pub const InventoryConfiguration = struct {
     is_enabled: bool,
 
     /// Contains the optional fields that are included in the inventory results.
+    ///
+    /// The following optional fields are supported for directory buckets `Size |
+    /// LastModifiedDate | StorageClass | ETag | IsMultipartUploaded |
+    /// EncryptionStatus | BucketKeyStatus | ChecksumAlgorithm |
+    /// LifecycleExpirationDate.` Throws MalformedXML error if unsupported optional
+    /// field is provided.
     optional_fields: ?[]const InventoryOptionalField = null,
 
     /// Specifies the schedule for generating inventory results.

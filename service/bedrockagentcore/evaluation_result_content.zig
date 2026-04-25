@@ -41,6 +41,11 @@ pub const EvaluationResultContent = struct {
     /// improvement.
     explanation: ?[]const u8 = null,
 
+    /// The list of reference input field names that were provided but not used by
+    /// the evaluator. Helps identify which ground truth data was not consumed
+    /// during evaluation.
+    ignored_reference_input_fields: ?[]const []const u8 = null,
+
     /// The categorical label assigned by the evaluator when using a categorical
     /// rating scale. This provides a human-readable description of the evaluation
     /// result (e.g., "Excellent", "Good", "Poor") corresponding to the numerical
@@ -67,6 +72,7 @@ pub const EvaluationResultContent = struct {
         .evaluator_id = "evaluatorId",
         .evaluator_name = "evaluatorName",
         .explanation = "explanation",
+        .ignored_reference_input_fields = "ignoredReferenceInputFields",
         .label = "label",
         .token_usage = "tokenUsage",
         .value = "value",

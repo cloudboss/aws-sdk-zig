@@ -24,10 +24,15 @@ pub const PutDeliverySourceInput = struct {
     /// * For Amazon Bedrock AgentCore Identity, the valid values are
     /// `APPLICATION_LOGS` and `TRACES`.
     ///
+    /// * For Amazon Bedrock AgentCore Memory, the valid values are
+    /// `APPLICATION_LOGS` and `TRACES`.
+    ///
     /// * For Amazon Bedrock AgentCore Gateway, the valid values are
     /// `APPLICATION_LOGS` and `TRACES`.
     ///
     /// * For CloudFront, the valid value is `ACCESS_LOGS`.
+    ///
+    /// * For DevOps Agent, the valid value is `APPLICATION_LOGS`.
     ///
     /// * For Amazon CodeWhisperer, the valid value is `EVENT_LOGS`.
     ///
@@ -36,6 +41,11 @@ pub const PutDeliverySourceInput = struct {
     ///
     /// * For Elemental MediaTailor, the valid values are `AD_DECISION_SERVER_LOGS`,
     /// `MANIFEST_SERVICE_LOGS`, and `TRANSCODE_LOGS`.
+    ///
+    /// * For Amazon EKS Auto Mode, the valid values are
+    ///   `AUTO_MODE_BLOCK_STORAGE_LOGS`,
+    /// `AUTO_MODE_COMPUTE_LOGS`, `AUTO_MODE_IPAM_LOGS`, and
+    /// `AUTO_MODE_LOAD_BALANCING_LOGS`.
     ///
     /// * For Entity Resolution, the valid value is `WORKFLOW_LOGS`.
     ///
@@ -50,7 +60,7 @@ pub const PutDeliverySourceInput = struct {
     /// * For PCS, the valid values are `PCS_SCHEDULER_LOGS` and
     /// `PCS_JOBCOMP_LOGS`.
     ///
-    /// * For Quick Suite, the valid values are `CHAT_LOGS` and
+    /// * For Quick, the valid values are `CHAT_LOGS` and
     /// `FEEDBACK_LOGS`.
     ///
     /// * For Amazon Web Services RTB Fabric, the valid values is
@@ -58,6 +68,9 @@ pub const PutDeliverySourceInput = struct {
     ///
     /// * For Amazon Q, the valid values are `EVENT_LOGS` and
     /// `SYNC_JOB_LOGS`.
+    ///
+    /// * For Amazon Web Services Security Hub CSPM, the valid value is
+    /// `SECURITY_FINDING_LOGS`.
     ///
     /// * For Amazon SES mail manager, the valid values are
     /// `APPLICATION_LOGS` and `TRAFFIC_POLICY_DEBUG_LOGS`.
@@ -80,6 +93,10 @@ pub const PutDeliverySourceInput = struct {
     /// logs. For
     /// example,
     /// `arn:aws:workmail:us-east-1:123456789012:organization/m-1234EXAMPLEabcd1234abcd1234abcd1234`
+    ///
+    /// For the `SECURITY_FINDING_LOGS` logType, use a wildcard ARN for the hub
+    /// resource. For example,
+    /// `arn:aws:securityhub:us-east-1:111122223333:hub/*`
     resource_arn: []const u8,
 
     /// An optional list of key-value pairs to associate with the resource.

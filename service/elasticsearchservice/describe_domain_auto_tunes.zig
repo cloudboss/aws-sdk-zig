@@ -78,25 +78,26 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeDomainAutoTunes
     try path_buf.appendSlice(allocator, "/autoTunes");
     const path = try path_buf.toOwnedSlice(allocator);
 
-    var body_buf: std.ArrayList(u8) = .{};
-    var has_prev = false;
-    try body_buf.appendSlice(allocator, "{");
-
+    var query_buf: std.ArrayList(u8) = .{};
+    var query_has_prev = false;
     if (input.max_results) |v| {
-        if (has_prev) try body_buf.appendSlice(allocator, ",");
-        try body_buf.appendSlice(allocator, "\"MaxResults\":");
-        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
-        has_prev = true;
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "maxResults=");
+        {
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try query_buf.appendSlice(allocator, num_str);
+        }
+        query_has_prev = true;
     }
     if (input.next_token) |v| {
-        if (has_prev) try body_buf.appendSlice(allocator, ",");
-        try body_buf.appendSlice(allocator, "\"NextToken\":");
-        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
-        has_prev = true;
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "nextToken=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
     }
+    const query = try query_buf.toOwnedSlice(allocator);
 
-    try body_buf.appendSlice(allocator, "}");
-    const body = try body_buf.toOwnedSlice(allocator);
+    const body: ?[]const u8 = null;
 
     var request = aws.http.Request.init(host);
     request.method = .GET;
@@ -104,6 +105,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeDomainAutoTunes
     request.tls = tls;
     request.port = port;
     request.body = body;
+    request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;

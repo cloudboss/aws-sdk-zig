@@ -4,11 +4,15 @@ pub const AuditEventType = enum {
     case_created,
     case_updated,
     related_item_created,
+    related_item_deleted,
+    related_item_updated,
 
     pub const json_field_names = .{
         .case_created = "Case.Created",
         .case_updated = "Case.Updated",
         .related_item_created = "RelatedItem.Created",
+        .related_item_deleted = "RelatedItem.Deleted",
+        .related_item_updated = "RelatedItem.Updated",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +20,8 @@ pub const AuditEventType = enum {
             .case_created => "Case.Created",
             .case_updated => "Case.Updated",
             .related_item_created => "RelatedItem.Created",
+            .related_item_deleted => "RelatedItem.Deleted",
+            .related_item_updated => "RelatedItem.Updated",
         };
     }
 

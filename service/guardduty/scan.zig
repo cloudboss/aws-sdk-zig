@@ -12,13 +12,11 @@ pub const Scan = struct {
     account_id: ?[]const u8 = null,
 
     /// The unique detector ID of the administrator account that the request is
-    /// associated with.
-    /// If the account is an administrator, the `AdminDetectorId` will be the same
-    /// as the one used for
-    /// `DetectorId`.
+    /// associated with. If the account is an administrator, the `AdminDetectorId`
+    /// will be the same as the one used for `DetectorId`.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     admin_detector_id: ?[]const u8 = null,
 
@@ -27,8 +25,8 @@ pub const Scan = struct {
 
     /// The unique ID of the detector that is associated with the request.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: ?[]const u8 = null,
 

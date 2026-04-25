@@ -4,10 +4,15 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const Tag = @import("tag.zig").Tag;
 const GlobalCluster = @import("global_cluster.zig").GlobalCluster;
 const serde = @import("serde.zig");
 
 pub const CreateGlobalClusterInput = struct {
+    /// The name for the new global database (up to 64 alpha-numeric
+    /// characters).
+    database_name: ?[]const u8 = null,
+
     /// The deletion protection setting for the new global database.
     /// The global database can't be deleted when deletion protection is
     /// enabled.
@@ -34,6 +39,9 @@ pub const CreateGlobalClusterInput = struct {
     /// The storage encryption setting for the new global database
     /// cluster.
     storage_encrypted: ?bool = null,
+
+    /// Tags to assign to the global cluster.
+    tags: ?[]const Tag = null,
 };
 
 pub const CreateGlobalClusterOutput = struct {
@@ -75,6 +83,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateGlobalClusterInpu
     var body_buf: std.ArrayList(u8) = .{};
 
     try body_buf.appendSlice(allocator, "Action=CreateGlobalCluster&Version=2014-10-31");
+    if (input.database_name) |v| {
+        try body_buf.appendSlice(allocator, "&DatabaseName=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
     if (input.deletion_protection) |v| {
         try body_buf.appendSlice(allocator, "&DeletionProtection=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
@@ -96,6 +108,27 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateGlobalClusterInpu
     if (input.storage_encrypted) |v| {
         try body_buf.appendSlice(allocator, "&StorageEncrypted=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
+    }
+    if (input.tags) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.key) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.Tag.{d}.Key=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.value) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.Tag.{d}.Value=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
+                }
+            }
+        }
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

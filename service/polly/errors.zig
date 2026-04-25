@@ -21,11 +21,14 @@ pub const ServiceError = struct {
         max_lexeme_length_exceeded_exception: MaxLexemeLengthExceededException,
         max_lexicons_number_exceeded_exception: MaxLexiconsNumberExceededException,
         service_failure_exception: ServiceFailureException,
+        service_quota_exceeded_exception: ServiceQuotaExceededException,
         ssml_marks_not_supported_for_text_type_exception: SsmlMarksNotSupportedForTextTypeException,
         synthesis_task_not_found_exception: SynthesisTaskNotFoundException,
         text_length_exceeded_exception: TextLengthExceededException,
+        throttling_exception: ThrottlingException,
         unsupported_pls_alphabet_exception: UnsupportedPlsAlphabetException,
         unsupported_pls_language_exception: UnsupportedPlsLanguageException,
+        validation_exception: ValidationException,
         unknown: UnknownServiceError,
 
         pub fn code(self: Kind) []const u8 {
@@ -46,11 +49,14 @@ pub const ServiceError = struct {
                 .max_lexeme_length_exceeded_exception => "MaxLexemeLengthExceededException",
                 .max_lexicons_number_exceeded_exception => "MaxLexiconsNumberExceededException",
                 .service_failure_exception => "ServiceFailureException",
+                .service_quota_exceeded_exception => "ServiceQuotaExceededException",
                 .ssml_marks_not_supported_for_text_type_exception => "SsmlMarksNotSupportedForTextTypeException",
                 .synthesis_task_not_found_exception => "SynthesisTaskNotFoundException",
                 .text_length_exceeded_exception => "TextLengthExceededException",
+                .throttling_exception => "ThrottlingException",
                 .unsupported_pls_alphabet_exception => "UnsupportedPlsAlphabetException",
                 .unsupported_pls_language_exception => "UnsupportedPlsLanguageException",
+                .validation_exception => "ValidationException",
                 .unknown => |e| e.code,
             };
         }
@@ -73,11 +79,14 @@ pub const ServiceError = struct {
                 .max_lexeme_length_exceeded_exception => |e| e.message,
                 .max_lexicons_number_exceeded_exception => |e| e.message,
                 .service_failure_exception => |e| e.message,
+                .service_quota_exceeded_exception => |e| e.message,
                 .ssml_marks_not_supported_for_text_type_exception => |e| e.message,
                 .synthesis_task_not_found_exception => |e| e.message,
                 .text_length_exceeded_exception => |e| e.message,
+                .throttling_exception => |e| e.message,
                 .unsupported_pls_alphabet_exception => |e| e.message,
                 .unsupported_pls_language_exception => |e| e.message,
+                .validation_exception => |e| e.message,
                 .unknown => |e| e.message,
             };
         }
@@ -100,11 +109,14 @@ pub const ServiceError = struct {
                 .max_lexeme_length_exceeded_exception => 400,
                 .max_lexicons_number_exceeded_exception => 400,
                 .service_failure_exception => 500,
+                .service_quota_exceeded_exception => 402,
                 .ssml_marks_not_supported_for_text_type_exception => 400,
                 .synthesis_task_not_found_exception => 400,
                 .text_length_exceeded_exception => 400,
+                .throttling_exception => 400,
                 .unsupported_pls_alphabet_exception => 400,
                 .unsupported_pls_language_exception => 400,
+                .validation_exception => 400,
                 .unknown => |e| e.http_status,
             };
         }
@@ -127,11 +139,14 @@ pub const ServiceError = struct {
                 .max_lexeme_length_exceeded_exception => |e| e.request_id,
                 .max_lexicons_number_exceeded_exception => |e| e.request_id,
                 .service_failure_exception => |e| e.request_id,
+                .service_quota_exceeded_exception => |e| e.request_id,
                 .ssml_marks_not_supported_for_text_type_exception => |e| e.request_id,
                 .synthesis_task_not_found_exception => |e| e.request_id,
                 .text_length_exceeded_exception => |e| e.request_id,
+                .throttling_exception => |e| e.request_id,
                 .unsupported_pls_alphabet_exception => |e| e.request_id,
                 .unsupported_pls_language_exception => |e| e.request_id,
+                .validation_exception => |e| e.request_id,
                 .unknown => |e| e.request_id,
             };
         }
@@ -238,6 +253,11 @@ pub const ServiceFailureException = struct {
     request_id: []const u8 = "",
 };
 
+pub const ServiceQuotaExceededException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
 pub const SsmlMarksNotSupportedForTextTypeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
@@ -253,12 +273,22 @@ pub const TextLengthExceededException = struct {
     request_id: []const u8 = "",
 };
 
+pub const ThrottlingException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
 pub const UnsupportedPlsAlphabetException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
 pub const UnsupportedPlsLanguageException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };

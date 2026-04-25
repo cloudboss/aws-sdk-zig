@@ -8,6 +8,7 @@ const get_speech_synthesis_task = @import("get_speech_synthesis_task.zig");
 const list_lexicons = @import("list_lexicons.zig");
 const list_speech_synthesis_tasks = @import("list_speech_synthesis_tasks.zig");
 const put_lexicon = @import("put_lexicon.zig");
+const start_speech_synthesis_stream = @import("start_speech_synthesis_stream.zig");
 const start_speech_synthesis_task = @import("start_speech_synthesis_task.zig");
 const synthesize_speech = @import("synthesize_speech.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
@@ -115,6 +116,20 @@ pub const Client = struct {
     /// Lexicons](https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
     pub fn putLexicon(self: *Self, allocator: std.mem.Allocator, input: put_lexicon.PutLexiconInput, options: CallOptions) !put_lexicon.PutLexiconOutput {
         return put_lexicon.execute(self, allocator, input, options);
+    }
+
+    /// Synthesizes UTF-8 input, plain text, or SSML over a bidirectional streaming
+    /// connection.
+    /// Specify synthesis parameters in HTTP/2 headers, send text incrementally as
+    /// events on the input stream,
+    /// and receive synthesized audio as it becomes available.
+    ///
+    /// This operation serves as a bidirectional counterpart to `SynthesizeSpeech`:
+    ///
+    /// *
+    ///   [SynthesizeSpeech](https://docs.aws.amazon.com/polly/latest/API/API_SynthesizeSpeech.html)
+    pub fn startSpeechSynthesisStream(self: *Self, allocator: std.mem.Allocator, input: start_speech_synthesis_stream.StartSpeechSynthesisStreamInput, options: CallOptions) !start_speech_synthesis_stream.StartSpeechSynthesisStreamOutput {
+        return start_speech_synthesis_stream.execute(self, allocator, input, options);
     }
 
     /// Allows the creation of an asynchronous synthesis task, by starting a

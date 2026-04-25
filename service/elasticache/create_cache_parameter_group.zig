@@ -18,7 +18,8 @@ pub const CreateCacheParameterGroupInput = struct {
     /// `redis3.2` | `redis4.0` | `redis5.0` | `redis6.x` | `redis7`
     cache_parameter_group_family: []const u8,
 
-    /// A user-specified name for the cache parameter group.
+    /// A user-specified name for the cache parameter group. This value is stored as
+    /// a lowercase string.
     cache_parameter_group_name: []const u8,
 
     /// A user-specified description for the cache parameter group.

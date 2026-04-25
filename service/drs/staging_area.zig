@@ -14,15 +14,13 @@ pub const StagingArea = struct {
     /// Arn of the staging source server if this source server is extended
     staging_source_server_arn: ?[]const u8 = null,
 
-    /// Status of Source server extension. Possible values:
-    /// (a) NOT_EXTENDED - This is a source server that is replicating in the
-    /// current account.
-    /// (b) EXTENDED - Source server is extended from a staging source server. In
-    /// this case, the value of stagingSourceServerArn is pointing to the Arn of the
-    /// source server in the staging account.
-    /// (c) EXTENSION_ERROR - Some issue occurred when accessing staging source
-    /// server. In this case, errorMessage field will contain an error message that
-    /// explains what happened.
+    /// Status of Source server extension. Possible values: (a) NOT_EXTENDED - This
+    /// is a source server that is replicating in the current account. (b) EXTENDED
+    /// - Source server is extended from a staging source server. In this case, the
+    /// value of stagingSourceServerArn is pointing to the Arn of the source server
+    /// in the staging account. (c) EXTENSION_ERROR - Some issue occurred when
+    /// accessing staging source server. In this case, errorMessage field will
+    /// contain an error message that explains what happened.
     status: ?ExtensionStatus = null,
 
     pub const json_field_names = .{

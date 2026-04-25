@@ -20,8 +20,7 @@ pub const ListChecksInput = struct {
     max_results: ?i32 = null,
 
     /// The token for the next set of results. Use the value returned in the
-    /// previous response in the next request
-    /// to retrieve the next set of results.
+    /// previous response in the next request to retrieve the next set of results.
     next_token: ?[]const u8 = null,
 
     /// The pillar of the check
@@ -45,8 +44,7 @@ pub const ListChecksOutput = struct {
     check_summaries: ?[]const CheckSummary = null,
 
     /// The token for the next set of results. Use the value returned in the
-    /// previous response in the next request
-    /// to retrieve the next set of results.
+    /// previous response in the next request to retrieve the next set of results.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{

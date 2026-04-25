@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ExclusionStatus = @import("exclusion_status.zig").ExclusionStatus;
+const RecommendationLanguage = @import("recommendation_language.zig").RecommendationLanguage;
 const ResourceStatus = @import("resource_status.zig").ResourceStatus;
 const RecommendationResourceSummary = @import("recommendation_resource_summary.zig").RecommendationResourceSummary;
 
@@ -12,12 +13,15 @@ pub const ListRecommendationResourcesInput = struct {
     /// The exclusion status of the resource
     exclusion_status: ?ExclusionStatus = null,
 
+    /// The ISO 639-1 code for the language that you want your recommendations to
+    /// appear in.
+    language: ?RecommendationLanguage = null,
+
     /// The maximum number of results to return per page.
     max_results: ?i32 = null,
 
     /// The token for the next set of results. Use the value returned in the
-    /// previous response in the next request
-    /// to retrieve the next set of results.
+    /// previous response in the next request to retrieve the next set of results.
     next_token: ?[]const u8 = null,
 
     /// The Recommendation identifier
@@ -31,6 +35,7 @@ pub const ListRecommendationResourcesInput = struct {
 
     pub const json_field_names = .{
         .exclusion_status = "exclusionStatus",
+        .language = "language",
         .max_results = "maxResults",
         .next_token = "nextToken",
         .recommendation_identifier = "recommendationIdentifier",
@@ -41,8 +46,7 @@ pub const ListRecommendationResourcesInput = struct {
 
 pub const ListRecommendationResourcesOutput = struct {
     /// The token for the next set of results. Use the value returned in the
-    /// previous response in the next request
-    /// to retrieve the next set of results.
+    /// previous response in the next request to retrieve the next set of results.
     next_token: ?[]const u8 = null,
 
     /// A list of Recommendation Resources
@@ -97,6 +101,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRecommendationResou
     if (input.exclusion_status) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "exclusionStatus=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
+        query_has_prev = true;
+    }
+    if (input.language) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "language=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }

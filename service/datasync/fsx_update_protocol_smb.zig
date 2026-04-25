@@ -1,3 +1,5 @@
+const CmkSecretConfig = @import("cmk_secret_config.zig").CmkSecretConfig;
+const CustomSecretConfig = @import("custom_secret_config.zig").CustomSecretConfig;
 const SmbMountOptions = @import("smb_mount_options.zig").SmbMountOptions;
 
 /// Specifies the Server Message Block (SMB) protocol configuration that
@@ -7,6 +9,18 @@ const SmbMountOptions = @import("smb_mount_options.zig").SmbMountOptions;
 /// file
 /// systems](https://docs.aws.amazon.com/datasync/latest/userguide/create-ontap-location.html#create-ontap-location-access).
 pub const FsxUpdateProtocolSmb = struct {
+    /// Specifies configuration information for a DataSync-managed secret, such as a
+    /// `Password` or set of credentials that DataSync uses to access a
+    /// specific transfer location, and a customer-managed KMS key.
+    cmk_secret_config: ?CmkSecretConfig = null,
+
+    /// Specifies configuration information for a customer-managed secret, such as a
+    /// `Password` or set of credentials that DataSync uses to access a
+    /// specific transfer location. This configuration includes the secret ARN, and
+    /// the ARN
+    /// for an IAM role that provides access to the secret.
+    custom_secret_config: ?CustomSecretConfig = null,
+
     /// Specifies the name of the Windows domain that your storage virtual machine
     /// (SVM) belongs
     /// to.
@@ -33,6 +47,8 @@ pub const FsxUpdateProtocolSmb = struct {
     user: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .cmk_secret_config = "CmkSecretConfig",
+        .custom_secret_config = "CustomSecretConfig",
         .domain = "Domain",
         .mount_options = "MountOptions",
         .password = "Password",

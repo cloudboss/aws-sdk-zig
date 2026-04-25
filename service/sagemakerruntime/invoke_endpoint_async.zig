@@ -46,6 +46,11 @@ pub const InvokeEndpointAsyncInput = struct {
     /// [CreateEndpoint](https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html) API.
     endpoint_name: []const u8,
 
+    /// The filename for the inference response payload stored in Amazon S3. If not
+    /// specified, Amazon SageMaker AI generates a filename based on the inference
+    /// ID.
+    filename: ?[]const u8 = null,
+
     /// The identifier for the inference request. Amazon SageMaker AI will generate
     /// an
     /// identifier for you if none is specified.
@@ -64,15 +69,22 @@ pub const InvokeEndpointAsyncInput = struct {
     /// The default is 6 hours, or 21,600 seconds.
     request_ttl_seconds: ?i32 = null,
 
+    /// The path extension that is appended to the Amazon S3 output path where the
+    /// inference
+    /// response payload is stored.
+    s3_output_path_extension: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .accept = "Accept",
         .content_type = "ContentType",
         .custom_attributes = "CustomAttributes",
         .endpoint_name = "EndpointName",
+        .filename = "Filename",
         .inference_id = "InferenceId",
         .input_location = "InputLocation",
         .invocation_timeout_seconds = "InvocationTimeoutSeconds",
         .request_ttl_seconds = "RequestTTLSeconds",
+        .s3_output_path_extension = "S3OutputPathExtension",
     };
 };
 
@@ -152,6 +164,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeEndpointAsyncInpu
     if (input.custom_attributes) |v| {
         try request.headers.put(allocator, "X-Amzn-SageMaker-Custom-Attributes", v);
     }
+    if (input.filename) |v| {
+        try request.headers.put(allocator, "X-Amzn-SageMaker-Filename", v);
+    }
     if (input.inference_id) |v| {
         try request.headers.put(allocator, "X-Amzn-SageMaker-Inference-Id", v);
     }
@@ -167,6 +182,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeEndpointAsyncInpu
             const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
             try request.headers.put(allocator, "X-Amzn-SageMaker-RequestTTLSeconds", num_str);
         }
+    }
+    if (input.s3_output_path_extension) |v| {
+        try request.headers.put(allocator, "X-Amzn-SageMaker-S3OutputPathExtension", v);
     }
 
     return request;

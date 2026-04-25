@@ -11,11 +11,10 @@ pub const UpdateFindingsFeedbackInput = struct {
     comments: ?[]const u8 = null,
 
     /// The ID of the detector that is associated with the findings for which you
-    /// want to update
-    /// the feedback.
+    /// want to update the feedback.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 

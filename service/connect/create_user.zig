@@ -4,10 +4,22 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const AfterContactWorkConfigPerChannel = @import("after_contact_work_config_per_channel.zig").AfterContactWorkConfigPerChannel;
+const AutoAcceptConfig = @import("auto_accept_config.zig").AutoAcceptConfig;
 const UserIdentityInfo = @import("user_identity_info.zig").UserIdentityInfo;
+const PersistentConnectionConfig = @import("persistent_connection_config.zig").PersistentConnectionConfig;
 const UserPhoneConfig = @import("user_phone_config.zig").UserPhoneConfig;
+const PhoneNumberConfig = @import("phone_number_config.zig").PhoneNumberConfig;
+const VoiceEnhancementConfig = @import("voice_enhancement_config.zig").VoiceEnhancementConfig;
 
 pub const CreateUserInput = struct {
+    /// The list of after contact work (ACW) timeout configuration settings for each
+    /// channel.
+    after_contact_work_configs: ?[]const AfterContactWorkConfigPerChannel = null,
+
+    /// The list of auto-accept configuration settings for each channel.
+    auto_accept_configs: ?[]const AutoAcceptConfig = null,
+
     /// The identifier of the user account in the directory used for identity
     /// management. If Amazon Connect cannot
     /// access the directory, you can specify this identifier to authenticate users.
@@ -38,8 +50,17 @@ pub const CreateUserInput = struct {
     /// management. Otherwise, it is an error to include a password.
     password: ?[]const u8 = null,
 
-    /// The phone settings for the user.
-    phone_config: UserPhoneConfig,
+    /// The list of persistent connection configuration settings for each channel.
+    persistent_connection_configs: ?[]const PersistentConnectionConfig = null,
+
+    /// The phone settings for the user. This parameter is optional. If not
+    /// provided, the user can be configured using channel-specific parameters such
+    /// as `AutoAcceptConfigs`, `AfterContactWorkConfigs`, `PhoneNumberConfigs`,
+    /// `PersistentConnectionConfigs`, and `VoiceEnhancementConfigs`.
+    phone_config: ?UserPhoneConfig = null,
+
+    /// The list of phone number configuration settings for each channel.
+    phone_number_configs: ?[]const PhoneNumberConfig = null,
 
     /// The identifier of the routing profile for the user.
     routing_profile_id: []const u8,
@@ -66,17 +87,25 @@ pub const CreateUserInput = struct {
     /// * Incorrect: testuser@example
     username: []const u8,
 
+    /// The list of voice enhancement configuration settings for each channel.
+    voice_enhancement_configs: ?[]const VoiceEnhancementConfig = null,
+
     pub const json_field_names = .{
+        .after_contact_work_configs = "AfterContactWorkConfigs",
+        .auto_accept_configs = "AutoAcceptConfigs",
         .directory_user_id = "DirectoryUserId",
         .hierarchy_group_id = "HierarchyGroupId",
         .identity_info = "IdentityInfo",
         .instance_id = "InstanceId",
         .password = "Password",
+        .persistent_connection_configs = "PersistentConnectionConfigs",
         .phone_config = "PhoneConfig",
+        .phone_number_configs = "PhoneNumberConfigs",
         .routing_profile_id = "RoutingProfileId",
         .security_profile_ids = "SecurityProfileIds",
         .tags = "Tags",
         .username = "Username",
+        .voice_enhancement_configs = "VoiceEnhancementConfigs",
     };
 };
 
@@ -134,6 +163,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateUserInput, config
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.after_contact_work_configs) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"AfterContactWorkConfigs\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.auto_accept_configs) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"AutoAcceptConfigs\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.directory_user_id) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"DirectoryUserId\":");
@@ -158,10 +199,24 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateUserInput, config
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"PhoneConfig\":");
-    try aws.json.writeValue(@TypeOf(input.phone_config), input.phone_config, allocator, &body_buf);
-    has_prev = true;
+    if (input.persistent_connection_configs) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"PersistentConnectionConfigs\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.phone_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"PhoneConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.phone_number_configs) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"PhoneNumberConfigs\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"RoutingProfileId\":");
     try aws.json.writeValue(@TypeOf(input.routing_profile_id), input.routing_profile_id, allocator, &body_buf);
@@ -180,6 +235,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateUserInput, config
     try body_buf.appendSlice(allocator, "\"Username\":");
     try aws.json.writeValue(@TypeOf(input.username), input.username, allocator, &body_buf);
     has_prev = true;
+    if (input.voice_enhancement_configs) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"VoiceEnhancementConfigs\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);

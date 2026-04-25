@@ -11,7 +11,7 @@ const serde = @import("serde.zig");
 pub const CreateEventSubscriptionInput = struct {
     /// A Boolean value; set to **true** to activate the
     /// subscription, set to **false** to create the subscription but not
-    /// active it.
+    /// activate it.
     enabled: ?bool = null,
 
     /// A list of event categories for a SourceType that you want to subscribe to.

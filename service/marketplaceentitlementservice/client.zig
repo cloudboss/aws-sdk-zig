@@ -35,14 +35,8 @@ pub const Client = struct {
 
     /// GetEntitlements retrieves entitlement values for a given product. The
     /// results can be
-    /// filtered based on customer identifier, AWS account ID, or product
-    /// dimensions.
-    ///
-    /// The `CustomerIdentifier` parameter is on path for deprecation. Use
-    /// `CustomerAWSAccountID` instead.
-    ///
-    /// These parameters are mutually exclusive. You can't specify both
-    /// `CustomerIdentifier` and `CustomerAWSAccountID` in the same request.
+    /// filtered based on customer identifier, AWS account ID, license ARN, or
+    /// product dimensions.
     pub fn getEntitlements(self: *Self, allocator: std.mem.Allocator, input: get_entitlements.GetEntitlementsInput, options: CallOptions) !get_entitlements.GetEntitlementsOutput {
         return get_entitlements.execute(self, allocator, input, options);
     }

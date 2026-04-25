@@ -1,17 +1,14 @@
 const ExpressGatewayServiceScalingMetric = @import("express_gateway_service_scaling_metric.zig").ExpressGatewayServiceScalingMetric;
 
 /// Defines the auto-scaling configuration for an Express service. This
-/// determines how the
-/// service automatically adjusts the number of running tasks based on demand
-/// metrics such as
-/// CPU utilization, memory utilization, or request count per target.
+/// determines how the service automatically adjusts the number of running tasks
+/// based on demand metrics such as CPU utilization, memory utilization, or
+/// request count per target.
 ///
 /// Auto-scaling helps ensure your application can handle varying levels of
-/// traffic while
-/// optimizing costs by scaling down during low-demand periods. You can specify
-/// the minimum and
-/// maximum number of tasks, the scaling metric, and the target value for that
-/// metric.
+/// traffic while optimizing costs by scaling down during low-demand periods.
+/// You can specify the minimum and maximum number of tasks, the scaling metric,
+/// and the target value for that metric.
 pub const ExpressGatewayScalingTarget = struct {
     /// The metric used for auto-scaling decisions. The default metric used for an
     /// Express service is `CPUUtilization`.

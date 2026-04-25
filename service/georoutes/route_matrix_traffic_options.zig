@@ -11,7 +11,7 @@ pub const RouteMatrixTrafficOptions = struct {
 
     /// Determines if traffic should be used or ignored while calculating the route.
     ///
-    /// Default Value: `UseTrafficData`
+    /// Default value: `UseTrafficData`
     usage: ?TrafficUsage = null,
 
     pub const json_field_names = .{

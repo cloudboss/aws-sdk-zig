@@ -3,8 +3,8 @@
 pub const DateStatistics = struct {
     /// The timestamp when the total findings count is observed.
     ///
-    /// For example, `Date` would look like `"2024-09-05T17:00:00-07:00"`
-    /// whereas `LastGeneratedAt` would look like 2024-09-05T17:12:29-07:00".
+    /// For example, `Date` would look like `"2024-09-05T17:00:00-07:00"` whereas
+    /// `LastGeneratedAt` would look like 2024-09-05T17:12:29-07:00".
     date: ?i64 = null,
 
     /// The timestamp at which the last finding in the findings count, was

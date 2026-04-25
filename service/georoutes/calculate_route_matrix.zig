@@ -23,13 +23,14 @@ pub const CalculateRouteMatrixInput = struct {
     /// Features that are avoided while calculating a route. Avoidance is on a
     /// best-case basis. If an avoidance can't be satisfied for a particular case,
     /// it violates the avoidance and the returned response produces a notice for
-    /// the violation.
+    /// the violation. For
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only `TollRoads`, `Ferries`, and `ControlledAccessHighways`.
     avoid: ?RouteMatrixAvoidanceOptions = null,
 
     /// Uses the current time as the time of departure.
     depart_now: ?bool = null,
 
-    /// Time of departure from thr origin.
+    /// Time of departure from the origin.
     ///
     /// Time format:`YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm`
     ///
@@ -44,47 +45,60 @@ pub const CalculateRouteMatrixInput = struct {
     ///
     /// Route calculations are billed for each origin and destination pair. If you
     /// use a large matrix of origins and destinations, your costs will increase
-    /// accordingly. See [ Amazon Location's pricing
-    /// page](https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`) for more information.
+    /// accordingly. For more information, see [Routes
+    /// pricing](https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html) in the *Amazon Location Service Developer Guide*.
     destinations: []const RouteMatrixDestination,
 
-    /// Features to be strictly excluded while calculating the route.
+    /// Features to be strictly excluded while calculating the route. Not supported
+    /// in `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     exclude: ?RouteMatrixExclusionOptions = null,
 
     /// Optional: The API key to be used for authorization. Either an API key or
     /// valid SigV4 signature must be provided when making a request.
     key: ?[]const u8 = null,
 
-    /// Specifies the optimization criteria for calculating a route.
+    /// Controls the trade-off between finding the shortest travel time
+    /// (`FastestRoute`) and the shortest distance (`ShortestRoute`) when
+    /// calculating reachable areas.
     ///
-    /// Default Value: `FastestRoute`
+    /// Default value: `FastestRoute`
     optimize_routing_for: ?RoutingObjective = null,
 
-    /// The position in longitude and latitude for the origin.
+    /// The position for the origin in World Geodetic System (WGS 84) format:
+    /// [longitude, latitude].
     ///
     /// Route calculations are billed for each origin and destination pair. Using a
     /// large amount of Origins in a request can lead you to incur unexpected
-    /// charges. See [ Amazon Location's pricing
-    /// page](https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html`) for more information.
+    /// charges. For more information, see [Routes
+    /// pricing](https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html) in the *Amazon Location Service Developer Guide*.
     origins: []const RouteMatrixOrigin,
 
     /// Boundary within which the matrix is to be calculated. All data, origins and
-    /// destinations outside the boundary are considered invalid.
+    /// destinations outside the boundary are considered invalid. For
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only `Unbounded` set to `true`.
+    ///
+    /// Default value: `Unbounded set to true`
     ///
     /// When request routing boundary was set as AutoCircle, the response routing
     /// boundary will return Circle derived from the AutoCircle settings.
-    routing_boundary: RouteMatrixBoundary,
+    routing_boundary: ?RouteMatrixBoundary = null,
 
-    /// Traffic related options.
+    /// Traffic related options. Not supported in `ap-southeast-1` and
+    /// `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     traffic: ?RouteMatrixTrafficOptions = null,
 
     /// Specifies the mode of transport when calculating a route. Used in estimating
-    /// the speed of travel and road compatibility.
+    /// the speed of travel and road compatibility. For
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only `Car`, `Pedestrian`, and `Scooter`.
     ///
-    /// Default Value: `Car`
+    /// Default value: `Car`
     travel_mode: ?RouteMatrixTravelMode = null,
 
-    /// Travel mode related options for the provided travel mode.
+    /// Travel mode related options for the provided travel mode. Not supported in
+    /// `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     travel_mode_options: ?RouteMatrixTravelModeOptions = null,
 
     pub const json_field_names = .{
@@ -225,10 +239,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CalculateRouteMatrixInp
     try body_buf.appendSlice(allocator, "\"Origins\":");
     try aws.json.writeValue(@TypeOf(input.origins), input.origins, allocator, &body_buf);
     has_prev = true;
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"RoutingBoundary\":");
-    try aws.json.writeValue(@TypeOf(input.routing_boundary), input.routing_boundary, allocator, &body_buf);
-    has_prev = true;
+    if (input.routing_boundary) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"RoutingBoundary\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.traffic) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"Traffic\":");

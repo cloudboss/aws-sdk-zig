@@ -22,14 +22,25 @@ pub const CreatePolicyEngineInput = struct {
     /// different services or environments.
     description: ?[]const u8 = null,
 
+    /// The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy
+    /// engine data.
+    encryption_key_arn: ?[]const u8 = null,
+
     /// The customer-assigned immutable name for the policy engine. This name
     /// identifies the policy engine and cannot be changed after creation.
     name: []const u8,
 
+    /// A map of tag keys and values to assign to an AgentCore Policy. Tags enable
+    /// you to categorize your resources in different ways, for example, by purpose,
+    /// owner, or environment.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
     pub const json_field_names = .{
         .client_token = "clientToken",
         .description = "description",
+        .encryption_key_arn = "encryptionKeyArn",
         .name = "name",
+        .tags = "tags",
     };
 };
 
@@ -40,6 +51,10 @@ pub const CreatePolicyEngineOutput = struct {
 
     /// A human-readable description of the policy engine's purpose.
     description: ?[]const u8 = null,
+
+    /// The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy
+    /// engine data.
+    encryption_key_arn: ?[]const u8 = null,
 
     /// The customer-assigned name of the created policy engine. This matches the
     /// name provided in the request and serves as the human-readable identifier.
@@ -71,6 +86,7 @@ pub const CreatePolicyEngineOutput = struct {
     pub const json_field_names = .{
         .created_at = "createdAt",
         .description = "description",
+        .encryption_key_arn = "encryptionKeyArn",
         .name = "name",
         .policy_engine_arn = "policyEngineArn",
         .policy_engine_id = "policyEngineId",
@@ -130,10 +146,22 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePolicyEngineInput
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.encryption_key_arn) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"encryptionKeyArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
     has_prev = true;
+    if (input.tags) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"tags\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);

@@ -31,7 +31,7 @@ pub const CreateGlobalReplicationGroupInput = struct {
 
     /// The name of the primary cluster that accepts writes and will replicate
     /// updates to the
-    /// secondary cluster.
+    /// secondary cluster. This value is stored as a lowercase string.
     primary_replication_group_id: []const u8,
 };
 

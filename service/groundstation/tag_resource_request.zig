@@ -1,5 +1,6 @@
 const aws = @import("aws");
 
+/// Input for the `TagResource` operation.
 pub const TagResourceRequest = struct {
     /// ARN of a resource tag.
     resource_arn: []const u8,

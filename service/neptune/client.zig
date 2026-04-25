@@ -760,7 +760,7 @@ pub const Client = struct {
 
     /// Detaches a Neptune DB cluster from a Neptune global database. A secondary
     /// cluster becomes a normal standalone cluster with read-write capability
-    /// instead of being read-only, and no longer receives data from a the
+    /// instead of being read-only, and no longer receives data from the
     /// primary cluster.
     pub fn removeFromGlobalCluster(self: *Self, allocator: std.mem.Allocator, input: remove_from_global_cluster.RemoveFromGlobalClusterInput, options: CallOptions) !remove_from_global_cluster.RemoveFromGlobalClusterOutput {
         return remove_from_global_cluster.execute(self, allocator, input, options);

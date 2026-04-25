@@ -16,6 +16,7 @@ pub const ServiceError = struct {
         limit_exceeded_exception: LimitExceededException,
         resource_already_exists_exception: ResourceAlreadyExistsException,
         resource_not_found_exception: ResourceNotFoundException,
+        service_quota_exceeded_exception: ServiceQuotaExceededException,
         slot_not_available_exception: SlotNotAvailableException,
         throttling_exception: ThrottlingException,
         validation_exception: ValidationException,
@@ -34,6 +35,7 @@ pub const ServiceError = struct {
                 .limit_exceeded_exception => "LimitExceededException",
                 .resource_already_exists_exception => "ResourceAlreadyExistsException",
                 .resource_not_found_exception => "ResourceNotFoundException",
+                .service_quota_exceeded_exception => "ServiceQuotaExceededException",
                 .slot_not_available_exception => "SlotNotAvailableException",
                 .throttling_exception => "ThrottlingException",
                 .validation_exception => "ValidationException",
@@ -54,6 +56,7 @@ pub const ServiceError = struct {
                 .limit_exceeded_exception => |e| e.message,
                 .resource_already_exists_exception => |e| e.message,
                 .resource_not_found_exception => |e| e.message,
+                .service_quota_exceeded_exception => |e| e.message,
                 .slot_not_available_exception => |e| e.message,
                 .throttling_exception => |e| e.message,
                 .validation_exception => |e| e.message,
@@ -74,6 +77,7 @@ pub const ServiceError = struct {
                 .limit_exceeded_exception => 409,
                 .resource_already_exists_exception => 409,
                 .resource_not_found_exception => 409,
+                .service_quota_exceeded_exception => 402,
                 .slot_not_available_exception => 409,
                 .throttling_exception => 429,
                 .validation_exception => 400,
@@ -94,6 +98,7 @@ pub const ServiceError = struct {
                 .limit_exceeded_exception => |e| e.request_id,
                 .resource_already_exists_exception => |e| e.request_id,
                 .resource_not_found_exception => |e| e.request_id,
+                .service_quota_exceeded_exception => |e| e.request_id,
                 .slot_not_available_exception => |e| e.request_id,
                 .throttling_exception => |e| e.request_id,
                 .validation_exception => |e| e.request_id,
@@ -174,6 +179,11 @@ pub const ResourceAlreadyExistsException = struct {
 };
 
 pub const ResourceNotFoundException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };

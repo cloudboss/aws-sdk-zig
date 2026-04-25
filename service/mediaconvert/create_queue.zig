@@ -20,6 +20,10 @@ pub const CreateQueueInput = struct {
     /// Optional. A description of the queue that you are creating.
     description: ?[]const u8 = null,
 
+    /// Specify the maximum number of Elemental Inference feeds MediaConvert can
+    /// process concurrently.
+    maximum_concurrent_feeds: ?i32 = null,
+
     /// The name of the queue that you are creating.
     name: []const u8,
 
@@ -46,6 +50,7 @@ pub const CreateQueueInput = struct {
     pub const json_field_names = .{
         .concurrent_jobs = "ConcurrentJobs",
         .description = "Description",
+        .maximum_concurrent_feeds = "MaximumConcurrentFeeds",
         .name = "Name",
         .pricing_plan = "PricingPlan",
         .reservation_plan_settings = "ReservationPlanSettings",
@@ -114,6 +119,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateQueueInput, confi
     if (input.description) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"Description\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.maximum_concurrent_feeds) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"MaximumConcurrentFeeds\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

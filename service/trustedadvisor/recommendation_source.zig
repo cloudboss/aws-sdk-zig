@@ -14,6 +14,7 @@ pub const RecommendationSource = enum {
     stir,
     ta_check,
     well_architected,
+    cost_optimization_hub,
 
     pub const json_field_names = .{
         .aws_config = "aws_config",
@@ -29,6 +30,7 @@ pub const RecommendationSource = enum {
         .stir = "stir",
         .ta_check = "ta_check",
         .well_architected = "well_architected",
+        .cost_optimization_hub = "cost_optimization_hub",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -46,6 +48,7 @@ pub const RecommendationSource = enum {
             .stir => "stir",
             .ta_check => "ta_check",
             .well_architected => "well_architected",
+            .cost_optimization_hub => "cost_optimization_hub",
         };
     }
 

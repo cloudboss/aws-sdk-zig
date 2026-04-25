@@ -23,6 +23,10 @@ pub const DeletePolicyEngineOutput = struct {
     /// The human-readable description of the deleted policy engine.
     description: ?[]const u8 = null,
 
+    /// The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy
+    /// engine data.
+    encryption_key_arn: ?[]const u8 = null,
+
     /// The customer-assigned name of the deleted policy engine.
     name: []const u8,
 
@@ -51,6 +55,7 @@ pub const DeletePolicyEngineOutput = struct {
     pub const json_field_names = .{
         .created_at = "createdAt",
         .description = "description",
+        .encryption_key_arn = "encryptionKeyArn",
         .name = "name",
         .policy_engine_arn = "policyEngineArn",
         .policy_engine_id = "policyEngineId",

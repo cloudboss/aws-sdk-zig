@@ -16,74 +16,56 @@ pub const RegisterContainerInstanceInput = struct {
     attributes: ?[]const Attribute = null,
 
     /// The short name or full Amazon Resource Name (ARN) of the cluster to register
-    /// your
-    /// container instance with. If you do not specify a cluster, the default
-    /// cluster is
-    /// assumed.
+    /// your container instance with. If you do not specify a cluster, the default
+    /// cluster is assumed.
     cluster: ?[]const u8 = null,
 
     /// The ARN of the container instance (if it was previously registered).
     container_instance_arn: ?[]const u8 = null,
 
     /// The instance identity document for the EC2 instance to register. This
-    /// document can be
-    /// found by running the following command from the instance: `curl
-    /// http://169.254.169.254/latest/dynamic/instance-identity/document/`
+    /// document can be found by running the following command from the instance:
+    /// `curl http://169.254.169.254/latest/dynamic/instance-identity/document/`
     instance_identity_document: ?[]const u8 = null,
 
     /// The instance identity document signature for the EC2 instance to register.
-    /// This
-    /// signature can be found by running the following command from the instance:
-    /// `curl
+    /// This signature can be found by running the following command from the
+    /// instance: `curl
     /// http://169.254.169.254/latest/dynamic/instance-identity/signature/`
     instance_identity_document_signature: ?[]const u8 = null,
 
     /// The devices that are available on the container instance. The only supported
-    /// device
-    /// type is a GPU.
+    /// device type is a GPU.
     platform_devices: ?[]const PlatformDevice = null,
 
     /// The metadata that you apply to the container instance to help you categorize
-    /// and
-    /// organize them. Each tag consists of a key and an optional value. You define
-    /// both.
+    /// and organize them. Each tag consists of a key and an optional value. You
+    /// define both.
     ///
     /// The following basic restrictions apply to tags:
     ///
     /// * Maximum number of tags per resource - 50
-    ///
     /// * For each resource, each tag key must be unique, and each tag key can have
-    ///   only
-    /// one value.
-    ///
+    ///   only one value.
     /// * Maximum key length - 128 Unicode characters in UTF-8
-    ///
     /// * Maximum value length - 256 Unicode characters in UTF-8
-    ///
     /// * If your tagging schema is used across multiple services and resources,
-    /// remember that other services may have restrictions on allowed characters.
-    /// Generally allowed characters are: letters, numbers, and spaces representable
-    /// in
-    /// UTF-8, and the following characters: + - = . _ : / @.
-    ///
+    ///   remember that other services may have restrictions on allowed characters.
+    ///   Generally allowed characters are: letters, numbers, and spaces
+    ///   representable in UTF-8, and the following characters: + - = . _ : / @.
     /// * Tag keys and values are case-sensitive.
-    ///
-    /// * Do not use `aws:`, `AWS:`, or any upper or lowercase
-    /// combination of such as a prefix for either keys or values as it is reserved
-    /// for
-    /// Amazon Web
-    /// Services use. You cannot edit or delete tag keys or values with
-    /// this prefix. Tags with this prefix do not count against your tags per
-    /// resource
-    /// limit.
+    /// * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of such
+    ///   as a prefix for either keys or values as it is reserved for Amazon Web
+    ///   Services use. You cannot edit or delete tag keys or values with this
+    ///   prefix. Tags with this prefix do not count against your tags per resource
+    ///   limit.
     tags: ?[]const Tag = null,
 
     /// The resources available on the instance.
     total_resources: ?[]const Resource = null,
 
     /// The version information for the Amazon ECS container agent and Docker daemon
-    /// that runs
-    /// on the container instance.
+    /// that runs on the container instance.
     version_info: ?VersionInfo = null,
 
     pub const json_field_names = .{
@@ -232,6 +214,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

@@ -4,6 +4,10 @@ pub const RecommendationResourcesAggregates = struct {
     /// the Trusted Advisor check
     error_count: i64,
 
+    /// The number of AWS resources belonging to this Trusted Advisor check that
+    /// were excluded by the customer
+    excluded_count: ?i64 = null,
+
     /// The number of AWS resources that were flagged to be OK according to the
     /// Trusted Advisor check
     ok_count: i64,
@@ -14,6 +18,7 @@ pub const RecommendationResourcesAggregates = struct {
 
     pub const json_field_names = .{
         .error_count = "errorCount",
+        .excluded_count = "excludedCount",
         .ok_count = "okCount",
         .warning_count = "warningCount",
     };

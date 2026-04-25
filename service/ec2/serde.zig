@@ -72,9 +72,11 @@ const AutoScalingIpsState = @import("auto_scaling_ips_state.zig").AutoScalingIps
 const AvailabilityMode = @import("availability_mode.zig").AvailabilityMode;
 const AvailabilityZone = @import("availability_zone.zig").AvailabilityZone;
 const AvailabilityZoneAddress = @import("availability_zone_address.zig").AvailabilityZoneAddress;
+const AvailabilityZoneGeography = @import("availability_zone_geography.zig").AvailabilityZoneGeography;
 const AvailabilityZoneMessage = @import("availability_zone_message.zig").AvailabilityZoneMessage;
 const AvailabilityZoneOptInStatus = @import("availability_zone_opt_in_status.zig").AvailabilityZoneOptInStatus;
 const AvailabilityZoneState = @import("availability_zone_state.zig").AvailabilityZoneState;
+const AvailabilityZoneSubGeography = @import("availability_zone_sub_geography.zig").AvailabilityZoneSubGeography;
 const AvailableCapacity = @import("available_capacity.zig").AvailableCapacity;
 const BandwidthWeightingType = @import("bandwidth_weighting_type.zig").BandwidthWeightingType;
 const BareMetal = @import("bare_metal.zig").BareMetal;
@@ -106,6 +108,7 @@ const CancelSpotFleetRequestsSuccessItem = @import("cancel_spot_fleet_requests_s
 const CancelSpotInstanceRequestState = @import("cancel_spot_instance_request_state.zig").CancelSpotInstanceRequestState;
 const CancelledSpotInstanceRequest = @import("cancelled_spot_instance_request.zig").CancelledSpotInstanceRequest;
 const CapacityAllocation = @import("capacity_allocation.zig").CapacityAllocation;
+const CapacityAllocationMetadataEntry = @import("capacity_allocation_metadata_entry.zig").CapacityAllocationMetadataEntry;
 const CapacityBlock = @import("capacity_block.zig").CapacityBlock;
 const CapacityBlockExtension = @import("capacity_block_extension.zig").CapacityBlockExtension;
 const CapacityBlockExtensionOffering = @import("capacity_block_extension_offering.zig").CapacityBlockExtensionOffering;
@@ -118,6 +121,9 @@ const CapacityManagerCondition = @import("capacity_manager_condition.zig").Capac
 const CapacityManagerDataExportResponse = @import("capacity_manager_data_export_response.zig").CapacityManagerDataExportResponse;
 const CapacityManagerDataExportStatus = @import("capacity_manager_data_export_status.zig").CapacityManagerDataExportStatus;
 const CapacityManagerDimension = @import("capacity_manager_dimension.zig").CapacityManagerDimension;
+const CapacityManagerMonitoredTagKey = @import("capacity_manager_monitored_tag_key.zig").CapacityManagerMonitoredTagKey;
+const CapacityManagerMonitoredTagKeyStatus = @import("capacity_manager_monitored_tag_key_status.zig").CapacityManagerMonitoredTagKeyStatus;
+const CapacityManagerTagDimension = @import("capacity_manager_tag_dimension.zig").CapacityManagerTagDimension;
 const CapacityReservation = @import("capacity_reservation.zig").CapacityReservation;
 const CapacityReservationBillingRequest = @import("capacity_reservation_billing_request.zig").CapacityReservationBillingRequest;
 const CapacityReservationBillingRequestStatus = @import("capacity_reservation_billing_request_status.zig").CapacityReservationBillingRequestStatus;
@@ -227,6 +233,7 @@ const DataQuery = @import("data_query.zig").DataQuery;
 const DataResponse = @import("data_response.zig").DataResponse;
 const DatafeedSubscriptionState = @import("datafeed_subscription_state.zig").DatafeedSubscriptionState;
 const DeclarativePoliciesReport = @import("declarative_policies_report.zig").DeclarativePoliciesReport;
+const DefaultConnectionTrackingConfiguration = @import("default_connection_tracking_configuration.zig").DefaultConnectionTrackingConfiguration;
 const DefaultRouteTableAssociationValue = @import("default_route_table_association_value.zig").DefaultRouteTableAssociationValue;
 const DefaultRouteTablePropagationValue = @import("default_route_table_propagation_value.zig").DefaultRouteTablePropagationValue;
 const DefaultTargetCapacityType = @import("default_target_capacity_type.zig").DefaultTargetCapacityType;
@@ -368,6 +375,7 @@ const FleetLaunchTemplateSpecification = @import("fleet_launch_template_specific
 const FleetLaunchTemplateSpecificationRequest = @import("fleet_launch_template_specification_request.zig").FleetLaunchTemplateSpecificationRequest;
 const FleetOnDemandAllocationStrategy = @import("fleet_on_demand_allocation_strategy.zig").FleetOnDemandAllocationStrategy;
 const FleetReplacementStrategy = @import("fleet_replacement_strategy.zig").FleetReplacementStrategy;
+const FleetReservationType = @import("fleet_reservation_type.zig").FleetReservationType;
 const FleetSpotCapacityRebalance = @import("fleet_spot_capacity_rebalance.zig").FleetSpotCapacityRebalance;
 const FleetSpotCapacityRebalanceRequest = @import("fleet_spot_capacity_rebalance_request.zig").FleetSpotCapacityRebalanceRequest;
 const FleetSpotMaintenanceStrategies = @import("fleet_spot_maintenance_strategies.zig").FleetSpotMaintenanceStrategies;
@@ -403,6 +411,7 @@ const HostProperties = @import("host_properties.zig").HostProperties;
 const HostRecovery = @import("host_recovery.zig").HostRecovery;
 const HostReservation = @import("host_reservation.zig").HostReservation;
 const HostnameType = @import("hostname_type.zig").HostnameType;
+const HttpTokensEnforcedState = @import("http_tokens_enforced_state.zig").HttpTokensEnforcedState;
 const HttpTokensState = @import("http_tokens_state.zig").HttpTokensState;
 const HypervisorType = @import("hypervisor_type.zig").HypervisorType;
 const IKEVersionsListValue = @import("ike_versions_list_value.zig").IKEVersionsListValue;
@@ -503,6 +512,11 @@ const InstanceRebootMigrationState = @import("instance_reboot_migration_state.zi
 const InstanceRequirements = @import("instance_requirements.zig").InstanceRequirements;
 const InstanceRequirementsRequest = @import("instance_requirements_request.zig").InstanceRequirementsRequest;
 const InstanceRequirementsWithMetadataRequest = @import("instance_requirements_with_metadata_request.zig").InstanceRequirementsWithMetadataRequest;
+const InstanceSecondaryInterface = @import("instance_secondary_interface.zig").InstanceSecondaryInterface;
+const InstanceSecondaryInterfaceAttachment = @import("instance_secondary_interface_attachment.zig").InstanceSecondaryInterfaceAttachment;
+const InstanceSecondaryInterfacePrivateIpAddress = @import("instance_secondary_interface_private_ip_address.zig").InstanceSecondaryInterfacePrivateIpAddress;
+const InstanceSecondaryInterfacePrivateIpAddressRequest = @import("instance_secondary_interface_private_ip_address_request.zig").InstanceSecondaryInterfacePrivateIpAddressRequest;
+const InstanceSecondaryInterfaceSpecificationRequest = @import("instance_secondary_interface_specification_request.zig").InstanceSecondaryInterfaceSpecificationRequest;
 const InstanceSpecification = @import("instance_specification.zig").InstanceSpecification;
 const InstanceState = @import("instance_state.zig").InstanceState;
 const InstanceStateChange = @import("instance_state_change.zig").InstanceStateChange;
@@ -663,6 +677,8 @@ const LaunchTemplateInstanceMetadataProtocolIpv6 = @import("launch_template_inst
 const LaunchTemplateInstanceMetadataTagsState = @import("launch_template_instance_metadata_tags_state.zig").LaunchTemplateInstanceMetadataTagsState;
 const LaunchTemplateInstanceNetworkInterfaceSpecification = @import("launch_template_instance_network_interface_specification.zig").LaunchTemplateInstanceNetworkInterfaceSpecification;
 const LaunchTemplateInstanceNetworkInterfaceSpecificationRequest = @import("launch_template_instance_network_interface_specification_request.zig").LaunchTemplateInstanceNetworkInterfaceSpecificationRequest;
+const LaunchTemplateInstanceSecondaryInterfaceSpecification = @import("launch_template_instance_secondary_interface_specification.zig").LaunchTemplateInstanceSecondaryInterfaceSpecification;
+const LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest = @import("launch_template_instance_secondary_interface_specification_request.zig").LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest;
 const LaunchTemplateLicenseConfiguration = @import("launch_template_license_configuration.zig").LaunchTemplateLicenseConfiguration;
 const LaunchTemplateLicenseConfigurationRequest = @import("launch_template_license_configuration_request.zig").LaunchTemplateLicenseConfigurationRequest;
 const LaunchTemplateNetworkPerformanceOptions = @import("launch_template_network_performance_options.zig").LaunchTemplateNetworkPerformanceOptions;
@@ -716,6 +732,8 @@ const MacSystemIntegrityProtectionSettingStatus = @import("mac_system_integrity_
 const MaintenanceDetails = @import("maintenance_details.zig").MaintenanceDetails;
 const ManagedBy = @import("managed_by.zig").ManagedBy;
 const ManagedPrefixList = @import("managed_prefix_list.zig").ManagedPrefixList;
+const ManagedResourceDefaultVisibility = @import("managed_resource_default_visibility.zig").ManagedResourceDefaultVisibility;
+const ManagedResourceVisibilitySettings = @import("managed_resource_visibility_settings.zig").ManagedResourceVisibilitySettings;
 const MarketType = @import("market_type.zig").MarketType;
 const MediaAcceleratorInfo = @import("media_accelerator_info.zig").MediaAcceleratorInfo;
 const MediaDeviceInfo = @import("media_device_info.zig").MediaDeviceInfo;
@@ -756,6 +774,7 @@ const NatGatewayApplianceType = @import("nat_gateway_appliance_type.zig").NatGat
 const NatGatewayAttachedAppliance = @import("nat_gateway_attached_appliance.zig").NatGatewayAttachedAppliance;
 const NatGatewayState = @import("nat_gateway_state.zig").NatGatewayState;
 const NativeApplicationOidcOptions = @import("native_application_oidc_options.zig").NativeApplicationOidcOptions;
+const NestedVirtualizationSpecification = @import("nested_virtualization_specification.zig").NestedVirtualizationSpecification;
 const NetworkAcl = @import("network_acl.zig").NetworkAcl;
 const NetworkAclAssociation = @import("network_acl_association.zig").NetworkAclAssociation;
 const NetworkAclEntry = @import("network_acl_entry.zig").NetworkAclEntry;
@@ -876,6 +895,7 @@ const RecurringCharge = @import("recurring_charge.zig").RecurringCharge;
 const RecurringChargeFrequency = @import("recurring_charge_frequency.zig").RecurringChargeFrequency;
 const ReferencedSecurityGroup = @import("referenced_security_group.zig").ReferencedSecurityGroup;
 const Region = @import("region.zig").Region;
+const RegionGeography = @import("region_geography.zig").RegionGeography;
 const RegionalSummary = @import("regional_summary.zig").RegionalSummary;
 const RegisterInstanceTagAttributeRequest = @import("register_instance_tag_attribute_request.zig").RegisterInstanceTagAttributeRequest;
 const RegisteredInstance = @import("registered_instance.zig").RegisteredInstance;
@@ -897,6 +917,8 @@ const ReservationFleetInstanceSpecification = @import("reservation_fleet_instanc
 const ReservationState = @import("reservation_state.zig").ReservationState;
 const ReservationType = @import("reservation_type.zig").ReservationType;
 const ReservationValue = @import("reservation_value.zig").ReservationValue;
+const ReservedCapacityOptions = @import("reserved_capacity_options.zig").ReservedCapacityOptions;
+const ReservedCapacityOptionsRequest = @import("reserved_capacity_options_request.zig").ReservedCapacityOptionsRequest;
 const ReservedInstanceLimitPrice = @import("reserved_instance_limit_price.zig").ReservedInstanceLimitPrice;
 const ReservedInstanceReservationValue = @import("reserved_instance_reservation_value.zig").ReservedInstanceReservationValue;
 const ReservedInstanceState = @import("reserved_instance_state.zig").ReservedInstanceState;
@@ -967,6 +989,22 @@ const ScheduledInstancesMonitoring = @import("scheduled_instances_monitoring.zig
 const ScheduledInstancesNetworkInterface = @import("scheduled_instances_network_interface.zig").ScheduledInstancesNetworkInterface;
 const ScheduledInstancesPlacement = @import("scheduled_instances_placement.zig").ScheduledInstancesPlacement;
 const ScheduledInstancesPrivateIpAddressConfig = @import("scheduled_instances_private_ip_address_config.zig").ScheduledInstancesPrivateIpAddressConfig;
+const SecondaryInterface = @import("secondary_interface.zig").SecondaryInterface;
+const SecondaryInterfaceAttachment = @import("secondary_interface_attachment.zig").SecondaryInterfaceAttachment;
+const SecondaryInterfaceIpv4Address = @import("secondary_interface_ipv_4_address.zig").SecondaryInterfaceIpv4Address;
+const SecondaryInterfacePrivateIpAddressSpecification = @import("secondary_interface_private_ip_address_specification.zig").SecondaryInterfacePrivateIpAddressSpecification;
+const SecondaryInterfacePrivateIpAddressSpecificationRequest = @import("secondary_interface_private_ip_address_specification_request.zig").SecondaryInterfacePrivateIpAddressSpecificationRequest;
+const SecondaryInterfaceStatus = @import("secondary_interface_status.zig").SecondaryInterfaceStatus;
+const SecondaryInterfaceType = @import("secondary_interface_type.zig").SecondaryInterfaceType;
+const SecondaryNetwork = @import("secondary_network.zig").SecondaryNetwork;
+const SecondaryNetworkCidrBlockAssociationState = @import("secondary_network_cidr_block_association_state.zig").SecondaryNetworkCidrBlockAssociationState;
+const SecondaryNetworkIpv4CidrBlockAssociation = @import("secondary_network_ipv_4_cidr_block_association.zig").SecondaryNetworkIpv4CidrBlockAssociation;
+const SecondaryNetworkState = @import("secondary_network_state.zig").SecondaryNetworkState;
+const SecondaryNetworkType = @import("secondary_network_type.zig").SecondaryNetworkType;
+const SecondarySubnet = @import("secondary_subnet.zig").SecondarySubnet;
+const SecondarySubnetCidrBlockAssociationState = @import("secondary_subnet_cidr_block_association_state.zig").SecondarySubnetCidrBlockAssociationState;
+const SecondarySubnetIpv4CidrBlockAssociation = @import("secondary_subnet_ipv_4_cidr_block_association.zig").SecondarySubnetIpv4CidrBlockAssociation;
+const SecondarySubnetState = @import("secondary_subnet_state.zig").SecondarySubnetState;
 const SecurityGroup = @import("security_group.zig").SecurityGroup;
 const SecurityGroupForVpc = @import("security_group_for_vpc.zig").SecurityGroupForVpc;
 const SecurityGroupIdentifier = @import("security_group_identifier.zig").SecurityGroupIdentifier;
@@ -1096,6 +1134,10 @@ const TransitGatewayAttachmentBgpConfiguration = @import("transit_gateway_attach
 const TransitGatewayAttachmentPropagation = @import("transit_gateway_attachment_propagation.zig").TransitGatewayAttachmentPropagation;
 const TransitGatewayAttachmentResourceType = @import("transit_gateway_attachment_resource_type.zig").TransitGatewayAttachmentResourceType;
 const TransitGatewayAttachmentState = @import("transit_gateway_attachment_state.zig").TransitGatewayAttachmentState;
+const TransitGatewayAttachmentStatusType = @import("transit_gateway_attachment_status_type.zig").TransitGatewayAttachmentStatusType;
+const TransitGatewayClientVpnAttachment = @import("transit_gateway_client_vpn_attachment.zig").TransitGatewayClientVpnAttachment;
+const TransitGatewayConfigurationDescribeEndpointStructure = @import("transit_gateway_configuration_describe_endpoint_structure.zig").TransitGatewayConfigurationDescribeEndpointStructure;
+const TransitGatewayConfigurationInputStructure = @import("transit_gateway_configuration_input_structure.zig").TransitGatewayConfigurationInputStructure;
 const TransitGatewayConnect = @import("transit_gateway_connect.zig").TransitGatewayConnect;
 const TransitGatewayConnectOptions = @import("transit_gateway_connect_options.zig").TransitGatewayConnectOptions;
 const TransitGatewayConnectPeer = @import("transit_gateway_connect_peer.zig").TransitGatewayConnectPeer;
@@ -1759,6 +1801,24 @@ pub fn deserializeAuthorizationRuleSet(allocator: std.mem.Allocator, reader: *aw
     return list.toOwnedSlice(allocator);
 }
 
+pub fn deserializeAvailabilityZoneGeographyList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const AvailabilityZoneGeography {
+    var list: std.ArrayList(AvailabilityZoneGeography) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeAvailabilityZoneGeography(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
 pub fn deserializeAvailabilityZoneList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const AvailabilityZone {
     var list: std.ArrayList(AvailabilityZone) = .{};
     while (try reader.next()) |event| {
@@ -1784,6 +1844,24 @@ pub fn deserializeAvailabilityZoneMessageList(allocator: std.mem.Allocator, read
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
                     try list.append(allocator, try deserializeAvailabilityZoneMessage(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeAvailabilityZoneSubGeographyList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const AvailabilityZoneSubGeography {
+    var list: std.ArrayList(AvailabilityZoneSubGeography) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeAvailabilityZoneSubGeography(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -1993,6 +2071,24 @@ pub fn deserializeCancelledSpotInstanceRequestList(allocator: std.mem.Allocator,
     return list.toOwnedSlice(allocator);
 }
 
+pub fn deserializeCapacityAllocationMetadataList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const CapacityAllocationMetadataEntry {
+    var list: std.ArrayList(CapacityAllocationMetadataEntry) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeCapacityAllocationMetadataEntry(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
 pub fn deserializeCapacityAllocations(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const CapacityAllocation {
     var list: std.ArrayList(CapacityAllocation) = .{};
     while (try reader.next()) |event| {
@@ -2108,6 +2204,42 @@ pub fn deserializeCapacityManagerDataExportResponseSet(allocator: std.mem.Alloca
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
                     try list.append(allocator, try deserializeCapacityManagerDataExportResponse(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeCapacityManagerMonitoredTagKeyList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const CapacityManagerMonitoredTagKey {
+    var list: std.ArrayList(CapacityManagerMonitoredTagKey) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeCapacityManagerMonitoredTagKey(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeCapacityManagerTagDimensionSet(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const CapacityManagerTagDimension {
+    var list: std.ArrayList(CapacityManagerTagDimension) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeCapacityManagerTagDimension(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -2360,6 +2492,42 @@ pub fn deserializeClientVpnAuthenticationList(allocator: std.mem.Allocator, read
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
                     try list.append(allocator, try deserializeClientVpnAuthentication(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeClientVpnAvailabilityZoneIdSet(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
+    var list: std.ArrayList([]const u8) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try allocator.dupe(u8, try reader.readElementText()));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeClientVpnAvailabilityZoneSet(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
+    var list: std.ArrayList([]const u8) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try allocator.dupe(u8, try reader.readElementText()));
                 } else {
                     try reader.skipElement();
                 }
@@ -4351,6 +4519,42 @@ pub fn deserializeInstancePrivateIpAddressList(allocator: std.mem.Allocator, rea
     return list.toOwnedSlice(allocator);
 }
 
+pub fn deserializeInstanceSecondaryInterfaceList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const InstanceSecondaryInterface {
+    var list: std.ArrayList(InstanceSecondaryInterface) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeInstanceSecondaryInterface(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeInstanceSecondaryInterfacePrivateIpAddressList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const InstanceSecondaryInterfacePrivateIpAddress {
+    var list: std.ArrayList(InstanceSecondaryInterfacePrivateIpAddress) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeInstanceSecondaryInterfacePrivateIpAddress(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
 pub fn deserializeInstanceSet(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const InstanceTopology {
     var list: std.ArrayList(InstanceTopology) = .{};
     while (try reader.next()) |event| {
@@ -5492,6 +5696,24 @@ pub fn deserializeLaunchTemplateInstanceNetworkInterfaceSpecificationList(alloca
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
                     try list.append(allocator, try deserializeLaunchTemplateInstanceNetworkInterfaceSpecification(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeLaunchTemplateInstanceSecondaryInterfaceSpecificationList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const LaunchTemplateInstanceSecondaryInterfaceSpecification {
+    var list: std.ArrayList(LaunchTemplateInstanceSecondaryInterfaceSpecification) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeLaunchTemplateInstanceSecondaryInterfaceSpecification(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -6979,6 +7201,24 @@ pub fn deserializeRecurringChargesList(allocator: std.mem.Allocator, reader: *aw
     return list.toOwnedSlice(allocator);
 }
 
+pub fn deserializeRegionGeographyList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const RegionGeography {
+    var list: std.ArrayList(RegionGeography) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeRegionGeography(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
 pub fn deserializeRegionList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Region {
     var list: std.ArrayList(Region) = .{};
     while (try reader.next()) |event| {
@@ -7058,6 +7298,24 @@ pub fn deserializeReservationList(allocator: std.mem.Allocator, reader: *aws.xml
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
                     try list.append(allocator, try deserializeReservation(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeReservationTypeList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const FleetReservationType {
+    var list: std.ArrayList(FleetReservationType) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    if (FleetReservationType.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
                 } else {
                     try reader.skipElement();
                 }
@@ -7526,6 +7784,132 @@ pub fn deserializeScheduledInstanceSet(allocator: std.mem.Allocator, reader: *aw
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
                     try list.append(allocator, try deserializeScheduledInstance(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeSecondaryInterfaceIpv4AddressList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const SecondaryInterfaceIpv4Address {
+    var list: std.ArrayList(SecondaryInterfaceIpv4Address) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeSecondaryInterfaceIpv4Address(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeSecondaryInterfaceList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const SecondaryInterface {
+    var list: std.ArrayList(SecondaryInterface) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeSecondaryInterface(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeSecondaryInterfacePrivateIpAddressSpecificationList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const SecondaryInterfacePrivateIpAddressSpecification {
+    var list: std.ArrayList(SecondaryInterfacePrivateIpAddressSpecification) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeSecondaryInterfacePrivateIpAddressSpecification(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeSecondaryNetworkIpv4CidrBlockAssociationList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const SecondaryNetworkIpv4CidrBlockAssociation {
+    var list: std.ArrayList(SecondaryNetworkIpv4CidrBlockAssociation) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeSecondaryNetworkIpv4CidrBlockAssociation(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeSecondaryNetworkList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const SecondaryNetwork {
+    var list: std.ArrayList(SecondaryNetwork) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeSecondaryNetwork(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeSecondarySubnetIpv4CidrBlockAssociationList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const SecondarySubnetIpv4CidrBlockAssociation {
+    var list: std.ArrayList(SecondarySubnetIpv4CidrBlockAssociation) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeSecondarySubnetIpv4CidrBlockAssociation(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeSecondarySubnetList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const SecondarySubnet {
+    var list: std.ArrayList(SecondarySubnet) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeSecondarySubnet(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -10766,6 +11150,7 @@ pub fn deserializeAuthorizationRule(allocator: std.mem.Allocator, reader: *aws.x
 
 pub fn deserializeAvailabilityZone(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !AvailabilityZone {
     var result: AvailabilityZone = undefined;
+    result.geography = null;
     result.group_long_name = null;
     result.group_name = null;
     result.messages = null;
@@ -10775,13 +11160,16 @@ pub fn deserializeAvailabilityZone(allocator: std.mem.Allocator, reader: *aws.xm
     result.parent_zone_name = null;
     result.region_name = null;
     result.state = null;
+    result.sub_geography = null;
     result.zone_id = null;
     result.zone_name = null;
     result.zone_type = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
-                if (std.mem.eql(u8, e.local, "groupLongName")) {
+                if (std.mem.eql(u8, e.local, "geographySet")) {
+                    result.geography = try deserializeAvailabilityZoneGeographyList(allocator, reader, "item");
+                } else if (std.mem.eql(u8, e.local, "groupLongName")) {
                     result.group_long_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "groupName")) {
                     result.group_name = try allocator.dupe(u8, try reader.readElementText());
@@ -10799,12 +11187,33 @@ pub fn deserializeAvailabilityZone(allocator: std.mem.Allocator, reader: *aws.xm
                     result.region_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "zoneState")) {
                     result.state = AvailabilityZoneState.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "subGeographySet")) {
+                    result.sub_geography = try deserializeAvailabilityZoneSubGeographyList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "zoneId")) {
                     result.zone_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "zoneName")) {
                     result.zone_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "zoneType")) {
                     result.zone_type = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeAvailabilityZoneGeography(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !AvailabilityZoneGeography {
+    var result: AvailabilityZoneGeography = undefined;
+    result.name = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "name")) {
+                    result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -10824,6 +11233,25 @@ pub fn deserializeAvailabilityZoneMessage(allocator: std.mem.Allocator, reader: 
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "message")) {
                     result.message = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeAvailabilityZoneSubGeography(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !AvailabilityZoneSubGeography {
+    var result: AvailabilityZoneSubGeography = undefined;
+    result.name = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "name")) {
+                    result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -11216,17 +11644,41 @@ pub fn deserializeCancelledSpotInstanceRequest(allocator: std.mem.Allocator, rea
 }
 
 pub fn deserializeCapacityAllocation(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !CapacityAllocation {
-    _ = allocator;
     var result: CapacityAllocation = undefined;
+    result.allocation_metadata = null;
     result.allocation_type = null;
     result.count = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
-                if (std.mem.eql(u8, e.local, "allocationType")) {
+                if (std.mem.eql(u8, e.local, "allocationMetadataList")) {
+                    result.allocation_metadata = try deserializeCapacityAllocationMetadataList(allocator, reader, "item");
+                } else if (std.mem.eql(u8, e.local, "allocationType")) {
                     result.allocation_type = AllocationType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "count")) {
                     result.count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeCapacityAllocationMetadataEntry(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !CapacityAllocationMetadataEntry {
+    var result: CapacityAllocationMetadataEntry = undefined;
+    result.key = null;
+    result.value = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "key")) {
+                    result.key = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "value")) {
+                    result.value = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -11299,6 +11751,7 @@ pub fn deserializeCapacityBlockExtension(allocator: std.mem.Allocator, reader: *
     result.instance_count = null;
     result.instance_type = null;
     result.upfront_fee = null;
+    result.zone_type = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -11328,6 +11781,8 @@ pub fn deserializeCapacityBlockExtension(allocator: std.mem.Allocator, reader: *
                     result.instance_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "upfrontFee")) {
                     result.upfront_fee = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "zoneType")) {
+                    result.zone_type = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -11353,6 +11808,7 @@ pub fn deserializeCapacityBlockExtensionOffering(allocator: std.mem.Allocator, r
     result.start_date = null;
     result.tenancy = null;
     result.upfront_fee = null;
+    result.zone_type = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -11380,6 +11836,8 @@ pub fn deserializeCapacityBlockExtensionOffering(allocator: std.mem.Allocator, r
                     result.tenancy = CapacityReservationTenancy.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "upfrontFee")) {
                     result.upfront_fee = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "zoneType")) {
+                    result.zone_type = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -11406,6 +11864,7 @@ pub fn deserializeCapacityBlockOffering(allocator: std.mem.Allocator, reader: *a
     result.ultraserver_count = null;
     result.ultraserver_type = null;
     result.upfront_fee = null;
+    result.zone_type = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -11435,6 +11894,8 @@ pub fn deserializeCapacityBlockOffering(allocator: std.mem.Allocator, reader: *a
                     result.ultraserver_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "upfrontFee")) {
                     result.upfront_fee = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "zoneType")) {
+                    result.zone_type = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -11532,6 +11993,7 @@ pub fn deserializeCapacityManagerDataExportResponse(allocator: std.mem.Allocator
 pub fn deserializeCapacityManagerDimension(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !CapacityManagerDimension {
     var result: CapacityManagerDimension = undefined;
     result.account_id = null;
+    result.account_name = null;
     result.availability_zone_id = null;
     result.instance_family = null;
     result.instance_platform = null;
@@ -11547,12 +12009,15 @@ pub fn deserializeCapacityManagerDimension(allocator: std.mem.Allocator, reader:
     result.reservation_type = null;
     result.reservation_unused_financial_owner = null;
     result.resource_region = null;
+    result.tags = null;
     result.tenancy = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "accountId")) {
                     result.account_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "accountName")) {
+                    result.account_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "availabilityZoneId")) {
                     result.availability_zone_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceFamily")) {
@@ -11583,8 +12048,63 @@ pub fn deserializeCapacityManagerDimension(allocator: std.mem.Allocator, reader:
                     result.reservation_unused_financial_owner = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "resourceRegion")) {
                     result.resource_region = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "tagSet")) {
+                    result.tags = try deserializeCapacityManagerTagDimensionSet(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "tenancy")) {
                     result.tenancy = CapacityTenancy.fromWireName(try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeCapacityManagerMonitoredTagKey(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !CapacityManagerMonitoredTagKey {
+    var result: CapacityManagerMonitoredTagKey = undefined;
+    result.capacity_manager_provided = null;
+    result.earliest_datapoint_timestamp = null;
+    result.status = null;
+    result.status_message = null;
+    result.tag_key = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "capacityManagerProvided")) {
+                    result.capacity_manager_provided = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "earliestDatapointTimestamp")) {
+                    result.earliest_datapoint_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "status")) {
+                    result.status = CapacityManagerMonitoredTagKeyStatus.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "statusMessage")) {
+                    result.status_message = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "tagKey")) {
+                    result.tag_key = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeCapacityManagerTagDimension(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !CapacityManagerTagDimension {
+    var result: CapacityManagerTagDimension = undefined;
+    result.key = null;
+    result.value = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "key")) {
+                    result.key = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "value")) {
+                    result.value = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -12428,6 +12948,7 @@ pub fn deserializeClientVpnEndpoint(allocator: std.mem.Allocator, reader: *aws.x
     result.status = null;
     result.tags = null;
     result.traffic_ip_address_type = null;
+    result.transit_gateway_configuration = null;
     result.transport_protocol = null;
     result.vpc_id = null;
     result.vpn_port = null;
@@ -12481,6 +13002,8 @@ pub fn deserializeClientVpnEndpoint(allocator: std.mem.Allocator, reader: *aws.x
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "trafficIpAddressType")) {
                     result.traffic_ip_address_type = TrafficIpAddressType.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "transitGatewayConfiguration")) {
+                    result.transit_gateway_configuration = try deserializeTransitGatewayConfigurationDescribeEndpointStructure(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "transportProtocol")) {
                     result.transport_protocol = TransportProtocol.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "vpcId")) {
@@ -12552,6 +13075,7 @@ pub fn deserializeClientVpnRoute(allocator: std.mem.Allocator, reader: *aws.xml.
     result.origin = null;
     result.status = null;
     result.target_subnet = null;
+    result.transit_gateway_attachment_id = null;
     result.@"type" = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -12568,6 +13092,8 @@ pub fn deserializeClientVpnRoute(allocator: std.mem.Allocator, reader: *aws.xml.
                     result.status = try deserializeClientVpnRouteStatus(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "targetSubnet")) {
                     result.target_subnet = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "transitGatewayAttachmentId")) {
+                    result.transit_gateway_attachment_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "type")) {
                     result.@"type" = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -12932,6 +13458,7 @@ pub fn deserializeCpuOptions(allocator: std.mem.Allocator, reader: *aws.xml.Read
     var result: CpuOptions = undefined;
     result.amd_sev_snp = null;
     result.core_count = null;
+    result.nested_virtualization = null;
     result.threads_per_core = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -12940,6 +13467,8 @@ pub fn deserializeCpuOptions(allocator: std.mem.Allocator, reader: *aws.xml.Read
                     result.amd_sev_snp = AmdSevSnpSpecification.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "coreCount")) {
                     result.core_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "nestedVirtualization")) {
+                    result.nested_virtualization = NestedVirtualizationSpecification.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "threadsPerCore")) {
                     result.threads_per_core = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else {
@@ -13202,6 +13731,32 @@ pub fn deserializeDeclarativePoliciesReport(allocator: std.mem.Allocator, reader
                     result.tags = try deserializeTagList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "targetId")) {
                     result.target_id = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeDefaultConnectionTrackingConfiguration(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !DefaultConnectionTrackingConfiguration {
+    _ = allocator;
+    var result: DefaultConnectionTrackingConfiguration = undefined;
+    result.default_tcp_established_timeout = null;
+    result.default_udp_stream_timeout = null;
+    result.default_udp_timeout = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "defaultTcpEstablishedTimeout")) {
+                    result.default_tcp_established_timeout = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "defaultUdpStreamTimeout")) {
+                    result.default_udp_stream_timeout = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "defaultUdpTimeout")) {
+                    result.default_udp_timeout = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -15276,6 +15831,7 @@ pub fn deserializeFleetData(allocator: std.mem.Allocator, reader: *aws.xml.Reade
     result.launch_template_configs = null;
     result.on_demand_options = null;
     result.replace_unhealthy_instances = null;
+    result.reserved_capacity_options = null;
     result.spot_options = null;
     result.tags = null;
     result.target_capacity_specification = null;
@@ -15314,6 +15870,8 @@ pub fn deserializeFleetData(allocator: std.mem.Allocator, reader: *aws.xml.Reade
                     result.on_demand_options = try deserializeOnDemandOptions(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "replaceUnhealthyInstances")) {
                     result.replace_unhealthy_instances = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "reservedCapacityOptions")) {
+                    result.reserved_capacity_options = try deserializeReservedCapacityOptions(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "spotOptions")) {
                     result.spot_options = try deserializeSpotOptions(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "tagSet")) {
@@ -17039,6 +17597,7 @@ pub fn deserializeInstance(allocator: std.mem.Allocator, reader: *aws.xml.Reader
     result.ramdisk_id = null;
     result.root_device_name = null;
     result.root_device_type = null;
+    result.secondary_interfaces = null;
     result.security_groups = null;
     result.source_dest_check = null;
     result.spot_instance_request_id = null;
@@ -17148,6 +17707,8 @@ pub fn deserializeInstance(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                     result.root_device_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "rootDeviceType")) {
                     result.root_device_type = DeviceType.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "secondaryInterfaceSet")) {
+                    result.secondary_interfaces = try deserializeInstanceSecondaryInterfaceList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "groupSet")) {
                     result.security_groups = try deserializeGroupIdentifierList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "sourceDestCheck")) {
@@ -17657,6 +18218,7 @@ pub fn deserializeInstanceMetadataDefaultsResponse(allocator: std.mem.Allocator,
     result.http_endpoint = null;
     result.http_put_response_hop_limit = null;
     result.http_tokens = null;
+    result.http_tokens_enforced = null;
     result.instance_metadata_tags = null;
     result.managed_by = null;
     result.managed_exception_message = null;
@@ -17669,6 +18231,8 @@ pub fn deserializeInstanceMetadataDefaultsResponse(allocator: std.mem.Allocator,
                     result.http_put_response_hop_limit = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "httpTokens")) {
                     result.http_tokens = HttpTokensState.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "httpTokensEnforced")) {
+                    result.http_tokens_enforced = HttpTokensEnforcedState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "instanceMetadataTags")) {
                     result.instance_metadata_tags = InstanceMetadataTagsState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "managedBy")) {
@@ -18106,6 +18670,105 @@ pub fn deserializeInstanceRequirements(allocator: std.mem.Allocator, reader: *aw
                     result.total_local_storage_gb = try deserializeTotalLocalStorageGB(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "vCpuCount")) {
                     result.v_cpu_count = try deserializeVCpuCountRange(allocator, reader);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeInstanceSecondaryInterface(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !InstanceSecondaryInterface {
+    var result: InstanceSecondaryInterface = undefined;
+    result.attachment = null;
+    result.interface_type = null;
+    result.mac_address = null;
+    result.owner_id = null;
+    result.private_ip_addresses = null;
+    result.secondary_interface_id = null;
+    result.secondary_network_id = null;
+    result.secondary_subnet_id = null;
+    result.source_dest_check = null;
+    result.status = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "attachment")) {
+                    result.attachment = try deserializeInstanceSecondaryInterfaceAttachment(allocator, reader);
+                } else if (std.mem.eql(u8, e.local, "interfaceType")) {
+                    result.interface_type = SecondaryInterfaceType.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "macAddress")) {
+                    result.mac_address = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ownerId")) {
+                    result.owner_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "privateIpAddressSet")) {
+                    result.private_ip_addresses = try deserializeInstanceSecondaryInterfacePrivateIpAddressList(allocator, reader, "item");
+                } else if (std.mem.eql(u8, e.local, "secondaryInterfaceId")) {
+                    result.secondary_interface_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "secondaryNetworkId")) {
+                    result.secondary_network_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "secondarySubnetId")) {
+                    result.secondary_subnet_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "sourceDestCheck")) {
+                    result.source_dest_check = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "status")) {
+                    result.status = SecondaryInterfaceStatus.fromWireName(try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeInstanceSecondaryInterfaceAttachment(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !InstanceSecondaryInterfaceAttachment {
+    var result: InstanceSecondaryInterfaceAttachment = undefined;
+    result.attachment_id = null;
+    result.attach_time = null;
+    result.delete_on_termination = null;
+    result.device_index = null;
+    result.network_card_index = null;
+    result.status = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "attachmentId")) {
+                    result.attachment_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "attachTime")) {
+                    result.attach_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "deleteOnTermination")) {
+                    result.delete_on_termination = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "deviceIndex")) {
+                    result.device_index = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "networkCardIndex")) {
+                    result.network_card_index = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "status")) {
+                    result.status = AttachmentStatus.fromWireName(try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeInstanceSecondaryInterfacePrivateIpAddress(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !InstanceSecondaryInterfacePrivateIpAddress {
+    var result: InstanceSecondaryInterfacePrivateIpAddress = undefined;
+    result.private_ip_address = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "privateIpAddress")) {
+                    result.private_ip_address = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -20443,6 +21106,7 @@ pub fn deserializeLaunchTemplateCpuOptions(allocator: std.mem.Allocator, reader:
     var result: LaunchTemplateCpuOptions = undefined;
     result.amd_sev_snp = null;
     result.core_count = null;
+    result.nested_virtualization = null;
     result.threads_per_core = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -20451,6 +21115,8 @@ pub fn deserializeLaunchTemplateCpuOptions(allocator: std.mem.Allocator, reader:
                     result.amd_sev_snp = AmdSevSnpSpecification.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "coreCount")) {
                     result.core_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "nestedVirtualization")) {
+                    result.nested_virtualization = NestedVirtualizationSpecification.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "threadsPerCore")) {
                     result.threads_per_core = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else {
@@ -20787,6 +21453,43 @@ pub fn deserializeLaunchTemplateInstanceNetworkInterfaceSpecification(allocator:
                     result.secondary_private_ip_address_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "subnetId")) {
                     result.subnet_id = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeLaunchTemplateInstanceSecondaryInterfaceSpecification(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !LaunchTemplateInstanceSecondaryInterfaceSpecification {
+    var result: LaunchTemplateInstanceSecondaryInterfaceSpecification = undefined;
+    result.delete_on_termination = null;
+    result.device_index = null;
+    result.interface_type = null;
+    result.network_card_index = null;
+    result.private_ip_address_count = null;
+    result.private_ip_addresses = null;
+    result.secondary_subnet_id = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "deleteOnTermination")) {
+                    result.delete_on_termination = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "deviceIndex")) {
+                    result.device_index = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "interfaceType")) {
+                    result.interface_type = SecondaryInterfaceType.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "networkCardIndex")) {
+                    result.network_card_index = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "privateIpAddressCount")) {
+                    result.private_ip_address_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "privateIpAddressesSet")) {
+                    result.private_ip_addresses = try deserializeSecondaryInterfacePrivateIpAddressSpecificationList(allocator, reader, "item");
+                } else if (std.mem.eql(u8, e.local, "secondarySubnetId")) {
+                    result.secondary_subnet_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -21653,6 +22356,26 @@ pub fn deserializeManagedPrefixList(allocator: std.mem.Allocator, reader: *aws.x
     return result;
 }
 
+pub fn deserializeManagedResourceVisibilitySettings(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ManagedResourceVisibilitySettings {
+    _ = allocator;
+    var result: ManagedResourceVisibilitySettings = undefined;
+    result.default_visibility = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "defaultVisibility")) {
+                    result.default_visibility = ManagedResourceDefaultVisibility.fromWireName(try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
 pub fn deserializeMediaAcceleratorInfo(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !MediaAcceleratorInfo {
     var result: MediaAcceleratorInfo = undefined;
     result.accelerators = null;
@@ -22265,6 +22988,7 @@ pub fn deserializeNetworkCardInfo(allocator: std.mem.Allocator, reader: *aws.xml
 pub fn deserializeNetworkInfo(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !NetworkInfo {
     var result: NetworkInfo = undefined;
     result.bandwidth_weightings = null;
+    result.connection_tracking_configuration = null;
     result.default_network_card_index = null;
     result.efa_info = null;
     result.efa_supported = null;
@@ -22273,17 +22997,22 @@ pub fn deserializeNetworkInfo(allocator: std.mem.Allocator, reader: *aws.xml.Rea
     result.encryption_in_transit_supported = null;
     result.flexible_ena_queues_support = null;
     result.ipv_4_addresses_per_interface = null;
+    result.ipv_4_addresses_per_secondary_interface = null;
     result.ipv_6_addresses_per_interface = null;
     result.ipv_6_supported = null;
     result.maximum_network_cards = null;
     result.maximum_network_interfaces = null;
+    result.maximum_secondary_network_interfaces = null;
     result.network_cards = null;
     result.network_performance = null;
+    result.secondary_network_supported = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "bandwidthWeightings")) {
                     result.bandwidth_weightings = try deserializeBandwidthWeightingTypeList(allocator, reader, "item");
+                } else if (std.mem.eql(u8, e.local, "connectionTrackingConfiguration")) {
+                    result.connection_tracking_configuration = try deserializeDefaultConnectionTrackingConfiguration(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "defaultNetworkCardIndex")) {
                     result.default_network_card_index = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "efaInfo")) {
@@ -22300,6 +23029,8 @@ pub fn deserializeNetworkInfo(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                     result.flexible_ena_queues_support = FlexibleEnaQueuesSupport.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ipv4AddressesPerInterface")) {
                     result.ipv_4_addresses_per_interface = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "ipv4AddressesPerSecondaryInterface")) {
+                    result.ipv_4_addresses_per_secondary_interface = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "ipv6AddressesPerInterface")) {
                     result.ipv_6_addresses_per_interface = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "ipv6Supported")) {
@@ -22308,10 +23039,14 @@ pub fn deserializeNetworkInfo(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                     result.maximum_network_cards = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "maximumNetworkInterfaces")) {
                     result.maximum_network_interfaces = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "maximumSecondaryNetworkInterfaces")) {
+                    result.maximum_secondary_network_interfaces = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "networkCards")) {
                     result.network_cards = try deserializeNetworkCardInfoList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "networkPerformance")) {
                     result.network_performance = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "secondaryNetworkSupported")) {
+                    result.secondary_network_supported = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else {
                     try reader.skipElement();
                 }
@@ -23065,12 +23800,15 @@ pub fn deserializeOnDemandOptions(allocator: std.mem.Allocator, reader: *aws.xml
 
 pub fn deserializeOperatorResponse(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !OperatorResponse {
     var result: OperatorResponse = undefined;
+    result.hidden_by_default = null;
     result.managed = null;
     result.principal = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
-                if (std.mem.eql(u8, e.local, "managed")) {
+                if (std.mem.eql(u8, e.local, "hiddenByDefault")) {
+                    result.hidden_by_default = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "managed")) {
                     result.managed = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "principal")) {
                     result.principal = try allocator.dupe(u8, try reader.readElementText());
@@ -23576,6 +24314,7 @@ pub fn deserializePlacementGroup(allocator: std.mem.Allocator, reader: *aws.xml.
     result.group_id = null;
     result.group_name = null;
     result.linked_group_id = null;
+    result.operator = null;
     result.partition_count = null;
     result.spread_level = null;
     result.state = null;
@@ -23592,6 +24331,8 @@ pub fn deserializePlacementGroup(allocator: std.mem.Allocator, reader: *aws.xml.
                     result.group_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "linkedGroupId")) {
                     result.linked_group_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "operator")) {
+                    result.operator = try deserializeOperatorResponse(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "partitionCount")) {
                     result.partition_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "spreadLevel")) {
@@ -24294,6 +25035,7 @@ pub fn deserializeReferencedSecurityGroup(allocator: std.mem.Allocator, reader: 
 pub fn deserializeRegion(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !Region {
     var result: Region = undefined;
     result.endpoint = null;
+    result.geography = null;
     result.opt_in_status = null;
     result.region_name = null;
     while (try reader.next()) |event| {
@@ -24301,10 +25043,31 @@ pub fn deserializeRegion(allocator: std.mem.Allocator, reader: *aws.xml.Reader) 
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "regionEndpoint")) {
                     result.endpoint = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "geographySet")) {
+                    result.geography = try deserializeRegionGeographyList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "optInStatus")) {
                     result.opt_in_status = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "regionName")) {
                     result.region_name = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeRegionGeography(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !RegionGeography {
+    var result: RegionGeography = undefined;
+    result.name = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "name")) {
+                    result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -24466,6 +25229,25 @@ pub fn deserializeReservationValue(allocator: std.mem.Allocator, reader: *aws.xm
                     result.remaining_total_value = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "remainingUpfrontValue")) {
                     result.remaining_upfront_value = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeReservedCapacityOptions(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ReservedCapacityOptions {
+    var result: ReservedCapacityOptions = undefined;
+    result.reservation_types = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "reservationTypeSet")) {
+                    result.reservation_types = try deserializeReservationTypeList(allocator, reader, "item");
                 } else {
                     try reader.skipElement();
                 }
@@ -24879,6 +25661,7 @@ pub fn deserializeResponseLaunchTemplateData(allocator: std.mem.Allocator, reade
     result.placement = null;
     result.private_dns_name_options = null;
     result.ram_disk_id = null;
+    result.secondary_interfaces = null;
     result.security_group_ids = null;
     result.security_groups = null;
     result.tag_specifications = null;
@@ -24944,6 +25727,8 @@ pub fn deserializeResponseLaunchTemplateData(allocator: std.mem.Allocator, reade
                     result.private_dns_name_options = try deserializeLaunchTemplatePrivateDnsNameOptions(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "ramDiskId")) {
                     result.ram_disk_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "secondaryInterfaceSet")) {
+                    result.secondary_interfaces = try deserializeLaunchTemplateInstanceSecondaryInterfaceSpecificationList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "securityGroupIdSet")) {
                     result.security_group_ids = try deserializeValueStringList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "securityGroupSet")) {
@@ -25749,6 +26534,290 @@ pub fn deserializeScheduledInstanceRecurrence(allocator: std.mem.Allocator, read
                     result.occurrence_relative_to_end = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "occurrenceUnit")) {
                     result.occurrence_unit = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeSecondaryInterface(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !SecondaryInterface {
+    var result: SecondaryInterface = undefined;
+    result.attachment = null;
+    result.availability_zone = null;
+    result.availability_zone_id = null;
+    result.mac_address = null;
+    result.owner_id = null;
+    result.private_ipv_4_addresses = null;
+    result.secondary_interface_arn = null;
+    result.secondary_interface_id = null;
+    result.secondary_interface_type = null;
+    result.secondary_network_id = null;
+    result.secondary_network_type = null;
+    result.secondary_subnet_id = null;
+    result.source_dest_check = null;
+    result.status = null;
+    result.tags = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "attachment")) {
+                    result.attachment = try deserializeSecondaryInterfaceAttachment(allocator, reader);
+                } else if (std.mem.eql(u8, e.local, "availabilityZone")) {
+                    result.availability_zone = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "availabilityZoneId")) {
+                    result.availability_zone_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "macAddress")) {
+                    result.mac_address = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ownerId")) {
+                    result.owner_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "privateIpv4AddressSet")) {
+                    result.private_ipv_4_addresses = try deserializeSecondaryInterfaceIpv4AddressList(allocator, reader, "item");
+                } else if (std.mem.eql(u8, e.local, "secondaryInterfaceArn")) {
+                    result.secondary_interface_arn = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "secondaryInterfaceId")) {
+                    result.secondary_interface_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "secondaryInterfaceType")) {
+                    result.secondary_interface_type = SecondaryInterfaceType.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "secondaryNetworkId")) {
+                    result.secondary_network_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "secondaryNetworkType")) {
+                    result.secondary_network_type = SecondaryNetworkType.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "secondarySubnetId")) {
+                    result.secondary_subnet_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "sourceDestCheck")) {
+                    result.source_dest_check = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "status")) {
+                    result.status = SecondaryInterfaceStatus.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "tagSet")) {
+                    result.tags = try deserializeTagList(allocator, reader, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeSecondaryInterfaceAttachment(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !SecondaryInterfaceAttachment {
+    var result: SecondaryInterfaceAttachment = undefined;
+    result.attachment_id = null;
+    result.attach_time = null;
+    result.delete_on_termination = null;
+    result.device_index = null;
+    result.instance_id = null;
+    result.instance_owner_id = null;
+    result.network_card_index = null;
+    result.status = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "attachmentId")) {
+                    result.attachment_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "attachTime")) {
+                    result.attach_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "deleteOnTermination")) {
+                    result.delete_on_termination = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "deviceIndex")) {
+                    result.device_index = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "instanceId")) {
+                    result.instance_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "instanceOwnerId")) {
+                    result.instance_owner_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "networkCardIndex")) {
+                    result.network_card_index = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "status")) {
+                    result.status = AttachmentStatus.fromWireName(try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeSecondaryInterfaceIpv4Address(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !SecondaryInterfaceIpv4Address {
+    var result: SecondaryInterfaceIpv4Address = undefined;
+    result.private_ip_address = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "privateIpAddress")) {
+                    result.private_ip_address = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeSecondaryInterfacePrivateIpAddressSpecification(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !SecondaryInterfacePrivateIpAddressSpecification {
+    var result: SecondaryInterfacePrivateIpAddressSpecification = undefined;
+    result.private_ip_address = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "privateIpAddress")) {
+                    result.private_ip_address = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeSecondaryNetwork(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !SecondaryNetwork {
+    var result: SecondaryNetwork = undefined;
+    result.ipv_4_cidr_block_associations = null;
+    result.owner_id = null;
+    result.secondary_network_arn = null;
+    result.secondary_network_id = null;
+    result.state = null;
+    result.state_reason = null;
+    result.tags = null;
+    result.@"type" = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ipv4CidrBlockAssociationSet")) {
+                    result.ipv_4_cidr_block_associations = try deserializeSecondaryNetworkIpv4CidrBlockAssociationList(allocator, reader, "item");
+                } else if (std.mem.eql(u8, e.local, "ownerId")) {
+                    result.owner_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "secondaryNetworkArn")) {
+                    result.secondary_network_arn = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "secondaryNetworkId")) {
+                    result.secondary_network_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "state")) {
+                    result.state = SecondaryNetworkState.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "stateReason")) {
+                    result.state_reason = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "tagSet")) {
+                    result.tags = try deserializeTagList(allocator, reader, "item");
+                } else if (std.mem.eql(u8, e.local, "type")) {
+                    result.@"type" = SecondaryNetworkType.fromWireName(try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeSecondaryNetworkIpv4CidrBlockAssociation(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !SecondaryNetworkIpv4CidrBlockAssociation {
+    var result: SecondaryNetworkIpv4CidrBlockAssociation = undefined;
+    result.association_id = null;
+    result.cidr_block = null;
+    result.state = null;
+    result.state_reason = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "associationId")) {
+                    result.association_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "cidrBlock")) {
+                    result.cidr_block = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "state")) {
+                    result.state = SecondaryNetworkCidrBlockAssociationState.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "stateReason")) {
+                    result.state_reason = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeSecondarySubnet(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !SecondarySubnet {
+    var result: SecondarySubnet = undefined;
+    result.availability_zone = null;
+    result.availability_zone_id = null;
+    result.ipv_4_cidr_block_associations = null;
+    result.owner_id = null;
+    result.secondary_network_id = null;
+    result.secondary_network_type = null;
+    result.secondary_subnet_arn = null;
+    result.secondary_subnet_id = null;
+    result.state = null;
+    result.state_reason = null;
+    result.tags = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "availabilityZone")) {
+                    result.availability_zone = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "availabilityZoneId")) {
+                    result.availability_zone_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ipv4CidrBlockAssociationSet")) {
+                    result.ipv_4_cidr_block_associations = try deserializeSecondarySubnetIpv4CidrBlockAssociationList(allocator, reader, "item");
+                } else if (std.mem.eql(u8, e.local, "ownerId")) {
+                    result.owner_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "secondaryNetworkId")) {
+                    result.secondary_network_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "secondaryNetworkType")) {
+                    result.secondary_network_type = SecondaryNetworkType.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "secondarySubnetArn")) {
+                    result.secondary_subnet_arn = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "secondarySubnetId")) {
+                    result.secondary_subnet_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "state")) {
+                    result.state = SecondarySubnetState.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "stateReason")) {
+                    result.state_reason = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "tagSet")) {
+                    result.tags = try deserializeTagList(allocator, reader, "item");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeSecondarySubnetIpv4CidrBlockAssociation(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !SecondarySubnetIpv4CidrBlockAssociation {
+    var result: SecondarySubnetIpv4CidrBlockAssociation = undefined;
+    result.association_id = null;
+    result.cidr_block = null;
+    result.state = null;
+    result.state_reason = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "associationId")) {
+                    result.association_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "cidrBlock")) {
+                    result.cidr_block = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "state")) {
+                    result.state = SecondarySubnetCidrBlockAssociationState.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "stateReason")) {
+                    result.state_reason = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -27695,6 +28764,8 @@ pub fn deserializeTargetGroupsConfig(allocator: std.mem.Allocator, reader: *aws.
 pub fn deserializeTargetNetwork(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !TargetNetwork {
     var result: TargetNetwork = undefined;
     result.association_id = null;
+    result.availability_zone_ids = null;
+    result.availability_zones = null;
     result.client_vpn_endpoint_id = null;
     result.security_groups = null;
     result.status = null;
@@ -27705,6 +28776,10 @@ pub fn deserializeTargetNetwork(allocator: std.mem.Allocator, reader: *aws.xml.R
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "associationId")) {
                     result.association_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "availabilityZoneIdSet")) {
+                    result.availability_zone_ids = try deserializeClientVpnAvailabilityZoneIdSet(allocator, reader, "item");
+                } else if (std.mem.eql(u8, e.local, "availabilityZoneSet")) {
+                    result.availability_zones = try deserializeClientVpnAvailabilityZoneSet(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "clientVpnEndpointId")) {
                     result.client_vpn_endpoint_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "securityGroups")) {
@@ -28191,6 +29266,68 @@ pub fn deserializeTransitGatewayAttachmentPropagation(allocator: std.mem.Allocat
                     result.state = TransitGatewayPropagationState.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "transitGatewayRouteTableId")) {
                     result.transit_gateway_route_table_id = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeTransitGatewayClientVpnAttachment(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !TransitGatewayClientVpnAttachment {
+    var result: TransitGatewayClientVpnAttachment = undefined;
+    result.client_vpn_endpoint_id = null;
+    result.client_vpn_owner_id = null;
+    result.creation_time = null;
+    result.state = null;
+    result.transit_gateway_attachment_id = null;
+    result.transit_gateway_id = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "clientVpnEndpointId")) {
+                    result.client_vpn_endpoint_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "clientVpnOwnerId")) {
+                    result.client_vpn_owner_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "creationTime")) {
+                    result.creation_time = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "state")) {
+                    result.state = TransitGatewayAttachmentStatusType.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "transitGatewayAttachmentId")) {
+                    result.transit_gateway_attachment_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "transitGatewayId")) {
+                    result.transit_gateway_id = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeTransitGatewayConfigurationDescribeEndpointStructure(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !TransitGatewayConfigurationDescribeEndpointStructure {
+    var result: TransitGatewayConfigurationDescribeEndpointStructure = undefined;
+    result.availability_zone_ids = null;
+    result.availability_zones = null;
+    result.transit_gateway_attachment_id = null;
+    result.transit_gateway_id = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "availabilityZoneIdSet")) {
+                    result.availability_zone_ids = try deserializeClientVpnAvailabilityZoneIdSet(allocator, reader, "item");
+                } else if (std.mem.eql(u8, e.local, "availabilityZoneSet")) {
+                    result.availability_zones = try deserializeClientVpnAvailabilityZoneSet(allocator, reader, "item");
+                } else if (std.mem.eql(u8, e.local, "transitGatewayAttachmentId")) {
+                    result.transit_gateway_attachment_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "transitGatewayId")) {
+                    result.transit_gateway_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -30629,6 +31766,7 @@ pub fn deserializeVolumeModification(allocator: std.mem.Allocator, reader: *aws.
     var result: VolumeModification = undefined;
     result.end_time = null;
     result.modification_state = null;
+    result.operator = null;
     result.original_iops = null;
     result.original_multi_attach_enabled = null;
     result.original_size = null;
@@ -30650,6 +31788,8 @@ pub fn deserializeVolumeModification(allocator: std.mem.Allocator, reader: *aws.
                     result.end_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "modificationState")) {
                     result.modification_state = VolumeModificationState.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "operator")) {
+                    result.operator = try deserializeOperatorResponse(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "originalIops")) {
                     result.original_iops = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "originalMultiAttachEnabled")) {
@@ -30886,6 +32026,7 @@ pub fn deserializeVolumeStatusItem(allocator: std.mem.Allocator, reader: *aws.xm
     result.availability_zone_id = null;
     result.events = null;
     result.initialization_status_details = null;
+    result.operator = null;
     result.outpost_arn = null;
     result.volume_id = null;
     result.volume_status = null;
@@ -30904,6 +32045,8 @@ pub fn deserializeVolumeStatusItem(allocator: std.mem.Allocator, reader: *aws.xm
                     result.events = try deserializeVolumeStatusEventsList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "initializationStatusDetails")) {
                     result.initialization_status_details = try deserializeInitializationStatusDetails(allocator, reader);
+                } else if (std.mem.eql(u8, e.local, "operator")) {
+                    result.operator = try deserializeOperatorResponse(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "outpostArn")) {
                     result.outpost_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "volumeId")) {
@@ -32259,6 +33402,30 @@ pub fn serializeClientVpnAuthenticationRequestList(allocator: std.mem.Allocator,
     }
 }
 
+pub fn serializeClientVpnAvailabilityZoneIdSet(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try aws.xml.appendXmlEscaped(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
+pub fn serializeClientVpnAvailabilityZoneSet(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try aws.xml.appendXmlEscaped(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
 pub fn serializeClientVpnEndpointIdList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
     for (value) |item| {
         try buf.appendSlice(allocator, "<");
@@ -33123,6 +34290,30 @@ pub fn serializeInstanceNetworkInterfaceSpecificationList(allocator: std.mem.All
     }
 }
 
+pub fn serializeInstanceSecondaryInterfacePrivateIpAddressListRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const InstanceSecondaryInterfacePrivateIpAddressRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try serializeInstanceSecondaryInterfacePrivateIpAddressRequest(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
+pub fn serializeInstanceSecondaryInterfaceSpecificationListRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const InstanceSecondaryInterfaceSpecificationRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try serializeInstanceSecondaryInterfaceSpecificationRequest(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
 pub fn serializeInstanceTagKeySet(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
     for (value) |item| {
         try buf.appendSlice(allocator, "<");
@@ -33456,6 +34647,18 @@ pub fn serializeLaunchTemplateInstanceNetworkInterfaceSpecificationRequestList(a
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
         try serializeLaunchTemplateInstanceNetworkInterfaceSpecificationRequest(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
+pub fn serializeLaunchTemplateInstanceSecondaryInterfaceSpecificationRequestList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try serializeLaunchTemplateInstanceSecondaryInterfaceSpecificationRequest(allocator, buf, item);
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -34293,6 +35496,18 @@ pub fn serializeReservationFleetInstanceSpecificationList(allocator: std.mem.All
     }
 }
 
+pub fn serializeReservationTypeListRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const FleetReservationType, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try buf.appendSlice(allocator, item.wireName());
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
 pub fn serializeReservedInstanceIdSet(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
     for (value) |item| {
         try buf.appendSlice(allocator, "<");
@@ -34534,6 +35749,54 @@ pub fn serializeScheduledInstancesNetworkInterfaceSet(allocator: std.mem.Allocat
 }
 
 pub fn serializeScheduledInstancesSecurityGroupIdSet(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try aws.xml.appendXmlEscaped(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
+pub fn serializeSecondaryInterfaceIdList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try aws.xml.appendXmlEscaped(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
+pub fn serializeSecondaryInterfacePrivateIpAddressSpecificationListRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const SecondaryInterfacePrivateIpAddressSpecificationRequest, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try serializeSecondaryInterfacePrivateIpAddressSpecificationRequest(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
+pub fn serializeSecondaryNetworkIdList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try aws.xml.appendXmlEscaped(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
+pub fn serializeSecondarySubnetIdList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
     for (value) |item| {
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
@@ -35864,6 +37127,11 @@ pub fn serializeCpuOptionsRequest(allocator: std.mem.Allocator, buf: *std.ArrayL
             try buf.appendSlice(allocator, num_str);
         }
         try buf.appendSlice(allocator, "</CoreCount>");
+    }
+    if (value.nested_virtualization) |v| {
+        try buf.appendSlice(allocator, "<NestedVirtualization>");
+        try buf.appendSlice(allocator, v.wireName());
+        try buf.appendSlice(allocator, "</NestedVirtualization>");
     }
     if (value.threads_per_core) |v| {
         try buf.appendSlice(allocator, "<ThreadsPerCore>");
@@ -37702,6 +38970,59 @@ pub fn serializeInstanceRequirementsWithMetadataRequest(allocator: std.mem.Alloc
     }
 }
 
+pub fn serializeInstanceSecondaryInterfacePrivateIpAddressRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceSecondaryInterfacePrivateIpAddressRequest) !void {
+    try buf.appendSlice(allocator, "<PrivateIpAddress>");
+    try aws.xml.appendXmlEscaped(allocator, buf, value.private_ip_address);
+    try buf.appendSlice(allocator, "</PrivateIpAddress>");
+}
+
+pub fn serializeInstanceSecondaryInterfaceSpecificationRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceSecondaryInterfaceSpecificationRequest) !void {
+    if (value.delete_on_termination) |v| {
+        try buf.appendSlice(allocator, "<DeleteOnTermination>");
+        try buf.appendSlice(allocator, if (v) "true" else "false");
+        try buf.appendSlice(allocator, "</DeleteOnTermination>");
+    }
+    if (value.device_index) |v| {
+        try buf.appendSlice(allocator, "<DeviceIndex>");
+        {
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try buf.appendSlice(allocator, num_str);
+        }
+        try buf.appendSlice(allocator, "</DeviceIndex>");
+    }
+    if (value.interface_type) |v| {
+        try buf.appendSlice(allocator, "<InterfaceType>");
+        try buf.appendSlice(allocator, v.wireName());
+        try buf.appendSlice(allocator, "</InterfaceType>");
+    }
+    if (value.network_card_index) |v| {
+        try buf.appendSlice(allocator, "<NetworkCardIndex>");
+        {
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try buf.appendSlice(allocator, num_str);
+        }
+        try buf.appendSlice(allocator, "</NetworkCardIndex>");
+    }
+    if (value.private_ip_address_count) |v| {
+        try buf.appendSlice(allocator, "<PrivateIpAddressCount>");
+        {
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try buf.appendSlice(allocator, num_str);
+        }
+        try buf.appendSlice(allocator, "</PrivateIpAddressCount>");
+    }
+    if (value.private_ip_addresses) |v| {
+        try buf.appendSlice(allocator, "<PrivateIpAddress>");
+        try serializeInstanceSecondaryInterfacePrivateIpAddressListRequest(allocator, buf, v, "item");
+        try buf.appendSlice(allocator, "</PrivateIpAddress>");
+    }
+    if (value.secondary_subnet_id) |v| {
+        try buf.appendSlice(allocator, "<SecondarySubnetId>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</SecondarySubnetId>");
+    }
+}
+
 pub fn serializeInstanceSpecification(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstanceSpecification) !void {
     if (value.exclude_boot_volume) |v| {
         try buf.appendSlice(allocator, "<ExcludeBootVolume>");
@@ -38017,6 +39338,11 @@ pub fn serializeLaunchTemplateCpuOptionsRequest(allocator: std.mem.Allocator, bu
         }
         try buf.appendSlice(allocator, "</CoreCount>");
     }
+    if (value.nested_virtualization) |v| {
+        try buf.appendSlice(allocator, "<NestedVirtualization>");
+        try buf.appendSlice(allocator, v.wireName());
+        try buf.appendSlice(allocator, "</NestedVirtualization>");
+    }
     if (value.threads_per_core) |v| {
         try buf.appendSlice(allocator, "<ThreadsPerCore>");
         {
@@ -38326,6 +39652,53 @@ pub fn serializeLaunchTemplateInstanceNetworkInterfaceSpecificationRequest(alloc
         try buf.appendSlice(allocator, "<SubnetId>");
         try aws.xml.appendXmlEscaped(allocator, buf, v);
         try buf.appendSlice(allocator, "</SubnetId>");
+    }
+}
+
+pub fn serializeLaunchTemplateInstanceSecondaryInterfaceSpecificationRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest) !void {
+    if (value.delete_on_termination) |v| {
+        try buf.appendSlice(allocator, "<DeleteOnTermination>");
+        try buf.appendSlice(allocator, if (v) "true" else "false");
+        try buf.appendSlice(allocator, "</DeleteOnTermination>");
+    }
+    if (value.device_index) |v| {
+        try buf.appendSlice(allocator, "<DeviceIndex>");
+        {
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try buf.appendSlice(allocator, num_str);
+        }
+        try buf.appendSlice(allocator, "</DeviceIndex>");
+    }
+    if (value.interface_type) |v| {
+        try buf.appendSlice(allocator, "<InterfaceType>");
+        try buf.appendSlice(allocator, v.wireName());
+        try buf.appendSlice(allocator, "</InterfaceType>");
+    }
+    if (value.network_card_index) |v| {
+        try buf.appendSlice(allocator, "<NetworkCardIndex>");
+        {
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try buf.appendSlice(allocator, num_str);
+        }
+        try buf.appendSlice(allocator, "</NetworkCardIndex>");
+    }
+    if (value.private_ip_address_count) |v| {
+        try buf.appendSlice(allocator, "<PrivateIpAddressCount>");
+        {
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try buf.appendSlice(allocator, num_str);
+        }
+        try buf.appendSlice(allocator, "</PrivateIpAddressCount>");
+    }
+    if (value.private_ip_addresses) |v| {
+        try buf.appendSlice(allocator, "<PrivateIpAddress>");
+        try serializeSecondaryInterfacePrivateIpAddressSpecificationListRequest(allocator, buf, v, "SecondaryInterfacePrivateIpAddressSpecification");
+        try buf.appendSlice(allocator, "</PrivateIpAddress>");
+    }
+    if (value.secondary_subnet_id) |v| {
+        try buf.appendSlice(allocator, "<SecondarySubnetId>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</SecondarySubnetId>");
     }
 }
 
@@ -39783,6 +41156,11 @@ pub fn serializeRequestLaunchTemplateData(allocator: std.mem.Allocator, buf: *st
         try aws.xml.appendXmlEscaped(allocator, buf, v);
         try buf.appendSlice(allocator, "</RamDiskId>");
     }
+    if (value.secondary_interfaces) |v| {
+        try buf.appendSlice(allocator, "<SecondaryInterface>");
+        try serializeLaunchTemplateInstanceSecondaryInterfaceSpecificationRequestList(allocator, buf, v, "InstanceSecondaryInterfaceSpecification");
+        try buf.appendSlice(allocator, "</SecondaryInterface>");
+    }
     if (value.security_group_ids) |v| {
         try buf.appendSlice(allocator, "<SecurityGroupId>");
         try serializeSecurityGroupIdStringList(allocator, buf, v, "SecurityGroupId");
@@ -39929,6 +41307,14 @@ pub fn serializeReservationFleetInstanceSpecification(allocator: std.mem.Allocat
             try buf.appendSlice(allocator, num_str);
         }
         try buf.appendSlice(allocator, "</Weight>");
+    }
+}
+
+pub fn serializeReservedCapacityOptionsRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ReservedCapacityOptionsRequest) !void {
+    if (value.reservation_types) |v| {
+        try buf.appendSlice(allocator, "<ReservationType>");
+        try serializeReservationTypeListRequest(allocator, buf, v, "ReservationType");
+        try buf.appendSlice(allocator, "</ReservationType>");
     }
 }
 
@@ -40363,6 +41749,14 @@ pub fn serializeScheduledInstancesPrivateIpAddressConfig(allocator: std.mem.Allo
         try buf.appendSlice(allocator, if (v) "true" else "false");
         try buf.appendSlice(allocator, "</Primary>");
     }
+    if (value.private_ip_address) |v| {
+        try buf.appendSlice(allocator, "<PrivateIpAddress>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</PrivateIpAddress>");
+    }
+}
+
+pub fn serializeSecondaryInterfacePrivateIpAddressSpecificationRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: SecondaryInterfacePrivateIpAddressSpecificationRequest) !void {
     if (value.private_ip_address) |v| {
         try buf.appendSlice(allocator, "<PrivateIpAddress>");
         try aws.xml.appendXmlEscaped(allocator, buf, v);
@@ -41094,6 +42488,24 @@ pub fn serializeTrafficMirrorPortRangeRequest(allocator: std.mem.Allocator, buf:
             try buf.appendSlice(allocator, num_str);
         }
         try buf.appendSlice(allocator, "</ToPort>");
+    }
+}
+
+pub fn serializeTransitGatewayConfigurationInputStructure(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: TransitGatewayConfigurationInputStructure) !void {
+    if (value.availability_zone_ids) |v| {
+        try buf.appendSlice(allocator, "<AvailabilityZoneId>");
+        try serializeClientVpnAvailabilityZoneIdSet(allocator, buf, v, "item");
+        try buf.appendSlice(allocator, "</AvailabilityZoneId>");
+    }
+    if (value.availability_zones) |v| {
+        try buf.appendSlice(allocator, "<AvailabilityZone>");
+        try serializeClientVpnAvailabilityZoneSet(allocator, buf, v, "item");
+        try buf.appendSlice(allocator, "</AvailabilityZone>");
+    }
+    if (value.transit_gateway_id) |v| {
+        try buf.appendSlice(allocator, "<TransitGatewayId>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</TransitGatewayId>");
     }
 }
 

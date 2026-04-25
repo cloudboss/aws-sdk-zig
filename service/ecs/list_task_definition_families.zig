@@ -8,44 +8,39 @@ const TaskDefinitionFamilyStatus = @import("task_definition_family_status.zig").
 
 pub const ListTaskDefinitionFamiliesInput = struct {
     /// The `familyPrefix` is a string that's used to filter the results of
-    /// `ListTaskDefinitionFamilies`. If you specify a `familyPrefix`,
-    /// only task definition family names that begin with the `familyPrefix` string
-    /// are returned.
+    /// `ListTaskDefinitionFamilies`. If you specify a `familyPrefix`, only task
+    /// definition family names that begin with the `familyPrefix` string are
+    /// returned.
     family_prefix: ?[]const u8 = null,
 
     /// The maximum number of task definition family results that
     /// `ListTaskDefinitionFamilies` returned in paginated output. When this
-    /// parameter is used, `ListTaskDefinitions` only returns `maxResults`
-    /// results in a single page along with a `nextToken` response element. The
-    /// remaining results of the initial request can be seen by sending another
-    /// `ListTaskDefinitionFamilies` request with the returned
-    /// `nextToken` value. This value can be between 1 and 100. If this parameter
-    /// isn't used, then `ListTaskDefinitionFamilies` returns up to 100 results and
-    /// a
-    /// `nextToken` value if applicable.
+    /// parameter is used, `ListTaskDefinitions` only returns `maxResults` results
+    /// in a single page along with a `nextToken` response element. The remaining
+    /// results of the initial request can be seen by sending another
+    /// `ListTaskDefinitionFamilies` request with the returned `nextToken` value.
+    /// This value can be between 1 and 100. If this parameter isn't used, then
+    /// `ListTaskDefinitionFamilies` returns up to 100 results and a `nextToken`
+    /// value if applicable.
     max_results: ?i32 = null,
 
-    /// The `nextToken` value returned from a
-    /// `ListTaskDefinitionFamilies` request indicating that more results are
-    /// available to fulfill the request and further calls will be needed. If
-    /// `maxResults` was provided, it is possible the number of results to be
-    /// fewer than `maxResults`.
+    /// The `nextToken` value returned from a `ListTaskDefinitionFamilies` request
+    /// indicating that more results are available to fulfill the request and
+    /// further calls will be needed. If `maxResults` was provided, it is possible
+    /// the number of results to be fewer than `maxResults`.
     ///
     /// This token should be treated as an opaque identifier that is only used to
-    /// retrieve
-    /// the next items in a list and not for other programmatic purposes.
+    /// retrieve the next items in a list and not for other programmatic purposes.
     next_token: ?[]const u8 = null,
 
-    /// The task definition family status to filter the
-    /// `ListTaskDefinitionFamilies` results with. By default, both
-    /// `ACTIVE` and `INACTIVE` task definition families are listed.
-    /// If this parameter is set to `ACTIVE`, only task definition families that
-    /// have
-    /// an `ACTIVE` task definition revision are returned. If this parameter is set
-    /// to `INACTIVE`, only task definition families that do not have any
-    /// `ACTIVE` task definition revisions are returned. If you paginate the
-    /// resulting output, be sure to keep the `status` value constant in each
-    /// subsequent request.
+    /// The task definition family status to filter the `ListTaskDefinitionFamilies`
+    /// results with. By default, both `ACTIVE` and `INACTIVE` task definition
+    /// families are listed. If this parameter is set to `ACTIVE`, only task
+    /// definition families that have an `ACTIVE` task definition revision are
+    /// returned. If this parameter is set to `INACTIVE`, only task definition
+    /// families that do not have any `ACTIVE` task definition revisions are
+    /// returned. If you paginate the resulting output, be sure to keep the `status`
+    /// value constant in each subsequent request.
     status: ?TaskDefinitionFamilyStatus = null,
 
     pub const json_field_names = .{
@@ -61,11 +56,10 @@ pub const ListTaskDefinitionFamiliesOutput = struct {
     /// `ListTaskDefinitionFamilies` request.
     families: ?[]const []const u8 = null,
 
-    /// The `nextToken` value to include in a future
-    /// `ListTaskDefinitionFamilies` request. When the results of a
-    /// `ListTaskDefinitionFamilies` request exceed `maxResults`, this
-    /// value can be used to retrieve the next page of results. This value is `null`
-    /// when there are no more results to return.
+    /// The `nextToken` value to include in a future `ListTaskDefinitionFamilies`
+    /// request. When the results of a `ListTaskDefinitionFamilies` request exceed
+    /// `maxResults`, this value can be used to retrieve the next page of results.
+    /// This value is `null` when there are no more results to return.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -198,6 +192,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

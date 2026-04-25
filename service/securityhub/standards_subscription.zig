@@ -26,19 +26,19 @@ pub const StandardsSubscription = struct {
     ///
     /// * `PENDING` - The standard is in the process of being enabled. Or the
     ///   standard is already
-    /// enabled and Security Hub is adding new controls to the standard.
+    /// enabled and Security Hub CSPM is adding new controls to the standard.
     ///
     /// * `READY` - The standard is enabled.
     ///
     /// * `INCOMPLETE` - The standard could not be enabled completely. One or more
     ///   errors (`StandardsStatusReason`)
-    /// occurred when Security Hub attempted to enable the standard.
+    /// occurred when Security Hub CSPM attempted to enable the standard.
     ///
     /// * `DELETING` - The standard is in the process of being disabled.
     ///
     /// * `FAILED` - The standard could not be disabled. One or more errors
     ///   (`StandardsStatusReason`)
-    /// occurred when Security Hub attempted to disable the standard.
+    /// occurred when Security Hub CSPM attempted to disable the standard.
     standards_status: StandardsStatus,
 
     /// The reason for the current status.

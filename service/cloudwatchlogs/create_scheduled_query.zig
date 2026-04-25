@@ -38,8 +38,7 @@ pub const CreateScheduledQueryInput = struct {
     /// be between 1 and 255 characters.
     name: []const u8,
 
-    /// The query language to use for the scheduled query. Valid values are
-    /// `LogsQL`,
+    /// The query language to use for the scheduled query. Valid values are `CWLI`,
     /// `PPL`, and `SQL`.
     query_language: QueryLanguage,
 

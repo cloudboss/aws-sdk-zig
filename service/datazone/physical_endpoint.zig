@@ -17,6 +17,9 @@ pub const PhysicalEndpoint = struct {
     /// The Amazon Web Services Glue connection name.
     glue_connection_name: ?[]const u8 = null,
 
+    /// The Amazon Web Services Glue connection names in the physical endpoint.
+    glue_connection_names: ?[]const []const u8 = null,
+
     /// The host in the physical endpoints of a connection.
     host: ?[]const u8 = null,
 
@@ -34,6 +37,7 @@ pub const PhysicalEndpoint = struct {
         .enable_trusted_identity_propagation = "enableTrustedIdentityPropagation",
         .glue_connection = "glueConnection",
         .glue_connection_name = "glueConnectionName",
+        .glue_connection_names = "glueConnectionNames",
         .host = "host",
         .port = "port",
         .protocol = "protocol",

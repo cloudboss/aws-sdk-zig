@@ -17,8 +17,7 @@ pub const CreateDetectorInput = struct {
     ///
     /// There might be regional differences because some data sources might not be
     /// available in all the Amazon Web Services Regions where GuardDuty is
-    /// presently supported. For more
-    /// information, see [Regions and
+    /// presently supported. For more information, see [Regions and
     /// endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
     data_sources: ?DataSourceConfigurations = null,
 
@@ -49,8 +48,7 @@ pub const CreateDetectorOutput = struct {
     detector_id: ?[]const u8 = null,
 
     /// Specifies the data sources that couldn't be enabled when GuardDuty was
-    /// enabled for the
-    /// first time.
+    /// enabled for the first time.
     unprocessed_data_sources: ?UnprocessedDataSourcesResult = null,
 
     pub const json_field_names = .{

@@ -5,67 +5,112 @@ const IsolineTrailerOptions = @import("isoline_trailer_options.zig").IsolineTrai
 const IsolineTruckType = @import("isoline_truck_type.zig").IsolineTruckType;
 const WeightPerAxleGroup = @import("weight_per_axle_group.zig").WeightPerAxleGroup;
 
-/// Travel mode options when the provided travel mode is "Truck"
+/// Vehicle characteristics and restrictions that affect which roads can be used
+/// when calculating reachable areas for trucks. These details ensure that
+/// routes respect physical limitations and legal requirements.
+///
+/// These apply when the provided travel mode is `Truck`
 pub const IsolineTruckOptions = struct {
-    /// Total number of axles of the vehicle.
+    /// The total number of axles on the vehicle. Required for certain road
+    /// restrictions and weight limit calculations.
     axle_count: ?i32 = null,
 
-    /// Engine type of the vehicle.
+    /// The type of engine powering the vehicle, which may affect route calculation
+    /// due to road restrictions or vehicle characteristics.
+    ///
+    /// * `INTERNAL_COMBUSTION`—Standard gasoline or diesel engine.
+    /// * `ELECTRIC`—Battery electric vehicle.
+    /// * `PLUGIN_HYBRID`—Combination of electric and internal combustion engines
+    ///   with plug-in charging capability.
     engine_type: ?IsolineEngineType = null,
 
-    /// Gross weight of the vehicle including trailers, and goods at capacity.
+    /// The gross vehicle weight (the maximum weight a vehicle can safely operate
+    /// at, as specified by the manufacturer) in kilograms. Used to avoid roads with
+    /// weight restrictions and ensure compliance with maximum allowed vehicle
+    /// weight regulations.
     ///
-    /// **Unit**: `Kilograms`
+    /// **Unit**: `kilograms`
     gross_weight: i64 = 0,
 
-    /// List of Hazardous cargo contained in the vehicle.
+    /// Types of hazardous materials being transported. This affects which roads and
+    /// tunnels can be used based on local regulations.
+    ///
+    /// * `Combustible`—Materials that can burn readily
+    /// * `Corrosive`—Materials that can destroy or irreversibly damage other
+    ///   substances
+    /// * `Explosive`—Materials that can produce an explosion by chemical reaction
+    /// * `Flammable`—Materials that can easily ignite
+    /// * `Gas`—Hazardous materials in gaseous form
+    /// * `HarmfulToWater`—Materials that pose a risk to water sources if released
+    /// * `Organic`—Hazardous organic compounds
+    /// * `Other`—Hazardous materials not covered by other categories
+    /// * `Poison`—Toxic materials
+    /// * `PoisonousInhalation`—Materials that are toxic when inhaled
+    /// * `Radioactive`—Materials that emit ionizing radiation
     hazardous_cargos: ?[]const IsolineHazardousCargoType = null,
 
-    /// Height of the vehicle.
+    /// The vehicle height in centimeters. Used to avoid routes with low bridges or
+    /// other height restrictions.
     ///
     /// **Unit**: `centimeters`
     height: i64 = 0,
 
-    /// Height of the vehicle above its first axle.
+    /// The height in centimeters measured from the ground to the highest point
+    /// above the first axle. Used for specific bridge and tunnel clearance
+    /// restrictions.
     ///
     /// **Unit**: `centimeters`
     height_above_first_axle: i64 = 0,
 
-    /// Kingpin to rear axle length of the vehicle.
+    /// The kingpin to rear axle (KPRA) length in centimeters. Used to determine if
+    /// the vehicle can safely navigate turns and intersections.
     ///
     /// **Unit**: `centimeters`
     kpra_length: i64 = 0,
 
-    /// Length of the vehicle.
+    /// The total vehicle length in centimeters. Used to avoid roads with length
+    /// restrictions and determine if the vehicle can safely navigate turns.
     ///
     /// **Unit**: `centimeters`
     length: i64 = 0,
 
-    /// The vehicle License Plate.
+    /// License plate information used in regions where road access or routing
+    /// restrictions are based on license plate numbers.
     license_plate: ?IsolineVehicleLicensePlate = null,
 
-    /// Maximum speed specified.
+    /// The maximum speed in kilometers per hour at which the vehicle can or is
+    /// permitted to travel. This affects travel time calculations and may result in
+    /// different reachable areas compared to using default speed limits. Value must
+    /// be between 3.6 and 252 kilometers per hour.
     ///
-    /// **Unit**: `KilometersPerHour`
+    /// **Unit**: `kilometers per hour`
     max_speed: ?f64 = null,
 
-    /// The number of occupants in the vehicle.
+    /// The number of occupants in the vehicle. This can affect route calculations
+    /// by enabling the use of high-occupancy vehicle (HOV) lanes where minimum
+    /// occupancy requirements are met.
     ///
-    /// Default Value: `1`
+    /// Default value: `1`
     occupancy: ?i32 = null,
 
-    /// Payload capacity of the vehicle and trailers attached.
+    /// The maximum cargo weight in kilograms that the vehicle (including attached
+    /// trailers) is rated to carry.
     ///
     /// **Unit**: `kilograms`
     payload_capacity: i64 = 0,
 
-    /// Number of tires on the vehicle.
+    /// The total number of tires on the vehicle.
     tire_count: ?i32 = null,
 
-    /// Trailer options corresponding to the vehicle.
+    /// Optional specifications for attached trailers. When provided, trailer
+    /// characteristics affect route calculations to ensure compliance with
+    /// trailer-specific restrictions such as length limits, weight distribution
+    /// requirements, and access restrictions for multi-trailer configurations.
     trailer: ?IsolineTrailerOptions = null,
 
-    /// Type of the truck.
+    /// The type of truck: `LightTruck` for smaller delivery vehicles, `
+    /// StraightTruck ` for rigid body trucks, or `Tractor` for tractor-trailer
+    /// combinations.
     truck_type: ?IsolineTruckType = null,
 
     /// The tunnel restriction code.
@@ -95,20 +140,22 @@ pub const IsolineTruckOptions = struct {
     /// * *Restrictions*: Restricted tunnel
     tunnel_restriction_code: ?[]const u8 = null,
 
-    /// Heaviest weight per axle irrespective of the axle type or the axle group.
-    /// Meant for usage in countries where the differences in axle types or axle
-    /// groups are not distinguished.
+    /// The heaviest weight per axle in kilograms, regardless of axle type or
+    /// grouping. Used for roads with axle-weight restrictions in regions where
+    /// regulations don't distinguish between different axle configurations.
     ///
-    /// **Unit**: `Kilograms`
+    /// **Unit**: `kilograms`
     weight_per_axle: i64 = 0,
 
-    /// Specifies the total weight for the specified axle group. Meant for usage in
-    /// countries that have different regulations based on the axle group type.
+    /// Specifies the total weight for different axle group configurations. Used in
+    /// regions where regulations set different weight limits based on axle group
+    /// types.
     ///
-    /// **Unit**: `Kilograms`
+    /// **Unit**: `kilograms`
     weight_per_axle_group: ?WeightPerAxleGroup = null,
 
-    /// Width of the vehicle.
+    /// The vehicle width in centimeters. Used to avoid routes with width
+    /// restrictions.
     ///
     /// **Unit**: `centimeters`
     width: i64 = 0,

@@ -12,54 +12,56 @@ pub const GetFindingHistoryInput = struct {
     /// finding history.
     ///
     /// If you provide values for both `StartTime` and `EndTime`,
-    /// Security Hub returns finding history for the specified time period. If you
-    /// provide a value for `StartTime` but not for `EndTime`, Security Hub returns
-    /// finding history from the `StartTime` to the time at
+    /// Security Hub CSPM returns finding history for the specified time period. If
+    /// you
+    /// provide a value for `StartTime` but not for `EndTime`, Security Hub CSPM
+    /// returns finding history from the `StartTime` to the time at
     /// which the API is called. If you provide a value for `EndTime` but not for
-    /// `StartTime`, Security Hub returns finding history from the
+    /// `StartTime`, Security Hub CSPM returns finding history from the
     /// [CreatedAt](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt) timestamp of the finding to the `EndTime`. If you
-    /// provide neither `StartTime` nor `EndTime`, Security Hub
+    /// provide neither `StartTime` nor `EndTime`, Security Hub CSPM
     /// returns finding history from the `CreatedAt` timestamp of the finding to the
     /// time at which
     /// the API is called. In all of these scenarios, the response is limited to 100
     /// results.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     end_time: ?i64 = null,
 
     finding_identifier: AwsSecurityFindingIdentifier,
 
     /// The maximum number of results to be returned. If you don’t provide it,
-    /// Security Hub returns up to 100 results of finding history.
+    /// Security Hub CSPM returns up to 100 results of finding history.
     max_results: ?i32 = null,
 
     /// A token for pagination purposes. Provide `NULL` as the initial value. In
     /// subsequent requests, provide the
     /// token included in the response to get up to an additional 100 results of
     /// finding history. If you don’t provide
-    /// `NextToken`, Security Hub returns up to 100 results of finding history for
-    /// each request.
+    /// `NextToken`, Security Hub CSPM returns up to 100 results of finding history
+    /// for each request.
     next_token: ?[]const u8 = null,
 
     /// A timestamp that indicates the start time of the requested finding history.
     ///
     /// If you provide values for both `StartTime` and `EndTime`,
-    /// Security Hub returns finding history for the specified time period. If you
-    /// provide a value for `StartTime` but not for `EndTime`, Security Hub returns
-    /// finding history from the `StartTime` to the time at
+    /// Security Hub CSPM returns finding history for the specified time period. If
+    /// you
+    /// provide a value for `StartTime` but not for `EndTime`, Security Hub CSPM
+    /// returns finding history from the `StartTime` to the time at
     /// which the API is called. If you provide a value for `EndTime` but not for
-    /// `StartTime`, Security Hub returns finding history from the
+    /// `StartTime`, Security Hub CSPM returns finding history from the
     /// [CreatedAt](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt) timestamp of the finding to the `EndTime`. If you
-    /// provide neither `StartTime` nor `EndTime`, Security Hub
+    /// provide neither `StartTime` nor `EndTime`, Security Hub CSPM
     /// returns finding history from the `CreatedAt` timestamp of the finding to the
     /// time at which
     /// the API is called. In all of these scenarios, the response is limited to 100
     /// results.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     start_time: ?i64 = null,
 
@@ -234,6 +236,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "LimitExceededException")) {
         return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organization_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationalUnitNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organizational_unit_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

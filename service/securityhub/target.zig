@@ -1,5 +1,5 @@
 /// The target account, organizational unit, or the root that is associated with
-/// an Security Hub configuration. The configuration
+/// an Security Hub CSPM configuration. The configuration
 /// can be a configuration policy or self-managed behavior.
 pub const Target = union(enum) {
     /// The Amazon Web Services account ID of the target account.

@@ -1,11 +1,11 @@
 const RoadSnapHazardousCargoType = @import("road_snap_hazardous_cargo_type.zig").RoadSnapHazardousCargoType;
 const RoadSnapTrailerOptions = @import("road_snap_trailer_options.zig").RoadSnapTrailerOptions;
 
-/// Travel mode options when the provided travel mode is "Truck".
+/// Travel mode options when the provided travel mode is `Truck`.
 pub const RoadSnapTruckOptions = struct {
     /// Gross weight of the vehicle including trailers, and goods at capacity.
     ///
-    /// **Unit**: `Kilograms`
+    /// **Unit**: `kilograms`
     gross_weight: i64 = 0,
 
     /// List of Hazardous cargos contained in the vehicle.
@@ -51,7 +51,7 @@ pub const RoadSnapTruckOptions = struct {
     /// * *Restrictions*: Restricted tunnel
     tunnel_restriction_code: ?[]const u8 = null,
 
-    /// Width of the vehicle in centimenters.
+    /// Width of the vehicle in centimeters.
     width: i64 = 0,
 
     pub const json_field_names = .{

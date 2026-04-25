@@ -6,6 +6,9 @@ pub const AutomatedReasoningPolicyBuildResultAssetType = enum {
     policy_definition,
     generated_test_cases,
     policy_scenarios,
+    fidelity_report,
+    asset_manifest,
+    source_document,
 
     pub const json_field_names = .{
         .build_log = "BUILD_LOG",
@@ -13,6 +16,9 @@ pub const AutomatedReasoningPolicyBuildResultAssetType = enum {
         .policy_definition = "POLICY_DEFINITION",
         .generated_test_cases = "GENERATED_TEST_CASES",
         .policy_scenarios = "POLICY_SCENARIOS",
+        .fidelity_report = "FIDELITY_REPORT",
+        .asset_manifest = "ASSET_MANIFEST",
+        .source_document = "SOURCE_DOCUMENT",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -22,6 +28,9 @@ pub const AutomatedReasoningPolicyBuildResultAssetType = enum {
             .policy_definition => "POLICY_DEFINITION",
             .generated_test_cases => "GENERATED_TEST_CASES",
             .policy_scenarios => "POLICY_SCENARIOS",
+            .fidelity_report => "FIDELITY_REPORT",
+            .asset_manifest => "ASSET_MANIFEST",
+            .source_document => "SOURCE_DOCUMENT",
         };
     }
 

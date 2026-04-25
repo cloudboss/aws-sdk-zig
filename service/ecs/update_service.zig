@@ -22,32 +22,26 @@ const Service = @import("service.zig").Service;
 pub const UpdateServiceInput = struct {
     /// Indicates whether to use Availability Zone rebalancing for the service.
     ///
-    /// For more information, see [Balancing an Amazon
-    /// ECS service across Availability
-    /// Zones](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html) in the *
-    /// Amazon
-    /// Elastic Container Service Developer Guide*
-    /// .
+    /// For more information, see [Balancing an Amazon ECS service across
+    /// Availability
+    /// Zones](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html) in the * Amazon Elastic Container Service Developer Guide* .
     ///
-    /// The default behavior of `AvailabilityZoneRebalancing` differs between
-    /// create and update requests:
+    /// The default behavior of `AvailabilityZoneRebalancing` differs between create
+    /// and update requests:
     ///
     /// * For create service requests, when no value is specified for
-    /// `AvailabilityZoneRebalancing`, Amazon ECS defaults the value to
-    /// `ENABLED`.
-    ///
+    ///   `AvailabilityZoneRebalancing`, Amazon ECS defaults the value to `ENABLED`.
     /// * For update service requests, when no value is specified for
-    /// `AvailabilityZoneRebalancing`, Amazon ECS defaults to the
-    /// existing service’s `AvailabilityZoneRebalancing` value. If the
-    /// service never had an `AvailabilityZoneRebalancing` value set, Amazon
-    /// ECS treats this as `DISABLED`.
+    ///   `AvailabilityZoneRebalancing`, Amazon ECS defaults to the existing
+    ///   service’s `AvailabilityZoneRebalancing` value. If the service never had an
+    ///   `AvailabilityZoneRebalancing` value set, Amazon ECS treats this as
+    ///   `DISABLED`.
     ///
     /// This parameter doesn't trigger a new service deployment.
     availability_zone_rebalancing: ?AvailabilityZoneRebalancing = null,
 
     /// The details of a capacity provider strategy. You can set a capacity provider
-    /// when you
-    /// create a cluster, run a task, or update a service.
+    /// when you create a cluster, run a task, or update a service.
     ///
     /// If you want to use Amazon ECS Managed Instances, you must use the
     /// `capacityProviderStrategy` request parameter.
@@ -62,41 +56,32 @@ pub const UpdateServiceInput = struct {
     ///
     /// The following list provides the valid transitions:
     ///
-    /// * Update the Fargate launch type to an Auto Scaling group capacity
-    /// provider.
-    ///
+    /// * Update the Fargate launch type to an Auto Scaling group capacity provider.
     /// * Update the Amazon EC2 launch type to a Fargate capacity provider.
-    ///
     /// * Update the Fargate capacity provider to an Auto Scaling group capacity
-    /// provider.
-    ///
+    ///   provider.
     /// * Update the Amazon EC2 capacity provider to a Fargate capacity provider.
-    ///
     /// * Update the Auto Scaling group or Fargate capacity provider back to the
-    ///   launch
-    /// type.
+    ///   launch type.
     ///
-    /// Pass an empty list in the `capacityProviderStrategy`
-    /// parameter.
+    /// Pass an empty list in the `capacityProviderStrategy` parameter.
     ///
     /// For information about Amazon Web Services CDK considerations, see [Amazon
-    /// Web
-    /// Services CDK
+    /// Web Services CDK
     /// considerations](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service-parameters.html).
     ///
     /// This parameter doesn't trigger a new service deployment.
     capacity_provider_strategy: ?[]const CapacityProviderStrategyItem = null,
 
     /// The short name or full Amazon Resource Name (ARN) of the cluster that your
-    /// service
-    /// runs on. If you do not specify a cluster, the default cluster is assumed.
+    /// service runs on. If you do not specify a cluster, the default cluster is
+    /// assumed.
     ///
     /// You can't change the cluster name.
     cluster: ?[]const u8 = null,
 
     /// Optional deployment parameters that control how many tasks run during the
-    /// deployment
-    /// and the ordering of stopping and starting tasks.
+    /// deployment and the ordering of stopping and starting tasks.
     ///
     /// This parameter doesn't trigger a new service deployment.
     deployment_configuration: ?DeploymentConfiguration = null,
@@ -110,14 +95,11 @@ pub const UpdateServiceInput = struct {
     desired_count: ?i32 = null,
 
     /// Determines whether to turn on Amazon ECS managed tags for the tasks in the
-    /// service.
-    /// For more information, see [Tagging Your Amazon ECS
-    /// Resources](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html) in the *Amazon Elastic Container Service Developer
-    /// Guide*.
+    /// service. For more information, see [Tagging Your Amazon ECS
+    /// Resources](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html) in the *Amazon Elastic Container Service Developer Guide*.
     ///
     /// Only tasks launched after the update will reflect the update. To update the
-    /// tags on
-    /// all tasks, set `forceNewDeployment` to `true`, so that Amazon ECS
+    /// tags on all tasks, set `forceNewDeployment` to `true`, so that Amazon ECS
     /// starts new tasks with the updated tags.
     ///
     /// This parameter doesn't trigger a new service deployment.
@@ -127,44 +109,33 @@ pub const UpdateServiceInput = struct {
     /// containers.
     ///
     /// If you do not want to override the value that was set when the service was
-    /// created,
-    /// you can set this to `null` when performing this action.
+    /// created, you can set this to `null` when performing this action.
     ///
     /// This parameter doesn't trigger a new service deployment.
     enable_execute_command: ?bool = null,
 
     /// Determines whether to force a new deployment of the service. By default,
-    /// deployments
-    /// aren't forced. You can use this option to start a new deployment with no
-    /// service
-    /// definition changes. For example, you can update a service's tasks to use a
-    /// newer Docker
-    /// image with the same image/tag combination (`my_image:latest`) or to roll
-    /// Fargate tasks onto a newer platform version.
+    /// deployments aren't forced. You can use this option to start a new deployment
+    /// with no service definition changes. For example, you can update a service's
+    /// tasks to use a newer Docker image with the same image/tag combination
+    /// (`my_image:latest`) or to roll Fargate tasks onto a newer platform version.
     force_new_deployment: ?bool = null,
 
     /// The period of time, in seconds, that the Amazon ECS service scheduler
-    /// ignores
-    /// unhealthy Elastic Load Balancing, VPC Lattice, and container health checks
-    /// after a task
-    /// has first started. If you don't specify a health check grace period value,
-    /// the default
-    /// value of `0` is used. If you don't use any of the health checks, then
-    /// `healthCheckGracePeriodSeconds` is unused.
+    /// ignores unhealthy Elastic Load Balancing, VPC Lattice, and container health
+    /// checks after a task has first started. If you don't specify a health check
+    /// grace period value, the default value of `0` is used. If you don't use any
+    /// of the health checks, then `healthCheckGracePeriodSeconds` is unused.
     ///
     /// If your service's tasks take a while to start and respond to health checks,
-    /// you can
-    /// specify a health check grace period of up to 2,147,483,647 seconds (about 69
-    /// years).
-    /// During that time, the Amazon ECS service scheduler ignores health check
-    /// status. This
-    /// grace period can prevent the service scheduler from marking tasks as
-    /// unhealthy and
-    /// stopping them before they have time to come up.
+    /// you can specify a health check grace period of up to 2,147,483,647 seconds
+    /// (about 69 years). During that time, the Amazon ECS service scheduler ignores
+    /// health check status. This grace period can prevent the service scheduler
+    /// from marking tasks as unhealthy and stopping them before they have time to
+    /// come up.
     ///
     /// If your service has more running tasks than desired, unhealthy tasks in the
-    /// grace
-    /// period might be stopped to reach the desired count.
+    /// grace period might be stopped to reach the desired count.
     ///
     /// This parameter doesn't trigger a new service deployment.
     health_check_grace_period_seconds: ?i32 = null,
@@ -172,44 +143,26 @@ pub const UpdateServiceInput = struct {
     /// You must have a service-linked role when you update this property
     ///
     /// A list of Elastic Load Balancing load balancer objects. It contains the load
-    /// balancer
-    /// name, the container name, and the container port to access from the load
-    /// balancer. The
-    /// container name is as it appears in a container definition.
+    /// balancer name, the container name, and the container port to access from the
+    /// load balancer. The container name is as it appears in a container
+    /// definition.
     ///
     /// When you add, update, or remove a load balancer configuration, Amazon ECS
-    /// starts new
-    /// tasks with the updated Elastic Load Balancing configuration, and then stops
-    /// the old
-    /// tasks when the new tasks are running.
+    /// starts new tasks with the updated Elastic Load Balancing configuration, and
+    /// then stops the old tasks when the new tasks are running.
     ///
     /// For services that use rolling updates, you can add, update, or remove
-    /// Elastic Load
-    /// Balancing target groups. You can update from a single target group to
-    /// multiple target
-    /// groups and from multiple target groups to a single target group.
+    /// Elastic Load Balancing target groups. You can update from a single target
+    /// group to multiple target groups and from multiple target groups to a single
+    /// target group.
     ///
     /// For services that use blue/green deployments, you can update Elastic Load
-    /// Balancing
-    /// target groups by using `
-    /// [CreateDeployment](https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html)
-    /// ` through CodeDeploy. Note that multiple target groups
-    /// are not supported for blue/green deployments. For more information see
-    /// [Register
-    /// multiple target groups with a
-    /// service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html) in the *Amazon Elastic
-    /// Container Service Developer Guide*.
+    /// Balancing target groups by using `
+    /// [CreateDeployment](https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html) ` through CodeDeploy. Note that multiple target groups are not supported for blue/green deployments. For more information see [Register multiple target groups with a service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html) in the *Amazon Elastic Container Service Developer Guide*.
     ///
     /// For services that use the external deployment controller, you can add,
-    /// update, or
-    /// remove load balancers by using
-    /// [CreateTaskSet](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateTaskSet.html).
-    /// Note that multiple target groups are not supported for external deployments.
-    /// For more
-    /// information see [Register
-    /// multiple target groups with a
-    /// service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html) in the *Amazon Elastic
-    /// Container Service Developer Guide*.
+    /// update, or remove load balancers by using
+    /// [CreateTaskSet](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateTaskSet.html). Note that multiple target groups are not supported for external deployments. For more information see [Register multiple target groups with a service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html) in the *Amazon Elastic Container Service Developer Guide*.
     ///
     /// You can remove existing `loadBalancers` by passing an empty list.
     ///
@@ -222,30 +175,22 @@ pub const UpdateServiceInput = struct {
     network_configuration: ?NetworkConfiguration = null,
 
     /// An array of task placement constraint objects to update the service to use.
-    /// If no
-    /// value is specified, the existing placement constraints for the service will
-    /// remain
-    /// unchanged. If this value is specified, it will override any existing
-    /// placement
-    /// constraints defined for the service. To remove all existing placement
-    /// constraints,
-    /// specify an empty array.
+    /// If no value is specified, the existing placement constraints for the service
+    /// will remain unchanged. If this value is specified, it will override any
+    /// existing placement constraints defined for the service. To remove all
+    /// existing placement constraints, specify an empty array.
     ///
     /// You can specify a maximum of 10 constraints for each task. This limit
-    /// includes
-    /// constraints in the task definition and those specified at runtime.
+    /// includes constraints in the task definition and those specified at runtime.
     ///
     /// This parameter doesn't trigger a new service deployment.
     placement_constraints: ?[]const PlacementConstraint = null,
 
     /// The task placement strategy objects to update the service to use. If no
-    /// value is
-    /// specified, the existing placement strategy for the service will remain
-    /// unchanged. If
-    /// this value is specified, it will override the existing placement strategy
-    /// defined for
-    /// the service. To remove an existing placement strategy, specify an empty
-    /// object.
+    /// value is specified, the existing placement strategy for the service will
+    /// remain unchanged. If this value is specified, it will override the existing
+    /// placement strategy defined for the service. To remove an existing placement
+    /// strategy, specify an empty object.
     ///
     /// You can specify a maximum of five strategy rules for each service.
     ///
@@ -253,25 +198,19 @@ pub const UpdateServiceInput = struct {
     placement_strategy: ?[]const PlacementStrategy = null,
 
     /// The platform version that your tasks in the service run on. A platform
-    /// version is only
-    /// specified for tasks using the Fargate launch type. If a platform version is
-    /// not
-    /// specified, the `LATEST` platform version is used. For more information, see
-    /// [Fargate
-    /// Platform
-    /// Versions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html) in the *Amazon Elastic Container Service
-    /// Developer Guide*.
+    /// version is only specified for tasks using the Fargate launch type. If a
+    /// platform version is not specified, the `LATEST` platform version is used.
+    /// For more information, see [Fargate Platform
+    /// Versions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html) in the *Amazon Elastic Container Service Developer Guide*.
     ///
     /// This parameter triggers a new service deployment.
     platform_version: ?[]const u8 = null,
 
     /// Determines whether to propagate the tags from the task definition or the
-    /// service to
-    /// the task. If no value is specified, the tags aren't propagated.
+    /// service to the task. If no value is specified, the tags aren't propagated.
     ///
     /// Only tasks launched after the update will reflect the update. To update the
-    /// tags on
-    /// all tasks, set `forceNewDeployment` to `true`, so that Amazon ECS
+    /// tags on all tasks, set `forceNewDeployment` to `true`, so that Amazon ECS
     /// starts new tasks with the updated tags.
     ///
     /// This parameter doesn't trigger a new service deployment.
@@ -281,20 +220,15 @@ pub const UpdateServiceInput = struct {
     service: []const u8,
 
     /// The configuration for this service to discover and connect to services, and
-    /// be
-    /// discovered by, and connected from, other services within a namespace.
+    /// be discovered by, and connected from, other services within a namespace.
     ///
     /// Tasks that run in a namespace can use short names to connect to services in
-    /// the
-    /// namespace. Tasks can connect to services across all of the clusters in the
-    /// namespace.
-    /// Tasks connect through a managed proxy container that collects logs and
-    /// metrics for
-    /// increased visibility. Only the tasks that Amazon ECS services create are
-    /// supported with
-    /// Service Connect. For more information, see [Service
-    /// Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
-    /// in the *Amazon Elastic Container Service Developer Guide*.
+    /// the namespace. Tasks can connect to services across all of the clusters in
+    /// the namespace. Tasks connect through a managed proxy container that collects
+    /// logs and metrics for increased visibility. Only the tasks that Amazon ECS
+    /// services create are supported with Service Connect. For more information,
+    /// see [Service
+    /// Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.
     ///
     /// This parameter triggers a new service deployment.
     service_connect_configuration: ?ServiceConnectConfiguration = null,
@@ -302,45 +236,34 @@ pub const UpdateServiceInput = struct {
     /// You must have a service-linked role when you update this property.
     ///
     /// For more information about the role see the `CreateService` request
-    /// parameter [
-    /// `role`
+    /// parameter [ `role`
     /// ](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html#ECS-CreateService-request-role).
     ///
     /// The details for the service discovery registries to assign to this service.
-    /// For more
-    /// information, see [Service
+    /// For more information, see [Service
     /// Discovery](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
     ///
     /// When you add, update, or remove the service registries configuration, Amazon
-    /// ECS
-    /// starts new tasks with the updated service registries configuration, and then
-    /// stops the
-    /// old tasks when the new tasks are running.
+    /// ECS starts new tasks with the updated service registries configuration, and
+    /// then stops the old tasks when the new tasks are running.
     ///
-    /// You can remove existing `serviceRegistries` by passing an empty
-    /// list.
+    /// You can remove existing `serviceRegistries` by passing an empty list.
     ///
     /// This parameter triggers a new service deployment.
     service_registries: ?[]const ServiceRegistry = null,
 
-    /// The `family` and `revision` (`family:revision`) or
-    /// full ARN of the task definition to run in your service. If a `revision` is
-    /// not specified, the latest `ACTIVE` revision is used. If you modify the task
-    /// definition with `UpdateService`, Amazon ECS spawns a task with the new
-    /// version of the task definition and then stops an old task after the new
-    /// version is
-    /// running.
+    /// The `family` and `revision` (`family:revision`) or full ARN of the task
+    /// definition to run in your service. If a `revision` is not specified, the
+    /// latest `ACTIVE` revision is used. If you modify the task definition with
+    /// `UpdateService`, Amazon ECS spawns a task with the new version of the task
+    /// definition and then stops an old task after the new version is running.
     ///
     /// This parameter triggers a new service deployment.
     task_definition: ?[]const u8 = null,
 
     /// The details of the volume that was `configuredAtLaunch`. You can configure
     /// the size, volumeType, IOPS, throughput, snapshot and encryption in
-    /// [ServiceManagedEBSVolumeConfiguration](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ServiceManagedEBSVolumeConfiguration.html). The `name` of the volume
-    /// must match the `name` from the task definition. If set to null, no new
-    /// deployment is triggered. Otherwise, if this configuration differs from the
-    /// existing one,
-    /// it triggers a new deployment.
+    /// [ServiceManagedEBSVolumeConfiguration](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ServiceManagedEBSVolumeConfiguration.html). The `name` of the volume must match the `name` from the task definition. If set to null, no new deployment is triggered. Otherwise, if this configuration differs from the existing one, it triggers a new deployment.
     ///
     /// This parameter triggers a new service deployment.
     volume_configurations: ?[]const ServiceVolumeConfiguration = null,
@@ -510,6 +433,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

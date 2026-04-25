@@ -5,6 +5,8 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const HdfsAuthenticationType = @import("hdfs_authentication_type.zig").HdfsAuthenticationType;
+const CmkSecretConfig = @import("cmk_secret_config.zig").CmkSecretConfig;
+const CustomSecretConfig = @import("custom_secret_config.zig").CustomSecretConfig;
 const HdfsNameNode = @import("hdfs_name_node.zig").HdfsNameNode;
 const QopConfiguration = @import("qop_configuration.zig").QopConfiguration;
 const TagListEntry = @import("tag_list_entry.zig").TagListEntry;
@@ -22,6 +24,44 @@ pub const CreateLocationHdfsInput = struct {
     /// be a multiple
     /// of 512 bytes. The default block size is 128 mebibytes (MiB).
     block_size: ?i32 = null,
+
+    /// Specifies configuration information for a DataSync-managed secret, which
+    /// includes the Kerberos keytab that DataSync uses to access a specific Hadoop
+    /// Distributed File System (HDFS) storage location, with a
+    /// customer-managed KMS key.
+    ///
+    /// When you include this parameter as part of a `CreateLocationHdfs` request,
+    /// you provide only the KMS key ARN. DataSync uses this KMS key together with
+    /// the `KerberosKeytab` you specify for
+    /// to create a DataSync-managed secret to store the location access
+    /// credentials.
+    ///
+    /// Make sure that DataSync has permission to access the KMS key that
+    /// you specify. For more information, see [
+    /// Using a service-managed secret encrypted with a custom KMS
+    /// key](https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key).
+    ///
+    /// You can use either `CmkSecretConfig` (with `KerberosKeytab`) or
+    /// `CustomSecretConfig` (without `KerberosKeytab`) to provide
+    /// credentials for a `CreateLocationHdfs` request. Do not provide both
+    /// parameters for the same request.
+    cmk_secret_config: ?CmkSecretConfig = null,
+
+    /// Specifies configuration information for a customer-managed Secrets Manager
+    /// secret where
+    /// the Kerberos keytab for the HDFS storage location is stored in binary, in
+    /// Secrets
+    /// Manager. This configuration includes the secret ARN, and the ARN for an IAM
+    /// role
+    /// that provides access to the secret. For more information, see [
+    /// Using a secret that you
+    /// manage](https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key).
+    ///
+    /// You can use either `CmkSecretConfig` (with `KerberosKeytab`) or
+    /// `CustomSecretConfig` (without `KerberosKeytab`) to provide
+    /// credentials for a `CreateLocationHdfs` request. Do not provide both
+    /// parameters for the same request.
+    custom_secret_config: ?CustomSecretConfig = null,
 
     /// The Kerberos key table (keytab) that contains mappings between the defined
     /// Kerberos
@@ -98,6 +138,8 @@ pub const CreateLocationHdfsInput = struct {
         .agent_arns = "AgentArns",
         .authentication_type = "AuthenticationType",
         .block_size = "BlockSize",
+        .cmk_secret_config = "CmkSecretConfig",
+        .custom_secret_config = "CustomSecretConfig",
         .kerberos_keytab = "KerberosKeytab",
         .kerberos_krb_5_conf = "KerberosKrb5Conf",
         .kerberos_principal = "KerberosPrincipal",

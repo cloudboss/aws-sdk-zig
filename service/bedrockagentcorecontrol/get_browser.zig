@@ -5,6 +5,8 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const BrowserSigningConfigOutput = @import("browser_signing_config_output.zig").BrowserSigningConfigOutput;
+const Certificate = @import("certificate.zig").Certificate;
+const BrowserEnterprisePolicy = @import("browser_enterprise_policy.zig").BrowserEnterprisePolicy;
 const BrowserNetworkConfiguration = @import("browser_network_configuration.zig").BrowserNetworkConfiguration;
 const RecordingConfig = @import("recording_config.zig").RecordingConfig;
 const BrowserStatus = @import("browser_status.zig").BrowserStatus;
@@ -29,11 +31,17 @@ pub const GetBrowserOutput = struct {
     /// identification is enabled for web bot authentication.
     browser_signing: ?BrowserSigningConfigOutput = null,
 
+    /// The list of certificates configured for the browser.
+    certificates: ?[]const Certificate = null,
+
     /// The timestamp when the browser was created.
     created_at: i64,
 
     /// The description of the browser.
     description: ?[]const u8 = null,
+
+    /// The list of enterprise policy files configured for the browser.
+    enterprise_policies: ?[]const BrowserEnterprisePolicy = null,
 
     /// The IAM role ARN that provides permissions for the browser.
     execution_role_arn: ?[]const u8 = null,
@@ -58,8 +66,10 @@ pub const GetBrowserOutput = struct {
         .browser_arn = "browserArn",
         .browser_id = "browserId",
         .browser_signing = "browserSigning",
+        .certificates = "certificates",
         .created_at = "createdAt",
         .description = "description",
+        .enterprise_policies = "enterprisePolicies",
         .execution_role_arn = "executionRoleArn",
         .failure_reason = "failureReason",
         .last_updated_at = "lastUpdatedAt",

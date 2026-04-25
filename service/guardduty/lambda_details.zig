@@ -16,8 +16,7 @@ pub const LambdaDetails = struct {
     function_version: ?[]const u8 = null,
 
     /// The timestamp when the Lambda function was last modified. This field is in
-    /// the UTC date string
-    /// format `(2023-03-22T19:37:20.168Z)`.
+    /// the UTC date string format `(2023-03-22T19:37:20.168Z)`.
     last_modified_at: ?i64 = null,
 
     /// The revision ID of the Lambda function version.

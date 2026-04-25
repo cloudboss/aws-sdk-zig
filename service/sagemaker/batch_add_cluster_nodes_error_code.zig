@@ -3,16 +3,22 @@ const std = @import("std");
 pub const BatchAddClusterNodesErrorCode = enum {
     instance_group_not_found,
     invalid_instance_group_status,
+    incompatible_availability_zones,
+    incompatible_instance_types,
 
     pub const json_field_names = .{
         .instance_group_not_found = "InstanceGroupNotFound",
         .invalid_instance_group_status = "InvalidInstanceGroupStatus",
+        .incompatible_availability_zones = "IncompatibleAvailabilityZones",
+        .incompatible_instance_types = "IncompatibleInstanceTypes",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .instance_group_not_found => "InstanceGroupNotFound",
             .invalid_instance_group_status => "InvalidInstanceGroupStatus",
+            .incompatible_availability_zones => "IncompatibleAvailabilityZones",
+            .incompatible_instance_types => "IncompatibleInstanceTypes",
         };
     }
 

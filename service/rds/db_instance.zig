@@ -18,6 +18,7 @@ const PendingModifiedValues = @import("pending_modified_values.zig").PendingModi
 const ProcessorFeature = @import("processor_feature.zig").ProcessorFeature;
 const ReplicaMode = @import("replica_mode.zig").ReplicaMode;
 const DBInstanceStatusInfo = @import("db_instance_status_info.zig").DBInstanceStatusInfo;
+const StorageEncryptionType = @import("storage_encryption_type.zig").StorageEncryptionType;
 const Tag = @import("tag.zig").Tag;
 const UpgradeRolloutOrder = @import("upgrade_rollout_order.zig").UpgradeRolloutOrder;
 const VpcSecurityGroupMembership = @import("vpc_security_group_membership.zig").VpcSecurityGroupMembership;
@@ -449,6 +450,16 @@ pub const DBInstance = struct {
 
     /// Indicates whether the DB instance is encrypted.
     storage_encrypted: ?bool = null,
+
+    /// The type of encryption used to protect data at rest in the DB instance.
+    /// Possible values:
+    ///
+    /// * `none` - The DB instance is not encrypted.
+    /// * `sse-rds` - The DB instance is encrypted using an Amazon Web Services
+    ///   owned KMS key.
+    /// * `sse-kms` - The DB instance is encrypted using a customer managed KMS key
+    ///   or Amazon Web Services managed KMS key.
+    storage_encryption_type: ?StorageEncryptionType = null,
 
     /// The storage throughput for the DB instance.
     ///

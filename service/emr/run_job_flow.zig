@@ -225,6 +225,22 @@ pub const RunJobFlowInput = struct {
     /// `1`. The maximum value is `256`.
     step_concurrency_level: ?i32 = null,
 
+    /// The Amazon Resource Name (ARN) of the runtime role for steps specified in
+    /// the
+    /// RunJobFlow request. The runtime role can be a cross-account IAM role.
+    /// The runtime role ARN is a combination of account ID, role name, and role
+    /// type using the
+    /// following format: `arn:partition:iam::account-id:role/role-name`.
+    ///
+    /// For example, `arn:aws:iam::1234567890:role/ReadOnly` is a correctly
+    /// formatted
+    /// runtime role ARN.
+    ///
+    /// This parameter applies only to steps included in the `Steps` parameter of
+    /// this
+    /// RunJobFlow request. It does not apply to steps added later to the cluster.
+    step_execution_role_arn: ?[]const u8 = null,
+
     /// A list of steps to run.
     steps: ?[]const StepConfig = null,
 
@@ -296,6 +312,7 @@ pub const RunJobFlowInput = struct {
         .security_configuration = "SecurityConfiguration",
         .service_role = "ServiceRole",
         .step_concurrency_level = "StepConcurrencyLevel",
+        .step_execution_role_arn = "StepExecutionRoleArn",
         .steps = "Steps",
         .supported_products = "SupportedProducts",
         .tags = "Tags",

@@ -10,22 +10,18 @@ const Service = @import("service.zig").Service;
 
 pub const DescribeServicesInput = struct {
     /// The short name or full Amazon Resource Name (ARN)the cluster that hosts the
-    /// service to
-    /// describe. If you do not specify a cluster, the default cluster is assumed.
-    /// This
-    /// parameter is required if the service or services you are describing were
-    /// launched in any
-    /// cluster other than the default cluster.
+    /// service to describe. If you do not specify a cluster, the default cluster is
+    /// assumed. This parameter is required if the service or services you are
+    /// describing were launched in any cluster other than the default cluster.
     cluster: ?[]const u8 = null,
 
     /// Determines whether you want to see the resource tags for the service. If
-    /// `TAGS` is specified, the tags are included in the response. If this field
-    /// is omitted, tags aren't included in the response.
+    /// `TAGS` is specified, the tags are included in the response. If this field is
+    /// omitted, tags aren't included in the response.
     include: ?[]const ServiceField = null,
 
     /// A list of services to describe. You may specify up to 10 services to
-    /// describe in a
-    /// single operation.
+    /// describe in a single operation.
     services: []const []const u8,
 
     pub const json_field_names = .{
@@ -172,6 +168,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

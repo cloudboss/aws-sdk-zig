@@ -19,7 +19,7 @@ pub const CreateDomainInput = struct {
     /// The domain execution role that is created when an Amazon DataZone domain is
     /// created. The domain execution role is created in the Amazon Web Services
     /// account that houses the Amazon DataZone domain.
-    domain_execution_role: []const u8,
+    domain_execution_role: ?[]const u8 = null,
 
     /// The version of the domain that is created.
     domain_version: ?DomainVersion = null,
@@ -165,10 +165,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDomainInput, conf
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"domainExecutionRole\":");
-    try aws.json.writeValue(@TypeOf(input.domain_execution_role), input.domain_execution_role, allocator, &body_buf);
-    has_prev = true;
+    if (input.domain_execution_role) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"domainExecutionRole\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.domain_version) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"domainVersion\":");

@@ -8,6 +8,7 @@ const EndpointIpAddressType = @import("endpoint_ip_address_type.zig").EndpointIp
 const ClientVpnEndpointStatus = @import("client_vpn_endpoint_status.zig").ClientVpnEndpointStatus;
 const Tag = @import("tag.zig").Tag;
 const TrafficIpAddressType = @import("traffic_ip_address_type.zig").TrafficIpAddressType;
+const TransitGatewayConfigurationDescribeEndpointStructure = @import("transit_gateway_configuration_describe_endpoint_structure.zig").TransitGatewayConfigurationDescribeEndpointStructure;
 const TransportProtocol = @import("transport_protocol.zig").TransportProtocol;
 const VpnProtocol = @import("vpn_protocol.zig").VpnProtocol;
 
@@ -114,6 +115,9 @@ pub const ClientVpnEndpoint = struct {
     /// `ipv4` for IPv4 addressing only, `ipv6` for IPv6 addressing only, or
     /// `dual-stack` for both IPv4 and IPv6 addressing.
     traffic_ip_address_type: ?TrafficIpAddressType = null,
+
+    /// The Transit Gateway configuration for the Client VPN endpoint.
+    transit_gateway_configuration: ?TransitGatewayConfigurationDescribeEndpointStructure = null,
 
     /// The transport protocol used by the Client VPN endpoint.
     transport_protocol: ?TransportProtocol = null,

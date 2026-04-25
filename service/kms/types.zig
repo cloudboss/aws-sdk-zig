@@ -7,6 +7,7 @@ pub const CustomKeyStoresListEntry = @import("custom_key_stores_list_entry.zig")
 pub const CustomerMasterKeySpec = @import("customer_master_key_spec.zig").CustomerMasterKeySpec;
 pub const DataKeyPairSpec = @import("data_key_pair_spec.zig").DataKeyPairSpec;
 pub const DataKeySpec = @import("data_key_spec.zig").DataKeySpec;
+pub const DryRunModifierType = @import("dry_run_modifier_type.zig").DryRunModifierType;
 pub const EncryptionAlgorithmSpec = @import("encryption_algorithm_spec.zig").EncryptionAlgorithmSpec;
 pub const ExpirationModelType = @import("expiration_model_type.zig").ExpirationModelType;
 pub const GrantConstraints = @import("grant_constraints.zig").GrantConstraints;

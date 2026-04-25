@@ -8,17 +8,14 @@ const Task = @import("task.zig").Task;
 
 pub const StopTaskInput = struct {
     /// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-    /// the task
-    /// to stop. If you do not specify a cluster, the default cluster is assumed.
+    /// the task to stop. If you do not specify a cluster, the default cluster is
+    /// assumed.
     cluster: ?[]const u8 = null,
 
     /// An optional message specified when a task is stopped. For example, if you're
-    /// using a
-    /// custom scheduler, you can use this parameter to specify the reason for
-    /// stopping the task
-    /// here, and the message appears in subsequent
-    /// [DescribeTasks](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html)>
-    /// API operations on this task.
+    /// using a custom scheduler, you can use this parameter to specify the reason
+    /// for stopping the task here, and the message appears in subsequent
+    /// [DescribeTasks](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html)> API operations on this task.
     reason: ?[]const u8 = null,
 
     /// Thefull Amazon Resource Name (ARN) of the task.
@@ -164,6 +161,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

@@ -21,7 +21,8 @@ pub const TestCase = struct {
     /// The identifier of the test case.
     id: ?[]const u8 = null,
 
-    /// Defines the test attributes for precise data representation.
+    /// Defines the test attributes for precise data representation. The value must
+    /// be a valid JSON string.
     initialization_data: ?[]const u8 = null,
 
     /// The region in which the test case was last modified.

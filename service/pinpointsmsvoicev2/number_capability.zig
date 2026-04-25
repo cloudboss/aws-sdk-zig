@@ -4,11 +4,13 @@ pub const NumberCapability = enum {
     sms,
     voice,
     mms,
+    rcs,
 
     pub const json_field_names = .{
         .sms = "SMS",
         .voice = "VOICE",
         .mms = "MMS",
+        .rcs = "RCS",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const NumberCapability = enum {
             .sms => "SMS",
             .voice => "VOICE",
             .mms => "MMS",
+            .rcs => "RCS",
         };
     }
 

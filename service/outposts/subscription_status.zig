@@ -2,11 +2,13 @@ const std = @import("std");
 
 pub const SubscriptionStatus = enum {
     active,
+    pending,
     inactive,
     cancelled,
 
     pub const json_field_names = .{
         .active = "ACTIVE",
+        .pending = "PENDING",
         .inactive = "INACTIVE",
         .cancelled = "CANCELLED",
     };
@@ -14,6 +16,7 @@ pub const SubscriptionStatus = enum {
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .active => "ACTIVE",
+            .pending => "PENDING",
             .inactive => "INACTIVE",
             .cancelled => "CANCELLED",
         };

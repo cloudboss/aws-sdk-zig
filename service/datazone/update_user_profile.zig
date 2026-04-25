@@ -13,6 +13,9 @@ pub const UpdateUserProfileInput = struct {
     /// updated.
     domain_identifier: []const u8,
 
+    /// The session name for IAM role sessions.
+    session_name: ?[]const u8 = null,
+
     /// The status of the user profile that are to be updated.
     status: UserProfileStatus,
 
@@ -24,6 +27,7 @@ pub const UpdateUserProfileInput = struct {
 
     pub const json_field_names = .{
         .domain_identifier = "domainIdentifier",
+        .session_name = "sessionName",
         .status = "status",
         .@"type" = "type",
         .user_identifier = "userIdentifier",
@@ -99,6 +103,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateUserProfileInput,
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.session_name) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"sessionName\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"status\":");
     try aws.json.writeValue(@TypeOf(input.status), input.status, allocator, &body_buf);

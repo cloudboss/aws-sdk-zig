@@ -23,6 +23,10 @@ pub const CreateRecommenderInput = struct {
     /// The name of the recommeder recipe.
     recommender_recipe_name: RecommenderRecipeName,
 
+    /// The name of the recommender schema to use for this recommender. If not
+    /// specified, the default schema is used.
+    recommender_schema_name: ?[]const u8 = null,
+
     /// The tags used to organize, track, or control access for this resource.
     tags: ?[]const aws.map.StringMapEntry = null,
 
@@ -32,6 +36,7 @@ pub const CreateRecommenderInput = struct {
         .recommender_config = "RecommenderConfig",
         .recommender_name = "RecommenderName",
         .recommender_recipe_name = "RecommenderRecipeName",
+        .recommender_schema_name = "RecommenderSchemaName",
         .tags = "Tags",
     };
 };
@@ -108,6 +113,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRecommenderInput,
     try body_buf.appendSlice(allocator, "\"RecommenderRecipeName\":");
     try aws.json.writeValue(@TypeOf(input.recommender_recipe_name), input.recommender_recipe_name, allocator, &body_buf);
     has_prev = true;
+    if (input.recommender_schema_name) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"RecommenderSchemaName\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.tags) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"Tags\":");

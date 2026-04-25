@@ -38,6 +38,19 @@ pub const ComputeCapacityStatus = struct {
     /// This only applies to multi-session fleets.
     desired_user_sessions: ?i32 = null,
 
+    /// The number of instances in drain mode. This only applies to multi-session
+    /// fleets.
+    draining: ?i32 = null,
+
+    /// The number of active user sessions on instances in drain mode. This only
+    /// applies to multi-session fleets.
+    drain_mode_active_user_sessions: ?i32 = null,
+
+    /// The number of unused session slots on instances in drain mode that cannot be
+    /// used for user session provisioning. This only applies to multi-session
+    /// fleets.
+    drain_mode_unused_user_sessions: ?i32 = null,
+
     /// The number of instances in use for streaming.
     in_use: ?i32 = null,
 
@@ -51,6 +64,9 @@ pub const ComputeCapacityStatus = struct {
         .available_user_sessions = "AvailableUserSessions",
         .desired = "Desired",
         .desired_user_sessions = "DesiredUserSessions",
+        .draining = "Draining",
+        .drain_mode_active_user_sessions = "DrainModeActiveUserSessions",
+        .drain_mode_unused_user_sessions = "DrainModeUnusedUserSessions",
         .in_use = "InUse",
         .running = "Running",
     };

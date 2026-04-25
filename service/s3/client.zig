@@ -518,12 +518,15 @@ pub const Client = struct {
     /// the **
     /// `s3express:CreateSession`
     /// ** permission in
-    /// the `Action` element of a policy to read the object. By default, the session
-    /// is
-    /// in the `ReadWrite` mode. If you want to restrict the access, you can
+    /// the `Action` element of a policy to read the object. If no session mode is
+    /// specified,
+    /// the session will be created with the maximum allowable privilege, attempting
+    /// `ReadWrite`
+    /// first, then `ReadOnly` if `ReadWrite` is not permitted. If you want to
     /// explicitly
-    /// set the `s3express:SessionMode` condition key to `ReadOnly` on the
-    /// copy source bucket.
+    /// restrict the access to be read-only, you can set the `s3express:SessionMode`
+    /// condition key to
+    /// `ReadOnly` on the copy source bucket.
     ///
     /// * If the copy destination is a directory bucket, you must have the **
     /// `s3express:CreateSession`
@@ -648,6 +651,24 @@ pub const Client = struct {
     /// buckets. For more information about
     /// these bucket types, see [Creating, configuring, and working with Amazon S3
     /// buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html) in the *Amazon S3 User Guide*.
+    ///
+    /// General purpose buckets exist in a global namespace, which means that each
+    /// bucket name must be unique
+    /// across all Amazon Web Services accounts in all the Amazon Web Services
+    /// Regions within a partition. A partition is a grouping of
+    /// Regions. Amazon Web Services currently has four partitions: `aws` (Standard
+    /// Regions), `aws-cn`
+    /// (China Regions), `aws-us-gov` (Amazon Web Services GovCloud (US)), and
+    /// `aws-eusc`
+    /// (European Sovereign Cloud). When you create a general purpose bucket, you
+    /// can choose to create a bucket in
+    /// the shared global namespace or you can choose to create a bucket in your
+    /// account regional namespace.
+    /// Your account regional namespace is a subdivision of the global namespace
+    /// that only your account can
+    /// create buckets in. For more information on account regional namespaces, see
+    /// [Namespaces for general purpose
+    /// buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/gpbucketnamespaces.html).
     ///
     /// * **General purpose buckets** - If you send your
     /// `CreateBucket` request to the `s3.amazonaws.com` global endpoint, the
@@ -1599,10 +1620,23 @@ pub const Client = struct {
         return delete_bucket_intelligent_tiering_configuration.execute(self, allocator, input, options);
     }
 
-    /// This operation is not supported for directory buckets.
-    ///
     /// Deletes an S3 Inventory configuration (identified by the inventory ID) from
     /// the bucket.
+    ///
+    /// **Directory buckets ** - For directory buckets, you must make requests for
+    /// this API operation to the Regional endpoint. These endpoints support
+    /// path-style requests in the format
+    /// `https://s3express-control.*region-code*.amazonaws.com/*bucket-name*
+    /// `. Virtual-hosted-style requests aren't supported.
+    /// For more information about endpoints in Availability Zones, see [Regional
+    /// and Zonal endpoints for directory buckets in Availability
+    /// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html) in the
+    /// *Amazon S3 User Guide*. For more information about endpoints in Local Zones,
+    /// see [Concepts for directory buckets in Local
+    /// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html) in the
+    /// *Amazon S3 User Guide*.
+    ///
+    /// **Permissions**
     ///
     /// To use this operation, you must have permissions to perform the
     /// `s3:PutInventoryConfiguration` action. The bucket owner has this permission
@@ -1612,8 +1646,33 @@ pub const Client = struct {
     /// Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources) and [Managing Access Permissions to Your Amazon S3
     /// Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
     ///
+    /// * **General purpose bucket permissions** - The
+    /// `s3:PutInventoryConfiguration` permission is required in a policy. For more
+    /// information
+    /// about general purpose buckets permissions, see [Using Bucket Policies and
+    /// User
+    /// Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html) in the *Amazon S3 User Guide*.
+    ///
+    /// * **Directory bucket permissions** - To grant access to
+    /// this API operation, you must have the `s3express:PutInventoryConfiguration`
+    /// permission in
+    /// an IAM identity-based policy instead of a bucket policy.
+    /// For more information about directory bucket policies and permissions, see
+    /// [Amazon Web Services Identity and Access Management (IAM) for S3 Express One
+    /// Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html) in the *Amazon S3 User Guide*.
+    ///
+    /// **HTTP Host header syntax**
+    ///
+    /// **Directory buckets ** - The HTTP Host header syntax is
+    /// `s3express-control.*region-code*.amazonaws.com`.
+    ///
     /// For information about the Amazon S3 inventory feature, see [Amazon S3
     /// Inventory](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html).
+    ///
+    /// After deleting a configuration, Amazon S3 might still deliver one additional
+    /// inventory
+    /// report during a brief transition period while the system processes the
+    /// deletion.
     ///
     /// Operations related to `DeleteBucketInventoryConfiguration` include:
     ///
@@ -1808,12 +1867,25 @@ pub const Client = struct {
         return delete_bucket_metadata_table_configuration.execute(self, allocator, input, options);
     }
 
-    /// This operation is not supported for directory buckets.
-    ///
     /// Deletes a metrics configuration for the Amazon CloudWatch request metrics
     /// (specified by the metrics
     /// configuration ID) from the bucket. Note that this doesn't include the daily
     /// storage metrics.
+    ///
+    /// **Directory buckets ** - For directory buckets, you must make requests for
+    /// this API operation to the Regional endpoint. These endpoints support
+    /// path-style requests in the format
+    /// `https://s3express-control.*region-code*.amazonaws.com/*bucket-name*
+    /// `. Virtual-hosted-style requests aren't supported.
+    /// For more information about endpoints in Availability Zones, see [Regional
+    /// and Zonal endpoints for directory buckets in Availability
+    /// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html) in the
+    /// *Amazon S3 User Guide*. For more information about endpoints in Local Zones,
+    /// see [Concepts for directory buckets in Local
+    /// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html) in the
+    /// *Amazon S3 User Guide*.
+    ///
+    /// **Permissions**
     ///
     /// To use this operation, you must have permissions to perform the
     /// `s3:PutMetricsConfiguration` action. The bucket owner has this permission by
@@ -1822,6 +1894,28 @@ pub const Client = struct {
     /// permissions, see [Permissions Related to Bucket Subresource
     /// Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources) and [Managing Access Permissions to Your Amazon S3
     /// Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+    ///
+    /// * **General purpose bucket permissions** - The
+    /// `s3:PutMetricsConfiguration` permission is required in a policy. For more
+    /// information
+    /// about general purpose buckets permissions, see [Using Bucket Policies and
+    /// User
+    /// Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html) in the *Amazon S3 User Guide*.
+    ///
+    /// * **Directory bucket permissions** - To grant access to
+    /// this API operation, you must have the `s3express:PutMetricsConfiguration`
+    /// permission in
+    /// an IAM identity-based policy instead of a bucket policy. Cross-account
+    /// access to this API operation isn't supported. This operation can only be
+    /// performed by the Amazon Web Services account that owns the resource.
+    /// For more information about directory bucket policies and permissions, see
+    /// [Amazon Web Services Identity and Access Management (IAM) for S3 Express One
+    /// Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html) in the *Amazon S3 User Guide*.
+    ///
+    /// **HTTP Host header syntax**
+    ///
+    /// **Directory buckets ** - The HTTP Host header syntax is
+    /// `s3express-control.*region-code*.amazonaws.com`.
     ///
     /// For information about CloudWatch request metrics for Amazon S3, see
     /// [Monitoring Metrics with Amazon
@@ -1995,10 +2089,6 @@ pub const Client = struct {
     /// Deletes tags from the general purpose bucket if attribute based access
     /// control (ABAC) is not enabled for the bucket. When you [enable ABAC for a
     /// general purpose
-    /// bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging-enable-abac.html), you can no longer use this operation for that bucket and must use [UntagResource](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UntagResource.html) instead.
-    ///
-    /// if ABAC is not enabled for the bucket. When you [enable ABAC for a general
-    /// purpose
     /// bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging-enable-abac.html), you can no longer use this operation for that bucket and must use [UntagResource](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UntagResource.html) instead.
     ///
     /// To use this operation, you must have permission to perform the
@@ -2680,19 +2770,52 @@ pub const Client = struct {
         return get_bucket_intelligent_tiering_configuration.execute(self, allocator, input, options);
     }
 
-    /// This operation is not supported for directory buckets.
-    ///
     /// Returns an S3 Inventory configuration (identified by the inventory
     /// configuration ID) from the
     /// bucket.
     ///
+    /// **Directory buckets ** - For directory buckets, you must make requests for
+    /// this API operation to the Regional endpoint. These endpoints support
+    /// path-style requests in the format
+    /// `https://s3express-control.*region-code*.amazonaws.com/*bucket-name*
+    /// `. Virtual-hosted-style requests aren't supported.
+    /// For more information about endpoints in Availability Zones, see [Regional
+    /// and Zonal endpoints for directory buckets in Availability
+    /// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html) in the
+    /// *Amazon S3 User Guide*. For more information about endpoints in Local Zones,
+    /// see [Concepts for directory buckets in Local
+    /// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html) in the
+    /// *Amazon S3 User Guide*.
+    ///
+    /// **Permissions**
+    ///
     /// To use this operation, you must have permissions to perform the
     /// `s3:GetInventoryConfiguration` action. The bucket owner has this permission
-    /// by default and
-    /// can grant this permission to others. For more information about permissions,
-    /// see [Permissions Related to Bucket Subresource
+    /// by default. The
+    /// bucket owner can grant this permission to others. For more information about
+    /// permissions, see [Permissions Related to Bucket Subresource
     /// Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources) and [Managing Access Permissions to Your Amazon S3
     /// Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+    ///
+    /// * **General purpose bucket permissions** - The
+    /// `s3:GetInventoryConfiguration` permission is required in a policy. For more
+    /// information
+    /// about general purpose buckets permissions, see [Using Bucket Policies and
+    /// User
+    /// Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html) in the *Amazon S3 User Guide*.
+    ///
+    /// * **Directory bucket permissions** - To grant access to
+    /// this API operation, you must have the `s3express:GetInventoryConfiguration`
+    /// permission in
+    /// an IAM identity-based policy instead of a bucket policy.
+    /// For more information about directory bucket policies and permissions, see
+    /// [Amazon Web Services Identity and Access Management (IAM) for S3 Express One
+    /// Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html) in the *Amazon S3 User Guide*.
+    ///
+    /// **HTTP Host header syntax**
+    ///
+    /// **Directory buckets ** - The HTTP Host header syntax is
+    /// `s3express-control.*region-code*.amazonaws.com`.
     ///
     /// For information about the Amazon S3 inventory feature, see [Amazon S3
     /// Inventory](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html).
@@ -2988,11 +3111,24 @@ pub const Client = struct {
         return get_bucket_metadata_table_configuration.execute(self, allocator, input, options);
     }
 
-    /// This operation is not supported for directory buckets.
-    ///
     /// Gets a metrics configuration (specified by the metrics configuration ID)
     /// from the bucket. Note that
     /// this doesn't include the daily storage metrics.
+    ///
+    /// **Directory buckets ** - For directory buckets, you must make requests for
+    /// this API operation to the Regional endpoint. These endpoints support
+    /// path-style requests in the format
+    /// `https://s3express-control.*region-code*.amazonaws.com/*bucket-name*
+    /// `. Virtual-hosted-style requests aren't supported.
+    /// For more information about endpoints in Availability Zones, see [Regional
+    /// and Zonal endpoints for directory buckets in Availability
+    /// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html) in the
+    /// *Amazon S3 User Guide*. For more information about endpoints in Local Zones,
+    /// see [Concepts for directory buckets in Local
+    /// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html) in the
+    /// *Amazon S3 User Guide*.
+    ///
+    /// **Permissions**
     ///
     /// To use this operation, you must have permissions to perform the
     /// `s3:GetMetricsConfiguration` action. The bucket owner has this permission by
@@ -3001,6 +3137,28 @@ pub const Client = struct {
     /// permissions, see [Permissions Related to Bucket Subresource
     /// Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources) and [Managing Access Permissions to Your Amazon S3
     /// Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+    ///
+    /// * **General purpose bucket permissions** - The
+    /// `s3:GetMetricsConfiguration` permission is required in a policy. For more
+    /// information
+    /// about general purpose buckets permissions, see [Using Bucket Policies and
+    /// User
+    /// Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html) in the *Amazon S3 User Guide*.
+    ///
+    /// * **Directory bucket permissions** - To grant access to
+    /// this API operation, you must have the `s3express:GetMetricsConfiguration`
+    /// permission in
+    /// an IAM identity-based policy instead of a bucket policy. Cross-account
+    /// access to this API operation isn't supported. This operation can only be
+    /// performed by the Amazon Web Services account that owns the resource.
+    /// For more information about directory bucket policies and permissions, see
+    /// [Amazon Web Services Identity and Access Management (IAM) for S3 Express One
+    /// Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html) in the *Amazon S3 User Guide*.
+    ///
+    /// **HTTP Host header syntax**
+    ///
+    /// **Directory buckets ** - The HTTP Host header syntax is
+    /// `s3express-control.*region-code*.amazonaws.com`.
     ///
     /// For information about CloudWatch request metrics for Amazon S3, see
     /// [Monitoring Metrics with Amazon
@@ -3295,10 +3453,6 @@ pub const Client = struct {
     /// This operation is not supported for directory buckets.
     ///
     /// Returns the tag set associated with the general purpose bucket.
-    ///
-    /// if ABAC is not enabled for the bucket. When you [enable ABAC for a general
-    /// purpose
-    /// bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/buckets-tagging-enable-abac.html), you can no longer use this operation for that bucket and must use [ListTagsForResource](https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListTagsForResource.html) instead.
     ///
     /// To use this operation, you must have permission to perform the
     /// `s3:GetBucketTagging`
@@ -4060,11 +4214,13 @@ pub const Client = struct {
     /// **
     /// `s3express:CreateSession`
     /// ** permission in the
-    /// `Action` element of a policy. By default, the session is in the
-    /// `ReadWrite` mode. If you want to restrict the access, you can explicitly set
-    /// the
-    /// `s3express:SessionMode` condition key to `ReadOnly` on the
-    /// bucket.
+    /// `Action` element of a policy. If no session mode is specified, the session
+    /// will be
+    /// created with the maximum allowable privilege, attempting `ReadWrite` first,
+    /// then `ReadOnly` if `ReadWrite` is not permitted. If you want to explicitly
+    /// restrict the access to be read-only, you can set the `s3express:SessionMode`
+    /// condition key to
+    /// `ReadOnly` on the bucket.
     ///
     /// For more information about example bucket policies, see [Example
     /// bucket policies for S3 Express One
@@ -4354,8 +4510,6 @@ pub const Client = struct {
         return list_bucket_intelligent_tiering_configurations.execute(self, allocator, input, options);
     }
 
-    /// This operation is not supported for directory buckets.
-    ///
     /// Returns a list of S3 Inventory configurations for the bucket. You can have
     /// up to 1,000 inventory
     /// configurations per bucket.
@@ -4372,6 +4526,21 @@ pub const Client = struct {
     /// list by passing
     /// the value in continuation-token in the request to `GET` the next page.
     ///
+    /// **Directory buckets ** - For directory buckets, you must make requests for
+    /// this API operation to the Regional endpoint. These endpoints support
+    /// path-style requests in the format
+    /// `https://s3express-control.*region-code*.amazonaws.com/*bucket-name*
+    /// `. Virtual-hosted-style requests aren't supported.
+    /// For more information about endpoints in Availability Zones, see [Regional
+    /// and Zonal endpoints for directory buckets in Availability
+    /// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html) in the
+    /// *Amazon S3 User Guide*. For more information about endpoints in Local Zones,
+    /// see [Concepts for directory buckets in Local
+    /// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html) in the
+    /// *Amazon S3 User Guide*.
+    ///
+    /// **Permissions**
+    ///
     /// To use this operation, you must have permissions to perform the
     /// `s3:GetInventoryConfiguration` action. The bucket owner has this permission
     /// by default. The
@@ -4379,6 +4548,26 @@ pub const Client = struct {
     /// permissions, see [Permissions Related to Bucket Subresource
     /// Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources) and [Managing Access Permissions to Your Amazon S3
     /// Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+    ///
+    /// * **General purpose bucket permissions** - The
+    /// `s3:GetInventoryConfiguration` permission is required in a policy. For more
+    /// information
+    /// about general purpose buckets permissions, see [Using Bucket Policies and
+    /// User
+    /// Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html) in the *Amazon S3 User Guide*.
+    ///
+    /// * **Directory bucket permissions** - To grant access to
+    /// this API operation, you must have the `s3express:GetInventoryConfiguration`
+    /// permission in
+    /// an IAM identity-based policy instead of a bucket policy.
+    /// For more information about directory bucket policies and permissions, see
+    /// [Amazon Web Services Identity and Access Management (IAM) for S3 Express One
+    /// Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html) in the *Amazon S3 User Guide*.
+    ///
+    /// **HTTP Host header syntax**
+    ///
+    /// **Directory buckets ** - The HTTP Host header syntax is
+    /// `s3express-control.*region-code*.amazonaws.com`.
     ///
     /// For information about the Amazon S3 inventory feature, see [Amazon S3
     /// Inventory](https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html)
@@ -4401,13 +4590,24 @@ pub const Client = struct {
         return list_bucket_inventory_configurations.execute(self, allocator, input, options);
     }
 
-    /// This operation is not supported for directory buckets.
-    ///
     /// Lists the metrics configurations for the bucket. The metrics configurations
     /// are only for the request
     /// metrics of the bucket and do not provide information on daily storage
     /// metrics. You can have up to 1,000
     /// configurations per bucket.
+    ///
+    /// **Directory buckets ** - For directory buckets, you must make requests for
+    /// this API operation to the Regional endpoint. These endpoints support
+    /// path-style requests in the format
+    /// `https://s3express-control.*region-code*.amazonaws.com/*bucket-name*
+    /// `. Virtual-hosted-style requests aren't supported.
+    /// For more information about endpoints in Availability Zones, see [Regional
+    /// and Zonal endpoints for directory buckets in Availability
+    /// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html) in the
+    /// *Amazon S3 User Guide*. For more information about endpoints in Local Zones,
+    /// see [Concepts for directory buckets in Local
+    /// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html) in the
+    /// *Amazon S3 User Guide*.
     ///
     /// This action supports list pagination and does not return more than 100
     /// configurations at a time.
@@ -4421,6 +4621,8 @@ pub const Client = struct {
     /// list by passing
     /// the value in `continuation-token` in the request to `GET` the next page.
     ///
+    /// **Permissions**
+    ///
     /// To use this operation, you must have permissions to perform the
     /// `s3:GetMetricsConfiguration` action. The bucket owner has this permission by
     /// default. The
@@ -4428,6 +4630,28 @@ pub const Client = struct {
     /// permissions, see [Permissions Related to Bucket Subresource
     /// Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources) and [Managing Access Permissions to Your Amazon S3
     /// Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+    ///
+    /// * **General purpose bucket permissions** - The
+    /// `s3:GetMetricsConfiguration` permission is required in a policy. For more
+    /// information
+    /// about general purpose buckets permissions, see [Using Bucket Policies and
+    /// User
+    /// Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html) in the *Amazon S3 User Guide*.
+    ///
+    /// * **Directory bucket permissions** - To grant access to
+    /// this API operation, you must have the `s3express:GetMetricsConfiguration`
+    /// permission in
+    /// an IAM identity-based policy instead of a bucket policy. Cross-account
+    /// access to this API operation isn't supported. This operation can only be
+    /// performed by the Amazon Web Services account that owns the resource.
+    /// For more information about directory bucket policies and permissions, see
+    /// [Amazon Web Services Identity and Access Management (IAM) for S3 Express One
+    /// Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html) in the *Amazon S3 User Guide*.
+    ///
+    /// **HTTP Host header syntax**
+    ///
+    /// **Directory buckets ** - The HTTP Host header syntax is
+    /// `s3express-control.*region-code*.amazonaws.com`.
     ///
     /// For more information about metrics configurations and CloudWatch request
     /// metrics, see [Monitoring Metrics with
@@ -5561,8 +5785,6 @@ pub const Client = struct {
         return put_bucket_intelligent_tiering_configuration.execute(self, allocator, input, options);
     }
 
-    /// This operation is not supported for directory buckets.
-    ///
     /// This implementation of the `PUT` action adds an S3 Inventory configuration
     /// (identified by
     /// the inventory ID) to the bucket. You can have up to 1,000 inventory
@@ -5594,6 +5816,19 @@ pub const Client = struct {
     /// Permissions for Amazon S3 Inventory and Storage Class
     /// Analysis](https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html#example-bucket-policies-use-case-9).
     ///
+    /// **Directory buckets ** - For directory buckets, you must make requests for
+    /// this API operation to the Regional endpoint. These endpoints support
+    /// path-style requests in the format
+    /// `https://s3express-control.*region-code*.amazonaws.com/*bucket-name*
+    /// `. Virtual-hosted-style requests aren't supported.
+    /// For more information about endpoints in Availability Zones, see [Regional
+    /// and Zonal endpoints for directory buckets in Availability
+    /// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html) in the
+    /// *Amazon S3 User Guide*. For more information about endpoints in Local Zones,
+    /// see [Concepts for directory buckets in Local
+    /// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html) in the
+    /// *Amazon S3 User Guide*.
+    ///
     /// **Permissions**
     ///
     /// To use this operation, you must have permission to perform the
@@ -5609,9 +5844,24 @@ pub const Client = struct {
     /// bucket can also access
     /// all object metadata fields that are available in the inventory report.
     ///
+    /// * **General purpose bucket permissions** - The
+    /// `s3:PutInventoryConfiguration` permission is required in a policy. For more
+    /// information
+    /// about general purpose buckets permissions, see [Using Bucket Policies and
+    /// User
+    /// Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html) in the *Amazon S3 User Guide*.
+    ///
+    /// * **Directory bucket permissions** - To grant access to
+    /// this API operation, you must have the `s3express:PutInventoryConfiguration`
+    /// permission in
+    /// an IAM identity-based policy instead of a bucket policy.
+    /// For more information about directory bucket policies and permissions, see
+    /// [Amazon Web Services Identity and Access Management (IAM) for S3 Express One
+    /// Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html) in the *Amazon S3 User Guide*.
+    ///
     /// To restrict access to an inventory report, see [Restricting access to an
     /// Amazon S3 Inventory
-    /// report](https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html#example-bucket-policies-use-case-10) in the
+    /// report](https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html#example-bucket-policies-s3-inventory) in the
     /// *Amazon S3 User Guide*. For more information about the metadata fields
     /// available
     /// in S3 Inventory, see [Amazon S3 Inventory
@@ -5620,6 +5870,11 @@ pub const Client = struct {
     /// operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources) and [Identity and access management in
     /// Amazon
     /// S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html) in the *Amazon S3 User Guide*.
+    ///
+    /// **HTTP Host header syntax**
+    ///
+    /// **Directory buckets ** - The HTTP Host header syntax is
+    /// `s3express-control.*region-code*.amazonaws.com`.
     ///
     /// `PutBucketInventoryConfiguration` has the following special errors:
     ///
@@ -5905,8 +6160,6 @@ pub const Client = struct {
         return put_bucket_logging.execute(self, allocator, input, options);
     }
 
-    /// This operation is not supported for directory buckets.
-    ///
     /// Sets a metrics configuration (specified by the metrics configuration ID) for
     /// the bucket. You can
     /// have up to 1,000 metrics configurations per bucket. If you're updating an
@@ -5915,6 +6168,21 @@ pub const Client = struct {
     /// configuration. If you don't
     /// include the elements you want to keep, they are erased.
     ///
+    /// **Directory buckets ** - For directory buckets, you must make requests for
+    /// this API operation to the Regional endpoint. These endpoints support
+    /// path-style requests in the format
+    /// `https://s3express-control.*region-code*.amazonaws.com/*bucket-name*
+    /// `. Virtual-hosted-style requests aren't supported.
+    /// For more information about endpoints in Availability Zones, see [Regional
+    /// and Zonal endpoints for directory buckets in Availability
+    /// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/endpoint-directory-buckets-AZ.html) in the
+    /// *Amazon S3 User Guide*. For more information about endpoints in Local Zones,
+    /// see [Concepts for directory buckets in Local
+    /// Zones](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-lzs-for-directory-buckets.html) in the
+    /// *Amazon S3 User Guide*.
+    ///
+    /// **Permissions**
+    ///
     /// To use this operation, you must have permissions to perform the
     /// `s3:PutMetricsConfiguration` action. The bucket owner has this permission by
     /// default. The
@@ -5922,6 +6190,28 @@ pub const Client = struct {
     /// permissions, see [Permissions Related to Bucket Subresource
     /// Operations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources) and [Managing Access Permissions to Your Amazon S3
     /// Resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+    ///
+    /// * **General purpose bucket permissions** - The
+    /// `s3:PutMetricsConfiguration` permission is required in a policy. For more
+    /// information
+    /// about general purpose buckets permissions, see [Using Bucket Policies and
+    /// User
+    /// Policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html) in the *Amazon S3 User Guide*.
+    ///
+    /// * **Directory bucket permissions** - To grant access to
+    /// this API operation, you must have the `s3express:PutMetricsConfiguration`
+    /// permission in
+    /// an IAM identity-based policy instead of a bucket policy. Cross-account
+    /// access to this API operation isn't supported. This operation can only be
+    /// performed by the Amazon Web Services account that owns the resource.
+    /// For more information about directory bucket policies and permissions, see
+    /// [Amazon Web Services Identity and Access Management (IAM) for S3 Express One
+    /// Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html) in the *Amazon S3 User Guide*.
+    ///
+    /// **HTTP Host header syntax**
+    ///
+    /// **Directory buckets ** - The HTTP Host header syntax is
+    /// `s3express-control.*region-code*.amazonaws.com`.
     ///
     /// For information about CloudWatch request metrics for Amazon S3, see
     /// [Monitoring Metrics with Amazon
@@ -8005,12 +8295,13 @@ pub const Client = struct {
     /// the **
     /// `s3express:CreateSession`
     /// ** permission in
-    /// the `Action` element of a policy to read the object. By default, the session
-    /// is
-    /// in the `ReadWrite` mode. If you want to restrict the access, you can
-    /// explicitly
-    /// set the `s3express:SessionMode` condition key to `ReadOnly` on the
-    /// copy source bucket.
+    /// the `Action` element of a policy to read the object. If no session mode is
+    /// specified,
+    /// the session will be created with the maximum allowable privilege, attempting
+    /// `ReadWrite` first, then `ReadOnly` if `ReadWrite` is not permitted.
+    /// If you want to explicitly restrict the access to be read-only, you can set
+    /// the `s3express:SessionMode`
+    /// condition key to `ReadOnly` on the copy source bucket.
     ///
     /// * If the copy destination is a directory bucket, you must have the **
     /// `s3express:CreateSession`

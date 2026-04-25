@@ -2,13 +2,17 @@ const aws = @import("aws");
 
 const DeploymentConfiguration = @import("deployment_configuration.zig").DeploymentConfiguration;
 const ClusterCapacityRequirements = @import("cluster_capacity_requirements.zig").ClusterCapacityRequirements;
+const ClusterInstanceRequirementDetails = @import("cluster_instance_requirement_details.zig").ClusterInstanceRequirementDetails;
 const ClusterInstanceStorageConfig = @import("cluster_instance_storage_config.zig").ClusterInstanceStorageConfig;
 const ClusterInstanceType = @import("cluster_instance_type.zig").ClusterInstanceType;
+const ClusterInstanceTypeDetail = @import("cluster_instance_type_detail.zig").ClusterInstanceTypeDetail;
 const ClusterKubernetesConfigDetails = @import("cluster_kubernetes_config_details.zig").ClusterKubernetesConfigDetails;
 const ClusterLifeCycleConfig = @import("cluster_life_cycle_config.zig").ClusterLifeCycleConfig;
+const ClusterNetworkInterfaceDetails = @import("cluster_network_interface_details.zig").ClusterNetworkInterfaceDetails;
 const DeepHealthCheckType = @import("deep_health_check_type.zig").DeepHealthCheckType;
 const VpcConfig = @import("vpc_config.zig").VpcConfig;
 const ScheduledUpdateConfig = @import("scheduled_update_config.zig").ScheduledUpdateConfig;
+const ClusterSlurmConfigDetails = @import("cluster_slurm_config_details.zig").ClusterSlurmConfigDetails;
 const SoftwareUpdateStatus = @import("software_update_status.zig").SoftwareUpdateStatus;
 const InstanceGroupStatus = @import("instance_group_status.zig").InstanceGroupStatus;
 
@@ -41,12 +45,22 @@ pub const ClusterInstanceGroupDetails = struct {
     /// The name of the instance group of a SageMaker HyperPod cluster.
     instance_group_name: ?[]const u8 = null,
 
+    /// The instance requirements for the instance group, including the current and
+    /// desired instance types. This field is present for flexible instance groups
+    /// that support multiple instance types.
+    instance_requirements: ?ClusterInstanceRequirementDetails = null,
+
     /// The additional storage configurations for the instances in the SageMaker
     /// HyperPod cluster instance group.
     instance_storage_configs: ?[]const ClusterInstanceStorageConfig = null,
 
     /// The instance type of the instance group of a SageMaker HyperPod cluster.
     instance_type: ?ClusterInstanceType = null,
+
+    /// Details about the instance types in the instance group, including the count
+    /// and configuration of each instance type. This field is present for flexible
+    /// instance groups that support multiple instance types.
+    instance_type_details: ?[]const ClusterInstanceTypeDetail = null,
 
     /// The Kubernetes configuration for the instance group that contains labels and
     /// taints to be applied for the nodes in this instance group.
@@ -58,6 +72,9 @@ pub const ClusterInstanceGroupDetails = struct {
     /// The minimum number of instances that must be available in the instance group
     /// of a SageMaker HyperPod cluster before it transitions to `InService` status.
     min_count: ?i32 = null,
+
+    /// The network interface configuration for the instance group.
+    network_interface: ?ClusterNetworkInterfaceDetails = null,
 
     /// A flag indicating whether deep health checks should be performed when the
     /// cluster instance group is created or updated.
@@ -71,6 +88,9 @@ pub const ClusterInstanceGroupDetails = struct {
     /// The configuration object of the schedule that SageMaker follows when
     /// updating the AMI.
     scheduled_update_config: ?ScheduledUpdateConfig = null,
+
+    /// The Slurm configuration for the instance group.
+    slurm_config: ?ClusterSlurmConfigDetails = null,
 
     /// Status of the last software udpate request.
     ///
@@ -142,14 +162,18 @@ pub const ClusterInstanceGroupDetails = struct {
         .desired_image_id = "DesiredImageId",
         .execution_role = "ExecutionRole",
         .instance_group_name = "InstanceGroupName",
+        .instance_requirements = "InstanceRequirements",
         .instance_storage_configs = "InstanceStorageConfigs",
         .instance_type = "InstanceType",
+        .instance_type_details = "InstanceTypeDetails",
         .kubernetes_config = "KubernetesConfig",
         .life_cycle_config = "LifeCycleConfig",
         .min_count = "MinCount",
+        .network_interface = "NetworkInterface",
         .on_start_deep_health_checks = "OnStartDeepHealthChecks",
         .override_vpc_config = "OverrideVpcConfig",
         .scheduled_update_config = "ScheduledUpdateConfig",
+        .slurm_config = "SlurmConfig",
         .software_update_status = "SoftwareUpdateStatus",
         .status = "Status",
         .target_count = "TargetCount",

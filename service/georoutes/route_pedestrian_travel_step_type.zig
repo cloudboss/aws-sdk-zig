@@ -9,9 +9,6 @@ pub const RoutePedestrianTravelStepType = enum {
     roundabout_exit,
     roundabout_pass,
     turn,
-    exit,
-    ramp,
-    u_turn,
 
     pub const json_field_names = .{
         .arrive = "Arrive",
@@ -22,9 +19,6 @@ pub const RoutePedestrianTravelStepType = enum {
         .roundabout_exit = "RoundaboutExit",
         .roundabout_pass = "RoundaboutPass",
         .turn = "Turn",
-        .exit = "Exit",
-        .ramp = "Ramp",
-        .u_turn = "UTurn",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -37,9 +31,6 @@ pub const RoutePedestrianTravelStepType = enum {
             .roundabout_exit => "RoundaboutExit",
             .roundabout_pass => "RoundaboutPass",
             .turn => "Turn",
-            .exit => "Exit",
-            .ramp => "Ramp",
-            .u_turn => "UTurn",
         };
     }
 

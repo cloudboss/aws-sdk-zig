@@ -11,7 +11,7 @@ pub const FindingHistoryUpdateSource = struct {
     /// `BatchImportFindings`
     /// ](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html) (by an integrated Amazon Web Services service or third party partner integration) or [
     /// `BatchUpdateFindings`
-    /// ](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) (by a Security Hub customer).
+    /// ](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html) (by a Security Hub CSPM customer).
     @"type": ?FindingHistoryUpdateSourceType = null,
 
     pub const json_field_names = .{

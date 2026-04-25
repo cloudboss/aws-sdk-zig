@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const PolicyDefinition = @import("policy_definition.zig").PolicyDefinition;
+const UpdatedDescription = @import("updated_description.zig").UpdatedDescription;
 const PolicyValidationMode = @import("policy_validation_mode.zig").PolicyValidationMode;
 const PolicyStatus = @import("policy_status.zig").PolicyStatus;
 
@@ -12,12 +13,12 @@ pub const UpdatePolicyInput = struct {
     /// The new Cedar policy statement that defines the access control rules. This
     /// replaces the existing policy definition with new logic while maintaining the
     /// policy's identity.
-    definition: PolicyDefinition,
+    definition: ?PolicyDefinition = null,
 
     /// The new human-readable description for the policy. This optional field
     /// allows updating the policy's documentation while keeping the same policy
     /// logic.
-    description: ?[]const u8 = null,
+    description: ?UpdatedDescription = null,
 
     /// The identifier of the policy engine that manages the policy to be updated.
     /// This ensures the policy is updated within the correct policy engine context.
@@ -133,10 +134,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdatePolicyInput, conf
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"definition\":");
-    try aws.json.writeValue(@TypeOf(input.definition), input.definition, allocator, &body_buf);
-    has_prev = true;
+    if (input.definition) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"definition\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.description) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"description\":");
@@ -154,7 +157,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdatePolicyInput, conf
     const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
-    request.method = .PUT;
+    request.method = .PATCH;
     request.path = path;
     request.tls = tls;
     request.port = port;

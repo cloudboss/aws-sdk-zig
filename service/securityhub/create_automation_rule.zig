@@ -16,9 +16,9 @@ pub const CreateAutomationRuleInput = struct {
 
     /// A set of ASFF finding field attributes and corresponding expected values
     /// that
-    /// Security Hub uses to filter findings. If a rule is enabled and a finding
-    /// matches the conditions specified in
-    /// this parameter, Security Hub applies the rule action to the finding.
+    /// Security Hub CSPM uses to filter findings. If a rule is enabled and a
+    /// finding matches the conditions specified in
+    /// this parameter, Security Hub CSPM applies the rule action to the finding.
     criteria: AutomationRulesFindingFilters,
 
     /// A description of the rule.
@@ -27,8 +27,8 @@ pub const CreateAutomationRuleInput = struct {
     /// Specifies whether a rule is the last to be applied with respect to a finding
     /// that matches the rule criteria. This is useful when a finding
     /// matches the criteria for multiple rules, and each rule has different
-    /// actions. If a rule is terminal, Security Hub applies the rule action to a
-    /// finding that matches
+    /// actions. If a rule is terminal, Security Hub CSPM applies the rule action to
+    /// a finding that matches
     /// the rule criteria and doesn't evaluate other rules for the finding. By
     /// default, a rule isn't terminal.
     is_terminal: ?bool = null,
@@ -38,14 +38,14 @@ pub const CreateAutomationRuleInput = struct {
 
     /// An integer ranging from 1 to 1000 that represents the order in which the
     /// rule action is
-    /// applied to findings. Security Hub applies rules with lower values for this
-    /// parameter
+    /// applied to findings. Security Hub CSPM applies rules with lower values for
+    /// this parameter
     /// first.
     rule_order: i32,
 
     /// Whether the rule is active after it is created. If
-    /// this parameter is equal to `ENABLED`, Security Hub starts applying the rule
-    /// to findings
+    /// this parameter is equal to `ENABLED`, Security Hub CSPM starts applying the
+    /// rule to findings
     /// and finding updates after the rule is created. To change the value of this
     /// parameter after creating a rule, use [
     /// `BatchUpdateAutomationRules`
@@ -231,6 +231,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "LimitExceededException")) {
         return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organization_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationalUnitNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organizational_unit_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

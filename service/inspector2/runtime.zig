@@ -22,6 +22,8 @@ pub const Runtime = enum {
     dotnet_7,
     ruby_2_7,
     ruby_3_2,
+    dotnet_10,
+    nodejs_24_x,
 
     pub const json_field_names = .{
         .nodejs = "NODEJS",
@@ -45,6 +47,8 @@ pub const Runtime = enum {
         .dotnet_7 = "DOTNET_7",
         .ruby_2_7 = "RUBY_2_7",
         .ruby_3_2 = "RUBY_3_2",
+        .dotnet_10 = "DOTNET_10",
+        .nodejs_24_x = "NODEJS_24_X",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -70,6 +74,8 @@ pub const Runtime = enum {
             .dotnet_7 => "DOTNET_7",
             .ruby_2_7 => "RUBY_2_7",
             .ruby_3_2 => "RUBY_3_2",
+            .dotnet_10 => "DOTNET_10",
+            .nodejs_24_x => "NODEJS_24_X",
         };
     }
 

@@ -7,11 +7,11 @@ const ServiceError = @import("errors.zig").ServiceError;
 const KmsKey = @import("kms_key.zig").KmsKey;
 
 pub const CreateMissionProfileInput = struct {
-    /// Amount of time after a contact ends that you’d like to receive a Ground
+    /// Amount of time after a contact ends that you'd like to receive a Ground
     /// Station Contact State Change event indicating the pass has finished.
     contact_post_pass_duration_seconds: ?i32 = null,
 
-    /// Amount of time prior to contact start you’d like to receive a Ground Station
+    /// Amount of time prior to contact start you'd like to receive a Ground Station
     /// Contact State Change event indicating an upcoming pass.
     contact_pre_pass_duration_seconds: ?i32 = null,
 
@@ -19,7 +19,7 @@ pub const CreateMissionProfileInput = struct {
     /// Config` and a *to* `Config`.
     dataflow_edges: []const []const []const u8,
 
-    /// Smallest amount of time in seconds that you’d like to see for an available
+    /// Smallest amount of time in seconds that you'd like to see for an available
     /// contact. AWS Ground Station will not present you with contacts shorter than
     /// this duration.
     minimum_viable_contact_duration_seconds: i32,

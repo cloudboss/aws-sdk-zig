@@ -23,10 +23,8 @@ pub const S3Bucket = struct {
     encryption_key_arn: ?[]const u8 = null,
 
     /// The type of encryption used for the Amazon S3 buckets and its objects. For
-    /// more information,
-    /// see [Protecting data with server-side
-    /// encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html)
-    /// in the *Amazon S3 User Guide*.
+    /// more information, see [Protecting data with server-side
+    /// encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html) in the *Amazon S3 User Guide*.
     encryption_type: ?[]const u8 = null,
 
     /// The owner ID of the associated S3Amazon S3bucket.

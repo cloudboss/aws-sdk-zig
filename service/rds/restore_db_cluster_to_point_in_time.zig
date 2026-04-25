@@ -26,6 +26,18 @@ pub const RestoreDBClusterToPointInTimeInput = struct {
     /// Valid for: Aurora MySQL DB clusters only
     backtrack_window: ?i64 = null,
 
+    /// The number of days for which automated backups are retained. Specify a
+    /// minimum value of `1`.
+    ///
+    /// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    ///
+    /// Default: Uses existing setting
+    ///
+    /// Constraints:
+    ///
+    /// * Must be a value from 1 to 35.
+    backup_retention_period: ?i32 = null,
+
     /// Specifies whether to copy all tags from the restored DB cluster to snapshots
     /// of the restored DB cluster. The default is not to copy them.
     ///
@@ -146,8 +158,30 @@ pub const RestoreDBClusterToPointInTimeInput = struct {
     /// Valid for: Aurora DB clusters and Multi-AZ DB clusters
     enable_iam_database_authentication: ?bool = null,
 
+    /// Specifies that the restored DB cluster should use internet-based
+    /// connectivity through an internet access gateway. This allows clients to
+    /// connect to the cluster over the internet without requiring a VPC.
+    ///
+    /// This parameter must be used together with `EnableVPCNetworking` set to
+    /// `false`. When both parameters are specified, IAM database authentication is
+    /// required. You must also specify `EnableIAMDatabaseAuthentication`.
+    ///
+    /// Valid for Cluster Type: Aurora PostgreSQL clusters
+    enable_internet_access_gateway: ?bool = null,
+
     /// Specifies whether to turn on Performance Insights for the DB cluster.
     enable_performance_insights: ?bool = null,
+
+    /// Specifies whether to enable VPC networking for the restored DB cluster. Set
+    /// this parameter to `false` to create a cluster without the VPC network
+    /// interface (ENI).
+    ///
+    /// This parameter must be used together with `EnableInternetAccessGateway`.
+    /// When both parameters are specified, IAM database authentication is required.
+    /// You must also specify `EnableIAMDatabaseAuthentication`.
+    ///
+    /// Valid for Cluster Type: Aurora PostgreSQL clusters
+    enable_vpc_networking: ?bool = null,
 
     /// The life cycle type for this DB cluster.
     ///
@@ -304,6 +338,24 @@ pub const RestoreDBClusterToPointInTimeInput = struct {
     ///
     /// Valid for: Aurora DB clusters and Multi-AZ DB clusters
     port: ?i32 = null,
+
+    /// The daily time range during which automated backups are created if automated
+    /// backups are enabled, using the `BackupRetentionPeriod` parameter.
+    ///
+    /// The default is a 30-minute window selected at random from an 8-hour block of
+    /// time for each Amazon Web Services Region. To view the time blocks available,
+    /// see [ Backup
+    /// window](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow) in the *Amazon Aurora User Guide*.
+    ///
+    /// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    ///
+    /// Constraints:
+    ///
+    /// * Must be in the format `hh24:mi-hh24:mi`.
+    /// * Must be in Universal Coordinated Time (UTC).
+    /// * Must not conflict with the preferred maintenance window.
+    /// * Must be at least 30 minutes.
+    preferred_backup_window: ?[]const u8 = null,
 
     /// Specifies whether the DB cluster is publicly accessible.
     ///
@@ -474,6 +526,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RestoreDBClusterToPoint
         try body_buf.appendSlice(allocator, "&BacktrackWindow=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
+    if (input.backup_retention_period) |v| {
+        try body_buf.appendSlice(allocator, "&BackupRetentionPeriod=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
+    }
     if (input.copy_tags_to_snapshot) |v| {
         try body_buf.appendSlice(allocator, "&CopyTagsToSnapshot=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
@@ -517,8 +573,16 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RestoreDBClusterToPoint
         try body_buf.appendSlice(allocator, "&EnableIAMDatabaseAuthentication=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
+    if (input.enable_internet_access_gateway) |v| {
+        try body_buf.appendSlice(allocator, "&EnableInternetAccessGateway=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
+    }
     if (input.enable_performance_insights) |v| {
         try body_buf.appendSlice(allocator, "&EnablePerformanceInsights=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
+    }
+    if (input.enable_vpc_networking) |v| {
+        try body_buf.appendSlice(allocator, "&EnableVPCNetworking=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.engine_lifecycle_support) |v| {
@@ -564,6 +628,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RestoreDBClusterToPoint
     if (input.port) |v| {
         try body_buf.appendSlice(allocator, "&Port=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
+    }
+    if (input.preferred_backup_window) |v| {
+        try body_buf.appendSlice(allocator, "&PreferredBackupWindow=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.publicly_accessible) |v| {
         try body_buf.appendSlice(allocator, "&PubliclyAccessible=");

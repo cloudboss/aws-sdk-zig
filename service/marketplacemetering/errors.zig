@@ -13,6 +13,7 @@ pub const ServiceError = struct {
         internal_service_error_exception: InternalServiceErrorException,
         invalid_customer_identifier_exception: InvalidCustomerIdentifierException,
         invalid_endpoint_region_exception: InvalidEndpointRegionException,
+        invalid_license_exception: InvalidLicenseException,
         invalid_product_code_exception: InvalidProductCodeException,
         invalid_public_key_version_exception: InvalidPublicKeyVersionException,
         invalid_region_exception: InvalidRegionException,
@@ -35,6 +36,7 @@ pub const ServiceError = struct {
                 .internal_service_error_exception => "InternalServiceErrorException",
                 .invalid_customer_identifier_exception => "InvalidCustomerIdentifierException",
                 .invalid_endpoint_region_exception => "InvalidEndpointRegionException",
+                .invalid_license_exception => "InvalidLicenseException",
                 .invalid_product_code_exception => "InvalidProductCodeException",
                 .invalid_public_key_version_exception => "InvalidPublicKeyVersionException",
                 .invalid_region_exception => "InvalidRegionException",
@@ -59,6 +61,7 @@ pub const ServiceError = struct {
                 .internal_service_error_exception => |e| e.message,
                 .invalid_customer_identifier_exception => |e| e.message,
                 .invalid_endpoint_region_exception => |e| e.message,
+                .invalid_license_exception => |e| e.message,
                 .invalid_product_code_exception => |e| e.message,
                 .invalid_public_key_version_exception => |e| e.message,
                 .invalid_region_exception => |e| e.message,
@@ -83,6 +86,7 @@ pub const ServiceError = struct {
                 .internal_service_error_exception => 500,
                 .invalid_customer_identifier_exception => 400,
                 .invalid_endpoint_region_exception => 400,
+                .invalid_license_exception => 400,
                 .invalid_product_code_exception => 400,
                 .invalid_public_key_version_exception => 400,
                 .invalid_region_exception => 400,
@@ -107,6 +111,7 @@ pub const ServiceError = struct {
                 .internal_service_error_exception => |e| e.request_id,
                 .invalid_customer_identifier_exception => |e| e.request_id,
                 .invalid_endpoint_region_exception => |e| e.request_id,
+                .invalid_license_exception => |e| e.request_id,
                 .invalid_product_code_exception => |e| e.request_id,
                 .invalid_public_key_version_exception => |e| e.request_id,
                 .invalid_region_exception => |e| e.request_id,
@@ -179,6 +184,11 @@ pub const InvalidCustomerIdentifierException = struct {
 };
 
 pub const InvalidEndpointRegionException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const InvalidLicenseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };

@@ -6,6 +6,7 @@ const MonitoredResourceInfo = @import("monitored_resource_info.zig").MonitoredRe
 const AlarmState = @import("alarm_state.zig").AlarmState;
 const ResourceType = @import("resource_type.zig").ResourceType;
 const MetricStatistic = @import("metric_statistic.zig").MetricStatistic;
+const Tag = @import("tag.zig").Tag;
 const TreatMissingData = @import("treat_missing_data.zig").TreatMissingData;
 const MetricUnit = @import("metric_unit.zig").MetricUnit;
 
@@ -109,6 +110,12 @@ pub const Alarm = struct {
     /// information more easily.
     support_code: ?[]const u8 = null,
 
+    /// The tag keys and optional values for the resource. For more information
+    /// about tags in
+    /// Lightsail, see the [Amazon Lightsail Developer
+    /// Guide](https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-tags).
+    tags: ?[]const Tag = null,
+
     /// The value against which the specified statistic is compared.
     threshold: ?f64 = null,
 
@@ -151,6 +158,7 @@ pub const Alarm = struct {
         .state = "state",
         .statistic = "statistic",
         .support_code = "supportCode",
+        .tags = "tags",
         .threshold = "threshold",
         .treat_missing_data = "treatMissingData",
         .unit = "unit",

@@ -21,6 +21,12 @@ pub const ReservedCapacityOffering = struct {
     /// The end time of the reserved capacity offering.
     end_time: ?i64 = null,
 
+    /// The end time of the extension for the reserved capacity offering.
+    extension_end_time: ?i64 = null,
+
+    /// The start time of the extension for the reserved capacity offering.
+    extension_start_time: ?i64 = null,
+
     /// The number of instances in the reserved capacity offering.
     instance_count: i32,
 
@@ -45,6 +51,8 @@ pub const ReservedCapacityOffering = struct {
         .duration_hours = "DurationHours",
         .duration_minutes = "DurationMinutes",
         .end_time = "EndTime",
+        .extension_end_time = "ExtensionEndTime",
+        .extension_start_time = "ExtensionStartTime",
         .instance_count = "InstanceCount",
         .instance_type = "InstanceType",
         .reserved_capacity_type = "ReservedCapacityType",

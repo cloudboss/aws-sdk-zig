@@ -3,6 +3,10 @@ const ScaleOutPolicyUpdate = @import("scale_out_policy_update.zig").ScaleOutPoli
 
 /// The updates to the auto scaling parameters for the connector.
 pub const AutoScalingUpdate = struct {
+    /// The maximum number of tasks allocated to the connector during autoscaling
+    /// operations. Must be at least equal to maxWorkerCount.
+    max_autoscaling_task_count: i32 = 0,
+
     /// The target maximum number of workers allocated to the connector.
     max_worker_count: i32 = 0,
 
@@ -13,13 +17,14 @@ pub const AutoScalingUpdate = struct {
     /// The target minimum number of workers allocated to the connector.
     min_worker_count: i32 = 0,
 
-    /// The target sacle-in policy for the connector.
+    /// The target scale-in policy for the connector.
     scale_in_policy: ScaleInPolicyUpdate,
 
-    /// The target sacle-out policy for the connector.
+    /// The target scale-out policy for the connector.
     scale_out_policy: ScaleOutPolicyUpdate,
 
     pub const json_field_names = .{
+        .max_autoscaling_task_count = "maxAutoscalingTaskCount",
         .max_worker_count = "maxWorkerCount",
         .mcu_count = "mcuCount",
         .min_worker_count = "minWorkerCount",

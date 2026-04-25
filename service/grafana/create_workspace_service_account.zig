@@ -14,8 +14,7 @@ pub const CreateWorkspaceServiceAccountInput = struct {
     grafana_role: Role,
 
     /// A name for the service account. The name must be unique within the
-    /// workspace, as it
-    /// determines the ID associated with the service account.
+    /// workspace, as it determines the ID associated with the service account.
     name: []const u8,
 
     /// The ID of the workspace within which to create the service account.

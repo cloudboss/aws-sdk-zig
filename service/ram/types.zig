@@ -17,6 +17,7 @@ pub const ResourceShare = @import("resource_share.zig").ResourceShare;
 pub const ResourceShareAssociation = @import("resource_share_association.zig").ResourceShareAssociation;
 pub const ResourceShareAssociationStatus = @import("resource_share_association_status.zig").ResourceShareAssociationStatus;
 pub const ResourceShareAssociationType = @import("resource_share_association_type.zig").ResourceShareAssociationType;
+pub const ResourceShareConfiguration = @import("resource_share_configuration.zig").ResourceShareConfiguration;
 pub const ResourceShareFeatureSet = @import("resource_share_feature_set.zig").ResourceShareFeatureSet;
 pub const ResourceShareInvitation = @import("resource_share_invitation.zig").ResourceShareInvitation;
 pub const ResourceShareInvitationStatus = @import("resource_share_invitation_status.zig").ResourceShareInvitationStatus;

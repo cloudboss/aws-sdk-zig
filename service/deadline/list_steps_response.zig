@@ -1,5 +1,6 @@
 const StepSummary = @import("step_summary.zig").StepSummary;
 
+/// Shared pagination field for List operation outputs (nextToken).
 pub const ListStepsResponse = struct {
     /// If Deadline Cloud returns `nextToken`, then there are more results
     /// available. The value of `nextToken` is a unique pagination token for each

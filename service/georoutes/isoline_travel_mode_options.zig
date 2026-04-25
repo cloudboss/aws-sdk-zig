@@ -2,18 +2,23 @@ const IsolineCarOptions = @import("isoline_car_options.zig").IsolineCarOptions;
 const IsolineScooterOptions = @import("isoline_scooter_options.zig").IsolineScooterOptions;
 const IsolineTruckOptions = @import("isoline_truck_options.zig").IsolineTruckOptions;
 
-/// Travel mode related options for the provided travel mode.
+/// Mode-specific routing options that further refine how reachable areas are
+/// calculated. Options are only considered when they match the selected travel
+/// mode.
 pub const IsolineTravelModeOptions = struct {
-    /// Travel mode options when the provided travel mode is "Car"
+    /// Options specific to passenger vehicle routing (`Car`, such as vehicle
+    /// characteristics and license plate restrictions.
     car: ?IsolineCarOptions = null,
 
-    /// Travel mode options when the provided travel mode is `Scooter`
+    /// Options specific to scooter routing (`Scooter`, such as vehicle
+    /// characteristics and license plate restrictions.
     ///
-    /// When travel mode is set to `Scooter`, then the avoidance option
-    /// `ControlledAccessHighways` defaults to `true`.
+    /// When using the `Scooter` travel mode, controlled-access highways are
+    /// automatically avoided unless explicitly allowed.
     scooter: ?IsolineScooterOptions = null,
 
-    /// Travel mode options when the provided travel mode is "Truck"
+    /// Options specific to commercial truck routing (`Truck`, including vehicle
+    /// dimensions, weight limits, and hazardous cargo specifications.
     truck: ?IsolineTruckOptions = null,
 
     pub const json_field_names = .{

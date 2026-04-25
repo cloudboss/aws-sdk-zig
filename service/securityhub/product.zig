@@ -3,7 +3,7 @@ const IntegrationType = @import("integration_type.zig").IntegrationType;
 /// Contains details about a product.
 pub const Product = struct {
     /// The URL to the service or product documentation about the integration with
-    /// Security Hub, including how to activate the integration.
+    /// Security Hub CSPM, including how to activate the integration.
     activation_url: ?[]const u8 = null,
 
     /// The categories assigned to the product.
@@ -19,14 +19,14 @@ pub const Product = struct {
     /// following.
     ///
     /// * `SEND_FINDINGS_TO_SECURITY_HUB` - The integration sends
-    /// findings to Security Hub.
+    /// findings to Security Hub CSPM.
     ///
     /// * `RECEIVE_FINDINGS_FROM_SECURITY_HUB` - The integration
-    /// receives findings from Security Hub.
+    /// receives findings from Security Hub CSPM.
     ///
     /// * `UPDATE_FINDINGS_IN_SECURITY_HUB` - The integration does not send new
-    ///   findings to Security Hub, but does make updates to the findings that it
-    ///   receives from Security Hub.
+    ///   findings to Security Hub CSPM, but does make updates to the findings that
+    ///   it receives from Security Hub CSPM.
     integration_types: ?[]const IntegrationType = null,
 
     /// For integrations with Amazon Web Services services, the Amazon Web Services

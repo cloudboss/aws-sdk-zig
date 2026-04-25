@@ -27,6 +27,9 @@ pub const Participant = struct {
     /// session.
     first_join_time: ?i64 = null,
 
+    /// The participant’s ingest configuration.
+    ingest_configuration_arn: ?[]const u8 = null,
+
     /// The participant’s Internet Service Provider.
     isp_name: ?[]const u8 = null,
 
@@ -69,6 +72,9 @@ pub const Participant = struct {
     /// The participant’s recording state.
     recording_state: ?ParticipantRecordingState = null,
 
+    /// Indicates whether redundant ingest is enabled for the participant.
+    redundant_ingest: bool = false,
+
     /// The participant's replication state.
     replication_state: ?ReplicationState = null,
 
@@ -103,6 +109,7 @@ pub const Participant = struct {
         .browser_name = "browserName",
         .browser_version = "browserVersion",
         .first_join_time = "firstJoinTime",
+        .ingest_configuration_arn = "ingestConfigurationArn",
         .isp_name = "ispName",
         .os_name = "osName",
         .os_version = "osVersion",
@@ -112,6 +119,7 @@ pub const Participant = struct {
         .recording_s3_bucket_name = "recordingS3BucketName",
         .recording_s3_prefix = "recordingS3Prefix",
         .recording_state = "recordingState",
+        .redundant_ingest = "redundantIngest",
         .replication_state = "replicationState",
         .replication_type = "replicationType",
         .sdk_version = "sdkVersion",

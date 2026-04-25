@@ -91,7 +91,10 @@ pub const ListUsersInput = struct {
     filter: ?[]const u8 = null,
 
     /// The maximum number of users that you want Amazon Cognito to return in the
-    /// response.
+    /// response. In some SDK
+    /// contexts, this operation might return fewer items than you specify in the
+    /// `Limit` parameter without having reached the end of the full list. If the
+    /// response contains a `PaginationToken`, then there are more results.
     limit: ?i32 = null,
 
     /// This API operation returns a limited number of results. The pagination token
@@ -127,6 +130,14 @@ pub const ListUsersOutput = struct {
     pagination_token: ?[]const u8 = null,
 
     /// An array of user pool users who match your query, and their attributes.
+    /// Between
+    /// different requests, you might observe variations in the sequence that users
+    /// in this
+    /// response object are sorted into. The sort order of users isn't guaranteed to
+    /// follow a
+    /// single pattern, but the paginated list from a single chain of requests won't
+    /// return
+    /// duplicates.
     users: ?[]const UserType = null,
 
     pub const json_field_names = .{
@@ -203,6 +214,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     const owned_message = try arena_alloc.dupe(u8, error_message);
     const owned_request_id = try arena_alloc.dupe(u8, "");
 
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "AliasExistsException")) {
         return .{ .arena = arena, .kind = .{ .alias_exists_exception = .{
             .message = owned_message,
@@ -271,6 +288,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "InternalErrorException")) {
         return .{ .arena = arena, .kind = .{ .internal_error_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

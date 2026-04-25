@@ -3,7 +3,7 @@ pub const EnumConfigurationOptions = struct {
     /// The valid values for a control parameter that is an enum.
     allowed_values: ?[]const []const u8 = null,
 
-    /// The Security Hub default value for a control parameter that is an enum.
+    /// The Security Hub CSPM default value for a control parameter that is an enum.
     default_value: ?[]const u8 = null,
 
     pub const json_field_names = .{

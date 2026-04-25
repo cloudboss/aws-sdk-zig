@@ -864,7 +864,8 @@ pub const Client = struct {
         return list_contributor_insights.execute(self, allocator, input, options);
     }
 
-    /// Lists completed exports within the past 90 days.
+    /// Lists completed exports within the past 90 days, in reverse alphanumeric
+    /// order of `ExportArn`.
     pub fn listExports(self: *Self, allocator: std.mem.Allocator, input: list_exports.ListExportsInput, options: CallOptions) !list_exports.ListExportsOutput {
         return list_exports.execute(self, allocator, input, options);
     }
@@ -937,6 +938,10 @@ pub const Client = struct {
     /// every
     /// record must contain that attribute, the `attribute_not_exists` function
     /// will only succeed if no matching item exists.
+    ///
+    /// To determine whether `PutItem` overwrote an existing item, use
+    /// `ReturnValues` set to `ALL_OLD`. If the response includes
+    /// the `Attributes` element, an existing item was overwritten.
     ///
     /// For more information about `PutItem`, see [Working with
     /// Items](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html) in the *Amazon DynamoDB Developer Guide*.

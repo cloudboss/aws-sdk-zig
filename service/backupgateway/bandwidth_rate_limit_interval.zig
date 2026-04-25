@@ -7,8 +7,6 @@ pub const BandwidthRateLimitInterval = struct {
     /// The average upload rate limit component of the bandwidth rate limit
     /// interval, in bits per second. This field does not appear in the response if
     /// the upload rate limit is not set.
-    ///
-    /// For Backup Gateway, the minimum value is `(Value)`.
     average_upload_rate_limit_in_bits_per_sec: ?i64 = null,
 
     /// The days of the week component of the bandwidth rate limit interval,

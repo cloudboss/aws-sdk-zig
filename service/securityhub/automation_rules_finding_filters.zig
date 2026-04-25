@@ -51,7 +51,7 @@ pub const AutomationRulesFindingFilters = struct {
     /// detection based on a statistical deviation of network traffic has low
     /// confidence because an
     /// actual exfiltration hasn't been verified. For more information, see
-    /// [Confidence](https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-confidence) in the *Security Hub User Guide*.
+    /// [Confidence](https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-confidence) in the *Security Hub CSPM User Guide*.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
     confidence: ?[]const NumberFilter = null,
@@ -59,7 +59,7 @@ pub const AutomationRulesFindingFilters = struct {
     /// A timestamp that indicates when this finding record was created.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
@@ -74,7 +74,7 @@ pub const AutomationRulesFindingFilters = struct {
     /// criticality, and a score of `100` is reserved for the most critical
     /// resources. For
     /// more information, see
-    /// [Criticality](https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-criticality) in the *Security Hub User Guide*.
+    /// [Criticality](https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-criticality) in the *Security Hub CSPM User Guide*.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
     criticality: ?[]const NumberFilter = null,
@@ -88,7 +88,7 @@ pub const AutomationRulesFindingFilters = struct {
     /// finding was first observed by the security findings product.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
@@ -109,7 +109,7 @@ pub const AutomationRulesFindingFilters = struct {
     /// observed a change in the resource that is involved in the finding.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
@@ -123,7 +123,7 @@ pub const AutomationRulesFindingFilters = struct {
     /// The timestamp of when the note was updated.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
@@ -136,13 +136,13 @@ pub const AutomationRulesFindingFilters = struct {
 
     /// The Amazon Resource Name (ARN) for a third-party product that generated a
     /// finding in
-    /// Security Hub.
+    /// Security Hub CSPM.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
     product_arn: ?[]const StringFilter = null,
 
     /// Provides the name of the product that generated the finding. For
-    /// control-based findings, the product name is Security Hub.
+    /// control-based findings, the product name is Security Hub CSPM.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
     product_name: ?[]const StringFilter = null,
@@ -235,7 +235,7 @@ pub const AutomationRulesFindingFilters = struct {
     /// that classify
     /// a finding. For a list of namespaces, classifiers, and categories, see [Types
     /// taxonomy for
-    /// ASFF](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-type-taxonomy.html) in the *Security Hub User Guide*.
+    /// ASFF](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-type-taxonomy.html) in the *Security Hub CSPM User Guide*.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
     @"type": ?[]const StringFilter = null,
@@ -244,7 +244,7 @@ pub const AutomationRulesFindingFilters = struct {
     /// updated.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.

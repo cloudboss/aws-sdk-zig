@@ -1,11 +1,13 @@
-/// Trailer options corresponding to the vehicle.
+/// Additional specifications when the vehicle includes one or more trailers.
 pub const IsolineTrailerOptions = struct {
-    /// Total number of axles of the vehicle.
+    /// The total number of axles across all trailers. Used for weight distribution
+    /// calculations and road restrictions.
     axle_count: ?i32 = null,
 
-    /// Number of trailers attached to the vehicle.
+    /// The number of trailers being pulled. Affects which roads can be used based
+    /// on local regulations.
     ///
-    /// Default Value: `0`
+    /// Default value: `0`
     trailer_count: ?i32 = null,
 
     pub const json_field_names = .{

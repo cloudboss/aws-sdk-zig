@@ -9,13 +9,19 @@ pub const ReplicationInfo = struct {
     consumer_group_replication: ConsumerGroupReplication,
 
     /// The ARN of the source Kafka cluster.
-    source_kafka_cluster_arn: []const u8,
+    source_kafka_cluster_arn: ?[]const u8 = null,
+
+    /// The ID of the source Kafka cluster.
+    source_kafka_cluster_id: ?[]const u8 = null,
 
     /// The compression type to use when producing records to target cluster.
     target_compression_type: TargetCompressionType,
 
     /// The ARN of the target Kafka cluster.
-    target_kafka_cluster_arn: []const u8,
+    target_kafka_cluster_arn: ?[]const u8 = null,
+
+    /// The ID of the target Kafka cluster.
+    target_kafka_cluster_id: ?[]const u8 = null,
 
     /// Configuration relating to topic replication.
     topic_replication: TopicReplication,
@@ -23,8 +29,10 @@ pub const ReplicationInfo = struct {
     pub const json_field_names = .{
         .consumer_group_replication = "ConsumerGroupReplication",
         .source_kafka_cluster_arn = "SourceKafkaClusterArn",
+        .source_kafka_cluster_id = "SourceKafkaClusterId",
         .target_compression_type = "TargetCompressionType",
         .target_kafka_cluster_arn = "TargetKafkaClusterArn",
+        .target_kafka_cluster_id = "TargetKafkaClusterId",
         .topic_replication = "TopicReplication",
     };
 };

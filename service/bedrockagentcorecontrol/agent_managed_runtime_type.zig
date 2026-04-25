@@ -5,12 +5,14 @@ pub const AgentManagedRuntimeType = enum {
     python_3_11,
     python_3_12,
     python_3_13,
+    python_3_14,
 
     pub const json_field_names = .{
         .python_3_10 = "PYTHON_3_10",
         .python_3_11 = "PYTHON_3_11",
         .python_3_12 = "PYTHON_3_12",
         .python_3_13 = "PYTHON_3_13",
+        .python_3_14 = "PYTHON_3_14",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +21,7 @@ pub const AgentManagedRuntimeType = enum {
             .python_3_11 => "PYTHON_3_11",
             .python_3_12 => "PYTHON_3_12",
             .python_3_13 => "PYTHON_3_13",
+            .python_3_14 => "PYTHON_3_14",
         };
     }
 

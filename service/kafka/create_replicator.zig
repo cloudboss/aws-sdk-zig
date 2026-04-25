@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const KafkaCluster = @import("kafka_cluster.zig").KafkaCluster;
+const LogDelivery = @import("log_delivery.zig").LogDelivery;
 const ReplicationInfo = @import("replication_info.zig").ReplicationInfo;
 const ReplicatorState = @import("replicator_state.zig").ReplicatorState;
 
@@ -14,6 +15,9 @@ pub const CreateReplicatorInput = struct {
 
     /// Kafka Clusters to use in setting up sources / targets for replication.
     kafka_clusters: []const KafkaCluster,
+
+    /// Configuration for delivering replicator logs to customer destinations.
+    log_delivery: ?LogDelivery = null,
 
     /// A list of replication configurations, where each configuration targets a
     /// given source cluster to target cluster replication flow.
@@ -32,6 +36,7 @@ pub const CreateReplicatorInput = struct {
     pub const json_field_names = .{
         .description = "Description",
         .kafka_clusters = "KafkaClusters",
+        .log_delivery = "LogDelivery",
         .replication_info_list = "ReplicationInfoList",
         .replicator_name = "ReplicatorName",
         .service_execution_role_arn = "ServiceExecutionRoleArn",
@@ -104,6 +109,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicatorInput, 
     try body_buf.appendSlice(allocator, "\"KafkaClusters\":");
     try aws.json.writeValue(@TypeOf(input.kafka_clusters), input.kafka_clusters, allocator, &body_buf);
     has_prev = true;
+    if (input.log_delivery) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"LogDelivery\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"ReplicationInfoList\":");
     try aws.json.writeValue(@TypeOf(input.replication_info_list), input.replication_info_list, allocator, &body_buf);
@@ -169,8 +180,20 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "ClusterConnectivityException")) {
+        return .{ .arena = arena, .kind = .{ .cluster_connectivity_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ControllerMovedException")) {
+        return .{ .arena = arena, .kind = .{ .controller_moved_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };
@@ -181,14 +204,44 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "GroupSubscribedToTopicException")) {
+        return .{ .arena = arena, .kind = .{ .group_subscribed_to_topic_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "InternalServerErrorException")) {
         return .{ .arena = arena, .kind = .{ .internal_server_error_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "KafkaRequestException")) {
+        return .{ .arena = arena, .kind = .{ .kafka_request_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "KafkaTimeoutException")) {
+        return .{ .arena = arena, .kind = .{ .kafka_timeout_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "NotControllerException")) {
+        return .{ .arena = arena, .kind = .{ .not_controller_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "NotFoundException")) {
         return .{ .arena = arena, .kind = .{ .not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ReassignmentInProgressException")) {
+        return .{ .arena = arena, .kind = .{ .reassignment_in_progress_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };
@@ -205,8 +258,20 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "TopicExistsException")) {
+        return .{ .arena = arena, .kind = .{ .topic_exists_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "UnauthorizedException")) {
         return .{ .arena = arena, .kind = .{ .unauthorized_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnknownTopicOrPartitionException")) {
+        return .{ .arena = arena, .kind = .{ .unknown_topic_or_partition_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

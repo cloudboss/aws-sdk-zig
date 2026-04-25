@@ -9,8 +9,8 @@ const WorkspaceDescription = @import("workspace_description.zig").WorkspaceDescr
 
 pub const AssociateLicenseInput = struct {
     /// A token from Grafana Labs that ties your Amazon Web Services account with a
+    /// Grafana Labs account. For more information, see [Link your account with
     /// Grafana
-    /// Labs account. For more information, see [Link your account with Grafana
     /// Labs](https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise).
     grafana_token: ?[]const u8 = null,
 

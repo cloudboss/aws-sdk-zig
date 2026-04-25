@@ -19,12 +19,11 @@ pub const SourceNetwork = struct {
     /// ID of the recovered VPC following Source Network recovery.
     launched_vpc_id: ?[]const u8 = null,
 
-    /// Status of Source Network Replication. Possible values:
-    /// (a) STOPPED - Source Network is not replicating.
-    /// (b) IN_PROGRESS - Source Network is being replicated.
-    /// (c) PROTECTED - Source Network was replicated successfully and is being
-    /// synchronized for changes.
-    /// (d) ERROR - Source Network replication has failed
+    /// Status of Source Network Replication. Possible values: (a) STOPPED - Source
+    /// Network is not replicating. (b) IN_PROGRESS - Source Network is being
+    /// replicated. (c) PROTECTED - Source Network was replicated successfully and
+    /// is being synchronized for changes. (d) ERROR - Source Network replication
+    /// has failed
     replication_status: ?ReplicationStatus = null,
 
     /// Error details in case Source Network replication status is ERROR.

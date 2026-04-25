@@ -31,6 +31,7 @@ const get_rate_based_statement_managed_keys = @import("get_rate_based_statement_
 const get_regex_pattern_set = @import("get_regex_pattern_set.zig");
 const get_rule_group = @import("get_rule_group.zig");
 const get_sampled_requests = @import("get_sampled_requests.zig");
+const get_top_path_statistics_by_traffic = @import("get_top_path_statistics_by_traffic.zig");
 const get_web_acl = @import("get_web_acl.zig");
 const get_web_acl_for_resource = @import("get_web_acl_for_resource.zig");
 const list_api_keys = @import("list_api_keys.zig");
@@ -453,6 +454,18 @@ pub const Client = struct {
     /// selected the requests in the sample.
     pub fn getSampledRequests(self: *Self, allocator: std.mem.Allocator, input: get_sampled_requests.GetSampledRequestsInput, options: CallOptions) !get_sampled_requests.GetSampledRequestsOutput {
         return get_sampled_requests.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves aggregated statistics about the top URI paths accessed by bot
+    /// traffic for a specified web ACL and time window.
+    /// You can use this operation to analyze which paths on your web application
+    /// receive the most bot traffic and identify the specific bots accessing those
+    /// paths.
+    /// The operation supports filtering by bot category, organization, or name, and
+    /// allows you to drill down into specific path prefixes to view detailed
+    /// URI-level statistics.
+    pub fn getTopPathStatisticsByTraffic(self: *Self, allocator: std.mem.Allocator, input: get_top_path_statistics_by_traffic.GetTopPathStatisticsByTrafficInput, options: CallOptions) !get_top_path_statistics_by_traffic.GetTopPathStatisticsByTrafficOutput {
+        return get_top_path_statistics_by_traffic.execute(self, allocator, input, options);
     }
 
     /// Retrieves the specified WebACL.

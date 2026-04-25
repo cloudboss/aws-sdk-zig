@@ -17,7 +17,7 @@ pub const CreateConnectorInput = struct {
     certificate_authority_arn: []const u8,
 
     /// Custom string that can be used to distinguish between calls to the
-    /// [CreateChallenge](https://docs.aws.amazon.com/C4SCEP_API/pca-connector-scep/latest/APIReference/API_CreateChallenge.html) action. Client tokens for `CreateChallenge` time out after five minutes. Therefore, if you call `CreateChallenge` multiple times with the same client token within five minutes, Connector for SCEP recognizes that you are requesting only one challenge and will only respond with one. If you change the client token for each call, Connector for SCEP recognizes that you are requesting multiple challenge passwords.
+    /// [CreateChallenge](https://docs.aws.amazon.com/pca-connector-scep/latest/APIReference/API_CreateChallenge.html) action. Client tokens for `CreateChallenge` time out after five minutes. Therefore, if you call `CreateChallenge` multiple times with the same client token within five minutes, Connector for SCEP recognizes that you are requesting only one challenge and will only respond with one. If you change the client token for each call, Connector for SCEP recognizes that you are requesting multiple challenge passwords.
     client_token: ?[]const u8 = null,
 
     /// If you don't supply a value, by default Connector for SCEP creates a
@@ -39,11 +39,17 @@ pub const CreateConnectorInput = struct {
     /// The key-value pairs to associate with the resource.
     tags: ?[]const aws.map.StringMapEntry = null,
 
+    /// If you don't supply a value, by default Connector for SCEP creates a
+    /// connector accessible over the public internet. If you provide a VPC endpoint
+    /// ID, creates a connector accessible only through that specific VPC endpoint.
+    vpc_endpoint_id: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .certificate_authority_arn = "CertificateAuthorityArn",
         .client_token = "ClientToken",
         .mobile_device_management = "MobileDeviceManagement",
         .tags = "Tags",
+        .vpc_endpoint_id = "VpcEndpointId",
     };
 };
 
@@ -113,6 +119,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateConnectorInput, c
     if (input.tags) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"Tags\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.vpc_endpoint_id) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"VpcEndpointId\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

@@ -16,11 +16,11 @@ pub const GetMissionProfileInput = struct {
 };
 
 pub const GetMissionProfileOutput = struct {
-    /// Amount of time after a contact ends that you’d like to receive a CloudWatch
+    /// Amount of time after a contact ends that you'd like to receive a CloudWatch
     /// event indicating the pass has finished.
     contact_post_pass_duration_seconds: ?i32 = null,
 
-    /// Amount of time prior to contact start you’d like to receive a CloudWatch
+    /// Amount of time prior to contact start you'd like to receive a CloudWatch
     /// event indicating an upcoming pass.
     contact_pre_pass_duration_seconds: ?i32 = null,
 
@@ -28,7 +28,7 @@ pub const GetMissionProfileOutput = struct {
     /// Config` and a *to* `Config`.
     dataflow_edges: ?[]const []const []const u8 = null,
 
-    /// Smallest amount of time in seconds that you’d like to see for an available
+    /// Smallest amount of time in seconds that you'd like to see for an available
     /// contact. AWS Ground Station will not present you with contacts shorter than
     /// this duration.
     minimum_viable_contact_duration_seconds: ?i32 = null,

@@ -54,6 +54,9 @@ pub const DescribeBackupJobOutput = struct {
     /// * For Amazon EFS, this value refers to the delta bytes transferred during a
     /// backup.
     ///
+    /// * For Amazon EKS, this value refers to the size of your nested EKS recovery
+    ///   point.
+    ///
     /// * Amazon FSx does not populate this value from the operation
     /// `GetBackupJobStatus` for FSx file systems.
     ///

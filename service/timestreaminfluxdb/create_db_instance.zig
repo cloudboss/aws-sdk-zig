@@ -8,6 +8,7 @@ const DbInstanceType = @import("db_instance_type.zig").DbInstanceType;
 const DbStorageType = @import("db_storage_type.zig").DbStorageType;
 const DeploymentType = @import("deployment_type.zig").DeploymentType;
 const LogDeliveryConfiguration = @import("log_delivery_configuration.zig").LogDeliveryConfiguration;
+const MaintenanceSchedule = @import("maintenance_schedule.zig").MaintenanceSchedule;
 const NetworkType = @import("network_type.zig").NetworkType;
 const InstanceMode = @import("instance_mode.zig").InstanceMode;
 const Status = @import("status.zig").Status;
@@ -49,6 +50,10 @@ pub const CreateDbInstanceInput = struct {
 
     /// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
     log_delivery_configuration: ?LogDeliveryConfiguration = null,
+
+    /// Specifies the maintenance schedule for the DB instance, including the
+    /// preferred maintenance window and timezone.
+    maintenance_schedule: ?MaintenanceSchedule = null,
 
     /// The name that uniquely identifies the DB instance when interacting with the
     /// Amazon Timestream for InfluxDB API and CLI commands. This name will also be
@@ -113,6 +118,7 @@ pub const CreateDbInstanceInput = struct {
         .db_storage_type = "dbStorageType",
         .deployment_type = "deploymentType",
         .log_delivery_configuration = "logDeliveryConfiguration",
+        .maintenance_schedule = "maintenanceSchedule",
         .name = "name",
         .network_type = "networkType",
         .organization = "organization",
@@ -170,9 +176,16 @@ pub const CreateDbInstanceOutput = struct {
     /// Specifies the DbInstance's roles in the cluster.
     instance_modes: ?[]const InstanceMode = null,
 
+    /// The timestamp of the last completed maintenance operation on the DB
+    /// instance.
+    last_maintenance_time: ?i64 = null,
+
     /// Configuration for sending InfluxDB engine logs to send to specified S3
     /// bucket.
     log_delivery_configuration: ?LogDeliveryConfiguration = null,
+
+    /// The maintenance schedule for the DB instance.
+    maintenance_schedule: ?MaintenanceSchedule = null,
 
     /// The customer-supplied name that uniquely identifies the DB instance when
     /// interacting with the Amazon Timestream for InfluxDB API and CLI commands.
@@ -182,6 +195,10 @@ pub const CreateDbInstanceOutput = struct {
     /// IPV4, which can communicate over IPv4 protocol only, or DUAL, which can
     /// communicate over both IPv4 and IPv6 protocols.
     network_type: ?NetworkType = null,
+
+    /// The timestamp of the next scheduled maintenance operation on the DB
+    /// instance.
+    next_maintenance_time: ?i64 = null,
 
     /// The port number on which InfluxDB accepts connections. The default value is
     /// 8086.
@@ -217,9 +234,12 @@ pub const CreateDbInstanceOutput = struct {
         .influx_auth_parameters_secret_arn = "influxAuthParametersSecretArn",
         .instance_mode = "instanceMode",
         .instance_modes = "instanceModes",
+        .last_maintenance_time = "lastMaintenanceTime",
         .log_delivery_configuration = "logDeliveryConfiguration",
+        .maintenance_schedule = "maintenanceSchedule",
         .name = "name",
         .network_type = "networkType",
+        .next_maintenance_time = "nextMaintenanceTime",
         .port = "port",
         .publicly_accessible = "publiclyAccessible",
         .secondary_availability_zone = "secondaryAvailabilityZone",

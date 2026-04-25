@@ -2626,6 +2626,7 @@ pub fn deserializeServerlessCache(allocator: std.mem.Allocator, reader: *aws.xml
     result.full_engine_version = null;
     result.kms_key_id = null;
     result.major_engine_version = null;
+    result.network_type = null;
     result.reader_endpoint = null;
     result.security_group_ids = null;
     result.serverless_cache_name = null;
@@ -2656,6 +2657,8 @@ pub fn deserializeServerlessCache(allocator: std.mem.Allocator, reader: *aws.xml
                     result.kms_key_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "MajorEngineVersion")) {
                     result.major_engine_version = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "NetworkType")) {
+                    result.network_type = NetworkType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ReaderEndpoint")) {
                     result.reader_endpoint = try deserializeEndpoint(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "SecurityGroupIds")) {

@@ -25,6 +25,10 @@ pub const Queue = struct {
     /// The timestamp in epoch seconds for when you most recently updated the queue.
     last_updated: ?i64 = null,
 
+    /// Specify the maximum number of Elemental Inference feeds MediaConvert can
+    /// process concurrently.
+    maximum_concurrent_feeds: ?i32 = null,
+
     /// A name that you create for each queue. Each name must be unique within your
     /// account.
     name: []const u8,
@@ -67,6 +71,7 @@ pub const Queue = struct {
         .created_at = "CreatedAt",
         .description = "Description",
         .last_updated = "LastUpdated",
+        .maximum_concurrent_feeds = "MaximumConcurrentFeeds",
         .name = "Name",
         .pricing_plan = "PricingPlan",
         .progressing_jobs_count = "ProgressingJobsCount",

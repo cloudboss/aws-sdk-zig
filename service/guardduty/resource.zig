@@ -15,12 +15,10 @@ const RecoveryPointDetails = @import("recovery_point_details.zig").RecoveryPoint
 const S3BucketDetail = @import("s3_bucket_detail.zig").S3BucketDetail;
 
 /// Contains information about the Amazon Web Services resource associated with
-/// the activity that prompted
-/// GuardDuty to generate a finding.
+/// the activity that prompted GuardDuty to generate a finding.
 pub const Resource = struct {
     /// The IAM access key details (user information) of a user that engaged in the
-    /// activity that
-    /// prompted GuardDuty to generate a finding.
+    /// activity that prompted GuardDuty to generate a finding.
     access_key_details: ?AccessKeyDetails = null,
 
     container_details: ?Container = null,
@@ -41,8 +39,7 @@ pub const Resource = struct {
     eks_cluster_details: ?EksClusterDetails = null,
 
     /// The information about the EC2 instance associated with the activity that
-    /// prompted
-    /// GuardDuty to generate a finding.
+    /// prompted GuardDuty to generate a finding.
     instance_details: ?InstanceDetails = null,
 
     /// Details about the Kubernetes user and workload involved in a Kubernetes
@@ -54,13 +51,11 @@ pub const Resource = struct {
     lambda_details: ?LambdaDetails = null,
 
     /// Contains information about the database instance to which an anomalous login
-    /// attempt was
-    /// made.
+    /// attempt was made.
     rds_db_instance_details: ?RdsDbInstanceDetails = null,
 
     /// Contains information about the user details through which anomalous login
-    /// attempt was
-    /// made.
+    /// attempt was made.
     rds_db_user_details: ?RdsDbUserDetails = null,
 
     /// Contains information about the RDS Limitless database that was involved in a

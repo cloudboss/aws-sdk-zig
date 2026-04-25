@@ -7,8 +7,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 
 pub const AcceptAdministratorInvitationInput = struct {
     /// The account ID of the GuardDuty administrator account whose invitation
-    /// you're
-    /// accepting.
+    /// you're accepting.
     administrator_id: []const u8,
 
     /// The unique ID of the detector of the GuardDuty member account.

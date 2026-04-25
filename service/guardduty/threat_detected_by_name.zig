@@ -6,8 +6,7 @@ pub const ThreatDetectedByName = struct {
     item_count: ?i32 = null,
 
     /// Flag to determine if the finding contains every single infected file-path
-    /// and/or every
-    /// threat.
+    /// and/or every threat.
     shortened: ?bool = null,
 
     /// List of identified threats with details, organized by threat name.

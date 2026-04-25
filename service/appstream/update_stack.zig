@@ -7,6 +7,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AccessEndpoint = @import("access_endpoint.zig").AccessEndpoint;
 const ApplicationSettings = @import("application_settings.zig").ApplicationSettings;
 const StackAttribute = @import("stack_attribute.zig").StackAttribute;
+const ContentRedirection = @import("content_redirection.zig").ContentRedirection;
 const StorageConnector = @import("storage_connector.zig").StorageConnector;
 const StreamingExperienceSettings = @import("streaming_experience_settings.zig").StreamingExperienceSettings;
 const UserSetting = @import("user_setting.zig").UserSetting;
@@ -26,6 +27,8 @@ pub const UpdateStackInput = struct {
 
     /// The stack attributes to delete.
     attributes_to_delete: ?[]const StackAttribute = null,
+
+    content_redirection: ?ContentRedirection = null,
 
     /// Deletes the storage connectors currently enabled for the stack.
     delete_storage_connectors: ?bool = null,
@@ -66,6 +69,7 @@ pub const UpdateStackInput = struct {
         .access_endpoints = "AccessEndpoints",
         .application_settings = "ApplicationSettings",
         .attributes_to_delete = "AttributesToDelete",
+        .content_redirection = "ContentRedirection",
         .delete_storage_connectors = "DeleteStorageConnectors",
         .description = "Description",
         .display_name = "DisplayName",

@@ -7,6 +7,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AdvancedSecurityOptionsInput = @import("advanced_security_options_input.zig").AdvancedSecurityOptionsInput;
 const AutoTuneOptions = @import("auto_tune_options.zig").AutoTuneOptions;
 const CognitoOptions = @import("cognito_options.zig").CognitoOptions;
+const DeploymentStrategyOptions = @import("deployment_strategy_options.zig").DeploymentStrategyOptions;
 const DomainEndpointOptions = @import("domain_endpoint_options.zig").DomainEndpointOptions;
 const EBSOptions = @import("ebs_options.zig").EBSOptions;
 const ElasticsearchClusterConfig = @import("elasticsearch_cluster_config.zig").ElasticsearchClusterConfig;
@@ -39,6 +40,9 @@ pub const UpdateElasticsearchDomainConfigInput = struct {
     /// authentication. For more information, see [Amazon Cognito Authentication for
     /// Kibana](http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
     cognito_options: ?CognitoOptions = null,
+
+    /// Specifies the deployment strategy options.
+    deployment_strategy_options: ?DeploymentStrategyOptions = null,
 
     /// Options to specify configuration that will be applied to the domain
     /// endpoint.
@@ -86,6 +90,7 @@ pub const UpdateElasticsearchDomainConfigInput = struct {
         .advanced_security_options = "AdvancedSecurityOptions",
         .auto_tune_options = "AutoTuneOptions",
         .cognito_options = "CognitoOptions",
+        .deployment_strategy_options = "DeploymentStrategyOptions",
         .domain_endpoint_options = "DomainEndpointOptions",
         .domain_name = "DomainName",
         .dry_run = "DryRun",
@@ -181,6 +186,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateElasticsearchDoma
     if (input.cognito_options) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"CognitoOptions\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.deployment_strategy_options) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"DeploymentStrategyOptions\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

@@ -6,8 +6,12 @@ const UsageAllocation = @import("usage_allocation.zig").UsageAllocation;
 /// Multiple requests with the same `UsageRecords` as input will be
 /// de-duplicated to prevent double charges.
 pub const UsageRecord = struct {
-    /// The `CustomerAWSAccountID` parameter specifies the AWS account ID of the
+    /// The `CustomerAWSAccountId` parameter specifies the AWS account ID of the
     /// buyer.
+    ///
+    /// For existing integrations, to access your `CustomerIdentifier` to
+    /// `CustomerAWSAccountId` mapping, see [Account
+    /// Feeds](https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-account.html).
     customer_aws_account_id: ?[]const u8 = null,
 
     /// The `CustomerIdentifier` is obtained through the
@@ -19,6 +23,15 @@ pub const UsageRecord = struct {
     /// Marketplace, dimensions are specified.
     /// These represent different units of value in your application.
     dimension: []const u8,
+
+    /// The `LicenseArn` is a unique identifier for a specific granted license.
+    /// These are used for software purchased through Amazon Web Services
+    /// Marketplace.
+    ///
+    /// To access your `CustomerAWSAccountId` and `LicenseArn` mapping, visit
+    /// [Agreements
+    /// Feeds](https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-agreements.html).
+    license_arn: ?[]const u8 = null,
 
     /// The quantity of usage consumed by the customer for the given dimension and
     /// time.
@@ -41,6 +54,7 @@ pub const UsageRecord = struct {
         .customer_aws_account_id = "CustomerAWSAccountId",
         .customer_identifier = "CustomerIdentifier",
         .dimension = "Dimension",
+        .license_arn = "LicenseArn",
         .quantity = "Quantity",
         .timestamp = "Timestamp",
         .usage_allocations = "UsageAllocations",

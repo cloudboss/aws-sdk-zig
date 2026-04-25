@@ -6,6 +6,8 @@ pub const OutputFormat = enum {
     ogg_opus,
     ogg_vorbis,
     pcm,
+    mulaw,
+    alaw,
 
     pub const json_field_names = .{
         .json = "json",
@@ -13,6 +15,8 @@ pub const OutputFormat = enum {
         .ogg_opus = "ogg_opus",
         .ogg_vorbis = "ogg_vorbis",
         .pcm = "pcm",
+        .mulaw = "mulaw",
+        .alaw = "alaw",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -22,6 +26,8 @@ pub const OutputFormat = enum {
             .ogg_opus => "ogg_opus",
             .ogg_vorbis => "ogg_vorbis",
             .pcm => "pcm",
+            .mulaw => "mulaw",
+            .alaw => "alaw",
         };
     }
 

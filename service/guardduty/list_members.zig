@@ -9,32 +9,25 @@ const Member = @import("member.zig").Member;
 pub const ListMembersInput = struct {
     /// The unique ID of the detector that is associated with the member.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 
     /// You can use this parameter to indicate the maximum number of items you want
-    /// in the
-    /// response. The default value is 50. The maximum value is 50.
+    /// in the response. The default value is 50. The maximum value is 50.
     max_results: ?i32 = null,
 
     /// You can use this parameter when paginating results. Set the value of this
-    /// parameter to
-    /// null on your first call to the list action. For subsequent calls to the
-    /// action, fill nextToken
-    /// in the request with the value of NextToken from the previous response to
-    /// continue listing
-    /// data.
+    /// parameter to null on your first call to the list action. For subsequent
+    /// calls to the action, fill nextToken in the request with the value of
+    /// NextToken from the previous response to continue listing data.
     next_token: ?[]const u8 = null,
 
     /// Specifies whether to only return associated members or to return all members
-    /// (including
-    /// members who haven't been invited yet or have been disassociated). Member
-    /// accounts must have
-    /// been previously associated with the GuardDuty administrator account using [
-    /// `Create
-    /// Members`
+    /// (including members who haven't been invited yet or have been disassociated).
+    /// Member accounts must have been previously associated with the GuardDuty
+    /// administrator account using [ `Create Members`
     /// ](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html).
     only_associated: ?[]const u8 = null,
 
@@ -49,13 +42,12 @@ pub const ListMembersInput = struct {
 pub const ListMembersOutput = struct {
     /// A list of members.
     ///
-    /// The values for `email` and `invitedAt` are available
-    /// only if the member accounts are added by invitation.
+    /// The values for `email` and `invitedAt` are available only if the member
+    /// accounts are added by invitation.
     members: ?[]const Member = null,
 
     /// The pagination parameter to be used on the next list operation to retrieve
-    /// more
-    /// items.
+    /// more items.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{

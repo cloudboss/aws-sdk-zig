@@ -18,6 +18,7 @@ pub const CreateInboundExternalLinkInput = struct {
     /// The unique identifier of the gateway.
     gateway_id: []const u8,
 
+    /// Settings for the application logs.
     log_settings: LinkLogSettings,
 
     /// A map of the key-value pairs of the tag or tags to assign to the resource.

@@ -8,8 +8,8 @@ const UnprocessedAccount = @import("unprocessed_account.zig").UnprocessedAccount
 
 pub const DeclineInvitationsInput = struct {
     /// A list of account IDs of the Amazon Web Services accounts that sent
-    /// invitations to the current member
-    /// account that you want to decline invitations from.
+    /// invitations to the current member account that you want to decline
+    /// invitations from.
     account_ids: []const []const u8,
 
     pub const json_field_names = .{
@@ -19,8 +19,7 @@ pub const DeclineInvitationsInput = struct {
 
 pub const DeclineInvitationsOutput = struct {
     /// A list of objects that contain the unprocessed account and a result string
-    /// that explains
-    /// why it was unprocessed.
+    /// that explains why it was unprocessed.
     unprocessed_accounts: ?[]const UnprocessedAccount = null,
 
     pub const json_field_names = .{

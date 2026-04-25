@@ -6,15 +6,13 @@ pub const DnsRequestAction = struct {
     /// The domain information for the DNS query.
     domain: ?[]const u8 = null,
 
-    /// The second and top level domain involved in the
-    /// activity that potentially prompted GuardDuty to generate this finding.
-    /// For a list of top-level and second-level domains, see [public suffix
-    /// list](https://publicsuffix.org/).
+    /// The second and top level domain involved in the activity that potentially
+    /// prompted GuardDuty to generate this finding. For a list of top-level and
+    /// second-level domains, see [public suffix list](https://publicsuffix.org/).
     domain_with_suffix: ?[]const u8 = null,
 
     /// The network connection protocol observed in the activity that prompted
-    /// GuardDuty to
-    /// generate the finding.
+    /// GuardDuty to generate the finding.
     protocol: ?[]const u8 = null,
 
     /// The Amazon Web Services account ID that owns the VPC through which the DNS

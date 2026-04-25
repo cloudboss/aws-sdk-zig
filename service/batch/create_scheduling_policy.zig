@@ -5,15 +5,25 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FairsharePolicy = @import("fairshare_policy.zig").FairsharePolicy;
+const QuotaSharePolicy = @import("quota_share_policy.zig").QuotaSharePolicy;
 
 pub const CreateSchedulingPolicyInput = struct {
-    /// The fair-share scheduling policy details.
+    /// The fair-share scheduling policy details. Only one of fairsharePolicy or
+    /// quotaSharePolicy can be set.
+    /// Once set, this policy type cannot be removed or changed to a
+    /// quotaSharePolicy.
     fairshare_policy: ?FairsharePolicy = null,
 
     /// The name of the fair-share scheduling policy. It can be up to 128 letters
     /// long. It can contain
     /// uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).
     name: []const u8,
+
+    /// The quota share scheduling policy details. Only one of fairsharePolicy or
+    /// quotaSharePolicy can be set.
+    /// Once set, this policy type cannot be removed or changed to a
+    /// fairSharePolicy.
+    quota_share_policy: ?QuotaSharePolicy = null,
 
     /// The tags that you apply to the scheduling policy to help you categorize and
     /// organize your
@@ -29,6 +39,7 @@ pub const CreateSchedulingPolicyInput = struct {
     pub const json_field_names = .{
         .fairshare_policy = "fairsharePolicy",
         .name = "name",
+        .quota_share_policy = "quotaSharePolicy",
         .tags = "tags",
     };
 };
@@ -98,6 +109,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSchedulingPolicyI
     try body_buf.appendSlice(allocator, "\"name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
     has_prev = true;
+    if (input.quota_share_policy) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"quotaSharePolicy\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.tags) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"tags\":");

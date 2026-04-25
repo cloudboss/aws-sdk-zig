@@ -10,11 +10,10 @@ const UsageStatistics = @import("usage_statistics.zig").UsageStatistics;
 
 pub const GetUsageStatisticsInput = struct {
     /// The ID of the detector that specifies the GuardDuty service whose usage
-    /// statistics you
-    /// want to retrieve.
+    /// statistics you want to retrieve.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 
@@ -22,17 +21,13 @@ pub const GetUsageStatisticsInput = struct {
     max_results: ?i32 = null,
 
     /// A token to use for paginating results that are returned in the response. Set
-    /// the value of
-    /// this parameter to null for the first request to a list action. For
-    /// subsequent calls, use the
-    /// NextToken value returned from the previous request to continue listing
-    /// results after the first
-    /// page.
+    /// the value of this parameter to null for the first request to a list action.
+    /// For subsequent calls, use the NextToken value returned from the previous
+    /// request to continue listing results after the first page.
     next_token: ?[]const u8 = null,
 
     /// The currency unit you would like to view your usage statistics in. Current
-    /// valid values
-    /// are USD.
+    /// valid values are USD.
     unit: ?[]const u8 = null,
 
     /// Represents the criteria used for querying usage.
@@ -53,13 +48,11 @@ pub const GetUsageStatisticsInput = struct {
 
 pub const GetUsageStatisticsOutput = struct {
     /// The pagination parameter to be used on the next list operation to retrieve
-    /// more
-    /// items.
+    /// more items.
     next_token: ?[]const u8 = null,
 
     /// The usage statistics object. If a UsageStatisticType was provided, the
-    /// objects
-    /// representing other types will be null.
+    /// objects representing other types will be null.
     usage_statistics: ?UsageStatistics = null,
 
     pub const json_field_names = .{

@@ -7,16 +7,14 @@ const ServiceError = @import("errors.zig").ServiceError;
 
 pub const UpdateThreatIntelSetInput = struct {
     /// The updated Boolean value that specifies whether the ThreateIntelSet is
-    /// active or
-    /// not.
+    /// active or not.
     activate: ?bool = null,
 
     /// The detectorID that specifies the GuardDuty service whose ThreatIntelSet you
-    /// want to
-    /// update.
+    /// want to update.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 

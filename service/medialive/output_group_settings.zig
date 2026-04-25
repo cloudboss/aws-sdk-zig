@@ -2,6 +2,7 @@ const ArchiveGroupSettings = @import("archive_group_settings.zig").ArchiveGroupS
 const CmafIngestGroupSettings = @import("cmaf_ingest_group_settings.zig").CmafIngestGroupSettings;
 const FrameCaptureGroupSettings = @import("frame_capture_group_settings.zig").FrameCaptureGroupSettings;
 const HlsGroupSettings = @import("hls_group_settings.zig").HlsGroupSettings;
+const MediaConnectRouterGroupSettings = @import("media_connect_router_group_settings.zig").MediaConnectRouterGroupSettings;
 const MediaPackageGroupSettings = @import("media_package_group_settings.zig").MediaPackageGroupSettings;
 const MsSmoothGroupSettings = @import("ms_smooth_group_settings.zig").MsSmoothGroupSettings;
 const MultiplexGroupSettings = @import("multiplex_group_settings.zig").MultiplexGroupSettings;
@@ -18,6 +19,8 @@ pub const OutputGroupSettings = struct {
     frame_capture_group_settings: ?FrameCaptureGroupSettings = null,
 
     hls_group_settings: ?HlsGroupSettings = null,
+
+    media_connect_router_group_settings: ?MediaConnectRouterGroupSettings = null,
 
     media_package_group_settings: ?MediaPackageGroupSettings = null,
 
@@ -36,6 +39,7 @@ pub const OutputGroupSettings = struct {
         .cmaf_ingest_group_settings = "CmafIngestGroupSettings",
         .frame_capture_group_settings = "FrameCaptureGroupSettings",
         .hls_group_settings = "HlsGroupSettings",
+        .media_connect_router_group_settings = "MediaConnectRouterGroupSettings",
         .media_package_group_settings = "MediaPackageGroupSettings",
         .ms_smooth_group_settings = "MsSmoothGroupSettings",
         .multiplex_group_settings = "MultiplexGroupSettings",

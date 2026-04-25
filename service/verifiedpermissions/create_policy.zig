@@ -34,13 +34,32 @@ pub const CreatePolicyInput = struct {
     /// policy content must be written in the Cedar policy language.
     definition: PolicyDefinition,
 
+    /// Specifies a name for the policy that is unique among all policies within the
+    /// policy store. You can use the name in place of the policy ID in API
+    /// operations that reference the policy. The name must be prefixed with
+    /// `name/`.
+    ///
+    /// If you specify a name that is already associated with another policy in the
+    /// policy store, you receive a `ConflictException` error.
+    name: ?[]const u8 = null,
+
     /// Specifies the `PolicyStoreId` of the policy store you want to store the
     /// policy in.
+    ///
+    /// To specify a policy store, use its ID or alias name. When using an alias
+    /// name, prefix it with `policy-store-alias/`. For example:
+    ///
+    /// * ID: `PSEXAMPLEabcdefg111111`
+    /// * Alias name: `policy-store-alias/example-policy-store`
+    ///
+    /// To view aliases, use
+    /// [ListPolicyStoreAliases](https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStoreAliases.html).
     policy_store_id: []const u8,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
         .definition = "definition",
+        .name = "name",
         .policy_store_id = "policyStoreId",
     };
 };

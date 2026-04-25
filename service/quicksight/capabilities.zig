@@ -25,6 +25,9 @@ pub const Capabilities = struct {
     /// The ability to perform analysis-related actions.
     analysis: ?CapabilityState = null,
 
+    /// The ability to review and approve sharing requests of Flows.
+    approve_flow_share_requests: ?CapabilityState = null,
+
     /// The ability to perform actions using Asana connectors.
     asana_action: ?CapabilityState = null,
 
@@ -36,6 +39,9 @@ pub const Capabilities = struct {
 
     /// The ability to perform actions using Box Agent connectors.
     box_agent_action: ?CapabilityState = null,
+
+    /// The ability to Build Calculation with AI
+    build_calculated_field_with_q: ?CapabilityState = null,
 
     /// The ability to perform actions using Canva Agent connectors.
     canva_agent_action: ?CapabilityState = null,
@@ -199,14 +205,23 @@ pub const Capabilities = struct {
     /// The ability to create chat agents.
     create_chat_agents: ?CapabilityState = null,
 
+    /// The ability to Create Executive Summary
+    create_dashboard_executive_summary_with_q: ?CapabilityState = null,
+
     /// The ability to create shared folders.
     create_shared_folders: ?CapabilityState = null,
+
+    /// The ability to create spaces.
+    create_spaces: ?CapabilityState = null,
 
     /// The ability to create a SPICE dataset.
     create_spice_dataset: ?CapabilityState = null,
 
     /// The ability to perform dashboard-related actions.
     dashboard: ?CapabilityState = null,
+
+    /// The ability to Edit Visual with AI
+    edit_visual_with_q: ?CapabilityState = null,
 
     /// The ability to export to CSV files from the UI.
     export_to_csv: ?CapabilityState = null,
@@ -226,11 +241,17 @@ pub const Capabilities = struct {
     /// The ability to export to PDF files in scheduled email reports.
     export_to_pdf_in_scheduled_reports: ?CapabilityState = null,
 
+    /// The ability to perform Extension-related actions.
+    extension: ?CapabilityState = null,
+
     /// The ability to perform actions using FactSet connectors.
     fact_set_action: ?CapabilityState = null,
 
     /// The ability to perform flow-related actions.
     flow: ?CapabilityState = null,
+
+    /// The ability to generate analysis using AI
+    generate_analyses: ?CapabilityState = null,
 
     /// The ability to perform actions using REST API connection connectors.
     generic_http_action: ?CapabilityState = null,
@@ -262,6 +283,14 @@ pub const Capabilities = struct {
 
     /// The ability to perform actions using Linear connectors.
     linear_action: ?CapabilityState = null,
+
+    /// The ability to create, update, delete and view shared folders (both
+    /// restricted and unrestricted), ability to add any asset to shared folders,
+    /// and ability to share the folders.
+    ///
+    /// **Note:** This does *not* prevent inheriting access to assets that others
+    /// share with them through folder membership.
+    manage_shared_folders: ?CapabilityState = null,
 
     /// The ability to perform actions using Model Context Protocol connectors.
     mcp_action: ?CapabilityState = null,
@@ -362,6 +391,9 @@ pub const Capabilities = struct {
 
     /// The ability to share Canva Agent actions.
     share_canva_agent_action: ?CapabilityState = null,
+
+    /// The ability to share chat agents with other users and groups.
+    share_chat_agents: ?CapabilityState = null,
 
     /// The ability to share Comprehend actions.
     share_comprehend_action: ?CapabilityState = null,
@@ -474,6 +506,9 @@ pub const Capabilities = struct {
     /// The ability to share Smartsheet actions.
     share_smartsheet_action: ?CapabilityState = null,
 
+    /// The ability to share spaces with other users and groups.
+    share_spaces: ?CapabilityState = null,
+
     /// The ability to share Textract actions.
     share_textract_action: ?CapabilityState = null,
 
@@ -494,6 +529,9 @@ pub const Capabilities = struct {
 
     /// The ability to perform actions using Textract connectors.
     textract_action: ?CapabilityState = null,
+
+    /// The ability to perform Topic-related actions.
+    topic: ?CapabilityState = null,
 
     /// The ability to use internet to enhance results in Chat Agents, Flows, and
     /// Quick Research.
@@ -647,10 +685,12 @@ pub const Capabilities = struct {
         .amazon_bedrock_krs_action = "AmazonBedrockKRSAction",
         .amazon_s_three_action = "AmazonSThreeAction",
         .analysis = "Analysis",
+        .approve_flow_share_requests = "ApproveFlowShareRequests",
         .asana_action = "AsanaAction",
         .automate = "Automate",
         .bamboo_hr_action = "BambooHRAction",
         .box_agent_action = "BoxAgentAction",
+        .build_calculated_field_with_q = "BuildCalculatedFieldWithQ",
         .canva_agent_action = "CanvaAgentAction",
         .chat_agent = "ChatAgent",
         .comprehend_action = "ComprehendAction",
@@ -705,17 +745,22 @@ pub const Capabilities = struct {
         .create_and_update_threshold_alerts = "CreateAndUpdateThresholdAlerts",
         .create_and_update_zendesk_action = "CreateAndUpdateZendeskAction",
         .create_chat_agents = "CreateChatAgents",
+        .create_dashboard_executive_summary_with_q = "CreateDashboardExecutiveSummaryWithQ",
         .create_shared_folders = "CreateSharedFolders",
+        .create_spaces = "CreateSpaces",
         .create_spice_dataset = "CreateSPICEDataset",
         .dashboard = "Dashboard",
+        .edit_visual_with_q = "EditVisualWithQ",
         .export_to_csv = "ExportToCsv",
         .export_to_csv_in_scheduled_reports = "ExportToCsvInScheduledReports",
         .export_to_excel = "ExportToExcel",
         .export_to_excel_in_scheduled_reports = "ExportToExcelInScheduledReports",
         .export_to_pdf = "ExportToPdf",
         .export_to_pdf_in_scheduled_reports = "ExportToPdfInScheduledReports",
+        .extension = "Extension",
         .fact_set_action = "FactSetAction",
         .flow = "Flow",
+        .generate_analyses = "GenerateAnalyses",
         .generic_http_action = "GenericHTTPAction",
         .github_action = "GithubAction",
         .google_calendar_action = "GoogleCalendarAction",
@@ -726,6 +771,7 @@ pub const Capabilities = struct {
         .jira_action = "JiraAction",
         .knowledge_base = "KnowledgeBase",
         .linear_action = "LinearAction",
+        .manage_shared_folders = "ManageSharedFolders",
         .mcp_action = "MCPAction",
         .monday_action = "MondayAction",
         .ms_exchange_action = "MSExchangeAction",
@@ -759,6 +805,7 @@ pub const Capabilities = struct {
         .share_bamboo_hr_action = "ShareBambooHRAction",
         .share_box_agent_action = "ShareBoxAgentAction",
         .share_canva_agent_action = "ShareCanvaAgentAction",
+        .share_chat_agents = "ShareChatAgents",
         .share_comprehend_action = "ShareComprehendAction",
         .share_comprehend_medical_action = "ShareComprehendMedicalAction",
         .share_confluence_action = "ShareConfluenceAction",
@@ -796,6 +843,7 @@ pub const Capabilities = struct {
         .share_share_point_action = "ShareSharePointAction",
         .share_slack_action = "ShareSlackAction",
         .share_smartsheet_action = "ShareSmartsheetAction",
+        .share_spaces = "ShareSpaces",
         .share_textract_action = "ShareTextractAction",
         .share_zendesk_action = "ShareZendeskAction",
         .slack_action = "SlackAction",
@@ -803,6 +851,7 @@ pub const Capabilities = struct {
         .space = "Space",
         .subscribe_dashboard_email_reports = "SubscribeDashboardEmailReports",
         .textract_action = "TextractAction",
+        .topic = "Topic",
         .use_agent_web_search = "UseAgentWebSearch",
         .use_amazon_bedrock_ars_action = "UseAmazonBedrockARSAction",
         .use_amazon_bedrock_fs_action = "UseAmazonBedrockFSAction",

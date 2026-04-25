@@ -9,11 +9,10 @@ const Finding = @import("finding.zig").Finding;
 
 pub const GetFindingsInput = struct {
     /// The ID of the detector that specifies the GuardDuty service whose findings
-    /// you want to
-    /// retrieve.
+    /// you want to retrieve.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 

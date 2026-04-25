@@ -13,8 +13,7 @@ pub const UsageCriteria = struct {
     features: ?[]const UsageFeature = null,
 
     /// The resources to aggregate usage statistics from. Only accepts exact
-    /// resource
-    /// names.
+    /// resource names.
     resources: ?[]const []const u8 = null,
 
     pub const json_field_names = .{

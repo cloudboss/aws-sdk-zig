@@ -1,3 +1,4 @@
+/// Input for the `UntagResource` operation.
 pub const UntagResourceRequest = struct {
     /// ARN of a resource.
     resource_arn: []const u8,

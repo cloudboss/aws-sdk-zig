@@ -10,13 +10,11 @@ pub const UpdateDashboardInput = struct {
     /// The ARN of the dashboard to update.
     arn: []const u8,
 
-    /// The new description for the dashboard. If not specified, the existing
-    /// description is retained.
+    /// The new description for the dashboard.
     description: ?[]const u8 = null,
 
-    /// The new name for the dashboard. If not specified, the existing name is
-    /// retained.
-    name: ?[]const u8 = null,
+    /// The new name for the dashboard.
+    name: []const u8,
 
     /// The updated array of widget configurations for the dashboard. Replaces all
     /// existing widgets.
@@ -108,6 +106,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
 
     if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
         return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

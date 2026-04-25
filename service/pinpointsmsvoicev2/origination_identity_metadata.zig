@@ -3,7 +3,8 @@ const NumberCapability = @import("number_capability.zig").NumberCapability;
 /// The metadata for an origination identity associated with a pool.
 pub const OriginationIdentityMetadata = struct {
     /// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
-    /// region.
+    /// region. This field is optional and may not be present for origination
+    /// identity types that are not country-specific, such as RCS agents.
     iso_country_code: []const u8,
 
     /// Describes if the origination identity can be used for text messages, voice

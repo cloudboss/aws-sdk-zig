@@ -777,6 +777,13 @@ pub const CreateDBClusterInput = struct {
     ///
     /// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     vpc_security_group_ids: ?[]const []const u8 = null,
+
+    /// Specifies to create an Aurora DB Cluster with express configuration in
+    /// seconds. Express configuration provides a cluster with a writer instance and
+    /// feature specific values set to all other input parameters of this API.
+    ///
+    /// Valid for Cluster Type: Aurora DB clusters
+    with_express_configuration: ?bool = null,
 };
 
 pub const CreateDBClusterOutput = struct {
@@ -1149,6 +1156,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDBClusterInput, c
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
+    }
+    if (input.with_express_configuration) |v| {
+        try body_buf.appendSlice(allocator, "&WithExpressConfiguration=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

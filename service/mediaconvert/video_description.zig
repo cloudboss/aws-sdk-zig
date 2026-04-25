@@ -89,7 +89,10 @@ pub const VideoDescription = struct {
 
     /// Specify the video Scaling behavior when your output has a different
     /// resolution than your input. For more information, see
-    /// https://docs.aws.amazon.com/mediaconvert/latest/ug/video-scaling.html
+    /// https://docs.aws.amazon.com/mediaconvert/latest/ug/video-scaling.html Select
+    /// Smart Cropping using Elemental Inference as your scaling behavior to have
+    /// Elemental Inference automatically crop your video. Smart Crop requires a
+    /// vertical output aspect ratio (1:1 is the widest aspect ratio supported).
     scaling_behavior: ?ScalingBehavior = null,
 
     /// Use Sharpness setting to specify the strength of anti-aliasing. This setting

@@ -1,16 +1,16 @@
 const AdminStatus = @import("admin_status.zig").AdminStatus;
 
-/// Represents a Security Hub administrator account designated by an
+/// Represents a Security Hub CSPM administrator account designated by an
 /// organization management
 /// account.
 pub const AdminAccount = struct {
-    /// The Amazon Web Services account identifier of the Security Hub administrator
-    /// account.
+    /// The Amazon Web Services account identifier of the Security Hub CSPM
+    /// administrator account.
     account_id: ?[]const u8 = null,
 
-    /// The current status of the Security Hub administrator account. Indicates
+    /// The current status of the Security Hub CSPM administrator account. Indicates
     /// whether the account is
-    /// currently enabled as a Security Hub administrator.
+    /// currently enabled as a Security Hub CSPM administrator.
     status: ?AdminStatus = null,
 
     pub const json_field_names = .{

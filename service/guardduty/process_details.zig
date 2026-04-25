@@ -21,8 +21,7 @@ pub const ProcessDetails = struct {
     namespace_pid: ?i32 = null,
 
     /// The unique ID of the parent process. This ID is assigned to the parent
-    /// process by
-    /// GuardDuty.
+    /// process by GuardDuty.
     parent_uuid: ?[]const u8 = null,
 
     /// The ID of the process.

@@ -1,4 +1,5 @@
 const ModelInvocationJobInputDataConfig = @import("model_invocation_job_input_data_config.zig").ModelInvocationJobInputDataConfig;
+const ModelInvocationType = @import("model_invocation_type.zig").ModelInvocationType;
 const ModelInvocationJobOutputDataConfig = @import("model_invocation_job_output_data_config.zig").ModelInvocationJobOutputDataConfig;
 const ModelInvocationJobStatus = @import("model_invocation_job_status.zig").ModelInvocationJobStatus;
 const VpcConfig = @import("vpc_config.zig").VpcConfig;
@@ -14,6 +15,9 @@ pub const ModelInvocationJobSummary = struct {
 
     /// The time at which the batch inference job ended.
     end_time: ?i64 = null,
+
+    /// The number of records that failed to process in the batch inference job.
+    error_record_count: ?i64 = null,
 
     /// Details about the location of the input to the batch inference job.
     input_data_config: ModelInvocationJobInputDataConfig,
@@ -37,8 +41,14 @@ pub const ModelInvocationJobSummary = struct {
     /// The unique identifier of the foundation model used for model inference.
     model_id: []const u8,
 
+    /// The invocation endpoint for ModelInvocationJob
+    model_invocation_type: ?ModelInvocationType = null,
+
     /// Details about the location of the output of the batch inference job.
     output_data_config: ModelInvocationJobOutputDataConfig,
+
+    /// The number of records that have been processed in the batch inference job.
+    processed_record_count: ?i64 = null,
 
     /// The Amazon Resource Name (ARN) of the service role with permissions to carry
     /// out and manage batch inference. You can use the console to create a default
@@ -85,8 +95,15 @@ pub const ModelInvocationJobSummary = struct {
     /// The time at which the batch inference job was submitted.
     submit_time: i64,
 
+    /// The number of records that were successfully processed in the batch
+    /// inference job.
+    success_record_count: ?i64 = null,
+
     /// The number of hours after which the batch inference job was set to time out.
     timeout_duration_in_hours: ?i32 = null,
+
+    /// The total number of records in the batch inference job.
+    total_record_count: ?i64 = null,
 
     /// The configuration of the Virtual Private Cloud (VPC) for the data in the
     /// batch inference job. For more information, see [Protect batch inference jobs
@@ -97,6 +114,7 @@ pub const ModelInvocationJobSummary = struct {
     pub const json_field_names = .{
         .client_request_token = "clientRequestToken",
         .end_time = "endTime",
+        .error_record_count = "errorRecordCount",
         .input_data_config = "inputDataConfig",
         .job_arn = "jobArn",
         .job_expiration_time = "jobExpirationTime",
@@ -104,11 +122,15 @@ pub const ModelInvocationJobSummary = struct {
         .last_modified_time = "lastModifiedTime",
         .message = "message",
         .model_id = "modelId",
+        .model_invocation_type = "modelInvocationType",
         .output_data_config = "outputDataConfig",
+        .processed_record_count = "processedRecordCount",
         .role_arn = "roleArn",
         .status = "status",
         .submit_time = "submitTime",
+        .success_record_count = "successRecordCount",
         .timeout_duration_in_hours = "timeoutDurationInHours",
+        .total_record_count = "totalRecordCount",
         .vpc_config = "vpcConfig",
     };
 };

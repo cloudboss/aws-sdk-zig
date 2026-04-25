@@ -25,8 +25,8 @@ pub const ListStreamKeysInput = struct {
 };
 
 pub const ListStreamKeysOutput = struct {
-    /// If there are more stream keys than `maxResults`, use `nextToken` in
-    /// the request to get the next set.
+    /// If there are more stream keys than `maxResults`, use `nextToken` in the
+    /// request to get the next set.
     next_token: ?[]const u8 = null,
 
     /// List of stream keys.
@@ -171,6 +171,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
         return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceUnavailable")) {
+        return .{ .arena = arena, .kind = .{ .service_unavailable = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

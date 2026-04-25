@@ -27,22 +27,22 @@ pub const DescribeHubOutput = struct {
     /// controls in
     /// the console and programmatically immediately after release. However,
     /// automatically enabled controls have a temporary default status of
-    /// `DISABLED`. It can take up to several days for Security Hub to process the
-    /// control release and designate the
+    /// `DISABLED`. It can take up to several days for Security Hub CSPM to process
+    /// the control release and designate the
     /// control as `ENABLED` in your account. During the processing period, you can
     /// manually enable or disable a
-    /// control, and Security Hub will maintain that designation regardless of
+    /// control, and Security Hub CSPM will maintain that designation regardless of
     /// whether you have `AutoEnableControls` set to
     /// `true`.
     auto_enable_controls: ?bool = null,
 
     /// Specifies whether the calling account has consolidated control findings
     /// turned on. If the value for this field is set to
-    /// `SECURITY_CONTROL`, Security Hub generates a single finding for a control
-    /// check even when the check
+    /// `SECURITY_CONTROL`, Security Hub CSPM generates a single finding for a
+    /// control check even when the check
     /// applies to multiple enabled standards.
     ///
-    /// If the value for this field is set to `STANDARD_CONTROL`, Security Hub
+    /// If the value for this field is set to `STANDARD_CONTROL`, Security Hub CSPM
     /// generates separate findings
     /// for a control check when the check applies to multiple enabled standards.
     ///
@@ -50,14 +50,15 @@ pub const DescribeHubOutput = struct {
     /// administrator
     /// account. For accounts that aren't part of an organization, the default value
     /// of this field
-    /// is `SECURITY_CONTROL` if you enabled Security Hub on or after February 23,
+    /// is `SECURITY_CONTROL` if you enabled Security Hub CSPM on or after February
+    /// 23,
     /// 2023.
     control_finding_generator: ?ControlFindingGenerator = null,
 
     /// The ARN of the Hub resource that was retrieved.
     hub_arn: ?[]const u8 = null,
 
-    /// The date and time when Security Hub was enabled in the account.
+    /// The date and time when Security Hub CSPM was enabled in the account.
     subscribed_at: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -190,6 +191,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "LimitExceededException")) {
         return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organization_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationalUnitNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organizational_unit_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

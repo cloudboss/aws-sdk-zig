@@ -5,6 +5,7 @@ const FleetStateCode = @import("fleet_state_code.zig").FleetStateCode;
 const DescribeFleetsInstances = @import("describe_fleets_instances.zig").DescribeFleetsInstances;
 const FleetLaunchTemplateConfig = @import("fleet_launch_template_config.zig").FleetLaunchTemplateConfig;
 const OnDemandOptions = @import("on_demand_options.zig").OnDemandOptions;
+const ReservedCapacityOptions = @import("reserved_capacity_options.zig").ReservedCapacityOptions;
 const SpotOptions = @import("spot_options.zig").SpotOptions;
 const Tag = @import("tag.zig").Tag;
 const TargetCapacitySpecification = @import("target_capacity_specification.zig").TargetCapacitySpecification;
@@ -84,6 +85,10 @@ pub const FleetData = struct {
     /// health
     /// checks](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#ec2-fleet-health-checks) in the *Amazon EC2 User Guide*.
     replace_unhealthy_instances: ?bool = null,
+
+    /// Defines EC2 Fleet preferences for utilizing reserved capacity when
+    /// DefaultTargetCapacityType is set to `reserved-capacity`.
+    reserved_capacity_options: ?ReservedCapacityOptions = null,
 
     /// The configuration of Spot Instances in an EC2 Fleet.
     spot_options: ?SpotOptions = null,

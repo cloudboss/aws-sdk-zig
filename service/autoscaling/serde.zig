@@ -318,6 +318,24 @@ pub fn deserializeAutoScalingNotificationTypes(allocator: std.mem.Allocator, rea
     return list.toOwnedSlice(allocator);
 }
 
+pub fn deserializeAvailabilityZoneIds(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
+    var list: std.ArrayList([]const u8) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try allocator.dupe(u8, try reader.readElementText()));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
 pub fn deserializeAvailabilityZones(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
     var list: std.ArrayList([]const u8) = .{};
     while (try reader.next()) |event| {
@@ -1285,6 +1303,7 @@ pub fn deserializeAutoScalingGroup(allocator: std.mem.Allocator, reader: *aws.xm
     var result: AutoScalingGroup = undefined;
     result.auto_scaling_group_arn = null;
     result.availability_zone_distribution = null;
+    result.availability_zone_ids = null;
     result.availability_zone_impairment_policy = null;
     result.capacity_rebalance = null;
     result.capacity_reservation_specification = null;
@@ -1324,6 +1343,8 @@ pub fn deserializeAutoScalingGroup(allocator: std.mem.Allocator, reader: *aws.xm
                     result.auto_scaling_group_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "AvailabilityZoneDistribution")) {
                     result.availability_zone_distribution = try deserializeAvailabilityZoneDistribution(allocator, reader);
+                } else if (std.mem.eql(u8, e.local, "AvailabilityZoneIds")) {
+                    result.availability_zone_ids = try deserializeAvailabilityZoneIds(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "AvailabilityZoneImpairmentPolicy")) {
                     result.availability_zone_impairment_policy = try deserializeAvailabilityZoneImpairmentPolicy(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "AvailabilityZones")) {
@@ -1411,6 +1432,7 @@ pub fn deserializeAutoScalingGroup(allocator: std.mem.Allocator, reader: *aws.xm
 
 pub fn deserializeAutoScalingInstanceDetails(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !AutoScalingInstanceDetails {
     var result: AutoScalingInstanceDetails = undefined;
+    result.availability_zone_id = null;
     result.image_id = null;
     result.instance_type = null;
     result.launch_configuration_name = null;
@@ -1423,6 +1445,8 @@ pub fn deserializeAutoScalingInstanceDetails(allocator: std.mem.Allocator, reade
                     result.auto_scaling_group_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "AvailabilityZone")) {
                     result.availability_zone = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "AvailabilityZoneId")) {
+                    result.availability_zone_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "HealthStatus")) {
                     result.health_status = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ImageId")) {
@@ -1791,6 +1815,7 @@ pub fn deserializeFailedScheduledUpdateGroupActionRequest(allocator: std.mem.All
 
 pub fn deserializeInstance(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !Instance {
     var result: Instance = undefined;
+    result.availability_zone_id = null;
     result.image_id = null;
     result.instance_type = null;
     result.launch_configuration_name = null;
@@ -1801,6 +1826,8 @@ pub fn deserializeInstance(allocator: std.mem.Allocator, reader: *aws.xml.Reader
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "AvailabilityZone")) {
                     result.availability_zone = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "AvailabilityZoneId")) {
+                    result.availability_zone_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "HealthStatus")) {
                     result.health_status = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ImageId")) {
@@ -3614,6 +3641,18 @@ pub fn serializeAutoScalingGroupNames(allocator: std.mem.Allocator, buf: *std.Ar
 }
 
 pub fn serializeAutoScalingNotificationTypes(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try aws.xml.appendXmlEscaped(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
+pub fn serializeAvailabilityZoneIds(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
     for (value) |item| {
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);

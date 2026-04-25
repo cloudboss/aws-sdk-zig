@@ -3,7 +3,7 @@ const ProgramTrackSettings = @import("program_track_settings.zig").ProgramTrackS
 /// Overrides the default tracking configuration on an antenna during a contact.
 pub const TrackingOverrides = struct {
     /// Program track settings to override for antenna tracking during the contact.
-    program_track_settings: ProgramTrackSettings,
+    program_track_settings: ?ProgramTrackSettings = null,
 
     pub const json_field_names = .{
         .program_track_settings = "programTrackSettings",

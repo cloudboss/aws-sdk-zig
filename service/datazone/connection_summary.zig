@@ -1,3 +1,4 @@
+const Configuration = @import("configuration.zig").Configuration;
 const PhysicalEndpoint = @import("physical_endpoint.zig").PhysicalEndpoint;
 const ConnectionPropertiesOutput = @import("connection_properties_output.zig").ConnectionPropertiesOutput;
 const ConnectionScope = @import("connection_scope.zig").ConnectionScope;
@@ -5,6 +6,9 @@ const ConnectionType = @import("connection_type.zig").ConnectionType;
 
 /// The summary of a connection.
 pub const ConnectionSummary = struct {
+    /// The configurations of a connection summary.
+    configurations: ?[]const Configuration = null,
+
     /// The ID of a connection.
     connection_id: []const u8,
 
@@ -36,6 +40,7 @@ pub const ConnectionSummary = struct {
     @"type": ConnectionType,
 
     pub const json_field_names = .{
+        .configurations = "configurations",
         .connection_id = "connectionId",
         .domain_id = "domainId",
         .domain_unit_id = "domainUnitId",

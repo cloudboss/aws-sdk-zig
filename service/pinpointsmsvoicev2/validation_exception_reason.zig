@@ -3,7 +3,9 @@ const std = @import("std");
 pub const ValidationExceptionReason = enum {
     cannot_add_opted_out_number,
     cannot_parse,
+    channel_not_enabled,
     country_code_mismatch,
+    country_not_enabled,
     destination_country_blocked,
     field_validation_failed,
     attachment_type_not_supported,
@@ -46,7 +48,9 @@ pub const ValidationExceptionReason = enum {
     pub const json_field_names = .{
         .cannot_add_opted_out_number = "CANNOT_ADD_OPTED_OUT_NUMBER",
         .cannot_parse = "CANNOT_PARSE",
+        .channel_not_enabled = "CHANNEL_NOT_ENABLED",
         .country_code_mismatch = "COUNTRY_CODE_MISMATCH",
+        .country_not_enabled = "COUNTRY_NOT_ENABLED",
         .destination_country_blocked = "DESTINATION_COUNTRY_BLOCKED",
         .field_validation_failed = "FIELD_VALIDATION_FAILED",
         .attachment_type_not_supported = "ATTACHMENT_TYPE_NOT_SUPPORTED",
@@ -91,7 +95,9 @@ pub const ValidationExceptionReason = enum {
         return switch (self) {
             .cannot_add_opted_out_number => "CANNOT_ADD_OPTED_OUT_NUMBER",
             .cannot_parse => "CANNOT_PARSE",
+            .channel_not_enabled => "CHANNEL_NOT_ENABLED",
             .country_code_mismatch => "COUNTRY_CODE_MISMATCH",
+            .country_not_enabled => "COUNTRY_NOT_ENABLED",
             .destination_country_blocked => "DESTINATION_COUNTRY_BLOCKED",
             .field_validation_failed => "FIELD_VALIDATION_FAILED",
             .attachment_type_not_supported => "ATTACHMENT_TYPE_NOT_SUPPORTED",

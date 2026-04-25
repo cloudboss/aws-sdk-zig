@@ -12,6 +12,10 @@ pub const PolicyTemplateItem = struct {
     /// The date and time that the policy template was most recently updated.
     last_updated_date: i64,
 
+    /// The name of the policy template, if one was assigned when the policy
+    /// template was created or last updated.
+    name: ?[]const u8 = null,
+
     /// The unique identifier of the policy store that contains the template.
     policy_store_id: []const u8,
 
@@ -22,6 +26,7 @@ pub const PolicyTemplateItem = struct {
         .created_date = "createdDate",
         .description = "description",
         .last_updated_date = "lastUpdatedDate",
+        .name = "name",
         .policy_store_id = "policyStoreId",
         .policy_template_id = "policyTemplateId",
     };

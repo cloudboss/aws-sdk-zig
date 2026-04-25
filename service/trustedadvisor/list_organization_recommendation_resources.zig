@@ -19,8 +19,7 @@ pub const ListOrganizationRecommendationResourcesInput = struct {
     max_results: ?i32 = null,
 
     /// The token for the next set of results. Use the value returned in the
-    /// previous response in the next request
-    /// to retrieve the next set of results.
+    /// previous response in the next request to retrieve the next set of results.
     next_token: ?[]const u8 = null,
 
     /// The AWS Organization organization's Recommendation identifier
@@ -45,8 +44,7 @@ pub const ListOrganizationRecommendationResourcesInput = struct {
 
 pub const ListOrganizationRecommendationResourcesOutput = struct {
     /// The token for the next set of results. Use the value returned in the
-    /// previous response in the next request
-    /// to retrieve the next set of results.
+    /// previous response in the next request to retrieve the next set of results.
     next_token: ?[]const u8 = null,
 
     /// A list of Recommendation Resources

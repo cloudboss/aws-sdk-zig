@@ -28,8 +28,8 @@ pub const GetEvaluatorOutput = struct {
     /// The Amazon Resource Name (ARN) of the evaluator.
     evaluator_arn: []const u8,
 
-    /// The configuration of the evaluator, including LLM-as-a-Judge settings for
-    /// custom evaluators.
+    /// The configuration of the evaluator, including LLM-as-a-Judge or code-based
+    /// settings.
     evaluator_config: ?EvaluatorConfig = null,
 
     /// The unique identifier of the evaluator.

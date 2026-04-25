@@ -26,3 +26,5 @@ pub const TagResourceRequest = @import("tag_resource_request.zig").TagResourceRe
 pub const TagResourceResponse = @import("tag_resource_response.zig").TagResourceResponse;
 pub const UntagResourceRequest = @import("untag_resource_request.zig").UntagResourceRequest;
 pub const UntagResourceResponse = @import("untag_resource_response.zig").UntagResourceResponse;
+pub const VpcTransitConfiguration = @import("vpc_transit_configuration.zig").VpcTransitConfiguration;
+pub const VpcTransitConfigurationResponse = @import("vpc_transit_configuration_response.zig").VpcTransitConfigurationResponse;

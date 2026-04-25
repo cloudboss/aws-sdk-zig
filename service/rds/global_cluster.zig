@@ -1,5 +1,6 @@
 const FailoverState = @import("failover_state.zig").FailoverState;
 const GlobalClusterMember = @import("global_cluster_member.zig").GlobalClusterMember;
+const StorageEncryptionType = @import("storage_encryption_type.zig").StorageEncryptionType;
 const Tag = @import("tag.zig").Tag;
 
 /// A data type representing an Aurora global database.
@@ -52,6 +53,16 @@ pub const GlobalCluster = struct {
 
     /// The storage encryption setting for the global database cluster.
     storage_encrypted: ?bool = null,
+
+    /// The type of encryption used to protect data at rest in the global database
+    /// cluster. Possible values:
+    ///
+    /// * `none` - The global database cluster is not encrypted.
+    /// * `sse-rds` - The global database cluster is encrypted using an Amazon Web
+    ///   Services owned KMS key.
+    /// * `sse-kms` - The global database cluster is encrypted using a customer
+    ///   managed KMS key or Amazon Web Services managed KMS key.
+    storage_encryption_type: ?StorageEncryptionType = null,
 
     tag_list: ?[]const Tag = null,
 };

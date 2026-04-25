@@ -4,6 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const CmkSecretConfig = @import("cmk_secret_config.zig").CmkSecretConfig;
+const CustomSecretConfig = @import("custom_secret_config.zig").CustomSecretConfig;
+const ManagedSecretConfig = @import("managed_secret_config.zig").ManagedSecretConfig;
 
 pub const DescribeLocationFsxWindowsInput = struct {
     /// Specifies the Amazon Resource Name (ARN) of the FSx for Windows File Server
@@ -16,8 +19,20 @@ pub const DescribeLocationFsxWindowsInput = struct {
 };
 
 pub const DescribeLocationFsxWindowsOutput = struct {
+    /// Describes configuration information for a DataSync-managed secret, such as a
+    /// `Password` that DataSync uses to access
+    /// a specific storage location, with a customer-managed KMS key.
+    cmk_secret_config: ?CmkSecretConfig = null,
+
     /// The time that the FSx for Windows File Server location was created.
     creation_time: ?i64 = null,
+
+    /// Describes configuration information for a customer-managed secret, such as a
+    /// `Password` that DataSync uses to access
+    /// a specific storage location, with a customer-managed Identity and Access
+    /// Management
+    /// (IAM) role that provides access to the secret.
+    custom_secret_config: ?CustomSecretConfig = null,
 
     /// The name of the Microsoft Active Directory domain that the FSx for Windows
     /// File Server file
@@ -30,6 +45,13 @@ pub const DescribeLocationFsxWindowsOutput = struct {
     /// The uniform resource identifier (URI) of the FSx for Windows File Server
     /// location.
     location_uri: ?[]const u8 = null,
+
+    /// Describes configuration information for a DataSync-managed secret, such as a
+    /// `Password` that DataSync uses to access
+    /// a specific storage location. DataSync uses the default Amazon Web
+    /// Services-managed
+    /// KMS key to encrypt this secret in Secrets Manager.
+    managed_secret_config: ?ManagedSecretConfig = null,
 
     /// The ARNs of the Amazon EC2 security groups that provide access to your file
     /// system's preferred subnet.
@@ -46,10 +68,13 @@ pub const DescribeLocationFsxWindowsOutput = struct {
     user: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .cmk_secret_config = "CmkSecretConfig",
         .creation_time = "CreationTime",
+        .custom_secret_config = "CustomSecretConfig",
         .domain = "Domain",
         .location_arn = "LocationArn",
         .location_uri = "LocationUri",
+        .managed_secret_config = "ManagedSecretConfig",
         .security_group_arns = "SecurityGroupArns",
         .user = "User",
     };

@@ -391,6 +391,9 @@ pub const Client = struct {
     }
 
     /// Lists the artifacts associated with a specified subject image.
+    ///
+    /// The IAM principal invoking this operation must have the `ecr:BatchGetImage`
+    /// permission.
     pub fn listImageReferrers(self: *Self, allocator: std.mem.Allocator, input: list_image_referrers.ListImageReferrersInput, options: CallOptions) !list_image_referrers.ListImageReferrersOutput {
         return list_image_referrers.execute(self, allocator, input, options);
     }

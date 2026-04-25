@@ -12,7 +12,8 @@ pub const ObjectTypeField = struct {
     source: ?[]const u8 = null,
 
     /// The location of the data in the standard ProfileObject model. For example:
-    /// _profile.Address.PostalCode.
+    /// _profile.Address.PostalCode. Do not include sensitive or personally
+    /// identifiable information (PII) in the target field name.
     target: ?[]const u8 = null,
 
     pub const json_field_names = .{

@@ -27,8 +27,7 @@ pub const ListOrganizationRecommendationsInput = struct {
     max_results: ?i32 = null,
 
     /// The token for the next set of results. Use the value returned in the
-    /// previous response in the next request
-    /// to retrieve the next set of results.
+    /// previous response in the next request to retrieve the next set of results.
     next_token: ?[]const u8 = null,
 
     /// The pillar of the Recommendation
@@ -59,8 +58,7 @@ pub const ListOrganizationRecommendationsInput = struct {
 
 pub const ListOrganizationRecommendationsOutput = struct {
     /// The token for the next set of results. Use the value returned in the
-    /// previous response in the next request
-    /// to retrieve the next set of results.
+    /// previous response in the next request to retrieve the next set of results.
     next_token: ?[]const u8 = null,
 
     /// The list of Recommendations

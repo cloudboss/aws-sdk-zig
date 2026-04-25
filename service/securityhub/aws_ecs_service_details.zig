@@ -32,7 +32,8 @@ pub const AwsEcsServiceDetails = struct {
     enable_execute_command: ?bool = null,
 
     /// After a task starts, the amount of time in seconds that the Amazon ECS
-    /// service scheduler ignores unhealthy ELB target health checks.
+    /// service scheduler ignores unhealthy Elastic Load Balancing target health
+    /// checks.
     health_check_grace_period_seconds: ?i32 = null,
 
     /// The launch type that the service uses.
@@ -69,8 +70,8 @@ pub const AwsEcsServiceDetails = struct {
     propagate_tags: ?[]const u8 = null,
 
     /// The ARN of the IAM role that is associated with the service. The role allows
-    /// the Amazon ECS container agent to register container instances with an ELB
-    /// load balancer.
+    /// the Amazon ECS container agent to register container instances with an
+    /// Elastic Load Balancing load balancer.
     role: ?[]const u8 = null,
 
     /// The scheduling strategy to use for the service.

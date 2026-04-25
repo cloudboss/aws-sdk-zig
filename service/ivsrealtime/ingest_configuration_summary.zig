@@ -15,6 +15,9 @@ pub const IngestConfigurationSummary = struct {
     /// ID of the participant within the stage.
     participant_id: []const u8,
 
+    /// Indicates whether redundant ingest is enabled for the ingest configuration.
+    redundant_ingest: bool = false,
+
     /// ARN of the stage with which the IngestConfiguration is associated.
     stage_arn: []const u8,
 
@@ -37,6 +40,7 @@ pub const IngestConfigurationSummary = struct {
         .ingest_protocol = "ingestProtocol",
         .name = "name",
         .participant_id = "participantId",
+        .redundant_ingest = "redundantIngest",
         .stage_arn = "stageArn",
         .state = "state",
         .user_id = "userId",

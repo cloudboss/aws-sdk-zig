@@ -28,18 +28,32 @@ pub const StopParticipantReplicationInput = struct {
 };
 
 pub const StopParticipantReplicationOutput = struct {
+    /// See
+    /// [Access-Control-Allow-Origin](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin) in the MDN Web Docs.
     access_control_allow_origin: ?[]const u8 = null,
 
+    /// See
+    /// [Access-Control-Expose-Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Expose-Headers) in the MDN Web Docs.
     access_control_expose_headers: ?[]const u8 = null,
 
+    /// See
+    /// [Cache-Control](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control) in the MDN Web Docs.
     cache_control: ?[]const u8 = null,
 
+    /// See
+    /// [Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy) in the MDN Web Docs.
     content_security_policy: ?[]const u8 = null,
 
+    /// See
+    /// [Strict-Transport-Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security) in the MDN Web Docs.
     strict_transport_security: ?[]const u8 = null,
 
+    /// See
+    /// [X-Content-Type-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options) in the MDN Web Docs.
     x_content_type_options: ?[]const u8 = null,
 
+    /// See
+    /// [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options) in the MDN Web Docs.
     x_frame_options: ?[]const u8 = null,
 
     pub const json_field_names = .{

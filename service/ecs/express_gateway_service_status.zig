@@ -1,8 +1,7 @@
 const ExpressGatewayServiceStatusCode = @import("express_gateway_service_status_code.zig").ExpressGatewayServiceStatusCode;
 
 /// An object that defines the status of Express service creation and
-/// information about the
-/// status of the service.
+/// information about the status of the service.
 pub const ExpressGatewayServiceStatus = struct {
     /// The status of the Express service.
     status_code: ?ExpressGatewayServiceStatusCode = null,

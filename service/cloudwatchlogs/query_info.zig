@@ -5,11 +5,18 @@ const QueryStatus = @import("query_status.zig").QueryStatus;
 /// request in a
 /// `DescribeQueries` operation.
 pub const QueryInfo = struct {
+    /// The total number of bytes scanned by the query. This indicates the cost
+    /// associated with the query.
+    bytes_scanned: ?f64 = null,
+
     /// The date and time that this query was created.
     create_time: ?i64 = null,
 
     /// The name of the log group scanned by this query.
     log_group_name: ?[]const u8 = null,
+
+    /// The duration in milliseconds that the query took to execute.
+    query_duration: ?i64 = null,
 
     /// The unique ID number of this query.
     query_id: ?[]const u8 = null,
@@ -28,12 +35,18 @@ pub const QueryInfo = struct {
     /// and `Unknown`.
     status: ?QueryStatus = null,
 
+    /// The ARN of the user who ran the query.
+    user_identity: ?[]const u8 = null,
+
     pub const json_field_names = .{
+        .bytes_scanned = "bytesScanned",
         .create_time = "createTime",
         .log_group_name = "logGroupName",
+        .query_duration = "queryDuration",
         .query_id = "queryId",
         .query_language = "queryLanguage",
         .query_string = "queryString",
         .status = "status",
+        .user_identity = "userIdentity",
     };
 };

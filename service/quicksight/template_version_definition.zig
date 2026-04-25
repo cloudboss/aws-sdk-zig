@@ -8,6 +8,7 @@ const ParameterDeclaration = @import("parameter_declaration.zig").ParameterDecla
 const QueryExecutionOptions = @import("query_execution_options.zig").QueryExecutionOptions;
 const SheetDefinition = @import("sheet_definition.zig").SheetDefinition;
 const StaticFile = @import("static_file.zig").StaticFile;
+const TooltipSheetDefinition = @import("tooltip_sheet_definition.zig").TooltipSheetDefinition;
 
 /// The detailed definition of a template.
 pub const TemplateVersionDefinition = struct {
@@ -52,6 +53,9 @@ pub const TemplateVersionDefinition = struct {
     /// The static files for the definition.
     static_files: ?[]const StaticFile = null,
 
+    /// An array of tooltip sheet definitions for a template.
+    tooltip_sheets: ?[]const TooltipSheetDefinition = null,
+
     pub const json_field_names = .{
         .analysis_defaults = "AnalysisDefaults",
         .calculated_fields = "CalculatedFields",
@@ -63,5 +67,6 @@ pub const TemplateVersionDefinition = struct {
         .query_execution_options = "QueryExecutionOptions",
         .sheets = "Sheets",
         .static_files = "StaticFiles",
+        .tooltip_sheets = "TooltipSheets",
     };
 };

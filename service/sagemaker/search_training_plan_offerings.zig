@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ReservedCapacityInstanceType = @import("reserved_capacity_instance_type.zig").ReservedCapacityInstanceType;
 const SageMakerResourceName = @import("sage_maker_resource_name.zig").SageMakerResourceName;
+const TrainingPlanExtensionOffering = @import("training_plan_extension_offering.zig").TrainingPlanExtensionOffering;
 const TrainingPlanOffering = @import("training_plan_offering.zig").TrainingPlanOffering;
 
 pub const SearchTrainingPlanOfferingsInput = struct {
@@ -47,6 +48,11 @@ pub const SearchTrainingPlanOfferingsInput = struct {
     ///   compute resources to SageMaker endpoints for model deployment.
     target_resources: ?[]const SageMakerResourceName = null,
 
+    /// The Amazon Resource Name (ARN); of an existing training plan to search for
+    /// extension offerings. When specified, the API returns extension offerings
+    /// that can be used to extend the specified training plan.
+    training_plan_arn: ?[]const u8 = null,
+
     /// The number of UltraServers to search for.
     ultra_server_count: ?i32 = null,
 
@@ -60,16 +66,23 @@ pub const SearchTrainingPlanOfferingsInput = struct {
         .instance_type = "InstanceType",
         .start_time_after = "StartTimeAfter",
         .target_resources = "TargetResources",
+        .training_plan_arn = "TrainingPlanArn",
         .ultra_server_count = "UltraServerCount",
         .ultra_server_type = "UltraServerType",
     };
 };
 
 pub const SearchTrainingPlanOfferingsOutput = struct {
+    /// A list of extension offerings available for the specified training plan.
+    /// These offerings can be used with the `
+    /// [ExtendTrainingPlan](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ExtendTrainingPlan.html) ` API to extend an existing training plan.
+    training_plan_extension_offerings: ?[]const TrainingPlanExtensionOffering = null,
+
     /// A list of training plan offerings that match the search criteria.
     training_plan_offerings: ?[]const TrainingPlanOffering = null,
 
     pub const json_field_names = .{
+        .training_plan_extension_offerings = "TrainingPlanExtensionOfferings",
         .training_plan_offerings = "TrainingPlanOfferings",
     };
 };

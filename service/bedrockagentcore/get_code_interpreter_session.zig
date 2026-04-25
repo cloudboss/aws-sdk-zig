@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const Certificate = @import("certificate.zig").Certificate;
 const CodeInterpreterSessionStatus = @import("code_interpreter_session_status.zig").CodeInterpreterSessionStatus;
 
 pub const GetCodeInterpreterSessionInput = struct {
@@ -20,6 +21,9 @@ pub const GetCodeInterpreterSessionInput = struct {
 };
 
 pub const GetCodeInterpreterSessionOutput = struct {
+    /// The list of certificates installed in the code interpreter session.
+    certificates: ?[]const Certificate = null,
+
     /// The identifier of the code interpreter.
     code_interpreter_identifier: []const u8,
 
@@ -40,6 +44,7 @@ pub const GetCodeInterpreterSessionOutput = struct {
     status: ?CodeInterpreterSessionStatus = null,
 
     pub const json_field_names = .{
+        .certificates = "certificates",
         .code_interpreter_identifier = "codeInterpreterIdentifier",
         .created_at = "createdAt",
         .name = "name",

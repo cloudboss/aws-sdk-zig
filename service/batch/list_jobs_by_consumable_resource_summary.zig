@@ -41,7 +41,7 @@ pub const ListJobsByConsumableResourceSummary = struct {
     /// The total amount of the consumable resource that is available.
     quantity: i64,
 
-    /// The fair-share scheduling policy identifier for the job.
+    /// The fair-share scheduling identifier for the job.
     share_identifier: ?[]const u8 = null,
 
     /// The Unix timestamp for when the job was started. More specifically, it's

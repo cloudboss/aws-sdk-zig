@@ -12,36 +12,30 @@ pub const ListAttributesInput = struct {
     attribute_name: ?[]const u8 = null,
 
     /// The value of the attribute to filter results with. You must also specify an
-    /// attribute
-    /// name to use this parameter.
+    /// attribute name to use this parameter.
     attribute_value: ?[]const u8 = null,
 
     /// The short name or full Amazon Resource Name (ARN) of the cluster to list
-    /// attributes.
-    /// If you do not specify a cluster, the default cluster is assumed.
+    /// attributes. If you do not specify a cluster, the default cluster is assumed.
     cluster: ?[]const u8 = null,
 
     /// The maximum number of cluster results that `ListAttributes` returned in
     /// paginated output. When this parameter is used, `ListAttributes` only returns
-    /// `maxResults` results in a single page along with a `nextToken`
-    /// response element. The remaining results of the initial request can be seen
-    /// by sending
-    /// another `ListAttributes` request with the returned `nextToken`
-    /// value. This value can be between 1 and 100. If this parameter isn't used,
-    /// then
-    /// `ListAttributes` returns up to 100 results and a `nextToken`
-    /// value if applicable.
+    /// `maxResults` results in a single page along with a `nextToken` response
+    /// element. The remaining results of the initial request can be seen by sending
+    /// another `ListAttributes` request with the returned `nextToken` value. This
+    /// value can be between 1 and 100. If this parameter isn't used, then
+    /// `ListAttributes` returns up to 100 results and a `nextToken` value if
+    /// applicable.
     max_results: ?i32 = null,
 
-    /// The `nextToken` value returned from a `ListAttributes` request
-    /// indicating that more results are available to fulfill the request and
-    /// further calls are
+    /// The `nextToken` value returned from a `ListAttributes` request indicating
+    /// that more results are available to fulfill the request and further calls are
     /// needed. If `maxResults` was provided, it's possible the number of results to
     /// be fewer than `maxResults`.
     ///
     /// This token should be treated as an opaque identifier that is only used to
-    /// retrieve
-    /// the next items in a list and not for other programmatic purposes.
+    /// retrieve the next items in a list and not for other programmatic purposes.
     next_token: ?[]const u8 = null,
 
     /// The type of the target to list attributes with.
@@ -61,11 +55,10 @@ pub const ListAttributesOutput = struct {
     /// A list of attribute objects that meet the criteria of the request.
     attributes: ?[]const Attribute = null,
 
-    /// The `nextToken` value to include in a future `ListAttributes`
-    /// request. When the results of a `ListAttributes` request exceed
-    /// `maxResults`, this value can be used to retrieve the next page of
-    /// results. This value is `null` when there are no more results to
-    /// return.
+    /// The `nextToken` value to include in a future `ListAttributes` request. When
+    /// the results of a `ListAttributes` request exceed `maxResults`, this value
+    /// can be used to retrieve the next page of results. This value is `null` when
+    /// there are no more results to return.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -198,6 +191,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

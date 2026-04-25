@@ -7,20 +7,24 @@ const batch_is_authorized_with_token = @import("batch_is_authorized_with_token.z
 const create_identity_source = @import("create_identity_source.zig");
 const create_policy = @import("create_policy.zig");
 const create_policy_store = @import("create_policy_store.zig");
+const create_policy_store_alias = @import("create_policy_store_alias.zig");
 const create_policy_template = @import("create_policy_template.zig");
 const delete_identity_source = @import("delete_identity_source.zig");
 const delete_policy = @import("delete_policy.zig");
 const delete_policy_store = @import("delete_policy_store.zig");
+const delete_policy_store_alias = @import("delete_policy_store_alias.zig");
 const delete_policy_template = @import("delete_policy_template.zig");
 const get_identity_source = @import("get_identity_source.zig");
 const get_policy = @import("get_policy.zig");
 const get_policy_store = @import("get_policy_store.zig");
+const get_policy_store_alias = @import("get_policy_store_alias.zig");
 const get_policy_template = @import("get_policy_template.zig");
 const get_schema = @import("get_schema.zig");
 const is_authorized = @import("is_authorized.zig");
 const is_authorized_with_token = @import("is_authorized_with_token.zig");
 const list_identity_sources = @import("list_identity_sources.zig");
 const list_policies = @import("list_policies.zig");
+const list_policy_store_aliases = @import("list_policy_store_aliases.zig");
 const list_policy_stores = @import("list_policy_stores.zig");
 const list_policy_templates = @import("list_policy_templates.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
@@ -186,6 +190,24 @@ pub const Client = struct {
         return create_policy_store.execute(self, allocator, input, options);
     }
 
+    /// Creates a policy store alias for the specified policy store. A policy store
+    /// alias is an alternative identifier that you can use to reference a policy
+    /// store in API operations.
+    ///
+    /// This operation is idempotent. If multiple CreatePolicyStoreAlias requests
+    /// are made where the `aliasName` and `policyStoreId` fields are the same
+    /// between the requests, subsequent requests will be ignored. For each
+    /// duplicate CreatePolicyStoreAlias request, a Success response will be
+    /// returned and a new policy store alias will not be created.
+    ///
+    /// Verified Permissions is * [eventually
+    /// consistent](https://wikipedia.org/wiki/Eventual_consistency) *. It can take
+    /// a few seconds for a new or changed element to propagate through the service
+    /// and be visible in the results of other Verified Permissions operations.
+    pub fn createPolicyStoreAlias(self: *Self, allocator: std.mem.Allocator, input: create_policy_store_alias.CreatePolicyStoreAliasInput, options: CallOptions) !create_policy_store_alias.CreatePolicyStoreAliasOutput {
+        return create_policy_store_alias.execute(self, allocator, input, options);
+    }
+
     /// Creates a policy template. A template can use placeholders for the principal
     /// and resource. A template must be instantiated into a policy by associating
     /// it with specific principals and resources to use for the placeholders. That
@@ -228,6 +250,21 @@ pub const Client = struct {
         return delete_policy_store.execute(self, allocator, input, options);
     }
 
+    /// Deletes the specified policy store alias.
+    ///
+    /// This operation is idempotent. If you specify a policy store alias that does
+    /// not exist, the request response will still return a successful HTTP 200
+    /// status code.
+    ///
+    /// When a policy store alias is deleted, it enters the `PendingDeletion` state.
+    /// When a policy store alias is in the `PendingDeletion` state, new policy
+    /// store aliases cannot be created with the same name. If the policy store
+    /// alias is used in an API that has a `policyStoreId` field, the operation will
+    /// fail with a `ResourceNotFound` exception.
+    pub fn deletePolicyStoreAlias(self: *Self, allocator: std.mem.Allocator, input: delete_policy_store_alias.DeletePolicyStoreAliasInput, options: CallOptions) !delete_policy_store_alias.DeletePolicyStoreAliasOutput {
+        return delete_policy_store_alias.execute(self, allocator, input, options);
+    }
+
     /// Deletes the specified policy template from the policy store.
     ///
     /// This operation also deletes any policies that were created from the
@@ -250,6 +287,11 @@ pub const Client = struct {
     /// Retrieves details about a policy store.
     pub fn getPolicyStore(self: *Self, allocator: std.mem.Allocator, input: get_policy_store.GetPolicyStoreInput, options: CallOptions) !get_policy_store.GetPolicyStoreOutput {
         return get_policy_store.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves details about the specified policy store alias.
+    pub fn getPolicyStoreAlias(self: *Self, allocator: std.mem.Allocator, input: get_policy_store_alias.GetPolicyStoreAliasInput, options: CallOptions) !get_policy_store_alias.GetPolicyStoreAliasOutput {
+        return get_policy_store_alias.execute(self, allocator, input, options);
     }
 
     /// Retrieve the details for the specified policy template in the specified
@@ -303,6 +345,12 @@ pub const Client = struct {
     /// store.
     pub fn listPolicies(self: *Self, allocator: std.mem.Allocator, input: list_policies.ListPoliciesInput, options: CallOptions) !list_policies.ListPoliciesOutput {
         return list_policies.execute(self, allocator, input, options);
+    }
+
+    /// Returns a paginated list of all policy store aliases in the calling Amazon
+    /// Web Services account.
+    pub fn listPolicyStoreAliases(self: *Self, allocator: std.mem.Allocator, input: list_policy_store_aliases.ListPolicyStoreAliasesInput, options: CallOptions) !list_policy_store_aliases.ListPolicyStoreAliasesOutput {
+        return list_policy_store_aliases.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of all policy stores in the calling Amazon Web
@@ -441,6 +489,13 @@ pub const Client = struct {
     }
 
     pub fn listPoliciesPaginator(self: *Self, params: list_policies.ListPoliciesInput) paginator.ListPoliciesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listPolicyStoreAliasesPaginator(self: *Self, params: list_policy_store_aliases.ListPolicyStoreAliasesInput) paginator.ListPolicyStoreAliasesPaginator {
         return .{
             .client = self,
             .params = params,

@@ -7,6 +7,8 @@ pub const Format = enum {
     webm,
     mxf,
     wave,
+    avi,
+    mpegts,
 
     pub const json_field_names = .{
         .mp_4 = "mp4",
@@ -15,6 +17,8 @@ pub const Format = enum {
         .webm = "webm",
         .mxf = "mxf",
         .wave = "wave",
+        .avi = "avi",
+        .mpegts = "mpegts",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -25,6 +29,8 @@ pub const Format = enum {
             .webm => "webm",
             .mxf => "mxf",
             .wave => "wave",
+            .avi => "avi",
+            .mpegts => "mpegts",
         };
     }
 

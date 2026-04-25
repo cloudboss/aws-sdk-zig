@@ -252,9 +252,7 @@ pub const UpdateItemInput = struct {
     /// existing data type is a set of strings, the `Value` must also
     /// be a set of strings.
     ///
-    /// The `ADD` action only supports Number and set data types. In
-    /// addition, `ADD` can only be used on top-level attributes, not
-    /// nested attributes.
+    /// The `ADD` action only supports Number and set data types.
     ///
     /// * `DELETE` - Deletes an element from a set.
     ///
@@ -264,9 +262,7 @@ pub const UpdateItemInput = struct {
     /// the `DELETE` action specifies `[a,c]`, then the final
     /// attribute value is `[b]`. Specifying an empty set is an error.
     ///
-    /// The `DELETE` action only supports set data types. In addition,
-    /// `DELETE` can only be used on top-level attributes, not nested
-    /// attributes.
+    /// The `DELETE` action only supports set data types.
     ///
     /// You can have many actions in a single expression, such as the following:
     /// `SET

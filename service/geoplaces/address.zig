@@ -9,12 +9,16 @@ pub const Address = struct {
     /// The number that identifies an address within a street.
     address_number: ?[]const u8 = null,
 
-    /// Name of the block.
+    /// Name of the block. Not available in `ap-southeast-1` and `ap-southeast-5`
+    /// regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
     /// Example: `Sunny Mansion 203 block: 2 Chome`
     block: ?[]const u8 = null,
 
-    /// The name of the building at the address.
+    /// The name of the building at the address. Not available in `ap-southeast-1`
+    /// and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     building: ?[]const u8 = null,
 
     /// The country component of the address.
@@ -23,7 +27,9 @@ pub const Address = struct {
     /// The district or division of a locality associated with this address.
     district: ?[]const u8 = null,
 
-    /// Name of the streets in the intersection.
+    /// Name of the streets in the intersection. Not available in `ap-southeast-1`
+    /// and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
     /// Example: `["Friedrichstraße","Unter den Linden"]`
     intersection: ?[]const []const u8 = null,
@@ -49,7 +55,9 @@ pub const Address = struct {
 
     /// Components that correspond to secondary identifiers on an Address. Secondary
     /// address components include information such as Suite or Unit Number,
-    /// Building, or Floor.
+    /// Building, or Floor. Not available in `ap-southeast-1` and `ap-southeast-5`
+    /// regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
     /// Coverage for `Address.SecondaryAddressComponents` is available in the
     /// following countries:
@@ -60,12 +68,16 @@ pub const Address = struct {
     /// The name of the street results should be present in.
     street: ?[]const u8 = null,
 
-    /// Components of the street.
+    /// Components of the street. Not available in `ap-southeast-1` and
+    /// `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
-    /// Example: Younge from the "Younge street".
+    /// Example: Yonge from "Yonge street".
     street_components: ?[]const StreetComponents = null,
 
-    /// Name of sub-block.
+    /// Name of sub-block. Not available in `ap-southeast-1` and `ap-southeast-5`
+    /// regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
     /// Example: `Sunny Mansion 203 sub-block: 4`
     sub_block: ?[]const u8 = null,

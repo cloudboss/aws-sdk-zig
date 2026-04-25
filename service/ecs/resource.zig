@@ -12,16 +12,16 @@ pub const Resource = struct {
     /// extended precision floating-point type.
     long_value: i64 = 0,
 
-    /// The name of the resource, such as `CPU`, `MEMORY`,
-    /// `PORTS`, `PORTS_UDP`, or a user-defined resource.
+    /// The name of the resource, such as `CPU`, `MEMORY`, `PORTS`, `PORTS_UDP`, or
+    /// a user-defined resource.
     name: ?[]const u8 = null,
 
     /// When the `stringSetValue` type is set, the value of the resource must be a
     /// string type.
     string_set_value: ?[]const []const u8 = null,
 
-    /// The type of the resource. Valid values: `INTEGER`, `DOUBLE`,
-    /// `LONG`, or `STRINGSET`.
+    /// The type of the resource. Valid values: `INTEGER`, `DOUBLE`, `LONG`, or
+    /// `STRINGSET`.
     @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{

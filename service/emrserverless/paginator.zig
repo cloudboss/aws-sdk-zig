@@ -7,6 +7,7 @@ const Client = @import("client.zig").Client;
 const list_applications = @import("list_applications.zig");
 const list_job_run_attempts = @import("list_job_run_attempts.zig");
 const list_job_runs = @import("list_job_runs.zig");
+const list_sessions = @import("list_sessions.zig");
 
 pub const ListApplicationsPaginator = struct {
     client: *Client,
@@ -104,6 +105,46 @@ pub const ListJobRunsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_job_runs.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListSessionsPaginator = struct {
+    client: *Client,
+    params: list_sessions.ListSessionsInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_sessions.ListSessionsOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_sessions.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

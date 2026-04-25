@@ -48,6 +48,27 @@ pub const RestoreDBInstanceFromDBSnapshotInput = struct {
     /// Example: `us-east-1a`
     availability_zone: ?[]const u8 = null,
 
+    /// The number of days to retain automated backups. Setting this parameter to a
+    /// positive number enables backups. Setting this parameter to 0 disables
+    /// automated backups.
+    ///
+    /// Enabling and disabling backups can result in a brief I/O suspension that
+    /// lasts from a few seconds to a few minutes, depending on the size and class
+    /// of your DB instance.
+    ///
+    /// This setting doesn't apply to Amazon Aurora DB instances. The retention
+    /// period for automated backups is managed by the DB cluster. For more
+    /// information, see `ModifyDBCluster`.
+    ///
+    /// Default: Uses existing setting
+    ///
+    /// Constraints:
+    ///
+    /// * Must be a value from 0 to 35.
+    /// * Can't be set to 0 if the DB instance is a source to read replicas.
+    /// * Can't be set to 0 for an RDS Custom for Oracle DB instance.
+    backup_retention_period: ?i32 = null,
+
     /// Specifies where automated backups and manual snapshots are stored for the
     /// restored DB instance.
     ///
@@ -444,6 +465,26 @@ pub const RestoreDBInstanceFromDBSnapshotInput = struct {
     /// Constraints: Value must be `1150-65535`
     port: ?i32 = null,
 
+    /// The daily time range during which automated backups are created if automated
+    /// backups are enabled, as determined by the `BackupRetentionPeriod` parameter.
+    /// Changing this parameter doesn't result in an outage and the change is
+    /// asynchronously applied as soon as possible. The default is a 30-minute
+    /// window selected at random from an 8-hour block of time for each Amazon Web
+    /// Services Region. For more information, see [Backup
+    /// window](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow) in the *Amazon RDS User Guide*.
+    ///
+    /// This setting doesn't apply to Amazon Aurora DB instances. The daily time
+    /// range for creating automated backups is managed by the DB cluster. For more
+    /// information, see `ModifyDBCluster`.
+    ///
+    /// Constraints:
+    ///
+    /// * Must be in the format `hh24:mi-hh24:mi`.
+    /// * Must be in Universal Coordinated Time (UTC).
+    /// * Must not conflict with the preferred maintenance window.
+    /// * Must be at least 30 minutes.
+    preferred_backup_window: ?[]const u8 = null,
+
     /// The number of CPU cores and the number of threads per core for the DB
     /// instance class of the DB instance.
     ///
@@ -616,6 +657,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RestoreDBInstanceFromDB
         try body_buf.appendSlice(allocator, "&AvailabilityZone=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
+    if (input.backup_retention_period) |v| {
+        try body_buf.appendSlice(allocator, "&BackupRetentionPeriod=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
+    }
     if (input.backup_target) |v| {
         try body_buf.appendSlice(allocator, "&BackupTarget=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
@@ -751,6 +796,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RestoreDBInstanceFromDB
     if (input.port) |v| {
         try body_buf.appendSlice(allocator, "&Port=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
+    }
+    if (input.preferred_backup_window) |v| {
+        try body_buf.appendSlice(allocator, "&PreferredBackupWindow=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.processor_features) |list| {
         for (list, 0..) |item, idx| {

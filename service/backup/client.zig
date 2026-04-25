@@ -406,11 +406,11 @@ pub const Client = struct {
         return describe_framework.execute(self, allocator, input, options);
     }
 
-    /// Describes whether the Amazon Web Services account is opted in to
-    /// cross-account backup.
-    /// Returns an error if the account is not a member of an Organizations
-    /// organization.
-    /// Example: `describe-global-settings --region us-west-2`
+    /// Describes whether the Amazon Web Services account has enabled different
+    /// cross-account management options, including cross-account backup,
+    /// multi-party approval, and delegated administrator. Returns an error if the
+    /// account is not a member of an Organizations organization. Example:
+    /// `describe-global-settings --region us-west-2`
     pub fn describeGlobalSettings(self: *Self, allocator: std.mem.Allocator, input: describe_global_settings.DescribeGlobalSettingsInput, options: CallOptions) !describe_global_settings.DescribeGlobalSettingsOutput {
         return describe_global_settings.execute(self, allocator, input, options);
     }
@@ -952,10 +952,10 @@ pub const Client = struct {
         return update_framework.execute(self, allocator, input, options);
     }
 
-    /// Updates whether the Amazon Web Services account is opted in to cross-account
-    /// backup.
-    /// Returns an error if the account is not an Organizations management account.
-    /// Use the
+    /// Updates whether the Amazon Web Services account has enabled different
+    /// cross-account management options, including cross-account backup,
+    /// multi-party approval, and delegated administrator. Returns an error if the
+    /// account is not an Organizations management account. Use the
     /// `DescribeGlobalSettings` API to determine the current settings.
     pub fn updateGlobalSettings(self: *Self, allocator: std.mem.Allocator, input: update_global_settings.UpdateGlobalSettingsInput, options: CallOptions) !update_global_settings.UpdateGlobalSettingsOutput {
         return update_global_settings.execute(self, allocator, input, options);

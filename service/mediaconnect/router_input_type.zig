@@ -5,12 +5,14 @@ pub const RouterInputType = enum {
     failover,
     merge,
     mediaconnect_flow,
+    medialive_channel,
 
     pub const json_field_names = .{
         .standard = "STANDARD",
         .failover = "FAILOVER",
         .merge = "MERGE",
         .mediaconnect_flow = "MEDIACONNECT_FLOW",
+        .medialive_channel = "MEDIALIVE_CHANNEL",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +21,7 @@ pub const RouterInputType = enum {
             .failover => "FAILOVER",
             .merge => "MERGE",
             .mediaconnect_flow => "MEDIACONNECT_FLOW",
+            .medialive_channel => "MEDIALIVE_CHANNEL",
         };
     }
 

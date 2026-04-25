@@ -5,8 +5,7 @@ const FeatureStatus = @import("feature_status.zig").FeatureStatus;
 /// Contains information about the features for the member account.
 pub const MemberFeaturesConfigurationResult = struct {
     /// Indicates the additional configuration of the feature that is configured for
-    /// the member
-    /// account.
+    /// the member account.
     additional_configuration: ?[]const MemberAdditionalConfigurationResult = null,
 
     /// Indicates the name of the feature that is enabled for the detector.

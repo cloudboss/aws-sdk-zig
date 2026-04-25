@@ -7,6 +7,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ChannelSubtypeConfig = @import("channel_subtype_config.zig").ChannelSubtypeConfig;
 const CommunicationLimitsConfig = @import("communication_limits_config.zig").CommunicationLimitsConfig;
 const CommunicationTimeConfig = @import("communication_time_config.zig").CommunicationTimeConfig;
+const EntryLimitsConfig = @import("entry_limits_config.zig").EntryLimitsConfig;
 const Schedule = @import("schedule.zig").Schedule;
 const Source = @import("source.zig").Source;
 const ExternalCampaignType = @import("external_campaign_type.zig").ExternalCampaignType;
@@ -21,6 +22,8 @@ pub const CreateCampaignInput = struct {
     connect_campaign_flow_arn: ?[]const u8 = null,
 
     connect_instance_id: []const u8,
+
+    entry_limits_config: ?EntryLimitsConfig = null,
 
     name: []const u8,
 
@@ -38,6 +41,7 @@ pub const CreateCampaignInput = struct {
         .communication_time_config = "communicationTimeConfig",
         .connect_campaign_flow_arn = "connectCampaignFlowArn",
         .connect_instance_id = "connectInstanceId",
+        .entry_limits_config = "entryLimitsConfig",
         .name = "name",
         .schedule = "schedule",
         .source = "source",
@@ -126,6 +130,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCampaignInput, co
     try body_buf.appendSlice(allocator, "\"connectInstanceId\":");
     try aws.json.writeValue(@TypeOf(input.connect_instance_id), input.connect_instance_id, allocator, &body_buf);
     has_prev = true;
+    if (input.entry_limits_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"entryLimitsConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);

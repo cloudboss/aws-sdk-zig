@@ -44,6 +44,7 @@ pub const PublicKey = @import("public_key.zig").PublicKey;
 pub const PublicKeySummary = @import("public_key_summary.zig").PublicKeySummary;
 pub const RecordingConfiguration = @import("recording_configuration.zig").RecordingConfiguration;
 pub const RecordingConfigurationFormat = @import("recording_configuration_format.zig").RecordingConfigurationFormat;
+pub const RedundantIngestCredential = @import("redundant_ingest_credential.zig").RedundantIngestCredential;
 pub const ReplicationState = @import("replication_state.zig").ReplicationState;
 pub const ReplicationType = @import("replication_type.zig").ReplicationType;
 pub const S3DestinationConfiguration = @import("s3_destination_configuration.zig").S3DestinationConfiguration;

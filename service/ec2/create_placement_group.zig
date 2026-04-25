@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const OperatorRequest = @import("operator_request.zig").OperatorRequest;
 const SpreadLevel = @import("spread_level.zig").SpreadLevel;
 const PlacementStrategy = @import("placement_strategy.zig").PlacementStrategy;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
@@ -27,6 +28,9 @@ pub const CreatePlacementGroupInput = struct {
 
     /// Reserved for future use.
     linked_group_id: ?[]const u8 = null,
+
+    /// Reserved for internal use.
+    operator: ?OperatorRequest = null,
 
     /// The number of partitions. Valid only when **Strategy** is
     /// set to `partition`.
@@ -98,6 +102,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePlacementGroupInp
     if (input.linked_group_id) |v| {
         try body_buf.appendSlice(allocator, "&LinkedGroupId=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
+    if (input.operator) |v| {
+        if (v.principal) |sv| {
+            try body_buf.appendSlice(allocator, "&Operator.Principal=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
+        }
     }
     if (input.partition_count) |v| {
         try body_buf.appendSlice(allocator, "&PartitionCount=");

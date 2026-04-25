@@ -27,8 +27,9 @@ pub const AutocompleteInput = struct {
     /// results must possess in order to be returned as a result.
     filter: ?AutocompleteFilter = null,
 
-    /// Indicates if the results will be stored. Defaults to `SingleUse`, if left
-    /// empty.
+    /// Indicates if the query results will be persisted in customer infrastructure.
+    /// Defaults to `SingleUse` (not stored). Currently, `Autocomplete` does not
+    /// support storage of results.
     intended_use: ?AutocompleteIntendedUse = null,
 
     /// Optional: The API key to be used for authorization. Either an API key or
@@ -146,7 +147,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AutocompleteInput, conf
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    const path = "/autocomplete";
+    const path = "/v2/autocomplete";
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;

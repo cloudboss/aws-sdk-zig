@@ -20,8 +20,7 @@ pub const KubernetesApiCallAction = struct {
     resource_name: ?[]const u8 = null,
 
     /// The IP of the Kubernetes API caller and the IPs of any proxies or load
-    /// balancers between
-    /// the caller and the API endpoint.
+    /// balancers between the caller and the API endpoint.
     source_ips: ?[]const []const u8 = null,
 
     /// The resulting HTTP response code of the Kubernetes API call action.

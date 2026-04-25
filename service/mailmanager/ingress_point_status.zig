@@ -7,6 +7,7 @@ pub const IngressPointStatus = enum {
     active,
     closed,
     failed,
+    associated_vpc_endpoint_does_not_exist,
 
     pub const json_field_names = .{
         .provisioning = "PROVISIONING",
@@ -15,6 +16,7 @@ pub const IngressPointStatus = enum {
         .active = "ACTIVE",
         .closed = "CLOSED",
         .failed = "FAILED",
+        .associated_vpc_endpoint_does_not_exist = "ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -25,6 +27,7 @@ pub const IngressPointStatus = enum {
             .active => "ACTIVE",
             .closed => "CLOSED",
             .failed => "FAILED",
+            .associated_vpc_endpoint_does_not_exist => "ASSOCIATED_VPC_ENDPOINT_DOES_NOT_EXIST",
         };
     }
 

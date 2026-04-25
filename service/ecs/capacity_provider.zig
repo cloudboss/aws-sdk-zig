@@ -14,18 +14,15 @@ pub const CapacityProvider = struct {
     capacity_provider_arn: ?[]const u8 = null,
 
     /// The cluster that this capacity provider is associated with. Managed
-    /// instances capacity
-    /// providers are cluster-scoped, meaning they can only be used within their
-    /// associated
-    /// cluster.
+    /// instances capacity providers are cluster-scoped, meaning they can only be
+    /// used within their associated cluster.
     ///
     /// This is required for Managed instances.
     cluster: ?[]const u8 = null,
 
     /// The configuration for the Amazon ECS Managed Instances provider. This
-    /// includes the
-    /// infrastructure role, the launch template configuration, and tag propagation
-    /// settings.
+    /// includes the infrastructure role, the launch template configuration, and tag
+    /// propagation settings.
     managed_instances_provider: ?ManagedInstancesProvider = null,
 
     /// The name of the capacity provider.
@@ -37,49 +34,35 @@ pub const CapacityProvider = struct {
     status: ?CapacityProviderStatus = null,
 
     /// The metadata that you apply to the capacity provider to help you categorize
-    /// and
-    /// organize it. Each tag consists of a key and an optional value. You define
-    /// both.
+    /// and organize it. Each tag consists of a key and an optional value. You
+    /// define both.
     ///
     /// The following basic restrictions apply to tags:
     ///
     /// * Maximum number of tags per resource - 50
-    ///
     /// * For each resource, each tag key must be unique, and each tag key can have
-    ///   only
-    /// one value.
-    ///
+    ///   only one value.
     /// * Maximum key length - 128 Unicode characters in UTF-8
-    ///
     /// * Maximum value length - 256 Unicode characters in UTF-8
-    ///
     /// * If your tagging schema is used across multiple services and resources,
-    /// remember that other services may have restrictions on allowed characters.
-    /// Generally allowed characters are: letters, numbers, and spaces representable
-    /// in
-    /// UTF-8, and the following characters: + - = . _ : / @.
-    ///
+    ///   remember that other services may have restrictions on allowed characters.
+    ///   Generally allowed characters are: letters, numbers, and spaces
+    ///   representable in UTF-8, and the following characters: + - = . _ : / @.
     /// * Tag keys and values are case-sensitive.
-    ///
-    /// * Do not use `aws:`, `AWS:`, or any upper or lowercase
-    /// combination of such as a prefix for either keys or values as it is reserved
-    /// for
-    /// Amazon Web
-    /// Services use. You cannot edit or delete tag keys or values with
-    /// this prefix. Tags with this prefix do not count against your tags per
-    /// resource
-    /// limit.
+    /// * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of such
+    ///   as a prefix for either keys or values as it is reserved for Amazon Web
+    ///   Services use. You cannot edit or delete tag keys or values with this
+    ///   prefix. Tags with this prefix do not count against your tags per resource
+    ///   limit.
     tags: ?[]const Tag = null,
 
     /// The type of capacity provider. For Amazon ECS Managed Instances, this value
-    /// is
-    /// `MANAGED_INSTANCES`, indicating that Amazon ECS manages the underlying
+    /// is `MANAGED_INSTANCES`, indicating that Amazon ECS manages the underlying
     /// Amazon EC2 instances on your behalf.
     @"type": ?CapacityProviderType = null,
 
     /// The update status of the capacity provider. The following are the possible
-    /// states that
-    /// is returned.
+    /// states that is returned.
     ///
     /// **DELETE_IN_PROGRESS**
     ///
@@ -87,8 +70,7 @@ pub const CapacityProvider = struct {
     ///
     /// **DELETE_COMPLETE**
     ///
-    /// The capacity provider was successfully deleted and has an
-    /// `INACTIVE` status.
+    /// The capacity provider was successfully deleted and has an `INACTIVE` status.
     ///
     /// **DELETE_FAILED**
     ///
@@ -97,8 +79,7 @@ pub const CapacityProvider = struct {
     update_status: ?CapacityProviderUpdateStatus = null,
 
     /// The update status reason. This provides further details about the update
-    /// status for
-    /// the capacity provider.
+    /// status for the capacity provider.
     update_status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{

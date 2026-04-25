@@ -3,12 +3,12 @@ pub const RoadSnapTracePoint = struct {
     /// GPS Heading at the position.
     heading: f64 = 0,
 
-    /// Position defined as `[longitude, latitude]`.
+    /// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
     position: []const f64,
 
     /// Speed at the specified trace point .
     ///
-    /// **Unit**: `KilometersPerHour`
+    /// **Unit**: `kilometers per hour`
     speed: f64 = 0,
 
     /// Timestamp of the event.

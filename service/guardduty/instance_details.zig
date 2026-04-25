@@ -33,8 +33,7 @@ pub const InstanceDetails = struct {
     network_interfaces: ?[]const NetworkInterface = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon Web Services Outpost. Only
-    /// applicable to Amazon Web Services Outposts
-    /// instances.
+    /// applicable to Amazon Web Services Outposts instances.
     outpost_arn: ?[]const u8 = null,
 
     /// The platform of the EC2 instance.

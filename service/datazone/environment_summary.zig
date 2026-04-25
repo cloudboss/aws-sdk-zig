@@ -25,6 +25,9 @@ pub const EnvironmentSummary = struct {
     /// The configuration ID with which the environment is created.
     environment_configuration_id: ?[]const u8 = null,
 
+    /// The configuration name with which the environment is created.
+    environment_configuration_name: ?[]const u8 = null,
+
     /// The identifier of the environment profile with which the environment was
     /// created.
     environment_profile_id: []const u8 = "",
@@ -55,6 +58,7 @@ pub const EnvironmentSummary = struct {
         .description = "description",
         .domain_id = "domainId",
         .environment_configuration_id = "environmentConfigurationId",
+        .environment_configuration_name = "environmentConfigurationName",
         .environment_profile_id = "environmentProfileId",
         .id = "id",
         .name = "name",

@@ -28,6 +28,9 @@ pub const ProjectSummary = struct {
     /// The name of a project.
     name: []const u8,
 
+    /// The category of the project.
+    project_category: ?[]const u8 = null,
+
     /// The status of the project.
     project_status: ?ProjectStatus = null,
 
@@ -43,6 +46,7 @@ pub const ProjectSummary = struct {
         .failure_reasons = "failureReasons",
         .id = "id",
         .name = "name",
+        .project_category = "projectCategory",
         .project_status = "projectStatus",
         .updated_at = "updatedAt",
     };

@@ -13,6 +13,15 @@ pub const GetParametersForExportInput = struct {
     /// `TR34_KEY_BLOCK`. Export token is not required for TR-31 key export.
     key_material_type: KeyMaterialType,
 
+    /// Specifies whether to reuse the existing export token and signing key
+    /// certificate. If set to `true` and a valid export token exists for the same
+    /// key material type and signing key algorithm with at least 7 days of
+    /// remaining validity, the existing token and signing key certificate are
+    /// returned. Otherwise, a new export token and signing key certificate are
+    /// generated. The default value is `false`, which generates a new export token
+    /// and signing key certificate on every call.
+    reuse_last_generated_token: ?bool = null,
+
     /// The signing key algorithm to generate a signing key certificate. This
     /// certificate signs the wrapped key under export within the TR-34 key block.
     /// `RSA_2048` is the only signing key algorithm allowed.
@@ -20,6 +29,7 @@ pub const GetParametersForExportInput = struct {
 
     pub const json_field_names = .{
         .key_material_type = "KeyMaterialType",
+        .reuse_last_generated_token = "ReuseLastGeneratedToken",
         .signing_key_algorithm = "SigningKeyAlgorithm",
     };
 };

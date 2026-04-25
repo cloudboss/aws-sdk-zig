@@ -22,14 +22,18 @@ const TimeZone = @import("time_zone.zig").TimeZone;
 
 pub const GetPlaceInput = struct {
     /// A list of optional additional parameters such as time zone that can be
-    /// requested for each result.
+    /// requested for each result. For
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only the `TimeZone` value.
     additional_features: ?[]const GetPlaceAdditionalFeature = null,
 
-    /// Indicates if the results will be stored. Defaults to `SingleUse`, if left
-    /// empty.
+    /// Indicates if the query results will be persisted in customer infrastructure.
+    /// Defaults to `SingleUse` (not stored). Not supported in `ap-southeast-1` and
+    /// `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
-    /// Storing the response of an GetPlace query is required to comply with service
-    /// terms, but charged at a higher cost per request. Please review the [user
+    /// When storing `GetPlace` responses, you *must* set this field to `Storage` to
+    /// comply with the terms of service. These requests will be charged at a higher
+    /// rate. Please review the [user
     /// agreement](https://aws.amazon.com/location/sla/) and [service pricing
     /// structure](https://aws.amazon.com/location/pricing/) to determine the
     /// correct setting for your use case.
@@ -42,7 +46,8 @@ pub const GetPlaceInput = struct {
     /// A list of [BCP 47](https://en.wikipedia.org/wiki/IETF_language_tag)
     /// compliant language codes for the results to be rendered in. If there is no
     /// data for the result in the requested language, data will be returned in the
-    /// default language for the entry.
+    /// default language for the entry. For
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only the following codes: `en, id, km, lo, ms, my, pt, th, tl, vi, zh`
     language: ?[]const u8 = null,
 
     /// The `PlaceId` of the place you wish to receive the information for.
@@ -51,7 +56,8 @@ pub const GetPlaceInput = struct {
     /// The alpha-2 or alpha-3 character code for the political view of a country.
     /// The political view applies to the results of the request to represent
     /// unresolved territorial claims through the point of view of the specified
-    /// country.
+    /// country. Not supported in `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     political_view: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -66,18 +72,24 @@ pub const GetPlaceInput = struct {
 
 pub const GetPlaceOutput = struct {
     /// Position of the access point in World Geodetic System (WGS 84) format:
-    /// [longitude, latitude].
+    /// [longitude, latitude]. Not available in `ap-southeast-1` and
+    /// `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     access_points: ?[]const AccessPoint = null,
 
     /// Indicates known access restrictions on a vehicle access point. The index
     /// correlates to an access point and indicates if access through this point has
-    /// some form of restriction.
+    /// some form of restriction. Not available in `ap-southeast-1` and
+    /// `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     access_restrictions: ?[]const AccessRestriction = null,
 
     /// The place's address.
     address: ?Address = null,
 
-    /// Boolean indicating if the address provided has been corrected.
+    /// Boolean indicating if the address provided has been corrected. Not available
+    /// in `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     address_number_corrected: ?bool = null,
 
     /// The Business Chains associated with the place.
@@ -86,13 +98,19 @@ pub const GetPlaceOutput = struct {
     /// Categories of results that results must belong to.
     categories: ?[]const Category = null,
 
-    /// List of potential contact methods for the result/place.
+    /// List of potential contact methods for the result/place. Not available in
+    /// `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     contacts: ?Contacts = null,
 
-    /// List of food types offered by this result.
+    /// List of food types offered by this result. Not available in `ap-southeast-1`
+    /// and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     food_types: ?[]const FoodType = null,
 
-    /// The main address corresponding to a place of type Secondary Address.
+    /// The main address corresponding to a place of type Secondary Address. Not
+    /// available in `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     main_address: ?RelatedPlace = null,
 
     /// The bounding box enclosing the geometric shape (area or line) that an
@@ -102,11 +120,15 @@ pub const GetPlaceOutput = struct {
     /// lng}, {southern lat}, {eastward lng}, {northern lat}]`
     map_view: ?[]const f64 = null,
 
-    /// List of opening hours objects.
+    /// List of opening hours objects. Not available in `ap-southeast-1` and
+    /// `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     opening_hours: ?[]const OpeningHours = null,
 
     /// How the various components of the result's address are pronounced in various
-    /// languages.
+    /// languages. Not available in `ap-southeast-1` and `ap-southeast-5` regions
+    /// for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     phonemes: ?PhonemeDetails = null,
 
     /// The `PlaceId` of the place you wish to receive the information for.
@@ -118,14 +140,17 @@ pub const GetPlaceOutput = struct {
     /// The alpha-2 or alpha-3 character code for the political view of a country.
     /// The political view applies to the results of the request to represent
     /// unresolved territorial claims through the point of view of the specified
-    /// country.
+    /// country. Not available in `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     political_view: ?[]const u8 = null,
 
     /// The position in World Geodetic System (WGS 84) format: [longitude,
     /// latitude].
     position: ?[]const f64 = null,
 
-    /// Contains details about the postal code of the place/result.
+    /// Contains details about the postal code of the place/result. Not available in
+    /// `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     postal_code_details: ?[]const PostalCodeDetails = null,
 
     /// The pricing bucket for which the query is charged at.
@@ -136,7 +161,9 @@ pub const GetPlaceOutput = struct {
 
     /// All secondary addresses that are associated with a main address. A secondary
     /// address is one that includes secondary designators, such as a Suite or Unit
-    /// Number, Building, or Floor information.
+    /// Number, Building, or Floor information. Not available in `ap-southeast-1`
+    /// and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
     /// Coverage for this functionality is available in the following countries:
     /// AUS, CAN, NZL, USA, PRI.
@@ -207,7 +234,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPlaceInput, config: 
     const port = aws.url.parsePort(endpoint);
 
     var path_buf: std.ArrayList(u8) = .{};
-    try path_buf.appendSlice(allocator, "/place/");
+    try path_buf.appendSlice(allocator, "/v2/place/");
     try path_buf.appendSlice(allocator, input.place_id);
     const path = try path_buf.toOwnedSlice(allocator);
 

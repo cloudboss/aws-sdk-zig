@@ -4,6 +4,7 @@ const AdvancedSecurityOptionsStatus = @import("advanced_security_options_status.
 const AutoTuneOptionsStatus = @import("auto_tune_options_status.zig").AutoTuneOptionsStatus;
 const ChangeProgressDetails = @import("change_progress_details.zig").ChangeProgressDetails;
 const CognitoOptionsStatus = @import("cognito_options_status.zig").CognitoOptionsStatus;
+const DeploymentStrategyOptionsStatus = @import("deployment_strategy_options_status.zig").DeploymentStrategyOptionsStatus;
 const DomainEndpointOptionsStatus = @import("domain_endpoint_options_status.zig").DomainEndpointOptionsStatus;
 const EBSOptionsStatus = @import("ebs_options_status.zig").EBSOptionsStatus;
 const ElasticsearchClusterConfigStatus = @import("elasticsearch_cluster_config_status.zig").ElasticsearchClusterConfigStatus;
@@ -37,6 +38,9 @@ pub const ElasticsearchDomainConfig = struct {
     /// [Amazon Cognito Authentication for
     /// Kibana](http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
     cognito_options: ?CognitoOptionsStatus = null,
+
+    /// Specifies `DeploymentStrategyOptions` for the domain.
+    deployment_strategy_options: ?DeploymentStrategyOptionsStatus = null,
 
     /// Specifies the `DomainEndpointOptions` for the Elasticsearch domain.
     domain_endpoint_options: ?DomainEndpointOptionsStatus = null,
@@ -77,6 +81,7 @@ pub const ElasticsearchDomainConfig = struct {
         .auto_tune_options = "AutoTuneOptions",
         .change_progress_details = "ChangeProgressDetails",
         .cognito_options = "CognitoOptions",
+        .deployment_strategy_options = "DeploymentStrategyOptions",
         .domain_endpoint_options = "DomainEndpointOptions",
         .ebs_options = "EBSOptions",
         .elasticsearch_cluster_config = "ElasticsearchClusterConfig",

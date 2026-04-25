@@ -38,9 +38,9 @@ pub const GetSessionEmbedUrlInput = struct {
     /// minutes.
     session_lifetime_in_minutes: ?i64 = null,
 
-    /// The Amazon Quick Suite user's Amazon Resource Name (ARN), for use with
+    /// The Amazon Quick user's Amazon Resource Name (ARN), for use with
     /// `QUICKSIGHT` identity type. You can use this for any type of Amazon Quick
-    /// Suite users in your account (readers, authors, or admins). They need to be
+    /// users in your account (readers, authors, or admins). They need to be
     /// authenticated as one of the following:
     ///
     /// * Active Directory (AD) users or group members
@@ -66,7 +66,7 @@ pub const GetSessionEmbedUrlInput = struct {
 
 pub const GetSessionEmbedUrlOutput = struct {
     /// A single-use URL that you can put into your server-side web page to embed
-    /// your Quick Suite session. This URL is valid for 5 minutes. The API operation
+    /// your Quick session. This URL is valid for 5 minutes. The API operation
     /// provides the
     /// URL with an `auth_code` value that enables one (and only one) sign-on to a
     /// user session that is valid for 10 hours.

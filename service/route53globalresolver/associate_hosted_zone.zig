@@ -45,8 +45,8 @@ pub const AssociateHostedZoneOutput = struct {
     /// hosted zone is associated to.
     resource_arn: []const u8,
 
-    /// Aggregate status for all the AWS Regions in which the Route 53 Global
-    /// Resolver exists.
+    /// Aggregate status for all the Amazon Web Services Regions in which the Route
+    /// 53 Global Resolver exists.
     status: HostedZoneAssociationStatus,
 
     /// The date and time the private hosted zone association was modified.

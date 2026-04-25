@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const EvaluationInput = @import("evaluation_input.zig").EvaluationInput;
+const EvaluationReferenceInput = @import("evaluation_reference_input.zig").EvaluationReferenceInput;
 const EvaluationTarget = @import("evaluation_target.zig").EvaluationTarget;
 const EvaluationResultContent = @import("evaluation_result_content.zig").EvaluationResultContent;
 
@@ -14,6 +15,13 @@ pub const EvaluateInput = struct {
     /// (AgentCore Runtime) or LangGraph with OpenInference instrumentation.
     evaluation_input: EvaluationInput,
 
+    /// Ground truth data to compare against agent responses during evaluation.
+    /// Allows to provide expected responses, assertions, and expected tool
+    /// trajectories at different evaluation levels. Session-level reference inputs
+    /// apply to the entire conversation, while trace-level reference inputs target
+    /// specific request-response interactions identified by trace ID.
+    evaluation_reference_inputs: ?[]const EvaluationReferenceInput = null,
+
     /// The specific trace or span IDs to evaluate within the provided input. Allows
     /// targeting evaluation at different levels: individual tool calls, single
     /// request-response interactions (traces), or entire conversation sessions.
@@ -21,11 +29,12 @@ pub const EvaluateInput = struct {
 
     /// The unique identifier of the evaluator to use for scoring. Can be a built-in
     /// evaluator (e.g., `Builtin.Helpfulness`, `Builtin.Correctness`) or a custom
-    /// evaluator ARN created through the control plane API.
+    /// evaluator Id created through the control plane API.
     evaluator_id: []const u8,
 
     pub const json_field_names = .{
         .evaluation_input = "evaluationInput",
+        .evaluation_reference_inputs = "evaluationReferenceInputs",
         .evaluation_target = "evaluationTarget",
         .evaluator_id = "evaluatorId",
     };
@@ -88,6 +97,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: EvaluateInput, config: 
     try body_buf.appendSlice(allocator, "\"evaluationInput\":");
     try aws.json.writeValue(@TypeOf(input.evaluation_input), input.evaluation_input, allocator, &body_buf);
     has_prev = true;
+    if (input.evaluation_reference_inputs) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"evaluationReferenceInputs\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.evaluation_target) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"evaluationTarget\":");

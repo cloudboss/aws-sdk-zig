@@ -8,12 +8,12 @@ const SecurityHubFeature = @import("security_hub_feature.zig").SecurityHubFeatur
 
 pub const EnableOrganizationAdminAccountInput = struct {
     /// The Amazon Web Services account identifier of the account to designate as
-    /// the Security Hub administrator
+    /// the Security Hub CSPM administrator
     /// account.
     admin_account_id: []const u8,
 
     /// The feature for which the delegated admin account is enabled.
-    /// Defaults to Security Hub if not specified.
+    /// Defaults to Security Hub CSPM if not specified.
     feature: ?SecurityHubFeature = null,
 
     pub const json_field_names = .{
@@ -24,12 +24,12 @@ pub const EnableOrganizationAdminAccountInput = struct {
 
 pub const EnableOrganizationAdminAccountOutput = struct {
     /// The Amazon Web Services account identifier of the account to designate as
-    /// the Security Hub administrator account.
+    /// the Security Hub CSPM administrator account.
     admin_account_id: ?[]const u8 = null,
 
     /// The feature where the delegated administrator is enabled.
-    /// The default is Security Hub CSPM if no delegated administrator is specified
-    /// in the request.
+    /// The default is Security Hub CSPM CSPM if no delegated administrator is
+    /// specified in the request.
     feature: ?SecurityHubFeature = null,
 
     pub const json_field_names = .{
@@ -165,6 +165,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "LimitExceededException")) {
         return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organization_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationalUnitNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organizational_unit_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

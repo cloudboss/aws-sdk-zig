@@ -2,20 +2,15 @@ const AssetDetails = @import("asset_details.zig").AssetDetails;
 const AssetType = @import("asset_type.zig").AssetType;
 
 /// An asset in AWS Data Exchange is a piece of data (Amazon S3 object) or a
-/// means of
-/// fulfilling data (Amazon Redshift datashare or Amazon API Gateway API, AWS
-/// Lake Formation
-/// data permission, or Amazon S3 data access). The asset can be a structured
-/// data file, an
-/// image file, or some other data file that can be stored as an Amazon S3
-/// object, an Amazon
-/// API Gateway API, or an Amazon Redshift datashare, an AWS Lake Formation data
-/// permission, or
-/// an Amazon S3 data access. When you create an import job for your files, API
-/// Gateway APIs,
-/// Amazon Redshift datashares, AWS Lake Formation data permission, or Amazon S3
-/// data access,
-/// you create an asset in AWS Data Exchange.
+/// means of fulfilling data (Amazon Redshift datashare or Amazon API Gateway
+/// API, AWS Lake Formation data permission, or Amazon S3 data access). The
+/// asset can be a structured data file, an image file, or some other data file
+/// that can be stored as an Amazon S3 object, an Amazon API Gateway API, or an
+/// Amazon Redshift datashare, an AWS Lake Formation data permission, or an
+/// Amazon S3 data access. When you create an import job for your files, API
+/// Gateway APIs, Amazon Redshift datashares, AWS Lake Formation data
+/// permission, or Amazon S3 data access, you create an asset in AWS Data
+/// Exchange.
 pub const AssetEntry = struct {
     /// The ARN for the asset.
     arn: []const u8,
@@ -36,28 +31,21 @@ pub const AssetEntry = struct {
     id: []const u8,
 
     /// The name of the asset. When importing from Amazon S3, the Amazon S3 object
-    /// key is used
-    /// as the asset name. When exporting to Amazon S3, the asset name is used as
-    /// default target
-    /// Amazon S3 object key. When importing from Amazon API Gateway API, the API
-    /// name is used as
-    /// the asset name. When importing from Amazon Redshift, the datashare name is
-    /// used as the
-    /// asset name. When importing from AWS Lake Formation, the static values of
-    /// "Database(s)
+    /// key is used as the asset name. When exporting to Amazon S3, the asset name
+    /// is used as default target Amazon S3 object key. When importing from Amazon
+    /// API Gateway API, the API name is used as the asset name. When importing from
+    /// Amazon Redshift, the datashare name is used as the asset name. When
+    /// importing from AWS Lake Formation, the static values of "Database(s)
     /// included in LF-tag policy" or "Table(s) included in LF-tag policy" are used
-    /// as the asset
-    /// name.
+    /// as the asset name.
     name: []const u8,
 
     /// The unique identifier for the revision associated with this asset.
     revision_id: []const u8,
 
     /// The asset ID of the owned asset corresponding to the entitled asset being
-    /// viewed. This
-    /// parameter is returned when an asset owner is viewing the entitled copy of
-    /// its owned
-    /// asset.
+    /// viewed. This parameter is returned when an asset owner is viewing the
+    /// entitled copy of its owned asset.
     source_id: ?[]const u8 = null,
 
     /// The date and time that the asset was last updated, in ISO 8601 format.

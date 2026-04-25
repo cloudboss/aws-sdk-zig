@@ -38,7 +38,7 @@ pub const CertificateSummary = struct {
     extended_key_usages: ?[]const ExtendedKeyUsageName = null,
 
     /// When called by
-    /// [ListCertificates](https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html), indicates whether the full list of subject alternative names has been included in the response. If false, the response includes all of the subject alternative names included in the certificate. If true, the response only includes the first 100 subject alternative names included in the certificate. To display the full list of subject alternative names, use [DescribeCertificate](https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html).
+    /// [ListCertificates](https://docs.aws.amazon.com/acm/latest/APIReference/API_ListCertificates.html), indicates whether the full list of subject alternative names has been included in the response. If false, the response includes all of the subject alternative names included in the certificate. If true, the response only includes the first 100 subject alternative names included in the certificate. To display the full list of subject alternative names, use [DescribeCertificate](https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html).
     has_additional_subject_alternative_names: ?bool = null,
 
     /// The date and time when the certificate was imported. This value exists only
@@ -96,7 +96,7 @@ pub const CertificateSummary = struct {
     /// additional domain names that can be used to connect to the website.
     ///
     /// When called by
-    /// [ListCertificates](https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html), this parameter will only return the first 100 subject alternative names included in the certificate. To display the full list of subject alternative names, use [DescribeCertificate](https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html).
+    /// [ListCertificates](https://docs.aws.amazon.com/acm/latest/APIReference/API_ListCertificates.html), this parameter will only return the first 100 subject alternative names included in the certificate. To display the full list of subject alternative names, use [DescribeCertificate](https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html).
     subject_alternative_name_summaries: ?[]const []const u8 = null,
 
     /// The source of the certificate. For certificates provided by ACM, this value

@@ -8,8 +8,7 @@ const PriceList = @import("price_list.zig").PriceList;
 
 pub const ListPriceListsInput = struct {
     /// The three alphabetical character ISO-4217 currency code that the Price List
-    /// files are
-    /// denominated in.
+    /// files are denominated in.
     currency_code: []const u8,
 
     /// The date that the Price List file prices are effective from.
@@ -23,23 +22,20 @@ pub const ListPriceListsInput = struct {
     next_token: ?[]const u8 = null,
 
     /// This is used to filter the Price List by Amazon Web Services Region. For
-    /// example, to get
-    /// the price list only for the `US East (N. Virginia)` Region, use
-    /// `us-east-1`. If nothing is specified, you retrieve price lists for all
+    /// example, to get the price list only for the `US East (N. Virginia)` Region,
+    /// use `us-east-1`. If nothing is specified, you retrieve price lists for all
     /// applicable Regions. The available `RegionCode` list can be retrieved from
     /// [GetAttributeValues](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetAttributeValues.html) API.
     region_code: ?[]const u8 = null,
 
-    /// The service code or the Savings Plan service code for the attributes that
+    /// The service code or the Savings Plans service code for the attributes that
     /// you want to retrieve. For example, to get the list of applicable Amazon EC2
-    /// price
-    /// lists, use `AmazonEC2`. For a full list of service codes containing
-    /// On-Demand
-    /// and Reserved Instance (RI) pricing, use the
+    /// price lists, use `AmazonEC2`. For a full list of service codes containing
+    /// On-Demand and Reserved Instance (RI) pricing, use the
     /// [DescribeServices](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_DescribeServices.html#awscostmanagement-pricing_DescribeServices-request-FormatVersion) API.
     ///
-    /// To retrieve the Reserved Instance and Compute Savings Plan price lists,
-    /// use `ComputeSavingsPlans`.
+    /// To retrieve the Reserved Instance and Compute Savings Plans price lists, use
+    /// `ComputeSavingsPlans`.
     ///
     /// To retrieve Machine Learning Savings Plans price lists, use
     /// `MachineLearningSavingsPlans`.

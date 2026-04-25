@@ -5,7 +5,7 @@ const OAuthUpdate = @import("o_auth_update.zig").OAuthUpdate;
 /// destination.
 pub const AuthConfigUpdate = struct {
     /// The General Authorization update information containing authorization
-    /// materials to add or update in Kinesis Data Streams.
+    /// materials to add or update.
     general_authorization_update: ?GeneralAuthorizationUpdate = null,
 
     /// The updated OAuth configuration settings for the authentication

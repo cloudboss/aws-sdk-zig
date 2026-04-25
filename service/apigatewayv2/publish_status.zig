@@ -5,12 +5,16 @@ pub const PublishStatus = enum {
     published,
     publish_in_progress,
     publish_failed,
+    disable_in_progress,
+    disable_failed,
     disabled,
 
     pub const json_field_names = .{
         .published = "PUBLISHED",
         .publish_in_progress = "PUBLISH_IN_PROGRESS",
         .publish_failed = "PUBLISH_FAILED",
+        .disable_in_progress = "DISABLE_IN_PROGRESS",
+        .disable_failed = "DISABLE_FAILED",
         .disabled = "DISABLED",
     };
 
@@ -19,6 +23,8 @@ pub const PublishStatus = enum {
             .published => "PUBLISHED",
             .publish_in_progress => "PUBLISH_IN_PROGRESS",
             .publish_failed => "PUBLISH_FAILED",
+            .disable_in_progress => "DISABLE_IN_PROGRESS",
+            .disable_failed => "DISABLE_FAILED",
             .disabled => "DISABLED",
         };
     }

@@ -52,6 +52,10 @@ pub const Client = struct {
         return get_sprites.execute(self, allocator, input, options);
     }
 
+    /// This operation is not supported in `ap-southeast-1` and `ap-southeast-5`
+    /// regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
+    ///
     /// `GetStaticMap` provides high-quality static map images with customizable
     /// options. You can modify the map's appearance and overlay additional
     /// information. It's an ideal solution for applications requiring tailored
@@ -79,7 +83,7 @@ pub const Client = struct {
     }
 
     /// `GetTile` returns a tile. Map tiles are used by clients to render a map.
-    /// they're addressed using a grid arrangement with an X coordinate, Y
+    /// They're addressed using a grid arrangement with an X coordinate, Y
     /// coordinate, and Z (zoom) level.
     ///
     /// For more information, see

@@ -5,9 +5,10 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ProvisioningType = @import("provisioning_type.zig").ProvisioningType;
+const ProvisioningProfileStatus = @import("provisioning_profile_status.zig").ProvisioningProfileStatus;
 
 pub const GetProvisioningProfileInput = struct {
-    /// The provisioning template the device uses for the provisioning process.
+    /// The id of a provisioning profile.
     identifier: []const u8,
 
     pub const json_field_names = .{
@@ -16,22 +17,24 @@ pub const GetProvisioningProfileInput = struct {
 };
 
 pub const GetProvisioningProfileOutput = struct {
-    /// The Amazon Resource Name (ARN) of the provisioning template used in the
-    /// provisioning profile.
+    /// The Amazon Resource Name (ARN) of the provisioning profile.
     arn: ?[]const u8 = null,
 
-    /// The id of the claim certificate.
+    /// The body of the PEM-encoded claim certificate.
     claim_certificate: ?[]const u8 = null,
 
     /// The provisioning profile id.
     id: ?[]const u8 = null,
 
-    /// The name of the provisioning template.
+    /// The name of the provisioning profile.
     name: ?[]const u8 = null,
 
     /// The type of provisioning workflow the device uses for onboarding to IoT
     /// managed integrations.
     provisioning_type: ?ProvisioningType = null,
+
+    /// The status of a provisioning profile.
+    status: ?ProvisioningProfileStatus = null,
 
     /// A set of key/value pairs that are used to manage the provisioning profile.
     tags: ?[]const aws.map.StringMapEntry = null,
@@ -42,6 +45,7 @@ pub const GetProvisioningProfileOutput = struct {
         .id = "Id",
         .name = "Name",
         .provisioning_type = "ProvisioningType",
+        .status = "Status",
         .tags = "Tags",
     };
 };

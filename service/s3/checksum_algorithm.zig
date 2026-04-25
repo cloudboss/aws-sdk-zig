@@ -6,6 +6,11 @@ pub const ChecksumAlgorithm = enum {
     sha1,
     sha256,
     crc64_nvme,
+    sha512,
+    md5,
+    xxhash64,
+    xxhash3,
+    xxhash128,
 
     pub const json_field_names = .{
         .crc32 = "CRC32",
@@ -13,6 +18,11 @@ pub const ChecksumAlgorithm = enum {
         .sha1 = "SHA1",
         .sha256 = "SHA256",
         .crc64_nvme = "CRC64NVME",
+        .sha512 = "SHA512",
+        .md5 = "MD5",
+        .xxhash64 = "XXHASH64",
+        .xxhash3 = "XXHASH3",
+        .xxhash128 = "XXHASH128",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -22,6 +32,11 @@ pub const ChecksumAlgorithm = enum {
             .sha1 => "SHA1",
             .sha256 => "SHA256",
             .crc64_nvme => "CRC64NVME",
+            .sha512 => "SHA512",
+            .md5 => "MD5",
+            .xxhash64 => "XXHASH64",
+            .xxhash3 => "XXHASH3",
+            .xxhash128 => "XXHASH128",
         };
     }
 

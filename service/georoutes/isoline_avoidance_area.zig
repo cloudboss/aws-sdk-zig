@@ -1,12 +1,16 @@
 const IsolineAvoidanceAreaGeometry = @import("isoline_avoidance_area_geometry.zig").IsolineAvoidanceAreaGeometry;
 
-/// The area to be avoided.
+/// Defines an area to avoid when calculating routes. Consists of a primary
+/// geometry to avoid, with the ability to specify exception areas within that
+/// geometry where travel is permitted.
 pub const IsolineAvoidanceArea = struct {
-    /// Exceptions to the provided avoidance geometry, to be included while
-    /// calculating an isoline.
+    /// Areas within the primary avoidance geometry where travel is allowed. For
+    /// example, you might want to avoid a neighborhood but allow travel on a major
+    /// road that passes through it.
     except: ?[]const IsolineAvoidanceAreaGeometry = null,
 
-    /// Geometry of the area to be avoided.
+    /// The primary area to avoid, specified using a bounding box, corridor,
+    /// polygon, or polyline corridor.
     geometry: IsolineAvoidanceAreaGeometry,
 
     pub const json_field_names = .{

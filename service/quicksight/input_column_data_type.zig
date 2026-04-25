@@ -8,6 +8,7 @@ pub const InputColumnDataType = enum {
     bit,
     boolean,
     json,
+    semistruct,
 
     pub const json_field_names = .{
         .string = "STRING",
@@ -17,6 +18,7 @@ pub const InputColumnDataType = enum {
         .bit = "BIT",
         .boolean = "BOOLEAN",
         .json = "JSON",
+        .semistruct = "SEMISTRUCT",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -28,6 +30,7 @@ pub const InputColumnDataType = enum {
             .bit => "BIT",
             .boolean => "BOOLEAN",
             .json => "JSON",
+            .semistruct => "SEMISTRUCT",
         };
     }
 

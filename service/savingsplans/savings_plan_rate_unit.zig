@@ -16,6 +16,8 @@ pub const SavingsPlanRateUnit = enum {
     elasti_cache_processing_unit,
     dcu_hr,
     ncu_hr,
+    ocu_hrs,
+    jobs,
 
     pub const json_field_names = .{
         .hours = "Hrs",
@@ -33,6 +35,8 @@ pub const SavingsPlanRateUnit = enum {
         .elasti_cache_processing_unit = "ElastiCacheProcessingUnit",
         .dcu_hr = "DCU-Hr",
         .ncu_hr = "NCU-hr",
+        .ocu_hrs = "OCU-hours",
+        .jobs = "Jobs",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -52,6 +56,8 @@ pub const SavingsPlanRateUnit = enum {
             .elasti_cache_processing_unit => "ElastiCacheProcessingUnit",
             .dcu_hr => "DCU-Hr",
             .ncu_hr => "NCU-hr",
+            .ocu_hrs => "OCU-hours",
+            .jobs => "Jobs",
         };
     }
 

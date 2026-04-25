@@ -4,6 +4,8 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const PaymentOption = @import("payment_option.zig").PaymentOption;
+const PaymentTerm = @import("payment_term.zig").PaymentTerm;
 const Subscription = @import("subscription.zig").Subscription;
 
 pub const GetOutpostBillingInformationInput = struct {
@@ -23,15 +25,21 @@ pub const GetOutpostBillingInformationInput = struct {
 
 pub const GetOutpostBillingInformationOutput = struct {
     /// The date the current contract term ends for the specified Outpost. You must
-    /// start the renewal or
-    /// decommission process at least 5 business days before the current term for
-    /// your
+    /// start the
+    /// renewal or decommission process at least 5 business days before the current
+    /// term for your
     /// Amazon Web Services Outposts ends. Failing to complete these steps at least
-    /// 5 business days before the
-    /// current term ends might result in unanticipated charges.
+    /// 5 business days before the current term
+    /// ends might result in unanticipated charges.
     contract_end_date: ?[]const u8 = null,
 
     next_token: ?[]const u8 = null,
+
+    /// The payment option.
+    payment_option: ?PaymentOption = null,
+
+    /// The payment term.
+    payment_term: ?PaymentTerm = null,
 
     /// The subscription details for the specified Outpost.
     subscriptions: ?[]const Subscription = null,
@@ -39,6 +47,8 @@ pub const GetOutpostBillingInformationOutput = struct {
     pub const json_field_names = .{
         .contract_end_date = "ContractEndDate",
         .next_token = "NextToken",
+        .payment_option = "PaymentOption",
+        .payment_term = "PaymentTerm",
         .subscriptions = "Subscriptions",
     };
 };

@@ -9,62 +9,57 @@ const LaunchType = @import("launch_type.zig").LaunchType;
 
 pub const ListTasksInput = struct {
     /// The short name or full Amazon Resource Name (ARN) of the cluster to use when
-    /// filtering
-    /// the `ListTasks` results. If you do not specify a cluster, the default
-    /// cluster
-    /// is assumed.
+    /// filtering the `ListTasks` results. If you do not specify a cluster, the
+    /// default cluster is assumed.
     cluster: ?[]const u8 = null,
 
     /// The container instance ID or full ARN of the container instance to use when
-    /// filtering
-    /// the `ListTasks` results. Specifying a `containerInstance` limits
+    /// filtering the `ListTasks` results. Specifying a `containerInstance` limits
     /// the results to tasks that belong to that container instance.
     container_instance: ?[]const u8 = null,
 
+    /// The name of the daemon to use when filtering the `ListTasks` results.
+    /// Specifying a `daemonName` limits the results to tasks that belong to that
+    /// daemon.
+    daemon_name: ?[]const u8 = null,
+
     /// The task desired status to use when filtering the `ListTasks` results.
-    /// Specifying a `desiredStatus` of `STOPPED` limits the results to
-    /// tasks that Amazon ECS has set the desired status to `STOPPED`. This can be
-    /// useful for debugging tasks that aren't starting properly or have died or
-    /// finished. The
+    /// Specifying a `desiredStatus` of `STOPPED` limits the results to tasks that
+    /// Amazon ECS has set the desired status to `STOPPED`. This can be useful for
+    /// debugging tasks that aren't starting properly or have died or finished. The
     /// default status filter is `RUNNING`, which shows tasks that Amazon ECS has
-    /// set
-    /// the desired status to `RUNNING`.
+    /// set the desired status to `RUNNING`.
     ///
-    /// Although you can filter results based on a desired status of `PENDING`,
-    /// this doesn't return any results. Amazon ECS never sets the desired status of
-    /// a task
-    /// to that value (only a task's `lastStatus` may have a value of
+    /// Although you can filter results based on a desired status of `PENDING`, this
+    /// doesn't return any results. Amazon ECS never sets the desired status of a
+    /// task to that value (only a task's `lastStatus` may have a value of
     /// `PENDING`).
     desired_status: ?DesiredStatus = null,
 
-    /// The name of the task definition family to use when filtering the
-    /// `ListTasks` results. Specifying a `family` limits the results
-    /// to tasks that belong to that family.
+    /// The name of the task definition family to use when filtering the `ListTasks`
+    /// results. Specifying a `family` limits the results to tasks that belong to
+    /// that family.
     family: ?[]const u8 = null,
 
     /// The launch type to use when filtering the `ListTasks` results.
     launch_type: ?LaunchType = null,
 
     /// The maximum number of task results that `ListTasks` returned in paginated
-    /// output. When this parameter is used, `ListTasks` only returns
-    /// `maxResults` results in a single page along with a `nextToken`
-    /// response element. The remaining results of the initial request can be seen
-    /// by sending
-    /// another `ListTasks` request with the returned `nextToken` value.
-    /// This value can be between 1 and 100. If this parameter isn't used, then
-    /// `ListTasks` returns up to 100 results and a `nextToken` value
-    /// if applicable.
+    /// output. When this parameter is used, `ListTasks` only returns `maxResults`
+    /// results in a single page along with a `nextToken` response element. The
+    /// remaining results of the initial request can be seen by sending another
+    /// `ListTasks` request with the returned `nextToken` value. This value can be
+    /// between 1 and 100. If this parameter isn't used, then `ListTasks` returns up
+    /// to 100 results and a `nextToken` value if applicable.
     max_results: ?i32 = null,
 
-    /// The `nextToken` value returned from a `ListTasks` request
-    /// indicating that more results are available to fulfill the request and
-    /// further calls will
-    /// be needed. If `maxResults` was provided, it's possible the number of results
-    /// to be fewer than `maxResults`.
+    /// The `nextToken` value returned from a `ListTasks` request indicating that
+    /// more results are available to fulfill the request and further calls will be
+    /// needed. If `maxResults` was provided, it's possible the number of results to
+    /// be fewer than `maxResults`.
     ///
     /// This token should be treated as an opaque identifier that is only used to
-    /// retrieve
-    /// the next items in a list and not for other programmatic purposes.
+    /// retrieve the next items in a list and not for other programmatic purposes.
     next_token: ?[]const u8 = null,
 
     /// The name of the service to use when filtering the `ListTasks` results.
@@ -83,6 +78,7 @@ pub const ListTasksInput = struct {
     pub const json_field_names = .{
         .cluster = "cluster",
         .container_instance = "containerInstance",
+        .daemon_name = "daemonName",
         .desired_status = "desiredStatus",
         .family = "family",
         .launch_type = "launchType",
@@ -94,11 +90,10 @@ pub const ListTasksInput = struct {
 };
 
 pub const ListTasksOutput = struct {
-    /// The `nextToken` value to include in a future `ListTasks`
-    /// request. When the results of a `ListTasks` request exceed
-    /// `maxResults`, this value can be used to retrieve the next page of
-    /// results. This value is `null` when there are no more results to
-    /// return.
+    /// The `nextToken` value to include in a future `ListTasks` request. When the
+    /// results of a `ListTasks` request exceed `maxResults`, this value can be used
+    /// to retrieve the next page of results. This value is `null` when there are no
+    /// more results to return.
     next_token: ?[]const u8 = null,
 
     /// The list of task ARN entries for the `ListTasks` request.
@@ -234,6 +229,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

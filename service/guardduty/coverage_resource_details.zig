@@ -5,12 +5,11 @@ const ResourceType = @import("resource_type.zig").ResourceType;
 
 /// Information about the resource for each individual EKS cluster.
 pub const CoverageResourceDetails = struct {
-    /// Information about the Amazon EC2 instance assessed
-    /// for runtime coverage.
+    /// Information about the Amazon EC2 instance assessed for runtime coverage.
     ec_2_instance_details: ?CoverageEc2InstanceDetails = null,
 
-    /// Information about the Amazon ECS cluster that is assessed for
-    /// runtime coverage.
+    /// Information about the Amazon ECS cluster that is assessed for runtime
+    /// coverage.
     ecs_cluster_details: ?CoverageEcsClusterDetails = null,
 
     /// EKS cluster details involved in the coverage statistics.

@@ -11,6 +11,7 @@ const describe_service_environments = @import("describe_service_environments.zig
 const list_consumable_resources = @import("list_consumable_resources.zig");
 const list_jobs = @import("list_jobs.zig");
 const list_jobs_by_consumable_resource = @import("list_jobs_by_consumable_resource.zig");
+const list_quota_shares = @import("list_quota_shares.zig");
 const list_scheduling_policies = @import("list_scheduling_policies.zig");
 const list_service_jobs = @import("list_service_jobs.zig");
 
@@ -270,6 +271,46 @@ pub const ListJobsByConsumableResourcePaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_jobs_by_consumable_resource.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListQuotaSharesPaginator = struct {
+    client: *Client,
+    params: list_quota_shares.ListQuotaSharesInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_quota_shares.ListQuotaSharesOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_quota_shares.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

@@ -3,9 +3,10 @@ const RouteSideOfStreetOptions = @import("route_side_of_street_options.zig").Rou
 
 /// Options related to the destination.
 pub const RouteDestinationOptions = struct {
-    /// Avoids actions for the provided distance. This is typically to consider for
-    /// users in moving vehicles who may not have sufficient time to make an action
-    /// at an origin or a destination.
+    /// The distance in meters from the destination point within which certain
+    /// routing actions (such as U-turns or left turns across traffic) are
+    /// restricted. This helps generate more practical routes by avoiding
+    /// potentially dangerous maneuvers near the endpoint.
     avoid_actions_for_distance: i64 = 0,
 
     /// Avoid U-turns for calculation on highways and motorways.

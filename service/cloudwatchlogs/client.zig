@@ -11,6 +11,7 @@ const create_import_task = @import("create_import_task.zig");
 const create_log_anomaly_detector = @import("create_log_anomaly_detector.zig");
 const create_log_group = @import("create_log_group.zig");
 const create_log_stream = @import("create_log_stream.zig");
+const create_lookup_table = @import("create_lookup_table.zig");
 const create_scheduled_query = @import("create_scheduled_query.zig");
 const delete_account_policy = @import("delete_account_policy.zig");
 const delete_data_protection_policy = @import("delete_data_protection_policy.zig");
@@ -24,6 +25,7 @@ const delete_integration = @import("delete_integration.zig");
 const delete_log_anomaly_detector = @import("delete_log_anomaly_detector.zig");
 const delete_log_group = @import("delete_log_group.zig");
 const delete_log_stream = @import("delete_log_stream.zig");
+const delete_lookup_table = @import("delete_lookup_table.zig");
 const delete_metric_filter = @import("delete_metric_filter.zig");
 const delete_query_definition = @import("delete_query_definition.zig");
 const delete_resource_policy = @import("delete_resource_policy.zig");
@@ -44,6 +46,7 @@ const describe_import_tasks = @import("describe_import_tasks.zig");
 const describe_index_policies = @import("describe_index_policies.zig");
 const describe_log_groups = @import("describe_log_groups.zig");
 const describe_log_streams = @import("describe_log_streams.zig");
+const describe_lookup_tables = @import("describe_lookup_tables.zig");
 const describe_metric_filters = @import("describe_metric_filters.zig");
 const describe_queries = @import("describe_queries.zig");
 const describe_query_definitions = @import("describe_query_definitions.zig");
@@ -64,6 +67,7 @@ const get_log_fields = @import("get_log_fields.zig");
 const get_log_group_fields = @import("get_log_group_fields.zig");
 const get_log_object = @import("get_log_object.zig");
 const get_log_record = @import("get_log_record.zig");
+const get_lookup_table = @import("get_lookup_table.zig");
 const get_query_results = @import("get_query_results.zig");
 const get_scheduled_query = @import("get_scheduled_query.zig");
 const get_scheduled_query_history = @import("get_scheduled_query_history.zig");
@@ -79,6 +83,7 @@ const list_sources_for_s3_table_integration = @import("list_sources_for_s3_table
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const list_tags_log_group = @import("list_tags_log_group.zig");
 const put_account_policy = @import("put_account_policy.zig");
+const put_bearer_token_authentication = @import("put_bearer_token_authentication.zig");
 const put_data_protection_policy = @import("put_data_protection_policy.zig");
 const put_delivery_destination = @import("put_delivery_destination.zig");
 const put_delivery_destination_policy = @import("put_delivery_destination_policy.zig");
@@ -107,6 +112,7 @@ const untag_resource = @import("untag_resource.zig");
 const update_anomaly = @import("update_anomaly.zig");
 const update_delivery_configuration = @import("update_delivery_configuration.zig");
 const update_log_anomaly_detector = @import("update_log_anomaly_detector.zig");
+const update_lookup_table = @import("update_lookup_table.zig");
 const update_scheduled_query = @import("update_scheduled_query.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
@@ -337,9 +343,10 @@ pub const Client = struct {
     ///
     /// * logs:PutResourcePolicy
     ///
-    /// * (If source has an associated AWS KMS Key) kms:Decrypt
+    /// * (If source has an associated Amazon Web Services KMS Key) kms:Decrypt
     ///
-    /// * (If source has an associated AWS KMS Key) kms:GenerateDataKey
+    /// * (If source has an associated Amazon Web Services KMS Key)
+    ///   kms:GenerateDataKey
     ///
     /// Example IAM policy for provided import role:
     ///
@@ -464,6 +471,19 @@ pub const Client = struct {
     /// * Don't use ':' (colon) or '*' (asterisk) characters.
     pub fn createLogStream(self: *Self, allocator: std.mem.Allocator, input: create_log_stream.CreateLogStreamInput, options: CallOptions) !create_log_stream.CreateLogStreamOutput {
         return create_log_stream.execute(self, allocator, input, options);
+    }
+
+    /// Creates a lookup table by uploading CSV data. You can use lookup tables to
+    /// enrich log
+    /// data in CloudWatch Logs Insights queries with reference data such as user
+    /// details, application
+    /// names, or error descriptions.
+    ///
+    /// The table name must be unique within your account and Region. The CSV
+    /// content must include
+    /// a header row with column names, use UTF-8 encoding, and not exceed 10 MB.
+    pub fn createLookupTable(self: *Self, allocator: std.mem.Allocator, input: create_lookup_table.CreateLookupTableInput, options: CallOptions) !create_lookup_table.CreateLookupTableOutput {
+        return create_lookup_table.execute(self, allocator, input, options);
     }
 
     /// Creates a scheduled query that runs CloudWatch Logs Insights queries at
@@ -642,6 +662,15 @@ pub const Client = struct {
     /// associated with the log stream.
     pub fn deleteLogStream(self: *Self, allocator: std.mem.Allocator, input: delete_log_stream.DeleteLogStreamInput, options: CallOptions) !delete_log_stream.DeleteLogStreamOutput {
         return delete_log_stream.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a lookup table permanently. This operation cannot be undone.
+    ///
+    /// Queries that reference a deleted table will return an error. Before deleting
+    /// a lookup
+    /// table, review any saved queries or dashboards that may reference it.
+    pub fn deleteLookupTable(self: *Self, allocator: std.mem.Allocator, input: delete_lookup_table.DeleteLookupTableInput, options: CallOptions) !delete_lookup_table.DeleteLookupTableOutput {
+        return delete_lookup_table.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified metric filter.
@@ -876,6 +905,14 @@ pub const Client = struct {
     /// observability](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html).
     pub fn describeLogStreams(self: *Self, allocator: std.mem.Allocator, input: describe_log_streams.DescribeLogStreamsInput, options: CallOptions) !describe_log_streams.DescribeLogStreamsOutput {
         return describe_log_streams.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves metadata about lookup tables in your account. You can optionally
+    /// filter the
+    /// results by table name prefix. Results are sorted by table name in ascending
+    /// order.
+    pub fn describeLookupTables(self: *Self, allocator: std.mem.Allocator, input: describe_lookup_tables.DescribeLookupTablesInput, options: CallOptions) !describe_lookup_tables.DescribeLookupTablesOutput {
+        return describe_lookup_tables.execute(self, allocator, input, options);
     }
 
     /// Lists the specified metric filters. You can list all of the metric filters
@@ -1213,6 +1250,15 @@ pub const Client = struct {
     /// could be
     /// `@ptr.$['input']['message']`, `@ptr.$['AAA']['BBB']['CCC']['DDD']`,
     /// `@ptr.$['AAA']`, or any other path matching your log structure.
+    ///
+    /// The `GetLogObject` API routes requests using SDK host prefix injection. SDK
+    /// versions released before April 1, 2026 route to
+    /// `streaming-logs.*Region*.amazonaws.com`, which does not support VPC
+    /// endpoints. SDK versions released on or after April 1, 2026 route to
+    /// `stream-logs.*Region*.amazonaws.com`, which supports VPC endpoints. To set
+    /// up a VPC endpoint for this API, see [Creating a VPC endpoint for CloudWatch
+    /// Logs
+    /// ](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch-logs-and-interface-VPC.html#create-VPC-endpoint-for-CloudWatchLogs).
     pub fn getLogObject(self: *Self, allocator: std.mem.Allocator, input: get_log_object.GetLogObjectInput, options: CallOptions) !get_log_object.GetLogObjectOutput {
         return get_log_object.execute(self, allocator, input, options);
     }
@@ -1226,6 +1272,11 @@ pub const Client = struct {
     /// The full unparsed log event is returned within `@message`.
     pub fn getLogRecord(self: *Self, allocator: std.mem.Allocator, input: get_log_record.GetLogRecordInput, options: CallOptions) !get_log_record.GetLogRecordOutput {
         return get_log_record.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the full content of a lookup table, including the CSV data.
+    pub fn getLookupTable(self: *Self, allocator: std.mem.Allocator, input: get_lookup_table.GetLookupTableInput, options: CallOptions) !get_lookup_table.GetLookupTableOutput {
+        return get_lookup_table.execute(self, allocator, input, options);
     }
 
     /// Returns the results from the specified query.
@@ -1780,8 +1831,8 @@ pub const Client = struct {
     /// the EMF format
     /// are still ingested, but no CloudWatch Metrics are created from them.
     ///
-    /// Creating a policy disables metrics for AWS features that use EMF to create
-    /// metrics, such
+    /// Creating a policy disables metrics for Amazon Web Services features that use
+    /// EMF to create metrics, such
     /// as CloudWatch Container Insights and CloudWatch Application Signals. To
     /// prevent turning off
     /// those features by accident, we recommend that you exclude the underlying
@@ -1840,6 +1891,19 @@ pub const Client = struct {
     /// `"/aws/lambda"`.
     pub fn putAccountPolicy(self: *Self, allocator: std.mem.Allocator, input: put_account_policy.PutAccountPolicyInput, options: CallOptions) !put_account_policy.PutAccountPolicyOutput {
         return put_account_policy.execute(self, allocator, input, options);
+    }
+
+    /// Enables or disables bearer token authentication for the specified log group.
+    /// When enabled on a
+    /// log group, bearer token authentication is enabled on operations until it is
+    /// explicitly
+    /// disabled.
+    ///
+    /// For information about the parameters that are common to all actions, see
+    /// [Common
+    /// Parameters](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/CommonParameters.html).
+    pub fn putBearerTokenAuthentication(self: *Self, allocator: std.mem.Allocator, input: put_bearer_token_authentication.PutBearerTokenAuthenticationInput, options: CallOptions) !put_bearer_token_authentication.PutBearerTokenAuthenticationOutput {
+        return put_bearer_token_authentication.execute(self, allocator, input, options);
     }
 
     /// Creates a data protection policy for the specified log group. A data
@@ -2517,9 +2581,14 @@ pub const Client = struct {
     ///   [SessionTimeoutException](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartLiveTailResponseStream.html#CWL-Type-StartLiveTailResponseStream-SessionTimeoutException) object is returned when the session times out, after it
     /// has been kept open for three hours.
     ///
-    /// The `StartLiveTail` API routes requests to
-    /// `streaming-logs.*Region*.amazonaws.com` using SDK host
-    /// prefix injection. VPC endpoint support is not available for this API.
+    /// The `StartLiveTail` API routes requests using SDK host prefix injection. SDK
+    /// versions released before April 1, 2026 route to
+    /// `streaming-logs.*Region*.amazonaws.com`, which does not support VPC
+    /// endpoints. SDK versions released on or after April 1, 2026 route to
+    /// `stream-logs.*Region*.amazonaws.com`, which supports VPC endpoints. To set
+    /// up a VPC endpoint for this API, see [Creating a VPC endpoint for CloudWatch
+    /// Logs
+    /// ](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch-logs-and-interface-VPC.html#create-VPC-endpoint-for-CloudWatchLogs).
     ///
     /// You can end a session before it times out by closing the session stream or
     /// by closing
@@ -2593,8 +2662,8 @@ pub const Client = struct {
     /// observability](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html). For a cross-account `StartQuery`
     /// operation, the query definition must be defined in the monitoring account.
     ///
-    /// You can have up to 30 concurrent CloudWatch Logs insights queries, including
-    /// queries
+    /// You can have up to 100 concurrent CloudWatch Logs insights queries,
+    /// including queries
     /// that have been added to dashboards.
     pub fn startQuery(self: *Self, allocator: std.mem.Allocator, input: start_query.StartQueryInput, options: CallOptions) !start_query.StartQueryOutput {
         return start_query.execute(self, allocator, input, options);
@@ -2744,6 +2813,17 @@ pub const Client = struct {
     /// Updates an existing log anomaly detector.
     pub fn updateLogAnomalyDetector(self: *Self, allocator: std.mem.Allocator, input: update_log_anomaly_detector.UpdateLogAnomalyDetectorInput, options: CallOptions) !update_log_anomaly_detector.UpdateLogAnomalyDetectorOutput {
         return update_log_anomaly_detector.execute(self, allocator, input, options);
+    }
+
+    /// Updates an existing lookup table by replacing all of its CSV content. After
+    /// the update
+    /// completes, queries that use this table will use the new data.
+    ///
+    /// This is a full replacement operation. All existing content is replaced with
+    /// the new CSV
+    /// data.
+    pub fn updateLookupTable(self: *Self, allocator: std.mem.Allocator, input: update_lookup_table.UpdateLookupTableInput, options: CallOptions) !update_lookup_table.UpdateLookupTableOutput {
+        return update_lookup_table.execute(self, allocator, input, options);
     }
 
     /// Updates an existing scheduled query with new configuration. This operation

@@ -23,6 +23,10 @@ pub const Fleet = struct {
     /// The description to display.
     description: ?[]const u8 = null,
 
+    /// Indicates whether Instance Metadata Service Version 1 (IMDSv1) is disabled
+    /// for the fleet.
+    disable_imdsv1: ?bool = null,
+
     /// The amount of time that a streaming session remains active after users
     /// disconnect. If they try to reconnect to the streaming session after a
     /// disconnection or network interruption within this time interval, they are
@@ -257,6 +261,7 @@ pub const Fleet = struct {
         .compute_capacity_status = "ComputeCapacityStatus",
         .created_time = "CreatedTime",
         .description = "Description",
+        .disable_imdsv1 = "DisableIMDSV1",
         .disconnect_timeout_in_seconds = "DisconnectTimeoutInSeconds",
         .display_name = "DisplayName",
         .domain_join_info = "DomainJoinInfo",

@@ -1,8 +1,8 @@
 const ClusterStatus = @import("cluster_status.zig").ClusterStatus;
 
 /// Contains information about the Amazon EKS cluster involved in a GuardDuty
-/// finding,
-/// including cluster identification, status, and network configuration.
+/// finding, including cluster identification, status, and network
+/// configuration.
 pub const EksCluster = struct {
     /// The Amazon Resource Name (ARN) that uniquely identifies the Amazon EKS
     /// cluster involved in the finding.

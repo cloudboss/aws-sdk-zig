@@ -8,8 +8,8 @@ const SeverityLabel = @import("severity_label.zig").SeverityLabel;
 /// `BatchUpdateFindings`.
 ///
 /// The finding must have either `Label` or `Normalized` populated. If
-/// only one of these attributes is populated, then Security Hub automatically
-/// populates the other
+/// only one of these attributes is populated, then Security Hub CSPM
+/// automatically populates the other
 /// one. If neither attribute is populated, then the finding is invalid. `Label`
 /// is
 /// the preferred attribute.

@@ -5,6 +5,7 @@ const VisualInteractionOptions = @import("visual_interaction_options.zig").Visua
 const PivotTablePaginatedReportOptions = @import("pivot_table_paginated_report_options.zig").PivotTablePaginatedReportOptions;
 const PivotTableSortConfiguration = @import("pivot_table_sort_configuration.zig").PivotTableSortConfiguration;
 const PivotTableOptions = @import("pivot_table_options.zig").PivotTableOptions;
+const TooltipOptions = @import("tooltip_options.zig").TooltipOptions;
 const PivotTableTotalOptions = @import("pivot_table_total_options.zig").PivotTableTotalOptions;
 
 /// The configuration for a `PivotTableVisual`.
@@ -31,6 +32,8 @@ pub const PivotTableConfiguration = struct {
     /// The table options for a pivot table visual.
     table_options: ?PivotTableOptions = null,
 
+    tooltip: ?TooltipOptions = null,
+
     /// The total options for a pivot table visual.
     total_options: ?PivotTableTotalOptions = null,
 
@@ -42,6 +45,7 @@ pub const PivotTableConfiguration = struct {
         .paginated_report_options = "PaginatedReportOptions",
         .sort_configuration = "SortConfiguration",
         .table_options = "TableOptions",
+        .tooltip = "Tooltip",
         .total_options = "TotalOptions",
     };
 };

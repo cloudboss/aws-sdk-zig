@@ -6,6 +6,7 @@ pub const ResourceType = enum {
     policy,
     policy_template,
     schema,
+    policy_store_alias,
 
     pub const json_field_names = .{
         .identity_source = "IDENTITY_SOURCE",
@@ -13,6 +14,7 @@ pub const ResourceType = enum {
         .policy = "POLICY",
         .policy_template = "POLICY_TEMPLATE",
         .schema = "SCHEMA",
+        .policy_store_alias = "POLICY_STORE_ALIAS",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -22,6 +24,7 @@ pub const ResourceType = enum {
             .policy => "POLICY",
             .policy_template => "POLICY_TEMPLATE",
             .schema => "SCHEMA",
+            .policy_store_alias => "POLICY_STORE_ALIAS",
         };
     }
 

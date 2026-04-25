@@ -11,12 +11,9 @@ pub const ListOrganizationAdminAccountsInput = struct {
     max_results: ?i32 = null,
 
     /// A token to use for paginating results that are returned in the response. Set
-    /// the value of
-    /// this parameter to null for the first request to a list action. For
-    /// subsequent calls, use the
-    /// `NextToken` value returned from the previous request to continue listing
-    /// results
-    /// after the first page.
+    /// the value of this parameter to null for the first request to a list action.
+    /// For subsequent calls, use the `NextToken` value returned from the previous
+    /// request to continue listing results after the first page.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -30,8 +27,7 @@ pub const ListOrganizationAdminAccountsOutput = struct {
     admin_accounts: ?[]const AdminAccount = null,
 
     /// The pagination parameter to be used on the next list operation to retrieve
-    /// more
-    /// items.
+    /// more items.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{

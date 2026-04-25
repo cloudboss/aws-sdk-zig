@@ -12,8 +12,9 @@ pub const DisassociateOriginationIdentityInput = struct {
     client_token: ?[]const u8 = null,
 
     /// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
-    /// region.
-    iso_country_code: []const u8,
+    /// region. This field is optional and is not required for origination identity
+    /// types that are not country-specific, such as RCS agents.
+    iso_country_code: ?[]const u8 = null,
 
     /// The origination identity to use such as a PhoneNumberId, PhoneNumberArn,
     /// SenderId or SenderIdArn. You can use DescribePhoneNumbers find the values

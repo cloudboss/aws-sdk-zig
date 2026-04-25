@@ -37,7 +37,9 @@ pub const CreateLocationSmbInput = struct {
     /// credentials.
     ///
     /// Make sure that DataSync has permission to access the KMS key that
-    /// you specify.
+    /// you specify. For more information, see [
+    /// Using a service-managed secret encrypted with a custom KMS
+    /// key](https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#service-secret-custom-key).
     ///
     /// You can use either `CmkSecretConfig` (with either `Password` or
     /// `KerberosKeytab`) or `CustomSecretConfig` (without any `Password`
@@ -53,7 +55,10 @@ pub const CreateLocationSmbInput = struct {
     /// text (for
     /// `Password`) or binary (for `KerberosKeytab`). This configuration includes
     /// the secret ARN, and the ARN for an IAM role that provides access to the
-    /// secret.
+    /// secret. For
+    /// more information, see [
+    /// Using a secret that you
+    /// manage](https://docs.aws.amazon.com/datasync/latest/userguide/location-credentials.html#custom-secret-custom-key).
     ///
     /// You can use either `CmkSecretConfig` (with `SasConfiguration`) or
     /// `CustomSecretConfig` (without `SasConfiguration`) to provide

@@ -18,6 +18,10 @@ pub const ProductV2 = struct {
     /// The type of integration.
     integration_v2_types: ?[]const IntegrationV2Type = null,
 
+    /// The identifier for the Amazon Web Services Marketplace product associated
+    /// with this integration.
+    marketplace_product_id: ?[]const u8 = null,
+
     /// The console URL where you can purchase or subscribe to products.
     marketplace_url: ?[]const u8 = null,
 
@@ -30,6 +34,7 @@ pub const ProductV2 = struct {
         .company_name = "CompanyName",
         .description = "Description",
         .integration_v2_types = "IntegrationV2Types",
+        .marketplace_product_id = "MarketplaceProductId",
         .marketplace_url = "MarketplaceUrl",
         .product_v2_name = "ProductV2Name",
     };

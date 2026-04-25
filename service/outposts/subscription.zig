@@ -27,6 +27,10 @@ pub const Subscription = struct {
     /// * **ACTIVE** - Subscription requests that are in progress
     /// and have an end date in the future.
     ///
+    /// * **PENDING** - Subscription has been created but billing
+    /// has not yet commenced because the subscription begin date has not been
+    /// reached.
+    ///
     /// * **CANCELLED** - Subscription requests that are
     /// cancelled.
     subscription_status: ?SubscriptionStatus = null,

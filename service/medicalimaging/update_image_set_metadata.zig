@@ -23,6 +23,10 @@ pub const UpdateImageSetMetadataInput = struct {
     /// The image set identifier.
     image_set_id: []const u8,
 
+    /// Flag to apply the metadata updates to all image sets in the same Study as
+    /// the requested image set ID.
+    include_study_image_sets: ?bool = null,
+
     /// The latest image set version identifier.
     latest_version_id: []const u8,
 
@@ -33,6 +37,7 @@ pub const UpdateImageSetMetadataInput = struct {
         .datastore_id = "datastoreId",
         .force = "force",
         .image_set_id = "imageSetId",
+        .include_study_image_sets = "includeStudyImageSets",
         .latest_version_id = "latestVersionId",
         .update_image_set_metadata_updates = "updateImageSetMetadataUpdates",
     };
@@ -123,6 +128,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateImageSetMetadataI
         try query_buf.appendSlice(allocator, if (v) "true" else "false");
         query_has_prev = true;
     }
+    if (input.include_study_image_sets) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "includeStudyImageSets=");
+        try query_buf.appendSlice(allocator, if (v) "true" else "false");
+        query_has_prev = true;
+    }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "latestVersion=");
     try aws.url.appendUrlEncoded(allocator, &query_buf, input.latest_version_id);
@@ -175,6 +186,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "BadRequestException")) {
+        return .{ .arena = arena, .kind = .{ .bad_request_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
             .message = owned_message,
@@ -183,6 +200,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "InternalServerException")) {
         return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "NotAcceptableException")) {
+        return .{ .arena = arena, .kind = .{ .not_acceptable_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

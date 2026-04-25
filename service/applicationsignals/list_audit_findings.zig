@@ -35,6 +35,11 @@ pub const ListAuditFindingsInput = struct {
     ///   metrics during the Analysis phase
     /// * `log` - LogAuditor: Extracts insights from application logs, categorizing
     ///   error types and ranking severity by frequency during the Analysis phase
+    /// * `change_indicator` - ChangeIndicatorAuditor: Detects change events
+    ///   (deployments, configuration changes) that occurred within 10 minutes
+    ///   before and during a detected anomaly, and surfaces them as findings with
+    ///   deployment timestamps in the Analysis phase. When changes are detected,
+    ///   the `top_contributor` auditor skips its analysis to avoid redundancy.
     ///
     /// `InitAuditor` and `Summarizer` auditors are not configurable as they are
     /// automatically triggered during the audit process.

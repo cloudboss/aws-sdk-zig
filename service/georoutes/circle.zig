@@ -2,7 +2,8 @@
 /// `AutoCircle`, the response routing boundary will return `Circle` derived
 /// from the `AutoCircle` settings.
 pub const Circle = struct {
-    /// Center of the Circle defined in longitude and latitude coordinates.
+    /// Center of the Circle in World Geodetic System (WGS 84) format: [longitude,
+    /// latitude].
     ///
     /// Example: `[-123.1174, 49.2847]` represents the position with longitude
     /// `-123.1174` and latitude `49.2847`.

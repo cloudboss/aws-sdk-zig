@@ -10,8 +10,8 @@ pub const Sequence = struct {
     actors: ?[]const Actor = null,
 
     /// Additional types of sequences that may be associated with the attack
-    /// sequence finding,
-    /// providing further context about the nature of the detected threat.
+    /// sequence finding, providing further context about the nature of the detected
+    /// threat.
     additional_sequence_types: ?[]const []const u8 = null,
 
     /// Description of the attack sequence.

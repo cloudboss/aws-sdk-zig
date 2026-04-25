@@ -20,6 +20,7 @@ pub const BucketLifecycleConfiguration = @import("bucket_lifecycle_configuration
 pub const BucketLocationConstraint = @import("bucket_location_constraint.zig").BucketLocationConstraint;
 pub const BucketLoggingStatus = @import("bucket_logging_status.zig").BucketLoggingStatus;
 pub const BucketLogsPermission = @import("bucket_logs_permission.zig").BucketLogsPermission;
+pub const BucketNamespace = @import("bucket_namespace.zig").BucketNamespace;
 pub const BucketType = @import("bucket_type.zig").BucketType;
 pub const BucketVersioningStatus = @import("bucket_versioning_status.zig").BucketVersioningStatus;
 pub const Checksum = @import("checksum.zig").Checksum;

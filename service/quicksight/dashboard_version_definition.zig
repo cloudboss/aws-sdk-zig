@@ -7,6 +7,7 @@ const AssetOptions = @import("asset_options.zig").AssetOptions;
 const ParameterDeclaration = @import("parameter_declaration.zig").ParameterDeclaration;
 const SheetDefinition = @import("sheet_definition.zig").SheetDefinition;
 const StaticFile = @import("static_file.zig").StaticFile;
+const TooltipSheetDefinition = @import("tooltip_sheet_definition.zig").TooltipSheetDefinition;
 
 /// The contents of a dashboard.
 pub const DashboardVersionDefinition = struct {
@@ -47,6 +48,9 @@ pub const DashboardVersionDefinition = struct {
     /// The static files for the definition.
     static_files: ?[]const StaticFile = null,
 
+    /// An array of tooltip sheet definitions for a dashboard.
+    tooltip_sheets: ?[]const TooltipSheetDefinition = null,
+
     pub const json_field_names = .{
         .analysis_defaults = "AnalysisDefaults",
         .calculated_fields = "CalculatedFields",
@@ -57,5 +61,6 @@ pub const DashboardVersionDefinition = struct {
         .parameter_declarations = "ParameterDeclarations",
         .sheets = "Sheets",
         .static_files = "StaticFiles",
+        .tooltip_sheets = "TooltipSheets",
     };
 };

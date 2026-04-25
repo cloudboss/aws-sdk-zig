@@ -12,6 +12,8 @@ pub const ExecutionBlockType = enum {
     eks_resource_scaling,
     route53_health_check,
     documentdb,
+    rds_promote_read_replica,
+    rds_create_cross_region_replica,
 
     pub const json_field_names = .{
         .custom_action_lambda = "CustomActionLambda",
@@ -25,6 +27,8 @@ pub const ExecutionBlockType = enum {
         .eks_resource_scaling = "EKSResourceScaling",
         .route53_health_check = "Route53HealthCheck",
         .documentdb = "DocumentDb",
+        .rds_promote_read_replica = "RdsPromoteReadReplica",
+        .rds_create_cross_region_replica = "RdsCreateCrossRegionReplica",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -40,6 +44,8 @@ pub const ExecutionBlockType = enum {
             .eks_resource_scaling => "EKSResourceScaling",
             .route53_health_check => "Route53HealthCheck",
             .documentdb => "DocumentDb",
+            .rds_promote_read_replica => "RdsPromoteReadReplica",
+            .rds_create_cross_region_replica => "RdsCreateCrossRegionReplica",
         };
     }
 

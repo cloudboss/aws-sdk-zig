@@ -4,8 +4,11 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const AuthorizationData = @import("authorization_data.zig").AuthorizationData;
 const CredentialProviderConfiguration = @import("credential_provider_configuration.zig").CredentialProviderConfiguration;
 const MetadataConfiguration = @import("metadata_configuration.zig").MetadataConfiguration;
+const PrivateEndpoint = @import("private_endpoint.zig").PrivateEndpoint;
+const ManagedResourceDetails = @import("managed_resource_details.zig").ManagedResourceDetails;
 const TargetStatus = @import("target_status.zig").TargetStatus;
 const TargetConfiguration = @import("target_configuration.zig").TargetConfiguration;
 
@@ -23,6 +26,11 @@ pub const GetGatewayTargetInput = struct {
 };
 
 pub const GetGatewayTargetOutput = struct {
+    /// OAuth2 authorization data for the gateway target. This data is returned when
+    /// a target is configured with a credential provider with authorization code
+    /// grant type and requires user federation.
+    authorization_data: ?AuthorizationData = null,
+
     /// The timestamp when the gateway target was created.
     created_at: i64,
 
@@ -45,6 +53,13 @@ pub const GetGatewayTargetOutput = struct {
     /// The name of the gateway target.
     name: []const u8,
 
+    /// The private endpoint configuration for the gateway target.
+    private_endpoint: ?PrivateEndpoint = null,
+
+    /// The managed resources created by the gateway for private endpoint
+    /// connectivity.
+    private_endpoint_managed_resources: ?[]const ManagedResourceDetails = null,
+
     /// The current status of the gateway target.
     status: TargetStatus,
 
@@ -60,6 +75,7 @@ pub const GetGatewayTargetOutput = struct {
     updated_at: i64,
 
     pub const json_field_names = .{
+        .authorization_data = "authorizationData",
         .created_at = "createdAt",
         .credential_provider_configurations = "credentialProviderConfigurations",
         .description = "description",
@@ -67,6 +83,8 @@ pub const GetGatewayTargetOutput = struct {
         .last_synchronized_at = "lastSynchronizedAt",
         .metadata_configuration = "metadataConfiguration",
         .name = "name",
+        .private_endpoint = "privateEndpoint",
+        .private_endpoint_managed_resources = "privateEndpointManagedResources",
         .status = "status",
         .status_reasons = "statusReasons",
         .target_configuration = "targetConfiguration",

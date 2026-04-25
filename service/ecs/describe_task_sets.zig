@@ -10,23 +10,19 @@ const TaskSet = @import("task_set.zig").TaskSet;
 
 pub const DescribeTaskSetsInput = struct {
     /// The short name or full Amazon Resource Name (ARN) of the cluster that hosts
-    /// the
-    /// service that the task sets exist in.
+    /// the service that the task sets exist in.
     cluster: []const u8,
 
     /// Specifies whether to see the resource tags for the task set. If `TAGS` is
     /// specified, the tags are included in the response. If this field is omitted,
-    /// tags aren't
-    /// included in the response.
+    /// tags aren't included in the response.
     include: ?[]const TaskSetField = null,
 
     /// The short name or full Amazon Resource Name (ARN) of the service that the
-    /// task sets
-    /// exist in.
+    /// task sets exist in.
     service: []const u8,
 
-    /// The ID or full Amazon Resource Name (ARN) of task sets to
-    /// describe.
+    /// The ID or full Amazon Resource Name (ARN) of task sets to describe.
     task_sets: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
@@ -174,6 +170,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

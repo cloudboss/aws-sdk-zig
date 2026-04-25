@@ -4,9 +4,17 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const MetadataConfig = @import("metadata_config.zig").MetadataConfig;
+const RecommenderFilter = @import("recommender_filter.zig").RecommenderFilter;
+const RecommenderPromotionalFilter = @import("recommender_promotional_filter.zig").RecommenderPromotionalFilter;
 const Recommendation = @import("recommendation.zig").Recommendation;
 
 pub const GetProfileRecommendationsInput = struct {
+    /// A list of item IDs to rank for the user. Use this when you want to re-rank a
+    /// specific set of items rather than getting recommendations from the full item
+    /// catalog. Required for personalized-ranking use cases.
+    candidate_ids: ?[]const []const u8 = null,
+
     /// The contextual metadata used to provide dynamic runtime information to
     /// tailor recommendations.
     context: ?[]const aws.map.StringMapEntry = null,
@@ -17,18 +25,36 @@ pub const GetProfileRecommendationsInput = struct {
     /// The maximum number of recommendations to return. The default value is 10.
     max_results: ?i32 = null,
 
+    /// Configuration for including item metadata in the recommendation response.
+    /// Use this to specify which metadata columns to return alongside recommended
+    /// items.
+    metadata_config: ?MetadataConfig = null,
+
     /// The unique identifier of the profile for which to retrieve recommendations.
     profile_id: []const u8,
+
+    /// A list of filters to apply to the returned recommendations. Filters define
+    /// criteria for including or excluding items from the recommendation results.
+    recommender_filters: ?[]const RecommenderFilter = null,
 
     /// The unique name of the recommender.
     recommender_name: []const u8,
 
+    /// A list of promotional filters to apply to the recommendations. Promotional
+    /// filters allow you to promote specific items within a configurable subset of
+    /// recommendation results.
+    recommender_promotional_filters: ?[]const RecommenderPromotionalFilter = null,
+
     pub const json_field_names = .{
+        .candidate_ids = "CandidateIds",
         .context = "Context",
         .domain_name = "DomainName",
         .max_results = "MaxResults",
+        .metadata_config = "MetadataConfig",
         .profile_id = "ProfileId",
+        .recommender_filters = "RecommenderFilters",
         .recommender_name = "RecommenderName",
+        .recommender_promotional_filters = "RecommenderPromotionalFilters",
     };
 };
 
@@ -85,6 +111,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetProfileRecommendatio
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.candidate_ids) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"CandidateIds\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.context) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"Context\":");
@@ -97,10 +129,28 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetProfileRecommendatio
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.metadata_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"MetadataConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.recommender_filters) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"RecommenderFilters\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"RecommenderName\":");
     try aws.json.writeValue(@TypeOf(input.recommender_name), input.recommender_name, allocator, &body_buf);
     has_prev = true;
+    if (input.recommender_promotional_filters) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"RecommenderPromotionalFilters\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);

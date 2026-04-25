@@ -5,6 +5,14 @@ pub const TargetNetwork = struct {
     /// The ID of the association.
     association_id: ?[]const u8 = null,
 
+    /// The Availability Zone IDs for the target network association, if the Client
+    /// VPN endpoint uses a Transit Gateway.
+    availability_zone_ids: ?[]const []const u8 = null,
+
+    /// The Availability Zone names for the target network association, if the
+    /// Client VPN endpoint uses a Transit Gateway.
+    availability_zones: ?[]const []const u8 = null,
+
     /// The ID of the Client VPN endpoint with which the target network is
     /// associated.
     client_vpn_endpoint_id: ?[]const u8 = null,

@@ -10,7 +10,7 @@ pub const UpdateApplicationWithTokenExchangeGrantInput = struct {
     /// exchange grant.
     aws_account_id: []const u8,
 
-    /// The namespace of the Quick Suite application.
+    /// The namespace of the Quick application.
     namespace: []const u8,
 
     pub const json_field_names = .{

@@ -1,5 +1,6 @@
 const AdditionalStorageVolume = @import("additional_storage_volume.zig").AdditionalStorageVolume;
 const ProcessorFeature = @import("processor_feature.zig").ProcessorFeature;
+const StorageEncryptionType = @import("storage_encryption_type.zig").StorageEncryptionType;
 const Tag = @import("tag.zig").Tag;
 
 /// Contains the details of an Amazon RDS DB snapshot.
@@ -17,6 +18,9 @@ pub const DBSnapshot = struct {
     /// Specifies the name of the Availability Zone the DB instance was located in
     /// at the time of the DB snapshot.
     availability_zone: ?[]const u8 = null,
+
+    /// The number of days for which automatic DB snapshots are retained.
+    backup_retention_period: ?i32 = null,
 
     /// Specifies the DB instance identifier of the DB instance this DB snapshot was
     /// created from.
@@ -92,6 +96,10 @@ pub const DBSnapshot = struct {
     /// the snapshot.
     port: ?i32 = null,
 
+    /// The daily time range during which automated backups are created if automated
+    /// backups are enabled, as determined by the `BackupRetentionPeriod`.
+    preferred_backup_window: ?[]const u8 = null,
+
     /// The number of CPU cores and the number of threads per core for the DB
     /// instance class of the DB instance when the DB snapshot was created.
     processor_features: ?[]const ProcessorFeature = null,
@@ -135,6 +143,16 @@ pub const DBSnapshot = struct {
 
     /// Specifies the status of this DB snapshot.
     status: ?[]const u8 = null,
+
+    /// The type of encryption used to protect data at rest in the DB snapshot.
+    /// Possible values:
+    ///
+    /// * `none` - The DB snapshot is not encrypted.
+    /// * `sse-rds` - The DB snapshot is encrypted using an Amazon Web Services
+    ///   owned KMS key.
+    /// * `sse-kms` - The DB snapshot is encrypted using a customer managed KMS key
+    ///   or Amazon Web Services managed KMS key.
+    storage_encryption_type: ?StorageEncryptionType = null,
 
     /// Specifies the storage throughput for the DB snapshot.
     storage_throughput: ?i32 = null,

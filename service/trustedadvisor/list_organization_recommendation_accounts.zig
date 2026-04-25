@@ -14,8 +14,7 @@ pub const ListOrganizationRecommendationAccountsInput = struct {
     max_results: ?i32 = null,
 
     /// The token for the next set of results. Use the value returned in the
-    /// previous response in the next request
-    /// to retrieve the next set of results.
+    /// previous response in the next request to retrieve the next set of results.
     next_token: ?[]const u8 = null,
 
     /// The Recommendation identifier
@@ -35,8 +34,7 @@ pub const ListOrganizationRecommendationAccountsOutput = struct {
     account_recommendation_lifecycle_summaries: ?[]const AccountRecommendationLifecycleSummary = null,
 
     /// The token for the next set of results. Use the value returned in the
-    /// previous response in the next request
-    /// to retrieve the next set of results.
+    /// previous response in the next request to retrieve the next set of results.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{

@@ -10,19 +10,15 @@ const AuthenticationDescription = @import("authentication_description.zig").Auth
 
 pub const UpdateWorkspaceAuthenticationInput = struct {
     /// Specifies whether this workspace uses SAML 2.0, IAM Identity Center, or both
-    /// to
-    /// authenticate users for using the Grafana console within a workspace. For
-    /// more
-    /// information, see [User authentication in
-    /// Amazon Managed
+    /// to authenticate users for using the Grafana console within a workspace. For
+    /// more information, see [User authentication in Amazon Managed
     /// Grafana](https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html).
     authentication_providers: []const AuthenticationProviderTypes,
 
     /// If the workspace uses SAML, use this structure to map SAML assertion
-    /// attributes to
-    /// workspace user information and define which groups in the assertion
-    /// attribute are to
-    /// have the `Admin` and `Editor` roles in the workspace.
+    /// attributes to workspace user information and define which groups in the
+    /// assertion attribute are to have the `Admin` and `Editor` roles in the
+    /// workspace.
     saml_configuration: ?SamlConfiguration = null,
 
     /// The ID of the workspace to update the authentication for.
@@ -37,8 +33,7 @@ pub const UpdateWorkspaceAuthenticationInput = struct {
 
 pub const UpdateWorkspaceAuthenticationOutput = struct {
     /// A structure that describes the user authentication for this workspace after
-    /// the update
-    /// is made.
+    /// the update is made.
     authentication: ?AuthenticationDescription = null,
 
     pub const json_field_names = .{

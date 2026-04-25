@@ -10,7 +10,15 @@ const assume_fleet_role_for_worker = @import("assume_fleet_role_for_worker.zig")
 const assume_queue_role_for_read = @import("assume_queue_role_for_read.zig");
 const assume_queue_role_for_user = @import("assume_queue_role_for_user.zig");
 const assume_queue_role_for_worker = @import("assume_queue_role_for_worker.zig");
+const batch_get_job = @import("batch_get_job.zig");
 const batch_get_job_entity = @import("batch_get_job_entity.zig");
+const batch_get_session = @import("batch_get_session.zig");
+const batch_get_session_action = @import("batch_get_session_action.zig");
+const batch_get_step = @import("batch_get_step.zig");
+const batch_get_task = @import("batch_get_task.zig");
+const batch_get_worker = @import("batch_get_worker.zig");
+const batch_update_job = @import("batch_update_job.zig");
+const batch_update_task = @import("batch_update_task.zig");
 const copy_job_template = @import("copy_job_template.zig");
 const create_budget = @import("create_budget.zig");
 const create_farm = @import("create_farm.zig");
@@ -49,6 +57,7 @@ const get_job = @import("get_job.zig");
 const get_license_endpoint = @import("get_license_endpoint.zig");
 const get_limit = @import("get_limit.zig");
 const get_monitor = @import("get_monitor.zig");
+const get_monitor_settings = @import("get_monitor_settings.zig");
 const get_queue = @import("get_queue.zig");
 const get_queue_environment = @import("get_queue_environment.zig");
 const get_queue_fleet_association = @import("get_queue_fleet_association.zig");
@@ -104,6 +113,7 @@ const update_fleet = @import("update_fleet.zig");
 const update_job = @import("update_job.zig");
 const update_limit = @import("update_limit.zig");
 const update_monitor = @import("update_monitor.zig");
+const update_monitor_settings = @import("update_monitor_settings.zig");
 const update_queue = @import("update_queue.zig");
 const update_queue_environment = @import("update_queue_environment.zig");
 const update_queue_fleet_association = @import("update_queue_fleet_association.zig");
@@ -193,9 +203,103 @@ pub const Client = struct {
         return assume_queue_role_for_worker.execute(self, allocator, input, options);
     }
 
+    /// Retrieves multiple jobs in a single request. This is a batch version of the
+    /// `GetJob` API.
+    ///
+    /// The result of getting each job is reported individually in the response.
+    /// Because the batch request can result in a combination of successful and
+    /// unsuccessful actions, you should check for batch errors even when the call
+    /// returns an HTTP status code of 200.
+    pub fn batchGetJob(self: *Self, allocator: std.mem.Allocator, input: batch_get_job.BatchGetJobInput, options: CallOptions) !batch_get_job.BatchGetJobOutput {
+        return batch_get_job.execute(self, allocator, input, options);
+    }
+
     /// Get batched job details for a worker.
     pub fn batchGetJobEntity(self: *Self, allocator: std.mem.Allocator, input: batch_get_job_entity.BatchGetJobEntityInput, options: CallOptions) !batch_get_job_entity.BatchGetJobEntityOutput {
         return batch_get_job_entity.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves multiple sessions in a single request. This is a batch version of
+    /// the `GetSession` API.
+    ///
+    /// The result of getting each session is reported individually in the response.
+    /// Because the batch request can result in a combination of successful and
+    /// unsuccessful actions, you should check for batch errors even when the call
+    /// returns an HTTP status code of 200.
+    pub fn batchGetSession(self: *Self, allocator: std.mem.Allocator, input: batch_get_session.BatchGetSessionInput, options: CallOptions) !batch_get_session.BatchGetSessionOutput {
+        return batch_get_session.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves multiple session actions in a single request. This is a batch
+    /// version of the `GetSessionAction` API.
+    ///
+    /// The result of getting each session action is reported individually in the
+    /// response. Because the batch request can result in a combination of
+    /// successful and unsuccessful actions, you should check for batch errors even
+    /// when the call returns an HTTP status code of 200.
+    pub fn batchGetSessionAction(self: *Self, allocator: std.mem.Allocator, input: batch_get_session_action.BatchGetSessionActionInput, options: CallOptions) !batch_get_session_action.BatchGetSessionActionOutput {
+        return batch_get_session_action.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves multiple steps in a single request. This is a batch version of the
+    /// `GetStep` API.
+    ///
+    /// The result of getting each step is reported individually in the response.
+    /// Because the batch request can result in a combination of successful and
+    /// unsuccessful actions, you should check for batch errors even when the call
+    /// returns an HTTP status code of 200.
+    pub fn batchGetStep(self: *Self, allocator: std.mem.Allocator, input: batch_get_step.BatchGetStepInput, options: CallOptions) !batch_get_step.BatchGetStepOutput {
+        return batch_get_step.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves multiple tasks in a single request. This is a batch version of the
+    /// `GetTask` API.
+    ///
+    /// The result of getting each task is reported individually in the response.
+    /// Because the batch request can result in a combination of successful and
+    /// unsuccessful actions, you should check for batch errors even when the call
+    /// returns an HTTP status code of 200.
+    pub fn batchGetTask(self: *Self, allocator: std.mem.Allocator, input: batch_get_task.BatchGetTaskInput, options: CallOptions) !batch_get_task.BatchGetTaskOutput {
+        return batch_get_task.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves multiple workers in a single request. This is a batch version of
+    /// the `GetWorker` API.
+    ///
+    /// The result of getting each worker is reported individually in the response.
+    /// Because the batch request can result in a combination of successful and
+    /// unsuccessful actions, you should check for batch errors even when the call
+    /// returns an HTTP status code of 200.
+    pub fn batchGetWorker(self: *Self, allocator: std.mem.Allocator, input: batch_get_worker.BatchGetWorkerInput, options: CallOptions) !batch_get_worker.BatchGetWorkerOutput {
+        return batch_get_worker.execute(self, allocator, input, options);
+    }
+
+    /// Updates multiple jobs in a single request. This is a batch version of the
+    /// `UpdateJob` API.
+    ///
+    /// The result of updating each job is reported individually in the response.
+    /// Because the batch request can result in a combination of successful and
+    /// unsuccessful actions, you should check for batch errors even when the call
+    /// returns an HTTP status code of 200.
+    ///
+    /// When you change the status of a job to `ARCHIVED`, the job can't be
+    /// scheduled or archived.
+    ///
+    /// An archived job and its steps and tasks are deleted after 120 days. The job
+    /// can't be recovered.
+    pub fn batchUpdateJob(self: *Self, allocator: std.mem.Allocator, input: batch_update_job.BatchUpdateJobInput, options: CallOptions) !batch_update_job.BatchUpdateJobOutput {
+        return batch_update_job.execute(self, allocator, input, options);
+    }
+
+    /// Updates multiple tasks in a single request. This is a batch version of the
+    /// `UpdateTask` API.
+    ///
+    /// The result of updating each task is reported individually in the response.
+    /// Because the batch request can result in a combination of successful and
+    /// unsuccessful actions, you should check for batch errors even when the call
+    /// returns an HTTP status code of 200.
+    pub fn batchUpdateTask(self: *Self, allocator: std.mem.Allocator, input: batch_update_task.BatchUpdateTaskInput, options: CallOptions) !batch_update_task.BatchUpdateTaskOutput {
+        return batch_update_task.execute(self, allocator, input, options);
     }
 
     /// Copies a job template to an Amazon S3 bucket.
@@ -432,6 +536,11 @@ pub const Client = struct {
     /// Gets information about the specified monitor.
     pub fn getMonitor(self: *Self, allocator: std.mem.Allocator, input: get_monitor.GetMonitorInput, options: CallOptions) !get_monitor.GetMonitorOutput {
         return get_monitor.execute(self, allocator, input, options);
+    }
+
+    /// Gets the settings for a Deadline Cloud monitor.
+    pub fn getMonitorSettings(self: *Self, allocator: std.mem.Allocator, input: get_monitor_settings.GetMonitorSettingsInput, options: CallOptions) !get_monitor_settings.GetMonitorSettingsOutput {
+        return get_monitor_settings.execute(self, allocator, input, options);
     }
 
     /// Gets a queue.
@@ -723,6 +832,13 @@ pub const Client = struct {
     /// all of the settings when you call `UpdateMonitor`.
     pub fn updateMonitor(self: *Self, allocator: std.mem.Allocator, input: update_monitor.UpdateMonitorInput, options: CallOptions) !update_monitor.UpdateMonitorOutput {
         return update_monitor.execute(self, allocator, input, options);
+    }
+
+    /// Updates the settings for a Deadline Cloud monitor. Keys present in the
+    /// request are upserted; keys absent are left unchanged. Send an empty string
+    /// value to delete a key.
+    pub fn updateMonitorSettings(self: *Self, allocator: std.mem.Allocator, input: update_monitor_settings.UpdateMonitorSettingsInput, options: CallOptions) !update_monitor_settings.UpdateMonitorSettingsOutput {
+        return update_monitor_settings.execute(self, allocator, input, options);
     }
 
     /// Updates a queue.

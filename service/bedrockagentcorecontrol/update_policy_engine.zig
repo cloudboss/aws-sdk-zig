@@ -4,11 +4,12 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const UpdatedDescription = @import("updated_description.zig").UpdatedDescription;
 const PolicyEngineStatus = @import("policy_engine_status.zig").PolicyEngineStatus;
 
 pub const UpdatePolicyEngineInput = struct {
     /// The new description for the policy engine.
-    description: ?[]const u8 = null,
+    description: ?UpdatedDescription = null,
 
     /// The unique identifier of the policy engine to be updated.
     policy_engine_id: []const u8,
@@ -25,6 +26,10 @@ pub const UpdatePolicyEngineOutput = struct {
 
     /// The updated description of the policy engine.
     description: ?[]const u8 = null,
+
+    /// The Amazon Resource Name (ARN) of the KMS key used to encrypt the policy
+    /// engine data.
+    encryption_key_arn: ?[]const u8 = null,
 
     /// The name of the updated policy engine.
     name: []const u8,
@@ -47,6 +52,7 @@ pub const UpdatePolicyEngineOutput = struct {
     pub const json_field_names = .{
         .created_at = "createdAt",
         .description = "description",
+        .encryption_key_arn = "encryptionKeyArn",
         .name = "name",
         .policy_engine_arn = "policyEngineArn",
         .policy_engine_id = "policyEngineId",
@@ -108,7 +114,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdatePolicyEngineInput
     const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(host);
-    request.method = .PUT;
+    request.method = .PATCH;
     request.path = path;
     request.tls = tls;
     request.port = port;

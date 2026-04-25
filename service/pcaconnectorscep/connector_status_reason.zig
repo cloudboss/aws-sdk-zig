@@ -5,12 +5,16 @@ pub const ConnectorStatusReason = enum {
     privateca_access_denied,
     privateca_invalid_state,
     privateca_resource_not_found,
+    vpc_endpoint_resource_not_found,
+    vpc_endpoint_dns_entries_not_found,
 
     pub const json_field_names = .{
         .internal_failure = "INTERNAL_FAILURE",
         .privateca_access_denied = "PRIVATECA_ACCESS_DENIED",
         .privateca_invalid_state = "PRIVATECA_INVALID_STATE",
         .privateca_resource_not_found = "PRIVATECA_RESOURCE_NOT_FOUND",
+        .vpc_endpoint_resource_not_found = "VPC_ENDPOINT_RESOURCE_NOT_FOUND",
+        .vpc_endpoint_dns_entries_not_found = "VPC_ENDPOINT_DNS_ENTRIES_NOT_FOUND",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +23,8 @@ pub const ConnectorStatusReason = enum {
             .privateca_access_denied => "PRIVATECA_ACCESS_DENIED",
             .privateca_invalid_state => "PRIVATECA_INVALID_STATE",
             .privateca_resource_not_found => "PRIVATECA_RESOURCE_NOT_FOUND",
+            .vpc_endpoint_resource_not_found => "VPC_ENDPOINT_RESOURCE_NOT_FOUND",
+            .vpc_endpoint_dns_entries_not_found => "VPC_ENDPOINT_DNS_ENTRIES_NOT_FOUND",
         };
     }
 

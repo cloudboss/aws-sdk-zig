@@ -20,6 +20,13 @@ pub const Script = struct {
     /// values are
     /// `10.x | 24.x`. By default, `NodeJsVersion` is `10.x`.
     /// This value cannot be updated later.
+    ///
+    /// Node.js 10 will reach end of support on September 30, 2026. See more details
+    /// in the [Node.js 10 FAQs](http://aws.amazon.com/gamelift/faq/nodejs10/). For
+    /// migration guidance,
+    /// see [
+    /// Migrating from Node.js 10 to
+    /// 24](https://docs.aws.amazon.com/gamelift/latest/realtimeguide/realtime-script.html#realtime-script-nodejs-migration).
     node_js_version: ?[]const u8 = null,
 
     /// The Amazon Resource Name

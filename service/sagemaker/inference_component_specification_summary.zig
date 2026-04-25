@@ -1,6 +1,7 @@
 const InferenceComponentComputeResourceRequirements = @import("inference_component_compute_resource_requirements.zig").InferenceComponentComputeResourceRequirements;
 const InferenceComponentContainerSpecificationSummary = @import("inference_component_container_specification_summary.zig").InferenceComponentContainerSpecificationSummary;
 const InferenceComponentDataCacheConfigSummary = @import("inference_component_data_cache_config_summary.zig").InferenceComponentDataCacheConfigSummary;
+const InferenceComponentSchedulingConfig = @import("inference_component_scheduling_config.zig").InferenceComponentSchedulingConfig;
 const InferenceComponentStartupParameters = @import("inference_component_startup_parameters.zig").InferenceComponentStartupParameters;
 
 /// Details about the resources that are deployed with this inference component.
@@ -24,6 +25,10 @@ pub const InferenceComponentSpecificationSummary = struct {
     /// inference component.
     model_name: ?[]const u8 = null,
 
+    /// The scheduling configuration that determines how inference component copies
+    /// are placed across available instances when copies are added or removed.
+    scheduling_config: ?InferenceComponentSchedulingConfig = null,
+
     /// Settings that take effect while the model container starts up.
     startup_parameters: ?InferenceComponentStartupParameters = null,
 
@@ -33,6 +38,7 @@ pub const InferenceComponentSpecificationSummary = struct {
         .container = "Container",
         .data_cache_config = "DataCacheConfig",
         .model_name = "ModelName",
+        .scheduling_config = "SchedulingConfig",
         .startup_parameters = "StartupParameters",
     };
 };

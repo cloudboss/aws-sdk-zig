@@ -5,7 +5,7 @@ pub const RouteTrailerOptions = struct {
 
     /// Number of trailers attached to the vehicle.
     ///
-    /// Default Value: `0`
+    /// Default value: `0`
     trailer_count: ?i32 = null,
 
     pub const json_field_names = .{

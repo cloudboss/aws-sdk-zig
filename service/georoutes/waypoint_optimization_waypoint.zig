@@ -18,7 +18,7 @@ pub const WaypointOptimizationWaypoint = struct {
     /// The waypoint Id.
     id: ?[]const u8 = null,
 
-    /// Position defined as `[longitude, latitude]`.
+    /// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
     position: []const f64,
 
     /// Service time spent at the waypoint. At an appointment, the service time

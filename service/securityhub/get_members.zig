@@ -8,8 +8,8 @@ const Member = @import("member.zig").Member;
 const Result = @import("result.zig").Result;
 
 pub const GetMembersInput = struct {
-    /// The list of account IDs for the Security Hub member accounts to return the
-    /// details for.
+    /// The list of account IDs for the Security Hub CSPM member accounts to return
+    /// the details for.
     account_ids: []const []const u8,
 
     pub const json_field_names = .{
@@ -18,7 +18,7 @@ pub const GetMembersInput = struct {
 };
 
 pub const GetMembersOutput = struct {
-    /// The list of details about the Security Hub member accounts.
+    /// The list of details about the Security Hub CSPM member accounts.
     members: ?[]const Member = null,
 
     /// The list of Amazon Web Services accounts that could not be processed. For
@@ -153,6 +153,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "LimitExceededException")) {
         return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organization_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationalUnitNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organizational_unit_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

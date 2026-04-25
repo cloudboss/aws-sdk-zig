@@ -6,6 +6,8 @@ const InstanceRoleCredentialsProvider = @import("instance_role_credentials_provi
 const EC2InstanceType = @import("ec2_instance_type.zig").EC2InstanceType;
 const ProtectionPolicy = @import("protection_policy.zig").ProtectionPolicy;
 const OperatingSystem = @import("operating_system.zig").OperatingSystem;
+const PlayerGatewayConfiguration = @import("player_gateway_configuration.zig").PlayerGatewayConfiguration;
+const PlayerGatewayMode = @import("player_gateway_mode.zig").PlayerGatewayMode;
 const ResourceCreationLimitPolicy = @import("resource_creation_limit_policy.zig").ResourceCreationLimitPolicy;
 const FleetStatus = @import("fleet_status.zig").FleetStatus;
 const FleetAction = @import("fleet_action.zig").FleetAction;
@@ -173,6 +175,17 @@ pub const FleetAttributes = struct {
     /// 5.](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html)
     operating_system: ?OperatingSystem = null,
 
+    /// Configuration settings for player gateway on this fleet.
+    player_gateway_configuration: ?PlayerGatewayConfiguration = null,
+
+    /// Indicates whether player gateway is enabled for this fleet. Player gateway
+    /// provides benefits such as DDoS protection with negligible impact to latency.
+    ///
+    /// If `ENABLED` or `REQUIRED`, game clients can use player gateway to connect
+    /// with the game server. If `DISABLED`, game clients cannot use player gateway.
+    /// Instead, they have to directly connect to the game server.
+    player_gateway_mode: ?PlayerGatewayMode = null,
+
     resource_creation_limit_policy: ?ResourceCreationLimitPolicy = null,
 
     /// The Amazon Resource Name
@@ -253,6 +266,8 @@ pub const FleetAttributes = struct {
         .name = "Name",
         .new_game_session_protection_policy = "NewGameSessionProtectionPolicy",
         .operating_system = "OperatingSystem",
+        .player_gateway_configuration = "PlayerGatewayConfiguration",
+        .player_gateway_mode = "PlayerGatewayMode",
         .resource_creation_limit_policy = "ResourceCreationLimitPolicy",
         .script_arn = "ScriptArn",
         .script_id = "ScriptId",

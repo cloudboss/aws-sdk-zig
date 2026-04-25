@@ -20,12 +20,9 @@ pub const CreateDataSetInput = struct {
     name: []const u8,
 
     /// A data set tag is an optional label that you can assign to a data set when
-    /// you create
-    /// it. Each tag consists of a key and an optional value, both of which you
-    /// define. When you
-    /// use tagging, you can also use tag-based access control in IAM policies to
-    /// control access to
-    /// these data sets and revisions.
+    /// you create it. Each tag consists of a key and an optional value, both of
+    /// which you define. When you use tagging, you can also use tag-based access
+    /// control in IAM policies to control access to these data sets and revisions.
     tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
@@ -56,20 +53,16 @@ pub const CreateDataSetOutput = struct {
     name: ?[]const u8 = null,
 
     /// A property that defines the data set as OWNED by the account (for providers)
-    /// or ENTITLED
-    /// to the account (for subscribers).
+    /// or ENTITLED to the account (for subscribers).
     origin: ?Origin = null,
 
     /// If the origin of this data set is ENTITLED, includes the details for the
-    /// product on AWS
-    /// Marketplace.
+    /// product on AWS Marketplace.
     origin_details: ?OriginDetails = null,
 
     /// The data set ID of the owned data set corresponding to the entitled data set
-    /// being
-    /// viewed. This parameter is returned when a data set owner is viewing the
-    /// entitled copy of
-    /// its owned data set.
+    /// being viewed. This parameter is returned when a data set owner is viewing
+    /// the entitled copy of its owned data set.
     source_id: ?[]const u8 = null,
 
     /// The tags for the data set.

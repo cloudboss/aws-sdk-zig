@@ -28,7 +28,7 @@ pub const GenerateEmbedUrlForRegisteredUserInput = struct {
     aws_account_id: []const u8,
 
     /// The experience that you want to embed. For registered users, you can embed
-    /// Quick Suite dashboards, Amazon Quick Sight visuals, the Amazon Quick Sight Q
+    /// Quick dashboards, Amazon Quick Sight visuals, the Amazon Quick Sight Q
     /// search bar,
     /// the Amazon Quick Sight Generative Q&A experience, or the entire Amazon Quick
     /// Sight console.

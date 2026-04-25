@@ -204,6 +204,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "SsmlMarksNotSupportedForTextTypeException")) {
         return .{ .arena = arena, .kind = .{ .ssml_marks_not_supported_for_text_type_exception = .{
             .message = owned_message,
@@ -222,6 +228,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "UnsupportedPlsAlphabetException")) {
         return .{ .arena = arena, .kind = .{ .unsupported_pls_alphabet_exception = .{
             .message = owned_message,
@@ -230,6 +242,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "UnsupportedPlsLanguageException")) {
         return .{ .arena = arena, .kind = .{ .unsupported_pls_language_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

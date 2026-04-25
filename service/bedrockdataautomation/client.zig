@@ -4,19 +4,29 @@ const std = @import("std");
 const copy_blueprint_stage = @import("copy_blueprint_stage.zig");
 const create_blueprint = @import("create_blueprint.zig");
 const create_blueprint_version = @import("create_blueprint_version.zig");
+const create_data_automation_library = @import("create_data_automation_library.zig");
 const create_data_automation_project = @import("create_data_automation_project.zig");
 const delete_blueprint = @import("delete_blueprint.zig");
+const delete_data_automation_library = @import("delete_data_automation_library.zig");
 const delete_data_automation_project = @import("delete_data_automation_project.zig");
 const get_blueprint = @import("get_blueprint.zig");
 const get_blueprint_optimization_status = @import("get_blueprint_optimization_status.zig");
+const get_data_automation_library = @import("get_data_automation_library.zig");
+const get_data_automation_library_entity = @import("get_data_automation_library_entity.zig");
+const get_data_automation_library_ingestion_job = @import("get_data_automation_library_ingestion_job.zig");
 const get_data_automation_project = @import("get_data_automation_project.zig");
 const invoke_blueprint_optimization_async = @import("invoke_blueprint_optimization_async.zig");
+const invoke_data_automation_library_ingestion_job = @import("invoke_data_automation_library_ingestion_job.zig");
 const list_blueprints = @import("list_blueprints.zig");
+const list_data_automation_libraries = @import("list_data_automation_libraries.zig");
+const list_data_automation_library_entities = @import("list_data_automation_library_entities.zig");
+const list_data_automation_library_ingestion_jobs = @import("list_data_automation_library_ingestion_jobs.zig");
 const list_data_automation_projects = @import("list_data_automation_projects.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_blueprint = @import("update_blueprint.zig");
+const update_data_automation_library = @import("update_data_automation_library.zig");
 const update_data_automation_project = @import("update_data_automation_project.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
@@ -65,6 +75,11 @@ pub const Client = struct {
         return create_blueprint_version.execute(self, allocator, input, options);
     }
 
+    /// Creates an Amazon Bedrock Data Automation Library
+    pub fn createDataAutomationLibrary(self: *Self, allocator: std.mem.Allocator, input: create_data_automation_library.CreateDataAutomationLibraryInput, options: CallOptions) !create_data_automation_library.CreateDataAutomationLibraryOutput {
+        return create_data_automation_library.execute(self, allocator, input, options);
+    }
+
     /// Creates an Amazon Bedrock Data Automation Project
     pub fn createDataAutomationProject(self: *Self, allocator: std.mem.Allocator, input: create_data_automation_project.CreateDataAutomationProjectInput, options: CallOptions) !create_data_automation_project.CreateDataAutomationProjectOutput {
         return create_data_automation_project.execute(self, allocator, input, options);
@@ -73,6 +88,11 @@ pub const Client = struct {
     /// Deletes an existing Amazon Bedrock Data Automation Blueprint
     pub fn deleteBlueprint(self: *Self, allocator: std.mem.Allocator, input: delete_blueprint.DeleteBlueprintInput, options: CallOptions) !delete_blueprint.DeleteBlueprintOutput {
         return delete_blueprint.execute(self, allocator, input, options);
+    }
+
+    /// Deletes an existing Amazon Bedrock Data Automation Library
+    pub fn deleteDataAutomationLibrary(self: *Self, allocator: std.mem.Allocator, input: delete_data_automation_library.DeleteDataAutomationLibraryInput, options: CallOptions) !delete_data_automation_library.DeleteDataAutomationLibraryOutput {
+        return delete_data_automation_library.execute(self, allocator, input, options);
     }
 
     /// Deletes an existing Amazon Bedrock Data Automation Project
@@ -90,6 +110,21 @@ pub const Client = struct {
         return get_blueprint_optimization_status.execute(self, allocator, input, options);
     }
 
+    /// Gets an existing Amazon Bedrock Data Automation Library
+    pub fn getDataAutomationLibrary(self: *Self, allocator: std.mem.Allocator, input: get_data_automation_library.GetDataAutomationLibraryInput, options: CallOptions) !get_data_automation_library.GetDataAutomationLibraryOutput {
+        return get_data_automation_library.execute(self, allocator, input, options);
+    }
+
+    /// Gets an existing entity based on entity type from the library
+    pub fn getDataAutomationLibraryEntity(self: *Self, allocator: std.mem.Allocator, input: get_data_automation_library_entity.GetDataAutomationLibraryEntityInput, options: CallOptions) !get_data_automation_library_entity.GetDataAutomationLibraryEntityOutput {
+        return get_data_automation_library_entity.execute(self, allocator, input, options);
+    }
+
+    /// API used to get status of data automation library ingestion job
+    pub fn getDataAutomationLibraryIngestionJob(self: *Self, allocator: std.mem.Allocator, input: get_data_automation_library_ingestion_job.GetDataAutomationLibraryIngestionJobInput, options: CallOptions) !get_data_automation_library_ingestion_job.GetDataAutomationLibraryIngestionJobOutput {
+        return get_data_automation_library_ingestion_job.execute(self, allocator, input, options);
+    }
+
     /// Gets an existing Amazon Bedrock Data Automation Project
     pub fn getDataAutomationProject(self: *Self, allocator: std.mem.Allocator, input: get_data_automation_project.GetDataAutomationProjectInput, options: CallOptions) !get_data_automation_project.GetDataAutomationProjectOutput {
         return get_data_automation_project.execute(self, allocator, input, options);
@@ -100,9 +135,29 @@ pub const Client = struct {
         return invoke_blueprint_optimization_async.execute(self, allocator, input, options);
     }
 
+    /// Async API: Invoke data automation library ingestion job
+    pub fn invokeDataAutomationLibraryIngestionJob(self: *Self, allocator: std.mem.Allocator, input: invoke_data_automation_library_ingestion_job.InvokeDataAutomationLibraryIngestionJobInput, options: CallOptions) !invoke_data_automation_library_ingestion_job.InvokeDataAutomationLibraryIngestionJobOutput {
+        return invoke_data_automation_library_ingestion_job.execute(self, allocator, input, options);
+    }
+
     /// Lists all existing Amazon Bedrock Data Automation Blueprints
     pub fn listBlueprints(self: *Self, allocator: std.mem.Allocator, input: list_blueprints.ListBlueprintsInput, options: CallOptions) !list_blueprints.ListBlueprintsOutput {
         return list_blueprints.execute(self, allocator, input, options);
+    }
+
+    /// Lists all existing Amazon Bedrock Data Automation Libraries
+    pub fn listDataAutomationLibraries(self: *Self, allocator: std.mem.Allocator, input: list_data_automation_libraries.ListDataAutomationLibrariesInput, options: CallOptions) !list_data_automation_libraries.ListDataAutomationLibrariesOutput {
+        return list_data_automation_libraries.execute(self, allocator, input, options);
+    }
+
+    /// Lists all stored entities in the library
+    pub fn listDataAutomationLibraryEntities(self: *Self, allocator: std.mem.Allocator, input: list_data_automation_library_entities.ListDataAutomationLibraryEntitiesInput, options: CallOptions) !list_data_automation_library_entities.ListDataAutomationLibraryEntitiesOutput {
+        return list_data_automation_library_entities.execute(self, allocator, input, options);
+    }
+
+    /// Lists all data automation library ingestion jobs
+    pub fn listDataAutomationLibraryIngestionJobs(self: *Self, allocator: std.mem.Allocator, input: list_data_automation_library_ingestion_jobs.ListDataAutomationLibraryIngestionJobsInput, options: CallOptions) !list_data_automation_library_ingestion_jobs.ListDataAutomationLibraryIngestionJobsOutput {
+        return list_data_automation_library_ingestion_jobs.execute(self, allocator, input, options);
     }
 
     /// Lists all existing Amazon Bedrock Data Automation Projects
@@ -130,12 +185,38 @@ pub const Client = struct {
         return update_blueprint.execute(self, allocator, input, options);
     }
 
+    /// Updates an existing Amazon Bedrock Data Automation Library
+    pub fn updateDataAutomationLibrary(self: *Self, allocator: std.mem.Allocator, input: update_data_automation_library.UpdateDataAutomationLibraryInput, options: CallOptions) !update_data_automation_library.UpdateDataAutomationLibraryOutput {
+        return update_data_automation_library.execute(self, allocator, input, options);
+    }
+
     /// Updates an existing Amazon Bedrock Data Automation Project
     pub fn updateDataAutomationProject(self: *Self, allocator: std.mem.Allocator, input: update_data_automation_project.UpdateDataAutomationProjectInput, options: CallOptions) !update_data_automation_project.UpdateDataAutomationProjectOutput {
         return update_data_automation_project.execute(self, allocator, input, options);
     }
 
     pub fn listBlueprintsPaginator(self: *Self, params: list_blueprints.ListBlueprintsInput) paginator.ListBlueprintsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listDataAutomationLibrariesPaginator(self: *Self, params: list_data_automation_libraries.ListDataAutomationLibrariesInput) paginator.ListDataAutomationLibrariesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listDataAutomationLibraryEntitiesPaginator(self: *Self, params: list_data_automation_library_entities.ListDataAutomationLibraryEntitiesInput) paginator.ListDataAutomationLibraryEntitiesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listDataAutomationLibraryIngestionJobsPaginator(self: *Self, params: list_data_automation_library_ingestion_jobs.ListDataAutomationLibraryIngestionJobsInput) paginator.ListDataAutomationLibraryIngestionJobsPaginator {
         return .{
             .client = self,
             .params = params,

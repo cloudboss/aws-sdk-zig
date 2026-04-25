@@ -2,14 +2,17 @@ const std = @import("std");
 
 pub const MessageType = enum {
     text,
+    tool_use_result,
 
     pub const json_field_names = .{
         .text = "TEXT",
+        .tool_use_result = "TOOL_USE_RESULT",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .text => "TEXT",
+            .tool_use_result => "TOOL_USE_RESULT",
         };
     }
 

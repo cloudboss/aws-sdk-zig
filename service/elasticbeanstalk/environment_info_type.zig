@@ -3,16 +3,19 @@ const std = @import("std");
 pub const EnvironmentInfoType = enum {
     tail,
     bundle,
+    analyze,
 
     pub const json_field_names = .{
         .tail = "tail",
         .bundle = "bundle",
+        .analyze = "analyze",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .tail => "tail",
             .bundle => "bundle",
+            .analyze => "analyze",
         };
     }
 

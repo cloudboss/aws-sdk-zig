@@ -23,8 +23,7 @@ pub const GetStyleDescriptorInput = struct {
     /// `Buildings3D` is valid only for the `Standard` and `Monochrome` map styles.
     buildings: ?Buildings = null,
 
-    /// Sets color tone for map such as dark and light for specific map styles. It
-    /// applies to only vector map styles such as Standard and Monochrome.
+    /// Sets the color tone for the map, such as dark and light.
     ///
     /// Example: `Light`
     ///
@@ -35,10 +34,11 @@ pub const GetStyleDescriptorInput = struct {
 
     /// Displays the shape and steepness of terrain features using elevation lines.
     /// The density value controls how densely the available contour line
-    /// information is rendered on the map.
+    /// information is rendered on the map. Not supported in `ap-southeast-1` and
+    /// `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
-    /// This parameter is valid only for the `Standard`, `Monochrome`, and `Hybrid`
-    /// map styles.
+    /// This parameter is valid for all map styles except `Satellite`.
     contour_density: ?ContourDensity = null,
 
     /// Optional: The API key to be used for authorization. Either an API key or
@@ -46,7 +46,8 @@ pub const GetStyleDescriptorInput = struct {
     key: ?[]const u8 = null,
 
     /// Specifies the political view using ISO 3166-2 or ISO 3166-3 country code
-    /// format.
+    /// format. Not supported in `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
     /// The following political views are currently supported:
     ///
@@ -68,10 +69,13 @@ pub const GetStyleDescriptorInput = struct {
     /// * `VNM`: Vietnam's view on the Paracel Islands and Spratly Islands
     political_view: ?[]const u8 = null,
 
-    /// Style specifies the desired map style.
+    /// Style specifies the desired map style. For
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only the `Standard` and `Monochrome` values.
     style: MapStyle,
 
-    /// Adjusts how physical terrain details are rendered on the map.
+    /// Adjusts how physical terrain details are rendered on the map. Not supported
+    /// in `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
     /// The following terrain styles are currently supported:
     ///
@@ -84,16 +88,20 @@ pub const GetStyleDescriptorInput = struct {
     terrain: ?Terrain = null,
 
     /// Displays real-time traffic information overlay on map, such as incident
-    /// events and flow events.
+    /// events and flow events. Not supported in `ap-southeast-1` and
+    /// `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
-    /// This parameter is valid only for the `Standard` map style.
+    /// This parameter is valid for all map styles except `Satellite`.
     traffic: ?Traffic = null,
 
     /// Renders additional map information relevant to selected travel modes.
     /// Information for multiple travel modes can be displayed simultaneously,
     /// although this increases the overall information density rendered on the map.
+    /// Not supported in `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
-    /// This parameter is valid only for the `Standard` map style.
+    /// This parameter is valid for all map styles except `Satellite`.
     travel_modes: ?[]const TravelMode = null,
 
     pub const json_field_names = .{

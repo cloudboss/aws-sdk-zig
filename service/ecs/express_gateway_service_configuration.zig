@@ -4,8 +4,7 @@ const ExpressGatewayContainer = @import("express_gateway_container.zig").Express
 const ExpressGatewayScalingTarget = @import("express_gateway_scaling_target.zig").ExpressGatewayScalingTarget;
 
 /// Represents a specific configuration revision of an Express service,
-/// containing all the
-/// settings and parameters for that revision.
+/// containing all the settings and parameters for that revision.
 pub const ExpressGatewayServiceConfiguration = struct {
     /// The CPU allocation for tasks in this service revision.
     cpu: ?[]const u8 = null,

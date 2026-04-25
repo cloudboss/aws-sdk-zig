@@ -56,13 +56,11 @@ pub const GetUserPoolMfaConfigOutput = struct {
     /// TOTP enabled or disabled state.
     software_token_mfa_configuration: ?SoftwareTokenMfaConfigType = null,
 
-    /// Shows user pool configuration for sign-in with passkey authenticators like
-    /// biometric
-    /// devices and security keys. Passkeys are not eligible MFA factors. They are
-    /// instead an
-    /// eligible primary sign-in factor for [choice-based
-    /// authentication](https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flows-selection-sdk.html#authentication-flows-selection-choice), or the
-    /// `USER_AUTH` flow.
+    /// Shows user pool configuration for sign-in with passkey authenticators such
+    /// as
+    /// biometric devices and security keys. Includes relying-party configuration,
+    /// user-verification requirements, and whether passkeys can satisfy MFA
+    /// requirements.
     web_authn_configuration: ?WebAuthnConfigurationType = null,
 
     pub const json_field_names = .{
@@ -142,6 +140,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     const owned_message = try arena_alloc.dupe(u8, error_message);
     const owned_request_id = try arena_alloc.dupe(u8, "");
 
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "AliasExistsException")) {
         return .{ .arena = arena, .kind = .{ .alias_exists_exception = .{
             .message = owned_message,
@@ -210,6 +214,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "InternalErrorException")) {
         return .{ .arena = arena, .kind = .{ .internal_error_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

@@ -6,6 +6,11 @@ const Tag = @import("tag.zig").Tag;
 /// FirewallPolicy, define the policy. You can retrieve all objects for a
 /// firewall policy by calling DescribeFirewallPolicy.
 pub const FirewallPolicyResponse = struct {
+    /// The total number of domain name specifications across all domain list rule
+    /// groups in the firewall policy that use the `stateful-domain-rulegroup`
+    /// resource type.
+    consumed_stateful_domain_capacity: ?i32 = null,
+
     /// The number of capacity units currently consumed by the policy's stateful
     /// rules.
     consumed_stateful_rule_capacity: ?i32 = null,
@@ -51,6 +56,7 @@ pub const FirewallPolicyResponse = struct {
     tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
+        .consumed_stateful_domain_capacity = "ConsumedStatefulDomainCapacity",
         .consumed_stateful_rule_capacity = "ConsumedStatefulRuleCapacity",
         .consumed_stateless_rule_capacity = "ConsumedStatelessRuleCapacity",
         .description = "Description",

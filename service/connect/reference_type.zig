@@ -10,6 +10,8 @@ pub const ReferenceType = enum {
     email,
     email_message,
     email_message_plain_text,
+    email_message_plain_text_redacted,
+    email_message_redacted,
 
     pub const json_field_names = .{
         .url = "URL",
@@ -21,6 +23,8 @@ pub const ReferenceType = enum {
         .email = "EMAIL",
         .email_message = "EMAIL_MESSAGE",
         .email_message_plain_text = "EMAIL_MESSAGE_PLAIN_TEXT",
+        .email_message_plain_text_redacted = "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED",
+        .email_message_redacted = "EMAIL_MESSAGE_REDACTED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -34,6 +38,8 @@ pub const ReferenceType = enum {
             .email => "EMAIL",
             .email_message => "EMAIL_MESSAGE",
             .email_message_plain_text => "EMAIL_MESSAGE_PLAIN_TEXT",
+            .email_message_plain_text_redacted => "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED",
+            .email_message_redacted => "EMAIL_MESSAGE_REDACTED",
         };
     }
 

@@ -1,8 +1,8 @@
 /// The options for customizing a security control parameter that is a list of
 /// strings.
 pub const StringListConfigurationOptions = struct {
-    /// The Security Hub default value for a control parameter that is a list of
-    /// strings.
+    /// The Security Hub CSPM default value for a control parameter that is a list
+    /// of strings.
     default_value: ?[]const []const u8 = null,
 
     /// The description of the RE2 regular expression.
@@ -12,8 +12,8 @@ pub const StringListConfigurationOptions = struct {
     /// accept.
     max_items: ?i32 = null,
 
-    /// An RE2 regular expression that Security Hub uses to validate a user-provided
-    /// list of strings for a control
+    /// An RE2 regular expression that Security Hub CSPM uses to validate a
+    /// user-provided list of strings for a control
     /// parameter.
     re_2_expression: ?[]const u8 = null,
 

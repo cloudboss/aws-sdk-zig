@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const RegionStatus = @import("region_status.zig").RegionStatus;
 const TelemetryRule = @import("telemetry_rule.zig").TelemetryRule;
 
 pub const GetTelemetryRuleForOrganizationInput = struct {
@@ -19,8 +20,26 @@ pub const GetTelemetryRuleForOrganizationOutput = struct {
     /// The timestamp when the organization telemetry rule was created.
     created_time_stamp: ?i64 = null,
 
+    /// The Amazon Web Services Region where the organization telemetry rule was
+    /// originally created. For replicated rules in spoke regions, this indicates
+    /// the region that manages the rule. For rules created without multi-region
+    /// scope, this field is not present.
+    home_region: ?[]const u8 = null,
+
+    /// Indicates whether this organization telemetry rule is a replica that was
+    /// created in this region through multi-region fan-out from the home region.
+    /// Replicated rules cannot be directly updated or deleted in the spoke region.
+    /// To modify a replicated rule, make changes in the home region.
+    is_replicated: ?bool = null,
+
     /// The timestamp when the organization telemetry rule was last updated.
     last_update_time_stamp: ?i64 = null,
+
+    /// A list of per-region replication statuses for the organization telemetry
+    /// rule. Each entry indicates the replication status of the rule in a specific
+    /// spoke region. This field is only present for rules created with multi-region
+    /// scope.
+    region_statuses: ?[]const RegionStatus = null,
 
     /// The Amazon Resource Name (ARN) of the organization telemetry rule.
     rule_arn: ?[]const u8 = null,
@@ -33,7 +52,10 @@ pub const GetTelemetryRuleForOrganizationOutput = struct {
 
     pub const json_field_names = .{
         .created_time_stamp = "CreatedTimeStamp",
+        .home_region = "HomeRegion",
+        .is_replicated = "IsReplicated",
         .last_update_time_stamp = "LastUpdateTimeStamp",
+        .region_statuses = "RegionStatuses",
         .rule_arn = "RuleArn",
         .rule_name = "RuleName",
         .telemetry_rule = "TelemetryRule",

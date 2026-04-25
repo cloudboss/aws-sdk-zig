@@ -1,3 +1,4 @@
+const WebAuthnFactorConfigurationType = @import("web_authn_factor_configuration_type.zig").WebAuthnFactorConfigurationType;
 const UserVerificationType = @import("user_verification_type.zig").UserVerificationType;
 
 /// Settings for authentication (MFA) with passkey, or webauthN, biometric and
@@ -13,6 +14,16 @@ const UserVerificationType = @import("user_verification_type.zig").UserVerificat
 /// * The providers that you want to allow as origins for passkey
 /// authentication.
 pub const WebAuthnConfigurationType = struct {
+    /// Sets whether passkeys can be used as multi-factor authentication (MFA). When
+    /// set to
+    /// `MULTI_FACTOR_WITH_USER_VERIFICATION`, passkey authentication with user
+    /// verification satisfies MFA requirements. When set to `SINGLE_FACTOR` or not
+    /// set, passkeys are a single authentication factor. To activate this setting,
+    /// your user pool must be in the [
+    /// Essentials
+    /// tier](https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html) or higher.
+    factor_configuration: ?WebAuthnFactorConfigurationType = null,
+
     /// Sets or displays the authentication domain, typically your user pool domain,
     /// that
     /// passkey providers must use as a relying party (RP) in their configuration.
@@ -36,6 +47,7 @@ pub const WebAuthnConfigurationType = struct {
     user_verification: ?UserVerificationType = null,
 
     pub const json_field_names = .{
+        .factor_configuration = "FactorConfiguration",
         .relying_party_id = "RelyingPartyId",
         .user_verification = "UserVerification",
     };

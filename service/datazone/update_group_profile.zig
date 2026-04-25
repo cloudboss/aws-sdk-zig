@@ -35,6 +35,14 @@ pub const UpdateGroupProfileOutput = struct {
     /// The identifier of the group profile that is updated.
     id: ?[]const u8 = null,
 
+    /// The ARN of the IAM role principal. This role is associated with the updated
+    /// group profile.
+    role_principal_arn: ?[]const u8 = null,
+
+    /// The unique identifier of the IAM role principal. This principal is
+    /// associated with the updated group profile.
+    role_principal_id: ?[]const u8 = null,
+
     /// The status of the group profile that is updated.
     status: ?GroupProfileStatus = null,
 
@@ -42,6 +50,8 @@ pub const UpdateGroupProfileOutput = struct {
         .domain_id = "domainId",
         .group_name = "groupName",
         .id = "id",
+        .role_principal_arn = "rolePrincipalArn",
+        .role_principal_id = "rolePrincipalId",
         .status = "status",
     };
 };

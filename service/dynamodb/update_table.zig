@@ -7,6 +7,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const AttributeDefinition = @import("attribute_definition.zig").AttributeDefinition;
 const BillingMode = @import("billing_mode.zig").BillingMode;
 const GlobalSecondaryIndexUpdate = @import("global_secondary_index_update.zig").GlobalSecondaryIndexUpdate;
+const GlobalTableSettingsReplicationMode = @import("global_table_settings_replication_mode.zig").GlobalTableSettingsReplicationMode;
 const GlobalTableWitnessGroupUpdate = @import("global_table_witness_group_update.zig").GlobalTableWitnessGroupUpdate;
 const MultiRegionConsistency = @import("multi_region_consistency.zig").MultiRegionConsistency;
 const OnDemandThroughput = @import("on_demand_throughput.zig").OnDemandThroughput;
@@ -71,6 +72,20 @@ pub const UpdateTableInput = struct {
     /// Indexes](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html) in the *Amazon DynamoDB Developer
     /// Guide*.
     global_secondary_index_updates: ?[]const GlobalSecondaryIndexUpdate = null,
+
+    /// Controls the settings replication mode for a global table replica. This
+    /// attribute can be defined
+    /// using UpdateTable operation only on a regional table with values:
+    ///
+    /// * `ENABLED`: Defines settings replication on a regional table to be used as
+    ///   a
+    /// source table for creating Multi-Account Global Table.
+    ///
+    /// * `DISABLED`: Remove settings replication on a regional table. Settings
+    ///   replication needs
+    /// to be defined to ENABLED again in order to create a Multi-Account Global
+    /// Table using this table.
+    global_table_settings_replication_mode: ?GlobalTableSettingsReplicationMode = null,
 
     /// A list of witness updates for a MRSC global table. A witness provides a
     /// cost-effective
@@ -156,6 +171,7 @@ pub const UpdateTableInput = struct {
         .billing_mode = "BillingMode",
         .deletion_protection_enabled = "DeletionProtectionEnabled",
         .global_secondary_index_updates = "GlobalSecondaryIndexUpdates",
+        .global_table_settings_replication_mode = "GlobalTableSettingsReplicationMode",
         .global_table_witness_updates = "GlobalTableWitnessUpdates",
         .multi_region_consistency = "MultiRegionConsistency",
         .on_demand_throughput = "OnDemandThroughput",

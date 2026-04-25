@@ -7,6 +7,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ReplicationConfigurationDataPlaneRouting = @import("replication_configuration_data_plane_routing.zig").ReplicationConfigurationDataPlaneRouting;
 const ReplicationConfigurationDefaultLargeStagingDiskType = @import("replication_configuration_default_large_staging_disk_type.zig").ReplicationConfigurationDefaultLargeStagingDiskType;
 const ReplicationConfigurationEbsEncryption = @import("replication_configuration_ebs_encryption.zig").ReplicationConfigurationEbsEncryption;
+const InternetProtocol = @import("internet_protocol.zig").InternetProtocol;
 const PITPolicyRule = @import("pit_policy_rule.zig").PITPolicyRule;
 const ReplicationConfigurationReplicatedDisk = @import("replication_configuration_replicated_disk.zig").ReplicationConfigurationReplicatedDisk;
 
@@ -47,6 +48,10 @@ pub const GetReplicationConfigurationOutput = struct {
     /// The ARN of the EBS encryption key to be used during replication.
     ebs_encryption_key_arn: ?[]const u8 = null,
 
+    /// Which version of the Internet Protocol to use for replication of data. (IPv4
+    /// or IPv6)
+    internet_protocol: ?InternetProtocol = null,
+
     /// The name of the Replication Configuration.
     name: ?[]const u8 = null,
 
@@ -85,6 +90,7 @@ pub const GetReplicationConfigurationOutput = struct {
         .default_large_staging_disk_type = "defaultLargeStagingDiskType",
         .ebs_encryption = "ebsEncryption",
         .ebs_encryption_key_arn = "ebsEncryptionKeyArn",
+        .internet_protocol = "internetProtocol",
         .name = "name",
         .pit_policy = "pitPolicy",
         .replicated_disks = "replicatedDisks",

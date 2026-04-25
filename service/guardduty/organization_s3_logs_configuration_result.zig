@@ -2,8 +2,7 @@
 /// organization.
 pub const OrganizationS3LogsConfigurationResult = struct {
     /// A value that describes whether S3 data event logs are automatically enabled
-    /// for new
-    /// members of the organization.
+    /// for new members of the organization.
     auto_enable: bool,
 
     pub const json_field_names = .{

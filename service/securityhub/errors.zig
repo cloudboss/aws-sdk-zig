@@ -12,6 +12,8 @@ pub const ServiceError = struct {
         invalid_access_exception: InvalidAccessException,
         invalid_input_exception: InvalidInputException,
         limit_exceeded_exception: LimitExceededException,
+        organization_not_found_exception: OrganizationNotFoundException,
+        organizational_unit_not_found_exception: OrganizationalUnitNotFoundException,
         resource_conflict_exception: ResourceConflictException,
         resource_in_use_exception: ResourceInUseException,
         resource_not_found_exception: ResourceNotFoundException,
@@ -29,6 +31,8 @@ pub const ServiceError = struct {
                 .invalid_access_exception => "InvalidAccessException",
                 .invalid_input_exception => "InvalidInputException",
                 .limit_exceeded_exception => "LimitExceededException",
+                .organization_not_found_exception => "OrganizationNotFoundException",
+                .organizational_unit_not_found_exception => "OrganizationalUnitNotFoundException",
                 .resource_conflict_exception => "ResourceConflictException",
                 .resource_in_use_exception => "ResourceInUseException",
                 .resource_not_found_exception => "ResourceNotFoundException",
@@ -48,6 +52,8 @@ pub const ServiceError = struct {
                 .invalid_access_exception => |e| e.message,
                 .invalid_input_exception => |e| e.message,
                 .limit_exceeded_exception => |e| e.message,
+                .organization_not_found_exception => |e| e.message,
+                .organizational_unit_not_found_exception => |e| e.message,
                 .resource_conflict_exception => |e| e.message,
                 .resource_in_use_exception => |e| e.message,
                 .resource_not_found_exception => |e| e.message,
@@ -67,6 +73,8 @@ pub const ServiceError = struct {
                 .invalid_access_exception => 401,
                 .invalid_input_exception => 400,
                 .limit_exceeded_exception => 429,
+                .organization_not_found_exception => 400,
+                .organizational_unit_not_found_exception => 400,
                 .resource_conflict_exception => 409,
                 .resource_in_use_exception => 400,
                 .resource_not_found_exception => 404,
@@ -86,6 +94,8 @@ pub const ServiceError = struct {
                 .invalid_access_exception => |e| e.request_id,
                 .invalid_input_exception => |e| e.request_id,
                 .limit_exceeded_exception => |e| e.request_id,
+                .organization_not_found_exception => |e| e.request_id,
+                .organizational_unit_not_found_exception => |e| e.request_id,
                 .resource_conflict_exception => |e| e.request_id,
                 .resource_in_use_exception => |e| e.request_id,
                 .resource_not_found_exception => |e| e.request_id,
@@ -149,6 +159,16 @@ pub const InvalidInputException = struct {
 };
 
 pub const LimitExceededException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const OrganizationNotFoundException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const OrganizationalUnitNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };

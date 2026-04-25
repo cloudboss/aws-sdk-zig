@@ -121,6 +121,7 @@ pub const Stage = @import("stage.zig").Stage;
 pub const Tag = @import("tag.zig").Tag;
 pub const TagResourceRequest = @import("tag_resource_request.zig").TagResourceRequest;
 pub const TagResourceResponse = @import("tag_resource_response.zig").TagResourceResponse;
+pub const TargetCloseDateFilter = @import("target_close_date_filter.zig").TargetCloseDateFilter;
 pub const TaskStatus = @import("task_status.zig").TaskStatus;
 pub const UntagResourceRequest = @import("untag_resource_request.zig").UntagResourceRequest;
 pub const UntagResourceResponse = @import("untag_resource_response.zig").UntagResourceResponse;

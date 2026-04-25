@@ -4,8 +4,7 @@ const FilterCriterion = @import("filter_criterion.zig").FilterCriterion;
 /// entries.
 pub const FilterCriteria = struct {
     /// Represents a condition that when matched will be added to the response of
-    /// the
-    /// operation.
+    /// the operation.
     filter_criterion: ?[]const FilterCriterion = null,
 
     pub const json_field_names = .{

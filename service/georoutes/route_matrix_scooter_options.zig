@@ -1,18 +1,18 @@
 const RouteMatrixVehicleLicensePlate = @import("route_matrix_vehicle_license_plate.zig").RouteMatrixVehicleLicensePlate;
 
-/// Travel mode options when the provided travel mode is `Scooter`
+/// Travel mode options when the provided travel mode is `Scooter`.
 pub const RouteMatrixScooterOptions = struct {
     /// The vehicle License Plate.
     license_plate: ?RouteMatrixVehicleLicensePlate = null,
 
     /// Maximum speed.
     ///
-    /// **Unit**: `KilometersPerHour`
+    /// **Unit**: `kilometers per hour`
     max_speed: ?f64 = null,
 
     /// The number of occupants in the vehicle.
     ///
-    /// Default Value: `1`
+    /// Default value: `1`
     occupancy: ?i32 = null,
 
     pub const json_field_names = .{

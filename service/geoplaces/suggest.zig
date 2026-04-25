@@ -12,7 +12,8 @@ const SuggestResultItem = @import("suggest_result_item.zig").SuggestResultItem;
 
 pub const SuggestInput = struct {
     /// A list of optional additional parameters, such as time zone, that can be
-    /// requested for each result.
+    /// requested for each result. For
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only the `Core` and `TimeZone` values.
     additional_features: ?[]const SuggestAdditionalFeature = null,
 
     /// The position, in longitude and latitude, that the results should be close
@@ -27,8 +28,9 @@ pub const SuggestInput = struct {
     /// results must possess in order to be returned as a result.
     filter: ?SuggestFilter = null,
 
-    /// Indicates if the results will be stored. Defaults to `SingleUse`, if left
-    /// empty.
+    /// Indicates if the query results will be persisted in customer infrastructure.
+    /// Defaults to `SingleUse` (not stored). Currently, `Suggest` does not support
+    /// storage of results.
     intended_use: ?SuggestIntendedUse = null,
 
     /// Optional: The API key to be used for authorization. Either an API key or
@@ -38,11 +40,13 @@ pub const SuggestInput = struct {
     /// A list of [BCP 47](https://en.wikipedia.org/wiki/IETF_language_tag)
     /// compliant language codes for the results to be rendered in. If there is no
     /// data for the result in the requested language, data will be returned in the
-    /// default language for the entry.
+    /// default language for the entry. For
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only the following codes: `en, id, km, lo, ms, my, pt, th, tl, vi, zh`
     language: ?[]const u8 = null,
 
     /// Maximum number of query terms to be returned for use with a search text
-    /// query.
+    /// query. Not supported in `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     max_query_refinements: ?i32 = null,
 
     /// An optional limit for the number of results returned in a single call.
@@ -53,7 +57,8 @@ pub const SuggestInput = struct {
     /// The alpha-2 or alpha-3 character code for the political view of a country.
     /// The political view applies to the results of the request to represent
     /// unresolved territorial claims through the point of view of the specified
-    /// country.
+    /// country. Not supported in `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     political_view: ?[]const u8 = null,
 
     /// The free-form text query to match addresses against. This is usually a
@@ -84,7 +89,8 @@ pub const SuggestOutput = struct {
     pricing_bucket: []const u8,
 
     /// Maximum number of query terms to be returned for use with a search text
-    /// query.
+    /// query. Not available in `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     query_refinements: ?[]const QueryRefinement = null,
 
     /// List of places or results returned for a query.
@@ -129,7 +135,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SuggestInput, config: *
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    const path = "/suggest";
+    const path = "/v2/suggest";
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;

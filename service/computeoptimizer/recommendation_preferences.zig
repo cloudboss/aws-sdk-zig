@@ -5,8 +5,8 @@ const CpuVendorArchitecture = @import("cpu_vendor_architecture.zig").CpuVendorAr
 /// GetEC2RecommendationProjectedMetrics, GetRDSDatabaseRecommendations, and
 /// GetRDSDatabaseRecommendationProjectedMetrics request.
 pub const RecommendationPreferences = struct {
-    /// Specifies the CPU vendor and architecture for Amazon EC2 instance and Amazon
-    /// EC2 Auto Scaling group recommendations.
+    /// Specifies the CPU vendor and architecture for Amazon EC2 instance and Auto
+    /// Scaling group recommendations.
     ///
     /// For example, when you specify `AWS_ARM64` with:
     ///

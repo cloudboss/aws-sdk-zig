@@ -2,8 +2,8 @@ const Action = @import("action.zig").Action;
 const Event = @import("event.zig").Event;
 
 /// An event action is an object that defines the relationship between a
-/// specific event and
-/// an automated action that will be taken on behalf of the customer.
+/// specific event and an automated action that will be taken on behalf of the
+/// customer.
 pub const EventActionEntry = struct {
     /// What occurs after a certain event.
     action: Action,

@@ -5,8 +5,7 @@ const ProductCode = @import("product_code.zig").ProductCode;
 pub const Ec2Instance = struct {
     /// The availability zone of the Amazon EC2 instance. For more information, see
     /// [Availability
-    /// zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-availability-zones)
-    /// in the *Amazon EC2 User Guide*.
+    /// zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-availability-zones) in the *Amazon EC2 User Guide*.
     availability_zone: ?[]const u8 = null,
 
     /// The ID of the network interface.
@@ -17,10 +16,9 @@ pub const Ec2Instance = struct {
     /// The image description of the Amazon EC2 instance.
     image_description: ?[]const u8 = null,
 
-    /// The state of the Amazon EC2 instance. For more information, see
-    /// [Amazon EC2 instance state
-    /// changes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html)
-    /// in the *Amazon EC2 User Guide*.
+    /// The state of the Amazon EC2 instance. For more information, see [Amazon EC2
+    /// instance state
+    /// changes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html) in the *Amazon EC2 User Guide*.
     instance_state: ?[]const u8 = null,
 
     /// Type of the Amazon EC2 instance.

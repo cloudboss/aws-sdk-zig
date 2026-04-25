@@ -14,10 +14,14 @@ pub const CustomMemoryStrategyInput = struct {
     /// The namespaces associated with the custom memory strategy.
     namespaces: ?[]const []const u8 = null,
 
+    /// The namespaceTemplates associated with the custom memory strategy.
+    namespace_templates: ?[]const []const u8 = null,
+
     pub const json_field_names = .{
         .configuration = "configuration",
         .description = "description",
         .name = "name",
         .namespaces = "namespaces",
+        .namespace_templates = "namespaceTemplates",
     };
 };

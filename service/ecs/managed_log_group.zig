@@ -6,8 +6,7 @@ pub const ManagedLogGroup = struct {
     /// the Express service.
     arn: ?[]const u8 = null,
 
-    /// The name of the Cloudwatch Log Group associated with
-    /// the Express service.
+    /// The name of the Cloudwatch Log Group associated with the Express service.
     log_group_name: []const u8,
 
     /// The status of the Cloudwatch LogGroup.

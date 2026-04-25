@@ -1,8 +1,8 @@
 const StringFilterComparison = @import("string_filter_comparison.zig").StringFilterComparison;
 
-/// A string filter for filtering Security Hub findings.
+/// A string filter for filtering Security Hub CSPM findings.
 pub const StringFilter = struct {
-    /// The condition to apply to a string value when filtering Security Hub
+    /// The condition to apply to a string value when filtering Security Hub CSPM
     /// findings.
     ///
     /// To search for values that have the filter value, use one of the following
@@ -73,10 +73,10 @@ pub const StringFilter = struct {
     ///
     /// You can combine `PREFIX` filters with `NOT_EQUALS` or `PREFIX_NOT_EQUALS`
     /// filters for the same field.
-    /// Security Hub first processes the `PREFIX` filters, and then the `NOT_EQUALS`
-    /// or `PREFIX_NOT_EQUALS` filters.
+    /// Security Hub CSPM first processes the `PREFIX` filters, and then the
+    /// `NOT_EQUALS` or `PREFIX_NOT_EQUALS` filters.
     ///
-    /// For example, for the following filters, Security Hub first identifies
+    /// For example, for the following filters, Security Hub CSPM first identifies
     /// findings that have resource types
     /// that start with either `AwsIam` or `AwsEc2`. It then excludes findings that
     /// have a resource
@@ -94,15 +94,16 @@ pub const StringFilter = struct {
     /// `CONTAINS` and `NOT_CONTAINS` operators can be used only with automation
     /// rules V1.
     /// `CONTAINS_WORD` operator is only supported in `GetFindingsV2`,
-    /// `GetFindingStatisticsV2`, `GetResourcesV2`, and `GetResourceStatisticsV2`
+    /// `GetFindingStatisticsV2`, `GetResourcesV2`, and `GetResourcesStatisticsV2`
     /// APIs.
     /// For more information, see [Automation
-    /// rules](https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html) in the *Security Hub User Guide*.
+    /// rules](https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html) in the *Security Hub CSPM User Guide*.
     comparison: ?StringFilterComparison = null,
 
     /// The string filter value. Filter values are case sensitive. For example, the
     /// product name
-    /// for control-based findings is `Security Hub`. If you provide `security hub`
+    /// for control-based findings is `Security Hub CSPM`. If you provide `security
+    /// hub`
     /// as the filter value, there's no match.
     value: ?[]const u8 = null,
 

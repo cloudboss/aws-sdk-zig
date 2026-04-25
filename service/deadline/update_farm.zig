@@ -6,6 +6,11 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const UpdateFarmInput = struct {
+    /// A multiplier applied to the farm's calculated costs for usage data and
+    /// budget tracking. A value less than 1 represents a discount, a value greater
+    /// than 1 represents a premium, and a value of 1 represents no adjustment.
+    cost_scale_factor: ?f32 = null,
+
     /// The description of the farm to update.
     ///
     /// This field can store any content. Escape or encode this content before
@@ -24,6 +29,7 @@ pub const UpdateFarmInput = struct {
     farm_id: []const u8,
 
     pub const json_field_names = .{
+        .cost_scale_factor = "costScaleFactor",
         .description = "description",
         .display_name = "displayName",
         .farm_id = "farmId",
@@ -74,6 +80,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateFarmInput, config
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.cost_scale_factor) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"costScaleFactor\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.description) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"description\":");

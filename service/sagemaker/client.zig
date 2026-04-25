@@ -11,6 +11,9 @@ const batch_describe_model_package = @import("batch_describe_model_package.zig")
 const batch_reboot_cluster_nodes = @import("batch_reboot_cluster_nodes.zig");
 const batch_replace_cluster_nodes = @import("batch_replace_cluster_nodes.zig");
 const create_action = @import("create_action.zig");
+const create_ai_benchmark_job = @import("create_ai_benchmark_job.zig");
+const create_ai_recommendation_job = @import("create_ai_recommendation_job.zig");
+const create_ai_workload_config = @import("create_ai_workload_config.zig");
 const create_algorithm = @import("create_algorithm.zig");
 const create_app = @import("create_app.zig");
 const create_app_image_config = @import("create_app_image_config.zig");
@@ -79,6 +82,9 @@ const create_user_profile = @import("create_user_profile.zig");
 const create_workforce = @import("create_workforce.zig");
 const create_workteam = @import("create_workteam.zig");
 const delete_action = @import("delete_action.zig");
+const delete_ai_benchmark_job = @import("delete_ai_benchmark_job.zig");
+const delete_ai_recommendation_job = @import("delete_ai_recommendation_job.zig");
+const delete_ai_workload_config = @import("delete_ai_workload_config.zig");
 const delete_algorithm = @import("delete_algorithm.zig");
 const delete_app = @import("delete_app.zig");
 const delete_app_image_config = @import("delete_app_image_config.zig");
@@ -138,6 +144,9 @@ const delete_workforce = @import("delete_workforce.zig");
 const delete_workteam = @import("delete_workteam.zig");
 const deregister_devices = @import("deregister_devices.zig");
 const describe_action = @import("describe_action.zig");
+const describe_ai_benchmark_job = @import("describe_ai_benchmark_job.zig");
+const describe_ai_recommendation_job = @import("describe_ai_recommendation_job.zig");
+const describe_ai_workload_config = @import("describe_ai_workload_config.zig");
 const describe_algorithm = @import("describe_algorithm.zig");
 const describe_app = @import("describe_app.zig");
 const describe_app_image_config = @import("describe_app_image_config.zig");
@@ -201,6 +210,7 @@ const describe_studio_lifecycle_config = @import("describe_studio_lifecycle_conf
 const describe_subscribed_workteam = @import("describe_subscribed_workteam.zig");
 const describe_training_job = @import("describe_training_job.zig");
 const describe_training_plan = @import("describe_training_plan.zig");
+const describe_training_plan_extension_history = @import("describe_training_plan_extension_history.zig");
 const describe_transform_job = @import("describe_transform_job.zig");
 const describe_trial = @import("describe_trial.zig");
 const describe_trial_component = @import("describe_trial_component.zig");
@@ -211,6 +221,7 @@ const detach_cluster_node_volume = @import("detach_cluster_node_volume.zig");
 const disable_sagemaker_servicecatalog_portfolio = @import("disable_sagemaker_servicecatalog_portfolio.zig");
 const disassociate_trial_component = @import("disassociate_trial_component.zig");
 const enable_sagemaker_servicecatalog_portfolio = @import("enable_sagemaker_servicecatalog_portfolio.zig");
+const extend_training_plan = @import("extend_training_plan.zig");
 const get_device_fleet_report = @import("get_device_fleet_report.zig");
 const get_lineage_group_policy = @import("get_lineage_group_policy.zig");
 const get_model_package_group_policy = @import("get_model_package_group_policy.zig");
@@ -219,6 +230,9 @@ const get_scaling_configuration_recommendation = @import("get_scaling_configurat
 const get_search_suggestions = @import("get_search_suggestions.zig");
 const import_hub_content = @import("import_hub_content.zig");
 const list_actions = @import("list_actions.zig");
+const list_ai_benchmark_jobs = @import("list_ai_benchmark_jobs.zig");
+const list_ai_recommendation_jobs = @import("list_ai_recommendation_jobs.zig");
+const list_ai_workload_configs = @import("list_ai_workload_configs.zig");
 const list_algorithms = @import("list_algorithms.zig");
 const list_aliases = @import("list_aliases.zig");
 const list_app_image_configs = @import("list_app_image_configs.zig");
@@ -312,6 +326,7 @@ const search_ = @import("search.zig");
 const search_training_plan_offerings = @import("search_training_plan_offerings.zig");
 const send_pipeline_execution_step_failure = @import("send_pipeline_execution_step_failure.zig");
 const send_pipeline_execution_step_success = @import("send_pipeline_execution_step_success.zig");
+const start_cluster_health_check = @import("start_cluster_health_check.zig");
 const start_edge_deployment_stage = @import("start_edge_deployment_stage.zig");
 const start_inference_experiment = @import("start_inference_experiment.zig");
 const start_mlflow_tracking_server = @import("start_mlflow_tracking_server.zig");
@@ -319,6 +334,8 @@ const start_monitoring_schedule = @import("start_monitoring_schedule.zig");
 const start_notebook_instance = @import("start_notebook_instance.zig");
 const start_pipeline_execution = @import("start_pipeline_execution.zig");
 const start_session = @import("start_session.zig");
+const stop_ai_benchmark_job = @import("stop_ai_benchmark_job.zig");
+const stop_ai_recommendation_job = @import("stop_ai_recommendation_job.zig");
 const stop_auto_ml_job = @import("stop_auto_ml_job.zig");
 const stop_compilation_job = @import("stop_compilation_job.zig");
 const stop_edge_deployment_stage = @import("stop_edge_deployment_stage.zig");
@@ -555,6 +572,30 @@ pub const Client = struct {
     /// Tracking](https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html).
     pub fn createAction(self: *Self, allocator: std.mem.Allocator, input: create_action.CreateActionInput, options: CallOptions) !create_action.CreateActionOutput {
         return create_action.execute(self, allocator, input, options);
+    }
+
+    /// Creates a benchmark job that runs performance benchmarks against inference
+    /// infrastructure using a predefined AI workload configuration. The benchmark
+    /// job measures metrics such as latency, throughput, and cost for your
+    /// generative AI inference endpoints.
+    pub fn createAiBenchmarkJob(self: *Self, allocator: std.mem.Allocator, input: create_ai_benchmark_job.CreateAIBenchmarkJobInput, options: CallOptions) !create_ai_benchmark_job.CreateAIBenchmarkJobOutput {
+        return create_ai_benchmark_job.execute(self, allocator, input, options);
+    }
+
+    /// Creates a recommendation job that generates intelligent optimization
+    /// recommendations for generative AI inference deployments. The job analyzes
+    /// your model, workload configuration, and performance targets to recommend
+    /// optimal instance types, model optimization techniques (such as quantization
+    /// and speculative decoding), and deployment configurations.
+    pub fn createAiRecommendationJob(self: *Self, allocator: std.mem.Allocator, input: create_ai_recommendation_job.CreateAIRecommendationJobInput, options: CallOptions) !create_ai_recommendation_job.CreateAIRecommendationJobOutput {
+        return create_ai_recommendation_job.execute(self, allocator, input, options);
+    }
+
+    /// Creates a reusable AI workload configuration that defines datasets, data
+    /// sources, and benchmark tool settings for consistent performance testing of
+    /// generative AI inference deployments on Amazon SageMaker AI.
+    pub fn createAiWorkloadConfig(self: *Self, allocator: std.mem.Allocator, input: create_ai_workload_config.CreateAIWorkloadConfigInput, options: CallOptions) !create_ai_workload_config.CreateAIWorkloadConfigOutput {
+        return create_ai_workload_config.execute(self, allocator, input, options);
     }
 
     /// Create a machine learning algorithm that you can use in SageMaker and list
@@ -1629,6 +1670,22 @@ pub const Client = struct {
         return delete_action.execute(self, allocator, input, options);
     }
 
+    /// Deletes the specified AI benchmark job.
+    pub fn deleteAiBenchmarkJob(self: *Self, allocator: std.mem.Allocator, input: delete_ai_benchmark_job.DeleteAIBenchmarkJobInput, options: CallOptions) !delete_ai_benchmark_job.DeleteAIBenchmarkJobOutput {
+        return delete_ai_benchmark_job.execute(self, allocator, input, options);
+    }
+
+    /// Deletes the specified AI recommendation job.
+    pub fn deleteAiRecommendationJob(self: *Self, allocator: std.mem.Allocator, input: delete_ai_recommendation_job.DeleteAIRecommendationJobInput, options: CallOptions) !delete_ai_recommendation_job.DeleteAIRecommendationJobOutput {
+        return delete_ai_recommendation_job.execute(self, allocator, input, options);
+    }
+
+    /// Deletes the specified AI workload configuration. You cannot delete a
+    /// configuration that is referenced by an active benchmark job.
+    pub fn deleteAiWorkloadConfig(self: *Self, allocator: std.mem.Allocator, input: delete_ai_workload_config.DeleteAIWorkloadConfigInput, options: CallOptions) !delete_ai_workload_config.DeleteAIWorkloadConfigOutput {
+        return delete_ai_workload_config.execute(self, allocator, input, options);
+    }
+
     /// Removes the specified algorithm from your account.
     pub fn deleteAlgorithm(self: *Self, allocator: std.mem.Allocator, input: delete_algorithm.DeleteAlgorithmInput, options: CallOptions) !delete_algorithm.DeleteAlgorithmOutput {
         return delete_algorithm.execute(self, allocator, input, options);
@@ -2038,6 +2095,25 @@ pub const Client = struct {
         return describe_action.execute(self, allocator, input, options);
     }
 
+    /// Returns details of an AI benchmark job, including its status, configuration,
+    /// target endpoint, and timing information.
+    pub fn describeAiBenchmarkJob(self: *Self, allocator: std.mem.Allocator, input: describe_ai_benchmark_job.DescribeAIBenchmarkJobInput, options: CallOptions) !describe_ai_benchmark_job.DescribeAIBenchmarkJobOutput {
+        return describe_ai_benchmark_job.execute(self, allocator, input, options);
+    }
+
+    /// Returns details of an AI recommendation job, including its status, model
+    /// source, performance targets, optimization recommendations, and deployment
+    /// configurations.
+    pub fn describeAiRecommendationJob(self: *Self, allocator: std.mem.Allocator, input: describe_ai_recommendation_job.DescribeAIRecommendationJobInput, options: CallOptions) !describe_ai_recommendation_job.DescribeAIRecommendationJobOutput {
+        return describe_ai_recommendation_job.execute(self, allocator, input, options);
+    }
+
+    /// Returns details of an AI workload configuration, including the dataset
+    /// configuration, benchmark tool settings, tags, and creation time.
+    pub fn describeAiWorkloadConfig(self: *Self, allocator: std.mem.Allocator, input: describe_ai_workload_config.DescribeAIWorkloadConfigInput, options: CallOptions) !describe_ai_workload_config.DescribeAIWorkloadConfigOutput {
+        return describe_ai_workload_config.execute(self, allocator, input, options);
+    }
+
     /// Returns a description of the specified algorithm that is in your account.
     pub fn describeAlgorithm(self: *Self, allocator: std.mem.Allocator, input: describe_algorithm.DescribeAlgorithmInput, options: CallOptions) !describe_algorithm.DescribeAlgorithmOutput {
         return describe_algorithm.execute(self, allocator, input, options);
@@ -2395,6 +2471,13 @@ pub const Client = struct {
         return describe_training_plan.execute(self, allocator, input, options);
     }
 
+    /// Retrieves the extension history for a specified training plan. The response
+    /// includes details about each extension, such as the offering ID, start and
+    /// end dates, status, payment status, and cost information.
+    pub fn describeTrainingPlanExtensionHistory(self: *Self, allocator: std.mem.Allocator, input: describe_training_plan_extension_history.DescribeTrainingPlanExtensionHistoryInput, options: CallOptions) !describe_training_plan_extension_history.DescribeTrainingPlanExtensionHistoryOutput {
+        return describe_training_plan_extension_history.execute(self, allocator, input, options);
+    }
+
     /// Returns information about a transform job.
     pub fn describeTransformJob(self: *Self, allocator: std.mem.Allocator, input: describe_transform_job.DescribeTransformJobInput, options: CallOptions) !describe_transform_job.DescribeTransformJobOutput {
         return describe_transform_job.execute(self, allocator, input, options);
@@ -2465,6 +2548,19 @@ pub const Client = struct {
         return enable_sagemaker_servicecatalog_portfolio.execute(self, allocator, input, options);
     }
 
+    /// Extends an existing training plan by purchasing an extension offering. This
+    /// allows you to add additional compute capacity time to your training plan
+    /// without creating a new plan or reconfiguring your workloads.
+    ///
+    /// To find available extension offerings, use the `
+    /// [SearchTrainingPlanOfferings](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_SearchTrainingPlanOfferings.html) ` API with the `TrainingPlanArn` parameter.
+    ///
+    /// To view the history of extensions for a training plan, use the `
+    /// [DescribeTrainingPlanExtensionHistory](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrainingPlanExtensionHistory.html) ` API.
+    pub fn extendTrainingPlan(self: *Self, allocator: std.mem.Allocator, input: extend_training_plan.ExtendTrainingPlanInput, options: CallOptions) !extend_training_plan.ExtendTrainingPlanOutput {
+        return extend_training_plan.execute(self, allocator, input, options);
+    }
+
     /// Describes a fleet.
     pub fn getDeviceFleetReport(self: *Self, allocator: std.mem.Allocator, input: get_device_fleet_report.GetDeviceFleetReportInput, options: CallOptions) !get_device_fleet_report.GetDeviceFleetReportOutput {
         return get_device_fleet_report.execute(self, allocator, input, options);
@@ -2512,6 +2608,27 @@ pub const Client = struct {
     /// Lists the actions in your account and their properties.
     pub fn listActions(self: *Self, allocator: std.mem.Allocator, input: list_actions.ListActionsInput, options: CallOptions) !list_actions.ListActionsOutput {
         return list_actions.execute(self, allocator, input, options);
+    }
+
+    /// Returns a list of AI benchmark jobs in your account. You can filter the
+    /// results by name, status, and creation time, and sort the results. The
+    /// response is paginated.
+    pub fn listAiBenchmarkJobs(self: *Self, allocator: std.mem.Allocator, input: list_ai_benchmark_jobs.ListAIBenchmarkJobsInput, options: CallOptions) !list_ai_benchmark_jobs.ListAIBenchmarkJobsOutput {
+        return list_ai_benchmark_jobs.execute(self, allocator, input, options);
+    }
+
+    /// Returns a list of AI recommendation jobs in your account. You can filter the
+    /// results by name, status, and creation time, and sort the results. The
+    /// response is paginated.
+    pub fn listAiRecommendationJobs(self: *Self, allocator: std.mem.Allocator, input: list_ai_recommendation_jobs.ListAIRecommendationJobsInput, options: CallOptions) !list_ai_recommendation_jobs.ListAIRecommendationJobsOutput {
+        return list_ai_recommendation_jobs.execute(self, allocator, input, options);
+    }
+
+    /// Returns a list of AI workload configurations in your account. You can filter
+    /// the results by name and creation time, and sort the results. The response is
+    /// paginated.
+    pub fn listAiWorkloadConfigs(self: *Self, allocator: std.mem.Allocator, input: list_ai_workload_configs.ListAIWorkloadConfigsInput, options: CallOptions) !list_ai_workload_configs.ListAIWorkloadConfigsOutput {
+        return list_ai_workload_configs.execute(self, allocator, input, options);
     }
 
     /// Lists the machine learning algorithms that have been created.
@@ -3074,6 +3191,12 @@ pub const Client = struct {
         return send_pipeline_execution_step_success.execute(self, allocator, input, options);
     }
 
+    /// Start deep health checks for a SageMaker HyperPod cluster. You can use
+    /// [DescribeClusterNode](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeClusterNode.html) API to track progress of the deep health checks. The unhealthy nodes will be automatically rebooted or replaced. Please see [ Resilience-related Kubernetes labels by SageMaker HyperPod](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-eks-resiliency-node-labels.html) for details.
+    pub fn startClusterHealthCheck(self: *Self, allocator: std.mem.Allocator, input: start_cluster_health_check.StartClusterHealthCheckInput, options: CallOptions) !start_cluster_health_check.StartClusterHealthCheckOutput {
+        return start_cluster_health_check.execute(self, allocator, input, options);
+    }
+
     /// Starts a stage in an edge deployment plan.
     pub fn startEdgeDeploymentStage(self: *Self, allocator: std.mem.Allocator, input: start_edge_deployment_stage.StartEdgeDeploymentStageInput, options: CallOptions) !start_edge_deployment_stage.StartEdgeDeploymentStageOutput {
         return start_edge_deployment_stage.execute(self, allocator, input, options);
@@ -3115,6 +3238,16 @@ pub const Client = struct {
     /// environments (IDEs) and a remote SageMaker space.
     pub fn startSession(self: *Self, allocator: std.mem.Allocator, input: start_session.StartSessionInput, options: CallOptions) !start_session.StartSessionOutput {
         return start_session.execute(self, allocator, input, options);
+    }
+
+    /// Stops a running AI benchmark job.
+    pub fn stopAiBenchmarkJob(self: *Self, allocator: std.mem.Allocator, input: stop_ai_benchmark_job.StopAIBenchmarkJobInput, options: CallOptions) !stop_ai_benchmark_job.StopAIBenchmarkJobOutput {
+        return stop_ai_benchmark_job.execute(self, allocator, input, options);
+    }
+
+    /// Stops a running AI recommendation job.
+    pub fn stopAiRecommendationJob(self: *Self, allocator: std.mem.Allocator, input: stop_ai_recommendation_job.StopAIRecommendationJobInput, options: CallOptions) !stop_ai_recommendation_job.StopAIRecommendationJobOutput {
+        return stop_ai_recommendation_job.execute(self, allocator, input, options);
     }
 
     /// A method for forcing a running job to shut down.
@@ -3645,7 +3778,35 @@ pub const Client = struct {
         };
     }
 
+    pub fn describeTrainingPlanExtensionHistoryPaginator(self: *Self, params: describe_training_plan_extension_history.DescribeTrainingPlanExtensionHistoryInput) paginator.DescribeTrainingPlanExtensionHistoryPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listActionsPaginator(self: *Self, params: list_actions.ListActionsInput) paginator.ListActionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listAiBenchmarkJobsPaginator(self: *Self, params: list_ai_benchmark_jobs.ListAIBenchmarkJobsInput) paginator.ListAIBenchmarkJobsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listAiRecommendationJobsPaginator(self: *Self, params: list_ai_recommendation_jobs.ListAIRecommendationJobsInput) paginator.ListAIRecommendationJobsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listAiWorkloadConfigsPaginator(self: *Self, params: list_ai_workload_configs.ListAIWorkloadConfigsInput) paginator.ListAIWorkloadConfigsPaginator {
         return .{
             .client = self,
             .params = params,

@@ -4,6 +4,7 @@ const std = @import("std");
 const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
+const list_ad_configurations = @import("list_ad_configurations.zig");
 const list_channels = @import("list_channels.zig");
 const list_playback_key_pairs = @import("list_playback_key_pairs.zig");
 const list_playback_restriction_policies = @import("list_playback_restriction_policies.zig");
@@ -11,6 +12,46 @@ const list_recording_configurations = @import("list_recording_configurations.zig
 const list_stream_keys = @import("list_stream_keys.zig");
 const list_stream_sessions = @import("list_stream_sessions.zig");
 const list_streams = @import("list_streams.zig");
+
+pub const ListAdConfigurationsPaginator = struct {
+    client: *Client,
+    params: list_ad_configurations.ListAdConfigurationsInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_ad_configurations.ListAdConfigurationsOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_ad_configurations.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
 
 pub const ListChannelsPaginator = struct {
     client: *Client,

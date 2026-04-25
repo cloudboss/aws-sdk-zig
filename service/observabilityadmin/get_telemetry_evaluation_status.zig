@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const RegionStatus = @import("region_status.zig").RegionStatus;
 const Status = @import("status.zig").Status;
 
 pub const GetTelemetryEvaluationStatusInput = struct {};
@@ -13,11 +14,25 @@ pub const GetTelemetryEvaluationStatusOutput = struct {
     /// populated if `Status` is `FAILED_START` or `FAILED_STOP`.
     failure_reason: ?[]const u8 = null,
 
+    /// The Amazon Web Services Region that is designated as the home region for
+    /// multi-region telemetry evaluation. The home region is the single management
+    /// point for all multi-region operations on this account. This field is only
+    /// present when multi-region telemetry evaluation is active.
+    home_region: ?[]const u8 = null,
+
+    /// A list of per-region telemetry evaluation statuses. Each entry indicates the
+    /// evaluation status for a specific spoke region included in the multi-region
+    /// configuration. This field is only present when multi-region telemetry
+    /// evaluation is active.
+    region_statuses: ?[]const RegionStatus = null,
+
     /// The onboarding status of the telemetry config feature.
     status: ?Status = null,
 
     pub const json_field_names = .{
         .failure_reason = "FailureReason",
+        .home_region = "HomeRegion",
+        .region_statuses = "RegionStatuses",
         .status = "Status",
     };
 };

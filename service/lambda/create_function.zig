@@ -75,7 +75,8 @@ pub const CreateFunctionInput = struct {
     /// (console)](https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage).
     ephemeral_storage: ?EphemeralStorage = null,
 
-    /// Connection settings for an Amazon EFS file system.
+    /// Connection settings for an Amazon EFS file system or an Amazon S3 Files file
+    /// system.
     file_system_configs: ?[]const FileSystemConfig = null,
 
     /// The name or ARN of the Lambda function. **Name formats**
@@ -682,6 +683,24 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ResourceNotReadyException")) {
         return .{ .arena = arena, .kind = .{ .resource_not_ready_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "S3FilesMountConnectivityException")) {
+        return .{ .arena = arena, .kind = .{ .s3_files_mount_connectivity_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "S3FilesMountFailureException")) {
+        return .{ .arena = arena, .kind = .{ .s3_files_mount_failure_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "S3FilesMountTimeoutException")) {
+        return .{ .arena = arena, .kind = .{ .s3_files_mount_timeout_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

@@ -2,6 +2,7 @@ const VolumeStatusAction = @import("volume_status_action.zig").VolumeStatusActio
 const VolumeStatusAttachmentStatus = @import("volume_status_attachment_status.zig").VolumeStatusAttachmentStatus;
 const VolumeStatusEvent = @import("volume_status_event.zig").VolumeStatusEvent;
 const InitializationStatusDetails = @import("initialization_status_details.zig").InitializationStatusDetails;
+const OperatorResponse = @import("operator_response.zig").OperatorResponse;
 const VolumeStatusInfo = @import("volume_status_info.zig").VolumeStatusInfo;
 
 /// Describes the volume status.
@@ -32,6 +33,9 @@ pub const VolumeStatusItem = struct {
     /// Initialize Amazon EBS
     /// volumes](https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html).
     initialization_status_details: ?InitializationStatusDetails = null,
+
+    /// The service provider that manages the resource.
+    operator: ?OperatorResponse = null,
 
     /// The Amazon Resource Name (ARN) of the Outpost.
     outpost_arn: ?[]const u8 = null,

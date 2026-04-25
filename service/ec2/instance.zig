@@ -24,6 +24,7 @@ const PlatformValues = @import("platform_values.zig").PlatformValues;
 const PrivateDnsNameOptionsResponse = @import("private_dns_name_options_response.zig").PrivateDnsNameOptionsResponse;
 const ProductCode = @import("product_code.zig").ProductCode;
 const DeviceType = @import("device_type.zig").DeviceType;
+const InstanceSecondaryInterface = @import("instance_secondary_interface.zig").InstanceSecondaryInterface;
 const GroupIdentifier = @import("group_identifier.zig").GroupIdentifier;
 const InstanceState = @import("instance_state.zig").InstanceState;
 const StateReason = @import("state_reason.zig").StateReason;
@@ -237,6 +238,9 @@ pub const Instance = struct {
     /// instance
     /// store volume.
     root_device_type: ?DeviceType = null,
+
+    /// The secondary interfaces for the instance.
+    secondary_interfaces: ?[]const InstanceSecondaryInterface = null,
 
     /// The security groups for the instance.
     security_groups: ?[]const GroupIdentifier = null,

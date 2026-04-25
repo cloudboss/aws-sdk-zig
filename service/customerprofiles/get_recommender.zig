@@ -55,6 +55,9 @@ pub const GetRecommenderOutput = struct {
     /// The name of the recipe used by the recommender to generate recommendations.
     recommender_recipe_name: RecommenderRecipeName,
 
+    /// The name of the recommender schema associated with this recommender.
+    recommender_schema_name: ?[]const u8 = null,
+
     /// The current status of the recommender, indicating whether it is active,
     /// creating, updating, or in another state.
     status: ?RecommenderStatus = null,
@@ -75,6 +78,7 @@ pub const GetRecommenderOutput = struct {
         .recommender_config = "RecommenderConfig",
         .recommender_name = "RecommenderName",
         .recommender_recipe_name = "RecommenderRecipeName",
+        .recommender_schema_name = "RecommenderSchemaName",
         .status = "Status",
         .tags = "Tags",
         .training_metrics = "TrainingMetrics",

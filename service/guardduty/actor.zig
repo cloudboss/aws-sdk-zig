@@ -8,8 +8,8 @@ pub const Actor = struct {
     id: []const u8,
 
     /// Contains information about the process associated with the threat actor.
-    /// This includes details such as process name, path, execution time, and
-    /// unique identifiers that help track the actor's activities within the system.
+    /// This includes details such as process name, path, execution time, and unique
+    /// identifiers that help track the actor's activities within the system.
     process: ?ActorProcess = null,
 
     /// Contains information about the user session where the activity initiated.

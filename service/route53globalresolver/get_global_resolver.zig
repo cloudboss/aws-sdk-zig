@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const GlobalResolverIpAddressType = @import("global_resolver_ip_address_type.zig").GlobalResolverIpAddressType;
 const CRResourceStatus = @import("cr_resource_status.zig").CRResourceStatus;
 
 pub const GetGlobalResolverInput = struct {
@@ -37,17 +38,24 @@ pub const GetGlobalResolverOutput = struct {
     /// The ID of the Global Resolver.
     id: []const u8,
 
+    /// The IP address type configured for the Global Resolver.
+    ip_address_type: ?GlobalResolverIpAddressType = null,
+
     /// List of anycast IPv4 addresses associated with the Global Resolver instance.
     ipv_4_addresses: ?[]const []const u8 = null,
+
+    /// List of anycast IPv6 addresses associated with the Global Resolver instance.
+    /// This field is only populated when ipAddressType is DUAL_STACK.
+    ipv_6_addresses: ?[]const []const u8 = null,
 
     /// The name of the Global Resolver.
     name: []const u8,
 
-    /// The AWS Regions in which the users' Global Resolver query resolution logs
-    /// will be propagated.
+    /// The Amazon Web Services Regions in which the users' Global Resolver query
+    /// resolution logs will be propagated.
     observability_region: ?[]const u8 = null,
 
-    /// The AWS Regions in which the Global Resolver operate.
+    /// The Amazon Web Services Regions in which the Global Resolver operate.
     regions: ?[]const []const u8 = null,
 
     /// The operational status of the Global Resolver.
@@ -63,7 +71,9 @@ pub const GetGlobalResolverOutput = struct {
         .description = "description",
         .dns_name = "dnsName",
         .id = "id",
+        .ip_address_type = "ipAddressType",
         .ipv_4_addresses = "ipv4Addresses",
+        .ipv_6_addresses = "ipv6Addresses",
         .name = "name",
         .observability_region = "observabilityRegion",
         .regions = "regions",

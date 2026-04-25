@@ -1,6 +1,7 @@
 /// The options for customizing a security control parameter that is a double.
 pub const DoubleConfigurationOptions = struct {
-    /// The Security Hub default value for a control parameter that is a double.
+    /// The Security Hub CSPM default value for a control parameter that is a
+    /// double.
     default_value: ?f64 = null,
 
     /// The maximum valid value for a control parameter that is a double.

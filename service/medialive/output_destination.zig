@@ -1,3 +1,4 @@
+const MediaConnectRouterOutputDestinationSettings = @import("media_connect_router_output_destination_settings.zig").MediaConnectRouterOutputDestinationSettings;
 const MediaPackageOutputDestinationSettings = @import("media_package_output_destination_settings.zig").MediaPackageOutputDestinationSettings;
 const MultiplexProgramChannelDestinationSettings = @import("multiplex_program_channel_destination_settings.zig").MultiplexProgramChannelDestinationSettings;
 const OutputDestinationSettings = @import("output_destination_settings.zig").OutputDestinationSettings;
@@ -11,6 +12,10 @@ pub const OutputDestination = struct {
     /// Optional assignment of an output to a logical interface on the Node. Only
     /// applies to on premises channels.
     logical_interface_names: ?[]const []const u8 = null,
+
+    /// Destination settings for a MediaConnect Router output; one destination for
+    /// each redundant encoder.
+    media_connect_router_settings: ?[]const MediaConnectRouterOutputDestinationSettings = null,
 
     /// Destination settings for a MediaPackage output; one destination for both
     /// encoders.
@@ -30,6 +35,7 @@ pub const OutputDestination = struct {
     pub const json_field_names = .{
         .id = "Id",
         .logical_interface_names = "LogicalInterfaceNames",
+        .media_connect_router_settings = "MediaConnectRouterSettings",
         .media_package_settings = "MediaPackageSettings",
         .multiplex_settings = "MultiplexSettings",
         .settings = "Settings",

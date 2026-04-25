@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const ServiceJobPreemptionConfiguration = @import("service_job_preemption_configuration.zig").ServiceJobPreemptionConfiguration;
 const ServiceJobRetryStrategy = @import("service_job_retry_strategy.zig").ServiceJobRetryStrategy;
 const ServiceJobType = @import("service_job_type.zig").ServiceJobType;
 const ServiceJobTimeout = @import("service_job_timeout.zig").ServiceJobTimeout;
@@ -24,6 +25,16 @@ pub const SubmitServiceJobInput = struct {
     /// either the name or the ARN of the queue. The job queue must have the type
     /// `SAGEMAKER_TRAINING`.
     job_queue: []const u8,
+
+    /// Specifies the service job behavior when preempted.
+    preemption_configuration: ?ServiceJobPreemptionConfiguration = null,
+
+    /// The quota share for the service job. Don't specify this parameter if the job
+    /// queue
+    /// doesn't have a quota share scheduling policy. If the job queue has a quota
+    /// share scheduling policy,
+    /// then this parameter must be specified.
+    quota_share_name: ?[]const u8 = null,
 
     /// The retry strategy to use for failed service jobs that are submitted with
     /// this service job request.
@@ -61,6 +72,8 @@ pub const SubmitServiceJobInput = struct {
         .client_token = "clientToken",
         .job_name = "jobName",
         .job_queue = "jobQueue",
+        .preemption_configuration = "preemptionConfiguration",
+        .quota_share_name = "quotaShareName",
         .retry_strategy = "retryStrategy",
         .scheduling_priority = "schedulingPriority",
         .service_job_type = "serviceJobType",
@@ -140,6 +153,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SubmitServiceJobInput, 
     try body_buf.appendSlice(allocator, "\"jobQueue\":");
     try aws.json.writeValue(@TypeOf(input.job_queue), input.job_queue, allocator, &body_buf);
     has_prev = true;
+    if (input.preemption_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"preemptionConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.quota_share_name) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"quotaShareName\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.retry_strategy) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"retryStrategy\":");

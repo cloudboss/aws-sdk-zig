@@ -9,6 +9,9 @@ pub const TargetStatus = enum {
     failed,
     synchronizing,
     synchronize_unsuccessful,
+    create_pending_auth,
+    update_pending_auth,
+    synchronize_pending_auth,
 
     pub const json_field_names = .{
         .creating = "CREATING",
@@ -19,6 +22,9 @@ pub const TargetStatus = enum {
         .failed = "FAILED",
         .synchronizing = "SYNCHRONIZING",
         .synchronize_unsuccessful = "SYNCHRONIZE_UNSUCCESSFUL",
+        .create_pending_auth = "CREATE_PENDING_AUTH",
+        .update_pending_auth = "UPDATE_PENDING_AUTH",
+        .synchronize_pending_auth = "SYNCHRONIZE_PENDING_AUTH",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -31,6 +37,9 @@ pub const TargetStatus = enum {
             .failed => "FAILED",
             .synchronizing => "SYNCHRONIZING",
             .synchronize_unsuccessful => "SYNCHRONIZE_UNSUCCESSFUL",
+            .create_pending_auth => "CREATE_PENDING_AUTH",
+            .update_pending_auth => "UPDATE_PENDING_AUTH",
+            .synchronize_pending_auth => "SYNCHRONIZE_PENDING_AUTH",
         };
     }
 

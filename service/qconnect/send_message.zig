@@ -38,6 +38,10 @@ pub const SendMessageInput = struct {
     /// The orchestrator use case for message processing.
     orchestrator_use_case: ?[]const u8 = null,
 
+    /// Request identifier from the origin system, used for end-to-end tracing
+    /// across spans.
+    origin_request_id: ?[]const u8 = null,
+
     /// The identifier of the Amazon Q in Connect session.
     session_id: []const u8,
 
@@ -53,6 +57,7 @@ pub const SendMessageInput = struct {
         .message = "message",
         .metadata = "metadata",
         .orchestrator_use_case = "orchestratorUseCase",
+        .origin_request_id = "originRequestId",
         .session_id = "sessionId",
         .@"type" = "type",
     };
@@ -157,6 +162,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendMessageInput, confi
     if (input.orchestrator_use_case) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"orchestratorUseCase\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.origin_request_id) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"originRequestId\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

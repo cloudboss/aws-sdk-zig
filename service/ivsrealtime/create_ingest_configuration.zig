@@ -27,6 +27,10 @@ pub const CreateIngestConfigurationInput = struct {
     /// created.
     name: ?[]const u8 = null,
 
+    /// Indicates whether redundant ingest is enabled for the ingest configuration.
+    /// Default: `false`.
+    redundant_ingest: ?bool = null,
+
     /// ARN of the stage with which the IngestConfiguration is associated.
     stage_arn: ?[]const u8 = null,
 
@@ -53,6 +57,7 @@ pub const CreateIngestConfigurationInput = struct {
         .ingest_protocol = "ingestProtocol",
         .insecure_ingest = "insecureIngest",
         .name = "name",
+        .redundant_ingest = "redundantIngest",
         .stage_arn = "stageArn",
         .tags = "tags",
         .user_id = "userId",
@@ -125,6 +130,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateIngestConfigurati
     if (input.name) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"name\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.redundant_ingest) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"redundantIngest\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

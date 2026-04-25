@@ -8,6 +8,17 @@ const AssociationStatus = @import("association_status.zig").AssociationStatus;
 const serde = @import("serde.zig");
 
 pub const AssociateClientVpnTargetNetworkInput = struct {
+    /// The Availability Zone name for the Transit Gateway association. Required if
+    /// when associating an Availability Zone with a Client VPN endpoint that uses a
+    /// Transit Gateway. You cannot specify both `SubnetId` and `AvailabilityZone`.
+    availability_zone: ?[]const u8 = null,
+
+    /// The Availability Zone ID for the Transit Gateway association. Required if
+    /// when associating an Availability Zone with a Client VPN endpoint that uses a
+    /// Transit Gateway. You cannot specify both `AvailabilityZone` and
+    /// `AvailabilityZoneId`.
+    availability_zone_id: ?[]const u8 = null,
+
     /// Unique, case-sensitive identifier that you provide to ensure the idempotency
     /// of the request.
     /// For more information, see [Ensuring
@@ -23,8 +34,10 @@ pub const AssociateClientVpnTargetNetworkInput = struct {
     /// is `UnauthorizedOperation`.
     dry_run: ?bool = null,
 
-    /// The ID of the subnet to associate with the Client VPN endpoint.
-    subnet_id: []const u8,
+    /// The ID of the subnet to associate with the Client VPN endpoint. Required for
+    /// VPC-based endpoints. For Transit Gateway-based endpoints, use
+    /// `AvailabilityZone` or `AvailabilityZoneId` instead.
+    subnet_id: ?[]const u8 = null,
 };
 
 pub const AssociateClientVpnTargetNetworkOutput = struct {
@@ -70,6 +83,14 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateClientVpnTarge
     var body_buf: std.ArrayList(u8) = .{};
 
     try body_buf.appendSlice(allocator, "Action=AssociateClientVpnTargetNetwork&Version=2016-11-15");
+    if (input.availability_zone) |v| {
+        try body_buf.appendSlice(allocator, "&AvailabilityZone=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
+    if (input.availability_zone_id) |v| {
+        try body_buf.appendSlice(allocator, "&AvailabilityZoneId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
     if (input.client_token) |v| {
         try body_buf.appendSlice(allocator, "&ClientToken=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
@@ -80,8 +101,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateClientVpnTarge
         try body_buf.appendSlice(allocator, "&DryRun=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
-    try body_buf.appendSlice(allocator, "&SubnetId=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, input.subnet_id);
+    if (input.subnet_id) |v| {
+        try body_buf.appendSlice(allocator, "&SubnetId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
 
     const body = try body_buf.toOwnedSlice(allocator);
 

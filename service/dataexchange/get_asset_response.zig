@@ -1,3 +1,5 @@
+const aws = @import("aws");
+
 const AssetDetails = @import("asset_details.zig").AssetDetails;
 const AssetType = @import("asset_type.zig").AssetType;
 
@@ -21,29 +23,25 @@ pub const GetAssetResponse = struct {
     id: ?[]const u8 = null,
 
     /// The name of the asset. When importing from Amazon S3, the Amazon S3 object
-    /// key is used
-    /// as the asset name. When exporting to Amazon S3, the asset name is used as
-    /// default target
-    /// Amazon S3 object key. When importing from Amazon API Gateway API, the API
-    /// name is used as
-    /// the asset name. When importing from Amazon Redshift, the datashare name is
-    /// used as the
-    /// asset name. When importing from AWS Lake Formation, the static values of
-    /// "Database(s)
+    /// key is used as the asset name. When exporting to Amazon S3, the asset name
+    /// is used as default target Amazon S3 object key. When importing from Amazon
+    /// API Gateway API, the API name is used as the asset name. When importing from
+    /// Amazon Redshift, the datashare name is used as the asset name. When
+    /// importing from AWS Lake Formation, the static values of "Database(s)
     /// included in the LF-tag policy" or "Table(s) included in the LF-tag policy"
-    /// are used as the
-    /// asset name.
+    /// are used as the asset name.
     name: ?[]const u8 = null,
 
     /// The unique identifier for the revision associated with this asset.
     revision_id: ?[]const u8 = null,
 
     /// The asset ID of the owned asset corresponding to the entitled asset being
-    /// viewed. This
-    /// parameter is returned when an asset owner is viewing the entitled copy of
-    /// its owned
-    /// asset.
+    /// viewed. This parameter is returned when an asset owner is viewing the
+    /// entitled copy of its owned asset.
     source_id: ?[]const u8 = null,
+
+    /// The tags for the asset.
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The date and time that the asset was last updated, in ISO 8601 format.
     updated_at: ?i64 = null,
@@ -58,6 +56,7 @@ pub const GetAssetResponse = struct {
         .name = "Name",
         .revision_id = "RevisionId",
         .source_id = "SourceId",
+        .tags = "Tags",
         .updated_at = "UpdatedAt",
     };
 };

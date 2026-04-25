@@ -1,6 +1,5 @@
 /// Contains information about the Autonomous System (AS) associated with the
-/// network
-/// endpoints involved in an attack sequence.
+/// network endpoints involved in an attack sequence.
 pub const AutonomousSystem = struct {
     /// Name associated with the Autonomous System (AS).
     name: []const u8,

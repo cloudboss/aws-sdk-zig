@@ -21,7 +21,7 @@ pub const AwsLambdaLayerVersionDetails = struct {
     /// Indicates when the version was created.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     created_date: ?[]const u8 = null,
 

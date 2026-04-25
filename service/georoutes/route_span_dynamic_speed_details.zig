@@ -1,10 +1,10 @@
 /// Details about the dynamic speed.
 ///
-/// **Unit**: `KilometersPerHour`
+/// **Unit**: `kilometers per hour`
 pub const RouteSpanDynamicSpeedDetails = struct {
     /// Estimated speed while traversing the span without traffic congestion.
     ///
-    /// **Unit**: `KilometersPerHour`
+    /// **Unit**: `kilometers per hour`
     best_case_speed: f64 = 0,
 
     /// Estimated time to turn from this span into the next.
@@ -14,7 +14,7 @@ pub const RouteSpanDynamicSpeedDetails = struct {
 
     /// Estimated speed while traversing the span under typical traffic congestion.
     ///
-    /// **Unit**: `KilometersPerHour`
+    /// **Unit**: `kilometers per hour`
     typical_speed: f64 = 0,
 
     pub const json_field_names = .{

@@ -4,12 +4,17 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const AdvancedConfiguration = @import("advanced_configuration.zig").AdvancedConfiguration;
 const CellTowers = @import("cell_towers.zig").CellTowers;
 const Gnss = @import("gnss.zig").Gnss;
 const Ip = @import("ip.zig").Ip;
 const WiFiAccessPoint = @import("wi_fi_access_point.zig").WiFiAccessPoint;
 
 pub const GetPositionEstimateInput = struct {
+    /// Optional configuration to customize position estimates.
+    /// If not provided, defaults are applied.
+    advanced_configuration: ?AdvancedConfiguration = null,
+
     /// Retrieves an estimated device position by resolving measurement data from
     /// cellular
     /// radio towers. The position is resolved using HERE's cellular-based solver.
@@ -40,6 +45,7 @@ pub const GetPositionEstimateInput = struct {
     wi_fi_access_points: ?[]const WiFiAccessPoint = null,
 
     pub const json_field_names = .{
+        .advanced_configuration = "AdvancedConfiguration",
         .cell_towers = "CellTowers",
         .gnss = "Gnss",
         .ip = "Ip",
@@ -104,6 +110,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPositionEstimateInpu
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.advanced_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"AdvancedConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.cell_towers) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"CellTowers\":");

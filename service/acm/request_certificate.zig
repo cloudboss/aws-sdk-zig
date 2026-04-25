@@ -59,7 +59,7 @@ pub const RequestCertificateInput = struct {
     /// requirements for the Amazon Web Services service where you plan to deploy
     /// your certificate. For more information about selecting an algorithm, see
     /// [Key
-    /// algorithms](https://docs.aws.amazon.com/acm/latest/userguide/acm-certificate.html#algorithms).
+    /// algorithms](https://docs.aws.amazon.com/acm/latest/userguide/acm-certificate-characteristics.html#algorithms-term).
     ///
     /// Algorithms supported for an ACM certificate request include:
     ///

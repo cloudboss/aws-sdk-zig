@@ -4,12 +4,14 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const ClusterConfiguration = @import("cluster_configuration.zig").ClusterConfiguration;
 const DbInstanceType = @import("db_instance_type.zig").DbInstanceType;
 const DbStorageType = @import("db_storage_type.zig").DbStorageType;
 const ClusterDeploymentType = @import("cluster_deployment_type.zig").ClusterDeploymentType;
 const EngineType = @import("engine_type.zig").EngineType;
 const FailoverMode = @import("failover_mode.zig").FailoverMode;
 const LogDeliveryConfiguration = @import("log_delivery_configuration.zig").LogDeliveryConfiguration;
+const MaintenanceSchedule = @import("maintenance_schedule.zig").MaintenanceSchedule;
 const NetworkType = @import("network_type.zig").NetworkType;
 const ClusterStatus = @import("cluster_status.zig").ClusterStatus;
 
@@ -28,6 +30,9 @@ pub const GetDbClusterOutput = struct {
 
     /// The Amazon Resource Name (ARN) of the DB cluster.
     arn: []const u8,
+
+    /// Configuration for node modes in the DbCluster.
+    cluster_configuration: ?ClusterConfiguration = null,
 
     /// The Timestream for InfluxDB instance type that InfluxDB runs on.
     db_instance_type: ?DbInstanceType = null,
@@ -60,9 +65,15 @@ pub const GetDbClusterOutput = struct {
     /// organization, bucket, username, and password.
     influx_auth_parameters_secret_arn: ?[]const u8 = null,
 
+    /// The timestamp of the last completed maintenance operation on the DB cluster.
+    last_maintenance_time: ?i64 = null,
+
     /// Configuration for sending InfluxDB engine logs to send to specified S3
     /// bucket.
     log_delivery_configuration: ?LogDeliveryConfiguration = null,
+
+    /// The maintenance schedule for the DB cluster.
+    maintenance_schedule: ?MaintenanceSchedule = null,
 
     /// Customer-supplied name of the Timestream for InfluxDB cluster.
     name: []const u8,
@@ -71,6 +82,9 @@ pub const GetDbClusterOutput = struct {
     /// IPv4, which can communicate over IPv4 protocol only, or DUAL, which can
     /// communicate over both IPv4 and IPv6 protocols.
     network_type: ?NetworkType = null,
+
+    /// The timestamp of the next scheduled maintenance operation on the DB cluster.
+    next_maintenance_time: ?i64 = null,
 
     /// The port number on which InfluxDB accepts connections.
     port: ?i32 = null,
@@ -95,6 +109,7 @@ pub const GetDbClusterOutput = struct {
     pub const json_field_names = .{
         .allocated_storage = "allocatedStorage",
         .arn = "arn",
+        .cluster_configuration = "clusterConfiguration",
         .db_instance_type = "dbInstanceType",
         .db_parameter_group_identifier = "dbParameterGroupIdentifier",
         .db_storage_type = "dbStorageType",
@@ -104,9 +119,12 @@ pub const GetDbClusterOutput = struct {
         .failover_mode = "failoverMode",
         .id = "id",
         .influx_auth_parameters_secret_arn = "influxAuthParametersSecretArn",
+        .last_maintenance_time = "lastMaintenanceTime",
         .log_delivery_configuration = "logDeliveryConfiguration",
+        .maintenance_schedule = "maintenanceSchedule",
         .name = "name",
         .network_type = "networkType",
+        .next_maintenance_time = "nextMaintenanceTime",
         .port = "port",
         .publicly_accessible = "publiclyAccessible",
         .reader_endpoint = "readerEndpoint",

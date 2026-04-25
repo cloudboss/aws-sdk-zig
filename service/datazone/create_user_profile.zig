@@ -18,6 +18,9 @@ pub const CreateUserProfileInput = struct {
     /// created.
     domain_identifier: []const u8,
 
+    /// The session name for IAM role sessions.
+    session_name: ?[]const u8 = null,
+
     /// The identifier of the user for which the user profile is created.
     user_identifier: []const u8,
 
@@ -27,6 +30,7 @@ pub const CreateUserProfileInput = struct {
     pub const json_field_names = .{
         .client_token = "clientToken",
         .domain_identifier = "domainIdentifier",
+        .session_name = "sessionName",
         .user_identifier = "userIdentifier",
         .user_type = "userType",
     };
@@ -103,6 +107,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateUserProfileInput,
     if (input.client_token) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"clientToken\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.session_name) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"sessionName\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

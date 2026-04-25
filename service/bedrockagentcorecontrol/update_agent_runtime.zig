@@ -6,7 +6,9 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AgentRuntimeArtifact = @import("agent_runtime_artifact.zig").AgentRuntimeArtifact;
 const AuthorizerConfiguration = @import("authorizer_configuration.zig").AuthorizerConfiguration;
+const FilesystemConfiguration = @import("filesystem_configuration.zig").FilesystemConfiguration;
 const LifecycleConfiguration = @import("lifecycle_configuration.zig").LifecycleConfiguration;
+const RuntimeMetadataConfiguration = @import("runtime_metadata_configuration.zig").RuntimeMetadataConfiguration;
 const NetworkConfiguration = @import("network_configuration.zig").NetworkConfiguration;
 const ProtocolConfiguration = @import("protocol_configuration.zig").ProtocolConfiguration;
 const RequestHeaderConfiguration = @import("request_header_configuration.zig").RequestHeaderConfiguration;
@@ -32,8 +34,15 @@ pub const UpdateAgentRuntimeInput = struct {
     /// Updated environment variables to set in the AgentCore Runtime environment.
     environment_variables: ?[]const aws.map.StringMapEntry = null,
 
+    /// The updated filesystem configurations to mount into the AgentCore Runtime.
+    filesystem_configurations: ?[]const FilesystemConfiguration = null,
+
     /// The updated life cycle configuration for the AgentCore Runtime.
     lifecycle_configuration: ?LifecycleConfiguration = null,
+
+    /// The updated configuration for microVM Metadata Service (MMDS) settings for
+    /// the AgentCore Runtime.
+    metadata_configuration: ?RuntimeMetadataConfiguration = null,
 
     /// The updated network configuration for the AgentCore Runtime.
     network_configuration: NetworkConfiguration,
@@ -55,7 +64,9 @@ pub const UpdateAgentRuntimeInput = struct {
         .client_token = "clientToken",
         .description = "description",
         .environment_variables = "environmentVariables",
+        .filesystem_configurations = "filesystemConfigurations",
         .lifecycle_configuration = "lifecycleConfiguration",
+        .metadata_configuration = "metadataConfiguration",
         .network_configuration = "networkConfiguration",
         .protocol_configuration = "protocolConfiguration",
         .request_header_configuration = "requestHeaderConfiguration",
@@ -166,9 +177,21 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAgentRuntimeInput
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.filesystem_configurations) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"filesystemConfigurations\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.lifecycle_configuration) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"lifecycleConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.metadata_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"metadataConfiguration\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

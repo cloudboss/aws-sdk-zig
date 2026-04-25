@@ -2,14 +2,20 @@ const std = @import("std");
 
 pub const ResourceType = enum {
     agreement,
+    charge,
+    payment_request,
 
     pub const json_field_names = .{
         .agreement = "Agreement",
+        .charge = "Charge",
+        .payment_request = "PaymentRequest",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .agreement => "Agreement",
+            .charge => "Charge",
+            .payment_request => "PaymentRequest",
         };
     }
 

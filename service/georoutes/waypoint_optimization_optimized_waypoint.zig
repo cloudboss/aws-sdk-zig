@@ -16,7 +16,7 @@ pub const WaypointOptimizationOptimizedWaypoint = struct {
     /// request.
     cluster_index: ?i32 = null,
 
-    /// Estimated time of departure from thr origin.
+    /// Estimated time of departure from the origin.
     ///
     /// Time format:`YYYY-MM-DDThh:mm:ss.sssZ | YYYY-MM-DDThh:mm:ss.sss+hh:mm`
     ///
@@ -30,7 +30,7 @@ pub const WaypointOptimizationOptimizedWaypoint = struct {
     /// The waypoint Id.
     id: []const u8,
 
-    /// Position defined as `[longitude, latitude]`.
+    /// Position in World Geodetic System (WGS 84) format: [longitude, latitude].
     position: []const f64,
 
     pub const json_field_names = .{

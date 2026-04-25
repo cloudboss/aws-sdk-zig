@@ -11,7 +11,9 @@ pub const MatchedPlayerSession = struct {
     /// A unique identifier for a player
     player_id: ?[]const u8 = null,
 
-    /// A unique identifier for a player session
+    /// A unique identifier for a player session. PlayerSessionId will only be
+    /// populated for player sessions that are in ACTIVE or RESERVED status when the
+    /// ticket is completed.
     player_session_id: ?[]const u8 = null,
 
     pub const json_field_names = .{

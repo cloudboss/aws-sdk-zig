@@ -9,6 +9,7 @@ const DataflowDetail = @import("dataflow_detail.zig").DataflowDetail;
 const EphemerisResponseData = @import("ephemeris_response_data.zig").EphemerisResponseData;
 const Elevation = @import("elevation.zig").Elevation;
 const TrackingOverrides = @import("tracking_overrides.zig").TrackingOverrides;
+const ContactVersion = @import("contact_version.zig").ContactVersion;
 
 pub const DescribeContactInput = struct {
     /// UUID of a contact.
@@ -47,15 +48,15 @@ pub const DescribeContactOutput = struct {
     /// ARN of a mission profile.
     mission_profile_arn: ?[]const u8 = null,
 
-    /// Amount of time after a contact ends that you’d like to receive a CloudWatch
+    /// End time in UTC of the post-pass period, at which you receive a CloudWatch
     /// event indicating the pass has finished.
     post_pass_end_time: ?i64 = null,
 
-    /// Amount of time prior to contact start you’d like to receive a CloudWatch
+    /// Start time in UTC of the pre-pass period, at which you receive a CloudWatch
     /// event indicating an upcoming pass.
     pre_pass_start_time: ?i64 = null,
 
-    /// Region of a contact.
+    /// Region where the `ReserveContact` API was called to schedule this contact.
     region: ?[]const u8 = null,
 
     /// ARN of a satellite.
@@ -69,6 +70,9 @@ pub const DescribeContactOutput = struct {
 
     /// Tracking configuration overrides specified when the contact was reserved.
     tracking_overrides: ?TrackingOverrides = null,
+
+    /// Version information for a contact.
+    version: ?ContactVersion = null,
 
     /// Projected time in UTC your satellite will set below the [receive
     /// mask](https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html).
@@ -101,6 +105,7 @@ pub const DescribeContactOutput = struct {
         .start_time = "startTime",
         .tags = "tags",
         .tracking_overrides = "trackingOverrides",
+        .version = "version",
         .visibility_end_time = "visibilityEndTime",
         .visibility_start_time = "visibilityStartTime",
     };

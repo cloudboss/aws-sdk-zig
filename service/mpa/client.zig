@@ -19,6 +19,7 @@ const list_resource_policies = @import("list_resource_policies.zig");
 const list_sessions = @import("list_sessions.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const start_active_approval_team_deletion = @import("start_active_approval_team_deletion.zig");
+const start_approval_team_baseline = @import("start_approval_team_baseline.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_approval_team = @import("update_approval_team.zig");
@@ -167,6 +168,12 @@ pub const Client = struct {
     /// Requests to delete an active team must be approved by the team.
     pub fn startActiveApprovalTeamDeletion(self: *Self, allocator: std.mem.Allocator, input: start_active_approval_team_deletion.StartActiveApprovalTeamDeletionInput, options: CallOptions) !start_active_approval_team_deletion.StartActiveApprovalTeamDeletionOutput {
         return start_active_approval_team_deletion.execute(self, allocator, input, options);
+    }
+
+    /// Starts a baseline session for specified approvers on an `ACTIVE` approval
+    /// team.
+    pub fn startApprovalTeamBaseline(self: *Self, allocator: std.mem.Allocator, input: start_approval_team_baseline.StartApprovalTeamBaselineInput, options: CallOptions) !start_approval_team_baseline.StartApprovalTeamBaselineOutput {
+        return start_approval_team_baseline.execute(self, allocator, input, options);
     }
 
     /// Creates or updates a resource tag. Each tag is a label consisting of a

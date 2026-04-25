@@ -22,6 +22,7 @@ pub const FirewallDomainListsItem = @import("firewall_domain_lists_item.zig").Fi
 pub const FirewallRuleAction = @import("firewall_rule_action.zig").FirewallRuleAction;
 pub const FirewallRulesFailOpenType = @import("firewall_rules_fail_open_type.zig").FirewallRulesFailOpenType;
 pub const FirewallRulesItem = @import("firewall_rules_item.zig").FirewallRulesItem;
+pub const GlobalResolverIpAddressType = @import("global_resolver_ip_address_type.zig").GlobalResolverIpAddressType;
 pub const GlobalResolversItem = @import("global_resolvers_item.zig").GlobalResolversItem;
 pub const HostedZoneAssociationStatus = @import("hosted_zone_association_status.zig").HostedZoneAssociationStatus;
 pub const HostedZoneAssociationSummary = @import("hosted_zone_association_summary.zig").HostedZoneAssociationSummary;

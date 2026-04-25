@@ -9,7 +9,7 @@ pub const WorkerComputeConfiguration = struct {
     /// SQL queries support a minimum value of 2 and a maximum value of 400.
     ///
     /// PySpark jobs support a minimum value of 4 and a maximum value of 128.
-    number: ?i32 = null,
+    number: i32 = 16,
 
     /// The configuration properties for the worker compute environment. These
     /// properties allow you to customize the compute settings for your Clean Rooms
@@ -17,7 +17,7 @@ pub const WorkerComputeConfiguration = struct {
     properties: ?WorkerComputeConfigurationProperties = null,
 
     /// The worker compute configuration type.
-    @"type": ?WorkerComputeType = null,
+    @"type": WorkerComputeType = .cr1_x,
 
     pub const json_field_names = .{
         .number = "number",

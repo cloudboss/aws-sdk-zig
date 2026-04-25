@@ -9,34 +9,26 @@ const ScopeDetails = @import("scope_details.zig").ScopeDetails;
 const NotificationType = @import("notification_type.zig").NotificationType;
 
 pub const SendDataSetNotificationInput = struct {
-    /// Idempotency
-    /// key for the notification, this key allows us to deduplicate notifications
-    /// that are sent in
-    /// quick succession erroneously.
+    /// Idempotency key for the notification, this key allows us to deduplicate
+    /// notifications that are sent in quick succession erroneously.
     client_token: ?[]const u8 = null,
 
-    /// Free-form
-    /// text field for providers to add information about their notifications.
+    /// Free-form text field for providers to add information about their
+    /// notifications.
     comment: ?[]const u8 = null,
 
-    /// Affected
-    /// data set of the notification.
+    /// Affected data set of the notification.
     data_set_id: []const u8,
 
-    /// Extra
-    /// details specific to this notification type.
+    /// Extra details specific to this notification type.
     details: ?NotificationDetails = null,
 
-    /// Affected
-    /// scope of this notification such as the underlying resources affected by the
-    /// notification
-    /// event.
+    /// Affected scope of this notification such as the underlying resources
+    /// affected by the notification event.
     scope: ?ScopeDetails = null,
 
-    /// The
-    /// type of the notification. Describing the kind of event the notification is
-    /// alerting you
-    /// to.
+    /// The type of the notification. Describing the kind of event the notification
+    /// is alerting you to.
     @"type": NotificationType,
 
     pub const json_field_names = .{

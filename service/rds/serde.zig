@@ -133,10 +133,12 @@ const ScalarReferenceDetails = @import("scalar_reference_details.zig").ScalarRef
 const ScalingConfiguration = @import("scaling_configuration.zig").ScalingConfiguration;
 const ScalingConfigurationInfo = @import("scaling_configuration_info.zig").ScalingConfigurationInfo;
 const ServerlessV2FeaturesSupport = @import("serverless_v2_features_support.zig").ServerlessV2FeaturesSupport;
+const ServerlessV2PlatformVersionInfo = @import("serverless_v2_platform_version_info.zig").ServerlessV2PlatformVersionInfo;
 const ServerlessV2ScalingConfiguration = @import("serverless_v2_scaling_configuration.zig").ServerlessV2ScalingConfiguration;
 const ServerlessV2ScalingConfigurationInfo = @import("serverless_v2_scaling_configuration_info.zig").ServerlessV2ScalingConfigurationInfo;
 const SourceRegion = @import("source_region.zig").SourceRegion;
 const SourceType = @import("source_type.zig").SourceType;
+const StorageEncryptionType = @import("storage_encryption_type.zig").StorageEncryptionType;
 const Subnet = @import("subnet.zig").Subnet;
 const SupportedEngineLifecycle = @import("supported_engine_lifecycle.zig").SupportedEngineLifecycle;
 const SwitchoverDetail = @import("switchover_detail.zig").SwitchoverDetail;
@@ -1764,6 +1766,24 @@ pub fn deserializeReservedDBInstancesOfferingList(allocator: std.mem.Allocator, 
     return list.toOwnedSlice(allocator);
 }
 
+pub fn deserializeServerlessV2PlatformVersionList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ServerlessV2PlatformVersionInfo {
+    var list: std.ArrayList(ServerlessV2PlatformVersionInfo) = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeServerlessV2PlatformVersionInfo(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
 pub fn deserializeSourceIdsList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
     var list: std.ArrayList([]const u8) = .{};
     while (try reader.next()) |event| {
@@ -2626,6 +2646,7 @@ pub fn deserializeDBCluster(allocator: std.mem.Allocator, reader: *aws.xml.Reade
     result.hosted_zone_id = null;
     result.http_endpoint_enabled = null;
     result.iam_database_authentication_enabled = null;
+    result.internet_access_gateway_enabled = null;
     result.io_optimized_next_allowed_modification_time = null;
     result.iops = null;
     result.kms_key_id = null;
@@ -2657,10 +2678,12 @@ pub fn deserializeDBCluster(allocator: std.mem.Allocator, reader: *aws.xml.Reade
     result.status = null;
     result.status_infos = null;
     result.storage_encrypted = null;
+    result.storage_encryption_type = null;
     result.storage_throughput = null;
     result.storage_type = null;
     result.tag_list = null;
     result.upgrade_rollout_order = null;
+    result.vpc_networking_enabled = null;
     result.vpc_security_groups = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -2763,6 +2786,8 @@ pub fn deserializeDBCluster(allocator: std.mem.Allocator, reader: *aws.xml.Reade
                     result.http_endpoint_enabled = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "IAMDatabaseAuthenticationEnabled")) {
                     result.iam_database_authentication_enabled = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "InternetAccessGatewayEnabled")) {
+                    result.internet_access_gateway_enabled = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "IOOptimizedNextAllowedModificationTime")) {
                     result.io_optimized_next_allowed_modification_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Iops")) {
@@ -2825,6 +2850,8 @@ pub fn deserializeDBCluster(allocator: std.mem.Allocator, reader: *aws.xml.Reade
                     result.status_infos = try deserializeDBClusterStatusInfoList(allocator, reader, "DBClusterStatusInfo");
                 } else if (std.mem.eql(u8, e.local, "StorageEncrypted")) {
                     result.storage_encrypted = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "StorageEncryptionType")) {
+                    result.storage_encryption_type = StorageEncryptionType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StorageThroughput")) {
                     result.storage_throughput = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "StorageType")) {
@@ -2833,6 +2860,8 @@ pub fn deserializeDBCluster(allocator: std.mem.Allocator, reader: *aws.xml.Reade
                     result.tag_list = try deserializeTagList(allocator, reader, "Tag");
                 } else if (std.mem.eql(u8, e.local, "UpgradeRolloutOrder")) {
                     result.upgrade_rollout_order = UpgradeRolloutOrder.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "VPCNetworkingEnabled")) {
+                    result.vpc_networking_enabled = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "VpcSecurityGroups")) {
                     result.vpc_security_groups = try deserializeVpcSecurityGroupMembershipList(allocator, reader, "VpcSecurityGroupMembership");
                 } else {
@@ -2866,10 +2895,12 @@ pub fn deserializeDBClusterAutomatedBackup(allocator: std.mem.Allocator, reader:
     result.license_model = null;
     result.master_username = null;
     result.port = null;
+    result.preferred_backup_window = null;
     result.region = null;
     result.restore_window = null;
     result.status = null;
     result.storage_encrypted = null;
+    result.storage_encryption_type = null;
     result.storage_throughput = null;
     result.storage_type = null;
     result.tag_list = null;
@@ -2913,6 +2944,8 @@ pub fn deserializeDBClusterAutomatedBackup(allocator: std.mem.Allocator, reader:
                     result.master_username = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Port")) {
                     result.port = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "PreferredBackupWindow")) {
+                    result.preferred_backup_window = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Region")) {
                     result.region = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "RestoreWindow")) {
@@ -2921,6 +2954,8 @@ pub fn deserializeDBClusterAutomatedBackup(allocator: std.mem.Allocator, reader:
                     result.status = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StorageEncrypted")) {
                     result.storage_encrypted = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "StorageEncryptionType")) {
+                    result.storage_encryption_type = StorageEncryptionType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StorageThroughput")) {
                     result.storage_throughput = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "StorageType")) {
@@ -3127,6 +3162,7 @@ pub fn deserializeDBClusterSnapshot(allocator: std.mem.Allocator, reader: *aws.x
     var result: DBClusterSnapshot = undefined;
     result.allocated_storage = null;
     result.availability_zones = null;
+    result.backup_retention_period = null;
     result.cluster_create_time = null;
     result.db_cluster_identifier = null;
     result.db_cluster_resource_id = null;
@@ -3142,11 +3178,13 @@ pub fn deserializeDBClusterSnapshot(allocator: std.mem.Allocator, reader: *aws.x
     result.master_username = null;
     result.percent_progress = null;
     result.port = null;
+    result.preferred_backup_window = null;
     result.snapshot_create_time = null;
     result.snapshot_type = null;
     result.source_db_cluster_snapshot_arn = null;
     result.status = null;
     result.storage_encrypted = null;
+    result.storage_encryption_type = null;
     result.storage_throughput = null;
     result.storage_type = null;
     result.tag_list = null;
@@ -3158,6 +3196,8 @@ pub fn deserializeDBClusterSnapshot(allocator: std.mem.Allocator, reader: *aws.x
                     result.allocated_storage = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "AvailabilityZones")) {
                     result.availability_zones = try deserializeAvailabilityZones(allocator, reader, "AvailabilityZone");
+                } else if (std.mem.eql(u8, e.local, "BackupRetentionPeriod")) {
+                    result.backup_retention_period = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "ClusterCreateTime")) {
                     result.cluster_create_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "DBClusterIdentifier")) {
@@ -3188,6 +3228,8 @@ pub fn deserializeDBClusterSnapshot(allocator: std.mem.Allocator, reader: *aws.x
                     result.percent_progress = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "Port")) {
                     result.port = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "PreferredBackupWindow")) {
+                    result.preferred_backup_window = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SnapshotCreateTime")) {
                     result.snapshot_create_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "SnapshotType")) {
@@ -3198,6 +3240,8 @@ pub fn deserializeDBClusterSnapshot(allocator: std.mem.Allocator, reader: *aws.x
                     result.status = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StorageEncrypted")) {
                     result.storage_encrypted = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "StorageEncryptionType")) {
+                    result.storage_encryption_type = StorageEncryptionType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StorageThroughput")) {
                     result.storage_throughput = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "StorageType")) {
@@ -3500,6 +3544,7 @@ pub fn deserializeDBInstance(allocator: std.mem.Allocator, reader: *aws.xml.Read
     result.secondary_availability_zone = null;
     result.status_infos = null;
     result.storage_encrypted = null;
+    result.storage_encryption_type = null;
     result.storage_throughput = null;
     result.storage_type = null;
     result.storage_volume_status = null;
@@ -3675,6 +3720,8 @@ pub fn deserializeDBInstance(allocator: std.mem.Allocator, reader: *aws.xml.Read
                     result.status_infos = try deserializeDBInstanceStatusInfoList(allocator, reader, "DBInstanceStatusInfo");
                 } else if (std.mem.eql(u8, e.local, "StorageEncrypted")) {
                     result.storage_encrypted = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "StorageEncryptionType")) {
+                    result.storage_encryption_type = StorageEncryptionType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StorageThroughput")) {
                     result.storage_throughput = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "StorageType")) {
@@ -3728,9 +3775,11 @@ pub fn deserializeDBInstanceAutomatedBackup(allocator: std.mem.Allocator, reader
     result.multi_tenant = null;
     result.option_group_name = null;
     result.port = null;
+    result.preferred_backup_window = null;
     result.region = null;
     result.restore_window = null;
     result.status = null;
+    result.storage_encryption_type = null;
     result.storage_throughput = null;
     result.storage_type = null;
     result.tag_list = null;
@@ -3788,12 +3837,16 @@ pub fn deserializeDBInstanceAutomatedBackup(allocator: std.mem.Allocator, reader
                     result.option_group_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Port")) {
                     result.port = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "PreferredBackupWindow")) {
+                    result.preferred_backup_window = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Region")) {
                     result.region = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "RestoreWindow")) {
                     result.restore_window = try deserializeRestoreWindow(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Status")) {
                     result.status = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "StorageEncryptionType")) {
+                    result.storage_encryption_type = StorageEncryptionType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StorageThroughput")) {
                     result.storage_throughput = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "StorageType")) {
@@ -4355,6 +4408,7 @@ pub fn deserializeDBSnapshot(allocator: std.mem.Allocator, reader: *aws.xml.Read
     result.additional_storage_volumes = null;
     result.allocated_storage = null;
     result.availability_zone = null;
+    result.backup_retention_period = null;
     result.db_instance_identifier = null;
     result.dbi_resource_id = null;
     result.db_snapshot_arn = null;
@@ -4375,6 +4429,7 @@ pub fn deserializeDBSnapshot(allocator: std.mem.Allocator, reader: *aws.xml.Read
     result.original_snapshot_create_time = null;
     result.percent_progress = null;
     result.port = null;
+    result.preferred_backup_window = null;
     result.processor_features = null;
     result.snapshot_availability_zone = null;
     result.snapshot_create_time = null;
@@ -4384,6 +4439,7 @@ pub fn deserializeDBSnapshot(allocator: std.mem.Allocator, reader: *aws.xml.Read
     result.source_db_snapshot_identifier = null;
     result.source_region = null;
     result.status = null;
+    result.storage_encryption_type = null;
     result.storage_throughput = null;
     result.storage_type = null;
     result.tag_list = null;
@@ -4399,6 +4455,8 @@ pub fn deserializeDBSnapshot(allocator: std.mem.Allocator, reader: *aws.xml.Read
                     result.allocated_storage = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "AvailabilityZone")) {
                     result.availability_zone = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "BackupRetentionPeriod")) {
+                    result.backup_retention_period = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "DBInstanceIdentifier")) {
                     result.db_instance_identifier = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DbiResourceId")) {
@@ -4439,6 +4497,8 @@ pub fn deserializeDBSnapshot(allocator: std.mem.Allocator, reader: *aws.xml.Read
                     result.percent_progress = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "Port")) {
                     result.port = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "PreferredBackupWindow")) {
+                    result.preferred_backup_window = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ProcessorFeatures")) {
                     result.processor_features = try deserializeProcessorFeatureList(allocator, reader, "ProcessorFeature");
                 } else if (std.mem.eql(u8, e.local, "SnapshotAvailabilityZone")) {
@@ -4457,6 +4517,8 @@ pub fn deserializeDBSnapshot(allocator: std.mem.Allocator, reader: *aws.xml.Read
                     result.source_region = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
                     result.status = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "StorageEncryptionType")) {
+                    result.storage_encryption_type = StorageEncryptionType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StorageThroughput")) {
                     result.storage_throughput = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "StorageType")) {
@@ -5010,6 +5072,7 @@ pub fn deserializeGlobalCluster(allocator: std.mem.Allocator, reader: *aws.xml.R
     result.global_cluster_resource_id = null;
     result.status = null;
     result.storage_encrypted = null;
+    result.storage_encryption_type = null;
     result.tag_list = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -5040,6 +5103,8 @@ pub fn deserializeGlobalCluster(allocator: std.mem.Allocator, reader: *aws.xml.R
                     result.status = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StorageEncrypted")) {
                     result.storage_encrypted = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "StorageEncryptionType")) {
+                    result.storage_encryption_type = StorageEncryptionType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TagList")) {
                     result.tag_list = try deserializeTagList(allocator, reader, "Tag");
                 } else {
@@ -6440,6 +6505,40 @@ pub fn deserializeServerlessV2FeaturesSupport(allocator: std.mem.Allocator, read
                     result.max_capacity = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "MinCapacity")) {
                     result.min_capacity = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeServerlessV2PlatformVersionInfo(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ServerlessV2PlatformVersionInfo {
+    var result: ServerlessV2PlatformVersionInfo = undefined;
+    result.engine = null;
+    result.is_default = null;
+    result.serverless_v2_features_support = null;
+    result.serverless_v2_platform_version = null;
+    result.serverless_v2_platform_version_description = null;
+    result.status = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Engine")) {
+                    result.engine = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "IsDefault")) {
+                    result.is_default = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "ServerlessV2FeaturesSupport")) {
+                    result.serverless_v2_features_support = try deserializeServerlessV2FeaturesSupport(allocator, reader);
+                } else if (std.mem.eql(u8, e.local, "ServerlessV2PlatformVersion")) {
+                    result.serverless_v2_platform_version = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ServerlessV2PlatformVersionDescription")) {
+                    result.serverless_v2_platform_version_description = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Status")) {
+                    result.status = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }

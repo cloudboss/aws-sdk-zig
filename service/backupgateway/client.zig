@@ -114,8 +114,8 @@ pub const Client = struct {
 
     /// This action retrieves the property mappings for the specified hypervisor.
     /// A hypervisor property mapping displays the relationship of entity properties
-    /// available from the on-premises hypervisor to the properties available in
-    /// Amazon Web Services.
+    /// available from the hypervisor to the properties available in Amazon Web
+    /// Services.
     pub fn getHypervisorPropertyMappings(self: *Self, allocator: std.mem.Allocator, input: get_hypervisor_property_mappings.GetHypervisorPropertyMappingsInput, options: CallOptions) !get_hypervisor_property_mappings.GetHypervisorPropertyMappingsOutput {
         return get_hypervisor_property_mappings.execute(self, allocator, input, options);
     }
@@ -166,8 +166,8 @@ pub const Client = struct {
 
     /// This action sets the property mappings for the specified hypervisor.
     /// A hypervisor property mapping displays the relationship of entity properties
-    /// available from the on-premises hypervisor to the properties available in
-    /// Amazon Web Services.
+    /// available from the hypervisor to the properties available in Amazon Web
+    /// Services.
     pub fn putHypervisorPropertyMappings(self: *Self, allocator: std.mem.Allocator, input: put_hypervisor_property_mappings.PutHypervisorPropertyMappingsInput, options: CallOptions) !put_hypervisor_property_mappings.PutHypervisorPropertyMappingsOutput {
         return put_hypervisor_property_mappings.execute(self, allocator, input, options);
     }

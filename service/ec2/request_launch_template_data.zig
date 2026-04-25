@@ -20,6 +20,7 @@ const LaunchTemplateNetworkPerformanceOptionsRequest = @import("launch_template_
 const OperatorRequest = @import("operator_request.zig").OperatorRequest;
 const LaunchTemplatePlacementRequest = @import("launch_template_placement_request.zig").LaunchTemplatePlacementRequest;
 const LaunchTemplatePrivateDnsNameOptionsRequest = @import("launch_template_private_dns_name_options_request.zig").LaunchTemplatePrivateDnsNameOptionsRequest;
+const LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest = @import("launch_template_instance_secondary_interface_specification_request.zig").LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest;
 const LaunchTemplateTagSpecificationRequest = @import("launch_template_tag_specification_request.zig").LaunchTemplateTagSpecificationRequest;
 
 /// The information to include in the launch template.
@@ -276,6 +277,10 @@ pub const RequestLaunchTemplateData = struct {
     /// information, see [User provided
     /// kernels](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html) in the *Amazon EC2 User Guide*.
     ram_disk_id: ?[]const u8 = null,
+
+    /// The secondary interfaces to associate with instances launched from the
+    /// template.
+    secondary_interfaces: ?[]const LaunchTemplateInstanceSecondaryInterfaceSpecificationRequest = null,
 
     /// The IDs of the security groups.
     ///

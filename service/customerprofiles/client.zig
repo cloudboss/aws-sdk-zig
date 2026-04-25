@@ -12,6 +12,8 @@ const create_event_trigger = @import("create_event_trigger.zig");
 const create_integration_workflow = @import("create_integration_workflow.zig");
 const create_profile = @import("create_profile.zig");
 const create_recommender = @import("create_recommender.zig");
+const create_recommender_filter = @import("create_recommender_filter.zig");
+const create_recommender_schema = @import("create_recommender_schema.zig");
 const create_segment_definition = @import("create_segment_definition.zig");
 const create_segment_estimate = @import("create_segment_estimate.zig");
 const create_segment_snapshot = @import("create_segment_snapshot.zig");
@@ -28,6 +30,8 @@ const delete_profile_key = @import("delete_profile_key.zig");
 const delete_profile_object = @import("delete_profile_object.zig");
 const delete_profile_object_type = @import("delete_profile_object_type.zig");
 const delete_recommender = @import("delete_recommender.zig");
+const delete_recommender_filter = @import("delete_recommender_filter.zig");
+const delete_recommender_schema = @import("delete_recommender_schema.zig");
 const delete_segment_definition = @import("delete_segment_definition.zig");
 const delete_workflow = @import("delete_workflow.zig");
 const detect_profile_object_type = @import("detect_profile_object_type.zig");
@@ -48,6 +52,8 @@ const get_profile_object_type = @import("get_profile_object_type.zig");
 const get_profile_object_type_template = @import("get_profile_object_type_template.zig");
 const get_profile_recommendations = @import("get_profile_recommendations.zig");
 const get_recommender = @import("get_recommender.zig");
+const get_recommender_filter = @import("get_recommender_filter.zig");
+const get_recommender_schema = @import("get_recommender_schema.zig");
 const get_segment_definition = @import("get_segment_definition.zig");
 const get_segment_estimate = @import("get_segment_estimate.zig");
 const get_segment_membership = @import("get_segment_membership.zig");
@@ -74,7 +80,9 @@ const list_profile_history_records = @import("list_profile_history_records.zig")
 const list_profile_object_type_templates = @import("list_profile_object_type_templates.zig");
 const list_profile_object_types = @import("list_profile_object_types.zig");
 const list_profile_objects = @import("list_profile_objects.zig");
+const list_recommender_filters = @import("list_recommender_filters.zig");
 const list_recommender_recipes = @import("list_recommender_recipes.zig");
+const list_recommender_schemas = @import("list_recommender_schemas.zig");
 const list_recommenders = @import("list_recommenders.zig");
 const list_rule_based_matches = @import("list_rule_based_matches.zig");
 const list_segment_definitions = @import("list_segment_definitions.zig");
@@ -249,6 +257,18 @@ pub const Client = struct {
         return create_recommender.execute(self, allocator, input, options);
     }
 
+    /// Creates a recommender filter. A recommender filter specifies which items to
+    /// include or exclude from recommendations.
+    pub fn createRecommenderFilter(self: *Self, allocator: std.mem.Allocator, input: create_recommender_filter.CreateRecommenderFilterInput, options: CallOptions) !create_recommender_filter.CreateRecommenderFilterOutput {
+        return create_recommender_filter.execute(self, allocator, input, options);
+    }
+
+    /// Creates a recommender schema. A recommender schema defines the set of data
+    /// columns available for training recommenders and filters under a domain.
+    pub fn createRecommenderSchema(self: *Self, allocator: std.mem.Allocator, input: create_recommender_schema.CreateRecommenderSchemaInput, options: CallOptions) !create_recommender_schema.CreateRecommenderSchemaOutput {
+        return create_recommender_schema.execute(self, allocator, input, options);
+    }
+
     /// Creates a segment definition associated to the given domain.
     pub fn createSegmentDefinition(self: *Self, allocator: std.mem.Allocator, input: create_segment_definition.CreateSegmentDefinitionInput, options: CallOptions) !create_segment_definition.CreateSegmentDefinitionOutput {
         return create_segment_definition.execute(self, allocator, input, options);
@@ -347,6 +367,16 @@ pub const Client = struct {
     /// Deletes a recommender.
     pub fn deleteRecommender(self: *Self, allocator: std.mem.Allocator, input: delete_recommender.DeleteRecommenderInput, options: CallOptions) !delete_recommender.DeleteRecommenderOutput {
         return delete_recommender.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a recommender filter from a domain.
+    pub fn deleteRecommenderFilter(self: *Self, allocator: std.mem.Allocator, input: delete_recommender_filter.DeleteRecommenderFilterInput, options: CallOptions) !delete_recommender_filter.DeleteRecommenderFilterOutput {
+        return delete_recommender_filter.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a recommender schema from a domain.
+    pub fn deleteRecommenderSchema(self: *Self, allocator: std.mem.Allocator, input: delete_recommender_schema.DeleteRecommenderSchemaInput, options: CallOptions) !delete_recommender_schema.DeleteRecommenderSchemaOutput {
+        return delete_recommender_schema.execute(self, allocator, input, options);
     }
 
     /// Deletes a segment definition from the domain.
@@ -546,6 +576,16 @@ pub const Client = struct {
         return get_recommender.execute(self, allocator, input, options);
     }
 
+    /// Retrieves information about a specific recommender filter in a domain.
+    pub fn getRecommenderFilter(self: *Self, allocator: std.mem.Allocator, input: get_recommender_filter.GetRecommenderFilterInput, options: CallOptions) !get_recommender_filter.GetRecommenderFilterOutput {
+        return get_recommender_filter.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves information about a specific recommender schema in a domain.
+    pub fn getRecommenderSchema(self: *Self, allocator: std.mem.Allocator, input: get_recommender_schema.GetRecommenderSchemaInput, options: CallOptions) !get_recommender_schema.GetRecommenderSchemaOutput {
+        return get_recommender_schema.execute(self, allocator, input, options);
+    }
+
     /// Gets a segment definition from the domain.
     pub fn getSegmentDefinition(self: *Self, allocator: std.mem.Allocator, input: get_segment_definition.GetSegmentDefinitionInput, options: CallOptions) !get_segment_definition.GetSegmentDefinitionOutput {
         return get_segment_definition.execute(self, allocator, input, options);
@@ -694,10 +734,20 @@ pub const Client = struct {
         return list_profile_objects.execute(self, allocator, input, options);
     }
 
+    /// Returns a list of recommender filters in the specified domain.
+    pub fn listRecommenderFilters(self: *Self, allocator: std.mem.Allocator, input: list_recommender_filters.ListRecommenderFiltersInput, options: CallOptions) !list_recommender_filters.ListRecommenderFiltersOutput {
+        return list_recommender_filters.execute(self, allocator, input, options);
+    }
+
     /// Returns a list of available recommender recipes that can be used to create
     /// recommenders.
     pub fn listRecommenderRecipes(self: *Self, allocator: std.mem.Allocator, input: list_recommender_recipes.ListRecommenderRecipesInput, options: CallOptions) !list_recommender_recipes.ListRecommenderRecipesOutput {
         return list_recommender_recipes.execute(self, allocator, input, options);
+    }
+
+    /// Returns a list of recommender schemas in the specified domain.
+    pub fn listRecommenderSchemas(self: *Self, allocator: std.mem.Allocator, input: list_recommender_schemas.ListRecommenderSchemasInput, options: CallOptions) !list_recommender_schemas.ListRecommenderSchemasOutput {
+        return list_recommender_schemas.execute(self, allocator, input, options);
     }
 
     /// Returns a list of recommenders in the specified domain.
@@ -993,7 +1043,21 @@ pub const Client = struct {
         };
     }
 
+    pub fn listRecommenderFiltersPaginator(self: *Self, params: list_recommender_filters.ListRecommenderFiltersInput) paginator.ListRecommenderFiltersPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listRecommenderRecipesPaginator(self: *Self, params: list_recommender_recipes.ListRecommenderRecipesInput) paginator.ListRecommenderRecipesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listRecommenderSchemasPaginator(self: *Self, params: list_recommender_schemas.ListRecommenderSchemasInput) paginator.ListRecommenderSchemasPaginator {
         return .{
             .client = self,
             .params = params,

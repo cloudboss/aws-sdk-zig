@@ -8,8 +8,8 @@ const ServiceError = @import("errors.zig").ServiceError;
 pub const AcceptInvitationInput = struct {
     /// The unique ID of the detector of the GuardDuty member account.
     ///
-    /// To find the `detectorId` in the current Region, see the
-    /// Settings page in the GuardDuty console, or run the
+    /// To find the `detectorId` in the current Region, see the Settings page in the
+    /// GuardDuty console, or run the
     /// [ListDetectors](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html) API.
     detector_id: []const u8,
 
@@ -18,8 +18,7 @@ pub const AcceptInvitationInput = struct {
     invitation_id: []const u8,
 
     /// The account ID of the GuardDuty administrator account whose invitation
-    /// you're
-    /// accepting.
+    /// you're accepting.
     master_id: []const u8,
 
     pub const json_field_names = .{

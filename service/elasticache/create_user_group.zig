@@ -18,7 +18,7 @@ pub const CreateUserGroupInput = struct {
     /// Valkey and Redis OSS only.
     tags: ?[]const Tag = null,
 
-    /// The ID of the user group.
+    /// The ID of the user group. This value is stored as a lowercase string.
     user_group_id: []const u8,
 
     /// The list of user IDs that belong to the user group.

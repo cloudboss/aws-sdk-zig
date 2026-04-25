@@ -31,7 +31,7 @@ pub const CreateUserInput = struct {
     /// be accompanied by a tag value, although null is accepted.
     tags: ?[]const Tag = null,
 
-    /// The ID of the user.
+    /// The ID of the user. This value is stored as a lowercase string.
     user_id: []const u8,
 
     /// The username of the user.

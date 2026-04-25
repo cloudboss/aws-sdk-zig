@@ -32,6 +32,15 @@ pub const CreateMlflowTrackingServerInput = struct {
     /// MLflow](https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow-create-tracking-server-iam.html).
     role_arn: []const u8,
 
+    /// Expected Amazon Web Services account ID that owns the Amazon S3 bucket for
+    /// artifact storage. Defaults to caller's account ID if not provided.
+    s3_bucket_owner_account_id: ?[]const u8 = null,
+
+    /// Enable Amazon S3 Ownership checks when interacting with Amazon S3 buckets
+    /// from a SageMaker Managed MLflow Tracking Server. Defaults to `True` if not
+    /// provided.
+    s3_bucket_owner_verification: ?bool = null,
+
     /// Tags consisting of key-value pairs used to manage metadata for the tracking
     /// server.
     tags: ?[]const Tag = null,
@@ -61,6 +70,8 @@ pub const CreateMlflowTrackingServerInput = struct {
         .automatic_model_registration = "AutomaticModelRegistration",
         .mlflow_version = "MlflowVersion",
         .role_arn = "RoleArn",
+        .s3_bucket_owner_account_id = "S3BucketOwnerAccountId",
+        .s3_bucket_owner_verification = "S3BucketOwnerVerification",
         .tags = "Tags",
         .tracking_server_name = "TrackingServerName",
         .tracking_server_size = "TrackingServerSize",

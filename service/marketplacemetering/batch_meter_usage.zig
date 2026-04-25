@@ -11,7 +11,7 @@ pub const BatchMeterUsageInput = struct {
     /// Product code is used to uniquely identify a product in Amazon Web Services
     /// Marketplace. The product code should
     /// be the same as the one used during the publishing of a new product.
-    product_code: []const u8,
+    product_code: ?[]const u8 = null,
 
     /// The set of `UsageRecords` to submit. `BatchMeterUsage` accepts
     /// up to 25 `UsageRecords` at a time.
@@ -154,6 +154,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "InvalidEndpointRegionException")) {
         return .{ .arena = arena, .kind = .{ .invalid_endpoint_region_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidLicenseException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_license_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

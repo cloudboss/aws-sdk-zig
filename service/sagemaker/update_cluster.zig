@@ -8,6 +8,7 @@ const ClusterAutoScalingConfig = @import("cluster_auto_scaling_config.zig").Clus
 const ClusterInstanceGroupSpecification = @import("cluster_instance_group_specification.zig").ClusterInstanceGroupSpecification;
 const ClusterNodeProvisioningMode = @import("cluster_node_provisioning_mode.zig").ClusterNodeProvisioningMode;
 const ClusterNodeRecovery = @import("cluster_node_recovery.zig").ClusterNodeRecovery;
+const ClusterOrchestrator = @import("cluster_orchestrator.zig").ClusterOrchestrator;
 const ClusterRestrictedInstanceGroupSpecification = @import("cluster_restricted_instance_group_specification.zig").ClusterRestrictedInstanceGroupSpecification;
 const ClusterTieredStorageConfig = @import("cluster_tiered_storage_config.zig").ClusterTieredStorageConfig;
 
@@ -42,6 +43,8 @@ pub const UpdateClusterInput = struct {
     /// The node recovery mode to be applied to the SageMaker HyperPod cluster.
     node_recovery: ?ClusterNodeRecovery = null,
 
+    orchestrator: ?ClusterOrchestrator = null,
+
     /// The specialized instance groups for training models like Amazon Nova to be
     /// created in the SageMaker HyperPod cluster.
     restricted_instance_groups: ?[]const ClusterRestrictedInstanceGroupSpecification = null,
@@ -59,6 +62,7 @@ pub const UpdateClusterInput = struct {
         .instance_groups_to_delete = "InstanceGroupsToDelete",
         .node_provisioning_mode = "NodeProvisioningMode",
         .node_recovery = "NodeRecovery",
+        .orchestrator = "Orchestrator",
         .restricted_instance_groups = "RestrictedInstanceGroups",
         .tiered_storage_config = "TieredStorageConfig",
     };

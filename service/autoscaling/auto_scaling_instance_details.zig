@@ -8,6 +8,9 @@ pub const AutoScalingInstanceDetails = struct {
     /// The Availability Zone for the instance.
     availability_zone: []const u8,
 
+    /// The Availability Zone ID where the instance is located.
+    availability_zone_id: ?[]const u8 = null,
+
     /// The last reported health status of this instance. `Healthy` means that the
     /// instance is healthy and should remain in service. `Unhealthy` means that the
     /// instance is unhealthy and Amazon EC2 Auto Scaling should terminate and
@@ -56,14 +59,17 @@ pub const AutoScalingInstanceDetails = struct {
     /// `Pending:Proceed` | `Quarantined` | `InService` |
     /// `Terminating` | `Terminating:Wait` |
     /// `Terminating:Proceed` | `Terminating:Retained` | `Terminated` | `Detaching`
-    /// | `Detached` | `EnteringStandby` | `Standby` |
+    /// |
+    /// `Detached` | `EnteringStandby` | `Standby` |
+    /// `ReplacingRootVolume` | `ReplacingRootVolume:Wait` |
+    /// `ReplacingRootVolume:Proceed` | `RootVolumeReplaced` |
     /// `Warmed:Pending` | `Warmed:Pending:Wait` |
     /// `Warmed:Pending:Proceed` | `Warmed:Pending:Retained` | `Warmed:Terminating`
     /// |
     /// `Warmed:Terminating:Wait` | `Warmed:Terminating:Proceed` |
     /// `Warmed:Terminating:Retained` |
     /// `Warmed:Terminated` | `Warmed:Stopped` |
-    /// `Warmed:Running`
+    /// `Warmed:Running` | `Warmed:Hibernated`
     lifecycle_state: []const u8,
 
     /// Indicates whether the instance is protected from termination by Amazon EC2

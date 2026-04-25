@@ -1,3 +1,5 @@
+const aws = @import("aws");
+
 const PrefetchConsumption = @import("prefetch_consumption.zig").PrefetchConsumption;
 const RecurringPrefetchConfiguration = @import("recurring_prefetch_configuration.zig").RecurringPrefetchConfiguration;
 const PrefetchRetrieval = @import("prefetch_retrieval.zig").PrefetchRetrieval;
@@ -48,6 +50,13 @@ pub const PrefetchSchedule = struct {
     /// multiple streams that use the same playback configuration.
     stream_id: ?[]const u8 = null,
 
+    /// The tags assigned to the prefetch schedule. Tags are key-value pairs that
+    /// you can associate with Amazon resources to help with organization, access
+    /// control, and cost tracking. For more information, see [Tagging AWS Elemental
+    /// MediaTailor
+    /// Resources](https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
+    tags: ?[]const aws.map.StringMapEntry = null,
+
     pub const json_field_names = .{
         .arn = "Arn",
         .consumption = "Consumption",
@@ -57,5 +66,6 @@ pub const PrefetchSchedule = struct {
         .retrieval = "Retrieval",
         .schedule_type = "ScheduleType",
         .stream_id = "StreamId",
+        .tags = "Tags",
     };
 };

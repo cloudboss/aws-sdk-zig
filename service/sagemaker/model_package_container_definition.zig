@@ -1,5 +1,6 @@
 const aws = @import("aws");
 
+const AdditionalModelDataSource = @import("additional_model_data_source.zig").AdditionalModelDataSource;
 const AdditionalS3DataSource = @import("additional_s3_data_source.zig").AdditionalS3DataSource;
 const BaseModel = @import("base_model.zig").BaseModel;
 const ModelDataSource = @import("model_data_source.zig").ModelDataSource;
@@ -7,6 +8,11 @@ const ModelInput = @import("model_input.zig").ModelInput;
 
 /// Describes the Docker container for the model package.
 pub const ModelPackageContainerDefinition = struct {
+    /// Data sources that are available to your model in addition to the one that
+    /// you specify for `ModelDataSource` when you use the `CreateModelPackage`
+    /// action.
+    additional_model_data_sources: ?[]const AdditionalModelDataSource = null,
+
     /// The additional data source that is used during inference in the Docker
     /// container for your model package.
     additional_s3_data_source: ?AdditionalS3DataSource = null,
@@ -73,6 +79,7 @@ pub const ModelPackageContainerDefinition = struct {
     product_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .additional_model_data_sources = "AdditionalModelDataSources",
         .additional_s3_data_source = "AdditionalS3DataSource",
         .base_model = "BaseModel",
         .container_hostname = "ContainerHostname",

@@ -42,6 +42,7 @@ const describe_orderable_db_instance_options = @import("describe_orderable_db_in
 const describe_pending_maintenance_actions = @import("describe_pending_maintenance_actions.zig");
 const describe_reserved_db_instances = @import("describe_reserved_db_instances.zig");
 const describe_reserved_db_instances_offerings = @import("describe_reserved_db_instances_offerings.zig");
+const describe_serverless_v2_platform_versions = @import("describe_serverless_v2_platform_versions.zig");
 const describe_source_regions = @import("describe_source_regions.zig");
 const describe_tenant_databases = @import("describe_tenant_databases.zig");
 const download_db_log_file_portion = @import("download_db_log_file_portion.zig");
@@ -1542,6 +1543,46 @@ pub const DescribeReservedDBInstancesOfferingsPaginator = struct {
         self.params.marker = self.next_token;
 
         const output = try describe_reserved_db_instances_offerings.execute(self.client, allocator, self.params, options);
+
+        if (output.marker) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const DescribeServerlessV2PlatformVersionsPaginator = struct {
+    client: *Client,
+    params: describe_serverless_v2_platform_versions.DescribeServerlessV2PlatformVersionsInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !describe_serverless_v2_platform_versions.DescribeServerlessV2PlatformVersionsOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.marker = self.next_token;
+
+        const output = try describe_serverless_v2_platform_versions.execute(self.client, allocator, self.params, options);
 
         if (output.marker) |token| {
             if (self.next_token) |old| {

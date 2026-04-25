@@ -5,6 +5,8 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const HdfsAuthenticationType = @import("hdfs_authentication_type.zig").HdfsAuthenticationType;
+const CmkSecretConfig = @import("cmk_secret_config.zig").CmkSecretConfig;
+const CustomSecretConfig = @import("custom_secret_config.zig").CustomSecretConfig;
 const HdfsNameNode = @import("hdfs_name_node.zig").HdfsNameNode;
 const QopConfiguration = @import("qop_configuration.zig").QopConfiguration;
 
@@ -19,6 +21,18 @@ pub const UpdateLocationHdfsInput = struct {
 
     /// The size of the data blocks to write into the HDFS cluster.
     block_size: ?i32 = null,
+
+    /// Specifies configuration information for a DataSync-managed secret, such as a
+    /// `KerberosKeytab` or set of credentials that DataSync uses to access a
+    /// specific transfer location, and a customer-managed KMS key.
+    cmk_secret_config: ?CmkSecretConfig = null,
+
+    /// Specifies configuration information for a customer-managed secret, such as a
+    /// `KerberosKeytab` or set of credentials that DataSync uses to
+    /// access a specific transfer location, and a customer-managed
+    /// Identity and Access Management (IAM) role that provides access to the
+    /// secret.
+    custom_secret_config: ?CustomSecretConfig = null,
 
     /// The Kerberos key table (keytab) that contains mappings between the defined
     /// Kerberos
@@ -75,6 +89,8 @@ pub const UpdateLocationHdfsInput = struct {
         .agent_arns = "AgentArns",
         .authentication_type = "AuthenticationType",
         .block_size = "BlockSize",
+        .cmk_secret_config = "CmkSecretConfig",
+        .custom_secret_config = "CustomSecretConfig",
         .kerberos_keytab = "KerberosKeytab",
         .kerberos_krb_5_conf = "KerberosKrb5Conf",
         .kerberos_principal = "KerberosPrincipal",

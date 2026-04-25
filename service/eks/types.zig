@@ -160,5 +160,7 @@ pub const UpgradePolicyResponse = @import("upgrade_policy_response.zig").Upgrade
 pub const VersionStatus = @import("version_status.zig").VersionStatus;
 pub const VpcConfigRequest = @import("vpc_config_request.zig").VpcConfigRequest;
 pub const VpcConfigResponse = @import("vpc_config_response.zig").VpcConfigResponse;
+pub const WarmPoolConfig = @import("warm_pool_config.zig").WarmPoolConfig;
+pub const WarmPoolState = @import("warm_pool_state.zig").WarmPoolState;
 pub const ZonalShiftConfigRequest = @import("zonal_shift_config_request.zig").ZonalShiftConfigRequest;
 pub const ZonalShiftConfigResponse = @import("zonal_shift_config_response.zig").ZonalShiftConfigResponse;

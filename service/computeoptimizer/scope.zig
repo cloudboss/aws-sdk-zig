@@ -11,21 +11,18 @@ const ScopeName = @import("scope_name.zig").ScopeName;
 /// metrics](https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html) in the *Compute Optimizer User
 /// Guide*.
 ///
-/// You cannot create recommendation preferences for Amazon EC2 Auto Scaling
-/// groups at the
+/// You cannot create recommendation preferences for Auto Scaling groups at the
 /// organization and account levels. You can create recommendation preferences
 /// for
-/// Amazon EC2 Auto Scaling groups only at the resource level by specifying a
-/// scope name
-/// of `ResourceArn` and a scope value of the Amazon EC2 Auto Scaling group
-/// Amazon
+/// Auto Scaling groups only at the resource level by specifying a scope name
+/// of `ResourceArn` and a scope value of the Auto Scaling group Amazon
 /// Resource Name (ARN). This will configure the preference for all instances
 /// that are
-/// part of the specified Amazon EC2 Auto Scaling group. You also cannot create
+/// part of the specified Auto Scaling group. You also cannot create
 /// recommendation
-/// preferences at the resource level for instances that are part of an Amazon
-/// EC2 Auto Scaling group. You can create recommendation preferences at the
-/// resource level only for
+/// preferences at the resource level for instances that are part of an Auto
+/// Scaling group. You can create recommendation preferences at the resource
+/// level only for
 /// standalone instances.
 pub const Scope = struct {
     /// The name of the scope.
@@ -55,10 +52,9 @@ pub const Scope = struct {
     ///   ID.
     ///
     /// * `ResourceArn` - The `value` must be the Amazon Resource
-    /// Name (ARN) of an EC2 instance or an Amazon EC2 Auto Scaling group.
+    /// Name (ARN) of an EC2 instance or an Auto Scaling group.
     ///
-    /// Only EC2 instance and Amazon EC2 Auto Scaling group ARNs are currently
-    /// supported.
+    /// Only EC2 instance and Auto Scaling group ARNs are currently supported.
     value: ?[]const u8 = null,
 
     pub const json_field_names = .{

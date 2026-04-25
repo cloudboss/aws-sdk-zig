@@ -1,7 +1,7 @@
 const AwsSecurityFindingIdentifier = @import("aws_security_finding_identifier.zig").AwsSecurityFindingIdentifier;
 
-/// A finding from a `BatchUpdateFindings` request that Security Hub was unable
-/// to
+/// A finding from a `BatchUpdateFindings` request that Security Hub CSPM was
+/// unable to
 /// update.
 pub const BatchUpdateFindingsUnprocessedFinding = struct {
     /// The code associated with the error. Possible values are:

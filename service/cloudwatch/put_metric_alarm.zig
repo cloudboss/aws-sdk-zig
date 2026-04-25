@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ComparisonOperator = @import("comparison_operator.zig").ComparisonOperator;
 const Dimension = @import("dimension.zig").Dimension;
+const EvaluationCriteria = @import("evaluation_criteria.zig").EvaluationCriteria;
 const MetricDataQuery = @import("metric_data_query.zig").MetricDataQuery;
 const Statistic = @import("statistic.zig").Statistic;
 const Tag = @import("tag.zig").Tag;
@@ -100,7 +101,7 @@ pub const PutMetricAlarmInput = struct {
     /// The values `LessThanLowerOrGreaterThanUpperThreshold`,
     /// `LessThanLowerThreshold`, and `GreaterThanUpperThreshold` are
     /// used only for alarms based on anomaly detection models.
-    comparison_operator: ComparisonOperator,
+    comparison_operator: ?ComparisonOperator = null,
 
     /// The number of data points that must be breaching to trigger the alarm. This
     /// is used
@@ -127,6 +128,32 @@ pub const PutMetricAlarmInput = struct {
     /// Valid Values: `evaluate | ignore`
     evaluate_low_sample_count_percentile: ?[]const u8 = null,
 
+    /// The evaluation criteria for the alarm. For each `PutMetricAlarm`
+    /// operation, you must specify either `MetricName`, a `Metrics`
+    /// array, or an `EvaluationCriteria`.
+    ///
+    /// If you use the `EvaluationCriteria` parameter, you cannot include the
+    /// `Namespace`, `MetricName`, `Dimensions`,
+    /// `Period`, `Unit`, `Statistic`,
+    /// `ExtendedStatistic`, `Metrics`, `Threshold`,
+    /// `ComparisonOperator`, `ThresholdMetricId`,
+    /// `EvaluationPeriods`, or `DatapointsToAlarm` parameters of
+    /// `PutMetricAlarm` in the same operation. Instead, all evaluation parameters
+    /// are defined within this structure.
+    ///
+    /// For an example of how to use this parameter, see the **PromQL
+    /// alarm** example on this page.
+    evaluation_criteria: ?EvaluationCriteria = null,
+
+    /// The frequency, in seconds, at which the alarm is evaluated. Valid values are
+    /// 10,
+    /// 20, 30, and any multiple of 60.
+    ///
+    /// This parameter is required for alarms that use `EvaluationCriteria`, and
+    /// cannot be specified for alarms configured with `MetricName` or
+    /// `Metrics`.
+    evaluation_interval: ?i32 = null,
+
     /// The number of periods over which data is compared to the specified
     /// threshold. If
     /// you are setting an alarm that requires that a number of consecutive data
@@ -134,7 +161,7 @@ pub const PutMetricAlarmInput = struct {
     /// breaching to trigger the alarm, this value specifies that number. If you are
     /// setting an
     /// "M out of N" alarm, this value is the N.
-    evaluation_periods: i32,
+    evaluation_periods: ?i32 = null,
 
     /// The extended statistic for the metric specified in `MetricName`. When
     /// you call `PutMetricAlarm` and specify a `MetricName`, you must
@@ -238,7 +265,8 @@ pub const PutMetricAlarmInput = struct {
 
     /// The name for the metric associated with the alarm. For each
     /// `PutMetricAlarm` operation, you must specify either
-    /// `MetricName` or a `Metrics` array.
+    /// `MetricName`, a `Metrics` array, or an
+    /// `EvaluationCriteria`.
     ///
     /// If you are creating an alarm based on a math expression, you cannot specify
     /// this
@@ -250,8 +278,8 @@ pub const PutMetricAlarmInput = struct {
 
     /// An array of `MetricDataQuery` structures that enable you to create an alarm
     /// based on the result of a metric math expression. For each `PutMetricAlarm`
-    /// operation, you must specify either `MetricName` or a `Metrics`
-    /// array.
+    /// operation, you must specify either `MetricName`, a `Metrics`
+    /// array, or an `EvaluationCriteria`.
     ///
     /// Each item in the `Metrics` array either retrieves a metric or performs a
     /// math expression.
@@ -264,11 +292,11 @@ pub const PutMetricAlarmInput = struct {
     ///
     /// If you use the `Metrics` parameter, you cannot include the
     /// `Namespace`, `MetricName`, `Dimensions`,
-    /// `Period`, `Unit`, `Statistic`, or
-    /// `ExtendedStatistic` parameters of `PutMetricAlarm` in the same
-    /// operation. Instead, you retrieve the metrics you are using in your math
-    /// expression as
-    /// part of the `Metrics` array.
+    /// `Period`, `Unit`, `Statistic`,
+    /// or `ExtendedStatistic` parameters of `PutMetricAlarm`
+    /// in the same operation. Instead, you retrieve the metrics you are using in
+    /// your
+    /// math expression as part of the `Metrics` array.
     metrics: ?[]const MetricDataQuery = null,
 
     /// The namespace for the metric associated specified in
@@ -429,6 +457,8 @@ pub const PutMetricAlarmInput = struct {
     /// `TreatMissingData`. When an `AWS/DynamoDB` metric has
     /// missing data, alarms that evaluate that metric remain in their current
     /// state.
+    ///
+    /// This parameter is not applicable to PromQL alarms.
     treat_missing_data: ?[]const u8 = null,
 
     /// The unit of measure for the statistic. For example, the units for the Amazon
@@ -470,6 +500,8 @@ pub const PutMetricAlarmInput = struct {
         .datapoints_to_alarm = "DatapointsToAlarm",
         .dimensions = "Dimensions",
         .evaluate_low_sample_count_percentile = "EvaluateLowSampleCountPercentile",
+        .evaluation_criteria = "EvaluationCriteria",
+        .evaluation_interval = "EvaluationInterval",
         .evaluation_periods = "EvaluationPeriods",
         .extended_statistic = "ExtendedStatistic",
         .insufficient_data_actions = "InsufficientDataActions",
@@ -543,8 +575,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutMetricAlarmInput, co
     }
     try body_buf.appendSlice(allocator, "&AlarmName=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.alarm_name);
-    try body_buf.appendSlice(allocator, "&ComparisonOperator=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, input.comparison_operator.wireName());
+    if (input.comparison_operator) |v| {
+        try body_buf.appendSlice(allocator, "&ComparisonOperator=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
+    }
     if (input.datapoints_to_alarm) |v| {
         try body_buf.appendSlice(allocator, "&DatapointsToAlarm=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
@@ -570,8 +604,32 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutMetricAlarmInput, co
         try body_buf.appendSlice(allocator, "&EvaluateLowSampleCountPercentile=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
-    try body_buf.appendSlice(allocator, "&EvaluationPeriods=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.evaluation_periods}) catch "");
+    if (input.evaluation_criteria) |u| {
+        switch (u) {
+            .prom_ql_criteria => |u_0| {
+                if (u_0) |v_0| {
+                    if (v_0.pending_period) |sv| {
+                        try body_buf.appendSlice(allocator, "&EvaluationCriteria.PromQLCriteria.PendingPeriod=");
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
+                    }
+                    try body_buf.appendSlice(allocator, "&EvaluationCriteria.PromQLCriteria.Query=");
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, v_0.query);
+                    if (v_0.recovery_period) |sv| {
+                        try body_buf.appendSlice(allocator, "&EvaluationCriteria.PromQLCriteria.RecoveryPeriod=");
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
+                    }
+                }
+            },
+        }
+    }
+    if (input.evaluation_interval) |v| {
+        try body_buf.appendSlice(allocator, "&EvaluationInterval=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
+    }
+    if (input.evaluation_periods) |v| {
+        try body_buf.appendSlice(allocator, "&EvaluationPeriods=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
+    }
     if (input.extended_statistic) |v| {
         try body_buf.appendSlice(allocator, "&ExtendedStatistic=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);

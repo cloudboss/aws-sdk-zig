@@ -11,8 +11,8 @@ pub const KubernetesPermissionCheckedDetails = struct {
     resource: ?[]const u8 = null,
 
     /// The verb component of the Kubernetes API call. For example, when you check
-    /// whether or not you have the permission
-    /// to call the `CreatePod` API, the verb component will be `Create`.
+    /// whether or not you have the permission to call the `CreatePod` API, the verb
+    /// component will be `Create`.
     verb: ?[]const u8 = null,
 
     pub const json_field_names = .{

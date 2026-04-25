@@ -2,6 +2,7 @@ const aws = @import("aws");
 
 const ResourceType = @import("resource_type.zig").ResourceType;
 const TelemetryState = @import("telemetry_state.zig").TelemetryState;
+const TelemetrySourceType = @import("telemetry_source_type.zig").TelemetrySourceType;
 
 /// A model representing the state of a resource within an account according to
 /// telemetry config.
@@ -30,6 +31,8 @@ pub const TelemetryConfiguration = struct {
     /// NotApplicable; Metrics: Enabled; Traces: NotApplicable; }`.
     telemetry_configuration_state: ?[]const aws.map.MapEntry(TelemetryState) = null,
 
+    telemetry_source_type: ?TelemetrySourceType = null,
+
     pub const json_field_names = .{
         .account_identifier = "AccountIdentifier",
         .last_update_time_stamp = "LastUpdateTimeStamp",
@@ -37,5 +40,6 @@ pub const TelemetryConfiguration = struct {
         .resource_tags = "ResourceTags",
         .resource_type = "ResourceType",
         .telemetry_configuration_state = "TelemetryConfigurationState",
+        .telemetry_source_type = "TelemetrySourceType",
     };
 };

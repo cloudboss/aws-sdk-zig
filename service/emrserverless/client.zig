@@ -7,14 +7,20 @@ const delete_application = @import("delete_application.zig");
 const get_application = @import("get_application.zig");
 const get_dashboard_for_job_run = @import("get_dashboard_for_job_run.zig");
 const get_job_run = @import("get_job_run.zig");
+const get_resource_dashboard = @import("get_resource_dashboard.zig");
+const get_session = @import("get_session.zig");
+const get_session_endpoint = @import("get_session_endpoint.zig");
 const list_applications = @import("list_applications.zig");
 const list_job_run_attempts = @import("list_job_run_attempts.zig");
 const list_job_runs = @import("list_job_runs.zig");
+const list_sessions = @import("list_sessions.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const start_application = @import("start_application.zig");
 const start_job_run = @import("start_job_run.zig");
+const start_session = @import("start_session.zig");
 const stop_application = @import("stop_application.zig");
 const tag_resource = @import("tag_resource.zig");
+const terminate_session = @import("terminate_session.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_application = @import("update_application.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
@@ -89,6 +95,34 @@ pub const Client = struct {
         return get_job_run.execute(self, allocator, input, options);
     }
 
+    /// Returns a URL that you can use to access the application UIs for a specified
+    /// resource, such as a session.
+    ///
+    /// For resources in a running state, the application UI is a live user
+    /// interface such as the Spark web UI. For terminated resources, the
+    /// application UI is a persistent application user interface such as the Spark
+    /// History Server.
+    ///
+    /// The URL is valid for one hour after you generate it. To access the
+    /// application UI after that hour elapses, you must invoke the API again to
+    /// generate a new URL.
+    pub fn getResourceDashboard(self: *Self, allocator: std.mem.Allocator, input: get_resource_dashboard.GetResourceDashboardInput, options: CallOptions) !get_resource_dashboard.GetResourceDashboardOutput {
+        return get_resource_dashboard.execute(self, allocator, input, options);
+    }
+
+    /// Displays detailed information about a session.
+    pub fn getSession(self: *Self, allocator: std.mem.Allocator, input: get_session.GetSessionInput, options: CallOptions) !get_session.GetSessionOutput {
+        return get_session.execute(self, allocator, input, options);
+    }
+
+    /// Returns the session endpoint URL and a time-limited authentication token for
+    /// the specified session. Use the endpoint and token to connect a client to the
+    /// session. Call this operation again when the authentication token expires to
+    /// obtain a new token.
+    pub fn getSessionEndpoint(self: *Self, allocator: std.mem.Allocator, input: get_session_endpoint.GetSessionEndpointInput, options: CallOptions) !get_session_endpoint.GetSessionEndpointOutput {
+        return get_session_endpoint.execute(self, allocator, input, options);
+    }
+
     /// Lists applications based on a set of parameters.
     pub fn listApplications(self: *Self, allocator: std.mem.Allocator, input: list_applications.ListApplicationsInput, options: CallOptions) !list_applications.ListApplicationsOutput {
         return list_applications.execute(self, allocator, input, options);
@@ -102,6 +136,12 @@ pub const Client = struct {
     /// Lists job runs based on a set of parameters.
     pub fn listJobRuns(self: *Self, allocator: std.mem.Allocator, input: list_job_runs.ListJobRunsInput, options: CallOptions) !list_job_runs.ListJobRunsOutput {
         return list_job_runs.execute(self, allocator, input, options);
+    }
+
+    /// Lists sessions for the specified application. You can filter sessions by
+    /// state and creation time.
+    pub fn listSessions(self: *Self, allocator: std.mem.Allocator, input: list_sessions.ListSessionsInput, options: CallOptions) !list_sessions.ListSessionsOutput {
+        return list_sessions.execute(self, allocator, input, options);
     }
 
     /// Lists the tags assigned to the resources.
@@ -120,6 +160,14 @@ pub const Client = struct {
         return start_job_run.execute(self, allocator, input, options);
     }
 
+    /// Creates and starts a new session on the specified application. The
+    /// application must be in the `STARTED` state or have `AutoStart` enabled, and
+    /// have interactive sessions enabled. This operation is supported for EMR
+    /// release 7.13.0 and later.
+    pub fn startSession(self: *Self, allocator: std.mem.Allocator, input: start_session.StartSessionInput, options: CallOptions) !start_session.StartSessionOutput {
+        return start_session.execute(self, allocator, input, options);
+    }
+
     /// Stops a specified application and releases initial capacity if configured.
     /// All scheduled and running jobs must be completed or cancelled before
     /// stopping an application.
@@ -135,6 +183,14 @@ pub const Client = struct {
     /// resource based on the tags you've assigned to it.
     pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
+    }
+
+    /// Terminates the specified session. After you terminate a session, it enters
+    /// the `TERMINATING` state and then the `TERMINATED` state. You can still
+    /// access the Spark History Server for a terminated session through the
+    /// `GetResourceDashboard` operation.
+    pub fn terminateSession(self: *Self, allocator: std.mem.Allocator, input: terminate_session.TerminateSessionInput, options: CallOptions) !terminate_session.TerminateSessionOutput {
+        return terminate_session.execute(self, allocator, input, options);
     }
 
     /// Removes tags from resources.
@@ -163,6 +219,13 @@ pub const Client = struct {
     }
 
     pub fn listJobRunsPaginator(self: *Self, params: list_job_runs.ListJobRunsInput) paginator.ListJobRunsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listSessionsPaginator(self: *Self, params: list_sessions.ListSessionsInput) paginator.ListSessionsPaginator {
         return .{
             .client = self,
             .params = params,

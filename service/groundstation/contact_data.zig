@@ -3,6 +3,7 @@ const aws = @import("aws");
 const ContactStatus = @import("contact_status.zig").ContactStatus;
 const EphemerisResponseData = @import("ephemeris_response_data.zig").EphemerisResponseData;
 const Elevation = @import("elevation.zig").Elevation;
+const ContactVersion = @import("contact_version.zig").ContactVersion;
 
 /// Data describing a contact.
 pub const ContactData = struct {
@@ -30,11 +31,11 @@ pub const ContactData = struct {
     /// ARN of a mission profile.
     mission_profile_arn: ?[]const u8 = null,
 
-    /// Amount of time after a contact ends that you’d like to receive a CloudWatch
+    /// End time in UTC of the post-pass period, at which you receive a CloudWatch
     /// event indicating the pass has finished.
     post_pass_end_time: ?i64 = null,
 
-    /// Amount of time prior to contact start you’d like to receive a CloudWatch
+    /// Start time in UTC of the pre-pass period, at which you receive a CloudWatch
     /// event indicating an upcoming pass.
     pre_pass_start_time: ?i64 = null,
 
@@ -49,6 +50,9 @@ pub const ContactData = struct {
 
     /// Tags assigned to a contact.
     tags: ?[]const aws.map.StringMapEntry = null,
+
+    /// Version information for a contact.
+    version: ?ContactVersion = null,
 
     /// Projected time in UTC your satellite will set below the [receive
     /// mask](https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html).
@@ -81,6 +85,7 @@ pub const ContactData = struct {
         .satellite_arn = "satelliteArn",
         .start_time = "startTime",
         .tags = "tags",
+        .version = "version",
         .visibility_end_time = "visibilityEndTime",
         .visibility_start_time = "visibilityStartTime",
     };

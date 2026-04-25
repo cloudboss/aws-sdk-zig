@@ -22,7 +22,7 @@ pub const AwsAutoScalingLaunchConfigurationDetails = struct {
     /// The creation date and time for the launch configuration.
     ///
     /// For more information about the validation and formatting of timestamp fields
-    /// in Security Hub, see
+    /// in Security Hub CSPM, see
     /// [Timestamps](https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps).
     created_time: ?[]const u8 = null,
 
@@ -63,8 +63,7 @@ pub const AwsAutoScalingLaunchConfigurationDetails = struct {
     /// The identifier of the RAM disk associated with the AMI.
     ramdisk_id: ?[]const u8 = null,
 
-    /// The security groups to assign to the instances in the Amazon EC2 Auto
-    /// Scaling group.
+    /// The security groups to assign to the instances in the Auto Scaling group.
     security_groups: ?[]const []const u8 = null,
 
     /// The maximum hourly price to be paid for any Spot Instance that is launched

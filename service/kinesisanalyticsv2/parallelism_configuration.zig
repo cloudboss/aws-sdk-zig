@@ -4,8 +4,8 @@ const ConfigurationType = @import("configuration_type.zig").ConfigurationType;
 /// executes multiple tasks simultaneously. For more information about
 /// parallelism,
 /// see [Parallel
-/// Execution](https://nightlies.apache.org/flink/flink-docs-release-1.20/dev/parallel.html) in the [Apache Flink
-/// Documentation](https://nightlies.apache.org/flink/flink-docs-release-1.20/).
+/// Execution](https://nightlies.apache.org/flink/flink-docs-release-2.2/dev/parallel.html) in the [Apache Flink
+/// Documentation](https://nightlies.apache.org/flink/flink-docs-release-2.2/).
 pub const ParallelismConfiguration = struct {
     /// Describes whether the Managed Service for Apache Flink service can increase
     /// the parallelism of the application in response to increased throughput.

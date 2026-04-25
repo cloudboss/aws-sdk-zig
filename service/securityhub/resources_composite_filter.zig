@@ -5,7 +5,7 @@ const AllowedOperators = @import("allowed_operators.zig").AllowedOperators;
 const ResourcesStringFilter = @import("resources_string_filter.zig").ResourcesStringFilter;
 
 /// Enables the creation of criteria for Amazon Web Services resources in
-/// Security Hub.
+/// Security Hub CSPM.
 pub const ResourcesCompositeFilter = struct {
     /// Enables filtering based on date and timestamp field values.
     date_filters: ?[]const ResourcesDateFilter = null,

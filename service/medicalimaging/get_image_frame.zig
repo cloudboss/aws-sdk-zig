@@ -57,6 +57,8 @@ pub const GetImageFrameOutput = struct {
     ///
     /// * If the stored transfer syntax is `1.2.840.10008.1.2.4.203`, the returned
     ///   contentType is `image/jphc`.
+    /// * If the stored transfer syntax is `1.2.840.10008.1.2.4.112` the returned
+    ///   `contentType` is `image/jxl`.
     content_type: ?[]const u8 = null,
 
     /// The blob containing the aggregated image frame information.
@@ -159,6 +161,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "BadRequestException")) {
+        return .{ .arena = arena, .kind = .{ .bad_request_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
             .message = owned_message,
@@ -167,6 +175,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "InternalServerException")) {
         return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "NotAcceptableException")) {
+        return .{ .arena = arena, .kind = .{ .not_acceptable_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

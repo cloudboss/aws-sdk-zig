@@ -1,5 +1,14 @@
+const ConsumerGroupOffsetSyncMode = @import("consumer_group_offset_sync_mode.zig").ConsumerGroupOffsetSyncMode;
+
 /// Details about consumer group replication.
 pub const ConsumerGroupReplication = struct {
+    /// The consumer group offset synchronization mode. With LEGACY, offsets are
+    /// synchronized when producers write to the source cluster. With ENHANCED,
+    /// consumer offsets are synchronized regardless of producer location. ENHANCED
+    /// requires a corresponding replicator that replicates data from the target
+    /// cluster to the source cluster.
+    consumer_group_offset_sync_mode: ?ConsumerGroupOffsetSyncMode = null,
+
     /// List of regular expression patterns indicating the consumer groups that
     /// should not be replicated.
     consumer_groups_to_exclude: ?[]const []const u8 = null,
@@ -15,6 +24,7 @@ pub const ConsumerGroupReplication = struct {
     synchronise_consumer_group_offsets: ?bool = null,
 
     pub const json_field_names = .{
+        .consumer_group_offset_sync_mode = "ConsumerGroupOffsetSyncMode",
         .consumer_groups_to_exclude = "ConsumerGroupsToExclude",
         .consumer_groups_to_replicate = "ConsumerGroupsToReplicate",
         .detect_and_copy_new_consumer_groups = "DetectAndCopyNewConsumerGroups",

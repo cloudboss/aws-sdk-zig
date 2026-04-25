@@ -16,6 +16,10 @@ pub const CreateVerifiedDestinationNumberInput = struct {
     /// The verified destination phone number, in E.164 format.
     destination_phone_number: []const u8,
 
+    /// The unique identifier of the RCS agent to associate with the verified
+    /// destination number. You can use either the RcsAgentId or RcsAgentArn.
+    rcs_agent_id: ?[]const u8 = null,
+
     /// An array of tags (key and value pairs) to associate with the destination
     /// number.
     tags: ?[]const Tag = null,
@@ -23,6 +27,7 @@ pub const CreateVerifiedDestinationNumberInput = struct {
     pub const json_field_names = .{
         .client_token = "ClientToken",
         .destination_phone_number = "DestinationPhoneNumber",
+        .rcs_agent_id = "RcsAgentId",
         .tags = "Tags",
     };
 };
@@ -34,6 +39,10 @@ pub const CreateVerifiedDestinationNumberOutput = struct {
 
     /// The verified destination phone number, in E.164 format.
     destination_phone_number: []const u8,
+
+    /// The unique identifier of the RCS agent associated with the verified
+    /// destination number.
+    rcs_agent_id: ?[]const u8 = null,
 
     /// The status of the verified destination phone number.
     ///
@@ -54,6 +63,7 @@ pub const CreateVerifiedDestinationNumberOutput = struct {
     pub const json_field_names = .{
         .created_timestamp = "CreatedTimestamp",
         .destination_phone_number = "DestinationPhoneNumber",
+        .rcs_agent_id = "RcsAgentId",
         .status = "Status",
         .tags = "Tags",
         .verified_destination_number_arn = "VerifiedDestinationNumberArn",

@@ -6,8 +6,10 @@ pub const ServiceError = struct {
 
     pub const Kind = union(enum) {
         access_denied_exception: AccessDeniedException,
+        bad_request_exception: BadRequestException,
         conflict_exception: ConflictException,
         internal_server_exception: InternalServerException,
+        not_acceptable_exception: NotAcceptableException,
         resource_not_found_exception: ResourceNotFoundException,
         service_quota_exceeded_exception: ServiceQuotaExceededException,
         throttling_exception: ThrottlingException,
@@ -17,8 +19,10 @@ pub const ServiceError = struct {
         pub fn code(self: Kind) []const u8 {
             return switch (self) {
                 .access_denied_exception => "AccessDeniedException",
+                .bad_request_exception => "BadRequestException",
                 .conflict_exception => "ConflictException",
                 .internal_server_exception => "InternalServerException",
+                .not_acceptable_exception => "NotAcceptableException",
                 .resource_not_found_exception => "ResourceNotFoundException",
                 .service_quota_exceeded_exception => "ServiceQuotaExceededException",
                 .throttling_exception => "ThrottlingException",
@@ -30,8 +34,10 @@ pub const ServiceError = struct {
         pub fn message(self: Kind) []const u8 {
             return switch (self) {
                 .access_denied_exception => |e| e.message,
+                .bad_request_exception => |e| e.message,
                 .conflict_exception => |e| e.message,
                 .internal_server_exception => |e| e.message,
+                .not_acceptable_exception => |e| e.message,
                 .resource_not_found_exception => |e| e.message,
                 .service_quota_exceeded_exception => |e| e.message,
                 .throttling_exception => |e| e.message,
@@ -43,8 +49,10 @@ pub const ServiceError = struct {
         pub fn httpStatus(self: Kind) u16 {
             return switch (self) {
                 .access_denied_exception => 403,
+                .bad_request_exception => 400,
                 .conflict_exception => 409,
                 .internal_server_exception => 500,
+                .not_acceptable_exception => 406,
                 .resource_not_found_exception => 404,
                 .service_quota_exceeded_exception => 402,
                 .throttling_exception => 429,
@@ -56,8 +64,10 @@ pub const ServiceError = struct {
         pub fn requestId(self: Kind) []const u8 {
             return switch (self) {
                 .access_denied_exception => |e| e.request_id,
+                .bad_request_exception => |e| e.request_id,
                 .conflict_exception => |e| e.request_id,
                 .internal_server_exception => |e| e.request_id,
+                .not_acceptable_exception => |e| e.request_id,
                 .resource_not_found_exception => |e| e.request_id,
                 .service_quota_exceeded_exception => |e| e.request_id,
                 .throttling_exception => |e| e.request_id,
@@ -93,12 +103,22 @@ pub const AccessDeniedException = struct {
     request_id: []const u8 = "",
 };
 
+pub const BadRequestException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
 pub const InternalServerException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const NotAcceptableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };

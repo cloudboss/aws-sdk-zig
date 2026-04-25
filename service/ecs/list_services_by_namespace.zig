@@ -6,39 +6,32 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
 pub const ListServicesByNamespaceInput = struct {
-    /// The maximum number of service results that `ListServicesByNamespace`
-    /// returns in paginated output. When this parameter is used,
-    /// `ListServicesByNamespace` only returns `maxResults` results in
-    /// a single page along with a `nextToken` response element. The remaining
-    /// results of the initial request can be seen by sending another
-    /// `ListServicesByNamespace` request with the returned
+    /// The maximum number of service results that `ListServicesByNamespace` returns
+    /// in paginated output. When this parameter is used, `ListServicesByNamespace`
+    /// only returns `maxResults` results in a single page along with a `nextToken`
+    /// response element. The remaining results of the initial request can be seen
+    /// by sending another `ListServicesByNamespace` request with the returned
     /// `nextToken` value. This value can be between 1 and 100. If this parameter
     /// isn't used, then `ListServicesByNamespace` returns up to 10 results and a
     /// `nextToken` value if applicable.
     max_results: ?i32 = null,
 
     /// The namespace name or full Amazon Resource Name (ARN) of the Cloud Map
-    /// namespace to list
-    /// the services in.
+    /// namespace to list the services in.
     ///
     /// Tasks that run in a namespace can use short names to connect to services in
-    /// the
-    /// namespace. Tasks can connect to services across all of the clusters in the
-    /// namespace.
-    /// Tasks connect through a managed proxy container that collects logs and
-    /// metrics for
-    /// increased visibility. Only the tasks that Amazon ECS services create are
-    /// supported with
-    /// Service Connect. For more information, see [Service
-    /// Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
-    /// in the *Amazon Elastic Container Service Developer Guide*.
+    /// the namespace. Tasks can connect to services across all of the clusters in
+    /// the namespace. Tasks connect through a managed proxy container that collects
+    /// logs and metrics for increased visibility. Only the tasks that Amazon ECS
+    /// services create are supported with Service Connect. For more information,
+    /// see [Service
+    /// Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.
     namespace: []const u8,
 
-    /// The `nextToken` value that's returned from a
-    /// `ListServicesByNamespace` request. It indicates that more results are
-    /// available to fulfill the request and further calls are needed. If
-    /// `maxResults` is returned, it is possible the number of results is less
-    /// than `maxResults`.
+    /// The `nextToken` value that's returned from a `ListServicesByNamespace`
+    /// request. It indicates that more results are available to fulfill the request
+    /// and further calls are needed. If `maxResults` is returned, it is possible
+    /// the number of results is less than `maxResults`.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -49,17 +42,14 @@ pub const ListServicesByNamespaceInput = struct {
 };
 
 pub const ListServicesByNamespaceOutput = struct {
-    /// The `nextToken` value to include in a future
-    /// `ListServicesByNamespace` request. When the results of a
-    /// `ListServicesByNamespace` request exceed `maxResults`, this
-    /// value can be used to retrieve the next page of results. When there are no
-    /// more results
-    /// to return, this value is `null`.
+    /// The `nextToken` value to include in a future `ListServicesByNamespace`
+    /// request. When the results of a `ListServicesByNamespace` request exceed
+    /// `maxResults`, this value can be used to retrieve the next page of results.
+    /// When there are no more results to return, this value is `null`.
     next_token: ?[]const u8 = null,
 
     /// The list of full ARN entries for each service that's associated with the
-    /// specified
-    /// namespace.
+    /// specified namespace.
     service_arns: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
@@ -192,6 +182,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotActiveException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_active_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DaemonNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .daemon_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

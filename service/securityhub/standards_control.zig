@@ -8,7 +8,8 @@ pub const StandardsControl = struct {
 
     /// The current status of the security standard control. Indicates whether the
     /// control is
-    /// enabled or disabled. Security Hub does not check against disabled controls.
+    /// enabled or disabled. Security Hub CSPM does not check against disabled
+    /// controls.
     control_status: ?ControlStatus = null,
 
     /// The date and time that the status of the security standard control was most
@@ -27,7 +28,8 @@ pub const StandardsControl = struct {
     /// The list of requirements that are related to this control.
     related_requirements: ?[]const []const u8 = null,
 
-    /// A link to remediation information for the control in the Security Hub user
+    /// A link to remediation information for the control in the Security Hub CSPM
+    /// user
     /// documentation.
     remediation_url: ?[]const u8 = null,
 

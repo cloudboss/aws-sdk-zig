@@ -4,10 +4,24 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const AssetType = @import("asset_type.zig").AssetType;
 const AssetState = @import("asset_state.zig").AssetState;
 const AssetInfo = @import("asset_info.zig").AssetInfo;
 
 pub const ListAssetsInput = struct {
+    /// Filters the results by asset type.
+    ///
+    /// * COMPUTE - Server asset used for customer compute
+    ///
+    /// * STORAGE - Server asset used by storage services
+    ///
+    /// * POWERSHELF - Powershelf assets
+    ///
+    /// * SWITCH - Switch assets
+    ///
+    /// * NETWORKING - Asset managed by Amazon Web Services for networking purposes
+    asset_type_filter: ?[]const AssetType = null,
+
     /// Filters the results by the host ID of a Dedicated Host.
     host_id_filter: ?[]const []const u8 = null,
 
@@ -22,6 +36,7 @@ pub const ListAssetsInput = struct {
     status_filter: ?[]const AssetState = null,
 
     pub const json_field_names = .{
+        .asset_type_filter = "AssetTypeFilter",
         .host_id_filter = "HostIdFilter",
         .max_results = "MaxResults",
         .next_token = "NextToken",
@@ -82,6 +97,14 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAssetsInput, config
 
     var query_buf: std.ArrayList(u8) = .{};
     var query_has_prev = false;
+    if (input.asset_type_filter) |v| {
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "AssetTypeFilter=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item.wireName());
+            query_has_prev = true;
+        }
+    }
     if (input.host_id_filter) |v| {
         for (v) |item| {
             if (query_has_prev) try query_buf.appendSlice(allocator, "&");

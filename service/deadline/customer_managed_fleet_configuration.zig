@@ -1,9 +1,13 @@
+const CustomerManagedAutoScalingConfiguration = @import("customer_managed_auto_scaling_configuration.zig").CustomerManagedAutoScalingConfiguration;
 const AutoScalingMode = @import("auto_scaling_mode.zig").AutoScalingMode;
 const TagPropagationMode = @import("tag_propagation_mode.zig").TagPropagationMode;
 const CustomerManagedWorkerCapabilities = @import("customer_managed_worker_capabilities.zig").CustomerManagedWorkerCapabilities;
 
 /// The configuration details for a customer managed fleet.
 pub const CustomerManagedFleetConfiguration = struct {
+    /// The auto scaling configuration settings for the customer managed fleet.
+    auto_scaling_configuration: ?CustomerManagedAutoScalingConfiguration = null,
+
     /// The Auto Scaling mode for the customer managed fleet.
     mode: AutoScalingMode,
 
@@ -17,6 +21,7 @@ pub const CustomerManagedFleetConfiguration = struct {
     worker_capabilities: CustomerManagedWorkerCapabilities,
 
     pub const json_field_names = .{
+        .auto_scaling_configuration = "autoScalingConfiguration",
         .mode = "mode",
         .storage_profile_id = "storageProfileId",
         .tag_propagation_mode = "tagPropagationMode",

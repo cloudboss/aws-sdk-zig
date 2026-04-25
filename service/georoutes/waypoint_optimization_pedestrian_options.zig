@@ -2,7 +2,7 @@
 pub const WaypointOptimizationPedestrianOptions = struct {
     /// Walking speed.
     ///
-    /// **Unit**: `KilometersPerHour`
+    /// **Unit**: `kilometers per hour`
     speed: ?f64 = null,
 
     pub const json_field_names = .{

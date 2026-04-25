@@ -16,7 +16,7 @@ pub const AgreementViewSummary = struct {
     /// The unique identifier of the agreement.
     agreement_id: ?[]const u8 = null,
 
-    /// The type of agreement. Value is `PurchaseAgreement`.
+    /// The type of agreement.
     agreement_type: ?[]const u8 = null,
 
     /// The date and time when the agreement ends. The field is `null` for

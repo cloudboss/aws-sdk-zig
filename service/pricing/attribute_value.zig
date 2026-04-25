@@ -1,7 +1,5 @@
 /// The values of a given attribute, such as `Throughput Optimized HDD` or
-/// `Provisioned
-/// IOPS` for the `Amazon EC2`
-/// `volumeType` attribute.
+/// `Provisioned IOPS` for the `Amazon EC2` `volumeType` attribute.
 pub const AttributeValue = struct {
     /// The specific value of an `attributeName`.
     value: ?[]const u8 = null,

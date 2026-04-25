@@ -17,8 +17,8 @@ pub const AwsEcsServiceLoadBalancersDetails = struct {
     /// Balancer or a Network Load Balancer, the load balancer name is omitted.
     load_balancer_name: ?[]const u8 = null,
 
-    /// The ARN of the ELB target group or groups associated with a service or task
-    /// set.
+    /// The ARN of the Elastic Load Balancing target group or groups associated with
+    /// a service or task set.
     ///
     /// Only specified when using an Application Load Balancer or a Network Load
     /// Balancer. For a Classic Load Balancer, the target group ARN is omitted.

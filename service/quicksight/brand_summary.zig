@@ -5,7 +5,7 @@ pub const BrandSummary = struct {
     /// The Amazon Resource Name (ARN) of the brand.
     arn: ?[]const u8 = null,
 
-    /// The ID of the Quick Suite brand.
+    /// The ID of the Quick brand.
     brand_id: ?[]const u8 = null,
 
     /// The name of the brand.

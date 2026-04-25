@@ -41,7 +41,7 @@ pub const SheetDefinition = struct {
     layouts: ?[]const Layout = null,
 
     /// The name of the sheet. This name is displayed on the sheet's tab in the
-    /// Quick Suite
+    /// Quick
     /// console.
     name: ?[]const u8 = null,
 

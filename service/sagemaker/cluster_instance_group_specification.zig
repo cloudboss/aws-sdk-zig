@@ -1,11 +1,14 @@
 const ClusterCapacityRequirements = @import("cluster_capacity_requirements.zig").ClusterCapacityRequirements;
+const ClusterInstanceRequirements = @import("cluster_instance_requirements.zig").ClusterInstanceRequirements;
 const ClusterInstanceStorageConfig = @import("cluster_instance_storage_config.zig").ClusterInstanceStorageConfig;
 const ClusterInstanceType = @import("cluster_instance_type.zig").ClusterInstanceType;
 const ClusterKubernetesConfig = @import("cluster_kubernetes_config.zig").ClusterKubernetesConfig;
 const ClusterLifeCycleConfig = @import("cluster_life_cycle_config.zig").ClusterLifeCycleConfig;
+const ClusterNetworkInterface = @import("cluster_network_interface.zig").ClusterNetworkInterface;
 const DeepHealthCheckType = @import("deep_health_check_type.zig").DeepHealthCheckType;
 const VpcConfig = @import("vpc_config.zig").VpcConfig;
 const ScheduledUpdateConfig = @import("scheduled_update_config.zig").ScheduledUpdateConfig;
+const ClusterSlurmConfig = @import("cluster_slurm_config.zig").ClusterSlurmConfig;
 
 /// The specifications of an instance group that you need to define.
 pub const ClusterInstanceGroupSpecification = struct {
@@ -45,12 +48,18 @@ pub const ClusterInstanceGroupSpecification = struct {
     /// Specifies the name of the instance group.
     instance_group_name: []const u8,
 
+    /// The instance requirements for the instance group, including the instance
+    /// types to use. Use this to create a flexible instance group that supports
+    /// multiple instance types. The `InstanceType` and `InstanceRequirements`
+    /// properties are mutually exclusive.
+    instance_requirements: ?ClusterInstanceRequirements = null,
+
     /// Specifies the additional storage configurations for the instances in the
     /// SageMaker HyperPod cluster instance group.
     instance_storage_configs: ?[]const ClusterInstanceStorageConfig = null,
 
     /// Specifies the instance type of the instance group.
-    instance_type: ClusterInstanceType,
+    instance_type: ?ClusterInstanceType = null,
 
     /// Specifies the Kubernetes configuration for the instance group. You describe
     /// what you want the labels and taints to look like, and the cluster works to
@@ -59,7 +68,7 @@ pub const ClusterInstanceGroupSpecification = struct {
     kubernetes_config: ?ClusterKubernetesConfig = null,
 
     /// Specifies the LifeCycle configuration for the instance group.
-    life_cycle_config: ClusterLifeCycleConfig,
+    life_cycle_config: ?ClusterLifeCycleConfig = null,
 
     /// Defines the minimum number of instances required for an instance group to
     /// become `InService`. If this threshold isn't met within 3 hours, the instance
@@ -68,6 +77,9 @@ pub const ClusterInstanceGroupSpecification = struct {
     /// `MinInstanceCount` only affects the initial transition to `InService` and
     /// does not guarantee maintaining this minimum afterward.
     min_instance_count: ?i32 = null,
+
+    /// The network interface configuration for the instance group.
+    network_interface: ?ClusterNetworkInterface = null,
 
     /// A flag indicating whether deep health checks should be performed when the
     /// cluster instance group is created or updated.
@@ -109,6 +121,9 @@ pub const ClusterInstanceGroupSpecification = struct {
     /// AMI.
     scheduled_update_config: ?ScheduledUpdateConfig = null,
 
+    /// Specifies the Slurm configuration for the instance group.
+    slurm_config: ?ClusterSlurmConfig = null,
+
     /// Specifies the value for **Threads per core**. For instance types that
     /// support multithreading, you can specify `1` for disabling multithreading and
     /// `2` for enabling multithreading. For instance types that doesn't support
@@ -131,14 +146,17 @@ pub const ClusterInstanceGroupSpecification = struct {
         .image_id = "ImageId",
         .instance_count = "InstanceCount",
         .instance_group_name = "InstanceGroupName",
+        .instance_requirements = "InstanceRequirements",
         .instance_storage_configs = "InstanceStorageConfigs",
         .instance_type = "InstanceType",
         .kubernetes_config = "KubernetesConfig",
         .life_cycle_config = "LifeCycleConfig",
         .min_instance_count = "MinInstanceCount",
+        .network_interface = "NetworkInterface",
         .on_start_deep_health_checks = "OnStartDeepHealthChecks",
         .override_vpc_config = "OverrideVpcConfig",
         .scheduled_update_config = "ScheduledUpdateConfig",
+        .slurm_config = "SlurmConfig",
         .threads_per_core = "ThreadsPerCore",
         .training_plan_arn = "TrainingPlanArn",
     };

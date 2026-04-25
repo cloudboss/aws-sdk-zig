@@ -25,7 +25,7 @@ pub const ModifyServerlessCacheInput = struct {
     description: ?[]const u8 = null,
 
     /// Modifies the engine listed in a serverless cache request. The options are
-    /// redis, memcached or valkey.
+    /// valkey, memcached or redis.
     engine: ?[]const u8 = null,
 
     /// Modifies the engine vesion listed in a serverless cache request.

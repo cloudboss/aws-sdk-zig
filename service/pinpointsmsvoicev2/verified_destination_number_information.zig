@@ -9,6 +9,10 @@ pub const VerifiedDestinationNumberInformation = struct {
     /// The verified destination phone number, in E.164 format.
     destination_phone_number: []const u8,
 
+    /// The unique identifier of the RCS agent associated with the verified
+    /// destination number.
+    rcs_agent_id: ?[]const u8 = null,
+
     /// The status of the verified destination phone number.
     ///
     /// * `PENDING`: The phone number hasn't been verified yet.
@@ -24,6 +28,7 @@ pub const VerifiedDestinationNumberInformation = struct {
     pub const json_field_names = .{
         .created_timestamp = "CreatedTimestamp",
         .destination_phone_number = "DestinationPhoneNumber",
+        .rcs_agent_id = "RcsAgentId",
         .status = "Status",
         .verified_destination_number_arn = "VerifiedDestinationNumberArn",
         .verified_destination_number_id = "VerifiedDestinationNumberId",

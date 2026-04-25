@@ -7,14 +7,14 @@ const ServiceError = @import("errors.zig").ServiceError;
 const ControlFindingGenerator = @import("control_finding_generator.zig").ControlFindingGenerator;
 
 pub const EnableSecurityHubInput = struct {
-    /// This field, used when enabling Security Hub, specifies whether the calling
-    /// account has consolidated control findings turned on.
+    /// This field, used when enabling Security Hub CSPM, specifies whether the
+    /// calling account has consolidated control findings turned on.
     /// If the value for this field is set to
-    /// `SECURITY_CONTROL`, Security Hub generates a single finding for a control
-    /// check even when the check
+    /// `SECURITY_CONTROL`, Security Hub CSPM generates a single finding for a
+    /// control check even when the check
     /// applies to multiple enabled standards.
     ///
-    /// If the value for this field is set to `STANDARD_CONTROL`, Security Hub
+    /// If the value for this field is set to `STANDARD_CONTROL`, Security Hub CSPM
     /// generates separate findings
     /// for a control check when the check applies to multiple enabled standards.
     ///
@@ -22,19 +22,20 @@ pub const EnableSecurityHubInput = struct {
     /// administrator
     /// account. For accounts that aren't part of an organization, the default value
     /// of this field
-    /// is `SECURITY_CONTROL` if you enabled Security Hub on or after February 23,
+    /// is `SECURITY_CONTROL` if you enabled Security Hub CSPM on or after February
+    /// 23,
     /// 2023.
     control_finding_generator: ?ControlFindingGenerator = null,
 
-    /// Whether to enable the security standards that Security Hub has designated as
-    /// automatically
+    /// Whether to enable the security standards that Security Hub CSPM has
+    /// designated as automatically
     /// enabled. If you don't provide a value for `EnableDefaultStandards`, it is
     /// set
     /// to `true`. To not enable the automatically enabled standards, set
     /// `EnableDefaultStandards` to `false`.
     enable_default_standards: ?bool = null,
 
-    /// The tags to add to the hub resource when you enable Security Hub.
+    /// The tags to add to the hub resource when you enable Security Hub CSPM.
     tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
@@ -181,6 +182,18 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "LimitExceededException")) {
         return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organization_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationalUnitNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .organizational_unit_not_found_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

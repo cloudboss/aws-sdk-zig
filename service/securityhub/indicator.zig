@@ -4,7 +4,7 @@
 /// that GuardDuty uses to detect an attack sequence finding. GuardDuty
 /// generates an attack sequence finding when multiple signals align to a
 /// potentially suspicious activity. To receive GuardDuty attack sequence
-/// findings in Security Hub, you
+/// findings in Security Hub CSPM, you
 /// must have GuardDuty and GuardDuty S3 Protection enabled. For more
 /// information, see [GuardDuty Extended Threat Detection
 /// ](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-extended-threat-detection.html) in the *Amazon GuardDuty User Guide*.

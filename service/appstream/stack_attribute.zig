@@ -13,6 +13,7 @@ pub const StackAttribute = enum {
     iam_role_arn,
     access_endpoints,
     streaming_experience_settings,
+    content_redirection,
 
     pub const json_field_names = .{
         .storage_connectors = "STORAGE_CONNECTORS",
@@ -27,6 +28,7 @@ pub const StackAttribute = enum {
         .iam_role_arn = "IAM_ROLE_ARN",
         .access_endpoints = "ACCESS_ENDPOINTS",
         .streaming_experience_settings = "STREAMING_EXPERIENCE_SETTINGS",
+        .content_redirection = "CONTENT_REDIRECTION",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -43,6 +45,7 @@ pub const StackAttribute = enum {
             .iam_role_arn => "IAM_ROLE_ARN",
             .access_endpoints => "ACCESS_ENDPOINTS",
             .streaming_experience_settings => "STREAMING_EXPERIENCE_SETTINGS",
+            .content_redirection => "CONTENT_REDIRECTION",
         };
     }
 

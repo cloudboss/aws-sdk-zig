@@ -6,6 +6,7 @@ pub const RecommenderRecipeName = enum {
     frequently_paired_items,
     popular_items,
     trending_now,
+    personalized_ranking,
 
     pub const json_field_names = .{
         .recommended_for_you = "recommended-for-you",
@@ -13,6 +14,7 @@ pub const RecommenderRecipeName = enum {
         .frequently_paired_items = "frequently-paired-items",
         .popular_items = "popular-items",
         .trending_now = "trending-now",
+        .personalized_ranking = "personalized-ranking",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -22,6 +24,7 @@ pub const RecommenderRecipeName = enum {
             .frequently_paired_items => "frequently-paired-items",
             .popular_items => "popular-items",
             .trending_now => "trending-now",
+            .personalized_ranking => "personalized-ranking",
         };
     }
 

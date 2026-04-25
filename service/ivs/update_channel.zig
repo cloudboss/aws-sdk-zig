@@ -12,6 +12,9 @@ const ChannelType = @import("channel_type.zig").ChannelType;
 const Channel = @import("channel.zig").Channel;
 
 pub const UpdateChannelInput = struct {
+    /// ARN of the ad configuration associated with the channel.
+    ad_configuration_arn: ?[]const u8 = null,
+
     /// ARN of the channel to be updated.
     arn: []const u8,
 
@@ -40,30 +43,29 @@ pub const UpdateChannelInput = struct {
     name: ?[]const u8 = null,
 
     /// Playback-restriction-policy ARN. A valid ARN value here both specifies the
-    /// ARN and enables playback restriction.
-    /// If this is set to an empty string, playback restriction policy is disabled.
+    /// ARN and enables playback restriction. If this is set to an empty string,
+    /// playback restriction policy is disabled.
     playback_restriction_policy_arn: ?[]const u8 = null,
 
     /// Optional transcode preset for the channel. This is selectable only for
-    /// `ADVANCED_HD` and `ADVANCED_SD` channel types. For those channel
-    /// types, the default `preset` is `HIGHER_BANDWIDTH_DELIVERY`. For other
-    /// channel types (`BASIC` and `STANDARD`), `preset` is the empty
-    /// string (`""`).
+    /// `ADVANCED_HD` and `ADVANCED_SD` channel types. For those channel types, the
+    /// default `preset` is `HIGHER_BANDWIDTH_DELIVERY`. For other channel types
+    /// (`BASIC` and `STANDARD`), `preset` is the empty string (`""`).
     preset: ?TranscodePreset = null,
 
     /// Recording-configuration ARN. A valid ARN value here both specifies the ARN
-    /// and enables recording.
-    /// If this is set to an empty string, recording is disabled.
+    /// and enables recording. If this is set to an empty string, recording is
+    /// disabled.
     recording_configuration_arn: ?[]const u8 = null,
 
     /// Channel type, which determines the allowable resolution and bitrate. *If you
     /// exceed the allowable input resolution or bitrate, the stream probably will
-    /// disconnect
-    /// immediately.* Default: `STANDARD`. For details, see [Channel
+    /// disconnect immediately.* Default: `STANDARD`. For details, see [Channel
     /// Types](https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html).
     @"type": ?ChannelType = null,
 
     pub const json_field_names = .{
+        .ad_configuration_arn = "adConfigurationArn",
         .arn = "arn",
         .authorized = "authorized",
         .container_format = "containerFormat",
@@ -125,6 +127,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateChannelInput, con
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.ad_configuration_arn) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"adConfigurationArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"arn\":");
     try aws.json.writeValue(@TypeOf(input.arn), input.arn, allocator, &body_buf);
@@ -268,6 +276,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
         return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceUnavailable")) {
+        return .{ .arena = arena, .kind = .{ .service_unavailable = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

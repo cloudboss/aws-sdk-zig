@@ -13,6 +13,7 @@ pub const RuntimeEnvironment = enum {
     flink_1_18,
     flink_1_19,
     flink_1_20,
+    flink_2_2,
 
     pub const json_field_names = .{
         .sql_1_0 = "SQL-1_0",
@@ -27,6 +28,7 @@ pub const RuntimeEnvironment = enum {
         .flink_1_18 = "FLINK-1_18",
         .flink_1_19 = "FLINK-1_19",
         .flink_1_20 = "FLINK-1_20",
+        .flink_2_2 = "FLINK-2_2",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -43,6 +45,7 @@ pub const RuntimeEnvironment = enum {
             .flink_1_18 => "FLINK-1_18",
             .flink_1_19 => "FLINK-1_19",
             .flink_1_20 => "FLINK-1_20",
+            .flink_2_2 => "FLINK-2_2",
         };
     }
 

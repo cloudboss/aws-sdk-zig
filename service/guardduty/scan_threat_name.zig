@@ -1,8 +1,7 @@
 const ScanFilePath = @import("scan_file_path.zig").ScanFilePath;
 
 /// Contains files infected with the given threat providing details of malware
-/// name and
-/// severity.
+/// name and severity.
 pub const ScanThreatName = struct {
     /// List of infected files in EBS volume with details.
     file_paths: ?[]const ScanFilePath = null,

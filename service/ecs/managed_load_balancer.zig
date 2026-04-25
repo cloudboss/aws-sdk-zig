@@ -6,8 +6,7 @@ pub const ManagedLoadBalancer = struct {
     arn: ?[]const u8 = null,
 
     /// The scheme of the load balancer. By default, the scheme of the load balancer
-    /// is
-    /// `internet-facing`.
+    /// is `internet-facing`.
     scheme: []const u8,
 
     /// The IDs of the security groups associated with the load balancer.
