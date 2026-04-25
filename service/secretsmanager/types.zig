@@ -1,11 +1,7 @@
 pub const APIErrorType = @import("api_error_type.zig").APIErrorType;
-pub const DeleteResourcePolicyRequest = @import("delete_resource_policy_request.zig").DeleteResourcePolicyRequest;
-pub const DeleteResourcePolicyResponse = @import("delete_resource_policy_response.zig").DeleteResourcePolicyResponse;
 pub const ExternalSecretRotationMetadataItem = @import("external_secret_rotation_metadata_item.zig").ExternalSecretRotationMetadataItem;
 pub const Filter = @import("filter.zig").Filter;
 pub const FilterNameStringType = @import("filter_name_string_type.zig").FilterNameStringType;
-pub const PutResourcePolicyRequest = @import("put_resource_policy_request.zig").PutResourcePolicyRequest;
-pub const PutResourcePolicyResponse = @import("put_resource_policy_response.zig").PutResourcePolicyResponse;
 pub const ReplicaRegionType = @import("replica_region_type.zig").ReplicaRegionType;
 pub const ReplicationStatusType = @import("replication_status_type.zig").ReplicationStatusType;
 pub const RotationRulesType = @import("rotation_rules_type.zig").RotationRulesType;

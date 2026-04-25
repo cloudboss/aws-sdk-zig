@@ -5,23 +5,9 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const PutResourcePolicyInput = struct {
-    /// An IAM policy. The policy string in JSON must not contain newlines or blank
-    /// lines.
-    policy: []const u8,
+pub const PutResourcePolicyInput = @import("put_resource_policy_request.zig").PutResourcePolicyRequest;
 
-    /// The ID or ARN of the service network or service for which the policy is
-    /// created.
-    resource_arn: []const u8,
-
-    pub const json_field_names = .{
-        .policy = "policy",
-        .resource_arn = "resourceArn",
-    };
-};
-
-pub const PutResourcePolicyOutput = struct {
-};
+pub const PutResourcePolicyOutput = @import("put_resource_policy_response.zig").PutResourcePolicyResponse;
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutResourcePolicyInput, options: CallOptions) !PutResourcePolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

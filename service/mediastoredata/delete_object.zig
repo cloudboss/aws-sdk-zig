@@ -5,16 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DeleteObjectInput = struct {
-    /// The path (including the file name) where the object is stored in the
-    /// container.
-    /// Format: //
-    path: []const u8,
-
-    pub const json_field_names = .{
-        .path = "Path",
-    };
-};
+pub const DeleteObjectInput = @import("delete_object_request.zig").DeleteObjectRequest;
 
 pub const DeleteObjectOutput = struct {
 };

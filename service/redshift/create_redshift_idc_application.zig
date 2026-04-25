@@ -135,6 +135,70 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRedshiftIdcApplic
     }
     try body_buf.appendSlice(allocator, "&RedshiftIdcApplicationName=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.redshift_idc_application_name);
+    if (input.service_integrations) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            switch (item) {
+                .lake_formation => |u_1| {
+                    if (u_1) |v_1| {
+                        for (v_1, 0..) |elem_1, idx_1| {
+                            const n_1 = idx_1 + 1;
+                            switch (elem_1) {
+                                .lake_formation_query => |u_2| {
+                                    if (u_2) |v_2| {
+                                        {
+                                            var prefix_buf: [256]u8 = undefined;
+                                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ServiceIntegrations.member.{d}.LakeFormation.member.{d}.LakeFormationQuery.Authorization=", .{n, n_1}) catch continue;
+                                            try body_buf.appendSlice(allocator, field_prefix);
+                                            try aws.url.appendUrlEncoded(allocator, &body_buf, v_2.authorization.wireName());
+                                        }
+                                    }
+                                },
+                            }
+                        }
+                    }
+                },
+                .redshift => |u_1| {
+                    if (u_1) |v_1| {
+                        for (v_1, 0..) |elem_1, idx_1| {
+                            const n_1 = idx_1 + 1;
+                            switch (elem_1) {
+                                .connect => |u_2| {
+                                    if (u_2) |v_2| {
+                                        {
+                                            var prefix_buf: [256]u8 = undefined;
+                                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ServiceIntegrations.member.{d}.Redshift.member.{d}.Connect.Authorization=", .{n, n_1}) catch continue;
+                                            try body_buf.appendSlice(allocator, field_prefix);
+                                            try aws.url.appendUrlEncoded(allocator, &body_buf, v_2.authorization.wireName());
+                                        }
+                                    }
+                                },
+                            }
+                        }
+                    }
+                },
+                .s3_access_grants => |u_1| {
+                    if (u_1) |v_1| {
+                        for (v_1, 0..) |elem_1, idx_1| {
+                            const n_1 = idx_1 + 1;
+                            switch (elem_1) {
+                                .read_write_access => |u_2| {
+                                    if (u_2) |v_2| {
+                                        {
+                                            var prefix_buf: [256]u8 = undefined;
+                                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ServiceIntegrations.member.{d}.S3AccessGrants.member.{d}.ReadWriteAccess.Authorization=", .{n, n_1}) catch continue;
+                                            try body_buf.appendSlice(allocator, field_prefix);
+                                            try aws.url.appendUrlEncoded(allocator, &body_buf, v_2.authorization.wireName());
+                                        }
+                                    }
+                                },
+                            }
+                        }
+                    }
+                },
+            }
+        }
+    }
     if (input.sso_tag_keys) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;

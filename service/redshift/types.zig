@@ -36,7 +36,6 @@ pub const DataTransferProgress = @import("data_transfer_progress.zig").DataTrans
 pub const DefaultClusterParameters = @import("default_cluster_parameters.zig").DefaultClusterParameters;
 pub const DeferredMaintenanceWindow = @import("deferred_maintenance_window.zig").DeferredMaintenanceWindow;
 pub const DeleteClusterSnapshotMessage = @import("delete_cluster_snapshot_message.zig").DeleteClusterSnapshotMessage;
-pub const DeleteTagsMessage = @import("delete_tags_message.zig").DeleteTagsMessage;
 pub const DescribeIntegrationsFilter = @import("describe_integrations_filter.zig").DescribeIntegrationsFilter;
 pub const DescribeIntegrationsFilterName = @import("describe_integrations_filter_name.zig").DescribeIntegrationsFilterName;
 pub const EC2SecurityGroup = @import("ec2_security_group.zig").EC2SecurityGroup;

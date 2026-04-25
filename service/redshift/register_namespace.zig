@@ -66,8 +66,22 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RegisterNamespaceInput,
         try body_buf.appendSlice(allocator, field_prefix);
         try aws.url.appendUrlEncoded(allocator, &body_buf, item);
     }
-    try body_buf.appendSlice(allocator, "&NamespaceIdentifier=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, input.namespace_identifier);
+    switch (input.namespace_identifier) {
+        .provisioned_identifier => |u_0| {
+            if (u_0) |v_0| {
+                try body_buf.appendSlice(allocator, "&NamespaceIdentifier.ProvisionedIdentifier.ClusterIdentifier=");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, v_0.cluster_identifier);
+            }
+        },
+        .serverless_identifier => |u_0| {
+            if (u_0) |v_0| {
+                try body_buf.appendSlice(allocator, "&NamespaceIdentifier.ServerlessIdentifier.NamespaceIdentifier=");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, v_0.namespace_identifier);
+                try body_buf.appendSlice(allocator, "&NamespaceIdentifier.ServerlessIdentifier.WorkgroupIdentifier=");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, v_0.workgroup_identifier);
+            }
+        },
+    }
 
     const body = try body_buf.toOwnedSlice(allocator);
 

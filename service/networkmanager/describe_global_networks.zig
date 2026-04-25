@@ -45,7 +45,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeGlo
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, "us-west-2", "networkmanager");
+    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "networkmanager");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
