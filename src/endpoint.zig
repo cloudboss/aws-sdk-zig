@@ -97,6 +97,25 @@ pub fn partitionForRegion(region: []const u8) Partition {
     return AWS_PARTITION;
 }
 
+/// Some services pin SigV4 signing to a specific region regardless of the
+/// client's configured region. Returns the region to sign with, or null when
+/// the client's region should be used.
+///
+/// networkmanager encodes this in its Smithy endpoint rules; globalaccelerator
+/// does not, but AWS requires control-plane calls to route through us-west-2,
+/// so we apply the same convention here for ergonomics.
+pub fn pinnedSigningRegion(service: []const u8, region: []const u8) ?[]const u8 {
+    const partition_name = partitionForRegion(region).name;
+    if (std.mem.eql(u8, service, "globalaccelerator")) {
+        if (std.mem.eql(u8, partition_name, "aws")) return "us-west-2";
+    }
+    if (std.mem.eql(u8, service, "networkmanager")) {
+        if (std.mem.eql(u8, partition_name, "aws")) return "us-west-2";
+        if (std.mem.eql(u8, partition_name, "aws-us-gov")) return "us-gov-west-1";
+    }
+    return null;
+}
+
 /// Resolves the endpoint hostname (no scheme, no trailing slash) for a given
 /// service + region + options. Returns allocated string -- caller owns memory.
 /// For S3, do NOT call this -- use s3_endpoint.zig instead.
@@ -139,15 +158,19 @@ pub fn resolveEndpoint(
         std.mem.eql(u8, partitionForRegion(region).name, "aws") and
         !options.fips and !options.dual_stack)
     {
-        return allocator.dupe(u8, "globalaccelerator.amazonaws.com");
+        return allocator.dupe(u8, "globalaccelerator.us-west-2.amazonaws.com");
     }
 
-    // Network Manager endpoint is anchored to us-west-2 in aws partition.
-    if (std.mem.eql(u8, service, "networkmanager") and
-        std.mem.eql(u8, partitionForRegion(region).name, "aws") and
-        !options.fips and !options.dual_stack)
-    {
-        return allocator.dupe(u8, "networkmanager.us-west-2.amazonaws.com");
+    // Network Manager endpoint is anchored to us-west-2 in aws partition,
+    // and to us-gov-west-1 in aws-us-gov.
+    if (std.mem.eql(u8, service, "networkmanager") and !options.fips and !options.dual_stack) {
+        const partition_name = partitionForRegion(region).name;
+        if (std.mem.eql(u8, partition_name, "aws")) {
+            return allocator.dupe(u8, "networkmanager.us-west-2.amazonaws.com");
+        }
+        if (std.mem.eql(u8, partition_name, "aws-us-gov")) {
+            return allocator.dupe(u8, "networkmanager.us-gov-west-1.amazonaws.com");
+        }
     }
 
     const partition = partitionForRegion(region);
@@ -217,11 +240,11 @@ test "resolveEndpoint cloudfront uses global endpoint in aws partition" {
     try std.testing.expectEqualStrings("cloudfront.amazonaws.com", host);
 }
 
-test "resolveEndpoint globalaccelerator uses global endpoint in aws partition" {
+test "resolveEndpoint globalaccelerator anchors to us-west-2 in aws partition" {
     const allocator = std.testing.allocator;
     const host = try resolveEndpoint(allocator, "globalaccelerator", "us-east-1", .{});
     defer allocator.free(host);
-    try std.testing.expectEqualStrings("globalaccelerator.amazonaws.com", host);
+    try std.testing.expectEqualStrings("globalaccelerator.us-west-2.amazonaws.com", host);
 }
 
 test "resolveEndpoint networkmanager uses us-west-2 endpoint in aws partition" {
@@ -229,6 +252,45 @@ test "resolveEndpoint networkmanager uses us-west-2 endpoint in aws partition" {
     const host = try resolveEndpoint(allocator, "networkmanager", "us-east-1", .{});
     defer allocator.free(host);
     try std.testing.expectEqualStrings("networkmanager.us-west-2.amazonaws.com", host);
+}
+
+test "resolveEndpoint networkmanager uses us-gov-west-1 endpoint in aws-us-gov partition" {
+    const allocator = std.testing.allocator;
+    const host = try resolveEndpoint(allocator, "networkmanager", "us-gov-east-1", .{});
+    defer allocator.free(host);
+    try std.testing.expectEqualStrings("networkmanager.us-gov-west-1.amazonaws.com", host);
+}
+
+test "pinnedSigningRegion globalaccelerator in aws -> us-west-2" {
+    try std.testing.expectEqualStrings(
+        "us-west-2",
+        pinnedSigningRegion("globalaccelerator", "us-east-1") orelse "",
+    );
+}
+
+test "pinnedSigningRegion networkmanager in aws -> us-west-2" {
+    try std.testing.expectEqualStrings(
+        "us-west-2",
+        pinnedSigningRegion("networkmanager", "eu-west-1") orelse "",
+    );
+}
+
+test "pinnedSigningRegion networkmanager in aws-us-gov -> us-gov-west-1" {
+    try std.testing.expectEqualStrings(
+        "us-gov-west-1",
+        pinnedSigningRegion("networkmanager", "us-gov-east-1") orelse "",
+    );
+}
+
+test "pinnedSigningRegion non-pinned service returns null" {
+    try std.testing.expectEqual(@as(?[]const u8, null), pinnedSigningRegion("ec2", "us-east-1"));
+}
+
+test "pinnedSigningRegion globalaccelerator in cn partition is not auto-pinned" {
+    try std.testing.expectEqual(
+        @as(?[]const u8, null),
+        pinnedSigningRegion("globalaccelerator", "cn-north-1"),
+    );
 }
 
 test "partitionForRegion aws" {

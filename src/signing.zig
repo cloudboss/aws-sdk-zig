@@ -9,6 +9,7 @@ const Sha256 = std.crypto.hash.sha2.Sha256;
 const EcdsaP256Sha256 = std.crypto.sign.ecdsa.EcdsaP256Sha256;
 
 const Credentials = @import("credentials.zig").Credentials;
+const endpoint_mod = @import("endpoint.zig");
 const http = @import("http.zig");
 const gzip_mod = @import("gzip.zig");
 
@@ -36,8 +37,10 @@ pub fn presignRequest(
     const datetime = formatAmzDate(timestamp);
     const datestamp = datetime[0..8];
 
+    const signing_region = endpoint_mod.pinnedSigningRegion(service, region) orelse region;
+
     const credential_scope = try std.fmt.allocPrint(allocator, "{s}/{s}/{s}/aws4_request", .{
-        datestamp, region, service,
+        datestamp, signing_region, service,
     });
     defer allocator.free(credential_scope);
 
@@ -124,7 +127,7 @@ pub fn presignRequest(
     defer allocator.free(string_to_sign);
 
     // Signature
-    const signing_key = deriveSigningKey(credentials.secret_access_key, datestamp, region, service);
+    const signing_key = deriveSigningKey(credentials.secret_access_key, datestamp, signing_region, service);
     var signature: [Hmac.mac_length]u8 = undefined;
     Hmac.create(&signature, string_to_sign, &signing_key);
     const signature_hex = std.fmt.bytesToHex(&signature, .lower);
@@ -244,6 +247,8 @@ pub fn signRequest(
     const datetime = formatAmzDate(timestamp);
     const datestamp = datetime[0..8];
 
+    const signing_region = endpoint_mod.pinnedSigningRegion(service, region) orelse region;
+
     // Compress body if requested and body exceeds threshold
     const COMPRESSION_THRESHOLD = 1024;
 
@@ -307,7 +312,7 @@ pub fn signRequest(
 
     const credential_scope = try std.fmt.allocPrint(allocator, "{s}/{s}/{s}/aws4_request", .{
         datestamp,
-        region,
+        signing_region,
         service,
     });
     defer allocator.free(credential_scope);
@@ -325,7 +330,7 @@ pub fn signRequest(
             const signing_key = deriveSigningKey(
                 credentials.secret_access_key,
                 datestamp,
-                region,
+                signing_region,
                 service,
             );
             var signature: [Hmac.mac_length]u8 = undefined;
