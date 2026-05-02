@@ -14,6 +14,8 @@ const endpoint_mod = @import("endpoint.zig");
 const date = @import("date.zig");
 
 pub const SsoProvider = struct {
+    io: std.Io,
+    env_map: *const std.process.Environ.Map,
     sso_account_id: []const u8,
     sso_role_name: []const u8,
     sso_region: []const u8,
@@ -23,15 +25,17 @@ pub const SsoProvider = struct {
     const Self = @This();
 
     pub fn getCredentials(self: *Self, allocator: Allocator) !Credentials {
-        if (self.cached) |c| if (!c.isExpired()) return c;
+        if (self.cached) |c| if (!c.isExpired(self.io)) return c;
 
-        const token = try readSsoCache(allocator, self.cache_key);
+        const token = try readSsoCache(allocator, self.io, self.env_map, self.cache_key);
         defer allocator.free(token.access_token);
 
-        if (token.isExpired()) return error.SsoTokenExpired;
+        if (token.isExpired(self.io)) return error.SsoTokenExpired;
 
         const creds = try callGetRoleCredentials(
             allocator,
+            self.io,
+            self.env_map,
             self.sso_region,
             self.sso_account_id,
             self.sso_role_name,
@@ -46,14 +50,19 @@ const SsoToken = struct {
     access_token: []const u8,
     expires_at: i64, // epoch seconds
 
-    fn isExpired(self: SsoToken) bool {
-        return std.time.timestamp() >= self.expires_at;
+    fn isExpired(self: SsoToken, io: std.Io) bool {
+        return std.Io.Clock.real.now(io).toSeconds() >= self.expires_at;
     }
 };
 
 /// Read SSO cache file at ~/.aws/sso/cache/{sha1(cache_key)}.json
-fn readSsoCache(allocator: Allocator, cache_key: []const u8) !SsoToken {
-    const home = std.posix.getenv("HOME") orelse return error.SsoTokenNotFound;
+fn readSsoCache(
+    allocator: Allocator,
+    io: std.Io,
+    env_map: *const std.process.Environ.Map,
+    cache_key: []const u8,
+) !SsoToken {
+    const home = env_map.get("HOME") orelse return error.SsoTokenNotFound;
 
     // SHA1 hash of cache key
     var hash: [Sha1.digest_length]u8 = undefined;
@@ -63,10 +72,15 @@ fn readSsoCache(allocator: Allocator, cache_key: []const u8) !SsoToken {
     const path = try std.fmt.allocPrint(allocator, "{s}/.aws/sso/cache/{s}.json", .{ home, hex });
     defer allocator.free(path);
 
-    const file = std.fs.openFileAbsolute(path, .{}) catch return error.SsoTokenNotFound;
-    defer file.close();
+    var file = std.Io.Dir.openFileAbsolute(io, path, .{}) catch return error.SsoTokenNotFound;
+    defer file.close(io);
 
-    const content = file.readToEndAlloc(allocator, 64 * 1024) catch return error.SsoTokenNotFound;
+    var read_buf: [4096]u8 = undefined;
+    var rdr = file.reader(io, &read_buf);
+    const content = rdr.interface.allocRemaining(
+        allocator,
+        std.Io.Limit.limited(64 * 1024),
+    ) catch return error.SsoTokenNotFound;
     defer allocator.free(content);
 
     return parseSsoCacheJson(allocator, content);
@@ -104,6 +118,8 @@ fn parseExpiresAt(timestamp: []const u8) !i64 {
 /// Call SSO GetRoleCredentials API
 fn callGetRoleCredentials(
     allocator: Allocator,
+    io: std.Io,
+    env_map: *const std.process.Environ.Map,
     sso_region: []const u8,
     account_id: []const u8,
     role_name: []const u8,
@@ -127,7 +143,7 @@ fn callGetRoleCredentials(
 
     try request.headers.put(allocator, "x-amz-sso_bearer_token", access_token);
 
-    var response = try http.sendRequest(allocator, &request);
+    var response = try http.sendRequest(allocator, io, env_map, &request);
     defer response.deinit();
 
     if (!response.isSuccess()) return error.SsoRequestFailed;
@@ -170,7 +186,7 @@ fn parseSsoCredentialsJson(allocator: Allocator, json: []const u8) !Credentials 
 fn findJsonStringValue(json: []const u8, field: []const u8) ?[]const u8 {
     var pos: usize = 0;
     while (pos < json.len) {
-        const field_start = std.mem.indexOfPos(u8, json, pos, "\"") orelse return null;
+        const field_start = std.mem.findPos(u8, json, pos, "\"") orelse return null;
         const after_quote = field_start + 1;
         if (after_quote + field.len > json.len) return null;
 
@@ -178,11 +194,11 @@ fn findJsonStringValue(json: []const u8, field: []const u8) ?[]const u8 {
             const end_quote = after_quote + field.len;
             if (end_quote < json.len and json[end_quote] == '"') {
                 const after_field = json[end_quote + 1 ..];
-                const colon = std.mem.indexOfScalar(u8, after_field, ':') orelse return null;
-                const after_colon = std.mem.trimLeft(u8, after_field[colon + 1 ..], " \t\r\n");
+                const colon = std.mem.findScalar(u8, after_field, ':') orelse return null;
+                const after_colon = std.mem.trimStart(u8, after_field[colon + 1 ..], " \t\r\n");
                 if (after_colon.len > 0 and after_colon[0] == '"') {
                     const value_start = after_colon[1..];
-                    const value_end = std.mem.indexOfScalar(u8, value_start, '"') orelse return null;
+                    const value_end = std.mem.findScalar(u8, value_start, '"') orelse return null;
                     return value_start[0..value_end];
                 }
                 return null;
@@ -197,7 +213,7 @@ fn findJsonStringValue(json: []const u8, field: []const u8) ?[]const u8 {
 fn findJsonNumberValue(json: []const u8, field: []const u8) ?i64 {
     var pos: usize = 0;
     while (pos < json.len) {
-        const field_start = std.mem.indexOfPos(u8, json, pos, "\"") orelse return null;
+        const field_start = std.mem.findPos(u8, json, pos, "\"") orelse return null;
         const after_quote = field_start + 1;
         if (after_quote + field.len > json.len) return null;
 
@@ -205,8 +221,8 @@ fn findJsonNumberValue(json: []const u8, field: []const u8) ?i64 {
             const end_quote = after_quote + field.len;
             if (end_quote < json.len and json[end_quote] == '"') {
                 const after_field = json[end_quote + 1 ..];
-                const colon = std.mem.indexOfScalar(u8, after_field, ':') orelse return null;
-                const after_colon = std.mem.trimLeft(u8, after_field[colon + 1 ..], " \t\r\n");
+                const colon = std.mem.findScalar(u8, after_field, ':') orelse return null;
+                const after_colon = std.mem.trimStart(u8, after_field[colon + 1 ..], " \t\r\n");
                 // Parse number
                 var end: usize = 0;
                 while (end < after_colon.len and (after_colon[end] >= '0' and after_colon[end] <= '9')) {
@@ -254,7 +270,7 @@ test "parseSsoCacheJson valid" {
     defer allocator.free(token.access_token);
 
     try std.testing.expectEqualStrings("eyJtoken", token.access_token);
-    try std.testing.expect(!token.isExpired());
+    try std.testing.expect(!token.isExpired(std.testing.io));
 }
 
 test "parseSsoCacheJson with Z suffix" {
@@ -284,7 +300,7 @@ test "parseSsoCacheJson expired" {
     const token = try parseSsoCacheJson(allocator, json);
     defer allocator.free(token.access_token);
 
-    try std.testing.expect(token.isExpired());
+    try std.testing.expect(token.isExpired(std.testing.io));
 }
 
 test "parseSsoCredentialsJson valid" {

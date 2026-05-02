@@ -93,6 +93,8 @@ pub const CallOptions = struct {
 /// IMDS client for querying EC2 instance metadata
 pub const Client = struct {
     allocator: Allocator,
+    io: std.Io,
+    env_map: *const std.process.Environ.Map,
     endpoint: []const u8,
     token_ttl: u32,
     http_client: http.HttpClient,
@@ -110,12 +112,19 @@ pub const Client = struct {
         token_ttl: u32 = default_token_ttl,
     };
 
-    pub fn init(allocator: Allocator, options: Options) !Self {
+    pub fn init(
+        allocator: Allocator,
+        io: std.Io,
+        env_map: *const std.process.Environ.Map,
+        options: Options,
+    ) !Self {
         return .{
             .allocator = allocator,
-            .endpoint = try resolveEndpoint(options),
+            .io = io,
+            .env_map = env_map,
+            .endpoint = try resolveEndpoint(env_map, options),
             .token_ttl = options.token_ttl,
-            .http_client = http.HttpClient.init(allocator, .{
+            .http_client = http.HttpClient.init(allocator, io, env_map, .{
                 .request_options = .{
                     .max_attempts = 3,
                     .base_delay_ms = 1_000,
@@ -132,11 +141,14 @@ pub const Client = struct {
     /// 3. Programmatic endpoint mode
     /// 4. AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE env var
     /// 5. Default: IPv4
-    fn resolveEndpoint(options: Options) ![]const u8 {
+    fn resolveEndpoint(
+        env_map: *const std.process.Environ.Map,
+        options: Options,
+    ) ![]const u8 {
         if (options.endpoint) |ep| return ep;
-        if (std.posix.getenv("AWS_EC2_METADATA_SERVICE_ENDPOINT")) |ep| return ep;
+        if (env_map.get("AWS_EC2_METADATA_SERVICE_ENDPOINT")) |ep| return ep;
         if (options.endpoint_mode) |mode| return mode.endpoint();
-        if (std.posix.getenv("AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE")) |mode_str| {
+        if (env_map.get("AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE")) |mode_str| {
             if (mode_str.len == 0) return default_ipv4_endpoint;
             return (try EndpointMode.fromString(mode_str)).endpoint();
         }
@@ -197,7 +209,7 @@ pub const Client = struct {
 
     /// Get or refresh the IMDSv2 session token
     fn getToken(self: *Self, options: CallOptions) ![]const u8 {
-        const now = std.time.timestamp();
+        const now = std.Io.Clock.real.now(self.io).toSeconds();
 
         // Return cached token if still valid (with 5 minute buffer)
         if (self.session_token) |token| {
@@ -281,7 +293,9 @@ pub const Client = struct {
                         inner_options,
                     ) catch return err;
                     self.session_token = new_token;
-                    self.token_expiry = std.time.timestamp() + @as(i64, self.token_ttl);
+                    self.token_expiry =
+                        std.Io.Clock.real.now(self.io).toSeconds() +
+                        @as(i64, self.token_ttl);
 
                     // Retry with new token
                     return self.doGetRequestInner(
@@ -423,22 +437,22 @@ fn parseJsonField(allocator: Allocator, json: []const u8, field: []const u8) ![]
     const search_pattern = try std.fmt.allocPrint(allocator, "\"{s}\"", .{field});
     defer allocator.free(search_pattern);
 
-    const field_start = std.mem.indexOf(u8, json, search_pattern) orelse
+    const field_start = std.mem.find(u8, json, search_pattern) orelse
         return error.JsonFieldNotFound;
 
     // Find the colon after the field name
     const after_field = json[field_start + search_pattern.len ..];
-    const colon_pos = std.mem.indexOfScalar(u8, after_field, ':') orelse
+    const colon_pos = std.mem.findScalar(u8, after_field, ':') orelse
         return error.JsonFieldNotFound;
 
     // Find the opening quote of the value
     const after_colon = after_field[colon_pos + 1 ..];
-    const quote_start = std.mem.indexOfScalar(u8, after_colon, '"') orelse
+    const quote_start = std.mem.findScalar(u8, after_colon, '"') orelse
         return error.JsonFieldNotFound;
 
     // Find the closing quote
     const value_start = after_colon[quote_start + 1 ..];
-    const quote_end = std.mem.indexOfScalar(u8, value_start, '"') orelse
+    const quote_end = std.mem.findScalar(u8, value_start, '"') orelse
         return error.JsonFieldNotFound;
 
     return try allocator.dupe(u8, value_start[0..quote_end]);
@@ -593,7 +607,9 @@ test "IamCredentials deinit frees all allocated strings" {
 }
 
 test "Client init with default options" {
-    var client = try Client.init(std.testing.allocator, .{});
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = try Client.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
     try std.testing.expectEqualStrings(default_ipv4_endpoint, client.endpoint);
     try std.testing.expectEqual(default_token_ttl, client.token_ttl);
@@ -602,7 +618,9 @@ test "Client init with default options" {
 }
 
 test "Client init with custom options" {
-    var client = try Client.init(std.testing.allocator, .{
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = try Client.init(std.testing.allocator, std.testing.io, &env_map, .{
         .endpoint = "http://custom:1234",
         .token_ttl = 3600,
     });
@@ -612,17 +630,31 @@ test "Client init with custom options" {
 }
 
 test "Client init with endpoint mode" {
-    var client_v4 = try Client.init(std.testing.allocator, .{ .endpoint_mode = .ipv4 });
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client_v4 = try Client.init(
+        std.testing.allocator,
+        std.testing.io,
+        &env_map,
+        .{ .endpoint_mode = .ipv4 },
+    );
     defer client_v4.deinit();
     try std.testing.expectEqualStrings(default_ipv4_endpoint, client_v4.endpoint);
 
-    var client_v6 = try Client.init(std.testing.allocator, .{ .endpoint_mode = .ipv6 });
+    var client_v6 = try Client.init(
+        std.testing.allocator,
+        std.testing.io,
+        &env_map,
+        .{ .endpoint_mode = .ipv6 },
+    );
     defer client_v6.deinit();
     try std.testing.expectEqualStrings(default_ipv6_endpoint, client_v6.endpoint);
 }
 
 test "Client init explicit endpoint overrides endpoint mode" {
-    var client = try Client.init(std.testing.allocator, .{
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = try Client.init(std.testing.allocator, std.testing.io, &env_map, .{
         .endpoint = "http://custom:1234",
         .endpoint_mode = .ipv6,
     });
@@ -631,19 +663,25 @@ test "Client init explicit endpoint overrides endpoint mode" {
 }
 
 test "Client deinit with null token does not crash" {
-    var client = try Client.init(std.testing.allocator, .{});
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = try Client.init(std.testing.allocator, std.testing.io, &env_map, .{});
     client.deinit();
 }
 
 test "Client deinit frees cached session token" {
-    var client = try Client.init(std.testing.allocator, .{});
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = try Client.init(std.testing.allocator, std.testing.io, &env_map, .{});
     client.session_token = try std.testing.allocator.dupe(u8, "test-token");
     // If deinit leaks, the testing allocator will catch it
     client.deinit();
 }
 
 test "Client invalidateToken clears cached token" {
-    var client = try Client.init(std.testing.allocator, .{});
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = try Client.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     client.session_token = try std.testing.allocator.dupe(u8, "test-token");
@@ -655,7 +693,9 @@ test "Client invalidateToken clears cached token" {
 }
 
 test "Client invalidateToken with null token is safe" {
-    var client = try Client.init(std.testing.allocator, .{});
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = try Client.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     client.invalidateToken();

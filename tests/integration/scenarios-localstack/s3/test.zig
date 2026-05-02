@@ -2,16 +2,18 @@ const std = @import("std");
 const aws = @import("aws");
 const s3 = @import("s3");
 
-var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var gpa: std.heap.DebugAllocator(.{}) = .init;
 var shared_client: s3.Client = undefined;
 var shared_cfg: aws.Config = undefined;
+var shared_env_map: std.process.Environ.Map = undefined;
 var shared_init = false;
 
 test "zest.beforeAll" {
     const allocator = gpa.allocator();
     var arena = std.heap.ArenaAllocator.init(allocator);
     defer arena.deinit();
-    shared_cfg = try aws.Config.load(allocator, .{});
+    shared_env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    shared_cfg = try aws.Config.load(allocator, std.testing.io, &shared_env_map, .{});
     shared_client = s3.Client.initWithOptions(
         allocator,
         &shared_cfg,
@@ -95,6 +97,7 @@ test "zest.afterAll" {
     }
     shared_client.deinit();
     shared_cfg.deinit();
+    shared_env_map.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
 }
 
@@ -310,7 +313,7 @@ test "presigned GetObject URL retrieves object without signing" {
         .{ .expires_seconds = 60 },
     );
 
-    var http_client = std.http.Client{ .allocator = allocator };
+    var http_client = std.http.Client{ .allocator = allocator, .io = std.testing.io };
     defer http_client.deinit();
 
     const uri = std.Uri.parse(presigned_url) catch

@@ -21,17 +21,17 @@ pub fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value
 /// Extract the host from an endpoint URL, stripping scheme, port, and path.
 pub fn parseHost(endpoint: []const u8) []const u8 {
     // Strip scheme
-    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
+    const after_scheme = if (std.mem.find(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
     // Strip port and path
-    const end = std.mem.indexOfAny(u8, after_scheme, ":/") orelse after_scheme.len;
+    const end = std.mem.findAny(u8, after_scheme, ":/") orelse after_scheme.len;
     return after_scheme[0..end];
 }
 
 /// Extract the port from an endpoint URL, or null if none is specified.
 pub fn parsePort(endpoint: []const u8) ?u16 {
-    const after_scheme = if (std.mem.indexOf(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
-    const colon = std.mem.indexOfScalar(u8, after_scheme, ':') orelse return null;
-    const port_end = std.mem.indexOfScalarPos(u8, after_scheme, colon + 1, '/') orelse after_scheme.len;
+    const after_scheme = if (std.mem.find(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
+    const colon = std.mem.findScalar(u8, after_scheme, ':') orelse return null;
+    const port_end = std.mem.findScalarPos(u8, after_scheme, colon + 1, '/') orelse after_scheme.len;
     return std.fmt.parseInt(u16, after_scheme[colon + 1 .. port_end], 10) catch null;
 }
 
@@ -39,7 +39,7 @@ pub fn parsePort(endpoint: []const u8) ?u16 {
 
 test "appendUrlEncoded passes through unreserved characters" {
     const alloc = std.testing.allocator;
-    var buf: std.ArrayList(u8) = .{};
+    var buf: std.ArrayList(u8) = .empty;
     defer buf.deinit(alloc);
 
     try appendUrlEncoded(alloc, &buf, "hello-world_test.value~ok");
@@ -48,7 +48,7 @@ test "appendUrlEncoded passes through unreserved characters" {
 
 test "appendUrlEncoded encodes spaces as +" {
     const alloc = std.testing.allocator;
-    var buf: std.ArrayList(u8) = .{};
+    var buf: std.ArrayList(u8) = .empty;
     defer buf.deinit(alloc);
 
     try appendUrlEncoded(alloc, &buf, "hello world");
@@ -57,7 +57,7 @@ test "appendUrlEncoded encodes spaces as +" {
 
 test "appendUrlEncoded percent-encodes special characters" {
     const alloc = std.testing.allocator;
-    var buf: std.ArrayList(u8) = .{};
+    var buf: std.ArrayList(u8) = .empty;
     defer buf.deinit(alloc);
 
     try appendUrlEncoded(alloc, &buf, "a=b&c");

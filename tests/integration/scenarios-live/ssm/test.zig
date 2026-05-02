@@ -3,9 +3,10 @@ const std = @import("std");
 const aws = @import("aws");
 const ssm = @import("ssm");
 
-var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var gpa: std.heap.DebugAllocator(.{}) = .init;
 var shared_client: ssm.Client = undefined;
 var shared_cfg: aws.Config = undefined;
+var shared_env_map: std.process.Environ.Map = undefined;
 var setup_done: bool = false;
 var shared_param_buf: [64]u8 = undefined;
 var shared_param: []const u8 = "";
@@ -14,10 +15,11 @@ var shared_secure: []const u8 = "";
 
 test "zest.beforeAll" {
     const allocator = gpa.allocator();
-    shared_cfg = try aws.Config.load(allocator, .{});
+    shared_env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    shared_cfg = try aws.Config.load(allocator, std.testing.io, &shared_env_map, .{});
     shared_client = ssm.Client.init(allocator, &shared_cfg);
 
-    const ts = std.time.timestamp();
+    const ts = std.Io.Clock.real.now(std.testing.io).toSeconds();
     shared_param = try std.fmt.bufPrint(
         &shared_param_buf,
         "/sdk-zig-live/param-{d}",
@@ -54,6 +56,7 @@ test "zest.afterAll" {
 
     shared_client.deinit();
     shared_cfg.deinit();
+    shared_env_map.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
 }
 

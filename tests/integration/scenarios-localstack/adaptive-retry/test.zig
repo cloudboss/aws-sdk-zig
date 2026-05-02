@@ -5,7 +5,9 @@ const sts = @import("sts");
 test "adaptive retry mode propagates to HttpClient" {
     const allocator = std.testing.allocator;
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
     cfg.retry_mode = .adaptive;
 
@@ -25,7 +27,9 @@ test "adaptive retry mode propagates to HttpClient" {
 test "adaptive retry succeeds on valid request" {
     const allocator = std.testing.allocator;
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
     cfg.retry_mode = .adaptive;
 
@@ -52,7 +56,9 @@ test "adaptive retry succeeds on valid request" {
 test "token bucket at full capacity after success" {
     const allocator = std.testing.allocator;
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
     cfg.retry_mode = .adaptive;
 

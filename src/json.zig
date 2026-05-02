@@ -21,7 +21,7 @@ pub fn parseJsonObject(comptime T: type, source: []const u8, alloc: Allocator) !
 /// Uses `T.json_field_names` for field name mapping if declared.
 /// Caller owns the returned slice.
 pub fn jsonStringify(value: anytype, alloc: Allocator) ![]const u8 {
-    var buf: std.ArrayList(u8) = .{};
+    var buf: std.ArrayList(u8) = .empty;
     errdefer buf.deinit(alloc);
     try writeValue(@TypeOf(value), value, alloc, &buf);
     return buf.toOwnedSlice(alloc);
@@ -236,7 +236,7 @@ fn parseArray(comptime Child: type, scanner: *Scanner, alloc: Allocator) ParseEr
         return try alloc.alloc(Child, len);
     }
 
-    var list: std.ArrayList(Child) = .{};
+    var list: std.ArrayList(Child) = .empty;
     errdefer list.deinit(alloc);
 
     while (true) {
@@ -257,7 +257,7 @@ fn parseMapEntries(comptime Entry: type, scanner: *Scanner, alloc: Allocator) Pa
         else => return error.SyntaxError,
     }
 
-    var list: std.ArrayList(Entry) = .{};
+    var list: std.ArrayList(Entry) = .empty;
     errdefer list.deinit(alloc);
 
     while (true) {
@@ -327,7 +327,7 @@ pub fn findJsonValue(json: []const u8, key: []const u8) ?[]const u8 {
     @memcpy(buf[1..][0..key.len], key);
     buf[key.len + 1] = 0x22; // double-quote
     const search = buf[0 .. key.len + 2];
-    const key_start = std.mem.indexOf(u8, json, search) orelse return null;
+    const key_start = std.mem.find(u8, json, search) orelse return null;
     var pos = key_start + search.len;
 
     // Skip whitespace and colon
@@ -338,7 +338,7 @@ pub fn findJsonValue(json: []const u8, key: []const u8) ?[]const u8 {
 
     if (json[pos] == 0x22) {
         const start = pos + 1;
-        const end = std.mem.indexOfScalarPos(u8, json, start, 0x22) orelse return null;
+        const end = std.mem.findScalarPos(u8, json, start, 0x22) orelse return null;
         return json[start..end];
     }
 

@@ -4,10 +4,11 @@ const ec2 = @import("ec2");
 
 const elb = @import("elasticloadbalancing");
 
-var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var gpa: std.heap.DebugAllocator(.{}) = .init;
 var shared_client: elb.Client = undefined;
 var shared_ec2_client: ec2.Client = undefined;
 var shared_cfg: aws.Config = undefined;
+var shared_env_map: std.process.Environ.Map = undefined;
 var shared_init = false;
 
 var lb_name_buf: [32]u8 = undefined;
@@ -20,14 +21,15 @@ test "zest.beforeAll" {
     var arena = std.heap.ArenaAllocator.init(allocator);
     defer arena.deinit();
 
-    shared_cfg = try aws.Config.load(allocator, .{});
+    shared_env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    shared_cfg = try aws.Config.load(allocator, std.testing.io, &shared_env_map, .{});
     shared_client = elb.Client.init(allocator, &shared_cfg);
     shared_ec2_client = ec2.Client.init(allocator, &shared_cfg);
 
     lb_name = try std.fmt.bufPrint(
         &lb_name_buf,
         "sdk-zig-live-elb-{d}",
-        .{@mod(std.time.timestamp(), 100000)},
+        .{@mod(std.Io.Clock.real.now(std.testing.io).toSeconds(), 100000)},
     );
 
     const describe_subnets_result = try shared_ec2_client.describeSubnets(
@@ -102,6 +104,7 @@ test "zest.afterAll" {
     shared_client.deinit();
     shared_ec2_client.deinit();
     shared_cfg.deinit();
+    shared_env_map.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
 }
 

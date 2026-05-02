@@ -5,13 +5,16 @@ const sts = @import("sts");
 test "Config.load resolves AWS_ENDPOINT_URL from environment" {
     const allocator = std.testing.allocator;
 
-    const endpoint_url = std.posix.getenv("AWS_ENDPOINT_URL") orelse
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
+
+    const endpoint_url = env_map.get("AWS_ENDPOINT_URL") orelse
         return error.MissingEndpoint;
     if (endpoint_url.len == 0) return error.MissingEndpoint;
 
     // Load config without explicit endpoint_url -- it should resolve
     // from the AWS_ENDPOINT_URL environment variable.
-    var cfg = try aws.Config.load(allocator, .{});
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
 
     try std.testing.expect(cfg.endpoint_url != null);

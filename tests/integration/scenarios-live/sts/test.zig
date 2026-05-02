@@ -5,7 +5,9 @@ const sts = @import("sts");
 test "getCallerIdentity returns valid identity" {
     const allocator = std.testing.allocator;
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
 
     var client = sts.Client.init(allocator, &cfg);

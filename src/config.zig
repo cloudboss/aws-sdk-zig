@@ -25,8 +25,8 @@ fn parseStsRegionalEndpoints(value: []const u8) ?StsRegionalEndpoints {
     return null;
 }
 
-fn readEnvStsRegionalEndpoints() ?StsRegionalEndpoints {
-    if (std.posix.getenv("AWS_STS_REGIONAL_ENDPOINTS")) |value| {
+fn readEnvStsRegionalEndpoints(env_map: *const std.process.Environ.Map) ?StsRegionalEndpoints {
+    if (env_map.get("AWS_STS_REGIONAL_ENDPOINTS")) |value| {
         return parseStsRegionalEndpoints(value);
     }
     return null;
@@ -45,32 +45,24 @@ pub fn parseRetryMode(value: []const u8) ?RetryMode {
 }
 
 /// Read retry mode from AWS_RETRY_MODE environment variable
-fn readEnvRetryMode() ?RetryMode {
-    if (std.posix.getenv("AWS_RETRY_MODE")) |value| {
+fn readEnvRetryMode(env_map: *const std.process.Environ.Map) ?RetryMode {
+    if (env_map.get("AWS_RETRY_MODE")) |value| {
         return parseRetryMode(value);
     }
     return null;
 }
 
 /// Read max attempts from AWS_MAX_ATTEMPTS environment variable
-fn readEnvMaxAttempts() ?u32 {
-    if (std.posix.getenv("AWS_MAX_ATTEMPTS")) |value| {
-        return std.fmt.parseInt(u32, value, 10) catch null;
-    }
-    return null;
-}
-
-/// Read request timeout from AWS_REQUEST_TIMEOUT env var
-fn readEnvRequestTimeout() ?u32 {
-    if (std.posix.getenv("AWS_REQUEST_TIMEOUT")) |value| {
+fn readEnvMaxAttempts(env_map: *const std.process.Environ.Map) ?u32 {
+    if (env_map.get("AWS_MAX_ATTEMPTS")) |value| {
         return std.fmt.parseInt(u32, value, 10) catch null;
     }
     return null;
 }
 
 /// Read a boolean from an environment variable ("true" -> true)
-fn resolveBoolEnv(env_var: []const u8) ?bool {
-    if (std.posix.getenv(env_var)) |value| {
+fn resolveBoolEnv(env_map: *const std.process.Environ.Map, env_var: []const u8) ?bool {
+    if (env_map.get(env_var)) |value| {
         return std.mem.eql(u8, value, "true");
     }
     return null;
@@ -98,8 +90,6 @@ pub const LoadOptions = struct {
     retry_mode: ?RetryMode = null,
     /// CA bundle path
     ca_bundle: ?[]const u8 = null,
-    /// Request timeout in milliseconds
-    timeout_ms: ?u32 = null,
     /// STS regional endpoint mode
     sts_regional_endpoints: ?StsRegionalEndpoints = null,
     /// Seconds before expiration to consider credentials stale
@@ -118,8 +108,6 @@ pub const Config = struct {
     endpoint_url: ?[]const u8 = null,
     /// Maximum retry attempts for transient failures
     max_attempts: u32 = 3,
-    /// Request timeout in milliseconds
-    timeout_ms: u32 = 30_000,
     /// Use FIPS endpoints
     use_fips: bool = false,
     /// Use dual-stack endpoints
@@ -136,26 +124,35 @@ pub const Config = struct {
     sts_regional_endpoints: StsRegionalEndpoints = .regional,
 
     allocator: Allocator,
+    io: std.Io,
+    env_map: *const std.process.Environ.Map,
 
     const Self = @This();
 
     /// Load config with automatic resolution of all settings.
     /// Precedence: options (code) > environment > config file profile > default.
-    pub fn load(allocator: Allocator, options: LoadOptions) !Self {
-        var cf = try loadConfigFile(allocator);
+    pub fn load(
+        allocator: Allocator,
+        io: std.Io,
+        env_map: *const std.process.Environ.Map,
+        options: LoadOptions,
+    ) !Self {
+        var cf = try loadConfigFile(allocator, io, env_map);
         errdefer cf.deinit();
 
         const resolved_profile = options.profile orelse
-            std.posix.getenv("AWS_PROFILE") orelse
+            env_map.get("AWS_PROFILE") orelse
             "default";
 
         const profile: ?Profile = cf.getProfile(resolved_profile);
 
-        const region = try resolveRegion(allocator, options, profile);
+        const region = try resolveRegion(allocator, env_map, options, profile);
         errdefer allocator.free(region);
 
         var chain = ChainProvider{
             .allocator = allocator,
+            .io = io,
+            .env_map = env_map,
             .profile = resolved_profile,
             .region = region,
         };
@@ -170,26 +167,26 @@ pub const Config = struct {
         };
 
         const endpoint_url: ?[]const u8 = options.endpoint_url orelse
-            std.posix.getenv("AWS_ENDPOINT_URL") orelse
+            env_map.get("AWS_ENDPOINT_URL") orelse
             (if (profile) |p| p.endpoint_url else null);
 
         const use_fips: bool = options.use_fips orelse
-            resolveBoolEnv("AWS_USE_FIPS_ENDPOINT") orelse
+            resolveBoolEnv(env_map, "AWS_USE_FIPS_ENDPOINT") orelse
             (if (profile) |p| p.use_fips_endpoint else null) orelse
             false;
 
         const use_dual_stack: bool = options.use_dual_stack orelse
-            resolveBoolEnv("AWS_USE_DUALSTACK_ENDPOINT") orelse
+            resolveBoolEnv(env_map, "AWS_USE_DUALSTACK_ENDPOINT") orelse
             (if (profile) |p| p.use_dualstack_endpoint else null) orelse
             false;
 
         const max_attempts: u32 = options.max_attempts orelse
-            readEnvMaxAttempts() orelse
+            readEnvMaxAttempts(env_map) orelse
             (if (profile) |p| p.max_attempts else null) orelse
             3;
 
         const retry_mode: RetryMode = options.retry_mode orelse
-            readEnvRetryMode() orelse
+            readEnvRetryMode(env_map) orelse
             (if (profile) |p|
                 (if (p.retry_mode) |rm| parseRetryMode(rm) else null)
             else
@@ -198,7 +195,7 @@ pub const Config = struct {
 
         const sts_regional_endpoints: StsRegionalEndpoints =
             options.sts_regional_endpoints orelse
-            readEnvStsRegionalEndpoints() orelse
+            readEnvStsRegionalEndpoints(env_map) orelse
             (if (profile) |p|
                 (if (p.sts_regional_endpoints) |s|
                     parseStsRegionalEndpoints(s)
@@ -209,12 +206,9 @@ pub const Config = struct {
             .regional;
 
         const ca_bundle: ?[]const u8 = options.ca_bundle orelse
-            std.posix.getenv("AWS_CA_BUNDLE") orelse
+            env_map.get("AWS_CA_BUNDLE") orelse
             (if (profile) |p| p.ca_bundle else null);
 
-        const timeout_ms: u32 = options.timeout_ms orelse
-            readEnvRequestTimeout() orelse
-            30_000;
         return Self{
             .region = region,
             .credentials = credentials,
@@ -225,10 +219,11 @@ pub const Config = struct {
             .retry_mode = retry_mode,
             .sts_regional_endpoints = sts_regional_endpoints,
             .ca_bundle = ca_bundle,
-            .timeout_ms = timeout_ms,
             .config_file = cf,
             .profile = resolved_profile,
             .allocator = allocator,
+            .io = io,
+            .env_map = env_map,
         };
     }
 
@@ -241,6 +236,8 @@ pub const Config = struct {
 
     /// Create config with static credentials (borrows strings, caller manages lifetime)
     pub fn withStaticCredentials(
+        io: std.Io,
+        env_map: *const std.process.Environ.Map,
         region: []const u8,
         access_key_id: []const u8,
         secret_access_key: []const u8,
@@ -256,15 +253,23 @@ pub const Config = struct {
                 },
             },
             .allocator = undefined, // Not owned, don't call deinit
+            .io = io,
+            .env_map = env_map,
         };
     }
 
     /// Create config loading credentials from environment (borrows region)
-    pub fn fromEnvironment(region: []const u8) Self {
+    pub fn fromEnvironment(
+        io: std.Io,
+        env_map: *const std.process.Environ.Map,
+        region: []const u8,
+    ) Self {
         return .{
             .region = region,
-            .credentials = .{ .environment = {} },
+            .credentials = .{ .environment = env_map },
             .allocator = undefined, // Not owned, don't call deinit
+            .io = io,
+            .env_map = env_map,
         };
     }
 
@@ -305,6 +310,7 @@ pub const Config = struct {
         }
 
         const ignore = shouldIgnoreConfiguredEndpoints(
+            self.env_map,
             self.config_file,
             self.profile,
         );
@@ -319,17 +325,12 @@ pub const Config = struct {
                 env_buf[prefix.len..],
             );
             const key_len = prefix.len + upper.len;
-            env_buf[key_len] = 0;
-            if (std.posix.getenv(
-                env_buf[0..key_len :0],
-            )) |url| {
+            if (self.env_map.get(env_buf[0..key_len])) |url| {
                 return try allocator.dupe(u8, url);
             }
 
             // Level 3: Global endpoint env var
-            if (std.posix.getenv(
-                "AWS_ENDPOINT_URL",
-            )) |url| {
+            if (self.env_map.get("AWS_ENDPOINT_URL")) |url| {
                 return try allocator.dupe(u8, url);
             }
 
@@ -380,12 +381,11 @@ pub const Config = struct {
 /// Check whether configured endpoint URLs should be ignored
 /// (env var or profile setting).
 fn shouldIgnoreConfiguredEndpoints(
+    env_map: *const std.process.Environ.Map,
     config_file: ?ConfigFile,
     profile_name: []const u8,
 ) bool {
-    if (std.posix.getenv(
-        "AWS_IGNORE_CONFIGURED_ENDPOINT_URLS",
-    )) |v| {
+    if (env_map.get("AWS_IGNORE_CONFIGURED_ENDPOINT_URLS")) |v| {
         if (std.mem.eql(u8, v, "true")) return true;
     }
     if (config_file) |cf| {
@@ -572,7 +572,7 @@ pub fn parseConfigFile(
                 (line[0] == ' ' or line[0] == '\t');
             if (!is_indented) {
                 // Service name line: "dynamodb ="
-                const eq_idx = std.mem.indexOfScalar(
+                const eq_idx = std.mem.findScalar(
                     u8,
                     trimmed,
                     '=',
@@ -591,7 +591,7 @@ pub fn parseConfigFile(
             } else {
                 // Sub-key line: "  endpoint_url = http://..."
                 if (current_service_name.len == 0) continue;
-                const eq_idx = std.mem.indexOfScalar(
+                const eq_idx = std.mem.findScalar(
                     u8,
                     trimmed,
                     '=',
@@ -618,7 +618,7 @@ pub fn parseConfigFile(
         }
 
         // Standard key = value for profiles and sso-sessions
-        const eq_idx = std.mem.indexOfScalar(
+        const eq_idx = std.mem.findScalar(
             u8,
             trimmed,
             '=',
@@ -750,17 +750,26 @@ fn setSsoSessionField(s: *SsoSession, key: []const u8, value: []const u8) void {
 
 /// Load and parse the config file from disk.
 /// Returns empty ConfigFile if file is missing.
-pub fn loadConfigFile(allocator: Allocator) !ConfigFile {
-    const path = try resolveConfigPath(allocator);
+pub fn loadConfigFile(
+    allocator: Allocator,
+    io: std.Io,
+    env_map: *const std.process.Environ.Map,
+) !ConfigFile {
+    const path = try resolveConfigPath(allocator, env_map);
     defer allocator.free(path);
 
-    const file = std.fs.openFileAbsolute(path, .{}) catch |err| {
+    var file = std.Io.Dir.openFileAbsolute(io, path, .{}) catch |err| {
         if (err == error.FileNotFound) return parseConfigFile(allocator, "");
         return err;
     };
-    defer file.close();
+    defer file.close(io);
 
-    const content = file.readToEndAlloc(allocator, 1024 * 1024) catch |err| {
+    var read_buf: [4096]u8 = undefined;
+    var rdr = file.reader(io, &read_buf);
+    const content = rdr.interface.allocRemaining(
+        allocator,
+        std.Io.Limit.limited(1024 * 1024),
+    ) catch |err| {
         if (err == error.OutOfMemory) return err;
         return parseConfigFile(allocator, "");
     };
@@ -769,27 +778,31 @@ pub fn loadConfigFile(allocator: Allocator) !ConfigFile {
     return cf;
 }
 
-fn resolveConfigPath(allocator: Allocator) ![]const u8 {
-    if (std.posix.getenv("AWS_CONFIG_FILE")) |p| {
+fn resolveConfigPath(
+    allocator: Allocator,
+    env_map: *const std.process.Environ.Map,
+) ![]const u8 {
+    if (env_map.get("AWS_CONFIG_FILE")) |p| {
         return try allocator.dupe(u8, p);
     }
-    const home = std.posix.getenv("HOME") orelse return error.RegionNotFound;
+    const home = env_map.get("HOME") orelse return error.RegionNotFound;
     return std.fmt.allocPrint(allocator, "{s}/.aws/config", .{home});
 }
 
 /// Resolve region: options > AWS_REGION > AWS_DEFAULT_REGION > profile > error
 fn resolveRegion(
     allocator: Allocator,
+    env_map: *const std.process.Environ.Map,
     options: LoadOptions,
     profile: ?Profile,
 ) ![]const u8 {
     if (options.region) |r| {
         return try allocator.dupe(u8, r);
     }
-    if (std.posix.getenv("AWS_REGION")) |r| {
+    if (env_map.get("AWS_REGION")) |r| {
         return try allocator.dupe(u8, r);
     }
-    if (std.posix.getenv("AWS_DEFAULT_REGION")) |r| {
+    if (env_map.get("AWS_DEFAULT_REGION")) |r| {
         return try allocator.dupe(u8, r);
     }
     if (profile) |p| {
@@ -801,7 +814,11 @@ fn resolveRegion(
 }
 
 test "Config with static credentials" {
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
     const config = Config.withStaticCredentials(
+        std.testing.io,
+        &env_map,
         "us-east-1",
         "AKIAIOSFODNN7EXAMPLE",
         "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
@@ -812,7 +829,9 @@ test "Config with static credentials" {
 }
 
 test "Config getEndpoint" {
-    const config = Config.fromEnvironment("us-west-2");
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    const config = Config.fromEnvironment(std.testing.io, &env_map, "us-west-2");
     const endpoint = try config.getEndpoint("sts", std.testing.allocator);
     defer std.testing.allocator.free(endpoint);
 
@@ -820,7 +839,9 @@ test "Config getEndpoint" {
 }
 
 test "Config getEndpoint with custom URL" {
-    var config = Config.fromEnvironment("us-east-1");
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var config = Config.fromEnvironment(std.testing.io, &env_map, "us-east-1");
     config.endpoint_url = "http://localhost:4566";
 
     const endpoint = try config.getEndpoint("sts", std.testing.allocator);
@@ -830,7 +851,9 @@ test "Config getEndpoint with custom URL" {
 }
 
 test "Config getEndpoint with FIPS" {
-    var config = Config.fromEnvironment("us-east-1");
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var config = Config.fromEnvironment(std.testing.io, &env_map, "us-east-1");
     config.use_fips = true;
 
     const endpoint = try config.getEndpoint("sts", std.testing.allocator);
@@ -840,15 +863,20 @@ test "Config getEndpoint with FIPS" {
 }
 
 test "Config getEndpoint with China region" {
-    const config_val = Config.fromEnvironment("cn-north-1");
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    const config_val = Config.fromEnvironment(std.testing.io, &env_map, "cn-north-1");
     const ep = try config_val.getEndpoint("sts", std.testing.allocator);
     defer std.testing.allocator.free(ep);
     try std.testing.expectEqualStrings("sts.cn-north-1.amazonaws.com.cn", ep);
 }
 
 test "resolveRegion from explicit option" {
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
     const region = try resolveRegion(
         std.testing.allocator,
+        &env_map,
         .{ .region = "ap-northeast-1" },
         null,
     );
@@ -858,8 +886,11 @@ test "resolveRegion from explicit option" {
 }
 
 test "resolveRegion from config profile" {
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
     const region = try resolveRegion(
         std.testing.allocator,
+        &env_map,
         .{},
         Profile{ .region = "eu-central-1" },
     );
@@ -869,8 +900,11 @@ test "resolveRegion from config profile" {
 }
 
 test "resolveRegion option overrides profile" {
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
     const region = try resolveRegion(
         std.testing.allocator,
+        &env_map,
         .{ .region = "us-west-2" },
         Profile{ .region = "eu-central-1" },
     );
@@ -880,7 +914,9 @@ test "resolveRegion option overrides profile" {
 }
 
 test "resolveRegion error when no source" {
-    const result = resolveRegion(std.testing.allocator, .{}, null);
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    const result = resolveRegion(std.testing.allocator, &env_map, .{}, null);
     try std.testing.expectError(error.RegionNotFound, result);
 }
 
@@ -898,16 +934,20 @@ test "LoadOptions.profile explicit value is used" {
 }
 
 test "resolveProfile: explicit overrides env" {
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
     var explicit: ?[]const u8 = "from-code";
-    explicit = explicit orelse std.posix.getenv("AWS_PROFILE");
+    explicit = explicit orelse env_map.get("AWS_PROFILE");
     const resolved = explicit orelse "default";
     try std.testing.expectEqualStrings("from-code", resolved);
 }
 
 test "resolveProfile: falls back to default when nothing set" {
     // AWS_PROFILE is not expected to be set during unit tests.
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
     var nothing: ?[]const u8 = null;
-    nothing = nothing orelse std.posix.getenv("AWS_PROFILE");
+    nothing = nothing orelse env_map.get("AWS_PROFILE");
     const resolved = nothing orelse "default";
     try std.testing.expectEqualStrings("default", resolved);
 }
@@ -1079,27 +1119,11 @@ test "Profile with invalid max_attempts" {
 }
 
 test "Config defaults" {
-    const config = Config.fromEnvironment("us-east-1");
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    const config = Config.fromEnvironment(std.testing.io, &env_map, "us-east-1");
     try std.testing.expect(config.retry_mode == .standard);
     try std.testing.expect(config.ca_bundle == null);
-}
-
-test "Config defaults include timeout_ms" {
-    const config = Config.fromEnvironment("us-east-1");
-    try std.testing.expectEqual(
-        @as(u32, 30_000),
-        config.timeout_ms,
-    );
-}
-
-test "readEnvRequestTimeout reads AWS_REQUEST_TIMEOUT" {
-    const old_len = std.os.environ.len;
-    const entry: [*:0]u8 = @constCast("AWS_REQUEST_TIMEOUT=5000");
-    std.os.environ.len += 1;
-    std.os.environ[old_len] = entry;
-    defer std.os.environ.len = old_len;
-    const val = readEnvRequestTimeout();
-    try std.testing.expectEqual(@as(?u32, 5000), val);
 }
 
 test "parseConfigFile services with multiple services" {
@@ -1171,8 +1195,10 @@ test "parseConfigFile profile with services section" {
 }
 
 test "resolveBoolEnv returns null for unset var" {
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
     try std.testing.expect(
-        resolveBoolEnv("AWS_NONEXISTENT_TEST_VAR_XYZ") == null,
+        resolveBoolEnv(&env_map, "AWS_NONEXISTENT_TEST_VAR_XYZ") == null,
     );
 }
 
@@ -1360,7 +1386,9 @@ test "sdkIdToConfigKey" {
 }
 
 test "getEndpointForService: code override wins" {
-    var config = Config.fromEnvironment("us-east-1");
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var config = Config.fromEnvironment(std.testing.io, &env_map, "us-east-1");
     config.endpoint_url = "http://localhost:4566";
 
     const ep = try config.getEndpointForService(
@@ -1377,7 +1405,9 @@ test "getEndpointForService: code override wins" {
 }
 
 test "getEndpointForService: partition default" {
-    const config = Config.fromEnvironment("us-west-2");
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    const config = Config.fromEnvironment(std.testing.io, &env_map, "us-west-2");
 
     const ep = try config.getEndpointForService(
         "sts",
@@ -1405,7 +1435,9 @@ test "getEndpointForService: services section lookup" {
     var cf = parseConfigFile(std.testing.allocator, content);
     defer cf.deinit();
 
-    var config = Config.fromEnvironment("us-east-1");
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var config = Config.fromEnvironment(std.testing.io, &env_map, "us-east-1");
     config.config_file = cf;
     config.profile = "default";
 
@@ -1431,7 +1463,9 @@ test "getEndpointForService: profile endpoint_url" {
     var cf = parseConfigFile(std.testing.allocator, content);
     defer cf.deinit();
 
-    var config = Config.fromEnvironment("us-east-1");
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var config = Config.fromEnvironment(std.testing.io, &env_map, "us-east-1");
     config.config_file = cf;
     config.profile = "default";
 
@@ -1463,7 +1497,9 @@ test "getEndpointForService: ignore flag skips config" {
     var cf = parseConfigFile(std.testing.allocator, content);
     defer cf.deinit();
 
-    var config = Config.fromEnvironment("us-east-1");
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var config = Config.fromEnvironment(std.testing.io, &env_map, "us-east-1");
     config.config_file = cf;
     config.profile = "default";
 
@@ -1495,7 +1531,9 @@ test "getEndpointForService: services beats profile" {
     var cf = parseConfigFile(std.testing.allocator, content);
     defer cf.deinit();
 
-    var config = Config.fromEnvironment("us-east-1");
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var config = Config.fromEnvironment(std.testing.io, &env_map, "us-east-1");
     config.config_file = cf;
     config.profile = "default";
 
@@ -1520,7 +1558,9 @@ test "getEndpointForService: code override beats ignore" {
     var cf = parseConfigFile(std.testing.allocator, content);
     defer cf.deinit();
 
-    var config = Config.fromEnvironment("us-east-1");
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var config = Config.fromEnvironment(std.testing.io, &env_map, "us-east-1");
     config.config_file = cf;
     config.profile = "default";
     config.endpoint_url = "http://code-override";
@@ -1539,7 +1579,9 @@ test "getEndpointForService: code override beats ignore" {
 }
 
 test "getEndpointForService: iam uses global endpoint in aws partition" {
-    const config = Config.fromEnvironment("us-east-1");
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    const config = Config.fromEnvironment(std.testing.io, &env_map, "us-east-1");
 
     const ep = try config.getEndpointForService(
         "iam",

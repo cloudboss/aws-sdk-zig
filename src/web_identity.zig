@@ -11,6 +11,8 @@ const Credentials = @import("credentials.zig").Credentials;
 const sts_common = @import("sts_common.zig");
 
 pub const WebIdentityProvider = struct {
+    io: std.Io,
+    env_map: *const std.process.Environ.Map,
     role_arn: []const u8,
     token_file: []const u8,
     session_name: []const u8,
@@ -22,10 +24,15 @@ pub const WebIdentityProvider = struct {
     const Self = @This();
 
     pub fn getCredentials(self: *Self, allocator: Allocator) !Credentials {
-        if (self.cached) |c| if (!c.isExpired()) return c;
+        if (self.cached) |c| if (!c.isExpired(self.io)) return c;
 
         // Re-read token file each time (tokens rotate on EKS/Lambda)
-        const token = std.fs.cwd().readFileAlloc(allocator, self.token_file, 64 * 1024) catch
+        const token = std.Io.Dir.cwd().readFileAlloc(
+            self.io,
+            self.token_file,
+            allocator,
+            std.Io.Limit.limited(64 * 1024),
+        ) catch
             return error.WebIdentityTokenFileNotFound;
         defer allocator.free(token);
 
@@ -47,7 +54,13 @@ pub const WebIdentityProvider = struct {
         });
         defer allocator.free(body);
 
-        const response = try sts_common.callStsUnsigned(allocator, endpoint, body);
+        const response = try sts_common.callStsUnsigned(
+            allocator,
+            self.io,
+            self.env_map,
+            endpoint,
+            body,
+        );
         defer allocator.free(response);
 
         const creds = try sts_common.parseStsCredentials(allocator, response);
@@ -57,7 +70,11 @@ pub const WebIdentityProvider = struct {
 };
 
 test "WebIdentityProvider struct initialization" {
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
     var provider = WebIdentityProvider{
+        .io = std.testing.io,
+        .env_map = &env_map,
         .role_arn = "arn:aws:iam::123456789012:role/TestRole",
         .token_file = "/tmp/token",
         .session_name = "test-session",

@@ -7,7 +7,11 @@ test "web identity provider loads credentials from token file" {
     // Write a token file
     const token_path = "/tmp/web-identity-token";
 
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
     var provider = aws.web_identity.WebIdentityProvider{
+        .io = std.testing.io,
+        .env_map = &env_map,
         .role_arn = "arn:aws:iam::000000000000:role/web-identity-test-role",
         .token_file = token_path,
         .session_name = "integration-test",
@@ -33,8 +37,12 @@ test "web identity credentials can be used via CredentialsProvider union" {
 
     const token_path = "/tmp/web-identity-token";
 
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
     var cp = aws.CredentialsProvider{
         .web_identity = .{
+            .io = std.testing.io,
+            .env_map = &env_map,
             .role_arn = "arn:aws:iam::000000000000:role/web-identity-test-role",
             .token_file = token_path,
             .session_name = "union-test",
@@ -58,7 +66,11 @@ test "web identity credentials include future expiration timestamp" {
 
     const token_path = "/tmp/web-identity-token";
 
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
     var provider = aws.web_identity.WebIdentityProvider{
+        .io = std.testing.io,
+        .env_map = &env_map,
         .role_arn = "arn:aws:iam::000000000000:role/web-identity-test-role",
         .token_file = token_path,
         .session_name = "expiration-test",
@@ -82,7 +94,11 @@ test "web identity credentials have non-empty session token" {
 
     const token_path = "/tmp/web-identity-token";
 
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
     var provider = aws.web_identity.WebIdentityProvider{
+        .io = std.testing.io,
+        .env_map = &env_map,
         .role_arn = "arn:aws:iam::000000000000:role/web-identity-test-role",
         .token_file = token_path,
         .session_name = "session-token-test",
@@ -105,7 +121,11 @@ test "web identity access key differs from static credentials" {
 
     const token_path = "/tmp/web-identity-token";
 
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
     var provider = aws.web_identity.WebIdentityProvider{
+        .io = std.testing.io,
+        .env_map = &env_map,
         .role_arn = "arn:aws:iam::000000000000:role/web-identity-test-role",
         .token_file = token_path,
         .session_name = "key-diff-test",

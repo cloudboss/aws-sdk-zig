@@ -45,7 +45,7 @@ fn makeResponse(
     header_name: []const u8,
     header_value: []const u8,
 ) !http.Response {
-    var headers = std.StringHashMapUnmanaged([]const u8){};
+    var headers: std.StringHashMapUnmanaged([]const u8) = .empty;
     const key = try allocator.dupe(u8, header_name);
     errdefer allocator.free(key);
     const value = try allocator.dupe(u8, header_value);

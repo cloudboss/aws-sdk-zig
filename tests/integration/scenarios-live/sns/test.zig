@@ -3,7 +3,7 @@ const aws = @import("aws");
 const sns = @import("sns");
 const sqs = @import("sqs");
 
-var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var gpa: std.heap.DebugAllocator(.{}) = .init;
 var shared_sns_client: ?sns.Client = null;
 var shared_sqs_client: ?sqs.Client = null;
 var shared_cfg: ?aws.Config = null;
@@ -15,10 +15,12 @@ var shared_queue_arn_buf: [256]u8 = undefined;
 var shared_queue_arn: []const u8 = "";
 var shared_sub_arn_buf: [256]u8 = undefined;
 var shared_sub_arn: []const u8 = "";
+var shared_env_map: std.process.Environ.Map = undefined;
 
 test "zest.beforeAll" {
     const allocator = gpa.allocator();
-    shared_cfg = try aws.Config.load(allocator, .{});
+    shared_env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    shared_cfg = try aws.Config.load(allocator, std.testing.io, &shared_env_map, .{});
     shared_sns_client = sns.Client.init(allocator, &shared_cfg.?);
     shared_sqs_client = sqs.Client.init(allocator, &shared_cfg.?);
     {
@@ -29,7 +31,7 @@ test "zest.beforeAll" {
         const topic_name = try std.fmt.bufPrint(
             &topic_name_buf,
             "sdk-zig-live-sns-{d}",
-            .{std.time.timestamp()},
+            .{std.Io.Clock.real.now(std.testing.io).toSeconds()},
         );
 
         const topic_r = try shared_sns_client.?.createTopic(
@@ -64,7 +66,7 @@ test "zest.beforeAll" {
         const queue_name = try std.fmt.bufPrint(
             &queue_name_buf,
             "sdk-zig-live-sns-sqs-{d}",
-            .{std.time.timestamp()},
+            .{std.Io.Clock.real.now(std.testing.io).toSeconds()},
         );
 
         const queue_r = try shared_sqs_client.?.createQueue(
@@ -175,6 +177,7 @@ test "zest.afterAll" {
         }
     }
     if (shared_cfg) |*cfg| cfg.deinit();
+    shared_env_map.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
 }
 

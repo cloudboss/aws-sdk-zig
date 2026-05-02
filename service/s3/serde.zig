@@ -1586,7 +1586,7 @@ pub fn deserializeEventBridgeConfiguration(allocator: std.mem.Allocator, reader:
     const result: EventBridgeConfiguration = .{};
     while (try reader.next()) |event| {
         switch (event) {
-            .element_start => |_| {
+            .element_start => {
                 try reader.skipElement();
             },
             .element_end => break,
@@ -3234,7 +3234,7 @@ pub fn deserializeSSES3(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !
     const result: SSES3 = .{};
     while (try reader.next()) |event| {
         switch (event) {
-            .element_start => |_| {
+            .element_start => {
                 try reader.skipElement();
             },
             .element_end => break,
@@ -3337,7 +3337,7 @@ pub fn deserializeSimplePrefix(allocator: std.mem.Allocator, reader: *aws.xml.Re
     const result: SimplePrefix = .{};
     while (try reader.next()) |event| {
         switch (event) {
-            .element_start => |_| {
+            .element_start => {
                 try reader.skipElement();
             },
             .element_end => break,

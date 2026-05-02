@@ -39,7 +39,7 @@ pub fn bodyContainsErrorCode(
     codes: []const []const u8,
 ) bool {
     for (codes) |code| {
-        if (std.mem.indexOf(u8, body, code) != null) return true;
+        if (std.mem.find(u8, body, code) != null) return true;
     }
     return false;
 }

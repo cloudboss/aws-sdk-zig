@@ -2,14 +2,16 @@ const std = @import("std");
 const aws = @import("aws");
 const lambda = @import("lambda");
 
-var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var gpa: std.heap.DebugAllocator(.{}) = .init;
 var shared_client: lambda.Client = undefined;
 var shared_cfg: aws.Config = undefined;
+var shared_env_map: std.process.Environ.Map = undefined;
 var shared_init = false;
 
 test "zest.beforeAll" {
     const allocator = gpa.allocator();
-    shared_cfg = try aws.Config.load(allocator, .{});
+    shared_env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    shared_cfg = try aws.Config.load(allocator, std.testing.io, &shared_env_map, .{});
     shared_client = lambda.Client.initWithOptions(
         allocator,
         &shared_cfg,
@@ -25,6 +27,7 @@ test "zest.afterAll" {
     }
     shared_client.deinit();
     shared_cfg.deinit();
+    shared_env_map.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
 }
 

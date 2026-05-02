@@ -3,10 +3,11 @@ const aws = @import("aws");
 const ssm = @import("ssm");
 const s3 = @import("s3");
 
-var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var gpa: std.heap.DebugAllocator(.{}) = .init;
 var shared_ssm: ssm.Client = undefined;
 var shared_s3: s3.Client = undefined;
 var shared_cfg: aws.Config = undefined;
+var shared_env_map: std.process.Environ.Map = undefined;
 var setup_done: bool = false;
 
 const bucket_name = "sdk-zig-gzip-decomp";
@@ -32,7 +33,8 @@ test "zest.beforeAll" {
 
     initLargeValue();
 
-    shared_cfg = try aws.Config.load(allocator, .{});
+    shared_env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    shared_cfg = try aws.Config.load(allocator, std.testing.io, &shared_env_map, .{});
 
     shared_ssm = ssm.Client.initWithOptions(
         allocator,
@@ -105,6 +107,7 @@ test "zest.afterAll" {
     shared_ssm.deinit();
     shared_s3.deinit();
     shared_cfg.deinit();
+    shared_env_map.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
 }
 

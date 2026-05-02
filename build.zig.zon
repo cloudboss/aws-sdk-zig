@@ -2,7 +2,7 @@
     .name = .aws_sdk,
     .version = "0.0.1",
     .fingerprint = 0x6d0e0c72f129402,
-    .minimum_zig_version = "0.15.0",
+    .minimum_zig_version = "0.16.0",
 
     .paths = .{
         "build.zig",
@@ -16,8 +16,8 @@
 
     .dependencies = .{
         .zest = .{
-            .url = "git+https://github.com/cloudboss/zest#7b3397bf606b4ae60996438085e9bd84a5afa0be",
-            .hash = "zest-0.1.0-2zk2niBDAADQEyo3Hw9t9FtL8Yks0GPHF08Vl8aGJ9qR",
+            .url = "git+https://github.com/cloudboss/zest#a87952beff65fe25bec5fdbefc6573abe26c6e58",
+            .hash = "zest-0.1.0-2zk2njFJAADnAZaID9xfG02TgcdPO6EPtHe_5PuFvNH_",
         },
     },
 }

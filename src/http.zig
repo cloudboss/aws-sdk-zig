@@ -97,7 +97,7 @@ pub const Request = struct {
     pub fn init(host: []const u8) Self {
         return .{
             .host = host,
-            .headers = std.StringHashMapUnmanaged([]const u8){},
+            .headers = .empty,
         };
     }
 
@@ -198,6 +198,8 @@ pub const TokenBucket = struct {
 pub const HttpClient = struct {
     inner: std.http.Client,
     allocator: Allocator,
+    io: std.Io,
+    env_map: *const std.process.Environ.Map,
     default_options: RequestOptions,
     proxy_arena: std.heap.ArenaAllocator,
     no_proxy: ?[]const u8,
@@ -205,7 +207,6 @@ pub const HttpClient = struct {
     token_bucket: TokenBucket = .{},
     ca_bundle_path: ?[]const u8 = null,
     clock_skew_offset: i64 = 0,
-    timeout_ms: u32 = 30_000,
     stall_protection: StallProtectionOptions = .{},
     interceptors: []const Interceptor = &.{},
     default_max_attempts: u32 = 3,
@@ -221,11 +222,15 @@ pub const HttpClient = struct {
 
     pub fn init(
         allocator: Allocator,
+        io: std.Io,
+        env_map: *const std.process.Environ.Map,
         options: HttpClientOptions,
     ) Self {
         var self: Self = .{
-            .inner = .{ .allocator = allocator },
+            .inner = .{ .allocator = allocator, .io = io },
             .allocator = allocator,
+            .io = io,
+            .env_map = env_map,
             .default_options = options.request_options,
             .proxy_arena = std.heap.ArenaAllocator.init(allocator),
             .no_proxy = null,
@@ -233,11 +238,6 @@ pub const HttpClient = struct {
             .ca_bundle_path = options.ca_bundle_path,
         };
         self.initProxies();
-        if (std.posix.getenv("AWS_REQUEST_TIMEOUT")) |val| {
-            if (std.fmt.parseInt(u32, val, 10)) |ms| {
-                self.timeout_ms = ms;
-            } else |_| {}
-        }
         return self;
     }
 
@@ -248,11 +248,10 @@ pub const HttpClient = struct {
 
     fn initProxies(self: *Self) void {
         const arena = self.proxy_arena.allocator();
-        self.inner.initDefaultProxies(arena) catch {};
-        self.no_proxy =
-            std.process.getEnvVarOwned(arena, "NO_PROXY") catch
-                std.process.getEnvVarOwned(arena, "no_proxy") catch
-                null;
+        self.inner.initDefaultProxies(arena, self.env_map) catch {};
+        if (self.env_map.get("NO_PROXY") orelse self.env_map.get("no_proxy")) |raw| {
+            self.no_proxy = arena.dupe(u8, raw) catch null;
+        }
     }
 
     /// Send request with default options
@@ -289,8 +288,8 @@ pub const HttpClient = struct {
         };
 
         var invocation_id: [36]u8 = undefined;
-        generateUuidV4(&invocation_id);
-        const start_ns = std.time.nanoTimestamp();
+        generateUuidV4(self.io, &invocation_id);
+        const start_ns = std.Io.Clock.real.now(self.io).toNanoseconds();
         log.debug("aws request start: {s} {s}{s} invocation={s}", .{
             @tagName(request.method),
             request.host,
@@ -319,10 +318,10 @@ pub const HttpClient = struct {
                     var resp = response;
                     resp.deinit();
                     if (retry_after_ms) |ms| {
-                        std.Thread.sleep(ms * std.time.ns_per_ms);
+                        self.io.sleep(.fromMilliseconds(@intCast(ms)), .awake) catch {};
                         backoff.attempt = backoff.attempt +| 1;
                     } else {
-                        backoff.wait();
+                        backoff.wait(self.io);
                     }
                     log.debug(
                         "aws request retry: attempt={d} status={d} invocation={s}",
@@ -333,7 +332,7 @@ pub const HttpClient = struct {
                 if (self.retry_mode == .adaptive)
                     self.token_bucket.onSuccess();
                 const elapsed_ms = @divTrunc(
-                    std.time.nanoTimestamp() - start_ns,
+                    std.Io.Clock.real.now(self.io).toNanoseconds() - start_ns,
                     std.time.ns_per_ms,
                 );
                 if (response.isSuccess()) {
@@ -374,7 +373,7 @@ pub const HttpClient = struct {
                         if (!self.token_bucket.tryAcquire(retry_cost))
                             return err;
                     }
-                    backoff.wait();
+                    backoff.wait(self.io);
                     continue;
                 }
                 log.debug(
@@ -423,7 +422,7 @@ pub const HttpClient = struct {
         const date_str = response.headers.get("date") orelse return;
         const server_s = parseHttpDate(date_str) orelse return;
         const local_s: i64 = @intCast(
-            @divTrunc(std.time.nanoTimestamp(), std.time.ns_per_s),
+            @divTrunc(std.Io.Clock.real.now(self.io).toNanoseconds(), std.time.ns_per_s),
         );
         self.clock_skew_offset = (server_s - local_s) * std.time.ns_per_s;
     }
@@ -485,29 +484,11 @@ pub const HttpClient = struct {
         errdefer self.allocator.destroy(inner);
         inner.allocator = self.allocator;
 
-        const tls_conn: ?*std.http.Client.Connection =
-            if (self.timeout_ms > 0 and request.tls and self.inner.https_proxy == null)
-                try connectTlsWithTimeout(
-                    &self.inner,
-                    request.host,
-                    request.port orelse 443,
-                    self.timeout_ms,
-                )
-            else
-                null;
-
         inner.http_request = self.inner.request(request.method.toStd(), request.getUri(), .{
             .extra_headers = extra_headers_list.items,
             .keep_alive = self.default_options.keep_alive,
-            .connection = tls_conn,
         }) catch return error.ConnectionFailed;
         errdefer inner.http_request.deinit();
-
-        if (self.timeout_ms > 0 and tls_conn == null) {
-            if (inner.http_request.connection) |conn| {
-                setSocketTimeouts(conn, self.timeout_ms);
-            }
-        }
 
         sendBody(&inner.http_request, request) catch return error.RequestFailed;
 
@@ -533,6 +514,7 @@ pub const HttpClient = struct {
             .headers = resp_headers,
             .body = StreamingBody{
                 ._inner = inner,
+                .io = self.io,
                 .stall_protection = self.stall_protection,
             },
             .allocator = self.allocator,
@@ -547,7 +529,7 @@ pub const HttpClient = struct {
         invocation_id: []const u8,
     ) RequestError!Response {
         if (self.ca_bundle_path) |path| {
-            std.fs.cwd().access(path, .{}) catch
+            std.Io.Dir.cwd().access(self.io, path, .{}) catch
                 return error.ConnectionFailed;
         }
 
@@ -615,29 +597,11 @@ pub const HttpClient = struct {
             if (ic.pre_send) |hook| hook(request);
         }
 
-        const tls_conn: ?*std.http.Client.Connection =
-            if (self.timeout_ms > 0 and request.tls and self.inner.https_proxy == null)
-                try connectTlsWithTimeout(
-                    &self.inner,
-                    request.host,
-                    request.port orelse 443,
-                    self.timeout_ms,
-                )
-            else
-                null;
-
         var req = self.inner.request(request.method.toStd(), request.getUri(), .{
             .extra_headers = extra_headers_list.items,
             .keep_alive = options.keep_alive,
-            .connection = tls_conn,
         }) catch return error.ConnectionFailed;
         defer req.deinit();
-
-        if (self.timeout_ms > 0 and tls_conn == null) {
-            if (req.connection) |conn| {
-                setSocketTimeouts(conn, self.timeout_ms);
-            }
-        }
 
         sendBody(&req, request) catch return error.RequestFailed;
 
@@ -648,27 +612,26 @@ pub const HttpClient = struct {
             return error.OutOfMemory;
         errdefer freeResponseHeaders(self.allocator, &resp_headers);
 
-        // Read and decompress the response body. The reader method is
-        // called directly (rather than response.reader()) because the
-        // std lib's responseHasBody() returns false for PUT/TRACE,
-        // skipping body reads even when the server returns a body.
         var transfer_buf: [8192]u8 = undefined;
         var decompress_buf: [std.compress.flate.max_window_len]u8 = undefined;
         var decompress: std.http.Decompress = undefined;
-        const body_reader = req.reader.bodyReaderDecompressing(
+        const body_reader = response.readerDecompressing(
             &transfer_buf,
-            response.head.transfer_encoding,
-            response.head.content_length,
-            response.head.content_encoding,
             &decompress,
             &decompress_buf,
         );
-        const body = body_reader.allocRemaining(
-            self.allocator,
-            std.Io.Limit.limited(options.max_response_size),
-        ) catch |err| {
-            return if (err == error.StreamTooLong) error.ResponseTooLarge else error.RequestFailed;
-        };
+        // Status codes 1xx, 204, 304 (RFC 9110 6.4.1) and HEAD
+        // requests (RFC 9110 9.3.2) always have empty bodies.
+        const no_body = request.method == .HEAD or statusForbidsBody(response.head.status);
+        const body = if (no_body)
+            self.allocator.alloc(u8, 0) catch return error.OutOfMemory
+        else
+            body_reader.allocRemaining(
+                self.allocator,
+                std.Io.Limit.limited(options.max_response_size),
+            ) catch |err| {
+                return if (err == error.StreamTooLong) error.ResponseTooLarge else error.RequestFailed;
+            };
         errdefer self.allocator.free(body);
 
         try verifyResponseChecksum(effective_checksum_alg, body, &resp_headers, self.allocator);
@@ -693,8 +656,8 @@ pub const HttpClient = struct {
         self: *Self,
         request: *const Request,
         invocation_id: ?[]const u8,
-    ) ?std.ArrayListUnmanaged(std.http.Header) {
-        var list: std.ArrayListUnmanaged(std.http.Header) = .{};
+    ) ?std.ArrayList(std.http.Header) {
+        var list: std.ArrayList(std.http.Header) = .empty;
         var iter = request.headers.iterator();
         while (iter.next()) |entry| {
             if (std.ascii.eqlIgnoreCase(entry.key_ptr.*, "host")) continue;
@@ -717,7 +680,7 @@ pub const HttpClient = struct {
         self: *Self,
         response: anytype,
     ) ?std.StringHashMapUnmanaged([]const u8) {
-        var resp_headers = std.StringHashMapUnmanaged([]const u8){};
+        var resp_headers: std.StringHashMapUnmanaged([]const u8) = .empty;
         var header_iter = response.head.iterateHeaders();
         while (header_iter.next()) |header| {
             const key = std.ascii.allocLowerString(
@@ -777,11 +740,10 @@ pub const HttpClient = struct {
 };
 
 /// Generate a UUID v4 string into buf.
-/// Uses std.crypto.random for cryptographically secure random bytes.
 /// Version bits are set to 0100 and variant bits to 10xx per RFC 4122.
-pub fn generateUuidV4(buf: *[36]u8) void {
+pub fn generateUuidV4(io: std.Io, buf: *[36]u8) void {
     var bytes: [16]u8 = undefined;
-    std.crypto.random.bytes(&bytes);
+    io.random(&bytes);
     bytes[6] = (bytes[6] & 0x0f) | 0x40;
     bytes[8] = (bytes[8] & 0x3f) | 0x80;
     const hex = "0123456789abcdef";
@@ -797,148 +759,12 @@ pub fn generateUuidV4(buf: *[36]u8) void {
     }
 }
 
-fn setSocketTimeouts(
-    conn: *std.http.Client.Connection,
-    timeout_ms: u32,
-) void {
-    setFdTimeouts(conn.stream_reader.getStream().handle, timeout_ms);
-}
-
-fn setFdTimeouts(fd: std.posix.socket_t, timeout_ms: u32) void {
-    const sec: isize = @intCast(timeout_ms / 1000);
-    const usec: isize = @intCast(
-        @as(u64, timeout_ms % 1000) * 1000,
-    );
-    const tv = std.posix.timeval{ .sec = sec, .usec = usec };
-    const opt_bytes = std.mem.asBytes(&tv);
-    std.posix.setsockopt(
-        fd,
-        std.posix.SOL.SOCKET,
-        std.posix.SO.RCVTIMEO,
-        opt_bytes,
-    ) catch {};
-    std.posix.setsockopt(
-        fd,
-        std.posix.SOL.SOCKET,
-        std.posix.SO.SNDTIMEO,
-        opt_bytes,
-    ) catch {};
-}
-
-/// Layout-compatible replica of the private std.http.Client.Connection.Tls.
-/// The std lib uses @fieldParentPtr("connection", conn) to recover the parent
-/// Tls struct from a *Connection, so both structs must have `connection` at
-/// the same offset. Identical field types guarantee identical layout.
-const TlsConnLayout = struct {
-    client: std.crypto.tls.Client,
-    connection: std.http.Client.Connection,
-};
-
-/// Establish a TLS connection with socket timeouts applied before the TLS
-/// handshake. The std lib's connectTcpOptions does TCP + TLS in one step,
-/// so timeouts set afterwards miss the handshake. This function replicates
-/// the Connection.Tls allocation from std/http/Client.zig and inserts
-/// setsockopt between TCP connect and TLS init.
-fn connectTlsWithTimeout(
-    client: *std.http.Client,
-    host: []const u8,
-    port: u16,
-    timeout_ms: u32,
-) RequestError!*std.http.Client.Connection {
-    if (client.connection_pool.findConnection(.{
-        .host = host,
-        .port = port,
-        .protocol = .tls,
-    })) |conn| {
-        setSocketTimeouts(conn, timeout_ms);
-        return conn;
-    }
-
-    // Rescan CA certificates if needed (mirrors request() logic).
-    if (@atomicLoad(
-        bool,
-        &client.next_https_rescan_certs,
-        .acquire,
-    )) {
-        client.ca_bundle_mutex.lock();
-        defer client.ca_bundle_mutex.unlock();
-        if (client.next_https_rescan_certs) {
-            client.ca_bundle.rescan(client.allocator) catch
-                return error.ConnectionFailed;
-            @atomicStore(
-                bool,
-                &client.next_https_rescan_certs,
-                false,
-                .release,
-            );
-        }
-    }
-
-    const stream = std.net.tcpConnectToHost(
-        client.allocator,
-        host,
-        port,
-    ) catch return error.ConnectionFailed;
-    errdefer stream.close();
-
-    // Set timeout BEFORE TLS handshake so handshake reads/writes
-    // on the raw socket respect the deadline.
-    setFdTimeouts(stream.handle, timeout_ms);
-
-    // Replicate the allocation layout from Connection.Tls.create
-    // in std/http/Client.zig.
-    const tls_buf_size = client.tls_buffer_size;
-    const tls_read_len = tls_buf_size + client.read_buffer_size;
-    const alloc_len = @sizeOf(TlsConnLayout) + host.len +
-        tls_read_len + tls_buf_size +
-        client.write_buffer_size + tls_buf_size;
-    const base = client.allocator.alignedAlloc(
-        u8,
-        .of(TlsConnLayout),
-        alloc_len,
-    ) catch return error.OutOfMemory;
-    errdefer client.allocator.free(base);
-
-    const host_buf = base[@sizeOf(TlsConnLayout)..][0..host.len];
-    const tls_read_buf =
-        host_buf.ptr[host_buf.len..][0..tls_read_len];
-    const tls_write_buf =
-        tls_read_buf.ptr[tls_read_buf.len..][0..tls_buf_size];
-    const sock_write_buf =
-        tls_write_buf.ptr[tls_write_buf.len..][0..client.write_buffer_size];
-    const sock_read_buf =
-        sock_write_buf.ptr[sock_write_buf.len..][0..tls_buf_size];
-    std.debug.assert(base.ptr + alloc_len == sock_read_buf.ptr + sock_read_buf.len);
-
-    @memcpy(host_buf, host);
-
-    const wrapper: *TlsConnLayout = @ptrCast(base);
-    wrapper.connection = .{
-        .client = client,
-        .stream_writer = stream.writer(tls_write_buf),
-        .stream_reader = stream.reader(sock_read_buf),
-        .pool_node = .{},
-        .port = port,
-        .host_len = @intCast(host.len),
-        .proxied = false,
-        .closing = false,
-        .protocol = .tls,
-    };
-    wrapper.client = std.crypto.tls.Client.init(
-        wrapper.connection.stream_reader.interface(),
-        &wrapper.connection.stream_writer.interface,
-        .{
-            .host = .{ .explicit = host },
-            .ca = .{ .bundle = client.ca_bundle },
-            .ssl_key_log = client.ssl_key_log,
-            .read_buffer = tls_read_buf,
-            .write_buffer = sock_write_buf,
-            .allow_truncation_attacks = true,
-        },
-    ) catch return error.ConnectionFailed;
-
-    client.connection_pool.addUsed(&wrapper.connection);
-    return &wrapper.connection;
+/// True if the HTTP status code disallows a response body per
+/// RFC 9110 6.4.1: 1xx Informational, 204 No Content, 304 Not Modified.
+pub fn statusForbidsBody(status: std.http.Status) bool {
+    const code = @intFromEnum(status);
+    if (code >= 100 and code < 200) return true;
+    return code == 204 or code == 304;
 }
 
 /// Check if a host should bypass the proxy based on the NO_PROXY list.
@@ -1111,6 +937,7 @@ fn parseHttpDate(date_str: []const u8) ?i64 {
 /// Used for `@streaming` blob payloads (e.g., S3 GetObject).
 pub const StreamingBody = struct {
     _inner: *Inner,
+    io: std.Io,
     stall_protection: StallProtectionOptions,
 
     pub const StallState = struct {
@@ -1130,7 +957,7 @@ pub const StreamingBody = struct {
 
     /// Read entire remaining body into memory.
     pub fn readAll(self: *StreamingBody, allocator: Allocator, max_size: usize) ![]const u8 {
-        var list: std.ArrayListUnmanaged(u8) = .{};
+        var list: std.ArrayList(u8) = .empty;
         errdefer list.deinit(allocator);
 
         var total_read: usize = 0;
@@ -1138,7 +965,7 @@ pub const StreamingBody = struct {
 
         const options = self.stall_protection;
         var stall_state = StallState{
-            .last_check_ns = std.time.nanoTimestamp(),
+            .last_check_ns = std.Io.Clock.real.now(self.io).toNanoseconds(),
             .last_check_bytes = 0,
             .consecutive_low_seconds = 0,
         };
@@ -1158,7 +985,7 @@ pub const StreamingBody = struct {
             list.appendSlice(allocator, buf[0..read_len]) catch return error.OutOfMemory;
             total_read += read_len;
 
-            const now_ns = std.time.nanoTimestamp();
+            const now_ns = std.Io.Clock.real.now(self.io).toNanoseconds();
             try updateStallState(options, total_read, now_ns, &stall_state);
         }
 
@@ -1248,13 +1075,15 @@ pub const Backoff = struct {
     cap_ms: u64 = 20_000,
 
     /// Wait with exponential backoff and jitter, then increment attempt
-    pub fn wait(self: *Backoff) void {
+    pub fn wait(self: *Backoff, io: std.Io) void {
         const max_wait = self.maxWaitMs();
-        const wait_ms = if (max_wait > 0)
-            std.crypto.random.intRangeLessThan(u64, 0, max_wait)
-        else
-            0;
-        std.Thread.sleep(wait_ms * std.time.ns_per_ms);
+        var wait_ms: u64 = 0;
+        if (max_wait > 0) {
+            var bytes: [8]u8 = undefined;
+            io.random(&bytes);
+            wait_ms = std.mem.readInt(u64, &bytes, .little) % max_wait;
+        }
+        io.sleep(.fromMilliseconds(@intCast(wait_ms)), .awake) catch {};
         self.attempt = self.attempt +| 1;
     }
 
@@ -1271,8 +1100,13 @@ pub const Backoff = struct {
 };
 
 /// Send an HTTP request using std.http.Client (stateless convenience function)
-pub fn sendRequest(allocator: Allocator, request: *const Request) RequestError!Response {
-    var client = HttpClient.init(allocator, .{});
+pub fn sendRequest(
+    allocator: Allocator,
+    io: std.Io,
+    env_map: *const std.process.Environ.Map,
+    request: *const Request,
+) RequestError!Response {
+    var client = HttpClient.init(allocator, io, env_map, .{});
     defer client.deinit();
     return client.sendRequest(request);
 }
@@ -1280,10 +1114,12 @@ pub fn sendRequest(allocator: Allocator, request: *const Request) RequestError!R
 /// Send an HTTP request with custom options (stateless convenience function)
 pub fn sendRequestWithOptions(
     allocator: Allocator,
+    io: std.Io,
+    env_map: *const std.process.Environ.Map,
     request: *const Request,
     options: RequestOptions,
 ) RequestError!Response {
-    var client = HttpClient.init(allocator, .{});
+    var client = HttpClient.init(allocator, io, env_map, .{});
     defer client.deinit();
     return client.sendRequestWithOptions(request, options);
 }
@@ -1291,19 +1127,19 @@ pub fn sendRequestWithOptions(
 // Tests
 
 const TestServer = struct {
-    server: std.net.Server,
-    address: std.net.Address,
+    server: std.Io.net.Server,
+    address: std.Io.net.IpAddress,
     responses: []const []const u8,
     thread: ?std.Thread = null,
 
     const Self = @This();
 
     pub fn init(responses: []const []const u8) !Self {
-        const loopback = try std.net.Address.parseIp4("127.0.0.1", 0);
-        const server = try loopback.listen(.{ .reuse_address = true });
+        const loopback = try std.Io.net.IpAddress.parseIp4("127.0.0.1", 0);
+        const server = try loopback.listen(std.testing.io, .{ .reuse_address = true });
         return .{
             .server = server,
-            .address = server.listen_address,
+            .address = server.socket.address,
             .responses = responses,
         };
     }
@@ -1313,34 +1149,36 @@ const TestServer = struct {
     }
 
     pub fn deinit(self: *Self) void {
-        self.server.deinit();
+        self.server.deinit(std.testing.io);
         if (self.thread) |thread| thread.join();
     }
 
     fn run(self: *Self) void {
         var idx: usize = 0;
         while (idx < self.responses.len) : (idx += 1) {
-            var conn = self.server.accept() catch return;
-            handleConnection(&conn, self.responses[idx]);
+            var stream = self.server.accept(std.testing.io) catch return;
+            handleConnection(&stream, self.responses[idx]);
         }
     }
 
-    fn handleConnection(conn: *std.net.Server.Connection, response_bytes: []const u8) void {
-        defer conn.stream.close();
-        readRequest(conn);
-        conn.stream.writeAll(response_bytes) catch {};
+    fn handleConnection(stream: *std.Io.net.Stream, response_bytes: []const u8) void {
+        defer stream.close(std.testing.io);
+        readRequest(stream);
+        var write_buf: [4096]u8 = undefined;
+        var w = stream.writer(std.testing.io, &write_buf);
+        w.interface.writeAll(response_bytes) catch return;
+        w.interface.flush() catch {};
     }
 
-    fn readRequest(conn: *std.net.Server.Connection) void {
-        var buf: [4096]u8 = undefined;
-        var total: usize = 0;
+    // Consume the request head one line at a time. takeDelimiterInclusive
+    // stops as soon as the delimiter is found, unlike readSliceShort which
+    // blocks until its buffer is full.
+    fn readRequest(stream: *std.Io.net.Stream) void {
+        var read_buf: [16 * 1024]u8 = undefined;
+        var r = stream.reader(std.testing.io, &read_buf);
         while (true) {
-            const read_len = conn.stream.read(&buf) catch return;
-            if (read_len == 0) return;
-            total += read_len;
-            if (std.mem.indexOf(u8, buf[0..read_len], "\r\n\r\n") != null)
-                return;
-            if (total > 16 * 1024) return;
+            const line = r.interface.takeDelimiterInclusive('\n') catch return;
+            if (std.mem.eql(u8, line, "\r\n")) return;
         }
     }
 };
@@ -1488,14 +1326,18 @@ test "RequestOptions defaults" {
 }
 
 test "HttpClient exposes default_max_attempts and default_base_delay_ms" {
-    var client = HttpClient.init(std.testing.allocator, .{});
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
     try std.testing.expectEqual(@as(u32, 3), client.default_max_attempts);
     try std.testing.expectEqual(@as(u32, 1_000), client.default_base_delay_ms);
 }
 
 test "per-call max_attempts overrides HttpClient default" {
-    var client = HttpClient.init(std.testing.allocator, .{});
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
     client.default_max_attempts = 5;
     const opts = RequestOptions{ .max_attempts = 1 };
@@ -1504,7 +1346,9 @@ test "per-call max_attempts overrides HttpClient default" {
 }
 
 test "null max_attempts falls back to HttpClient default" {
-    var client = HttpClient.init(std.testing.allocator, .{});
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
     client.default_max_attempts = 7;
     const opts = RequestOptions{};
@@ -1690,7 +1534,9 @@ test "TokenBucket cost limits" {
 }
 
 test "HttpClient defaults to standard retry mode" {
-    var client = HttpClient.init(std.testing.allocator, .{});
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
     try std.testing.expectEqual(
         config_mod.RetryMode.standard,
@@ -1706,7 +1552,9 @@ test "HttpClient interceptors fire on success" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(std.testing.allocator, .{});
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     var state = HookState{};
@@ -1745,7 +1593,9 @@ test "HttpClient interceptors fire per retry" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(std.testing.allocator, .{});
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     var state = HookState{};
@@ -1784,7 +1634,9 @@ test "HttpClient interceptors empty slice is no-op" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(std.testing.allocator, .{});
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     var request = Request.init("127.0.0.1");
@@ -1812,7 +1664,9 @@ test "PUT response body is read" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(std.testing.allocator, .{});
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     var request = Request.init("127.0.0.1");
@@ -1834,8 +1688,12 @@ test "PUT response body is read" {
 }
 
 test "HttpClient stores ca_bundle_path" {
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
     var client = HttpClient.init(
         std.testing.allocator,
+        std.testing.io,
+        &env_map,
         .{ .ca_bundle_path = "/etc/pki/tls/certs/ca-bundle.crt" },
     );
     defer client.deinit();
@@ -1846,29 +1704,11 @@ test "HttpClient stores ca_bundle_path" {
 }
 
 test "HttpClient ca_bundle_path defaults to null" {
-    var client = HttpClient.init(std.testing.allocator, .{});
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
     try std.testing.expectEqual(@as(?[]const u8, null), client.ca_bundle_path);
-}
-
-test "HttpClient timeout_ms defaults to 30s" {
-    var client = HttpClient.init(std.testing.allocator, .{});
-    defer client.deinit();
-    try std.testing.expectEqual(
-        @as(u32, 30_000),
-        client.timeout_ms,
-    );
-}
-
-test "HttpClient.init reads AWS_REQUEST_TIMEOUT env var" {
-    const old_len = std.os.environ.len;
-    const entry: [*:0]u8 = @constCast("AWS_REQUEST_TIMEOUT=5000");
-    std.os.environ.len += 1;
-    std.os.environ[old_len] = entry;
-    defer std.os.environ.len = old_len;
-    var client = HttpClient.init(std.testing.allocator, .{});
-    defer client.deinit();
-    try std.testing.expectEqual(@as(u32, 5000), client.timeout_ms);
 }
 
 test "Request stores service_name and api_version for User-Agent" {
@@ -1952,7 +1792,7 @@ test "checksum computeBase64 and verify round-trip" {
 }
 
 test "verifyResponseChecksum returns error on mismatch" {
-    var headers: std.StringHashMapUnmanaged([]const u8) = .{};
+    var headers: std.StringHashMapUnmanaged([]const u8) = .empty;
     defer headers.deinit(std.testing.allocator);
     try headers.put(std.testing.allocator, "x-amz-checksum-crc32", "AAAA");
 
@@ -1967,7 +1807,7 @@ test "verifyResponseChecksum passes on valid checksum" {
     const valid_b64 = try checksum_mod.computeBase64(std.testing.allocator, .crc32, body);
     defer std.testing.allocator.free(valid_b64);
 
-    var headers: std.StringHashMapUnmanaged([]const u8) = .{};
+    var headers: std.StringHashMapUnmanaged([]const u8) = .empty;
     defer headers.deinit(std.testing.allocator);
     try headers.put(std.testing.allocator, "x-amz-checksum-crc32", valid_b64);
 
@@ -1975,12 +1815,12 @@ test "verifyResponseChecksum passes on valid checksum" {
 }
 
 test "verifyResponseChecksum is no-op without algorithm" {
-    var headers: std.StringHashMapUnmanaged([]const u8) = .{};
+    var headers: std.StringHashMapUnmanaged([]const u8) = .empty;
     try verifyResponseChecksum(null, "anything", &headers, std.testing.allocator);
 }
 
 test "verifyResponseChecksum is no-op without matching header" {
-    var headers: std.StringHashMapUnmanaged([]const u8) = .{};
+    var headers: std.StringHashMapUnmanaged([]const u8) = .empty;
     try verifyResponseChecksum(.crc32, "anything", &headers, std.testing.allocator);
 }
 
@@ -2000,7 +1840,7 @@ test "isClockSkewError detects clock skew codes" {
 }
 
 test "parseRetryAfter parses integer milliseconds" {
-    var headers = std.StringHashMapUnmanaged([]const u8){};
+    var headers: std.StringHashMapUnmanaged([]const u8) = .empty;
     defer headers.deinit(std.testing.allocator);
     try headers.put(
         std.testing.allocator,
@@ -2012,7 +1852,7 @@ test "parseRetryAfter parses integer milliseconds" {
 }
 
 test "parseRetryAfter returns null when header absent" {
-    const headers = std.StringHashMapUnmanaged([]const u8){};
+    const headers: std.StringHashMapUnmanaged([]const u8) = .empty;
     try std.testing.expectEqual(
         @as(?u64, null),
         parseRetryAfter(headers),
@@ -2030,7 +1870,7 @@ test "parseHttpDate parses valid HTTP date" {
 
 test "generateUuidV4 produces valid UUID v4 format" {
     var buf: [36]u8 = undefined;
-    generateUuidV4(&buf);
+    generateUuidV4(std.testing.io, &buf);
     const s = buf[0..];
     try std.testing.expectEqual(@as(usize, 36), s.len);
     try std.testing.expectEqual(@as(u8, '-'), s[8]);
@@ -2051,8 +1891,8 @@ test "generateUuidV4 produces valid UUID v4 format" {
 test "generateUuidV4 produces unique values" {
     var buf1: [36]u8 = undefined;
     var buf2: [36]u8 = undefined;
-    generateUuidV4(&buf1);
-    generateUuidV4(&buf2);
+    generateUuidV4(std.testing.io, &buf1);
+    generateUuidV4(std.testing.io, &buf2);
     try std.testing.expect(!std.mem.eql(u8, &buf1, &buf2));
 }
 
@@ -2064,7 +1904,9 @@ test "HttpClient sends amz-sdk-invocation-id header" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(std.testing.allocator, .{});
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     var request = Request.init("127.0.0.1");
@@ -2092,7 +1934,14 @@ test "adaptive retry: depleted bucket prevents retry" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(std.testing.allocator, .{ .retry_mode = .adaptive });
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = HttpClient.init(
+        std.testing.allocator,
+        std.testing.io,
+        &env_map,
+        .{ .retry_mode = .adaptive },
+    );
     defer client.deinit();
     client.token_bucket.current_capacity = 0.0;
 
@@ -2123,7 +1972,14 @@ test "adaptive retry: sufficient tokens allow retry" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(std.testing.allocator, .{ .retry_mode = .adaptive });
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = HttpClient.init(
+        std.testing.allocator,
+        std.testing.io,
+        &env_map,
+        .{ .retry_mode = .adaptive },
+    );
     defer client.deinit();
 
     var request = Request.init("127.0.0.1");
@@ -2161,7 +2017,14 @@ test "adaptive retry: throttle error depletes bucket and stops retry" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(std.testing.allocator, .{ .retry_mode = .adaptive });
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = HttpClient.init(
+        std.testing.allocator,
+        std.testing.io,
+        &env_map,
+        .{ .retry_mode = .adaptive },
+    );
     defer client.deinit();
     client.token_bucket.current_capacity = 4.0;
 
@@ -2192,7 +2055,14 @@ test "adaptive retry: onSuccess restores capacity" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(std.testing.allocator, .{ .retry_mode = .adaptive });
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = HttpClient.init(
+        std.testing.allocator,
+        std.testing.io,
+        &env_map,
+        .{ .retry_mode = .adaptive },
+    );
     defer client.deinit();
     client.token_bucket.current_capacity = 490.0;
 
@@ -2246,7 +2116,9 @@ test "gzip response is decompressed by doRequest" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(allocator, .{});
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = HttpClient.init(allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     var request = Request.init("127.0.0.1");
@@ -2267,72 +2139,6 @@ test "gzip response is decompressed by doRequest" {
     try std.testing.expectEqualStrings(plain, response.body);
 }
 
-test "request to unresponsive server respects timeout" {
-    // A server that accepts connections but never sends data simulates a
-    // hung connection (e.g. stalled TLS handshake).  The client's
-    // timeout_ms should bound how long the request blocks.
-    const SilentServer = struct {
-        server: std.net.Server,
-        address: std.net.Address,
-        thread: ?std.Thread = null,
-
-        fn init() !@This() {
-            const loopback = try std.net.Address.parseIp4("127.0.0.1", 0);
-            const server = try loopback.listen(.{ .reuse_address = true });
-            return .{ .server = server, .address = server.listen_address };
-        }
-
-        fn start(self: *@This()) !void {
-            self.thread = try std.Thread.spawn(.{}, run, .{self});
-        }
-
-        fn deinit(self: *@This()) void {
-            self.server.deinit();
-            if (self.thread) |thread| thread.join();
-        }
-
-        fn run(self: *@This()) void {
-            // Accept one connection, hold it open for 5s, then close.
-            // This bounds the test runtime while still exceeding the
-            // client's 500ms timeout to demonstrate the hang.
-            var conn = self.server.accept() catch return;
-            std.Thread.sleep(5 * std.time.ns_per_s);
-            conn.stream.close();
-        }
-    };
-
-    var server = try SilentServer.init();
-    defer server.deinit();
-    try server.start();
-
-    var client = HttpClient.init(std.testing.allocator, .{});
-    defer client.deinit();
-    client.timeout_ms = 500;
-
-    var request = Request.init("127.0.0.1");
-    defer request.deinit(std.testing.allocator);
-    request.method = .GET;
-    request.path = "/hang";
-    request.port = server.address.getPort();
-    request.tls = true; // TLS handshake blocks inside request() before timeout is set
-
-    const start_ns = std.time.nanoTimestamp();
-    const result = client.sendRequestWithOptions(
-        &request,
-        .{ .max_attempts = 1, .keep_alive = false },
-    );
-    const elapsed_ms: u64 = @intCast(@divFloor(
-        std.time.nanoTimestamp() - start_ns,
-        std.time.ns_per_ms,
-    ));
-
-    // The request must fail (server never responds).
-    try std.testing.expectError(error.ConnectionFailed, result);
-    // And it must fail within a reasonable multiple of the timeout,
-    // not hang for the OS default TCP timeout (~2 minutes).
-    try std.testing.expect(elapsed_ms < 3_000);
-}
-
 test "gzip response is decompressed by sendStreamingRequest" {
     const allocator = std.testing.allocator;
     const plain = "hello from a gzip-compressed streaming response";
@@ -2344,7 +2150,9 @@ test "gzip response is decompressed by sendStreamingRequest" {
     defer server.deinit();
     try server.start();
 
-    var client = HttpClient.init(allocator, .{});
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = HttpClient.init(allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     var request = Request.init("127.0.0.1");

@@ -12,7 +12,11 @@ test "assume role provider gets temporary credentials" {
         },
     };
 
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
     var provider = aws.assume_role.AssumeRoleProvider{
+        .io = std.testing.io,
+        .env_map = &env_map,
         .role_arn = "arn:aws:iam::000000000000:role/phase8-assume-role-test",
         .session_name = "integration-test",
         .external_id = null,
@@ -44,7 +48,11 @@ test "assume role with external id" {
         },
     };
 
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
     var provider = aws.assume_role.AssumeRoleProvider{
+        .io = std.testing.io,
+        .env_map = &env_map,
         .role_arn = "arn:aws:iam::000000000000:role/phase8-assume-role-test",
         .session_name = "external-id-test",
         .external_id = "my-external-id-123",
@@ -74,8 +82,12 @@ test "assume role works via CredentialsProvider union" {
         },
     };
 
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
     var cp = aws.CredentialsProvider{
         .assume_role = .{
+            .io = std.testing.io,
+            .env_map = &env_map,
             .role_arn = "arn:aws:iam::000000000000:role/phase8-assume-role-test",
             .session_name = "union-test",
             .external_id = null,
@@ -104,7 +116,11 @@ test "assumed role session token has substantial length" {
         },
     };
 
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
     var provider = aws.assume_role.AssumeRoleProvider{
+        .io = std.testing.io,
+        .env_map = &env_map,
         .role_arn = "arn:aws:iam::000000000000:role/phase8-assume-role-test",
         .session_name = "verify-session-name",
         .external_id = null,
@@ -134,7 +150,11 @@ test "assumed credentials have future expiration" {
         },
     };
 
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
     var provider = aws.assume_role.AssumeRoleProvider{
+        .io = std.testing.io,
+        .env_map = &env_map,
         .role_arn = "arn:aws:iam::000000000000:role/phase8-assume-role-test",
         .session_name = "expiration-test",
         .external_id = null,
@@ -163,7 +183,11 @@ test "assumed credentials access key differs from source" {
         },
     };
 
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
     var provider = aws.assume_role.AssumeRoleProvider{
+        .io = std.testing.io,
+        .env_map = &env_map,
         .role_arn = "arn:aws:iam::000000000000:role/phase8-assume-role-test",
         .session_name = "key-rotation-test",
         .external_id = null,

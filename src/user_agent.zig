@@ -24,7 +24,7 @@ pub fn buildUserAgent(
 }
 
 test "buildUserAgent starts with aws-sdk-zig/" {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}){};
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
 
@@ -35,7 +35,7 @@ test "buildUserAgent starts with aws-sdk-zig/" {
 }
 
 test "buildUserAgent contains ua/2.1" {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}){};
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
 
@@ -46,7 +46,7 @@ test "buildUserAgent contains ua/2.1" {
 }
 
 test "buildUserAgent contains lang/zig#" {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}){};
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
 
@@ -57,7 +57,7 @@ test "buildUserAgent contains lang/zig#" {
 }
 
 test "buildUserAgent contains api/sts#2011-06-15" {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}){};
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
 
@@ -70,7 +70,7 @@ test "buildUserAgent contains api/sts#2011-06-15" {
 }
 
 test "buildUserAgent contains os/" {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}){};
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
 

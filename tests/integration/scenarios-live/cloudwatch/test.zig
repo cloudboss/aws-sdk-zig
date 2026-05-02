@@ -3,7 +3,7 @@ const aws = @import("aws");
 const cloudwatch = @import("cloudwatch");
 const cloudwatchlogs = @import("cloudwatchlogs");
 
-var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var gpa: std.heap.DebugAllocator(.{}) = .init;
 var shared_cw_client: ?cloudwatch.Client = null;
 var shared_logs_client: ?cloudwatchlogs.Client = null;
 var shared_cfg: ?aws.Config = null;
@@ -11,14 +11,16 @@ var shared_alarm_name_buf: [64]u8 = undefined;
 var shared_alarm_name: []const u8 = "";
 var shared_log_group_buf: [64]u8 = undefined;
 var shared_log_group: []const u8 = "";
+var shared_env_map: std.process.Environ.Map = undefined;
 
 test "zest.beforeAll" {
     const allocator = gpa.allocator();
-    shared_cfg = try aws.Config.load(allocator, .{});
+    shared_env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    shared_cfg = try aws.Config.load(allocator, std.testing.io, &shared_env_map, .{});
     shared_cw_client = cloudwatch.Client.init(allocator, &shared_cfg.?);
     shared_logs_client = cloudwatchlogs.Client.init(allocator, &shared_cfg.?);
 
-    const ts = std.time.timestamp();
+    const ts = std.Io.Clock.real.now(std.testing.io).toSeconds();
     shared_alarm_name = try std.fmt.bufPrint(
         &shared_alarm_name_buf,
         "sdk-zig-live-alarm-{d}",
@@ -57,6 +59,7 @@ test "zest.afterAll" {
         }
     }
     if (shared_cfg) |*cfg| cfg.deinit();
+    shared_env_map.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
 }
 

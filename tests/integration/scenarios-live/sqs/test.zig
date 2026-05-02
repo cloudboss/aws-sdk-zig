@@ -2,17 +2,19 @@ const std = @import("std");
 const aws = @import("aws");
 const sqs = @import("sqs");
 
-var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var gpa: std.heap.DebugAllocator(.{}) = .init;
 var shared_client: ?sqs.Client = null;
 var shared_cfg: ?aws.Config = null;
 var shared_queue_url_buf: [512]u8 = undefined;
 var shared_queue_url: []const u8 = "";
 var shared_queue_name_buf: [64]u8 = undefined;
 var shared_queue_name: []const u8 = "";
+var shared_env_map: std.process.Environ.Map = undefined;
 
 test "zest.beforeAll" {
     const allocator = gpa.allocator();
-    shared_cfg = try aws.Config.load(allocator, .{});
+    shared_env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    shared_cfg = try aws.Config.load(allocator, std.testing.io, &shared_env_map, .{});
     shared_client = sqs.Client.init(allocator, &shared_cfg.?);
     {
         var arena = std.heap.ArenaAllocator.init(allocator);
@@ -21,7 +23,7 @@ test "zest.beforeAll" {
         const queue_name = try std.fmt.bufPrint(
             &shared_queue_name_buf,
             "sdk-zig-live-sqs-{d}",
-            .{std.time.timestamp()},
+            .{std.Io.Clock.real.now(std.testing.io).toSeconds()},
         );
         shared_queue_name = queue_name;
 
@@ -69,6 +71,7 @@ test "zest.afterAll" {
         }
     }
     if (shared_cfg) |*cfg| cfg.deinit();
+    shared_env_map.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
 }
 
@@ -81,7 +84,7 @@ test "createQueue returns queue URL" {
     const queue_name = try std.fmt.bufPrint(
         &name_buf,
         "sdk-zig-live-sqs-cq-{d}",
-        .{std.time.timestamp()},
+        .{std.Io.Clock.real.now(std.testing.io).toSeconds()},
     );
 
     const create_result = try client.createQueue(
@@ -269,7 +272,7 @@ test "listQueues includes created queue" {
         }
 
         if (!found and attempt + 1 < 10) {
-            std.Thread.sleep(300 * std.time.ns_per_ms);
+            std.testing.io.sleep(.fromMilliseconds(300), .awake) catch {};
         }
     }
 
@@ -302,7 +305,7 @@ test "sendMessageBatch sends multiple messages" {
     const queue_name = try std.fmt.bufPrint(
         &name_buf,
         "sdk-zig-live-sqs-batch-{d}",
-        .{std.time.timestamp()},
+        .{std.Io.Clock.real.now(std.testing.io).toSeconds()},
     );
 
     const create_result = try client.createQueue(
@@ -413,7 +416,7 @@ test "getQueueUrl returns URL for named queue" {
     const queue_name = try std.fmt.bufPrint(
         &name_buf,
         "sdk-zig-live-sqs-gu-{d}",
-        .{std.time.timestamp()},
+        .{std.Io.Clock.real.now(std.testing.io).toSeconds()},
     );
 
     const create_result = try client.createQueue(

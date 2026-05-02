@@ -25,24 +25,26 @@ pub const Credentials = struct {
     expiration: ?i64 = null,
 
     /// Check if credentials are expired (with default 5 minute buffer)
-    pub fn isExpired(self: Credentials) bool {
-        return self.isExpiredWithBuffer(default_expiry_buffer);
+    pub fn isExpired(self: Credentials, io: std.Io) bool {
+        return self.isExpiredWithBuffer(io, default_expiry_buffer);
     }
 
     /// Check if credentials are expired with a custom buffer (seconds)
-    pub fn isExpiredWithBuffer(self: Credentials, buffer: i64) bool {
+    pub fn isExpiredWithBuffer(self: Credentials, io: std.Io, buffer: i64) bool {
         const exp = self.expiration orelse return false;
-        return std.time.timestamp() >= (exp - buffer);
+        return std.Io.Clock.real.now(io).toSeconds() >= (exp - buffer);
     }
 };
 
 /// Return a jittered buffer value in [buffer/2, buffer] (seconds).
-/// Uses cryptographic randomness to avoid thundering herd on refresh.
-pub fn jitteredBuffer(buffer: i64) i64 {
+/// Jittered to avoid thundering herd on refresh.
+pub fn jitteredBuffer(io: std.Io, buffer: i64) i64 {
     if (buffer <= 1) return buffer;
     const half: u64 = @intCast(@divTrunc(buffer, 2));
     const range: u64 = @intCast(buffer - @as(i64, @intCast(half)) + 1);
-    const jitter = std.crypto.random.intRangeLessThan(u64, 0, range);
+    var bytes: [8]u8 = undefined;
+    io.random(&bytes);
+    const jitter = std.mem.readInt(u64, &bytes, .little) % range;
     return @intCast(half + jitter);
 }
 
@@ -51,7 +53,7 @@ pub const CredentialsProvider = union(enum) {
     /// Static credentials provided directly
     static: Credentials,
     /// Load from environment variables
-    environment: void,
+    environment: *const std.process.Environ.Map,
     /// Load from shared credentials file (~/.aws/credentials)
     file: FileProvider,
     /// Load from web identity token file (OIDC)
@@ -81,7 +83,7 @@ pub const CredentialsProvider = union(enum) {
     ) GetCredentialsError!Credentials {
         return switch (self.*) {
             .static => |creds| creds,
-            .environment => getFromEnvironment(),
+            .environment => |env_map| getFromEnvironment(env_map),
             .file => |*f| f.load(allocator) catch return error.CredentialsNotFound,
             .web_identity => |*w| w.getCredentials(allocator) catch
                 return error.CredentialsNotFound,
@@ -104,21 +106,23 @@ pub const CredentialsProvider = union(enum) {
 };
 
 /// Load credentials from environment variables
-pub fn getFromEnvironment() !Credentials {
-    const access_key = std.posix.getenv("AWS_ACCESS_KEY_ID") orelse
+pub fn getFromEnvironment(env_map: *const std.process.Environ.Map) !Credentials {
+    const access_key = env_map.get("AWS_ACCESS_KEY_ID") orelse
         return error.CredentialsNotFound;
-    const secret_key = std.posix.getenv("AWS_SECRET_ACCESS_KEY") orelse
+    const secret_key = env_map.get("AWS_SECRET_ACCESS_KEY") orelse
         return error.CredentialsNotFound;
 
     return Credentials{
         .access_key_id = access_key,
         .secret_access_key = secret_key,
-        .session_token = std.posix.getenv("AWS_SESSION_TOKEN"),
+        .session_token = env_map.get("AWS_SESSION_TOKEN"),
     };
 }
 
 /// IMDS-based credential provider (EC2 instance metadata)
 pub const ImdsProvider = struct {
+    io: std.Io,
+    env_map: *const std.process.Environ.Map,
     client: ?imds.Client = null,
     endpoint: ?[]const u8 = null,
 
@@ -128,7 +132,7 @@ pub const ImdsProvider = struct {
     pub fn load(self: *Self, allocator: Allocator) !Credentials {
         // Initialize client if needed
         if (self.client == null) {
-            self.client = try imds.Client.init(allocator, .{
+            self.client = try imds.Client.init(allocator, self.io, self.env_map, .{
                 .endpoint = self.endpoint,
             });
         }
@@ -163,6 +167,8 @@ pub const ImdsProvider = struct {
 
 /// ECS container credential provider
 pub const EcsProvider = struct {
+    io: std.Io,
+    env_map: *const std.process.Environ.Map,
     provider: ?ecs.Provider = null,
 
     const Self = @This();
@@ -170,7 +176,7 @@ pub const EcsProvider = struct {
     /// Load credentials from ECS container metadata service
     pub fn load(self: *Self, allocator: Allocator) !Credentials {
         if (self.provider == null) {
-            self.provider = ecs.Provider.init(allocator);
+            self.provider = ecs.Provider.init(allocator, self.io, self.env_map);
         }
 
         var ecs_creds = try self.provider.?.getCredentials();
@@ -196,6 +202,8 @@ pub const EcsProvider = struct {
 
 /// File-based credential provider (~/.aws/credentials)
 pub const FileProvider = struct {
+    io: std.Io,
+    env_map: *const std.process.Environ.Map,
     profile: ?[]const u8 = null,
     path: ?[]const u8 = null,
 
@@ -206,13 +214,18 @@ pub const FileProvider = struct {
         const path = try self.resolvePath(allocator);
         defer allocator.free(path);
 
-        const file = std.fs.openFileAbsolute(path, .{}) catch |err| {
+        var file = std.Io.Dir.openFileAbsolute(self.io, path, .{}) catch |err| {
             if (err == error.FileNotFound) return error.CredentialsNotFound;
             return error.CredentialsNotFound;
         };
-        defer file.close();
+        defer file.close(self.io);
 
-        const content = file.readToEndAlloc(allocator, 1024 * 1024) catch {
+        var read_buf: [4096]u8 = undefined;
+        var rdr = file.reader(self.io, &read_buf);
+        const content = rdr.interface.allocRemaining(
+            allocator,
+            std.Io.Limit.limited(1024 * 1024),
+        ) catch {
             return error.CredentialsNotFound;
         };
         defer allocator.free(content);
@@ -229,12 +242,12 @@ pub const FileProvider = struct {
         }
 
         // 2. AWS_SHARED_CREDENTIALS_FILE environment variable
-        if (std.posix.getenv("AWS_SHARED_CREDENTIALS_FILE")) |p| {
+        if (self.env_map.get("AWS_SHARED_CREDENTIALS_FILE")) |p| {
             return try allocator.dupe(u8, p);
         }
 
         // 3. Default: ~/.aws/credentials
-        const home = std.posix.getenv("HOME") orelse return error.CredentialsNotFound;
+        const home = self.env_map.get("HOME") orelse return error.CredentialsNotFound;
         return std.fmt.allocPrint(allocator, "{s}/.aws/credentials", .{home});
     }
 
@@ -256,6 +269,10 @@ pub const FileProvider = struct {
 pub const ChainProvider = struct {
     /// Long-lived allocator used for owning cached credential strings.
     allocator: Allocator = std.heap.page_allocator,
+    /// Io instance used by inner providers when they need to perform I/O.
+    io: std.Io,
+    /// Environment variables for env-based providers and HOME/AWS_PROFILE lookups.
+    env_map: *const std.process.Environ.Map,
     /// Cached credentials from last successful retrieval
     cached: ?Credentials = null,
     /// Whether cached credential strings are owned by this provider.
@@ -282,7 +299,7 @@ pub const ChainProvider = struct {
     /// null = cache forever (original behavior).
     default_expiration: ?i64 = 900,
     /// Mutex for thread-safe credential caching
-    mutex: std.Thread.Mutex = .{},
+    mutex: std.Io.Mutex = .init,
 
     const Self = @This();
 
@@ -300,12 +317,12 @@ pub const ChainProvider = struct {
 
     /// Get credentials, using cache if valid
     pub fn getCredentials(self: *Self, allocator: Allocator) !Credentials {
-        self.mutex.lock();
-        defer self.mutex.unlock();
+        self.mutex.lockUncancelable(self.io);
+        defer self.mutex.unlock(self.io);
 
         // Return cached credentials if still valid
         if (self.cached) |creds| {
-            if (!creds.isExpiredWithBuffer(jitteredBuffer(self.expiry_buffer))) {
+            if (!creds.isExpiredWithBuffer(self.io, jitteredBuffer(self.io, self.expiry_buffer))) {
                 return creds;
             }
         }
@@ -361,15 +378,17 @@ pub const ChainProvider = struct {
     /// Try a specific provider
     fn tryProvider(self: *Self, allocator: Allocator, provider: ProviderType) !Credentials {
         return switch (provider) {
-            .environment => getFromEnvironment(),
+            .environment => getFromEnvironment(self.env_map),
             .file => blk: {
-                var fp = FileProvider{ .profile = self.profile };
+                var fp = FileProvider{
+                    .io = self.io,
+                    .env_map = self.env_map,
+                    .profile = self.profile,
+                };
                 break :blk fp.load(allocator);
             },
             .profile_assume_role => blk: {
-                var cf = config_mod.loadConfigFile(
-                    allocator,
-                ) catch
+                var cf = config_mod.loadConfigFile(allocator, self.io, self.env_map) catch
                     break :blk error.CredentialsNotFound;
                 defer cf.deinit();
                 const p = cf.getProfile(
@@ -383,6 +402,8 @@ pub const ChainProvider = struct {
                 const region = self.region orelse
                     break :blk error.CredentialsNotFound;
                 var fp = FileProvider{
+                    .io = self.io,
+                    .env_map = self.env_map,
                     .profile = src_profile,
                 };
                 const source_creds = fp.load(
@@ -393,6 +414,8 @@ pub const ChainProvider = struct {
                     .static = source_creds,
                 };
                 var ar = assume_role.AssumeRoleProvider{
+                    .io = self.io,
+                    .env_map = self.env_map,
                     .role_arn = role_arn,
                     .session_name = p.role_session_name orelse
                         "aws-sdk-zig",
@@ -405,9 +428,7 @@ pub const ChainProvider = struct {
                 break :blk ar.getCredentials(allocator);
             },
             .profile_sso => blk: {
-                var cf = config_mod.loadConfigFile(
-                    allocator,
-                ) catch
+                var cf = config_mod.loadConfigFile(allocator, self.io, self.env_map) catch
                     break :blk error.CredentialsNotFound;
                 defer cf.deinit();
                 const p = cf.getProfile(
@@ -428,6 +449,8 @@ pub const ChainProvider = struct {
                     p.sso_region orelse
                     break :blk error.CredentialsNotFound;
                 var sp = sso.SsoProvider{
+                    .io = self.io,
+                    .env_map = self.env_map,
                     .sso_account_id = acct,
                     .sso_role_name = role,
                     .sso_region = sso_region,
@@ -436,9 +459,7 @@ pub const ChainProvider = struct {
                 break :blk sp.getCredentials(allocator);
             },
             .profile_process => blk: {
-                var cf = config_mod.loadConfigFile(
-                    allocator,
-                ) catch
+                var cf = config_mod.loadConfigFile(allocator, self.io, self.env_map) catch
                     break :blk error.CredentialsNotFound;
                 defer cf.deinit();
                 const p = cf.getProfile(
@@ -448,14 +469,13 @@ pub const ChainProvider = struct {
                 const command = p.credential_process orelse
                     break :blk error.CredentialsNotFound;
                 var pp = process.ProcessProvider{
+                    .io = self.io,
                     .command = command,
                 };
                 break :blk pp.getCredentials(allocator);
             },
             .profile_web_identity => blk: {
-                var cf = config_mod.loadConfigFile(
-                    allocator,
-                ) catch
+                var cf = config_mod.loadConfigFile(allocator, self.io, self.env_map) catch
                     break :blk error.CredentialsNotFound;
                 defer cf.deinit();
                 const p = cf.getProfile(
@@ -470,6 +490,8 @@ pub const ChainProvider = struct {
                 const region = self.region orelse
                     break :blk error.CredentialsNotFound;
                 var wp = web_identity.WebIdentityProvider{
+                    .io = self.io,
+                    .env_map = self.env_map,
                     .role_arn = role_arn,
                     .token_file = token_file,
                     .session_name = p.role_session_name orelse
@@ -482,18 +504,20 @@ pub const ChainProvider = struct {
             },
             .web_identity => blk: {
                 // Only attempt if env vars are set
-                const token_file = std.posix.getenv("AWS_WEB_IDENTITY_TOKEN_FILE") orelse
+                const token_file = self.env_map.get("AWS_WEB_IDENTITY_TOKEN_FILE") orelse
                     break :blk error.CredentialsNotFound;
-                const role_arn = std.posix.getenv("AWS_ROLE_ARN") orelse
+                const role_arn = self.env_map.get("AWS_ROLE_ARN") orelse
                     break :blk error.CredentialsNotFound;
                 const region = self.region orelse
                     break :blk error.CredentialsNotFound;
 
                 if (self.web_identity_provider == null) {
                     self.web_identity_provider = web_identity.WebIdentityProvider{
+                        .io = self.io,
+                        .env_map = self.env_map,
                         .role_arn = role_arn,
                         .token_file = token_file,
-                        .session_name = std.posix.getenv("AWS_ROLE_SESSION_NAME") orelse
+                        .session_name = self.env_map.get("AWS_ROLE_SESSION_NAME") orelse
                             "aws-sdk-zig",
                         .region = region,
                         .endpoint_url = self.endpoint_url,
@@ -504,19 +528,25 @@ pub const ChainProvider = struct {
             },
             .ecs => blk: {
                 if (self.ecs_provider == null) {
-                    self.ecs_provider = EcsProvider{};
+                    self.ecs_provider = EcsProvider{
+                        .io = self.io,
+                        .env_map = self.env_map,
+                    };
                 }
                 break :blk self.ecs_provider.?.load(allocator);
             },
             .imds => blk: {
                 // Respect AWS_EC2_METADATA_DISABLED (matches AWS SDK behavior)
-                if (std.posix.getenv("AWS_EC2_METADATA_DISABLED")) |val| {
+                if (self.env_map.get("AWS_EC2_METADATA_DISABLED")) |val| {
                     if (std.mem.eql(u8, val, "true")) {
                         break :blk error.CredentialsNotFound;
                     }
                 }
                 if (self.imds_provider == null) {
-                    self.imds_provider = ImdsProvider{};
+                    self.imds_provider = ImdsProvider{
+                        .io = self.io,
+                        .env_map = self.env_map,
+                    };
                 }
                 break :blk self.imds_provider.?.load(allocator);
             },
@@ -545,7 +575,7 @@ pub const ChainProvider = struct {
         cached.session_token = session_token;
         if (cached.expiration == null) {
             if (self.default_expiration) |ttl| {
-                cached.expiration = std.time.timestamp() + ttl;
+                cached.expiration = std.Io.Clock.real.now(self.io).toSeconds() + ttl;
             }
         }
         self.cached = cached;
@@ -568,15 +598,15 @@ pub const ChainProvider = struct {
 
     /// Clear cached credentials (forces refresh on next call)
     pub fn clearCache(self: *Self) void {
-        self.mutex.lock();
-        defer self.mutex.unlock();
+        self.mutex.lockUncancelable(self.io);
+        defer self.mutex.unlock(self.io);
         self.freeCachedCredentials();
     }
 
     /// Clean up resources
     pub fn deinit(self: *Self) void {
-        self.mutex.lock();
-        defer self.mutex.unlock();
+        self.mutex.lockUncancelable(self.io);
+        defer self.mutex.unlock(self.io);
 
         self.freeCachedCredentials();
 
@@ -624,7 +654,7 @@ fn parseCredentialsFile(
 
         // Parse key=value in target section
         if (in_target_section) {
-            if (std.mem.indexOfScalar(u8, trimmed, '=')) |eq_idx| {
+            if (std.mem.findScalar(u8, trimmed, '=')) |eq_idx| {
                 const key = std.mem.trim(u8, trimmed[0..eq_idx], " \t");
                 const value = std.mem.trim(u8, trimmed[eq_idx + 1 ..], " \t");
 
@@ -679,20 +709,20 @@ test "credentials expiration" {
         .secret_access_key = "test",
         .expiration = 0,
     };
-    try std.testing.expect(expired.isExpired());
+    try std.testing.expect(expired.isExpired(std.testing.io));
 
     const valid = Credentials{
         .access_key_id = "test",
         .secret_access_key = "test",
-        .expiration = std.time.timestamp() + 3600,
+        .expiration = std.Io.Clock.real.now(std.testing.io).toSeconds() + 3600,
     };
-    try std.testing.expect(!valid.isExpired());
+    try std.testing.expect(!valid.isExpired(std.testing.io));
 
     const permanent = Credentials{
         .access_key_id = "test",
         .secret_access_key = "test",
     };
-    try std.testing.expect(!permanent.isExpired());
+    try std.testing.expect(!permanent.isExpired(std.testing.io));
 }
 
 test "parseCredentialsFile default profile" {
@@ -809,14 +839,16 @@ test "parseCredentialsFile returns owned strings surviving source free" {
 }
 
 test "chain provider caches credentials" {
-    var chain = ChainProvider{ .allocator = std.testing.allocator };
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var chain = ChainProvider{ .allocator = std.testing.allocator, .io = std.testing.io, .env_map = &env_map };
     defer chain.deinit();
 
     // Manually set cached credentials
     chain.cached = Credentials{
         .access_key_id = "CACHED_KEY",
         .secret_access_key = "CACHED_SECRET",
-        .expiration = std.time.timestamp() + 3600, // Valid for 1 hour
+        .expiration = std.Io.Clock.real.now(std.testing.io).toSeconds() + 3600, // Valid for 1 hour
     };
 
     const creds = try chain.getCredentials(std.testing.allocator);
@@ -824,7 +856,9 @@ test "chain provider caches credentials" {
 }
 
 test "chain provider clear cache" {
-    var chain = ChainProvider{ .allocator = std.testing.allocator };
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var chain = ChainProvider{ .allocator = std.testing.allocator, .io = std.testing.io, .env_map = &env_map };
     defer chain.deinit();
 
     chain.cached = Credentials{
@@ -838,7 +872,11 @@ test "chain provider clear cache" {
 }
 
 test "profile_assume_role skips when profile lacks role_arn" {
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
     var chain = ChainProvider{
+        .io = std.testing.io,
+        .env_map = &env_map,
         .allocator = std.testing.allocator,
         .profile = "no-such-profile",
         .region = "us-east-1",
@@ -854,7 +892,11 @@ test "profile_assume_role skips when profile lacks role_arn" {
 }
 
 test "profile_process skips when profile lacks credential_process" {
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
     var chain = ChainProvider{
+        .io = std.testing.io,
+        .env_map = &env_map,
         .allocator = std.testing.allocator,
         .profile = "no-such-profile",
         .region = "us-east-1",
@@ -870,7 +912,11 @@ test "profile_process skips when profile lacks credential_process" {
 }
 
 test "profile_sso skips when profile lacks sso_session" {
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
     var chain = ChainProvider{
+        .io = std.testing.io,
+        .env_map = &env_map,
         .allocator = std.testing.allocator,
         .profile = "no-such-profile",
         .region = "us-east-1",
@@ -889,32 +935,36 @@ test "jitteredBuffer returns values in [buffer/2, buffer]" {
     const buffer: i64 = 300;
     const half = @divTrunc(buffer, 2);
     for (0..100) |_| {
-        const result = jitteredBuffer(buffer);
+        const result = jitteredBuffer(std.testing.io, buffer);
         try std.testing.expect(result >= half);
         try std.testing.expect(result <= buffer);
     }
 }
 
 test "jitteredBuffer edge cases" {
-    try std.testing.expectEqual(@as(i64, 0), jitteredBuffer(0));
-    try std.testing.expectEqual(@as(i64, 1), jitteredBuffer(1));
+    try std.testing.expectEqual(@as(i64, 0), jitteredBuffer(std.testing.io, 0));
+    try std.testing.expectEqual(@as(i64, 1), jitteredBuffer(std.testing.io, 1));
 }
 
 test "isExpiredWithBuffer with custom buffer" {
-    const now = std.time.timestamp();
+    const now = std.Io.Clock.real.now(std.testing.io).toSeconds();
     const creds = Credentials{
         .access_key_id = "test",
         .secret_access_key = "test",
         .expiration = now + 100,
     };
     // With a 200-second buffer, should be expired
-    try std.testing.expect(creds.isExpiredWithBuffer(200));
+    try std.testing.expect(creds.isExpiredWithBuffer(std.testing.io, 200));
     // With a 50-second buffer, should not be expired
-    try std.testing.expect(!creds.isExpiredWithBuffer(50));
+    try std.testing.expect(!creds.isExpiredWithBuffer(std.testing.io, 50));
 }
 
 test "cacheCredentials stamps permanent credentials with synthetic expiration" {
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
     var chain = ChainProvider{
+        .io = std.testing.io,
+        .env_map = &env_map,
         .allocator = std.testing.allocator,
         .default_expiration = 900,
     };
@@ -927,19 +977,23 @@ test "cacheCredentials stamps permanent credentials with synthetic expiration" {
     // Cached copy should have an expiration set
     try std.testing.expect(chain.cached.?.expiration != null);
     const exp = chain.cached.?.expiration.?;
-    const now = std.time.timestamp();
+    const now = std.Io.Clock.real.now(std.testing.io).toSeconds();
     // Should be roughly now + 900 (allow 5 second tolerance)
     try std.testing.expect(exp >= now + 895);
     try std.testing.expect(exp <= now + 905);
 }
 
 test "cacheCredentials leaves already-expiring credentials unchanged" {
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
     var chain = ChainProvider{
+        .io = std.testing.io,
+        .env_map = &env_map,
         .allocator = std.testing.allocator,
         .default_expiration = 900,
     };
     defer chain.deinit();
-    const now = std.time.timestamp();
+    const now = std.Io.Clock.real.now(std.testing.io).toSeconds();
     const original_exp = now + 3600;
     const creds = Credentials{
         .access_key_id = "TEMP_KEY",
@@ -951,7 +1005,11 @@ test "cacheCredentials leaves already-expiring credentials unchanged" {
 }
 
 test "multi-threaded getCredentials does not crash" {
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
     var chain = ChainProvider{
+        .io = std.testing.io,
+        .env_map = &env_map,
         .allocator = std.testing.allocator,
         .default_expiration = null,
     };
@@ -959,7 +1017,7 @@ test "multi-threaded getCredentials does not crash" {
     chain.cached = Credentials{
         .access_key_id = "MT_KEY",
         .secret_access_key = "MT_SECRET",
-        .expiration = std.time.timestamp() + 3600,
+        .expiration = std.Io.Clock.real.now(std.testing.io).toSeconds() + 3600,
     };
 
     const Thread = std.Thread;
@@ -983,7 +1041,9 @@ test "multi-threaded getCredentials does not crash" {
 }
 
 test "cacheCredentials owns cached strings beyond source allocator lifetime" {
-    var chain = ChainProvider{ .allocator = std.testing.allocator };
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var chain = ChainProvider{ .allocator = std.testing.allocator, .io = std.testing.io, .env_map = &env_map };
     defer chain.deinit();
 
     var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
@@ -997,7 +1057,7 @@ test "cacheCredentials owns cached strings beyond source allocator lifetime" {
         .access_key_id = source_access_key,
         .secret_access_key = source_secret_key,
         .session_token = source_token,
-        .expiration = std.time.timestamp() + 3600,
+        .expiration = std.Io.Clock.real.now(std.testing.io).toSeconds() + 3600,
     };
 
     try chain.cacheCredentials(source_creds);

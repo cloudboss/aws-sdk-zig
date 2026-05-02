@@ -2,9 +2,10 @@ const std = @import("std");
 const aws = @import("aws");
 const s3 = @import("s3");
 
-var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var gpa: std.heap.DebugAllocator(.{}) = .init;
 var shared_client: s3.Client = undefined;
 var shared_cfg: aws.Config = undefined;
+var shared_env_map: std.process.Environ.Map = undefined;
 var shared_init = false;
 var shared_bucket_buf: [96]u8 = undefined;
 var shared_bucket: []const u8 = "";
@@ -14,19 +15,20 @@ test "zest.beforeAll" {
     var arena = std.heap.ArenaAllocator.init(allocator);
     defer arena.deinit();
 
-    shared_cfg = try aws.Config.load(allocator, .{});
+    shared_env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    shared_cfg = try aws.Config.load(allocator, std.testing.io, &shared_env_map, .{});
     errdefer shared_cfg.deinit();
     shared_client = s3.Client.init(allocator, &shared_cfg);
     errdefer shared_client.deinit();
 
     var rand_buf: [4]u8 = undefined;
-    std.crypto.random.bytes(&rand_buf);
+    std.testing.io.random(&rand_buf);
     const rand_suffix = std.mem.readInt(u32, &rand_buf, .little);
 
     shared_bucket = try std.fmt.bufPrint(
         &shared_bucket_buf,
         "sdk-zig-live-s3-{d}-{x}",
-        .{ std.time.milliTimestamp(), rand_suffix },
+        .{ std.Io.Clock.real.now(std.testing.io).toMilliseconds(), rand_suffix },
     );
 
     var create_bucket_diagnostic: s3.ServiceError = undefined;
@@ -140,6 +142,7 @@ test "zest.afterAll" {
 
     shared_client.deinit();
     shared_cfg.deinit();
+    shared_env_map.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
 }
 

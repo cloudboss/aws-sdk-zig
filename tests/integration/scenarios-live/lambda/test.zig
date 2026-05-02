@@ -3,10 +3,11 @@ const aws = @import("aws");
 const iam = @import("iam");
 const lambda = @import("lambda");
 
-var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var gpa: std.heap.DebugAllocator(.{}) = .init;
 var lambda_client: lambda.Client = undefined;
 var iam_client: iam.Client = undefined;
 var shared_cfg: aws.Config = undefined;
+var shared_env_map: std.process.Environ.Map = undefined;
 var shared_init = false;
 
 var fn_name_buf: [64]u8 = undefined;
@@ -34,11 +35,12 @@ test "zest.beforeAll" {
     var arena = std.heap.ArenaAllocator.init(allocator);
     defer arena.deinit();
 
-    shared_cfg = try aws.Config.load(allocator, .{});
+    shared_env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    shared_cfg = try aws.Config.load(allocator, std.testing.io, &shared_env_map, .{});
     iam_client = iam.Client.init(allocator, &shared_cfg);
     lambda_client = lambda.Client.init(allocator, &shared_cfg);
 
-    const ts = std.time.timestamp();
+    const ts = std.Io.Clock.real.now(std.testing.io).toSeconds();
 
     // 1. Create IAM execution role
     role_name = try std.fmt.bufPrint(
@@ -83,13 +85,14 @@ test "zest.beforeAll" {
     );
 
     // 3. Wait for IAM propagation
-    std.Thread.sleep(10 * std.time.ns_per_s);
+    std.testing.io.sleep(.fromSeconds(10), .awake) catch {};
 
     // 4. Read ZIP from setup.sh output
-    const zip_bytes = try std.fs.cwd().readFileAlloc(
-        allocator,
+    const zip_bytes = try std.Io.Dir.cwd().readFileAlloc(
+        std.testing.io,
         "_output/lambda-function.zip",
-        10 * 1024 * 1024,
+        allocator,
+        .limited(10 * 1024 * 1024),
     );
     defer allocator.free(zip_bytes);
 
@@ -138,7 +141,7 @@ test "zest.beforeAll" {
                 .resource_not_found_exception,
                 => {
                     if (create_attempts < 20) {
-                        std.Thread.sleep(3 * std.time.ns_per_s);
+                        std.testing.io.sleep(.fromSeconds(3), .awake) catch {};
                         continue;
                     }
                 },
@@ -161,7 +164,7 @@ test "zest.beforeAll" {
     // 6. Wait for function to become Active
     var attempts: usize = 0;
     while (attempts < 15) : (attempts += 1) {
-        std.Thread.sleep(2 * std.time.ns_per_s);
+        std.testing.io.sleep(.fromSeconds(2), .awake) catch {};
         const cfg_result =
             try lambda_client.getFunctionConfiguration(
                 arena.allocator(),
@@ -214,6 +217,7 @@ test "zest.afterAll" {
     lambda_client.deinit();
     iam_client.deinit();
     shared_cfg.deinit();
+    shared_env_map.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
 }
 
@@ -331,7 +335,7 @@ test "updateFunctionConfiguration changes description" {
     );
 
     // Wait briefly for the update to propagate
-    std.Thread.sleep(2 * std.time.ns_per_s);
+    std.testing.io.sleep(.fromSeconds(2), .awake) catch {};
 
     const result =
         try lambda_client.getFunctionConfiguration(

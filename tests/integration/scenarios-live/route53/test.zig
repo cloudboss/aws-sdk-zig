@@ -3,10 +3,11 @@ const aws = @import("aws");
 const route53 = @import("route53");
 const ec2 = @import("ec2");
 
-var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var gpa: std.heap.DebugAllocator(.{}) = .init;
 var shared_r53_client: ?route53.Client = null;
 var shared_ec2_client: ?ec2.Client = null;
 var shared_cfg: ?aws.Config = null;
+var shared_env_map: std.process.Environ.Map = undefined;
 
 var shared_zone_id_buf: [64]u8 = undefined;
 var shared_zone_id: []const u8 = "";
@@ -22,11 +23,12 @@ test "zest.beforeAll" {
     var arena = std.heap.ArenaAllocator.init(allocator);
     defer arena.deinit();
 
-    shared_cfg = try aws.Config.load(allocator, .{});
+    shared_env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    shared_cfg = try aws.Config.load(allocator, std.testing.io, &shared_env_map, .{});
     shared_r53_client = route53.Client.init(allocator, &shared_cfg.?);
     shared_ec2_client = ec2.Client.init(allocator, &shared_cfg.?);
 
-    const ts = std.time.timestamp();
+    const ts = std.Io.Clock.real.now(std.testing.io).toSeconds();
 
     // Create VPC for private hosted zone association.
     const vpc_result = try shared_ec2_client.?.createVpc(
@@ -58,7 +60,7 @@ test "zest.beforeAll" {
         .{},
     );
 
-    std.Thread.sleep(200 * std.time.ns_per_ms);
+    std.testing.io.sleep(.fromMilliseconds(200), .awake) catch {};
 
     // Create private hosted zone.
     shared_caller_ref = try std.fmt.bufPrint(
@@ -106,7 +108,7 @@ test "zest.beforeAll" {
     @memcpy(shared_zone_id_buf[0..zone_id.len], zone_id);
     shared_zone_id = shared_zone_id_buf[0..zone_id.len];
 
-    std.Thread.sleep(200 * std.time.ns_per_ms);
+    std.testing.io.sleep(.fromMilliseconds(200), .awake) catch {};
 
     // Tag the hosted zone.
     _ = try shared_r53_client.?.changeTagsForResource(
@@ -162,14 +164,15 @@ test "zest.afterAll" {
                             },
                             .{},
                         ) catch {};
-                        std.Thread.sleep(
-                            200 * std.time.ns_per_ms,
-                        );
+                        std.testing.io.sleep(
+                            .fromMilliseconds(200),
+                            .awake,
+                        ) catch {};
                     }
                 }
             } else |_| {}
 
-            std.Thread.sleep(200 * std.time.ns_per_ms);
+            std.testing.io.sleep(.fromMilliseconds(200), .awake) catch {};
 
             _ = r53.deleteHostedZone(
                 alloc,
@@ -193,6 +196,7 @@ test "zest.afterAll" {
     }
 
     if (shared_cfg) |*cfg| cfg.deinit();
+    shared_env_map.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
 }
 
@@ -279,7 +283,7 @@ test "changeResourceRecordSets creates A record" {
         .{},
     );
 
-    std.Thread.sleep(200 * std.time.ns_per_ms);
+    std.testing.io.sleep(.fromMilliseconds(200), .awake) catch {};
 }
 
 test "listResourceRecordSets includes A record" {
@@ -338,7 +342,7 @@ test "changeResourceRecordSets deletes A record" {
         .{},
     );
 
-    std.Thread.sleep(200 * std.time.ns_per_ms);
+    std.testing.io.sleep(.fromMilliseconds(200), .awake) catch {};
 }
 
 test "listHostedZonesByName returns zone" {

@@ -2,16 +2,18 @@ const std = @import("std");
 const aws = @import("aws");
 const dynamodb = @import("dynamodb");
 
-var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var gpa: std.heap.DebugAllocator(.{}) = .init;
 var shared_client: dynamodb.Client = undefined;
 var shared_cfg: aws.Config = undefined;
+var shared_env_map: std.process.Environ.Map = undefined;
 var shared_init = false;
 var shared_table_name_buf: [64]u8 = undefined;
 var shared_table: []const u8 = "";
 
 test "zest.beforeAll" {
     const allocator = gpa.allocator();
-    shared_cfg = try aws.Config.load(allocator, .{});
+    shared_env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    shared_cfg = try aws.Config.load(allocator, std.testing.io, &shared_env_map, .{});
     shared_client = dynamodb.Client.init(allocator, &shared_cfg);
 
     var arena = std.heap.ArenaAllocator.init(allocator);
@@ -20,7 +22,7 @@ test "zest.beforeAll" {
     shared_table = try std.fmt.bufPrint(
         &shared_table_name_buf,
         "sdk-zig-live-ddb-{d}",
-        .{std.time.milliTimestamp()},
+        .{std.Io.Clock.real.now(std.testing.io).toMilliseconds()},
     );
 
     const create_result = try shared_client.createTable(
@@ -88,6 +90,7 @@ test "zest.afterAll" {
     }
     shared_client.deinit();
     shared_cfg.deinit();
+    shared_env_map.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
 }
 

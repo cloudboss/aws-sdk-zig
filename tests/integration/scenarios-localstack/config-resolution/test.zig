@@ -8,7 +8,9 @@ test "Config.load resolves settings from config file" {
     // AWS_CONFIG_FILE points to a temp file with max_attempts=7
     // and retry_mode=adaptive under [default]. These settings
     // have no env-var overrides, so they must come from the file.
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
 
     // No explicit profile and no AWS_PROFILE -- must fall back to "default".

@@ -558,11 +558,11 @@ class SerdeGenerator(
         writer.openBlock("while (try reader.next()) |event| {")
         writer.openBlock("switch (event) {")
 
-        // .element_start branch -- use |_| if no members need the element name
+        // .element_start branch -- omit the capture if no members need the element name
         if (hasMembers) {
             writer.openBlock(".element_start => |e| {")
         } else {
-            writer.openBlock(".element_start => |_| {")
+            writer.openBlock(".element_start => {")
         }
 
         var first = true
@@ -765,7 +765,7 @@ class SerdeGenerator(
             fnName, returnType,
         )
 
-        writer.write("var list: std.ArrayList(\$L) = .{};", elementTypeName)
+        writer.write("var list: std.ArrayList(\$L) = .empty;", elementTypeName)
         writer.openBlock("while (try reader.next()) |event| {")
         writer.openBlock("switch (event) {")
         writer.openBlock(".element_start => |e| {")
@@ -888,7 +888,7 @@ class SerdeGenerator(
             "aws.map.MapEntry($valueZigType)"
         }
 
-        writer.write("var list: std.ArrayList(\$L) = .{};", entryType)
+        writer.write("var list: std.ArrayList(\$L) = .empty;", entryType)
         writer.openBlock("while (try reader.next()) |event| {")
         writer.openBlock("switch (event) {")
         writer.openBlock(".element_start => |e| {")

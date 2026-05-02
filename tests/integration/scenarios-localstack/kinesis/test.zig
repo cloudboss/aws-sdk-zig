@@ -2,9 +2,10 @@ const std = @import("std");
 const aws = @import("aws");
 const kinesis = @import("kinesis");
 
-var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var gpa: std.heap.DebugAllocator(.{}) = .init;
 var shared_client: kinesis.Client = undefined;
 var shared_cfg: aws.Config = undefined;
+var shared_env_map: std.process.Environ.Map = undefined;
 var shared_init = false;
 
 const stream_name = "sdk-zig-kinesis-test";
@@ -16,7 +17,8 @@ var consumer_arn: []const u8 = "";
 
 test "zest.beforeAll" {
     const allocator = gpa.allocator();
-    shared_cfg = try aws.Config.load(allocator, .{});
+    shared_env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    shared_cfg = try aws.Config.load(allocator, std.testing.io, &shared_env_map, .{});
     shared_client = kinesis.Client.initWithOptions(
         allocator,
         &shared_cfg,
@@ -53,7 +55,7 @@ test "zest.beforeAll" {
             stream_arn = stream_arn_buf[0..len];
             break;
         }
-        std.Thread.sleep(500 * std.time.ns_per_ms);
+        std.testing.io.sleep(.fromMilliseconds(500), .awake) catch {};
     }
     if (stream_arn.len == 0) return error.StreamNotActive;
 
@@ -86,7 +88,7 @@ test "zest.beforeAll" {
         if (desc.consumer_description) |cd| {
             if (cd.consumer_status == .active) break;
         }
-        std.Thread.sleep(500 * std.time.ns_per_ms);
+        std.testing.io.sleep(.fromMilliseconds(500), .awake) catch {};
     }
 
     shared_init = true;
@@ -119,6 +121,7 @@ test "zest.afterAll" {
     }
     shared_client.deinit();
     shared_cfg.deinit();
+    shared_env_map.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
 }
 

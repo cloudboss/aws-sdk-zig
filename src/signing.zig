@@ -27,13 +27,14 @@ pub const PresignOptions = struct {
 /// owned string that the caller must free.
 pub fn presignRequest(
     allocator: Allocator,
+    io: std.Io,
     request: *const http.Request,
     credentials: Credentials,
     region: []const u8,
     service: []const u8,
     options: PresignOptions,
 ) ![]const u8 {
-    const timestamp = std.time.timestamp();
+    const timestamp = std.Io.Clock.real.now(io).toSeconds();
     const datetime = formatAmzDate(timestamp);
     const datestamp = datetime[0..8];
 
@@ -166,7 +167,7 @@ fn buildPresignCanonicalQuery(
     expires_seconds: u64,
     session_token: ?[]const u8,
 ) ![]const u8 {
-    var pairs: std.ArrayList(QueryPair) = .{};
+    var pairs: std.ArrayList(QueryPair) = .empty;
     defer pairs.deinit(allocator);
 
     // Parse existing query params
@@ -174,7 +175,7 @@ fn buildPresignCanonicalQuery(
         var param_iter = std.mem.splitScalar(u8, q, '&');
         while (param_iter.next()) |param| {
             if (param.len == 0) continue;
-            if (std.mem.indexOfScalar(u8, param, '=')) |eq_idx| {
+            if (std.mem.findScalar(u8, param, '=')) |eq_idx| {
                 try pairs.append(allocator, .{
                     .key = param[0..eq_idx],
                     .value = param[eq_idx + 1 ..],
@@ -222,7 +223,7 @@ fn buildPresignCanonicalQuery(
 
     // All values are already URI-encoded (existing query params by the
     // serializer, X-Amz-* params above), so just sort and rejoin.
-    var result: std.ArrayList(u8) = .{};
+    var result: std.ArrayList(u8) = .empty;
     errdefer result.deinit(allocator);
 
     for (pairs.items, 0..) |pair, i| {
@@ -238,12 +239,13 @@ fn buildPresignCanonicalQuery(
 /// Sign an HTTP request with AWS Signature Version 4
 pub fn signRequest(
     allocator: Allocator,
+    io: std.Io,
     request: *http.Request,
     credentials: Credentials,
     region: []const u8,
     service: []const u8,
 ) !void {
-    const timestamp = std.time.timestamp();
+    const timestamp = std.Io.Clock.real.now(io).toSeconds();
     const datetime = formatAmzDate(timestamp);
     const datestamp = datetime[0..8];
 
@@ -543,7 +545,7 @@ fn canonicalizeHeaders(
     headers: *const std.StringHashMapUnmanaged([]const u8),
 ) !HeadersResult {
     // Collect header names
-    var header_names: std.ArrayList([]const u8) = .{};
+    var header_names: std.ArrayList([]const u8) = .empty;
     defer header_names.deinit(allocator);
 
     var iter = headers.iterator();
@@ -559,9 +561,9 @@ fn canonicalizeHeaders(
     }.lessThan);
 
     // Build canonical headers and signed headers
-    var canonical: std.ArrayList(u8) = .{};
+    var canonical: std.ArrayList(u8) = .empty;
     errdefer canonical.deinit(allocator);
-    var signed: std.ArrayList(u8) = .{};
+    var signed: std.ArrayList(u8) = .empty;
     defer signed.deinit(allocator);
 
     for (header_names.items, 0..) |name, i| {
@@ -610,7 +612,7 @@ fn trimAndNormalizeHeaderValue(value: []const u8) []const u8 {
 
 /// URI-encode a path (RFC 3986, preserving /)
 pub fn encodeUri(allocator: Allocator, path: []const u8) ![]const u8 {
-    var result: std.ArrayList(u8) = .{};
+    var result: std.ArrayList(u8) = .empty;
     errdefer result.deinit(allocator);
 
     for (path) |c| {
@@ -626,7 +628,7 @@ pub fn encodeUri(allocator: Allocator, path: []const u8) ![]const u8 {
 
 /// Percent-encode a raw query value.
 fn encodeQueryValue(allocator: Allocator, value: []const u8) ![]const u8 {
-    var buf: std.ArrayList(u8) = .{};
+    var buf: std.ArrayList(u8) = .empty;
     errdefer buf.deinit(allocator);
     for (value) |c| {
         if (shouldEncodeQueryChar(c)) {
@@ -668,14 +670,14 @@ pub fn canonicalizeQueryString(allocator: Allocator, query: ?[]const u8) ![]cons
     if (q.len == 0) return try allocator.dupe(u8, "");
 
     // Parse query string into key-value pairs
-    var pairs: std.ArrayList(QueryPair) = .{};
+    var pairs: std.ArrayList(QueryPair) = .empty;
     defer pairs.deinit(allocator);
 
     var param_iter = std.mem.splitScalar(u8, q, '&');
     while (param_iter.next()) |param| {
         if (param.len == 0) continue;
 
-        if (std.mem.indexOfScalar(u8, param, '=')) |eq_idx| {
+        if (std.mem.findScalar(u8, param, '=')) |eq_idx| {
             try pairs.append(allocator, .{
                 .key = param[0..eq_idx],
                 .value = param[eq_idx + 1 ..],
@@ -699,7 +701,7 @@ pub fn canonicalizeQueryString(allocator: Allocator, query: ?[]const u8) ![]cons
 
     // Build canonical query string -- keys and values are already URI-encoded
     // by the request serializer, so we just sort and rejoin without re-encoding.
-    var result: std.ArrayList(u8) = .{};
+    var result: std.ArrayList(u8) = .empty;
     errdefer result.deinit(allocator);
 
     for (pairs.items, 0..) |pair, i| {
@@ -797,7 +799,7 @@ test "canonicalizeQueryString preserves already-encoded values" {
 test "canonicalizeHeaders" {
     const allocator = std.testing.allocator;
 
-    var headers: std.StringHashMapUnmanaged([]const u8) = .{};
+    var headers: std.StringHashMapUnmanaged([]const u8) = .empty;
     defer headers.deinit(allocator);
 
     try headers.put(allocator, "X-Amz-Date", "20150830T123600Z");
@@ -837,7 +839,7 @@ test "presignRequest produces valid URL" {
         .secret_access_key = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
     };
 
-    const url = try presignRequest(allocator, &request, creds, "us-east-1", "s3", .{});
+    const url = try presignRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3", .{});
     defer allocator.free(url);
 
     // URL should start with https and contain all required SigV4 query params
@@ -848,12 +850,12 @@ test "presignRequest produces valid URL" {
             "https://my-bucket.s3.us-east-1.amazonaws.com/my-key.txt?",
         ),
     );
-    try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-Algorithm=AWS4-HMAC-SHA256") != null);
-    try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-Credential=") != null);
-    try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-Date=") != null);
-    try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-Expires=3600") != null);
-    try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-SignedHeaders=host") != null);
-    try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-Signature=") != null);
+    try std.testing.expect(std.mem.find(u8, url, "X-Amz-Algorithm=AWS4-HMAC-SHA256") != null);
+    try std.testing.expect(std.mem.find(u8, url, "X-Amz-Credential=") != null);
+    try std.testing.expect(std.mem.find(u8, url, "X-Amz-Date=") != null);
+    try std.testing.expect(std.mem.find(u8, url, "X-Amz-Expires=3600") != null);
+    try std.testing.expect(std.mem.find(u8, url, "X-Amz-SignedHeaders=host") != null);
+    try std.testing.expect(std.mem.find(u8, url, "X-Amz-Signature=") != null);
 }
 
 test "presignRequest with session token" {
@@ -872,6 +874,7 @@ test "presignRequest with session token" {
 
     const url = try presignRequest(
         allocator,
+        std.testing.io,
         &request,
         creds,
         "us-west-2",
@@ -880,8 +883,8 @@ test "presignRequest with session token" {
     );
     defer allocator.free(url);
 
-    try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-Security-Token=TOKEN123") != null);
-    try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-Expires=900") != null);
+    try std.testing.expect(std.mem.find(u8, url, "X-Amz-Security-Token=TOKEN123") != null);
+    try std.testing.expect(std.mem.find(u8, url, "X-Amz-Expires=900") != null);
 }
 
 test "presignRequest with custom port" {
@@ -899,7 +902,7 @@ test "presignRequest with custom port" {
         .secret_access_key = "test",
     };
 
-    const url = try presignRequest(allocator, &request, creds, "us-east-1", "s3", .{});
+    const url = try presignRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3", .{});
     defer allocator.free(url);
 
     try std.testing.expect(std.mem.startsWith(u8, url, "http://localhost:4566/bucket/key?"));
@@ -919,14 +922,14 @@ test "presignRequest with existing query params" {
         .secret_access_key = "SECRET",
     };
 
-    const url = try presignRequest(allocator, &request, creds, "us-east-1", "s3", .{});
+    const url = try presignRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3", .{});
     defer allocator.free(url);
 
     // Existing param should be present alongside the signing params
     try std.testing.expect(
-        std.mem.indexOf(u8, url, "response-content-disposition=attachment") != null,
+        std.mem.find(u8, url, "response-content-disposition=attachment") != null,
     );
-    try std.testing.expect(std.mem.indexOf(u8, url, "X-Amz-Algorithm=") != null);
+    try std.testing.expect(std.mem.find(u8, url, "X-Amz-Algorithm=") != null);
 }
 
 test "buildPresignCanonicalQuery sorts params" {
@@ -944,9 +947,9 @@ test "buildPresignCanonicalQuery sorts params" {
     defer allocator.free(result);
 
     // All params should be sorted: Alpha, X-Amz-Algorithm, X-Amz-Credential, ...
-    const alpha_pos = std.mem.indexOf(u8, result, "Alpha=2") orelse unreachable;
-    const algo_pos = std.mem.indexOf(u8, result, "X-Amz-Algorithm=") orelse unreachable;
-    const zebra_pos = std.mem.indexOf(u8, result, "Zebra=1") orelse unreachable;
+    const alpha_pos = std.mem.find(u8, result, "Alpha=2") orelse unreachable;
+    const algo_pos = std.mem.find(u8, result, "X-Amz-Algorithm=") orelse unreachable;
+    const zebra_pos = std.mem.find(u8, result, "Zebra=1") orelse unreachable;
 
     try std.testing.expect(alpha_pos < algo_pos);
     try std.testing.expect(algo_pos < zebra_pos);
@@ -972,7 +975,7 @@ test "signRequest gzip compresses large body" {
         .secret_access_key = "SECRET",
     };
 
-    try signRequest(allocator, &request, creds, "us-east-1", "s3");
+    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3");
 
     try std.testing.expect(request.body != null);
     const compressed = request.body.?;
@@ -1003,7 +1006,7 @@ test "signRequest does not compress small body" {
         .secret_access_key = "SECRET",
     };
 
-    try signRequest(allocator, &request, creds, "us-east-1", "s3");
+    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3");
 
     try std.testing.expectEqualSlices(u8, body, request.body.?);
     try std.testing.expect(request.headers.get("content-encoding") == null);
@@ -1025,7 +1028,7 @@ test "signRequest null compression is no-op" {
         .secret_access_key = "SECRET",
     };
 
-    try signRequest(allocator, &request, creds, "us-east-1", "s3");
+    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3");
 
     try std.testing.expect(request.headers.get("content-encoding") == null);
 }
@@ -1046,13 +1049,13 @@ test "signRequest SigV4a produces ECDSA signature" {
         .secret_access_key = "SECRET",
     };
 
-    try signRequest(allocator, &request, creds, "us-east-1", "sts");
+    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "sts");
 
     const authorization = request.headers.get("authorization") orelse "";
     try std.testing.expect(
-        std.mem.indexOf(u8, authorization, algorithm_sigv4a) != null,
+        std.mem.find(u8, authorization, algorithm_sigv4a) != null,
     );
-    try std.testing.expect(std.mem.indexOf(u8, authorization, "/*/") != null);
+    try std.testing.expect(std.mem.find(u8, authorization, "/*/") != null);
 }
 
 test "signRequest SigV4 still works unchanged" {
@@ -1070,11 +1073,11 @@ test "signRequest SigV4 still works unchanged" {
         .secret_access_key = "SECRET",
     };
 
-    try signRequest(allocator, &request, creds, "us-east-1", "sts");
+    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "sts");
 
     const authorization = request.headers.get("authorization") orelse "";
     try std.testing.expect(
-        std.mem.indexOf(u8, authorization, algorithm) != null,
+        std.mem.find(u8, authorization, algorithm) != null,
     );
 }
 
@@ -1098,7 +1101,7 @@ test "signRequest hashes compressed body" {
         .secret_access_key = "SECRET",
     };
 
-    try signRequest(allocator, &request, creds, "us-east-1", "s3");
+    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3");
 
     const compressed = request.body.?;
     var payload_hash: [Sha256.digest_length]u8 = undefined;
@@ -1131,7 +1134,7 @@ test "signRequest SigV4a hashes compressed body" {
         .secret_access_key = "SECRET",
     };
 
-    try signRequest(allocator, &request, creds, "us-east-1", "s3");
+    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3");
 
     const compressed = request.body.?;
     var payload_hash: [Sha256.digest_length]u8 = undefined;
@@ -1143,7 +1146,7 @@ test "signRequest SigV4a hashes compressed body" {
     );
     const authorization = request.headers.get("authorization") orelse "";
     try std.testing.expect(
-        std.mem.indexOf(u8, authorization, algorithm_sigv4a) != null,
+        std.mem.find(u8, authorization, algorithm_sigv4a) != null,
     );
 }
 
@@ -1167,10 +1170,10 @@ test "signRequest content-encoding is in signed headers" {
         .secret_access_key = "SECRET",
     };
 
-    try signRequest(allocator, &request, creds, "us-east-1", "s3");
+    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3");
 
     const authorization = request.headers.get("authorization") orelse "";
     try std.testing.expect(
-        std.mem.indexOf(u8, authorization, "content-encoding") != null,
+        std.mem.find(u8, authorization, "content-encoding") != null,
     );
 }

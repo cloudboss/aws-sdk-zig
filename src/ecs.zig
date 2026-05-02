@@ -16,11 +16,17 @@ pub const default_endpoint = "http://169.254.170.2";
 /// ECS container credentials provider
 pub const Provider = struct {
     allocator: Allocator,
+    io: std.Io,
+    env_map: *const std.process.Environ.Map,
 
     const Self = @This();
 
-    pub fn init(allocator: Allocator) Self {
-        return .{ .allocator = allocator };
+    pub fn init(
+        allocator: Allocator,
+        io: std.Io,
+        env_map: *const std.process.Environ.Map,
+    ) Self {
+        return .{ .allocator = allocator, .io = io, .env_map = env_map };
     }
 
     /// Load credentials from ECS container metadata service
@@ -40,12 +46,12 @@ pub const Provider = struct {
     /// Resolve the credentials endpoint URI
     fn resolveCredentialsUri(self: *Self) ![]const u8 {
         // 1. Check for full URI
-        if (std.posix.getenv("AWS_CONTAINER_CREDENTIALS_FULL_URI")) |full_uri| {
+        if (self.env_map.get("AWS_CONTAINER_CREDENTIALS_FULL_URI")) |full_uri| {
             return try self.allocator.dupe(u8, full_uri);
         }
 
         // 2. Check for relative URI (appended to default endpoint)
-        if (std.posix.getenv("AWS_CONTAINER_CREDENTIALS_RELATIVE_URI")) |relative_uri| {
+        if (self.env_map.get("AWS_CONTAINER_CREDENTIALS_RELATIVE_URI")) |relative_uri| {
             return std.fmt.allocPrint(self.allocator, "{s}{s}", .{ default_endpoint, relative_uri });
         }
 
@@ -55,19 +61,24 @@ pub const Provider = struct {
     /// Get authorization token if configured
     fn getAuthorizationToken(self: *Self) !?[]const u8 {
         // 1. Check for token in environment variable
-        if (std.posix.getenv("AWS_CONTAINER_AUTHORIZATION_TOKEN")) |token| {
+        if (self.env_map.get("AWS_CONTAINER_AUTHORIZATION_TOKEN")) |token| {
             return try self.allocator.dupe(u8, token);
         }
 
         // 2. Check for token file
-        if (std.posix.getenv("AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE")) |token_file| {
-            const file = std.fs.openFileAbsolute(token_file, .{}) catch |err| {
+        if (self.env_map.get("AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE")) |token_file| {
+            var file = std.Io.Dir.openFileAbsolute(self.io, token_file, .{}) catch |err| {
                 if (err == error.FileNotFound) return null;
                 return err;
             };
-            defer file.close();
+            defer file.close(self.io);
 
-            const token = file.readToEndAlloc(self.allocator, 8192) catch return null;
+            var read_buf: [4096]u8 = undefined;
+            var rdr = file.reader(self.io, &read_buf);
+            const token = rdr.interface.allocRemaining(
+                self.allocator,
+                std.Io.Limit.limited(8192),
+            ) catch return null;
             // Trim whitespace
             const trimmed = std.mem.trim(u8, token, " \t\r\n");
             if (trimmed.len == token.len) {
@@ -84,7 +95,7 @@ pub const Provider = struct {
     fn doRequest(self: *Self, uri_str: []const u8, auth_token: ?[]const u8) ![]const u8 {
         const uri = std.Uri.parse(uri_str) catch return error.EcsRequestFailed;
 
-        var client = std.http.Client{ .allocator = self.allocator };
+        var client = std.http.Client{ .allocator = self.allocator, .io = self.io };
         defer client.deinit();
 
         var extra_headers_buf: [1]std.http.Header = undefined;
@@ -131,8 +142,8 @@ pub const Credentials = struct {
     }
 
     /// Check if credentials are expired (with 5 minute buffer)
-    pub fn isExpired(self: Self) bool {
-        return std.time.timestamp() >= (self.expiration - 300);
+    pub fn isExpired(self: Self, io: std.Io) bool {
+        return std.Io.Clock.real.now(io).toSeconds() >= (self.expiration - 300);
     }
 };
 
@@ -166,19 +177,19 @@ fn parseJsonField(allocator: Allocator, json: []const u8, field: []const u8) ![]
     const search_pattern = try std.fmt.allocPrint(allocator, "\"{s}\"", .{field});
     defer allocator.free(search_pattern);
 
-    const field_start = std.mem.indexOf(u8, json, search_pattern) orelse
+    const field_start = std.mem.find(u8, json, search_pattern) orelse
         return error.JsonFieldNotFound;
 
     const after_field = json[field_start + search_pattern.len ..];
-    const colon_pos = std.mem.indexOfScalar(u8, after_field, ':') orelse
+    const colon_pos = std.mem.findScalar(u8, after_field, ':') orelse
         return error.JsonFieldNotFound;
 
     const after_colon = after_field[colon_pos + 1 ..];
-    const quote_start = std.mem.indexOfScalar(u8, after_colon, '"') orelse
+    const quote_start = std.mem.findScalar(u8, after_colon, '"') orelse
         return error.JsonFieldNotFound;
 
     const value_start = after_colon[quote_start + 1 ..];
-    const quote_end = std.mem.indexOfScalar(u8, value_start, '"') orelse
+    const quote_end = std.mem.findScalar(u8, value_start, '"') orelse
         return error.JsonFieldNotFound;
 
     return try allocator.dupe(u8, value_start[0..quote_end]);
@@ -221,8 +232,8 @@ test "Credentials expiration" {
         .allocator = std.testing.allocator,
     };
 
-    try std.testing.expect(creds.isExpired());
+    try std.testing.expect(creds.isExpired(std.testing.io));
 
-    creds.expiration = std.time.timestamp() + 3600;
-    try std.testing.expect(!creds.isExpired());
+    creds.expiration = std.Io.Clock.real.now(std.testing.io).toSeconds() + 3600;
+    try std.testing.expect(!creds.isExpired(std.testing.io));
 }

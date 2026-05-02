@@ -3,17 +3,19 @@ const aws = @import("aws");
 const sns = @import("sns");
 const sqs = @import("sqs");
 
-var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var gpa: std.heap.DebugAllocator(.{}) = .init;
 
 var shared_sns_client: ?sns.Client = null;
 var shared_sqs_client: ?sqs.Client = null;
 var shared_cfg: ?aws.Config = null;
 var shared_topic_arn_buf: [512]u8 = undefined;
 var shared_topic_arn: []const u8 = "";
+var shared_env_map: std.process.Environ.Map = undefined;
 
 test "zest.beforeAll" {
     const allocator = gpa.allocator();
-    shared_cfg = try aws.Config.load(allocator, .{});
+    shared_env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    shared_cfg = try aws.Config.load(allocator, std.testing.io, &shared_env_map, .{});
     shared_sns_client = sns.Client.initWithOptions(
         allocator,
         &shared_cfg.?,
@@ -53,6 +55,7 @@ test "zest.afterAll" {
     }
     if (shared_sqs_client) |*c| c.deinit();
     if (shared_cfg) |*cfg| cfg.deinit();
+    shared_env_map.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
 }
 

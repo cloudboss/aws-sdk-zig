@@ -3133,7 +3133,7 @@ pub fn deserializeS3DeleteObjectTaggingOperation(allocator: std.mem.Allocator, r
     const result: S3DeleteObjectTaggingOperation = .{};
     while (try reader.next()) |event| {
         switch (event) {
-            .element_start => |_| {
+            .element_start => {
                 try reader.skipElement();
             },
             .element_end => break,
@@ -3330,7 +3330,7 @@ pub fn deserializeS3ReplicateObjectOperation(allocator: std.mem.Allocator, reade
     const result: S3ReplicateObjectOperation = .{};
     while (try reader.next()) |event| {
         switch (event) {
-            .element_start => |_| {
+            .element_start => {
                 try reader.skipElement();
             },
             .element_end => break,
@@ -3523,7 +3523,7 @@ pub fn deserializeSSES3(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !
     const result: SSES3 = .{};
     while (try reader.next()) |event| {
         switch (event) {
-            .element_start => |_| {
+            .element_start => {
                 try reader.skipElement();
             },
             .element_end => break,

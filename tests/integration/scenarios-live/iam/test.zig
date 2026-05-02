@@ -2,9 +2,10 @@ const std = @import("std");
 const aws = @import("aws");
 const iam = @import("iam");
 
-var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var gpa: std.heap.DebugAllocator(.{}) = .init;
 var shared_client: iam.Client = undefined;
 var shared_cfg: aws.Config = undefined;
+var shared_env_map: std.process.Environ.Map = undefined;
 var shared_init = false;
 
 var role_name_buf: [64]u8 = undefined;
@@ -26,13 +27,14 @@ test "zest.beforeAll" {
     var arena = std.heap.ArenaAllocator.init(allocator);
     defer arena.deinit();
 
-    shared_cfg = try aws.Config.load(allocator, .{});
+    shared_env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    shared_cfg = try aws.Config.load(allocator, std.testing.io, &shared_env_map, .{});
     shared_client = iam.Client.init(allocator, &shared_cfg);
 
     role_name = try std.fmt.bufPrint(
         &role_name_buf,
         "sdk-zig-live-role-{d}",
-        .{std.time.timestamp()},
+        .{std.Io.Clock.real.now(std.testing.io).toSeconds()},
     );
 
     _ = try shared_client.createRole(
@@ -121,6 +123,7 @@ test "zest.afterAll" {
 
     shared_client.deinit();
     shared_cfg.deinit();
+    shared_env_map.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
 }
 
@@ -170,7 +173,7 @@ test "createPolicy creates a policy" {
     const pname = try std.fmt.bufPrint(
         &name_buf,
         "sdk-zig-live-policy-{d}",
-        .{std.time.timestamp()},
+        .{std.Io.Clock.real.now(std.testing.io).toSeconds()},
     );
 
     const result = try shared_client.createPolicy(
@@ -290,7 +293,7 @@ test "createUser and deleteUser" {
     user_name = try std.fmt.bufPrint(
         &user_name_buf,
         "sdk-zig-live-user-{d}",
-        .{std.time.timestamp()},
+        .{std.Io.Clock.real.now(std.testing.io).toSeconds()},
     );
 
     const result = try shared_client.createUser(

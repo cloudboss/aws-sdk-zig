@@ -128,7 +128,7 @@ pub fn decodeMessage(allocator: Allocator, data: []const u8) DecodeError!Message
     const payload_len = total_len - 16 - headers_len;
     const payload_bytes = data[12 + headers_len .. 12 + headers_len + payload_len];
 
-    var headers_list: std.ArrayList(Header) = .{};
+    var headers_list: std.ArrayList(Header) = .empty;
     errdefer deinitHeaderList(allocator, &headers_list);
 
     var index: usize = 0;

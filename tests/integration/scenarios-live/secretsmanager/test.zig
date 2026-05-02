@@ -2,7 +2,7 @@ const std = @import("std");
 const aws = @import("aws");
 const secretsmanager = @import("secretsmanager");
 
-var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var gpa: std.heap.DebugAllocator(.{}) = .init;
 var shared_client: ?secretsmanager.Client = null;
 var shared_cfg: ?aws.Config = null;
 var shared_secret_arn_buf: [2048]u8 = undefined;
@@ -10,10 +10,12 @@ var shared_secret_arn: []const u8 = "";
 var shared_secret_name_buf: [128]u8 = undefined;
 var shared_secret_name: []const u8 = "";
 var shared_create_token_buf: [64]u8 = undefined;
+var shared_env_map: std.process.Environ.Map = undefined;
 
 test "zest.beforeAll" {
     const allocator = gpa.allocator();
-    shared_cfg = try aws.Config.load(allocator, .{});
+    shared_env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    shared_cfg = try aws.Config.load(allocator, std.testing.io, &shared_env_map, .{});
     shared_client = secretsmanager.Client.init(allocator, &shared_cfg.?);
     {
         var arena = std.heap.ArenaAllocator.init(allocator);
@@ -22,16 +24,16 @@ test "zest.beforeAll" {
         const name = try std.fmt.bufPrint(
             &shared_secret_name_buf,
             "sdk-zig-live-secret-{d}-{x}",
-            .{ std.time.milliTimestamp(), std.crypto.random.int(u32) },
+            .{ std.Io.Clock.real.now(std.testing.io).toMilliseconds(), (std.Random.IoSource{ .io = std.testing.io }).interface().int(u32) },
         );
         const create_token = try std.fmt.bufPrint(
             &shared_create_token_buf,
             "{x}-{x}-{x}-{x}",
             .{
-                std.crypto.random.int(u32),
-                std.crypto.random.int(u32),
-                std.crypto.random.int(u32),
-                std.crypto.random.int(u32),
+                (std.Random.IoSource{ .io = std.testing.io }).interface().int(u32),
+                (std.Random.IoSource{ .io = std.testing.io }).interface().int(u32),
+                (std.Random.IoSource{ .io = std.testing.io }).interface().int(u32),
+                (std.Random.IoSource{ .io = std.testing.io }).interface().int(u32),
             },
         );
         shared_secret_name = name;
@@ -94,6 +96,7 @@ test "zest.afterAll" {
         }
     }
     if (shared_cfg) |*cfg| cfg.deinit();
+    shared_env_map.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
 }
 
@@ -168,7 +171,7 @@ test "listSecrets includes created secret" {
         }
 
         if (!found) {
-            std.Thread.sleep(300 * std.time.ns_per_ms);
+            std.testing.io.sleep(.fromMilliseconds(300), .awake) catch {};
         }
     }
 
@@ -187,10 +190,10 @@ test "putSecretValue updates the secret" {
             &token_buf,
             "{x}-{x}-{x}-{x}",
             .{
-                std.crypto.random.int(u32),
-                std.crypto.random.int(u32),
-                std.crypto.random.int(u32),
-                std.crypto.random.int(u32),
+                (std.Random.IoSource{ .io = std.testing.io }).interface().int(u32),
+                (std.Random.IoSource{ .io = std.testing.io }).interface().int(u32),
+                (std.Random.IoSource{ .io = std.testing.io }).interface().int(u32),
+                (std.Random.IoSource{ .io = std.testing.io }).interface().int(u32),
             },
         );
         const put = try client.putSecretValue(

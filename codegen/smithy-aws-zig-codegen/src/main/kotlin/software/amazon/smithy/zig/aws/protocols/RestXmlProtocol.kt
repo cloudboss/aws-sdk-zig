@@ -272,7 +272,7 @@ class RestXmlProtocol : ProtocolGenerator {
         val elementZigType = ctx.resolveBaseZigType(elementShape)
 
         writer.openBlock("{")
-        writer.write("var header_buf: std.ArrayList(u8) = .{};")
+        writer.write("var header_buf: std.ArrayList(u8) = .empty;")
         writer.openBlock("for (\$L) |item| {", varName)
         writer.write("if (header_buf.items.len > 0) try header_buf.appendSlice(allocator, \", \");")
 
@@ -306,7 +306,7 @@ class RestXmlProtocol : ProtocolGenerator {
             return
         }
 
-        writer.write("var path_buf: std.ArrayList(u8) = .{};")
+        writer.write("var path_buf: std.ArrayList(u8) = .empty;")
 
         val parts = mutableListOf<Any>()
         var remaining = pathPattern
@@ -386,7 +386,7 @@ class RestXmlProtocol : ProtocolGenerator {
     private fun writeQueryBuilder(writer: ZigWriter, ctx: OperationContext, bindings: InputBindings, staticQuery: String? = null) {
         if (bindings.queryParams.isEmpty() && staticQuery == null) return
 
-        writer.write("var query_buf: std.ArrayList(u8) = .{};")
+        writer.write("var query_buf: std.ArrayList(u8) = .empty;")
         writer.write("var query_has_prev = false;")
 
         if (staticQuery != null) {
@@ -475,7 +475,7 @@ class RestXmlProtocol : ProtocolGenerator {
                     .orElse(null)
 
                 if (memberShape.isRequired) {
-                    writer.write("var body_buf: std.ArrayList(u8) = .{};")
+                    writer.write("var body_buf: std.ArrayList(u8) = .empty;")
                     writeXmlRootOpen(writer, rootName, ns)
                     writer.write("try serde.serialize\$L(allocator, &body_buf, input.\$L);", targetShape.id.name, fieldName)
                     writer.write("try body_buf.appendSlice(allocator, \"</\$L>\");", rootName)
@@ -483,7 +483,7 @@ class RestXmlProtocol : ProtocolGenerator {
                 } else {
                     writer.openBlock("const body: ?[]const u8 = blk: {")
                     writer.openBlock("if (input.\$L) |payload| {", fieldName)
-                    writer.write("var body_buf: std.ArrayList(u8) = .{};")
+                    writer.write("var body_buf: std.ArrayList(u8) = .empty;")
                     writeXmlRootOpen(writer, rootName, ns)
                     writer.write("try serde.serialize\$L(allocator, &body_buf, payload);", targetShape.id.name)
                     writer.write("try body_buf.appendSlice(allocator, \"</\$L>\");", rootName)
@@ -518,7 +518,7 @@ class RestXmlProtocol : ProtocolGenerator {
             .or { ctx.service.getTrait(XmlNamespaceTrait::class.java) }
             .orElse(null)
 
-        writer.write("var body_buf: std.ArrayList(u8) = .{};")
+        writer.write("var body_buf: std.ArrayList(u8) = .empty;")
         writeXmlRootOpen(writer, rootElementName, rootNamespace)
 
         for ((memberName, memberShape) in bindings.bodyMembers) {
@@ -791,7 +791,7 @@ class RestXmlProtocol : ProtocolGenerator {
         for ((fieldName, _, listShape) in flattenedLists) {
             val elementShape = ctx.model.expectShape(listShape.member.target)
             val elementType = resolveZigElementType(ctx, elementShape)
-            writer.write("var \${L}_list: std.ArrayList(\$L) = .{};", fieldName, elementType)
+            writer.write("var \${L}_list: std.ArrayList(\$L) = .empty;", fieldName, elementType)
         }
 
         writer.openBlock("while (try reader.next()) |event| {")

@@ -3,6 +3,7 @@ const std = @import("std");
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
+    const io = b.graph.io;
 
     const zest = b.dependency("zest", .{});
 
@@ -16,16 +17,16 @@ pub fn build(b: *std.Build) void {
     // Auto-discover service modules from service/*/root.zig
     const services_path = "service";
     var service_modules = std.StringHashMap(*std.Build.Module).init(b.allocator);
-    if (b.build_root.handle.openDir(services_path, .{ .iterate = true })) |dir| {
+    if (b.build_root.handle.openDir(io, services_path, .{ .iterate = true })) |dir| {
         var services_dir = dir;
-        defer services_dir.close();
+        defer services_dir.close(io);
         var svc_iter = services_dir.iterate();
-        while (svc_iter.next() catch null) |entry| {
+        while (svc_iter.next(io) catch null) |entry| {
             if (entry.kind != .directory) continue;
             // Dupe the name so the hash key outlives the directory iterator buffer
             const name = b.allocator.dupe(u8, entry.name) catch continue;
             const root_path = b.fmt("{s}/{s}/root.zig", .{ services_path, name });
-            b.build_root.handle.access(root_path, .{}) catch continue;
+            b.build_root.handle.access(io, root_path, .{}) catch continue;
 
             const svc_module = b.addModule(name, .{
                 .root_source_file = b.path(root_path),
@@ -98,17 +99,17 @@ pub fn build(b: *std.Build) void {
 
     // Integration tests: auto-discover scenarios from tests/integration/scenarios-localstack/
     const scenarios_path = "tests/integration/scenarios-localstack";
-    var scenarios_dir = b.build_root.handle.openDir(scenarios_path, .{ .iterate = true }) catch return;
-    defer scenarios_dir.close();
+    var scenarios_dir = b.build_root.handle.openDir(io, scenarios_path, .{ .iterate = true }) catch return;
+    defer scenarios_dir.close(io);
 
     var iter = scenarios_dir.iterate();
-    while (iter.next() catch null) |entry| {
+    while (iter.next(io) catch null) |entry| {
         if (entry.kind != .directory) continue;
 
         const test_path = b.fmt("{s}/{s}/test.zig", .{ scenarios_path, entry.name });
 
         // Verify test.zig exists
-        b.build_root.handle.access(test_path, .{}) catch continue;
+        b.build_root.handle.access(io, test_path, .{}) catch continue;
 
         const integration_module = b.createModule(.{
             .root_source_file = b.path(test_path),
@@ -141,13 +142,14 @@ pub fn build(b: *std.Build) void {
     // Live tests: auto-discover scenarios from tests/integration/scenarios-live/
     const live_scenarios_path = "tests/integration/scenarios-live";
     var live_scenarios_dir = b.build_root.handle.openDir(
+        io,
         live_scenarios_path,
         .{ .iterate = true },
     ) catch return;
-    defer live_scenarios_dir.close();
+    defer live_scenarios_dir.close(io);
 
     var live_iter = live_scenarios_dir.iterate();
-    while (live_iter.next() catch null) |entry| {
+    while (live_iter.next(io) catch null) |entry| {
         if (entry.kind != .directory) continue;
 
         const live_test_path = b.fmt(
@@ -156,7 +158,7 @@ pub fn build(b: *std.Build) void {
         );
 
         // Verify test.zig exists
-        b.build_root.handle.access(live_test_path, .{}) catch continue;
+        b.build_root.handle.access(io, live_test_path, .{}) catch continue;
 
         const live_module = b.createModule(.{
             .root_source_file = b.path(live_test_path),

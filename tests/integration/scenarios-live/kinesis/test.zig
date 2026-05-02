@@ -2,9 +2,10 @@ const std = @import("std");
 const aws = @import("aws");
 const kinesis = @import("kinesis");
 
-var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var gpa: std.heap.DebugAllocator(.{}) = .init;
 var shared_client: kinesis.Client = undefined;
 var shared_cfg: aws.Config = undefined;
+var shared_env_map: std.process.Environ.Map = undefined;
 var shared_init = false;
 var stream_name_buf: [64]u8 = undefined;
 var stream_name: []const u8 = "";
@@ -15,7 +16,8 @@ var consumer_arn: []const u8 = "";
 
 test "zest.beforeAll" {
     const allocator = gpa.allocator();
-    shared_cfg = try aws.Config.load(allocator, .{});
+    shared_env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    shared_cfg = try aws.Config.load(allocator, std.testing.io, &shared_env_map, .{});
     shared_client = kinesis.Client.init(allocator, &shared_cfg);
 
     var arena = std.heap.ArenaAllocator.init(allocator);
@@ -24,7 +26,7 @@ test "zest.beforeAll" {
     stream_name = try std.fmt.bufPrint(
         &stream_name_buf,
         "sdk-zig-live-kinesis-{d}",
-        .{std.time.timestamp()},
+        .{std.Io.Clock.real.now(std.testing.io).toSeconds()},
     );
 
     _ = try shared_client.createStream(
@@ -53,7 +55,7 @@ test "zest.beforeAll" {
             stream_arn = stream_arn_buf[0..len];
             break;
         }
-        std.Thread.sleep(2 * std.time.ns_per_s);
+        std.testing.io.sleep(.fromSeconds(2), .awake) catch {};
     }
     if (stream_arn.len == 0) return error.StreamNotActive;
 
@@ -105,6 +107,7 @@ test "zest.afterAll" {
     }
     shared_client.deinit();
     shared_cfg.deinit();
+    shared_env_map.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
 }
 
@@ -173,7 +176,7 @@ test "putRecord writes data" {
                     .provisioned_throughput_exceeded_exception,
                     .internal_failure_exception,
                     => {
-                        std.Thread.sleep(std.time.ns_per_s);
+                        std.testing.io.sleep(.fromSeconds(1), .awake) catch {};
                         continue;
                     },
                     else => {
@@ -229,11 +232,11 @@ test "getShardIterator and getRecords reads back data" {
             .{},
         );
         const record_list = records.records orelse {
-            std.Thread.sleep(std.time.ns_per_s);
+            std.testing.io.sleep(.fromSeconds(1), .awake) catch {};
             continue;
         };
         if (record_list.len == 0) {
-            std.Thread.sleep(std.time.ns_per_s);
+            std.testing.io.sleep(.fromSeconds(1), .awake) catch {};
             continue;
         }
         const decoded_len = try std.base64.standard.Decoder
@@ -299,9 +302,10 @@ test "registerStreamConsumer creates consumer" {
                 .{ .consumer_arn = consumer_arn },
                 .{},
             ) catch {
-                std.Thread.sleep(
-                    2 * std.time.ns_per_s,
-                );
+                std.testing.io.sleep(
+                    .fromSeconds(2),
+                    .awake,
+                ) catch {};
                 attempts += 1;
                 continue;
             };
@@ -312,7 +316,7 @@ test "registerStreamConsumer creates consumer" {
             );
             return;
         }
-        std.Thread.sleep(2 * std.time.ns_per_s);
+        std.testing.io.sleep(.fromSeconds(2), .awake) catch {};
     }
     return error.ConsumerNotFound;
 }

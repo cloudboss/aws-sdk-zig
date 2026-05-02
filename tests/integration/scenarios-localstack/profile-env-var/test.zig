@@ -9,7 +9,9 @@ test "AWS_PROFILE selects named profile from credentials file" {
     // AWS_PROFILE=custom-profile plus AWS_SHARED_CREDENTIALS_FILE
     // pointing to a file with [default] and [custom-profile] sections.
     // Config.load must pick up "custom-profile" from the env var.
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
 
     try std.testing.expectEqualStrings("custom-profile", cfg.profile);

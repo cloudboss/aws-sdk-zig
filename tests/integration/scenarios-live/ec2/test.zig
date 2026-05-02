@@ -2,9 +2,10 @@ const std = @import("std");
 const aws = @import("aws");
 const ec2 = @import("ec2");
 
-var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var gpa: std.heap.DebugAllocator(.{}) = .init;
 var shared_client: ec2.Client = undefined;
 var shared_cfg: aws.Config = undefined;
+var shared_env_map: std.process.Environ.Map = undefined;
 var shared_init = false;
 
 var shared_vpc_id_buf: [64]u8 = undefined;
@@ -47,7 +48,8 @@ fn storeId(
 
 test "zest.beforeAll" {
     const allocator = gpa.allocator();
-    shared_cfg = try aws.Config.load(allocator, .{});
+    shared_env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    shared_cfg = try aws.Config.load(allocator, std.testing.io, &shared_env_map, .{});
     shared_client = ec2.Client.init(allocator, &shared_cfg);
 
     var arena = std.heap.ArenaAllocator.init(allocator);
@@ -76,6 +78,7 @@ test "zest.afterAll" {
     }
     shared_client.deinit();
     shared_cfg.deinit();
+    shared_env_map.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
 }
 
@@ -370,7 +373,7 @@ test "describeInstances returns launched instance" {
         ) catch |err| switch (err) {
             error.ServiceError => {
                 if (attempts >= 12) return err;
-                std.Thread.sleep(5 * std.time.ns_per_s);
+                std.testing.io.sleep(.fromSeconds(5), .awake) catch {};
                 continue;
             },
             else => return err,

@@ -9,15 +9,19 @@ const codepipeline = @import("codepipeline");
 const codestarnotifications = @import("codestarnotifications");
 const xray = @import("xray");
 
-var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var gpa: std.heap.DebugAllocator(.{}) = .init;
 var shared_cfg: ?aws.Config = null;
+var shared_env_map: std.process.Environ.Map = undefined;
 
 test "zest.beforeAll" {
-    shared_cfg = try aws.Config.load(gpa.allocator(), .{});
+    const allocator = gpa.allocator();
+    shared_env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    shared_cfg = try aws.Config.load(allocator, std.testing.io, &shared_env_map, .{});
 }
 
 test "zest.afterAll" {
     if (shared_cfg) |*cfg| cfg.deinit();
+    shared_env_map.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
 }
 

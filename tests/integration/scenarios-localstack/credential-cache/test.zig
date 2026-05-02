@@ -5,7 +5,9 @@ const sts = @import("sts");
 test "chain caches and reuses credentials" {
     const allocator = std.testing.allocator;
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
 
     // First call -- populates cache
@@ -34,7 +36,9 @@ test "chain caches and reuses credentials" {
 test "config passes expiry_buffer through LoadOptions" {
     const allocator = std.testing.allocator;
 
-    var cfg = try aws.Config.load(allocator, .{ .expiry_buffer = 0 });
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{ .expiry_buffer = 0 });
     defer cfg.deinit();
 
     switch (cfg.credentials) {
@@ -48,7 +52,14 @@ test "config passes expiry_buffer through LoadOptions" {
 test "default expiration applied to permanent credentials" {
     const allocator = std.testing.allocator;
 
-    var cfg = try aws.Config.load(allocator, .{ .default_expiration = 900 });
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(
+        allocator,
+        std.testing.io,
+        &env_map,
+        .{ .default_expiration = 900 },
+    );
     defer cfg.deinit();
 
     // Fetch credentials (env-based credentials have no natural expiration)

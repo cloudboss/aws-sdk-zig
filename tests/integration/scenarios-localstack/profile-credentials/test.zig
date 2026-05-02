@@ -7,7 +7,9 @@ test "credential_process from profile resolves credentials" {
 
     // AWS_CONFIG_FILE points to a config with [profile test-process]
     // containing credential_process = /tmp/cred-process.sh.
-    var cfg = try aws.Config.load(allocator, .{
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{
         .profile = "test-process",
     });
     defer cfg.deinit();
@@ -25,7 +27,10 @@ test "credential_process from profile resolves credentials" {
     );
 
     // Invoke the process provider directly
-    var pp = aws.process_creds.ProcessProvider{ .command = command };
+    var pp = aws.process_creds.ProcessProvider{
+        .io = std.testing.io,
+        .command = command,
+    };
     const creds = try pp.getCredentials(allocator);
     defer {
         allocator.free(creds.access_key_id);

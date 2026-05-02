@@ -43,7 +43,7 @@ pub fn stsEndpoint(
 
 /// Build a URL-encoded STS POST body from action name and key-value params.
 pub fn buildStsRequestBody(allocator: Allocator, action: []const u8, params: []const [2][]const u8) ![]const u8 {
-    var buf: std.ArrayList(u8) = .{};
+    var buf: std.ArrayList(u8) = .empty;
     errdefer buf.deinit(allocator);
 
     try buf.appendSlice(allocator, "Action=");
@@ -61,10 +61,16 @@ pub fn buildStsRequestBody(allocator: Allocator, action: []const u8, params: []c
 }
 
 /// POST to STS without SigV4 signing (for AssumeRoleWithWebIdentity).
-pub fn callStsUnsigned(allocator: Allocator, endpoint: []const u8, body: []const u8) ![]const u8 {
+pub fn callStsUnsigned(
+    allocator: Allocator,
+    io: std.Io,
+    env_map: *const std.process.Environ.Map,
+    endpoint: []const u8,
+    body: []const u8,
+) ![]const u8 {
     const host = url_mod.parseHost(endpoint);
     const port = url_mod.parsePort(endpoint);
-    const tls = if (std.mem.indexOf(u8, endpoint, "https://")) |_| true else false;
+    const tls = if (std.mem.find(u8, endpoint, "https://")) |_| true else false;
 
     var request = http.Request.init(host);
     defer request.deinit(allocator);
@@ -77,7 +83,7 @@ pub fn callStsUnsigned(allocator: Allocator, endpoint: []const u8, body: []const
 
     try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
 
-    var response = try http.sendRequest(allocator, &request);
+    var response = try http.sendRequest(allocator, io, env_map, &request);
     defer response.deinit();
 
     if (!response.isSuccess()) {
@@ -91,10 +97,18 @@ pub fn callStsUnsigned(allocator: Allocator, endpoint: []const u8, body: []const
 /// Uses a local arena for request construction and signing so that all
 /// heap-allocated header values (x-amz-date, authorization, etc.) are
 /// freed automatically.
-pub fn callStsSigned(allocator: Allocator, endpoint: []const u8, body: []const u8, creds: Credentials, region: []const u8) ![]const u8 {
+pub fn callStsSigned(
+    allocator: Allocator,
+    io: std.Io,
+    env_map: *const std.process.Environ.Map,
+    endpoint: []const u8,
+    body: []const u8,
+    creds: Credentials,
+    region: []const u8,
+) ![]const u8 {
     const host = url_mod.parseHost(endpoint);
     const port = url_mod.parsePort(endpoint);
-    const tls = if (std.mem.indexOf(u8, endpoint, "https://")) |_| true else false;
+    const tls = if (std.mem.find(u8, endpoint, "https://")) |_| true else false;
 
     // Arena for request + signing allocations (header values, canonical request, etc.)
     var arena = std.heap.ArenaAllocator.init(allocator);
@@ -119,9 +133,9 @@ pub fn callStsSigned(allocator: Allocator, endpoint: []const u8, body: []const u
         try request.headers.put(alloc, "host", host);
     }
 
-    try signing.signRequest(alloc, &request, creds, region, "sts");
+    try signing.signRequest(alloc, io, &request, creds, region, "sts");
 
-    var response = try http.sendRequest(allocator, &request);
+    var response = try http.sendRequest(allocator, io, env_map, &request);
     defer response.deinit();
 
     if (!response.isSuccess()) {
@@ -192,10 +206,10 @@ test "buildStsRequestBody basic" {
     });
     defer allocator.free(body);
 
-    try std.testing.expect(std.mem.indexOf(u8, body, "Action=AssumeRoleWithWebIdentity") != null);
-    try std.testing.expect(std.mem.indexOf(u8, body, "Version=2011-06-15") != null);
-    try std.testing.expect(std.mem.indexOf(u8, body, "RoleArn=") != null);
-    try std.testing.expect(std.mem.indexOf(u8, body, "RoleSessionName=my-session") != null);
+    try std.testing.expect(std.mem.find(u8, body, "Action=AssumeRoleWithWebIdentity") != null);
+    try std.testing.expect(std.mem.find(u8, body, "Version=2011-06-15") != null);
+    try std.testing.expect(std.mem.find(u8, body, "RoleArn=") != null);
+    try std.testing.expect(std.mem.find(u8, body, "RoleSessionName=my-session") != null);
 }
 
 test "buildStsRequestBody url encodes special characters" {
@@ -206,7 +220,7 @@ test "buildStsRequestBody url encodes special characters" {
     defer allocator.free(body);
 
     // Space should be encoded as +
-    try std.testing.expect(std.mem.indexOf(u8, body, "Test+Role") != null);
+    try std.testing.expect(std.mem.find(u8, body, "Test+Role") != null);
 }
 
 test "stsEndpoint regional mode with us-east-1" {

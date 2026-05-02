@@ -206,7 +206,7 @@ class RestJsonProtocol : ProtocolGenerator {
         val elementZigType = ctx.resolveBaseZigType(elementShape)
 
         writer.openBlock("{")
-        writer.write("var header_buf: std.ArrayList(u8) = .{};")
+        writer.write("var header_buf: std.ArrayList(u8) = .empty;")
         writer.openBlock("for (\$L) |item| {", varName)
         writer.write("if (header_buf.items.len > 0) try header_buf.appendSlice(allocator, \", \");")
 
@@ -242,7 +242,7 @@ class RestJsonProtocol : ProtocolGenerator {
         }
 
         // Build path dynamically by substituting {Label} placeholders
-        writer.write("var path_buf: std.ArrayList(u8) = .{};")
+        writer.write("var path_buf: std.ArrayList(u8) = .empty;")
 
         // Split URI into segments around {labels}
         val parts = mutableListOf<Any>() // String for literal, Pair<String,MemberShape> for label
@@ -285,7 +285,7 @@ class RestJsonProtocol : ProtocolGenerator {
     private fun writeQueryBuilder(writer: ZigWriter, ctx: OperationContext, bindings: InputBindings, staticQuery: String? = null) {
         if (bindings.queryParams.isEmpty() && staticQuery == null) return
 
-        writer.write("var query_buf: std.ArrayList(u8) = .{};")
+        writer.write("var query_buf: std.ArrayList(u8) = .empty;")
         writer.write("var query_has_prev = false;")
 
         if (staticQuery != null) {
@@ -434,7 +434,7 @@ class RestJsonProtocol : ProtocolGenerator {
             return
         }
 
-        writer.write("var body_buf: std.ArrayList(u8) = .{};")
+        writer.write("var body_buf: std.ArrayList(u8) = .empty;")
         writer.write("var has_prev = false;")
         writer.write("try body_buf.appendSlice(allocator, \"{\");")
         writer.blankLine()

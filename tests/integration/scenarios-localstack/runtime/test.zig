@@ -32,7 +32,9 @@ test "SigV4 signed request accepted by STS" {
     defer arena.deinit();
     const sign_alloc = arena.allocator();
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
     const endpoint_url = try cfg.getEndpoint("sts", allocator);
     defer allocator.free(endpoint_url);
@@ -57,10 +59,15 @@ test "SigV4 signed request accepted by STS" {
         .access_key_id = "test",
         .secret_access_key = "test",
     };
-    try aws.signing.signRequest(sign_alloc, &request, creds, "us-east-1", "sts");
+    try aws.signing.signRequest(sign_alloc, std.testing.io, &request, creds, "us-east-1", "sts");
 
     // Send the request
-    var client = aws.http.HttpClient.init(allocator, .{ .request_options = .{ .keep_alive = false } });
+    var client = aws.http.HttpClient.init(
+        allocator,
+        std.testing.io,
+        &env_map,
+        .{ .request_options = .{ .keep_alive = false } },
+    );
     defer client.deinit();
 
     var response = try client.sendRequest(&request);
@@ -73,24 +80,33 @@ test "SigV4 signed request accepted by STS" {
 }
 
 test "credential chain resolves from environment" {
-    const creds = try aws.credentials.getFromEnvironment();
+    const allocator = std.testing.allocator;
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
+    const creds = try aws.credentials.getFromEnvironment(&env_map);
     try std.testing.expectEqualStrings("test", creds.access_key_id);
     try std.testing.expectEqualStrings("test", creds.secret_access_key);
 }
 
 test "Config.load resolves region from environment" {
-    var cfg = try aws.Config.load(std.testing.allocator, .{});
+    const allocator = std.testing.allocator;
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
 
     try std.testing.expectEqualStrings("us-east-1", cfg.region);
 }
 
 test "Config.load with explicit endpoint" {
-    var cfg = try aws.Config.load(std.testing.allocator, .{});
+    const allocator = std.testing.allocator;
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
 
-    const endpoint = try cfg.getEndpoint("sts", std.testing.allocator);
-    defer std.testing.allocator.free(endpoint);
+    const endpoint = try cfg.getEndpoint("sts", allocator);
+    defer allocator.free(endpoint);
 
     try std.testing.expect(endpoint.len > 0);
 }
@@ -98,7 +114,9 @@ test "Config.load with explicit endpoint" {
 test "HTTP client connects to LocalStack" {
     const allocator = std.testing.allocator;
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
     const endpoint_url = try cfg.getEndpoint("sts", allocator);
     defer allocator.free(endpoint_url);
@@ -113,7 +131,12 @@ test "HTTP client connects to LocalStack" {
     request.tls = endpoint.tls;
     request.port = endpoint.port;
 
-    var client = aws.http.HttpClient.init(allocator, .{ .request_options = .{ .keep_alive = false } });
+    var client = aws.http.HttpClient.init(
+        allocator,
+        std.testing.io,
+        &env_map,
+        .{ .request_options = .{ .keep_alive = false } },
+    );
     defer client.deinit();
 
     var response = try client.sendRequest(&request);
@@ -130,7 +153,9 @@ test "SigV4 signing includes session token header when present" {
     defer arena.deinit();
     const sign_alloc = arena.allocator();
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
     const endpoint_url = try cfg.getEndpoint("sts", allocator);
     defer allocator.free(endpoint_url);
@@ -156,7 +181,7 @@ test "SigV4 signing includes session token header when present" {
         .secret_access_key = "test",
         .session_token = "test-session-token",
     };
-    try aws.signing.signRequest(sign_alloc, &request, creds, "us-east-1", "sts");
+    try aws.signing.signRequest(sign_alloc, std.testing.io, &request, creds, "us-east-1", "sts");
 
     // Verify the session token header was added
     const token_header = request.headers.get("x-amz-security-token");
@@ -164,7 +189,12 @@ test "SigV4 signing includes session token header when present" {
     try std.testing.expectEqualStrings("test-session-token", token_header.?);
 
     // Send the request to verify LocalStack accepts it
-    var client = aws.http.HttpClient.init(allocator, .{ .request_options = .{ .keep_alive = false } });
+    var client = aws.http.HttpClient.init(
+        allocator,
+        std.testing.io,
+        &env_map,
+        .{ .request_options = .{ .keep_alive = false } },
+    );
     defer client.deinit();
 
     var response = try client.sendRequest(&request);
@@ -182,7 +212,9 @@ test "SigV4 signature includes x-amz-date header" {
     defer arena.deinit();
     const sign_alloc = arena.allocator();
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
     const endpoint_url = try cfg.getEndpoint("sts", allocator);
     defer allocator.free(endpoint_url);
@@ -201,7 +233,7 @@ test "SigV4 signature includes x-amz-date header" {
         .access_key_id = "test",
         .secret_access_key = "test",
     };
-    try aws.signing.signRequest(sign_alloc, &request, creds, "us-east-1", "sts");
+    try aws.signing.signRequest(sign_alloc, std.testing.io, &request, creds, "us-east-1", "sts");
 
     // x-amz-date format: YYYYMMDDTHHMMSSZ = 16 characters
     const date_header = request.headers.get("x-amz-date");
@@ -215,7 +247,9 @@ test "SigV4 signature includes x-amz-content-sha256 header" {
     defer arena.deinit();
     const sign_alloc = arena.allocator();
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
     const endpoint_url = try cfg.getEndpoint("sts", allocator);
     defer allocator.free(endpoint_url);
@@ -234,7 +268,7 @@ test "SigV4 signature includes x-amz-content-sha256 header" {
         .access_key_id = "test",
         .secret_access_key = "test",
     };
-    try aws.signing.signRequest(sign_alloc, &request, creds, "us-east-1", "sts");
+    try aws.signing.signRequest(sign_alloc, std.testing.io, &request, creds, "us-east-1", "sts");
 
     // SHA-256 hex digest = 64 characters
     const sha256_header = request.headers.get("x-amz-content-sha256");
@@ -248,7 +282,9 @@ test "SigV4 Authorization header starts with AWS4-HMAC-SHA256" {
     defer arena.deinit();
     const sign_alloc = arena.allocator();
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
     const endpoint_url = try cfg.getEndpoint("sts", allocator);
     defer allocator.free(endpoint_url);
@@ -267,7 +303,7 @@ test "SigV4 Authorization header starts with AWS4-HMAC-SHA256" {
         .access_key_id = "test",
         .secret_access_key = "test",
     };
-    try aws.signing.signRequest(sign_alloc, &request, creds, "us-east-1", "sts");
+    try aws.signing.signRequest(sign_alloc, std.testing.io, &request, creds, "us-east-1", "sts");
 
     const auth_header = request.headers.get("authorization");
     try std.testing.expect(auth_header != null);
@@ -280,7 +316,9 @@ test "SigV4 signed GET request with empty body succeeds" {
     defer arena.deinit();
     const sign_alloc = arena.allocator();
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
     const endpoint_url = try cfg.getEndpoint("sts", allocator);
     defer allocator.free(endpoint_url);
@@ -297,9 +335,14 @@ test "SigV4 signed GET request with empty body succeeds" {
         .access_key_id = "test",
         .secret_access_key = "test",
     };
-    try aws.signing.signRequest(sign_alloc, &request, creds, "us-east-1", "s3");
+    try aws.signing.signRequest(sign_alloc, std.testing.io, &request, creds, "us-east-1", "s3");
 
-    var client = aws.http.HttpClient.init(allocator, .{ .request_options = .{ .keep_alive = false } });
+    var client = aws.http.HttpClient.init(
+        allocator,
+        std.testing.io,
+        &env_map,
+        .{ .request_options = .{ .keep_alive = false } },
+    );
     defer client.deinit();
     var response = try client.sendRequest(&request);
     defer response.deinit();

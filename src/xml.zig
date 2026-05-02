@@ -307,7 +307,7 @@ pub fn findElement(xml: []const u8, tag_name: []const u8) ?[]const u8 {
     const open_prefix = std.fmt.bufPrint(&buf, "<{s}", .{tag_name}) catch return null;
 
     var search_from: usize = 0;
-    while (std.mem.indexOfPos(u8, xml, search_from, open_prefix)) |start| {
+    while (std.mem.findPos(u8, xml, search_from, open_prefix)) |start| {
         const after = start + open_prefix.len;
         if (after >= xml.len) return null;
 
@@ -326,13 +326,13 @@ pub fn findElement(xml: []const u8, tag_name: []const u8) ?[]const u8 {
         }
 
         // Find the end of the opening tag.
-        const tag_end = std.mem.indexOfScalarPos(u8, xml, after, '>') orelse return null;
+        const tag_end = std.mem.findScalarPos(u8, xml, after, '>') orelse return null;
         const content_start = tag_end + 1;
 
         // Find the closing tag.
         var close_buf: [256]u8 = undefined;
         const close_tag = std.fmt.bufPrint(&close_buf, "</{s}>", .{tag_name}) catch return null;
-        const end = std.mem.indexOfPos(u8, xml, content_start, close_tag) orelse return null;
+        const end = std.mem.findPos(u8, xml, content_start, close_tag) orelse return null;
 
         return xml[content_start..end];
     }
@@ -519,7 +519,7 @@ test "findElement with full EC2 error response" {
 
 test "appendXmlEscaped escapes special characters" {
     const alloc = testing.allocator;
-    var buf: std.ArrayList(u8) = .{};
+    var buf: std.ArrayList(u8) = .empty;
     defer buf.deinit(alloc);
 
     try appendXmlEscaped(alloc, &buf, "a < b & c > d");
@@ -528,7 +528,7 @@ test "appendXmlEscaped escapes special characters" {
 
 test "appendXmlEscaped passes through normal text" {
     const alloc = testing.allocator;
-    var buf: std.ArrayList(u8) = .{};
+    var buf: std.ArrayList(u8) = .empty;
     defer buf.deinit(alloc);
 
     try appendXmlEscaped(alloc, &buf, "hello world");

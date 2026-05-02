@@ -3,14 +3,21 @@ const aws = @import("aws");
 
 const bucket_name = "sdk-zig-gzip-test";
 
-var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var gpa: std.heap.DebugAllocator(.{}) = .init;
 var shared_client: aws.http.HttpClient = undefined;
 var shared_cfg: aws.Config = undefined;
+var shared_env_map: std.process.Environ.Map = undefined;
 var shared_init = false;
 test "zest.beforeAll" {
     const allocator = gpa.allocator();
-    shared_cfg = try aws.Config.load(allocator, .{});
-    shared_client = aws.http.HttpClient.init(allocator, .{ .request_options = .{ .keep_alive = false } });
+    shared_env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    shared_cfg = try aws.Config.load(allocator, std.testing.io, &shared_env_map, .{});
+    shared_client = aws.http.HttpClient.init(
+        allocator,
+        std.testing.io,
+        &shared_env_map,
+        .{ .request_options = .{ .keep_alive = false } },
+    );
     {
         var arena = std.heap.ArenaAllocator.init(allocator);
         defer arena.deinit();
@@ -31,6 +38,7 @@ test "zest.beforeAll" {
         );
         try aws.signing.signRequest(
             arena.allocator(),
+            std.testing.io,
             &request,
             creds,
             shared_cfg.region,
@@ -68,6 +76,7 @@ test "zest.afterAll" {
             req.query = "x-id=DeleteObject";
             try aws.signing.signRequest(
                 arena.allocator(),
+                std.testing.io,
                 &req,
                 creds,
                 shared_cfg.region,
@@ -92,6 +101,7 @@ test "zest.afterAll" {
 
         try aws.signing.signRequest(
             arena.allocator(),
+            std.testing.io,
             &request,
             creds,
             shared_cfg.region,
@@ -104,6 +114,7 @@ test "zest.afterAll" {
     }
     shared_client.deinit();
     shared_cfg.deinit();
+    shared_env_map.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
 }
 
@@ -130,6 +141,7 @@ test "PutObject with gzip compression sends smaller body and sets Content-Encodi
     );
     try aws.signing.signRequest(
         arena.allocator(),
+        std.testing.io,
         &request,
         creds,
         shared_cfg.region,
@@ -169,6 +181,7 @@ test "PutObject without compression sends full body" {
     );
     try aws.signing.signRequest(
         arena.allocator(),
+        std.testing.io,
         &request,
         creds,
         shared_cfg.region,
@@ -209,6 +222,7 @@ test "PutObject small body skips compression" {
     );
     try aws.signing.signRequest(
         arena.allocator(),
+        std.testing.io,
         &request,
         creds,
         shared_cfg.region,

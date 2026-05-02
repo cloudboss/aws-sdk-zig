@@ -5,6 +5,7 @@ test "process provider executes command returns credentials" {
     const allocator = std.testing.allocator;
 
     var provider = aws.process_creds.ProcessProvider{
+        .io = std.testing.io,
         .command = "/tmp/cred-helper.sh",
     };
 
@@ -25,6 +26,7 @@ test "process provider caches credentials" {
     const allocator = std.testing.allocator;
 
     var provider = aws.process_creds.ProcessProvider{
+        .io = std.testing.io,
         .command = "/tmp/cred-helper.sh",
     };
 
@@ -44,6 +46,7 @@ test "process provider caches credentials" {
 
 test "process provider returns error on non-zero exit" {
     const provider = aws.process_creds.ProcessProvider{
+        .io = std.testing.io,
         .command = "/tmp/cred-helper-fail.sh",
     };
 
@@ -58,6 +61,7 @@ test "process provider works via CredentialsProvider union" {
 
     var cp = aws.CredentialsProvider{
         .process = .{
+            .io = std.testing.io,
             .command = "/tmp/cred-helper.sh",
         },
     };
@@ -74,35 +78,40 @@ test "process provider works via CredentialsProvider union" {
 
 test "process provider returns error for malformed JSON output" {
     const allocator = std.testing.allocator;
+    const io = std.testing.io;
 
     // Create a script that outputs invalid JSON
     const script_path = "/tmp/cred-helper-badjson.sh";
     const script_content = "#!/bin/sh\necho '{broken'\n";
 
-    var file = try std.fs.cwd().createFile(script_path, .{});
-    defer file.close();
-    try file.writeAll(script_content);
+    var file = try std.Io.Dir.cwd().createFile(io, script_path, .{});
+    defer file.close(io);
+    try file.writeStreamingAll(io, script_content);
 
     // Make the script executable using chmod command
-    var chmod_child = std.process.Child.init(&.{ "chmod", "+x", script_path }, allocator);
-    _ = try chmod_child.spawn();
-    _ = try chmod_child.wait();
+    const result = try std.process.run(allocator, io, .{
+        .argv = &.{ "chmod", "+x", script_path },
+    });
+    allocator.free(result.stdout);
+    allocator.free(result.stderr);
 
     // Create provider with the malformed JSON script
     const provider = aws.process_creds.ProcessProvider{
+        .io = io,
         .command = script_path,
     };
 
     var cp = aws.CredentialsProvider{ .process = provider };
     _ = &cp;
-    const result = cp.getCredentials(allocator);
-    try std.testing.expectError(error.CredentialsNotFound, result);
+    const creds_result = cp.getCredentials(allocator);
+    try std.testing.expectError(error.CredentialsNotFound, creds_result);
 }
 
 test "process provider credentials have future expiration" {
     const allocator = std.testing.allocator;
 
     var provider = aws.process_creds.ProcessProvider{
+        .io = std.testing.io,
         .command = "/tmp/cred-helper.sh",
     };
 
@@ -119,6 +128,7 @@ test "process provider credentials have future expiration" {
 
 test "process provider with missing command returns error" {
     const provider = aws.process_creds.ProcessProvider{
+        .io = std.testing.io,
         .command = "/tmp/nonexistent-cred-helper-xyz.sh",
     };
 

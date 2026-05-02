@@ -12,6 +12,8 @@ const CredentialsProvider = credentials_mod.CredentialsProvider;
 const sts_common = @import("sts_common.zig");
 
 pub const AssumeRoleProvider = struct {
+    io: std.Io,
+    env_map: *const std.process.Environ.Map,
     role_arn: []const u8,
     session_name: []const u8,
     external_id: ?[]const u8,
@@ -24,7 +26,7 @@ pub const AssumeRoleProvider = struct {
     const Self = @This();
 
     pub fn getCredentials(self: *Self, allocator: Allocator) !Credentials {
-        if (self.cached) |c| if (!c.isExpired()) return c;
+        if (self.cached) |c| if (!c.isExpired(self.io)) return c;
 
         const source_creds = try self.source_provider.getCredentials(allocator);
 
@@ -51,7 +53,15 @@ pub const AssumeRoleProvider = struct {
         const body = try sts_common.buildStsRequestBody(allocator, "AssumeRole", params[0..param_count]);
         defer allocator.free(body);
 
-        const response = try sts_common.callStsSigned(allocator, endpoint, body, source_creds, self.region);
+        const response = try sts_common.callStsSigned(
+            allocator,
+            self.io,
+            self.env_map,
+            endpoint,
+            body,
+            source_creds,
+            self.region,
+        );
         defer allocator.free(response);
 
         const creds = try sts_common.parseStsCredentials(allocator, response);
@@ -68,7 +78,11 @@ test "AssumeRoleProvider struct initialization" {
         },
     };
 
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
     var provider = AssumeRoleProvider{
+        .io = std.testing.io,
+        .env_map = &env_map,
         .role_arn = "arn:aws:iam::123456789012:role/TestRole",
         .session_name = "test-session",
         .external_id = "my-external-id",
@@ -89,7 +103,11 @@ test "AssumeRoleProvider without external_id" {
         },
     };
 
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
     var provider = AssumeRoleProvider{
+        .io = std.testing.io,
+        .env_map = &env_map,
         .role_arn = "arn:aws:iam::123456789012:role/TestRole",
         .session_name = "test-session",
         .external_id = null,

@@ -7,10 +7,12 @@ test "GetCallerIdentity with SigV4a signing succeeds" {
     var arena = std.heap.ArenaAllocator.init(allocator);
     defer arena.deinit();
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
 
-    var http_client = aws.http.HttpClient.init(allocator, .{});
+    var http_client = aws.http.HttpClient.init(allocator, std.testing.io, &env_map, .{});
     defer http_client.deinit();
 
     var request = try makeGetCallerIdentityRequest(arena.allocator(), &cfg);
@@ -20,6 +22,7 @@ test "GetCallerIdentity with SigV4a signing succeeds" {
     const creds = try cfg.credentials.getCredentials(arena.allocator());
     try aws.signing.signRequest(
         arena.allocator(),
+        std.testing.io,
         &request,
         creds,
         cfg.region,
@@ -46,7 +49,9 @@ test "SigV4a Authorization header has correct format" {
     var arena = std.heap.ArenaAllocator.init(allocator);
     defer arena.deinit();
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
 
     var request = try makeGetCallerIdentityRequest(arena.allocator(), &cfg);
@@ -56,6 +61,7 @@ test "SigV4a Authorization header has correct format" {
     const creds = try cfg.credentials.getCredentials(arena.allocator());
     try aws.signing.signRequest(
         arena.allocator(),
+        std.testing.io,
         &request,
         creds,
         cfg.region,

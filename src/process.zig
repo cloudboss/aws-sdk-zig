@@ -10,15 +10,16 @@ const Credentials = @import("credentials.zig").Credentials;
 const date = @import("date.zig");
 
 pub const ProcessProvider = struct {
+    io: std.Io,
     command: []const u8,
     cached: ?Credentials = null,
 
     const Self = @This();
 
     pub fn getCredentials(self: *Self, allocator: Allocator) !Credentials {
-        if (self.cached) |c| if (!c.isExpired()) return c;
+        if (self.cached) |c| if (!c.isExpired(self.io)) return c;
 
-        const output = try runCommand(allocator, self.command);
+        const output = try runCommand(allocator, self.io, self.command);
         defer allocator.free(output);
 
         const creds = try parseProcessOutput(allocator, output);
@@ -27,24 +28,20 @@ pub const ProcessProvider = struct {
     }
 };
 
-fn runCommand(allocator: Allocator, command: []const u8) ![]const u8 {
-    var child = std.process.Child.init(&.{ "/bin/sh", "-c", command }, allocator);
-    child.stdout_behavior = .Pipe;
-    child.stderr_behavior = .Pipe;
-    try child.spawn();
+fn runCommand(allocator: Allocator, io: std.Io, command: []const u8) ![]const u8 {
+    const result = std.process.run(allocator, io, .{
+        .argv = &.{ "/bin/sh", "-c", command },
+        .stdout_limit = .limited(1024 * 1024),
+        .stderr_limit = .limited(1024 * 1024),
+    }) catch return error.ProcessCredentialsFailed;
+    defer allocator.free(result.stderr);
+    errdefer allocator.free(result.stdout);
 
-    var stdout_buf: std.ArrayList(u8) = .{};
-    defer stdout_buf.deinit(allocator);
-    var stderr_buf: std.ArrayList(u8) = .{};
-    defer stderr_buf.deinit(allocator);
-
-    child.collectOutput(allocator, &stdout_buf, &stderr_buf, 1024 * 1024) catch
-        return error.ProcessCredentialsFailed;
-
-    const term = child.wait() catch return error.ProcessCredentialsFailed;
-    if (term != .Exited or term.Exited != 0) return error.ProcessCredentialsFailed;
-
-    return stdout_buf.toOwnedSlice(allocator) catch return error.ProcessCredentialsFailed;
+    switch (result.term) {
+        .exited => |code| if (code != 0) return error.ProcessCredentialsFailed,
+        else => return error.ProcessCredentialsFailed,
+    }
+    return result.stdout;
 }
 
 fn parseProcessOutput(allocator: Allocator, output: []const u8) !Credentials {
@@ -86,7 +83,7 @@ fn parseJsonField(json: []const u8, field: []const u8) ?[]const u8 {
     // Look for "field"
     var pos: usize = 0;
     while (pos < json.len) {
-        const field_start = std.mem.indexOfPos(u8, json, pos, "\"") orelse return null;
+        const field_start = std.mem.findPos(u8, json, pos, "\"") orelse return null;
         const after_quote = field_start + 1;
         if (after_quote + field.len > json.len) return null;
 
@@ -95,13 +92,13 @@ fn parseJsonField(json: []const u8, field: []const u8) ?[]const u8 {
             if (end_quote < json.len and json[end_quote] == '"') {
                 // Found the field, now find : and value
                 const after_field = json[end_quote + 1 ..];
-                const colon = std.mem.indexOfScalar(u8, after_field, ':') orelse return null;
-                const after_colon = std.mem.trimLeft(u8, after_field[colon + 1 ..], " \t\r\n");
+                const colon = std.mem.findScalar(u8, after_field, ':') orelse return null;
+                const after_colon = std.mem.trimStart(u8, after_field[colon + 1 ..], " \t\r\n");
 
                 // Check if value is a string (starts with ")
                 if (after_colon.len > 0 and after_colon[0] == '"') {
                     const value_start = after_colon[1..];
-                    const value_end = std.mem.indexOfScalar(u8, value_start, '"') orelse return null;
+                    const value_end = std.mem.findScalar(u8, value_start, '"') orelse return null;
                     return value_start[0..value_end];
                 }
                 // Check if value is a number

@@ -5,7 +5,9 @@ const sts = @import("sts");
 test "getCallerIdentity returns account info from LocalStack" {
     const allocator = std.testing.allocator;
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
 
     var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
@@ -29,7 +31,9 @@ test "getCallerIdentity returns account info from LocalStack" {
 test "service error populates diagnostic on invalid action" {
     const allocator = std.testing.allocator;
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
 
     var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
@@ -55,7 +59,9 @@ test "service error populates diagnostic on invalid action" {
 test "getSessionToken returns temporary credentials" {
     const allocator = std.testing.allocator;
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
 
     var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
@@ -86,7 +92,9 @@ test "getSessionToken returns temporary credentials" {
 test "getCallerIdentity response fields have expected format" {
     const allocator = std.testing.allocator;
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
 
     var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
@@ -116,7 +124,9 @@ test "getCallerIdentity response fields have expected format" {
 test "GetCallerIdentity account has 12 digit format" {
     const allocator = std.testing.allocator;
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
 
     var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
@@ -139,7 +149,9 @@ test "GetCallerIdentity account has 12 digit format" {
 test "GetCallerIdentity ARN contains account" {
     const allocator = std.testing.allocator;
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
 
     var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
@@ -163,7 +175,9 @@ test "GetCallerIdentity ARN contains account" {
 test "GetSessionToken credentials differ from source credentials" {
     const allocator = std.testing.allocator;
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
 
     var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
@@ -188,7 +202,9 @@ test "GetSessionToken credentials differ from source credentials" {
 test "GetCallerIdentity returns consistent results across calls" {
     const allocator = std.testing.allocator;
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
 
     var client = sts.Client.initWithOptions(allocator, &cfg, .{ .keep_alive = false });
@@ -220,7 +236,9 @@ test "GetCallerIdentity returns consistent results across calls" {
 test "Config resolves sts_regional_endpoints from load options" {
     const allocator = std.testing.allocator;
 
-    var cfg = try aws.Config.load(allocator, .{
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{
         .sts_regional_endpoints = .legacy,
     });
     defer cfg.deinit();

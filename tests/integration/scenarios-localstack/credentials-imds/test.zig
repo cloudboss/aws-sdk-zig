@@ -3,12 +3,14 @@ const std = @import("std");
 const aws = @import("aws");
 const ssm = @import("ssm");
 
-var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
+var gpa: std.heap.DebugAllocator(.{}) = .init;
 
 test "IMDS credential resolution does not leak on deinit" {
     const allocator = gpa.allocator();
 
-    var cfg = try aws.Config.load(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
+    defer env_map.deinit();
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
 
     var client = ssm.Client.initWithOptions(

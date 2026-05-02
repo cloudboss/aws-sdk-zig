@@ -4,7 +4,9 @@ const aws = @import("aws");
 
 test "IMDS client retrieves instance ID" {
     const allocator = std.testing.allocator;
-    var client = try aws.imds.Client.init(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
+    var client = try aws.imds.Client.init(allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     const instance_id = try client.getInstanceId(.{});
@@ -15,7 +17,9 @@ test "IMDS client retrieves instance ID" {
 
 test "IMDS client retrieves IAM credentials" {
     const allocator = std.testing.allocator;
-    var client = try aws.imds.Client.init(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
+    var client = try aws.imds.Client.init(allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     var creds = try client.getIamCredentials(.{});
@@ -29,7 +33,9 @@ test "IMDS client retrieves IAM credentials" {
 
 test "IMDS client retrieves region" {
     const allocator = std.testing.allocator;
-    var client = try aws.imds.Client.init(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
+    var client = try aws.imds.Client.init(allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     const region = try client.getRegion(.{});
@@ -40,7 +46,9 @@ test "IMDS client retrieves region" {
 
 test "IMDS client returns error for unknown path" {
     const allocator = std.testing.allocator;
-    var client = try aws.imds.Client.init(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
+    var client = try aws.imds.Client.init(allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     const result = client.getMetadata("/latest/meta-data/nonexistent", .{});
@@ -49,7 +57,9 @@ test "IMDS client returns error for unknown path" {
 
 test "IMDS client fills diagnostic on error" {
     const allocator = std.testing.allocator;
-    var client = try aws.imds.Client.init(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
+    var client = try aws.imds.Client.init(allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     var diag: aws.imds.ServiceError = undefined;
@@ -61,7 +71,9 @@ test "IMDS client fills diagnostic on error" {
 
 test "IMDS client retrieves identity document fields" {
     const allocator = std.testing.allocator;
-    var client = try aws.imds.Client.init(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
+    var client = try aws.imds.Client.init(allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     const doc = try client.getMetadata("/latest/dynamic/instance-identity/document", .{});
@@ -74,7 +86,9 @@ test "IMDS client retrieves identity document fields" {
 
 test "IMDS identity document includes availability zone" {
     const allocator = std.testing.allocator;
-    var client = try aws.imds.Client.init(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
+    var client = try aws.imds.Client.init(allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     const doc = try client.getMetadata("/latest/dynamic/instance-identity/document", .{});
@@ -85,7 +99,9 @@ test "IMDS identity document includes availability zone" {
 
 test "IMDS identity document includes instance type" {
     const allocator = std.testing.allocator;
-    var client = try aws.imds.Client.init(allocator, .{});
+    var env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
+    defer env_map.deinit();
+    var client = try aws.imds.Client.init(allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     const doc = try client.getMetadata("/latest/dynamic/instance-identity/document", .{});

@@ -83,7 +83,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
         writer.blankLine()
 
         // Build form body
-        writer.write("var body_buf: std.ArrayList(u8) = .{};")
+        writer.write("var body_buf: std.ArrayList(u8) = .empty;")
         writer.blankLine()
         writer.write(
             "try body_buf.appendSlice(allocator, \"Action=\$L&Version=\$L\");",

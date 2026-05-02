@@ -391,7 +391,7 @@ class SerdeGeneratorTest {
         val files = generateFiles()
         val serde = files["serde.zig"]!!
         assertTrue(
-            serde.contains("var list: std.ArrayList(Tag) = .{};"),
+            serde.contains("var list: std.ArrayList(Tag) = .empty;"),
             "Should use ArrayList for accumulation",
         )
     }
@@ -453,9 +453,9 @@ class SerdeGeneratorTest {
             fnBody.contains("var result"),
             "Empty struct should NOT use var result",
         )
-        assertTrue(
+        assertFalse(
             fnBody.contains("|_|"),
-            "Empty struct should use |_| for unused element capture",
+            "Empty struct should omit the empty capture (rejected by 0.16)",
         )
     }
 
