@@ -47,7 +47,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutTableRep
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "s3tables");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "s3tables");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -72,7 +72,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutTableReplicationInpu
 
     const path = "/table-replication";
 
-    var query_buf: std.ArrayList(u8) = .{};
+    var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "tableArn=");
@@ -86,7 +86,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutTableReplicationInpu
     }
     const query = try query_buf.toOwnedSlice(allocator);
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 

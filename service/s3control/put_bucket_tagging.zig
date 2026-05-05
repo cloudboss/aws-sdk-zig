@@ -38,7 +38,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutBucketTa
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "s3");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "s3");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -61,13 +61,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutBucketTaggingInput, 
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var path_buf: std.ArrayList(u8) = .{};
+    var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/v20180820/bucket/");
     try path_buf.appendSlice(allocator, input.bucket);
     try path_buf.appendSlice(allocator, "/tagging");
     const path = try path_buf.toOwnedSlice(allocator);
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
     try body_buf.appendSlice(allocator, "<Tagging xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">");
     try serde.serializeTagging(allocator, &body_buf, input.tagging);
     try body_buf.appendSlice(allocator, "</Tagging>");

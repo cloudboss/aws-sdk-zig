@@ -17,7 +17,7 @@ const Tag = @import("tag.zig").Tag;
 const Topic = @import("topic.zig").Topic;
 
 pub fn deserializeBatchResultErrorEntryList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const BatchResultErrorEntry {
-    var list: std.ArrayList(BatchResultErrorEntry) = .{};
+    var list: std.ArrayList(BatchResultErrorEntry) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -35,7 +35,7 @@ pub fn deserializeBatchResultErrorEntryList(allocator: std.mem.Allocator, reader
 }
 
 pub fn deserializeListOfEndpoints(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Endpoint {
-    var list: std.ArrayList(Endpoint) = .{};
+    var list: std.ArrayList(Endpoint) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -53,7 +53,7 @@ pub fn deserializeListOfEndpoints(allocator: std.mem.Allocator, reader: *aws.xml
 }
 
 pub fn deserializeListOfPlatformApplications(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const PlatformApplication {
-    var list: std.ArrayList(PlatformApplication) = .{};
+    var list: std.ArrayList(PlatformApplication) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -71,7 +71,7 @@ pub fn deserializeListOfPlatformApplications(allocator: std.mem.Allocator, reade
 }
 
 pub fn deserializeNumberCapabilityList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const NumberCapability {
-    var list: std.ArrayList(NumberCapability) = .{};
+    var list: std.ArrayList(NumberCapability) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -89,7 +89,7 @@ pub fn deserializeNumberCapabilityList(allocator: std.mem.Allocator, reader: *aw
 }
 
 pub fn deserializePhoneNumberInformationList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const PhoneNumberInformation {
-    var list: std.ArrayList(PhoneNumberInformation) = .{};
+    var list: std.ArrayList(PhoneNumberInformation) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -107,7 +107,7 @@ pub fn deserializePhoneNumberInformationList(allocator: std.mem.Allocator, reade
 }
 
 pub fn deserializePhoneNumberList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
-    var list: std.ArrayList([]const u8) = .{};
+    var list: std.ArrayList([]const u8) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -125,7 +125,7 @@ pub fn deserializePhoneNumberList(allocator: std.mem.Allocator, reader: *aws.xml
 }
 
 pub fn deserializePublishBatchResultEntryList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const PublishBatchResultEntry {
-    var list: std.ArrayList(PublishBatchResultEntry) = .{};
+    var list: std.ArrayList(PublishBatchResultEntry) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -143,7 +143,7 @@ pub fn deserializePublishBatchResultEntryList(allocator: std.mem.Allocator, read
 }
 
 pub fn deserializeSMSSandboxPhoneNumberList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const SMSSandboxPhoneNumber {
-    var list: std.ArrayList(SMSSandboxPhoneNumber) = .{};
+    var list: std.ArrayList(SMSSandboxPhoneNumber) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -161,7 +161,7 @@ pub fn deserializeSMSSandboxPhoneNumberList(allocator: std.mem.Allocator, reader
 }
 
 pub fn deserializeSubscriptionsList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Subscription {
-    var list: std.ArrayList(Subscription) = .{};
+    var list: std.ArrayList(Subscription) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -179,7 +179,7 @@ pub fn deserializeSubscriptionsList(allocator: std.mem.Allocator, reader: *aws.x
 }
 
 pub fn deserializeTagList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Tag {
-    var list: std.ArrayList(Tag) = .{};
+    var list: std.ArrayList(Tag) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -197,7 +197,7 @@ pub fn deserializeTagList(allocator: std.mem.Allocator, reader: *aws.xml.Reader,
 }
 
 pub fn deserializeTopicsList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Topic {
-    var list: std.ArrayList(Topic) = .{};
+    var list: std.ArrayList(Topic) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -215,7 +215,7 @@ pub fn deserializeTopicsList(allocator: std.mem.Allocator, reader: *aws.xml.Read
 }
 
 pub fn deserializeMapStringToString(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime entry_tag: []const u8) ![]const aws.map.StringMapEntry {
-    var list: std.ArrayList(aws.map.StringMapEntry) = .{};
+    var list: std.ArrayList(aws.map.StringMapEntry) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -250,7 +250,7 @@ pub fn deserializeMapStringToString(allocator: std.mem.Allocator, reader: *aws.x
 }
 
 pub fn deserializeSubscriptionAttributesMap(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime entry_tag: []const u8) ![]const aws.map.StringMapEntry {
-    var list: std.ArrayList(aws.map.StringMapEntry) = .{};
+    var list: std.ArrayList(aws.map.StringMapEntry) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -285,7 +285,7 @@ pub fn deserializeSubscriptionAttributesMap(allocator: std.mem.Allocator, reader
 }
 
 pub fn deserializeTopicAttributesMap(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime entry_tag: []const u8) ![]const aws.map.StringMapEntry {
-    var list: std.ArrayList(aws.map.StringMapEntry) = .{};
+    var list: std.ArrayList(aws.map.StringMapEntry) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {

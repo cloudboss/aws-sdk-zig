@@ -109,7 +109,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutSessionI
     var request = try serializeRequest(alloc, input, client.config);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "lex");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "lex");
 
     var stream_resp = try client.http_client.sendStreamingRequest(&request);
 
@@ -136,7 +136,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutSessionInput, config
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var path_buf: std.ArrayList(u8) = .{};
+    var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/bots/");
     try path_buf.appendSlice(allocator, input.bot_id);
     try path_buf.appendSlice(allocator, "/botAliases/");
@@ -147,7 +147,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutSessionInput, config
     try path_buf.appendSlice(allocator, input.session_id);
     const path = try path_buf.toOwnedSlice(allocator);
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 

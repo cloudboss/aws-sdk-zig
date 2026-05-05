@@ -75,7 +75,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeBlu
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "rds");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "rds");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -98,7 +98,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeBlueGreenDeploy
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
 
     try body_buf.appendSlice(allocator, "Action=DescribeBlueGreenDeployments&Version=2014-10-31");
     if (input.blue_green_deployment_identifier) |v| {

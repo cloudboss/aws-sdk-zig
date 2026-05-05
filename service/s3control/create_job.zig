@@ -78,7 +78,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateJobIn
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "s3");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "s3");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -103,7 +103,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateJobInput, config:
 
     const path = "/v20180820/jobs";
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
     try body_buf.appendSlice(allocator, "<CreateJobRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">");
     try body_buf.appendSlice(allocator, "<ClientRequestToken>");
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.client_request_token);

@@ -64,7 +64,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListHumanLo
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "sagemaker");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "sagemaker");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -89,7 +89,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListHumanLoopsInput, co
 
     const path = "/human-loops";
 
-    var query_buf: std.ArrayList(u8) = .{};
+    var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
     if (input.creation_time_after) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

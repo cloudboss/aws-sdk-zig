@@ -73,7 +73,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRespo
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "rtbfabric");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "rtbfabric");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -96,13 +96,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateResponderGatewayI
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var path_buf: std.ArrayList(u8) = .{};
+    var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/responder-gateway/");
     try path_buf.appendSlice(allocator, input.gateway_id);
     try path_buf.appendSlice(allocator, "/update");
     const path = try path_buf.toOwnedSlice(allocator);
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 

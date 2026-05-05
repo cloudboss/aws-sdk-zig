@@ -46,7 +46,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssumeQueue
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "deadline");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "deadline");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -69,7 +69,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssumeQueueRoleForWorke
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var path_buf: std.ArrayList(u8) = .{};
+    var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/2023-10-12/farms/");
     try path_buf.appendSlice(allocator, input.farm_id);
     try path_buf.appendSlice(allocator, "/fleets/");
@@ -79,7 +79,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssumeQueueRoleForWorke
     try path_buf.appendSlice(allocator, "/queue-roles");
     const path = try path_buf.toOwnedSlice(allocator);
 
-    var query_buf: std.ArrayList(u8) = .{};
+    var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "queueId=");

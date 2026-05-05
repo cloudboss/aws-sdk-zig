@@ -40,7 +40,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetSes
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "deadline");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "deadline");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -65,7 +65,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetSessionActionIn
 
     const path = "/2023-10-12/batch-get-session-action";
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 

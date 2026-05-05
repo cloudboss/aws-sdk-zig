@@ -83,7 +83,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSecur
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "iot");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "iot");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -106,12 +106,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSecurityProfileIn
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var path_buf: std.ArrayList(u8) = .{};
+    var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/security-profiles/");
     try path_buf.appendSlice(allocator, input.security_profile_name);
     const path = try path_buf.toOwnedSlice(allocator);
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 

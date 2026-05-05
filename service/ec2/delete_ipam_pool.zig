@@ -42,7 +42,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteIpamP
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ec2");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "ec2");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -65,7 +65,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteIpamPoolInput, co
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
 
     try body_buf.appendSlice(allocator, "Action=DeleteIpamPool&Version=2016-11-15");
     if (input.cascade) |v| {

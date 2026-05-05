@@ -131,7 +131,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchGetFra
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "codeguru-profiler");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "codeguru-profiler");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -154,13 +154,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetFrameMetricData
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var path_buf: std.ArrayList(u8) = .{};
+    var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/profilingGroups/");
     try path_buf.appendSlice(allocator, input.profiling_group_name);
     try path_buf.appendSlice(allocator, "/frames/-/metrics");
     const path = try path_buf.toOwnedSlice(allocator);
 
-    var query_buf: std.ArrayList(u8) = .{};
+    var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
     if (input.end_time) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
@@ -194,7 +194,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetFrameMetricData
     }
     const query = try query_buf.toOwnedSlice(allocator);
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 

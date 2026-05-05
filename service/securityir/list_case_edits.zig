@@ -55,7 +55,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListCaseEdi
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "security-ir");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "security-ir");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -78,13 +78,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCaseEditsInput, con
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var path_buf: std.ArrayList(u8) = .{};
+    var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/v1/cases/");
     try path_buf.appendSlice(allocator, input.case_id);
     try path_buf.appendSlice(allocator, "/list-case-edits");
     const path = try path_buf.toOwnedSlice(allocator);
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 

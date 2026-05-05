@@ -34,7 +34,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateConti
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "cloudfront");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "cloudfront");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -59,7 +59,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateContinuousDeploym
 
     const path = "/2020-05-31/continuous-deployment-policy";
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
     try body_buf.appendSlice(allocator, "<ContinuousDeploymentPolicyConfig xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     try serde.serializeContinuousDeploymentPolicyConfig(allocator, &body_buf, input.continuous_deployment_policy_config);
     try body_buf.appendSlice(allocator, "</ContinuousDeploymentPolicyConfig>");

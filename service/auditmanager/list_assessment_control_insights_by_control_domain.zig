@@ -60,7 +60,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListAssessm
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "auditmanager");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "auditmanager");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -85,7 +85,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAssessmentControlIn
 
     const path = "/insights/controls-by-assessment";
 
-    var query_buf: std.ArrayList(u8) = .{};
+    var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "assessmentId=");

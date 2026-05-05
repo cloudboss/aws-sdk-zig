@@ -86,7 +86,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListModelCo
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "amazonbedrockcontrolplaneservice");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "amazonbedrockcontrolplaneservice");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -111,7 +111,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListModelCopyJobsInput,
 
     const path = "/model-copy-jobs";
 
-    var query_buf: std.ArrayList(u8) = .{};
+    var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
     if (input.creation_time_after) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

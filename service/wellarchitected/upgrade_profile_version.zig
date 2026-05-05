@@ -34,7 +34,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpgradeProf
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "wellarchitected");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "wellarchitected");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -57,7 +57,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpgradeProfileVersionIn
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var path_buf: std.ArrayList(u8) = .{};
+    var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/workloads/");
     try path_buf.appendSlice(allocator, input.workload_id);
     try path_buf.appendSlice(allocator, "/profiles/");
@@ -65,7 +65,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpgradeProfileVersionIn
     try path_buf.appendSlice(allocator, "/upgrade");
     const path = try path_buf.toOwnedSlice(allocator);
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 

@@ -44,7 +44,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutAccountS
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "ses");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "ses");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -69,7 +69,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutAccountSuppressionAt
 
     const path = "/v2/email/account/suppression";
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 

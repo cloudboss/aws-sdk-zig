@@ -37,7 +37,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AnalyzeExpe
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "textract");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "textract");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();

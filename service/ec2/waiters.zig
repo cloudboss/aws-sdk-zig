@@ -30,7 +30,8 @@ pub const ImageExistsWaiter = struct {
     const Self = @This();
 
     pub fn wait(self: *Self) aws.waiter.WaiterError!void {
-        const start = std.time.timestamp();
+        const io = self.client.config.io;
+        const start = std.Io.Clock.real.now(io).toSeconds();
         var delay_s: u32 = self.config.min_delay_s;
 
         while (true) {
@@ -42,13 +43,13 @@ pub const ImageExistsWaiter = struct {
                 .retry => {},
             }
 
-            const elapsed: u32 = @intCast(std.time.timestamp() - start);
+            const elapsed: u32 = @intCast(std.Io.Clock.real.now(io).toSeconds() - start);
             if (elapsed >= self.config.max_wait_time_s) {
                 return error.WaiterTimedOut;
             }
 
-            const jittered = aws.waiter.jitteredDelay(self.config.min_delay_s, delay_s);
-            std.Thread.sleep(@as(u64, jittered) * std.time.ns_per_s);
+            const jittered = aws.waiter.jitteredDelay(io, self.config.min_delay_s, delay_s);
+            io.sleep(.fromSeconds(@intCast(jittered)), .awake) catch {};
             delay_s = @min(delay_s * 2, self.config.max_delay_s);
         }
     }
@@ -84,7 +85,8 @@ pub const InstanceExistsWaiter = struct {
     const Self = @This();
 
     pub fn wait(self: *Self) aws.waiter.WaiterError!void {
-        const start = std.time.timestamp();
+        const io = self.client.config.io;
+        const start = std.Io.Clock.real.now(io).toSeconds();
         var delay_s: u32 = self.config.min_delay_s;
 
         while (true) {
@@ -96,13 +98,13 @@ pub const InstanceExistsWaiter = struct {
                 .retry => {},
             }
 
-            const elapsed: u32 = @intCast(std.time.timestamp() - start);
+            const elapsed: u32 = @intCast(std.Io.Clock.real.now(io).toSeconds() - start);
             if (elapsed >= self.config.max_wait_time_s) {
                 return error.WaiterTimedOut;
             }
 
-            const jittered = aws.waiter.jitteredDelay(self.config.min_delay_s, delay_s);
-            std.Thread.sleep(@as(u64, jittered) * std.time.ns_per_s);
+            const jittered = aws.waiter.jitteredDelay(io, self.config.min_delay_s, delay_s);
+            io.sleep(.fromSeconds(@intCast(jittered)), .awake) catch {};
             delay_s = @min(delay_s * 2, self.config.max_delay_s);
         }
     }
@@ -138,7 +140,8 @@ pub const InstanceRunningWaiter = struct {
     const Self = @This();
 
     pub fn wait(self: *Self) aws.waiter.WaiterError!void {
-        const start = std.time.timestamp();
+        const io = self.client.config.io;
+        const start = std.Io.Clock.real.now(io).toSeconds();
         var delay_s: u32 = self.config.min_delay_s;
 
         while (true) {
@@ -150,13 +153,13 @@ pub const InstanceRunningWaiter = struct {
                 .retry => {},
             }
 
-            const elapsed: u32 = @intCast(std.time.timestamp() - start);
+            const elapsed: u32 = @intCast(std.Io.Clock.real.now(io).toSeconds() - start);
             if (elapsed >= self.config.max_wait_time_s) {
                 return error.WaiterTimedOut;
             }
 
-            const jittered = aws.waiter.jitteredDelay(self.config.min_delay_s, delay_s);
-            std.Thread.sleep(@as(u64, jittered) * std.time.ns_per_s);
+            const jittered = aws.waiter.jitteredDelay(io, self.config.min_delay_s, delay_s);
+            io.sleep(.fromSeconds(@intCast(jittered)), .awake) catch {};
             delay_s = @min(delay_s * 2, self.config.max_delay_s);
         }
     }
@@ -192,7 +195,8 @@ pub const InstanceStatusOkWaiter = struct {
     const Self = @This();
 
     pub fn wait(self: *Self) aws.waiter.WaiterError!void {
-        const start = std.time.timestamp();
+        const io = self.client.config.io;
+        const start = std.Io.Clock.real.now(io).toSeconds();
         var delay_s: u32 = self.config.min_delay_s;
 
         while (true) {
@@ -204,13 +208,13 @@ pub const InstanceStatusOkWaiter = struct {
                 .retry => {},
             }
 
-            const elapsed: u32 = @intCast(std.time.timestamp() - start);
+            const elapsed: u32 = @intCast(std.Io.Clock.real.now(io).toSeconds() - start);
             if (elapsed >= self.config.max_wait_time_s) {
                 return error.WaiterTimedOut;
             }
 
-            const jittered = aws.waiter.jitteredDelay(self.config.min_delay_s, delay_s);
-            std.Thread.sleep(@as(u64, jittered) * std.time.ns_per_s);
+            const jittered = aws.waiter.jitteredDelay(io, self.config.min_delay_s, delay_s);
+            io.sleep(.fromSeconds(@intCast(jittered)), .awake) catch {};
             delay_s = @min(delay_s * 2, self.config.max_delay_s);
         }
     }
@@ -246,7 +250,8 @@ pub const InternetGatewayExistsWaiter = struct {
     const Self = @This();
 
     pub fn wait(self: *Self) aws.waiter.WaiterError!void {
-        const start = std.time.timestamp();
+        const io = self.client.config.io;
+        const start = std.Io.Clock.real.now(io).toSeconds();
         var delay_s: u32 = self.config.min_delay_s;
 
         while (true) {
@@ -258,13 +263,13 @@ pub const InternetGatewayExistsWaiter = struct {
                 .retry => {},
             }
 
-            const elapsed: u32 = @intCast(std.time.timestamp() - start);
+            const elapsed: u32 = @intCast(std.Io.Clock.real.now(io).toSeconds() - start);
             if (elapsed >= self.config.max_wait_time_s) {
                 return error.WaiterTimedOut;
             }
 
-            const jittered = aws.waiter.jitteredDelay(self.config.min_delay_s, delay_s);
-            std.Thread.sleep(@as(u64, jittered) * std.time.ns_per_s);
+            const jittered = aws.waiter.jitteredDelay(io, self.config.min_delay_s, delay_s);
+            io.sleep(.fromSeconds(@intCast(jittered)), .awake) catch {};
             delay_s = @min(delay_s * 2, self.config.max_delay_s);
         }
     }
@@ -300,7 +305,8 @@ pub const KeyPairExistsWaiter = struct {
     const Self = @This();
 
     pub fn wait(self: *Self) aws.waiter.WaiterError!void {
-        const start = std.time.timestamp();
+        const io = self.client.config.io;
+        const start = std.Io.Clock.real.now(io).toSeconds();
         var delay_s: u32 = self.config.min_delay_s;
 
         while (true) {
@@ -312,13 +318,13 @@ pub const KeyPairExistsWaiter = struct {
                 .retry => {},
             }
 
-            const elapsed: u32 = @intCast(std.time.timestamp() - start);
+            const elapsed: u32 = @intCast(std.Io.Clock.real.now(io).toSeconds() - start);
             if (elapsed >= self.config.max_wait_time_s) {
                 return error.WaiterTimedOut;
             }
 
-            const jittered = aws.waiter.jitteredDelay(self.config.min_delay_s, delay_s);
-            std.Thread.sleep(@as(u64, jittered) * std.time.ns_per_s);
+            const jittered = aws.waiter.jitteredDelay(io, self.config.min_delay_s, delay_s);
+            io.sleep(.fromSeconds(@intCast(jittered)), .awake) catch {};
             delay_s = @min(delay_s * 2, self.config.max_delay_s);
         }
     }
@@ -354,7 +360,8 @@ pub const NatGatewayAvailableWaiter = struct {
     const Self = @This();
 
     pub fn wait(self: *Self) aws.waiter.WaiterError!void {
-        const start = std.time.timestamp();
+        const io = self.client.config.io;
+        const start = std.Io.Clock.real.now(io).toSeconds();
         var delay_s: u32 = self.config.min_delay_s;
 
         while (true) {
@@ -366,13 +373,13 @@ pub const NatGatewayAvailableWaiter = struct {
                 .retry => {},
             }
 
-            const elapsed: u32 = @intCast(std.time.timestamp() - start);
+            const elapsed: u32 = @intCast(std.Io.Clock.real.now(io).toSeconds() - start);
             if (elapsed >= self.config.max_wait_time_s) {
                 return error.WaiterTimedOut;
             }
 
-            const jittered = aws.waiter.jitteredDelay(self.config.min_delay_s, delay_s);
-            std.Thread.sleep(@as(u64, jittered) * std.time.ns_per_s);
+            const jittered = aws.waiter.jitteredDelay(io, self.config.min_delay_s, delay_s);
+            io.sleep(.fromSeconds(@intCast(jittered)), .awake) catch {};
             delay_s = @min(delay_s * 2, self.config.max_delay_s);
         }
     }
@@ -408,7 +415,8 @@ pub const NatGatewayDeletedWaiter = struct {
     const Self = @This();
 
     pub fn wait(self: *Self) aws.waiter.WaiterError!void {
-        const start = std.time.timestamp();
+        const io = self.client.config.io;
+        const start = std.Io.Clock.real.now(io).toSeconds();
         var delay_s: u32 = self.config.min_delay_s;
 
         while (true) {
@@ -420,13 +428,13 @@ pub const NatGatewayDeletedWaiter = struct {
                 .retry => {},
             }
 
-            const elapsed: u32 = @intCast(std.time.timestamp() - start);
+            const elapsed: u32 = @intCast(std.Io.Clock.real.now(io).toSeconds() - start);
             if (elapsed >= self.config.max_wait_time_s) {
                 return error.WaiterTimedOut;
             }
 
-            const jittered = aws.waiter.jitteredDelay(self.config.min_delay_s, delay_s);
-            std.Thread.sleep(@as(u64, jittered) * std.time.ns_per_s);
+            const jittered = aws.waiter.jitteredDelay(io, self.config.min_delay_s, delay_s);
+            io.sleep(.fromSeconds(@intCast(jittered)), .awake) catch {};
             delay_s = @min(delay_s * 2, self.config.max_delay_s);
         }
     }
@@ -462,7 +470,8 @@ pub const NetworkInterfaceAvailableWaiter = struct {
     const Self = @This();
 
     pub fn wait(self: *Self) aws.waiter.WaiterError!void {
-        const start = std.time.timestamp();
+        const io = self.client.config.io;
+        const start = std.Io.Clock.real.now(io).toSeconds();
         var delay_s: u32 = self.config.min_delay_s;
 
         while (true) {
@@ -474,13 +483,13 @@ pub const NetworkInterfaceAvailableWaiter = struct {
                 .retry => {},
             }
 
-            const elapsed: u32 = @intCast(std.time.timestamp() - start);
+            const elapsed: u32 = @intCast(std.Io.Clock.real.now(io).toSeconds() - start);
             if (elapsed >= self.config.max_wait_time_s) {
                 return error.WaiterTimedOut;
             }
 
-            const jittered = aws.waiter.jitteredDelay(self.config.min_delay_s, delay_s);
-            std.Thread.sleep(@as(u64, jittered) * std.time.ns_per_s);
+            const jittered = aws.waiter.jitteredDelay(io, self.config.min_delay_s, delay_s);
+            io.sleep(.fromSeconds(@intCast(jittered)), .awake) catch {};
             delay_s = @min(delay_s * 2, self.config.max_delay_s);
         }
     }
@@ -516,7 +525,8 @@ pub const SecondaryNetworkCreateCompleteWaiter = struct {
     const Self = @This();
 
     pub fn wait(self: *Self) aws.waiter.WaiterError!void {
-        const start = std.time.timestamp();
+        const io = self.client.config.io;
+        const start = std.Io.Clock.real.now(io).toSeconds();
         var delay_s: u32 = self.config.min_delay_s;
 
         while (true) {
@@ -528,13 +538,13 @@ pub const SecondaryNetworkCreateCompleteWaiter = struct {
                 .retry => {},
             }
 
-            const elapsed: u32 = @intCast(std.time.timestamp() - start);
+            const elapsed: u32 = @intCast(std.Io.Clock.real.now(io).toSeconds() - start);
             if (elapsed >= self.config.max_wait_time_s) {
                 return error.WaiterTimedOut;
             }
 
-            const jittered = aws.waiter.jitteredDelay(self.config.min_delay_s, delay_s);
-            std.Thread.sleep(@as(u64, jittered) * std.time.ns_per_s);
+            const jittered = aws.waiter.jitteredDelay(io, self.config.min_delay_s, delay_s);
+            io.sleep(.fromSeconds(@intCast(jittered)), .awake) catch {};
             delay_s = @min(delay_s * 2, self.config.max_delay_s);
         }
     }
@@ -570,7 +580,8 @@ pub const SecondarySubnetCreateCompleteWaiter = struct {
     const Self = @This();
 
     pub fn wait(self: *Self) aws.waiter.WaiterError!void {
-        const start = std.time.timestamp();
+        const io = self.client.config.io;
+        const start = std.Io.Clock.real.now(io).toSeconds();
         var delay_s: u32 = self.config.min_delay_s;
 
         while (true) {
@@ -582,13 +593,13 @@ pub const SecondarySubnetCreateCompleteWaiter = struct {
                 .retry => {},
             }
 
-            const elapsed: u32 = @intCast(std.time.timestamp() - start);
+            const elapsed: u32 = @intCast(std.Io.Clock.real.now(io).toSeconds() - start);
             if (elapsed >= self.config.max_wait_time_s) {
                 return error.WaiterTimedOut;
             }
 
-            const jittered = aws.waiter.jitteredDelay(self.config.min_delay_s, delay_s);
-            std.Thread.sleep(@as(u64, jittered) * std.time.ns_per_s);
+            const jittered = aws.waiter.jitteredDelay(io, self.config.min_delay_s, delay_s);
+            io.sleep(.fromSeconds(@intCast(jittered)), .awake) catch {};
             delay_s = @min(delay_s * 2, self.config.max_delay_s);
         }
     }
@@ -624,7 +635,8 @@ pub const SecurityGroupExistsWaiter = struct {
     const Self = @This();
 
     pub fn wait(self: *Self) aws.waiter.WaiterError!void {
-        const start = std.time.timestamp();
+        const io = self.client.config.io;
+        const start = std.Io.Clock.real.now(io).toSeconds();
         var delay_s: u32 = self.config.min_delay_s;
 
         while (true) {
@@ -636,13 +648,13 @@ pub const SecurityGroupExistsWaiter = struct {
                 .retry => {},
             }
 
-            const elapsed: u32 = @intCast(std.time.timestamp() - start);
+            const elapsed: u32 = @intCast(std.Io.Clock.real.now(io).toSeconds() - start);
             if (elapsed >= self.config.max_wait_time_s) {
                 return error.WaiterTimedOut;
             }
 
-            const jittered = aws.waiter.jitteredDelay(self.config.min_delay_s, delay_s);
-            std.Thread.sleep(@as(u64, jittered) * std.time.ns_per_s);
+            const jittered = aws.waiter.jitteredDelay(io, self.config.min_delay_s, delay_s);
+            io.sleep(.fromSeconds(@intCast(jittered)), .awake) catch {};
             delay_s = @min(delay_s * 2, self.config.max_delay_s);
         }
     }
@@ -678,7 +690,8 @@ pub const SpotInstanceRequestFulfilledWaiter = struct {
     const Self = @This();
 
     pub fn wait(self: *Self) aws.waiter.WaiterError!void {
-        const start = std.time.timestamp();
+        const io = self.client.config.io;
+        const start = std.Io.Clock.real.now(io).toSeconds();
         var delay_s: u32 = self.config.min_delay_s;
 
         while (true) {
@@ -690,13 +703,13 @@ pub const SpotInstanceRequestFulfilledWaiter = struct {
                 .retry => {},
             }
 
-            const elapsed: u32 = @intCast(std.time.timestamp() - start);
+            const elapsed: u32 = @intCast(std.Io.Clock.real.now(io).toSeconds() - start);
             if (elapsed >= self.config.max_wait_time_s) {
                 return error.WaiterTimedOut;
             }
 
-            const jittered = aws.waiter.jitteredDelay(self.config.min_delay_s, delay_s);
-            std.Thread.sleep(@as(u64, jittered) * std.time.ns_per_s);
+            const jittered = aws.waiter.jitteredDelay(io, self.config.min_delay_s, delay_s);
+            io.sleep(.fromSeconds(@intCast(jittered)), .awake) catch {};
             delay_s = @min(delay_s * 2, self.config.max_delay_s);
         }
     }
@@ -732,7 +745,8 @@ pub const VolumeDeletedWaiter = struct {
     const Self = @This();
 
     pub fn wait(self: *Self) aws.waiter.WaiterError!void {
-        const start = std.time.timestamp();
+        const io = self.client.config.io;
+        const start = std.Io.Clock.real.now(io).toSeconds();
         var delay_s: u32 = self.config.min_delay_s;
 
         while (true) {
@@ -744,13 +758,13 @@ pub const VolumeDeletedWaiter = struct {
                 .retry => {},
             }
 
-            const elapsed: u32 = @intCast(std.time.timestamp() - start);
+            const elapsed: u32 = @intCast(std.Io.Clock.real.now(io).toSeconds() - start);
             if (elapsed >= self.config.max_wait_time_s) {
                 return error.WaiterTimedOut;
             }
 
-            const jittered = aws.waiter.jitteredDelay(self.config.min_delay_s, delay_s);
-            std.Thread.sleep(@as(u64, jittered) * std.time.ns_per_s);
+            const jittered = aws.waiter.jitteredDelay(io, self.config.min_delay_s, delay_s);
+            io.sleep(.fromSeconds(@intCast(jittered)), .awake) catch {};
             delay_s = @min(delay_s * 2, self.config.max_delay_s);
         }
     }
@@ -786,7 +800,8 @@ pub const VpcExistsWaiter = struct {
     const Self = @This();
 
     pub fn wait(self: *Self) aws.waiter.WaiterError!void {
-        const start = std.time.timestamp();
+        const io = self.client.config.io;
+        const start = std.Io.Clock.real.now(io).toSeconds();
         var delay_s: u32 = self.config.min_delay_s;
 
         while (true) {
@@ -798,13 +813,13 @@ pub const VpcExistsWaiter = struct {
                 .retry => {},
             }
 
-            const elapsed: u32 = @intCast(std.time.timestamp() - start);
+            const elapsed: u32 = @intCast(std.Io.Clock.real.now(io).toSeconds() - start);
             if (elapsed >= self.config.max_wait_time_s) {
                 return error.WaiterTimedOut;
             }
 
-            const jittered = aws.waiter.jitteredDelay(self.config.min_delay_s, delay_s);
-            std.Thread.sleep(@as(u64, jittered) * std.time.ns_per_s);
+            const jittered = aws.waiter.jitteredDelay(io, self.config.min_delay_s, delay_s);
+            io.sleep(.fromSeconds(@intCast(jittered)), .awake) catch {};
             delay_s = @min(delay_s * 2, self.config.max_delay_s);
         }
     }
@@ -840,7 +855,8 @@ pub const VpcPeeringConnectionDeletedWaiter = struct {
     const Self = @This();
 
     pub fn wait(self: *Self) aws.waiter.WaiterError!void {
-        const start = std.time.timestamp();
+        const io = self.client.config.io;
+        const start = std.Io.Clock.real.now(io).toSeconds();
         var delay_s: u32 = self.config.min_delay_s;
 
         while (true) {
@@ -852,13 +868,13 @@ pub const VpcPeeringConnectionDeletedWaiter = struct {
                 .retry => {},
             }
 
-            const elapsed: u32 = @intCast(std.time.timestamp() - start);
+            const elapsed: u32 = @intCast(std.Io.Clock.real.now(io).toSeconds() - start);
             if (elapsed >= self.config.max_wait_time_s) {
                 return error.WaiterTimedOut;
             }
 
-            const jittered = aws.waiter.jitteredDelay(self.config.min_delay_s, delay_s);
-            std.Thread.sleep(@as(u64, jittered) * std.time.ns_per_s);
+            const jittered = aws.waiter.jitteredDelay(io, self.config.min_delay_s, delay_s);
+            io.sleep(.fromSeconds(@intCast(jittered)), .awake) catch {};
             delay_s = @min(delay_s * 2, self.config.max_delay_s);
         }
     }
@@ -894,7 +910,8 @@ pub const VpcPeeringConnectionExistsWaiter = struct {
     const Self = @This();
 
     pub fn wait(self: *Self) aws.waiter.WaiterError!void {
-        const start = std.time.timestamp();
+        const io = self.client.config.io;
+        const start = std.Io.Clock.real.now(io).toSeconds();
         var delay_s: u32 = self.config.min_delay_s;
 
         while (true) {
@@ -906,13 +923,13 @@ pub const VpcPeeringConnectionExistsWaiter = struct {
                 .retry => {},
             }
 
-            const elapsed: u32 = @intCast(std.time.timestamp() - start);
+            const elapsed: u32 = @intCast(std.Io.Clock.real.now(io).toSeconds() - start);
             if (elapsed >= self.config.max_wait_time_s) {
                 return error.WaiterTimedOut;
             }
 
-            const jittered = aws.waiter.jitteredDelay(self.config.min_delay_s, delay_s);
-            std.Thread.sleep(@as(u64, jittered) * std.time.ns_per_s);
+            const jittered = aws.waiter.jitteredDelay(io, self.config.min_delay_s, delay_s);
+            io.sleep(.fromSeconds(@intCast(jittered)), .awake) catch {};
             delay_s = @min(delay_s * 2, self.config.max_delay_s);
         }
     }

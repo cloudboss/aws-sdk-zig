@@ -243,7 +243,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetStreamSe
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "gameliftstreams");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "gameliftstreams");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -266,7 +266,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetStreamSessionInput, 
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var path_buf: std.ArrayList(u8) = .{};
+    var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/streamgroups/");
     try path_buf.appendSlice(allocator, input.identifier);
     try path_buf.appendSlice(allocator, "/streamsessions/");

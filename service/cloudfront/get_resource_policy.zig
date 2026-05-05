@@ -18,7 +18,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetResource
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "cloudfront");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "cloudfront");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -43,7 +43,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetResourcePolicyInput,
 
     const path = "/2020-05-31/get-resource-policy";
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
     try body_buf.appendSlice(allocator, "<GetResourcePolicyRequest xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     try body_buf.appendSlice(allocator, "<ResourceArn>");
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.resource_arn);

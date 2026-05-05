@@ -82,7 +82,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutBucketAc
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "s3");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "s3");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -105,12 +105,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutBucketAclInput, conf
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var path_buf: std.ArrayList(u8) = .{};
+    var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/");
     try path_buf.appendSlice(allocator, input.bucket);
     const path = try path_buf.toOwnedSlice(allocator);
 
-    var query_buf: std.ArrayList(u8) = .{};
+    var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
     try query_buf.appendSlice(allocator, "acl");
     query_has_prev = true;
@@ -118,7 +118,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutBucketAclInput, conf
 
     const body: ?[]const u8 = blk: {
         if (input.access_control_policy) |payload| {
-            var body_buf: std.ArrayList(u8) = .{};
+            var body_buf: std.ArrayList(u8) = .empty;
             try body_buf.appendSlice(allocator, "<AccessControlPolicy xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">");
             try serde.serializeAccessControlPolicy(allocator, &body_buf, payload);
             try body_buf.appendSlice(allocator, "</AccessControlPolicy>");

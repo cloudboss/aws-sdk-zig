@@ -42,7 +42,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDataL
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "securitylake");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "securitylake");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -67,7 +67,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateDataLakeInput, co
 
     const path = "/v1/datalake";
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 

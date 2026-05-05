@@ -51,7 +51,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetReferenc
     var request = try serializeRequest(alloc, input, client.config);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "omics");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "omics");
 
     var stream_resp = try client.http_client.sendStreamingRequest(&request);
 
@@ -78,14 +78,14 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetReferenceInput, conf
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var path_buf: std.ArrayList(u8) = .{};
+    var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/referencestore/");
     try path_buf.appendSlice(allocator, input.reference_store_id);
     try path_buf.appendSlice(allocator, "/reference/");
     try path_buf.appendSlice(allocator, input.id);
     const path = try path_buf.toOwnedSlice(allocator);
 
-    var query_buf: std.ArrayList(u8) = .{};
+    var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
     if (input.file) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

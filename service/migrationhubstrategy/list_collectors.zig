@@ -48,7 +48,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListCollect
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "awsmigrationhubstrategyrecommendation");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "awsmigrationhubstrategyrecommendation");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -73,7 +73,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCollectorsInput, co
 
     const path = "/list-collectors";
 
-    var query_buf: std.ArrayList(u8) = .{};
+    var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
     if (input.max_results) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

@@ -41,7 +41,7 @@ const TextArrayOptions = @import("text_array_options.zig").TextArrayOptions;
 const TextOptions = @import("text_options.zig").TextOptions;
 
 pub fn deserializeAnalysisSchemeStatusList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const AnalysisSchemeStatus {
-    var list: std.ArrayList(AnalysisSchemeStatus) = .{};
+    var list: std.ArrayList(AnalysisSchemeStatus) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -59,7 +59,7 @@ pub fn deserializeAnalysisSchemeStatusList(allocator: std.mem.Allocator, reader:
 }
 
 pub fn deserializeDomainStatusList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const DomainStatus {
-    var list: std.ArrayList(DomainStatus) = .{};
+    var list: std.ArrayList(DomainStatus) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -77,7 +77,7 @@ pub fn deserializeDomainStatusList(allocator: std.mem.Allocator, reader: *aws.xm
 }
 
 pub fn deserializeExpressionStatusList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ExpressionStatus {
-    var list: std.ArrayList(ExpressionStatus) = .{};
+    var list: std.ArrayList(ExpressionStatus) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -95,7 +95,7 @@ pub fn deserializeExpressionStatusList(allocator: std.mem.Allocator, reader: *aw
 }
 
 pub fn deserializeFieldNameList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
-    var list: std.ArrayList([]const u8) = .{};
+    var list: std.ArrayList([]const u8) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -113,7 +113,7 @@ pub fn deserializeFieldNameList(allocator: std.mem.Allocator, reader: *aws.xml.R
 }
 
 pub fn deserializeIndexFieldStatusList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const IndexFieldStatus {
-    var list: std.ArrayList(IndexFieldStatus) = .{};
+    var list: std.ArrayList(IndexFieldStatus) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -131,7 +131,7 @@ pub fn deserializeIndexFieldStatusList(allocator: std.mem.Allocator, reader: *aw
 }
 
 pub fn deserializeSuggesterStatusList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const SuggesterStatus {
-    var list: std.ArrayList(SuggesterStatus) = .{};
+    var list: std.ArrayList(SuggesterStatus) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -149,7 +149,7 @@ pub fn deserializeSuggesterStatusList(allocator: std.mem.Allocator, reader: *aws
 }
 
 pub fn deserializeDomainNameMap(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime entry_tag: []const u8) ![]const aws.map.StringMapEntry {
-    var list: std.ArrayList(aws.map.StringMapEntry) = .{};
+    var list: std.ArrayList(aws.map.StringMapEntry) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {

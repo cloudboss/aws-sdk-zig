@@ -65,7 +65,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteJobEx
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "iot");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "iot");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -88,7 +88,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteJobExecutionInput
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var path_buf: std.ArrayList(u8) = .{};
+    var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/things/");
     try path_buf.appendSlice(allocator, input.thing_name);
     try path_buf.appendSlice(allocator, "/jobs/");
@@ -97,7 +97,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteJobExecutionInput
     try path_buf.appendSlice(allocator, input.execution_number);
     const path = try path_buf.toOwnedSlice(allocator);
 
-    var query_buf: std.ArrayList(u8) = .{};
+    var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
     if (input.force) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

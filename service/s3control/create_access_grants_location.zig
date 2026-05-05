@@ -69,7 +69,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAcces
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "s3");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "s3");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -94,7 +94,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAccessGrantsLocat
 
     const path = "/v20180820/accessgrantsinstance/location";
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
     try body_buf.appendSlice(allocator, "<CreateAccessGrantsLocationRequest xmlns=\"http://awss3control.amazonaws.com/doc/2018-08-20/\">");
     try body_buf.appendSlice(allocator, "<IAMRoleArn>");
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.iam_role_arn);

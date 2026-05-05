@@ -42,7 +42,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetConfigur
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "cleanrooms-ml");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "cleanrooms-ml");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -65,7 +65,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetConfiguredAudienceMo
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var path_buf: std.ArrayList(u8) = .{};
+    var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/configured-audience-model/");
     try path_buf.appendSlice(allocator, input.configured_audience_model_arn);
     try path_buf.appendSlice(allocator, "/policy");

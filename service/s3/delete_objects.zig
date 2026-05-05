@@ -161,7 +161,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteObjec
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "s3");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "s3");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -184,18 +184,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteObjectsInput, con
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var path_buf: std.ArrayList(u8) = .{};
+    var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/");
     try path_buf.appendSlice(allocator, input.bucket);
     const path = try path_buf.toOwnedSlice(allocator);
 
-    var query_buf: std.ArrayList(u8) = .{};
+    var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
     try query_buf.appendSlice(allocator, "delete");
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(allocator);
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
     try body_buf.appendSlice(allocator, "<Delete xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">");
     try serde.serializeDelete(allocator, &body_buf, input.delete);
     try body_buf.appendSlice(allocator, "</Delete>");
@@ -249,8 +249,8 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         }
     }
 
-    var deleted_list: std.ArrayList(DeletedObject) = .{};
-    var errors_list: std.ArrayList(Error) = .{};
+    var deleted_list: std.ArrayList(DeletedObject) = .empty;
+    var errors_list: std.ArrayList(Error) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {

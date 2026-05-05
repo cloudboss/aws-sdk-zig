@@ -82,7 +82,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RestoreObje
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "s3");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "s3");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -105,14 +105,14 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RestoreObjectInput, con
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var path_buf: std.ArrayList(u8) = .{};
+    var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/");
     try path_buf.appendSlice(allocator, input.bucket);
     try path_buf.appendSlice(allocator, "/");
     try path_buf.appendSlice(allocator, input.key);
     const path = try path_buf.toOwnedSlice(allocator);
 
-    var query_buf: std.ArrayList(u8) = .{};
+    var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
     try query_buf.appendSlice(allocator, "restore");
     query_has_prev = true;
@@ -126,7 +126,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RestoreObjectInput, con
 
     const body: ?[]const u8 = blk: {
         if (input.restore_request) |payload| {
-            var body_buf: std.ArrayList(u8) = .{};
+            var body_buf: std.ArrayList(u8) = .empty;
             try body_buf.appendSlice(allocator, "<RestoreRequest xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">");
             try serde.serializeRestoreRequest(allocator, &body_buf, payload);
             try body_buf.appendSlice(allocator, "</RestoreRequest>");

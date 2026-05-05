@@ -39,7 +39,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListStorage
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "s3");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "s3");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -64,7 +64,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListStorageLensGroupsIn
 
     const path = "/v20180820/storagelensgroup";
 
-    var query_buf: std.ArrayList(u8) = .{};
+    var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
     if (input.next_token) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
@@ -100,7 +100,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
         }
     }
 
-    var storage_lens_group_list_list: std.ArrayList(ListStorageLensGroupEntry) = .{};
+    var storage_lens_group_list_list: std.ArrayList(ListStorageLensGroupEntry) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {

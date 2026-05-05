@@ -48,7 +48,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListVpcEndp
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "es");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "es");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -71,13 +71,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListVpcEndpointAccessIn
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var path_buf: std.ArrayList(u8) = .{};
+    var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/2021-01-01/opensearch/domain/");
     try path_buf.appendSlice(allocator, input.domain_name);
     try path_buf.appendSlice(allocator, "/listVpcEndpointAccess");
     const path = try path_buf.toOwnedSlice(allocator);
 
-    var query_buf: std.ArrayList(u8) = .{};
+    var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
     if (input.next_token) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

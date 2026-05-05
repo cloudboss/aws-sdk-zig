@@ -57,7 +57,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeInp
     var request = try serializeRequest(alloc, input, client.config);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "medialive");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "medialive");
 
     var stream_resp = try client.http_client.sendStreamingRequest(&request);
 
@@ -84,7 +84,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeInputDeviceThum
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var path_buf: std.ArrayList(u8) = .{};
+    var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/prod/inputDevices/");
     try path_buf.appendSlice(allocator, input.input_device_id);
     try path_buf.appendSlice(allocator, "/thumbnailData");

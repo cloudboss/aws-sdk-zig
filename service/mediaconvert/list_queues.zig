@@ -66,7 +66,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListQueuesI
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "mediaconvert");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "mediaconvert");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -91,7 +91,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListQueuesInput, config
 
     const path = "/2017-08-29/queues";
 
-    var query_buf: std.ArrayList(u8) = .{};
+    var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
     if (input.list_by) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

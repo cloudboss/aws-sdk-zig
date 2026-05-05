@@ -62,7 +62,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSecurit
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "connect");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "connect");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -85,14 +85,14 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListSecurityProfilePerm
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var path_buf: std.ArrayList(u8) = .{};
+    var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/security-profiles-permissions/");
     try path_buf.appendSlice(allocator, input.instance_id);
     try path_buf.appendSlice(allocator, "/");
     try path_buf.appendSlice(allocator, input.security_profile_id);
     const path = try path_buf.toOwnedSlice(allocator);
 
-    var query_buf: std.ArrayList(u8) = .{};
+    var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
     if (input.max_results) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

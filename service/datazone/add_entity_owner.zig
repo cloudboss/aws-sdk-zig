@@ -45,7 +45,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AddEntityOw
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "datazone");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "datazone");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -68,7 +68,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AddEntityOwnerInput, co
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var path_buf: std.ArrayList(u8) = .{};
+    var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/v2/domains/");
     try path_buf.appendSlice(allocator, input.domain_identifier);
     try path_buf.appendSlice(allocator, "/entities/");
@@ -78,7 +78,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AddEntityOwnerInput, co
     try path_buf.appendSlice(allocator, "/addOwner");
     const path = try path_buf.toOwnedSlice(allocator);
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 

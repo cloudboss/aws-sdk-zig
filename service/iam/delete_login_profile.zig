@@ -34,7 +34,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLogin
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "iam");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "iam");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -57,7 +57,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteLoginProfileInput
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
 
     try body_buf.appendSlice(allocator, "Action=DeleteLoginProfile&Version=2010-05-08");
     if (input.user_name) |v| {

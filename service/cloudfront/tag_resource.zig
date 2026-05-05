@@ -20,7 +20,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TagResource
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "cloudfront");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "cloudfront");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -45,7 +45,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: TagResourceInput, confi
 
     const path = "/2020-05-31/tagging";
 
-    var query_buf: std.ArrayList(u8) = .{};
+    var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
     try query_buf.appendSlice(allocator, "Operation=Tag");
     query_has_prev = true;
@@ -55,7 +55,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: TagResourceInput, confi
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(allocator);
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
     try body_buf.appendSlice(allocator, "<Tags xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     try serde.serializeTags(allocator, &body_buf, input.tags);
     try body_buf.appendSlice(allocator, "</Tags>");

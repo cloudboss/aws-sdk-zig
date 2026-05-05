@@ -55,7 +55,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListCallerA
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "s3");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "s3");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -80,7 +80,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCallerAccessGrantsI
 
     const path = "/v20180820/accessgrantsinstance/caller/grants";
 
-    var query_buf: std.ArrayList(u8) = .{};
+    var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
     if (input.allowed_by_application) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");

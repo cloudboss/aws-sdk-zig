@@ -69,7 +69,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDistr
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "cloudfront");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "cloudfront");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -92,12 +92,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateDistributionTenan
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var path_buf: std.ArrayList(u8) = .{};
+    var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/2020-05-31/distribution-tenant/");
     try path_buf.appendSlice(allocator, input.id);
     const path = try path_buf.toOwnedSlice(allocator);
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
     try body_buf.appendSlice(allocator, "<UpdateDistributionTenantRequest xmlns=\"http://cloudfront.amazonaws.com/doc/2020-05-31/\">");
     if (input.connection_group_id) |v| {
         try body_buf.appendSlice(allocator, "<ConnectionGroupId>");

@@ -67,7 +67,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListUnsuppo
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "resiliencehub");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "resiliencehub");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -92,7 +92,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListUnsupportedAppVersi
 
     const path = "/list-unsupported-app-version-resources";
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 

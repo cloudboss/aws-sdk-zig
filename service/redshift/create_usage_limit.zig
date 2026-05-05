@@ -57,7 +57,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateUsage
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "redshift");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "redshift");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -80,7 +80,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateUsageLimitInput, 
     const tls = !std.mem.startsWith(u8, endpoint, "http://");
     const port = aws.url.parsePort(endpoint);
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
 
     try body_buf.appendSlice(allocator, "Action=CreateUsageLimit&Version=2012-12-01");
     try body_buf.appendSlice(allocator, "&Amount=");

@@ -120,7 +120,7 @@ const VpcSecurityGroupMembership = @import("vpc_security_group_membership.zig").
 const ZeroETLIntegrationStatus = @import("zero_etl_integration_status.zig").ZeroETLIntegrationStatus;
 
 pub fn deserializeAccountsWithRestoreAccessList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const AccountWithRestoreAccess {
-    var list: std.ArrayList(AccountWithRestoreAccess) = .{};
+    var list: std.ArrayList(AccountWithRestoreAccess) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -138,7 +138,7 @@ pub fn deserializeAccountsWithRestoreAccessList(allocator: std.mem.Allocator, re
 }
 
 pub fn deserializeAssociatedClusterList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ClusterAssociatedToSchedule {
-    var list: std.ArrayList(ClusterAssociatedToSchedule) = .{};
+    var list: std.ArrayList(ClusterAssociatedToSchedule) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -156,7 +156,7 @@ pub fn deserializeAssociatedClusterList(allocator: std.mem.Allocator, reader: *a
 }
 
 pub fn deserializeAssociationList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Association {
-    var list: std.ArrayList(Association) = .{};
+    var list: std.ArrayList(Association) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -174,7 +174,7 @@ pub fn deserializeAssociationList(allocator: std.mem.Allocator, reader: *aws.xml
 }
 
 pub fn deserializeAttributeList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const AccountAttribute {
-    var list: std.ArrayList(AccountAttribute) = .{};
+    var list: std.ArrayList(AccountAttribute) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -192,7 +192,7 @@ pub fn deserializeAttributeList(allocator: std.mem.Allocator, reader: *aws.xml.R
 }
 
 pub fn deserializeAttributeValueList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const AttributeValueTarget {
-    var list: std.ArrayList(AttributeValueTarget) = .{};
+    var list: std.ArrayList(AttributeValueTarget) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -210,7 +210,7 @@ pub fn deserializeAttributeValueList(allocator: std.mem.Allocator, reader: *aws.
 }
 
 pub fn deserializeAuthenticationProfileList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const AuthenticationProfile {
-    var list: std.ArrayList(AuthenticationProfile) = .{};
+    var list: std.ArrayList(AuthenticationProfile) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -228,7 +228,7 @@ pub fn deserializeAuthenticationProfileList(allocator: std.mem.Allocator, reader
 }
 
 pub fn deserializeAuthorizedAudienceList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
-    var list: std.ArrayList([]const u8) = .{};
+    var list: std.ArrayList([]const u8) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -246,7 +246,7 @@ pub fn deserializeAuthorizedAudienceList(allocator: std.mem.Allocator, reader: *
 }
 
 pub fn deserializeAuthorizedTokenIssuerList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const AuthorizedTokenIssuer {
-    var list: std.ArrayList(AuthorizedTokenIssuer) = .{};
+    var list: std.ArrayList(AuthorizedTokenIssuer) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -264,7 +264,7 @@ pub fn deserializeAuthorizedTokenIssuerList(allocator: std.mem.Allocator, reader
 }
 
 pub fn deserializeAvailabilityZoneList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const AvailabilityZone {
-    var list: std.ArrayList(AvailabilityZone) = .{};
+    var list: std.ArrayList(AvailabilityZone) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -282,7 +282,7 @@ pub fn deserializeAvailabilityZoneList(allocator: std.mem.Allocator, reader: *aw
 }
 
 pub fn deserializeBatchSnapshotOperationErrorList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const SnapshotErrorMessage {
-    var list: std.ArrayList(SnapshotErrorMessage) = .{};
+    var list: std.ArrayList(SnapshotErrorMessage) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -300,7 +300,7 @@ pub fn deserializeBatchSnapshotOperationErrorList(allocator: std.mem.Allocator, 
 }
 
 pub fn deserializeBatchSnapshotOperationErrors(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const SnapshotErrorMessage {
-    var list: std.ArrayList(SnapshotErrorMessage) = .{};
+    var list: std.ArrayList(SnapshotErrorMessage) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -318,7 +318,7 @@ pub fn deserializeBatchSnapshotOperationErrors(allocator: std.mem.Allocator, rea
 }
 
 pub fn deserializeCertificateAssociationList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const CertificateAssociation {
-    var list: std.ArrayList(CertificateAssociation) = .{};
+    var list: std.ArrayList(CertificateAssociation) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -336,7 +336,7 @@ pub fn deserializeCertificateAssociationList(allocator: std.mem.Allocator, reade
 }
 
 pub fn deserializeClusterDbRevisionsList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ClusterDbRevision {
-    var list: std.ArrayList(ClusterDbRevision) = .{};
+    var list: std.ArrayList(ClusterDbRevision) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -354,7 +354,7 @@ pub fn deserializeClusterDbRevisionsList(allocator: std.mem.Allocator, reader: *
 }
 
 pub fn deserializeClusterIamRoleList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ClusterIamRole {
-    var list: std.ArrayList(ClusterIamRole) = .{};
+    var list: std.ArrayList(ClusterIamRole) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -372,7 +372,7 @@ pub fn deserializeClusterIamRoleList(allocator: std.mem.Allocator, reader: *aws.
 }
 
 pub fn deserializeClusterList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Cluster {
-    var list: std.ArrayList(Cluster) = .{};
+    var list: std.ArrayList(Cluster) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -390,7 +390,7 @@ pub fn deserializeClusterList(allocator: std.mem.Allocator, reader: *aws.xml.Rea
 }
 
 pub fn deserializeClusterNodesList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ClusterNode {
-    var list: std.ArrayList(ClusterNode) = .{};
+    var list: std.ArrayList(ClusterNode) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -408,7 +408,7 @@ pub fn deserializeClusterNodesList(allocator: std.mem.Allocator, reader: *aws.xm
 }
 
 pub fn deserializeClusterParameterGroupStatusList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ClusterParameterGroupStatus {
-    var list: std.ArrayList(ClusterParameterGroupStatus) = .{};
+    var list: std.ArrayList(ClusterParameterGroupStatus) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -426,7 +426,7 @@ pub fn deserializeClusterParameterGroupStatusList(allocator: std.mem.Allocator, 
 }
 
 pub fn deserializeClusterParameterStatusList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ClusterParameterStatus {
-    var list: std.ArrayList(ClusterParameterStatus) = .{};
+    var list: std.ArrayList(ClusterParameterStatus) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -444,7 +444,7 @@ pub fn deserializeClusterParameterStatusList(allocator: std.mem.Allocator, reade
 }
 
 pub fn deserializeClusterSecurityGroupMembershipList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ClusterSecurityGroupMembership {
-    var list: std.ArrayList(ClusterSecurityGroupMembership) = .{};
+    var list: std.ArrayList(ClusterSecurityGroupMembership) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -462,7 +462,7 @@ pub fn deserializeClusterSecurityGroupMembershipList(allocator: std.mem.Allocato
 }
 
 pub fn deserializeClusterSecurityGroups(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ClusterSecurityGroup {
-    var list: std.ArrayList(ClusterSecurityGroup) = .{};
+    var list: std.ArrayList(ClusterSecurityGroup) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -480,7 +480,7 @@ pub fn deserializeClusterSecurityGroups(allocator: std.mem.Allocator, reader: *a
 }
 
 pub fn deserializeClusterSubnetGroups(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ClusterSubnetGroup {
-    var list: std.ArrayList(ClusterSubnetGroup) = .{};
+    var list: std.ArrayList(ClusterSubnetGroup) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -498,7 +498,7 @@ pub fn deserializeClusterSubnetGroups(allocator: std.mem.Allocator, reader: *aws
 }
 
 pub fn deserializeClusterVersionList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ClusterVersion {
-    var list: std.ArrayList(ClusterVersion) = .{};
+    var list: std.ArrayList(ClusterVersion) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -516,7 +516,7 @@ pub fn deserializeClusterVersionList(allocator: std.mem.Allocator, reader: *aws.
 }
 
 pub fn deserializeDataShareAssociationList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const DataShareAssociation {
-    var list: std.ArrayList(DataShareAssociation) = .{};
+    var list: std.ArrayList(DataShareAssociation) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -534,7 +534,7 @@ pub fn deserializeDataShareAssociationList(allocator: std.mem.Allocator, reader:
 }
 
 pub fn deserializeDataShareList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const DataShare {
-    var list: std.ArrayList(DataShare) = .{};
+    var list: std.ArrayList(DataShare) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -552,7 +552,7 @@ pub fn deserializeDataShareList(allocator: std.mem.Allocator, reader: *aws.xml.R
 }
 
 pub fn deserializeDeferredMaintenanceWindowsList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const DeferredMaintenanceWindow {
-    var list: std.ArrayList(DeferredMaintenanceWindow) = .{};
+    var list: std.ArrayList(DeferredMaintenanceWindow) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -570,7 +570,7 @@ pub fn deserializeDeferredMaintenanceWindowsList(allocator: std.mem.Allocator, r
 }
 
 pub fn deserializeEC2SecurityGroupList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const EC2SecurityGroup {
-    var list: std.ArrayList(EC2SecurityGroup) = .{};
+    var list: std.ArrayList(EC2SecurityGroup) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -588,7 +588,7 @@ pub fn deserializeEC2SecurityGroupList(allocator: std.mem.Allocator, reader: *aw
 }
 
 pub fn deserializeEligibleTracksToUpdateList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const UpdateTarget {
-    var list: std.ArrayList(UpdateTarget) = .{};
+    var list: std.ArrayList(UpdateTarget) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -606,7 +606,7 @@ pub fn deserializeEligibleTracksToUpdateList(allocator: std.mem.Allocator, reade
 }
 
 pub fn deserializeEndpointAccesses(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const EndpointAccess {
-    var list: std.ArrayList(EndpointAccess) = .{};
+    var list: std.ArrayList(EndpointAccess) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -624,7 +624,7 @@ pub fn deserializeEndpointAccesses(allocator: std.mem.Allocator, reader: *aws.xm
 }
 
 pub fn deserializeEndpointAuthorizations(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const EndpointAuthorization {
-    var list: std.ArrayList(EndpointAuthorization) = .{};
+    var list: std.ArrayList(EndpointAuthorization) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -642,7 +642,7 @@ pub fn deserializeEndpointAuthorizations(allocator: std.mem.Allocator, reader: *
 }
 
 pub fn deserializeEventCategoriesList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
-    var list: std.ArrayList([]const u8) = .{};
+    var list: std.ArrayList([]const u8) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -660,7 +660,7 @@ pub fn deserializeEventCategoriesList(allocator: std.mem.Allocator, reader: *aws
 }
 
 pub fn deserializeEventCategoriesMapList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const EventCategoriesMap {
-    var list: std.ArrayList(EventCategoriesMap) = .{};
+    var list: std.ArrayList(EventCategoriesMap) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -678,7 +678,7 @@ pub fn deserializeEventCategoriesMapList(allocator: std.mem.Allocator, reader: *
 }
 
 pub fn deserializeEventInfoMapList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const EventInfoMap {
-    var list: std.ArrayList(EventInfoMap) = .{};
+    var list: std.ArrayList(EventInfoMap) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -696,7 +696,7 @@ pub fn deserializeEventInfoMapList(allocator: std.mem.Allocator, reader: *aws.xm
 }
 
 pub fn deserializeEventList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Event {
-    var list: std.ArrayList(Event) = .{};
+    var list: std.ArrayList(Event) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -714,7 +714,7 @@ pub fn deserializeEventList(allocator: std.mem.Allocator, reader: *aws.xml.Reade
 }
 
 pub fn deserializeEventSubscriptionsList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const EventSubscription {
-    var list: std.ArrayList(EventSubscription) = .{};
+    var list: std.ArrayList(EventSubscription) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -732,7 +732,7 @@ pub fn deserializeEventSubscriptionsList(allocator: std.mem.Allocator, reader: *
 }
 
 pub fn deserializeHsmClientCertificateList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const HsmClientCertificate {
-    var list: std.ArrayList(HsmClientCertificate) = .{};
+    var list: std.ArrayList(HsmClientCertificate) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -750,7 +750,7 @@ pub fn deserializeHsmClientCertificateList(allocator: std.mem.Allocator, reader:
 }
 
 pub fn deserializeHsmConfigurationList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const HsmConfiguration {
-    var list: std.ArrayList(HsmConfiguration) = .{};
+    var list: std.ArrayList(HsmConfiguration) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -768,7 +768,7 @@ pub fn deserializeHsmConfigurationList(allocator: std.mem.Allocator, reader: *aw
 }
 
 pub fn deserializeIPRangeList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const IPRange {
-    var list: std.ArrayList(IPRange) = .{};
+    var list: std.ArrayList(IPRange) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -786,7 +786,7 @@ pub fn deserializeIPRangeList(allocator: std.mem.Allocator, reader: *aws.xml.Rea
 }
 
 pub fn deserializeImportTablesCompleted(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
-    var list: std.ArrayList([]const u8) = .{};
+    var list: std.ArrayList([]const u8) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -804,7 +804,7 @@ pub fn deserializeImportTablesCompleted(allocator: std.mem.Allocator, reader: *a
 }
 
 pub fn deserializeImportTablesInProgress(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
-    var list: std.ArrayList([]const u8) = .{};
+    var list: std.ArrayList([]const u8) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -822,7 +822,7 @@ pub fn deserializeImportTablesInProgress(allocator: std.mem.Allocator, reader: *
 }
 
 pub fn deserializeImportTablesNotStarted(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
-    var list: std.ArrayList([]const u8) = .{};
+    var list: std.ArrayList([]const u8) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -840,7 +840,7 @@ pub fn deserializeImportTablesNotStarted(allocator: std.mem.Allocator, reader: *
 }
 
 pub fn deserializeInboundIntegrationList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const InboundIntegration {
-    var list: std.ArrayList(InboundIntegration) = .{};
+    var list: std.ArrayList(InboundIntegration) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -858,7 +858,7 @@ pub fn deserializeInboundIntegrationList(allocator: std.mem.Allocator, reader: *
 }
 
 pub fn deserializeIntegrationErrorList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const IntegrationError {
-    var list: std.ArrayList(IntegrationError) = .{};
+    var list: std.ArrayList(IntegrationError) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -876,7 +876,7 @@ pub fn deserializeIntegrationErrorList(allocator: std.mem.Allocator, reader: *aw
 }
 
 pub fn deserializeIntegrationList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Integration {
-    var list: std.ArrayList(Integration) = .{};
+    var list: std.ArrayList(Integration) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -894,7 +894,7 @@ pub fn deserializeIntegrationList(allocator: std.mem.Allocator, reader: *aws.xml
 }
 
 pub fn deserializeLogTypeList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
-    var list: std.ArrayList([]const u8) = .{};
+    var list: std.ArrayList([]const u8) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -912,7 +912,7 @@ pub fn deserializeLogTypeList(allocator: std.mem.Allocator, reader: *aws.xml.Rea
 }
 
 pub fn deserializeNetworkInterfaceList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const NetworkInterface {
-    var list: std.ArrayList(NetworkInterface) = .{};
+    var list: std.ArrayList(NetworkInterface) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -930,7 +930,7 @@ pub fn deserializeNetworkInterfaceList(allocator: std.mem.Allocator, reader: *aw
 }
 
 pub fn deserializeNodeConfigurationOptionList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const NodeConfigurationOption {
-    var list: std.ArrayList(NodeConfigurationOption) = .{};
+    var list: std.ArrayList(NodeConfigurationOption) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -948,7 +948,7 @@ pub fn deserializeNodeConfigurationOptionList(allocator: std.mem.Allocator, read
 }
 
 pub fn deserializeOrderableClusterOptionsList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const OrderableClusterOption {
-    var list: std.ArrayList(OrderableClusterOption) = .{};
+    var list: std.ArrayList(OrderableClusterOption) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -966,7 +966,7 @@ pub fn deserializeOrderableClusterOptionsList(allocator: std.mem.Allocator, read
 }
 
 pub fn deserializeParameterGroupList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ClusterParameterGroup {
-    var list: std.ArrayList(ClusterParameterGroup) = .{};
+    var list: std.ArrayList(ClusterParameterGroup) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -984,7 +984,7 @@ pub fn deserializeParameterGroupList(allocator: std.mem.Allocator, reader: *aws.
 }
 
 pub fn deserializeParametersList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Parameter {
-    var list: std.ArrayList(Parameter) = .{};
+    var list: std.ArrayList(Parameter) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1002,7 +1002,7 @@ pub fn deserializeParametersList(allocator: std.mem.Allocator, reader: *aws.xml.
 }
 
 pub fn deserializePartnerIntegrationInfoList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const PartnerIntegrationInfo {
-    var list: std.ArrayList(PartnerIntegrationInfo) = .{};
+    var list: std.ArrayList(PartnerIntegrationInfo) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1020,7 +1020,7 @@ pub fn deserializePartnerIntegrationInfoList(allocator: std.mem.Allocator, reade
 }
 
 pub fn deserializePendingActionsList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
-    var list: std.ArrayList([]const u8) = .{};
+    var list: std.ArrayList([]const u8) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1038,7 +1038,7 @@ pub fn deserializePendingActionsList(allocator: std.mem.Allocator, reader: *aws.
 }
 
 pub fn deserializeRecommendationList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Recommendation {
-    var list: std.ArrayList(Recommendation) = .{};
+    var list: std.ArrayList(Recommendation) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1056,7 +1056,7 @@ pub fn deserializeRecommendationList(allocator: std.mem.Allocator, reader: *aws.
 }
 
 pub fn deserializeRecommendedActionList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const RecommendedAction {
-    var list: std.ArrayList(RecommendedAction) = .{};
+    var list: std.ArrayList(RecommendedAction) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1074,7 +1074,7 @@ pub fn deserializeRecommendedActionList(allocator: std.mem.Allocator, reader: *a
 }
 
 pub fn deserializeRecurringChargeList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const RecurringCharge {
-    var list: std.ArrayList(RecurringCharge) = .{};
+    var list: std.ArrayList(RecurringCharge) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1092,7 +1092,7 @@ pub fn deserializeRecurringChargeList(allocator: std.mem.Allocator, reader: *aws
 }
 
 pub fn deserializeRedshiftIdcApplicationList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const RedshiftIdcApplication {
-    var list: std.ArrayList(RedshiftIdcApplication) = .{};
+    var list: std.ArrayList(RedshiftIdcApplication) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1110,7 +1110,7 @@ pub fn deserializeRedshiftIdcApplicationList(allocator: std.mem.Allocator, reade
 }
 
 pub fn deserializeReferenceLinkList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ReferenceLink {
-    var list: std.ArrayList(ReferenceLink) = .{};
+    var list: std.ArrayList(ReferenceLink) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1128,7 +1128,7 @@ pub fn deserializeReferenceLinkList(allocator: std.mem.Allocator, reader: *aws.x
 }
 
 pub fn deserializeReservedNodeConfigurationOptionList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ReservedNodeConfigurationOption {
-    var list: std.ArrayList(ReservedNodeConfigurationOption) = .{};
+    var list: std.ArrayList(ReservedNodeConfigurationOption) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1146,7 +1146,7 @@ pub fn deserializeReservedNodeConfigurationOptionList(allocator: std.mem.Allocat
 }
 
 pub fn deserializeReservedNodeExchangeStatusList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ReservedNodeExchangeStatus {
-    var list: std.ArrayList(ReservedNodeExchangeStatus) = .{};
+    var list: std.ArrayList(ReservedNodeExchangeStatus) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1164,7 +1164,7 @@ pub fn deserializeReservedNodeExchangeStatusList(allocator: std.mem.Allocator, r
 }
 
 pub fn deserializeReservedNodeList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ReservedNode {
-    var list: std.ArrayList(ReservedNode) = .{};
+    var list: std.ArrayList(ReservedNode) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1182,7 +1182,7 @@ pub fn deserializeReservedNodeList(allocator: std.mem.Allocator, reader: *aws.xm
 }
 
 pub fn deserializeReservedNodeOfferingList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ReservedNodeOffering {
-    var list: std.ArrayList(ReservedNodeOffering) = .{};
+    var list: std.ArrayList(ReservedNodeOffering) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1200,7 +1200,7 @@ pub fn deserializeReservedNodeOfferingList(allocator: std.mem.Allocator, reader:
 }
 
 pub fn deserializeRestorableNodeTypeList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
-    var list: std.ArrayList([]const u8) = .{};
+    var list: std.ArrayList([]const u8) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1218,7 +1218,7 @@ pub fn deserializeRestorableNodeTypeList(allocator: std.mem.Allocator, reader: *
 }
 
 pub fn deserializeRevisionTargetsList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const RevisionTarget {
-    var list: std.ArrayList(RevisionTarget) = .{};
+    var list: std.ArrayList(RevisionTarget) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1236,7 +1236,7 @@ pub fn deserializeRevisionTargetsList(allocator: std.mem.Allocator, reader: *aws
 }
 
 pub fn deserializeScheduleDefinitionList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
-    var list: std.ArrayList([]const u8) = .{};
+    var list: std.ArrayList([]const u8) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1254,7 +1254,7 @@ pub fn deserializeScheduleDefinitionList(allocator: std.mem.Allocator, reader: *
 }
 
 pub fn deserializeScheduledActionList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ScheduledAction {
-    var list: std.ArrayList(ScheduledAction) = .{};
+    var list: std.ArrayList(ScheduledAction) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1272,7 +1272,7 @@ pub fn deserializeScheduledActionList(allocator: std.mem.Allocator, reader: *aws
 }
 
 pub fn deserializeScheduledActionTimeList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const i64 {
-    var list: std.ArrayList(i64) = .{};
+    var list: std.ArrayList(i64) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1290,7 +1290,7 @@ pub fn deserializeScheduledActionTimeList(allocator: std.mem.Allocator, reader: 
 }
 
 pub fn deserializeScheduledSnapshotTimeList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const i64 {
-    var list: std.ArrayList(i64) = .{};
+    var list: std.ArrayList(i64) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1308,7 +1308,7 @@ pub fn deserializeScheduledSnapshotTimeList(allocator: std.mem.Allocator, reader
 }
 
 pub fn deserializeServiceIntegrationList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ServiceIntegrationsUnion {
-    var list: std.ArrayList(ServiceIntegrationsUnion) = .{};
+    var list: std.ArrayList(ServiceIntegrationsUnion) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1326,7 +1326,7 @@ pub fn deserializeServiceIntegrationList(allocator: std.mem.Allocator, reader: *
 }
 
 pub fn deserializeSnapshotCopyGrantList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const SnapshotCopyGrant {
-    var list: std.ArrayList(SnapshotCopyGrant) = .{};
+    var list: std.ArrayList(SnapshotCopyGrant) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1344,7 +1344,7 @@ pub fn deserializeSnapshotCopyGrantList(allocator: std.mem.Allocator, reader: *a
 }
 
 pub fn deserializeSnapshotIdentifierList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
-    var list: std.ArrayList([]const u8) = .{};
+    var list: std.ArrayList([]const u8) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1362,7 +1362,7 @@ pub fn deserializeSnapshotIdentifierList(allocator: std.mem.Allocator, reader: *
 }
 
 pub fn deserializeSnapshotList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Snapshot {
-    var list: std.ArrayList(Snapshot) = .{};
+    var list: std.ArrayList(Snapshot) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1380,7 +1380,7 @@ pub fn deserializeSnapshotList(allocator: std.mem.Allocator, reader: *aws.xml.Re
 }
 
 pub fn deserializeSnapshotScheduleList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const SnapshotSchedule {
-    var list: std.ArrayList(SnapshotSchedule) = .{};
+    var list: std.ArrayList(SnapshotSchedule) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1398,7 +1398,7 @@ pub fn deserializeSnapshotScheduleList(allocator: std.mem.Allocator, reader: *aw
 }
 
 pub fn deserializeSourceIdsList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
-    var list: std.ArrayList([]const u8) = .{};
+    var list: std.ArrayList([]const u8) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1416,7 +1416,7 @@ pub fn deserializeSourceIdsList(allocator: std.mem.Allocator, reader: *aws.xml.R
 }
 
 pub fn deserializeSubnetList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Subnet {
-    var list: std.ArrayList(Subnet) = .{};
+    var list: std.ArrayList(Subnet) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1434,7 +1434,7 @@ pub fn deserializeSubnetList(allocator: std.mem.Allocator, reader: *aws.xml.Read
 }
 
 pub fn deserializeSupportedOperationList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const SupportedOperation {
-    var list: std.ArrayList(SupportedOperation) = .{};
+    var list: std.ArrayList(SupportedOperation) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1452,7 +1452,7 @@ pub fn deserializeSupportedOperationList(allocator: std.mem.Allocator, reader: *
 }
 
 pub fn deserializeSupportedPlatformsList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const SupportedPlatform {
-    var list: std.ArrayList(SupportedPlatform) = .{};
+    var list: std.ArrayList(SupportedPlatform) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1470,7 +1470,7 @@ pub fn deserializeSupportedPlatformsList(allocator: std.mem.Allocator, reader: *
 }
 
 pub fn deserializeTableRestoreStatusList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const TableRestoreStatus {
-    var list: std.ArrayList(TableRestoreStatus) = .{};
+    var list: std.ArrayList(TableRestoreStatus) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1488,7 +1488,7 @@ pub fn deserializeTableRestoreStatusList(allocator: std.mem.Allocator, reader: *
 }
 
 pub fn deserializeTagKeyList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
-    var list: std.ArrayList([]const u8) = .{};
+    var list: std.ArrayList([]const u8) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1506,7 +1506,7 @@ pub fn deserializeTagKeyList(allocator: std.mem.Allocator, reader: *aws.xml.Read
 }
 
 pub fn deserializeTagList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Tag {
-    var list: std.ArrayList(Tag) = .{};
+    var list: std.ArrayList(Tag) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1524,7 +1524,7 @@ pub fn deserializeTagList(allocator: std.mem.Allocator, reader: *aws.xml.Reader,
 }
 
 pub fn deserializeTaggedResourceList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const TaggedResource {
-    var list: std.ArrayList(TaggedResource) = .{};
+    var list: std.ArrayList(TaggedResource) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1542,7 +1542,7 @@ pub fn deserializeTaggedResourceList(allocator: std.mem.Allocator, reader: *aws.
 }
 
 pub fn deserializeTrackList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const MaintenanceTrack {
-    var list: std.ArrayList(MaintenanceTrack) = .{};
+    var list: std.ArrayList(MaintenanceTrack) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1560,7 +1560,7 @@ pub fn deserializeTrackList(allocator: std.mem.Allocator, reader: *aws.xml.Reade
 }
 
 pub fn deserializeUsageLimits(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const UsageLimit {
-    var list: std.ArrayList(UsageLimit) = .{};
+    var list: std.ArrayList(UsageLimit) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1578,7 +1578,7 @@ pub fn deserializeUsageLimits(allocator: std.mem.Allocator, reader: *aws.xml.Rea
 }
 
 pub fn deserializeValueStringList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
-    var list: std.ArrayList([]const u8) = .{};
+    var list: std.ArrayList([]const u8) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1596,7 +1596,7 @@ pub fn deserializeValueStringList(allocator: std.mem.Allocator, reader: *aws.xml
 }
 
 pub fn deserializeVpcEndpointsList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const VpcEndpoint {
-    var list: std.ArrayList(VpcEndpoint) = .{};
+    var list: std.ArrayList(VpcEndpoint) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1614,7 +1614,7 @@ pub fn deserializeVpcEndpointsList(allocator: std.mem.Allocator, reader: *aws.xm
 }
 
 pub fn deserializeVpcIdentifierList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
-    var list: std.ArrayList([]const u8) = .{};
+    var list: std.ArrayList([]const u8) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1632,7 +1632,7 @@ pub fn deserializeVpcIdentifierList(allocator: std.mem.Allocator, reader: *aws.x
 }
 
 pub fn deserializeVpcSecurityGroupMembershipList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const VpcSecurityGroupMembership {
-    var list: std.ArrayList(VpcSecurityGroupMembership) = .{};
+    var list: std.ArrayList(VpcSecurityGroupMembership) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1650,7 +1650,7 @@ pub fn deserializeVpcSecurityGroupMembershipList(allocator: std.mem.Allocator, r
 }
 
 pub fn deserializeEncryptionContextMap(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime entry_tag: []const u8) ![]const aws.map.StringMapEntry {
-    var list: std.ArrayList(aws.map.StringMapEntry) = .{};
+    var list: std.ArrayList(aws.map.StringMapEntry) = .empty;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {

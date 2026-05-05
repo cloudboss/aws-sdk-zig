@@ -18,7 +18,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TagResource
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, &request, creds, client.config.region, "iotsitewise");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "iotsitewise");
 
     var response = try client.http_client.sendRequest(&request);
     defer response.deinit();
@@ -43,7 +43,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: TagResourceInput, confi
 
     const path = "/tags";
 
-    var query_buf: std.ArrayList(u8) = .{};
+    var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "resourceArn=");
@@ -51,7 +51,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: TagResourceInput, confi
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(allocator);
 
-    var body_buf: std.ArrayList(u8) = .{};
+    var body_buf: std.ArrayList(u8) = .empty;
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
