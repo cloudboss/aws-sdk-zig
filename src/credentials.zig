@@ -214,20 +214,12 @@ pub const FileProvider = struct {
         const path = try self.resolvePath(allocator);
         defer allocator.free(path);
 
-        var file = std.Io.Dir.openFileAbsolute(self.io, path, .{}) catch |err| {
-            if (err == error.FileNotFound) return error.CredentialsNotFound;
-            return error.CredentialsNotFound;
-        };
-        defer file.close(self.io);
-
-        var read_buf: [4096]u8 = undefined;
-        var rdr = file.reader(self.io, &read_buf);
-        const content = rdr.interface.allocRemaining(
+        const content = std.Io.Dir.cwd().readFileAlloc(
+            self.io,
+            path,
             allocator,
             std.Io.Limit.limited(1024 * 1024),
-        ) catch {
-            return error.CredentialsNotFound;
-        };
+        ) catch return error.CredentialsNotFound;
         defer allocator.free(content);
 
         const profile = self.resolveProfile();

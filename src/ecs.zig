@@ -67,23 +67,17 @@ pub const Provider = struct {
 
         // 2. Check for token file
         if (self.env_map.get("AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE")) |token_file| {
-            var file = std.Io.Dir.openFileAbsolute(self.io, token_file, .{}) catch |err| {
-                if (err == error.FileNotFound) return null;
-                return err;
-            };
-            defer file.close(self.io);
-
-            var read_buf: [4096]u8 = undefined;
-            var rdr = file.reader(self.io, &read_buf);
-            const token = rdr.interface.allocRemaining(
+            const token = std.Io.Dir.cwd().readFileAlloc(
+                self.io,
+                token_file,
                 self.allocator,
                 std.Io.Limit.limited(8192),
-            ) catch return null;
-            // Trim whitespace
+            ) catch |err| switch (err) {
+                error.FileNotFound => return null,
+                else => return err,
+            };
             const trimmed = std.mem.trim(u8, token, " \t\r\n");
-            if (trimmed.len == token.len) {
-                return token;
-            }
+            if (trimmed.len == token.len) return token;
             defer self.allocator.free(token);
             return try self.allocator.dupe(u8, trimmed);
         }

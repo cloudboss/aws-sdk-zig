@@ -758,20 +758,14 @@ pub fn loadConfigFile(
     const path = try resolveConfigPath(allocator, env_map);
     defer allocator.free(path);
 
-    var file = std.Io.Dir.openFileAbsolute(io, path, .{}) catch |err| {
-        if (err == error.FileNotFound) return parseConfigFile(allocator, "");
-        return err;
-    };
-    defer file.close(io);
-
-    var read_buf: [4096]u8 = undefined;
-    var rdr = file.reader(io, &read_buf);
-    const content = rdr.interface.allocRemaining(
+    const content = std.Io.Dir.cwd().readFileAlloc(
+        io,
+        path,
         allocator,
         std.Io.Limit.limited(1024 * 1024),
-    ) catch |err| {
-        if (err == error.OutOfMemory) return err;
-        return parseConfigFile(allocator, "");
+    ) catch |err| switch (err) {
+        error.OutOfMemory => return err,
+        else => return parseConfigFile(allocator, ""),
     };
     var cf = parseConfigFile(allocator, content);
     cf.content = content;

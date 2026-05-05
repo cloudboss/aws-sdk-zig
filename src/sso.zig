@@ -72,12 +72,9 @@ fn readSsoCache(
     const path = try std.fmt.allocPrint(allocator, "{s}/.aws/sso/cache/{s}.json", .{ home, hex });
     defer allocator.free(path);
 
-    var file = std.Io.Dir.openFileAbsolute(io, path, .{}) catch return error.SsoTokenNotFound;
-    defer file.close(io);
-
-    var read_buf: [4096]u8 = undefined;
-    var rdr = file.reader(io, &read_buf);
-    const content = rdr.interface.allocRemaining(
+    const content = std.Io.Dir.cwd().readFileAlloc(
+        io,
+        path,
         allocator,
         std.Io.Limit.limited(64 * 1024),
     ) catch return error.SsoTokenNotFound;
