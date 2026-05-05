@@ -57,9 +57,9 @@ fn parseValue(comptime T: type, scanner: *Scanner, alloc: Allocator) ParseError!
             },
             else => @compileError("unsupported pointer type: " ++ @typeName(T)),
         },
-        .int => return parseInt(T, scanner),
-        .float => return parseFloat(T, scanner),
-        .bool => return parseBool(scanner),
+        .int => return parseInt(T, scanner, alloc),
+        .float => return parseFloat(T, scanner, alloc),
+        .bool => return parseBool(scanner, alloc),
         else => @compileError("unsupported type: " ++ @typeName(T)),
     }
 }
@@ -276,9 +276,8 @@ fn parseMapEntries(comptime Entry: type, scanner: *Scanner, alloc: Allocator) Pa
     return list.toOwnedSlice(alloc);
 }
 
-fn parseInt(comptime T: type, scanner: *Scanner) ParseError!T {
-    const alloc_unused = std.heap.page_allocator; // numbers don't allocate
-    const token = try scanner.nextAlloc(alloc_unused, .alloc_if_needed);
+fn parseInt(comptime T: type, scanner: *Scanner, alloc: Allocator) ParseError!T {
+    const token = try scanner.nextAlloc(alloc, .alloc_if_needed);
     const str = switch (token) {
         .number => |s| s,
         .allocated_number => |s| s,
@@ -291,9 +290,8 @@ fn parseInt(comptime T: type, scanner: *Scanner) ParseError!T {
     };
 }
 
-fn parseFloat(comptime T: type, scanner: *Scanner) ParseError!T {
-    const alloc_unused = std.heap.page_allocator;
-    const token = try scanner.nextAlloc(alloc_unused, .alloc_if_needed);
+fn parseFloat(comptime T: type, scanner: *Scanner, alloc: Allocator) ParseError!T {
+    const token = try scanner.nextAlloc(alloc, .alloc_if_needed);
     const str = switch (token) {
         .number => |s| s,
         .allocated_number => |s| s,
@@ -302,9 +300,8 @@ fn parseFloat(comptime T: type, scanner: *Scanner) ParseError!T {
     return std.fmt.parseFloat(T, str) catch return error.SyntaxError;
 }
 
-fn parseBool(scanner: *Scanner) ParseError!bool {
-    const alloc_unused = std.heap.page_allocator;
-    const token = try scanner.nextAlloc(alloc_unused, .alloc_if_needed);
+fn parseBool(scanner: *Scanner, alloc: Allocator) ParseError!bool {
+    const token = try scanner.nextAlloc(alloc, .alloc_if_needed);
     return switch (token) {
         .true => true,
         .false => false,
