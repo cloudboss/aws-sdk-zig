@@ -5,6 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCENARIOS_DIR="${SCRIPT_DIR}"
 ZIG_BUILD_FLAGS="${ZIG_BUILD_FLAGS:-}"
 SCENARIO="${SCENARIO:-}"
+export SCENARIO_TIMEOUT_SECS="${SCENARIO_TIMEOUT_SECS:-30}"
 
 if [[ -n "${SCENARIO}" ]]; then
     SCENARIO_DIRS=("${SCENARIOS_DIR}/${SCENARIO}/")
@@ -85,14 +86,29 @@ for scenario_dir in "${SCENARIO_DIRS[@]}"; do
     if [[ -f "${scenario_dir}/env.sh" ]]; then
         env_cmd="${env_cmd} && . '${scenario_dir}/env.sh'"
     fi
-    if /bin/sh -c "${env_cmd} && zig build 'integration-test-live-${scenario}' ${ZIG_BUILD_FLAGS}" 2>&1; then
-        echo "  PASS: ${scenario}"
-        PASS=$((PASS + 1))
-    else
-        echo "  FAIL: ${scenario}"
-        ERRORS+=("${scenario}")
-        FAIL=$((FAIL + 1))
-    fi
+    scenario_timeout=$(/bin/sh -c "${env_cmd} && printf '%s' \"\${SCENARIO_TIMEOUT_SECS}\"")
+
+    set +e
+    timeout -k 3 "${scenario_timeout}" \
+        /bin/sh -c "${env_cmd} && zig build 'integration-test-live-${scenario}' ${ZIG_BUILD_FLAGS}" 2>&1
+    rc=$?
+    set -e
+    case ${rc} in
+        0)
+            echo "  PASS: ${scenario}"
+            PASS=$((PASS + 1))
+            ;;
+        124|137|143)
+            echo "  TIMEOUT: ${scenario} (killed after ${scenario_timeout}s)"
+            ERRORS+=("${scenario} (timeout)")
+            FAIL=$((FAIL + 1))
+            ;;
+        *)
+            echo "  FAIL: ${scenario}"
+            ERRORS+=("${scenario}")
+            FAIL=$((FAIL + 1))
+            ;;
+    esac
 
     if [[ -f "${scenario_dir}/teardown.sh" ]]; then
         echo "  Running teardown..."

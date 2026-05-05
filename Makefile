@@ -76,6 +76,7 @@ test-integration-localstack: $(HAS_IMAGE_LOCAL) certs | $(DIR_OUT)
 		-e LOCALSTACK_IMG=$(LOCALSTACK_IMG) \
 		-e "ZIG_BUILD_FLAGS=$(ZIG_BUILD_FLAGS)" \
 		-e SCENARIO=$(SCENARIO) \
+		-e SCENARIO_TIMEOUT_SECS \
 		-e AWS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
 		-e TLS_CERT_HOST_PATH=$(DIR_ROOT)/tests/integration/certs/server.pem \
 		-w /code \
@@ -93,6 +94,7 @@ test-integration-live: $(HAS_IMAGE_LOCAL) | $(DIR_OUT)
 		-e AWS_DEFAULT_REGION \
 		-e "ZIG_BUILD_FLAGS=$(ZIG_BUILD_FLAGS)" \
 		-e SCENARIO=$(SCENARIO) \
+		-e SCENARIO_TIMEOUT_SECS \
 		-w /code \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "./tests/integration/scenarios-live/run.sh"
 

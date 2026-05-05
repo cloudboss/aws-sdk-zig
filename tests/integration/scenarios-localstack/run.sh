@@ -8,6 +8,7 @@ LOCALSTACK_CONTAINER=""
 LOCALSTACK_IMG="${LOCALSTACK_IMG:-localstack/localstack:4.3.0}"
 ZIG_BUILD_FLAGS="${ZIG_BUILD_FLAGS:-}"
 TLS_CERT_HOST_PATH="${TLS_CERT_HOST_PATH:-}"
+export SCENARIO_TIMEOUT_SECS="${SCENARIO_TIMEOUT_SECS:-30}"
 # Filter to single scenario if SCENARIO is set
 if [[ -n "${SCENARIO:-}" ]]; then
     SCENARIO_DIRS=("${SCENARIOS_DIR}/${SCENARIO}/")
@@ -125,14 +126,29 @@ for scenario_dir in "${SCENARIO_DIRS[@]}"; do
     if [[ -f "${scenario_dir}/env.sh" ]]; then
         env_cmd="${env_cmd} && . '${scenario_dir}/env.sh'"
     fi
-    if /bin/sh -c "${env_cmd} && zig build 'integration-test-localstack-${scenario}' ${ZIG_BUILD_FLAGS}" 2>&1; then
-        echo "  PASS: ${scenario}"
-        PASS=$((PASS + 1))
-    else
-        echo "  FAIL: ${scenario}"
-        ERRORS+=("${scenario}")
-        FAIL=$((FAIL + 1))
-    fi
+    scenario_timeout=$(/bin/sh -c "${env_cmd} && printf '%s' \"\${SCENARIO_TIMEOUT_SECS}\"")
+
+    set +e
+    timeout -k 3 "${scenario_timeout}" \
+        /bin/sh -c "${env_cmd} && zig build 'integration-test-localstack-${scenario}' ${ZIG_BUILD_FLAGS}" 2>&1
+    rc=$?
+    set -e
+    case ${rc} in
+        0)
+            echo "  PASS: ${scenario}"
+            PASS=$((PASS + 1))
+            ;;
+        124|137|143)
+            echo "  TIMEOUT: ${scenario} (killed after ${scenario_timeout}s)"
+            ERRORS+=("${scenario} (timeout)")
+            FAIL=$((FAIL + 1))
+            ;;
+        *)
+            echo "  FAIL: ${scenario}"
+            ERRORS+=("${scenario}")
+            FAIL=$((FAIL + 1))
+            ;;
+    esac
 
     # Run per-scenario teardown inside a child shell so it gets the
     # base environment defaults without polluting the parent shell.
