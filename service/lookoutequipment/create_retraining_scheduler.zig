@@ -84,7 +84,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateRetra
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "lookoutequipment");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "lookoutequipment", client.config.http_client.clock_skew_offset);
 
     var response = try client.config.http_client.sendRequestWithOptions(&request, client.options);
     defer response.deinit();

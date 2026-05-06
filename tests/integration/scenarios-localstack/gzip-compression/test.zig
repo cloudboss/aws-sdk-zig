@@ -36,6 +36,7 @@ test "zest.beforeAll" {
             creds,
             shared_cfg.region,
             "s3",
+            0,
         );
 
         var response = try shared_cfg.http_client.sendRequestWithOptions(&request, .{ .keep_alive = false });
@@ -74,6 +75,7 @@ test "zest.afterAll" {
                 creds,
                 shared_cfg.region,
                 "s3",
+                0,
             );
             var resp = try shared_cfg.http_client.sendRequestWithOptions(&req, .{ .keep_alive = false });
             defer resp.deinit();
@@ -99,6 +101,7 @@ test "zest.afterAll" {
             creds,
             shared_cfg.region,
             "s3",
+            0,
         );
 
         var response = try shared_cfg.http_client.sendRequestWithOptions(&request, .{ .keep_alive = false });
@@ -138,6 +141,7 @@ test "PutObject with gzip compression sends smaller body and sets Content-Encodi
         creds,
         shared_cfg.region,
         "s3",
+        0,
     );
 
     const body_after = request.body orelse return error.MissingBody;
@@ -178,6 +182,7 @@ test "PutObject without compression sends full body" {
         creds,
         shared_cfg.region,
         "s3",
+        0,
     );
 
     const body_after = request.body orelse return error.MissingBody;
@@ -219,6 +224,7 @@ test "PutObject small body skips compression" {
         creds,
         shared_cfg.region,
         "s3",
+        0,
     );
 
     const body_after = request.body orelse return error.MissingBody;

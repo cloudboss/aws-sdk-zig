@@ -33,8 +33,11 @@ pub fn presignRequest(
     region: []const u8,
     service: []const u8,
     options: PresignOptions,
+    clock_skew_offset: i64,
 ) ![]const u8 {
-    const timestamp = std.Io.Clock.real.now(io).toSeconds();
+    const now_secs: i64 = @intCast(std.Io.Clock.real.now(io).toSeconds());
+    const skew_secs: i64 = @divTrunc(clock_skew_offset, std.time.ns_per_s);
+    const timestamp = now_secs +% skew_secs;
     const datetime = formatAmzDate(timestamp);
     const datestamp = datetime[0..8];
 
@@ -244,8 +247,11 @@ pub fn signRequest(
     credentials: Credentials,
     region: []const u8,
     service: []const u8,
+    clock_skew_offset: i64,
 ) !void {
-    const timestamp = std.Io.Clock.real.now(io).toSeconds();
+    const now_secs: i64 = @intCast(std.Io.Clock.real.now(io).toSeconds());
+    const skew_secs: i64 = @divTrunc(clock_skew_offset, std.time.ns_per_s);
+    const timestamp = now_secs +% skew_secs;
     const datetime = formatAmzDate(timestamp);
     const datestamp = datetime[0..8];
 
@@ -767,7 +773,7 @@ test "signRequest does not leak header values without an arena" {
         .session_token = "tok",
     };
 
-    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3");
+    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3", 0);
 
     try std.testing.expect(request.headers.get("authorization") != null);
     try std.testing.expect(request.headers.get("x-amz-date") != null);
@@ -887,7 +893,7 @@ test "presignRequest produces valid URL" {
         .secret_access_key = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
     };
 
-    const url = try presignRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3", .{});
+    const url = try presignRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3", .{}, 0);
     defer allocator.free(url);
 
     // URL should start with https and contain all required SigV4 query params
@@ -928,6 +934,7 @@ test "presignRequest with session token" {
         "us-west-2",
         "s3",
         .{ .expires_seconds = 900 },
+        0,
     );
     defer allocator.free(url);
 
@@ -950,7 +957,7 @@ test "presignRequest with custom port" {
         .secret_access_key = "test",
     };
 
-    const url = try presignRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3", .{});
+    const url = try presignRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3", .{}, 0);
     defer allocator.free(url);
 
     try std.testing.expect(std.mem.startsWith(u8, url, "http://localhost:4566/bucket/key?"));
@@ -970,7 +977,7 @@ test "presignRequest with existing query params" {
         .secret_access_key = "SECRET",
     };
 
-    const url = try presignRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3", .{});
+    const url = try presignRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3", .{}, 0);
     defer allocator.free(url);
 
     // Existing param should be present alongside the signing params
@@ -1023,7 +1030,7 @@ test "signRequest gzip compresses large body" {
         .secret_access_key = "SECRET",
     };
 
-    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3");
+    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3", 0);
 
     try std.testing.expect(request.body != null);
     const compressed = request.body.?;
@@ -1054,7 +1061,7 @@ test "signRequest does not compress small body" {
         .secret_access_key = "SECRET",
     };
 
-    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3");
+    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3", 0);
 
     try std.testing.expectEqualSlices(u8, body, request.body.?);
     try std.testing.expect(request.headers.get("content-encoding") == null);
@@ -1076,7 +1083,7 @@ test "signRequest null compression is no-op" {
         .secret_access_key = "SECRET",
     };
 
-    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3");
+    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3", 0);
 
     try std.testing.expect(request.headers.get("content-encoding") == null);
 }
@@ -1097,7 +1104,7 @@ test "signRequest SigV4a produces ECDSA signature" {
         .secret_access_key = "SECRET",
     };
 
-    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "sts");
+    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "sts", 0);
 
     const authorization = request.headers.get("authorization") orelse "";
     try std.testing.expect(
@@ -1121,7 +1128,7 @@ test "signRequest SigV4 still works unchanged" {
         .secret_access_key = "SECRET",
     };
 
-    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "sts");
+    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "sts", 0);
 
     const authorization = request.headers.get("authorization") orelse "";
     try std.testing.expect(
@@ -1149,7 +1156,7 @@ test "signRequest hashes compressed body" {
         .secret_access_key = "SECRET",
     };
 
-    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3");
+    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3", 0);
 
     const compressed = request.body.?;
     var payload_hash: [Sha256.digest_length]u8 = undefined;
@@ -1182,7 +1189,7 @@ test "signRequest SigV4a hashes compressed body" {
         .secret_access_key = "SECRET",
     };
 
-    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3");
+    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3", 0);
 
     const compressed = request.body.?;
     var payload_hash: [Sha256.digest_length]u8 = undefined;
@@ -1218,10 +1225,100 @@ test "signRequest content-encoding is in signed headers" {
         .secret_access_key = "SECRET",
     };
 
-    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3");
+    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3", 0);
 
     const authorization = request.headers.get("authorization") orelse "";
     try std.testing.expect(
         std.mem.find(u8, authorization, "content-encoding") != null,
+    );
+}
+
+test "signRequest applies positive clock skew" {
+    const allocator = std.testing.allocator;
+
+    var request = http.Request.init("s3.us-east-1.amazonaws.com");
+    defer request.deinit(allocator);
+    request.method = .POST;
+    request.path = "/bucket/key";
+    request.body = "payload";
+
+    const creds = Credentials{
+        .access_key_id = "AKID",
+        .secret_access_key = "SECRET",
+    };
+
+    const pre_secs: i64 = @intCast(std.Io.Clock.real.now(std.testing.io).toSeconds());
+    const skew_secs: i64 = 300;
+    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3", skew_secs * std.time.ns_per_s);
+
+    const amz_date = request.headers.get("x-amz-date").?;
+    const expected_a = formatAmzDate(pre_secs + skew_secs);
+    const expected_b = formatAmzDate(pre_secs + skew_secs + 1);
+
+    try std.testing.expect(
+        std.mem.eql(u8, amz_date, &expected_a) or
+        std.mem.eql(u8, amz_date, &expected_b),
+    );
+}
+
+test "signRequest applies negative clock skew" {
+    const allocator = std.testing.allocator;
+
+    var request = http.Request.init("s3.us-east-1.amazonaws.com");
+    defer request.deinit(allocator);
+    request.method = .POST;
+    request.path = "/bucket/key";
+    request.body = "payload";
+
+    const creds = Credentials{
+        .access_key_id = "AKID",
+        .secret_access_key = "SECRET",
+    };
+
+    const pre_secs: i64 = @intCast(std.Io.Clock.real.now(std.testing.io).toSeconds());
+    const skew_secs: i64 = -300;
+    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3", skew_secs * std.time.ns_per_s);
+
+    const amz_date = request.headers.get("x-amz-date").?;
+    const expected_a = formatAmzDate(pre_secs + skew_secs);
+    const expected_b = formatAmzDate(pre_secs + skew_secs - 1);
+
+    try std.testing.expect(
+        std.mem.eql(u8, amz_date, &expected_a) or
+        std.mem.eql(u8, amz_date, &expected_b),
+    );
+}
+
+test "presignRequest applies clock skew offset" {
+    const allocator = std.testing.allocator;
+
+    var request = http.Request.init("s3.us-east-1.amazonaws.com");
+    defer request.deinit(allocator);
+    request.method = .GET;
+    request.path = "/bucket/key";
+
+    const creds = Credentials{
+        .access_key_id = "AKID",
+        .secret_access_key = "SECRET",
+    };
+
+    const pre_secs: i64 = @intCast(std.Io.Clock.real.now(std.testing.io).toSeconds());
+    const skew_secs: i64 = 300;
+    const url = try presignRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3", .{}, skew_secs * std.time.ns_per_s);
+    defer allocator.free(url);
+
+    // Extract X-Amz-Date from URL query params
+    const date_prefix = "X-Amz-Date=";
+    const date_start = std.mem.find(u8, url, date_prefix).? + date_prefix.len;
+    const rest = url[date_start..];
+    const date_len = std.mem.findScalar(u8, rest, '&') orelse rest.len;
+    const amz_date = url[date_start .. date_start + date_len];
+
+    const expected_a = formatAmzDate(pre_secs + skew_secs);
+    const expected_b = formatAmzDate(pre_secs + skew_secs + 1);
+
+    try std.testing.expect(
+        std.mem.eql(u8, amz_date, &expected_a) or
+        std.mem.eql(u8, amz_date, &expected_b),
     );
 }

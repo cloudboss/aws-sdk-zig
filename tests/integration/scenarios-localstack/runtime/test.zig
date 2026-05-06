@@ -59,7 +59,7 @@ test "SigV4 signed request accepted by STS" {
         .access_key_id = "test",
         .secret_access_key = "test",
     };
-    try aws.signing.signRequest(sign_alloc, std.testing.io, &request, creds, "us-east-1", "sts");
+    try aws.signing.signRequest(sign_alloc, std.testing.io, &request, creds, "us-east-1", "sts", 0);
 
     // Send the request
     var response = try cfg.http_client.sendRequestWithOptions(&request, .{ .keep_alive = false });
@@ -165,7 +165,7 @@ test "SigV4 signing includes session token header when present" {
         .secret_access_key = "test",
         .session_token = "test-session-token",
     };
-    try aws.signing.signRequest(sign_alloc, std.testing.io, &request, creds, "us-east-1", "sts");
+    try aws.signing.signRequest(sign_alloc, std.testing.io, &request, creds, "us-east-1", "sts", 0);
 
     // Verify the session token header was added
     const token_header = request.headers.get("x-amz-security-token");
@@ -209,7 +209,7 @@ test "SigV4 signature includes x-amz-date header" {
         .access_key_id = "test",
         .secret_access_key = "test",
     };
-    try aws.signing.signRequest(sign_alloc, std.testing.io, &request, creds, "us-east-1", "sts");
+    try aws.signing.signRequest(sign_alloc, std.testing.io, &request, creds, "us-east-1", "sts", 0);
 
     // x-amz-date format: YYYYMMDDTHHMMSSZ = 16 characters
     const date_header = request.headers.get("x-amz-date");
@@ -244,7 +244,7 @@ test "SigV4 signature includes x-amz-content-sha256 header" {
         .access_key_id = "test",
         .secret_access_key = "test",
     };
-    try aws.signing.signRequest(sign_alloc, std.testing.io, &request, creds, "us-east-1", "sts");
+    try aws.signing.signRequest(sign_alloc, std.testing.io, &request, creds, "us-east-1", "sts", 0);
 
     // SHA-256 hex digest = 64 characters
     const sha256_header = request.headers.get("x-amz-content-sha256");
@@ -279,7 +279,7 @@ test "SigV4 Authorization header starts with AWS4-HMAC-SHA256" {
         .access_key_id = "test",
         .secret_access_key = "test",
     };
-    try aws.signing.signRequest(sign_alloc, std.testing.io, &request, creds, "us-east-1", "sts");
+    try aws.signing.signRequest(sign_alloc, std.testing.io, &request, creds, "us-east-1", "sts", 0);
 
     const auth_header = request.headers.get("authorization");
     try std.testing.expect(auth_header != null);
@@ -311,7 +311,7 @@ test "SigV4 signed GET request with empty body succeeds" {
         .access_key_id = "test",
         .secret_access_key = "test",
     };
-    try aws.signing.signRequest(sign_alloc, std.testing.io, &request, creds, "us-east-1", "s3");
+    try aws.signing.signRequest(sign_alloc, std.testing.io, &request, creds, "us-east-1", "s3", 0);
 
     var response = try cfg.http_client.sendRequestWithOptions(&request, .{ .keep_alive = false });
     defer response.deinit();

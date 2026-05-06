@@ -2333,3 +2333,49 @@ test "gzip response is decompressed by sendStreamingRequest" {
     defer allocator.free(data);
     try std.testing.expectEqualStrings(plain, data);
 }
+
+test "parseHttpDate parses known HTTP date" {
+    // 2025-01-01 00:00:00 UTC = 1735689600
+    // Jan 1 2025 is a Wednesday
+    try std.testing.expectEqual(
+        @as(?i64, 1735689600),
+        parseHttpDate("Wed, 01 Jan 2025 00:00:00 GMT"),
+    );
+}
+
+test "syncClockSkew sets clock_skew_offset from Date header" {
+    const allocator = std.testing.allocator;
+    const io = std.testing.io;
+
+    // Use a fixed known date so we can compute the expected skew without
+    // needing to format dates at all. 2025-01-01 00:00:00 UTC = 1735689600.
+    const date_str = "Wed, 01 Jan 2025 00:00:00 GMT";
+    const server_secs = parseHttpDate(date_str).?;
+
+    // Construct a Response with the Date header
+    var headers: std.StringHashMapUnmanaged([]const u8) = .empty;
+    try headers.put(allocator, try allocator.dupe(u8, "date"), try allocator.dupe(u8, date_str));
+    var response = Response{
+        .status = 400,
+        .body = try allocator.dupe(u8, ""),
+        .headers = headers,
+        .allocator = allocator,
+    };
+    defer response.deinit();
+
+    var env_map: std.process.Environ.Map = .init(allocator);
+    defer env_map.deinit();
+    var client = try HttpClient.init(allocator, io, &env_map, .{});
+    defer client.deinit();
+
+    const before_secs: i64 = @intCast(std.Io.Clock.real.now(io).toSeconds());
+    client.syncClockSkew(&response);
+    const after_secs: i64 = @intCast(std.Io.Clock.real.now(io).toSeconds());
+
+    // The offset should be server_secs minus local time at call moment
+    const expected_min = (server_secs - after_secs) * std.time.ns_per_s;
+    const expected_max = (server_secs - before_secs) * std.time.ns_per_s;
+
+    try std.testing.expect(client.clock_skew_offset >= expected_min - std.time.ns_per_s);
+    try std.testing.expect(client.clock_skew_offset <= expected_max + std.time.ns_per_s);
+}

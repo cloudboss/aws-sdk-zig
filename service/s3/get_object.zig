@@ -550,7 +550,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetObjectIn
     var request = try serializeRequest(alloc, input, client.config);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "s3");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "s3", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequest(&request);
 
@@ -592,6 +592,7 @@ pub fn presign(client: *Client, allocator: std.mem.Allocator, input: GetObjectIn
         client.config.region,
         "s3",
         .{ .expires_seconds = options.expires_seconds },
+        client.config.http_client.clock_skew_offset,
     );
 }
 

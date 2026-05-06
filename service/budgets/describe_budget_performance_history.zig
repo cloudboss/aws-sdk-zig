@@ -55,7 +55,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeBud
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "budgets");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "budgets", client.config.http_client.clock_skew_offset);
 
     var response = try client.config.http_client.sendRequestWithOptions(&request, client.options);
     defer response.deinit();

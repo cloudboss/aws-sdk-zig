@@ -24,6 +24,7 @@ test "GetCallerIdentity with SigV4a signing succeeds" {
         creds,
         cfg.region,
         "sts",
+        0,
     );
 
     const auth = request.headers.get("authorization") orelse
@@ -63,6 +64,7 @@ test "SigV4a Authorization header has correct format" {
         creds,
         cfg.region,
         "sts",
+        0,
     );
 
     const auth = request.headers.get("authorization") orelse

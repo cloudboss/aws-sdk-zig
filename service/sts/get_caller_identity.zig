@@ -35,7 +35,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetCallerId
     defer request.deinit(alloc);
 
     const creds = try client.config.credentials.getCredentials(client.allocator);
-    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "sts");
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "sts", client.config.http_client.clock_skew_offset);
 
     var response = try client.config.http_client.sendRequestWithOptions(&request, client.options);
     defer response.deinit();
@@ -73,6 +73,7 @@ pub fn presign(client: *Client, allocator: std.mem.Allocator, input: GetCallerId
         client.config.region,
         "sts",
         .{ .expires_seconds = options.expires_seconds },
+        client.config.http_client.clock_skew_offset,
     );
 }
 

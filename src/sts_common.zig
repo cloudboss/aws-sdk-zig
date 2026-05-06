@@ -129,7 +129,7 @@ pub fn callStsSigned(
         try request.headers.put(alloc, "host", ep.host);
     }
 
-    try signing.signRequest(alloc, io, &request, creds, region, "sts");
+    try signing.signRequest(alloc, io, &request, creds, region, "sts", 0);
 
     var response = try http.sendRequest(allocator, io, env_map, &request);
     defer response.deinit();
