@@ -106,7 +106,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetPackageV
     const creds = try client.config.credentials.getCredentials(client.allocator);
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "codeartifact");
 
-    var stream_resp = try client.http_client.sendStreamingRequest(&request);
+    var stream_resp = try client.config.http_client.sendStreamingRequest(&request);
 
     arena.deinit();
 

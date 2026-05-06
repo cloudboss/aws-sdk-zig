@@ -7,9 +7,8 @@ test "adaptive retry mode propagates to HttpClient" {
 
     var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
     defer env_map.deinit();
-    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{ .retry_mode = .adaptive });
     defer cfg.deinit();
-    cfg.retry_mode = .adaptive;
 
     var client = sts.Client.initWithOptions(
         allocator,
@@ -20,7 +19,7 @@ test "adaptive retry mode propagates to HttpClient" {
 
     try std.testing.expectEqual(
         aws.RetryMode.adaptive,
-        client.http_client.retry_mode,
+        cfg.http_client.retry_mode,
     );
 }
 
@@ -29,9 +28,8 @@ test "adaptive retry succeeds on valid request" {
 
     var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
     defer env_map.deinit();
-    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{ .retry_mode = .adaptive });
     defer cfg.deinit();
-    cfg.retry_mode = .adaptive;
 
     var client = sts.Client.initWithOptions(
         allocator,
@@ -58,9 +56,8 @@ test "token bucket at full capacity after success" {
 
     var env_map = try std.process.Environ.createMap(std.testing.environ, std.testing.allocator);
     defer env_map.deinit();
-    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
+    var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{ .retry_mode = .adaptive });
     defer cfg.deinit();
-    cfg.retry_mode = .adaptive;
 
     var client = sts.Client.initWithOptions(
         allocator,
@@ -81,6 +78,6 @@ test "token bucket at full capacity after success" {
     // After a successful request, onSuccess caps capacity at 500
     try std.testing.expectEqual(
         @as(f64, 500.0),
-        client.http_client.token_bucket.current_capacity,
+        cfg.http_client.token_bucket.current_capacity,
     );
 }

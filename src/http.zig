@@ -205,7 +205,6 @@ pub const HttpClient = struct {
     no_proxy: ?[]const u8,
     retry_mode: config_mod.RetryMode = .standard,
     token_bucket: TokenBucket = .{},
-    ca_bundle_path: ?[]const u8 = null,
     clock_skew_offset: i64 = 0,
     stall_protection: StallProtectionOptions = .{},
     interceptors: []const Interceptor = &.{},
@@ -220,12 +219,19 @@ pub const HttpClient = struct {
         ca_bundle_path: ?[]const u8 = null,
     };
 
+    pub const InitError = error{
+        CaBundleNotFound,
+        CaBundleLoadFailure,
+        OutOfMemory,
+        Canceled,
+    };
+
     pub fn init(
         allocator: Allocator,
         io: std.Io,
         env_map: *const std.process.Environ.Map,
         options: HttpClientOptions,
-    ) Self {
+    ) InitError!Self {
         var self: Self = .{
             .inner = .{ .allocator = allocator, .io = io },
             .allocator = allocator,
@@ -235,10 +241,50 @@ pub const HttpClient = struct {
             .proxy_arena = std.heap.ArenaAllocator.init(allocator),
             .no_proxy = null,
             .retry_mode = options.retry_mode,
-            .ca_bundle_path = options.ca_bundle_path,
         };
         self.initProxies();
+        const bundle_path = options.ca_bundle_path orelse env_map.get("AWS_CA_BUNDLE");
+        if (bundle_path) |path| {
+            errdefer self.proxy_arena.deinit();
+            errdefer self.inner.deinit();
+            try loadCaBundle(&self.inner, allocator, io, path);
+        }
         return self;
+    }
+
+    fn loadCaBundle(
+        inner: *std.http.Client,
+        allocator: Allocator,
+        io: std.Io,
+        path: []const u8,
+    ) InitError!void {
+        const now = std.Io.Clock.real.now(io);
+        const result = if (std.fs.path.isAbsolute(path))
+            std.crypto.Certificate.Bundle.addCertsFromFilePathAbsolute(
+                &inner.ca_bundle,
+                allocator,
+                io,
+                now,
+                path,
+            )
+        else
+            std.crypto.Certificate.Bundle.addCertsFromFilePath(
+                &inner.ca_bundle,
+                allocator,
+                io,
+                now,
+                std.Io.Dir.cwd(),
+                path,
+            );
+        result catch |err| switch (err) {
+            error.FileNotFound => return error.CaBundleNotFound,
+            error.OutOfMemory => return error.OutOfMemory,
+            error.Canceled => return error.Canceled,
+            else => return error.CaBundleLoadFailure,
+        };
+        // Setting now non-null tells std.http.Client to use the bundle we
+        // loaded instead of rescanning system roots on the first TLS request.
+        inner.now = now;
     }
 
     pub fn deinit(self: *Self) void {
@@ -528,11 +574,6 @@ pub const HttpClient = struct {
         options: RequestOptions,
         invocation_id: []const u8,
     ) RequestError!Response {
-        if (self.ca_bundle_path) |path| {
-            std.Io.Dir.cwd().access(self.io, path, .{}) catch
-                return error.ConnectionFailed;
-        }
-
         var extra_headers_list = self.buildExtraHeaders(request, invocation_id) orelse
             return error.OutOfMemory;
         defer extra_headers_list.deinit(self.allocator);
@@ -1105,8 +1146,8 @@ pub fn sendRequest(
     io: std.Io,
     env_map: *const std.process.Environ.Map,
     request: *const Request,
-) RequestError!Response {
-    var client = HttpClient.init(allocator, io, env_map, .{});
+) (RequestError || HttpClient.InitError)!Response {
+    var client = try HttpClient.init(allocator, io, env_map, .{});
     defer client.deinit();
     return client.sendRequest(request);
 }
@@ -1118,8 +1159,8 @@ pub fn sendRequestWithOptions(
     env_map: *const std.process.Environ.Map,
     request: *const Request,
     options: RequestOptions,
-) RequestError!Response {
-    var client = HttpClient.init(allocator, io, env_map, .{});
+) (RequestError || HttpClient.InitError)!Response {
+    var client = try HttpClient.init(allocator, io, env_map, .{});
     defer client.deinit();
     return client.sendRequestWithOptions(request, options);
 }
@@ -1328,7 +1369,7 @@ test "RequestOptions defaults" {
 test "HttpClient exposes default_max_attempts and default_base_delay_ms" {
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var client = HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
+    var client = try HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
     try std.testing.expectEqual(@as(u32, 3), client.default_max_attempts);
     try std.testing.expectEqual(@as(u32, 1_000), client.default_base_delay_ms);
@@ -1337,7 +1378,7 @@ test "HttpClient exposes default_max_attempts and default_base_delay_ms" {
 test "per-call max_attempts overrides HttpClient default" {
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var client = HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
+    var client = try HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
     client.default_max_attempts = 5;
     const opts = RequestOptions{ .max_attempts = 1 };
@@ -1348,7 +1389,7 @@ test "per-call max_attempts overrides HttpClient default" {
 test "null max_attempts falls back to HttpClient default" {
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var client = HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
+    var client = try HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
     client.default_max_attempts = 7;
     const opts = RequestOptions{};
@@ -1536,7 +1577,7 @@ test "TokenBucket cost limits" {
 test "HttpClient defaults to standard retry mode" {
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var client = HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
+    var client = try HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
     try std.testing.expectEqual(
         config_mod.RetryMode.standard,
@@ -1554,7 +1595,7 @@ test "HttpClient interceptors fire on success" {
 
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var client = HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
+    var client = try HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     var state = HookState{};
@@ -1595,7 +1636,7 @@ test "HttpClient interceptors fire per retry" {
 
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var client = HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
+    var client = try HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     var state = HookState{};
@@ -1636,7 +1677,7 @@ test "HttpClient interceptors empty slice is no-op" {
 
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var client = HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
+    var client = try HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     var request = Request.init("127.0.0.1");
@@ -1666,7 +1707,7 @@ test "PUT response body is read" {
 
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var client = HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
+    var client = try HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     var request = Request.init("127.0.0.1");
@@ -1687,29 +1728,117 @@ test "PUT response body is read" {
     try std.testing.expectEqualStrings("mock-imds-token-12345", response.body);
 }
 
-test "HttpClient stores ca_bundle_path" {
+test "HttpClient init returns CaBundleNotFound for missing path" {
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var client = HttpClient.init(
+    const result = HttpClient.init(
         std.testing.allocator,
         std.testing.io,
         &env_map,
-        .{ .ca_bundle_path = "/etc/pki/tls/certs/ca-bundle.crt" },
+        .{ .ca_bundle_path = "/nonexistent-aws-sdk-zig/bundle.pem" },
     );
-    defer client.deinit();
-    try std.testing.expectEqualStrings(
-        "/etc/pki/tls/certs/ca-bundle.crt",
-        client.ca_bundle_path.?,
-    );
+    try std.testing.expectError(error.CaBundleNotFound, result);
 }
 
-test "HttpClient ca_bundle_path defaults to null" {
+test "HttpClient init returns CaBundleLoadFailure for malformed PEM" {
+    var tmp = std.testing.tmpDir(.{});
+    defer tmp.cleanup();
+    try tmp.dir.writeFile(std.testing.io, .{
+        .sub_path = "bundle.pem",
+        .data = "-----BEGIN CERTIFICATE-----\nno end marker\n",
+    });
+
+    var path_buf: [std.fs.max_path_bytes]u8 = undefined;
+    const rel_path = try std.fmt.bufPrint(
+        &path_buf,
+        ".zig-cache/tmp/{s}/bundle.pem",
+        .{tmp.sub_path},
+    );
+
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var client = HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
-    defer client.deinit();
-    try std.testing.expectEqual(@as(?[]const u8, null), client.ca_bundle_path);
+    const result = HttpClient.init(
+        std.testing.allocator,
+        std.testing.io,
+        &env_map,
+        .{ .ca_bundle_path = rel_path },
+    );
+    try std.testing.expectError(error.CaBundleLoadFailure, result);
 }
+
+test "HttpClient init succeeds when ca_bundle_path is null" {
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = try HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
+    defer client.deinit();
+    try std.testing.expectEqual(@as(?std.Io.Timestamp, null), client.inner.now);
+    try std.testing.expectEqual(@as(usize, 0), client.inner.ca_bundle.bytes.items.len);
+}
+
+test "HttpClient init loads certs from a valid PEM bundle" {
+    var tmp = std.testing.tmpDir(.{});
+    defer tmp.cleanup();
+    try tmp.dir.writeFile(std.testing.io, .{
+        .sub_path = "bundle.pem",
+        .data = test_ca_pem,
+    });
+
+    var path_buf: [std.fs.max_path_bytes]u8 = undefined;
+    const rel_path = try std.fmt.bufPrint(
+        &path_buf,
+        ".zig-cache/tmp/{s}/bundle.pem",
+        .{tmp.sub_path},
+    );
+
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var client = try HttpClient.init(
+        std.testing.allocator,
+        std.testing.io,
+        &env_map,
+        .{ .ca_bundle_path = rel_path },
+    );
+    defer client.deinit();
+    try std.testing.expect(client.inner.ca_bundle.bytes.items.len > 0);
+    try std.testing.expect(client.inner.now != null);
+}
+
+// ISRG Root X1 -- public root CA, valid through 2035. Used as a stable
+// PEM fixture for ca_bundle loading tests.
+const test_ca_pem =
+    \\-----BEGIN CERTIFICATE-----
+    \\MIIFazCCA1OgAwIBAgIRAIIQz7DSQONZRGPgu2OCiwAwDQYJKoZIhvcNAQELBQAw
+    \\TzELMAkGA1UEBhMCVVMxKTAnBgNVBAoTIEludGVybmV0IFNlY3VyaXR5IFJlc2Vh
+    \\cmNoIEdyb3VwMRUwEwYDVQQDEwxJU1JHIFJvb3QgWDEwHhcNMTUwNjA0MTEwNDM4
+    \\WhcNMzUwNjA0MTEwNDM4WjBPMQswCQYDVQQGEwJVUzEpMCcGA1UEChMgSW50ZXJu
+    \\ZXQgU2VjdXJpdHkgUmVzZWFyY2ggR3JvdXAxFTATBgNVBAMTDElTUkcgUm9vdCBY
+    \\MTCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBAK3oJHP0FDfzm54rVygc
+    \\h77ct984kIxuPOZXoHj3dcKi/vVqbvYATyjb3miGbESTtrFj/RQSa78f0uoxmyF+
+    \\0TM8ukj13Xnfs7j/EvEhmkvBioZxaUpmZmyPfjxwv60pIgbz5MDmgK7iS4+3mX6U
+    \\A5/TR5d8mUgjU+g4rk8Kb4Mu0UlXjIB0ttov0DiNewNwIRt18jA8+o+u3dpjq+sW
+    \\T8KOEUt+zwvo/7V3LvSye0rgTBIlDHCNAymg4VMk7BPZ7hm/ELNKjD+Jo2FR3qyH
+    \\B5T0Y3HsLuJvW5iB4YlcNHlsdu87kGJ55tukmi8mxdAQ4Q7e2RCOFvu396j3x+UC
+    \\B5iPNgiV5+I3lg02dZ77DnKxHZu8A/lJBdiB3QW0KtZB6awBdpUKD9jf1b0SHzUv
+    \\KBds0pjBqAlkd25HN7rOrFleaJ1/ctaJxQZBKT5ZPt0m9STJEadao0xAH0ahmbWn
+    \\OlFuhjuefXKnEgV4We0+UXgVCwOPjdAvBbI+e0ocS3MFEvzG6uBQE3xDk3SzynTn
+    \\jh8BCNAw1FtxNrQHusEwMFxIt4I7mKZ9YIqioymCzLq9gwQbooMDQaHWBfEbwrbw
+    \\qHyGO0aoSCqI3Haadr8faqU9GY/rOPNk3sgrDQoo//fb4hVC1CLQJ13hef4Y53CI
+    \\rU7m2Ys6xt0nUW7/vGT1M0NPAgMBAAGjQjBAMA4GA1UdDwEB/wQEAwIBBjAPBgNV
+    \\HRMBAf8EBTADAQH/MB0GA1UdDgQWBBR5tFnme7bl5AFzgAiIyBpY9umbbjANBgkq
+    \\hkiG9w0BAQsFAAOCAgEAVR9YqbyyqFDQDLHYGmkgJykIrGF1XIpu+ILlaS/V9lZL
+    \\ubhzEFnTIZd+50xx+7LSYK05qAvqFyFWhfFQDlnrzuBZ6brJFe+GnY+EgPbk6ZGQ
+    \\3BebYhtF8GaV0nxvwuo77x/Py9auJ/GpsMiu/X1+mvoiBOv/2X/qkSsisRcOj/KK
+    \\NFtY2PwByVS5uCbMiogziUwthDyC3+6WVwW6LLv3xLfHTjuCvjHIInNzktHCgKQ5
+    \\ORAzI4JMPJ+GslWYHb4phowim57iaztXOoJwTdwJx4nLCgdNbOhdjsnvzqvHu7Ur
+    \\TkXWStAmzOVyyghqpZXjFaH3pO3JLF+l+/+sKAIuvtd7u+Nxe5AW0wdeRlN8NwdC
+    \\jNPElpzVmbUq4JUagEiuTDkHzsxHpFKVK7q4+63SM1N95R1NbdWhscdCb+ZAJzVc
+    \\oyi3B43njTOQ5yOf+1CceWxG1bQVs5ZufpsMljq4Ui0/1lvh+wjChP4kqKOJ2qxq
+    \\4RgqsahDYVvTH9w7jXbyLeiNdd8XM2w9U/t7y0Ff/9yi0GE44Za4rF2LN9d11TPA
+    \\mRGunUHBcnWEvgJBQl9nJEiU0Zsnvgc/ubhPgXRR4Xq37Z0j4r7g1SgEEzwxA57d
+    \\emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=
+    \\-----END CERTIFICATE-----
+    \\
+;
 
 test "Request stores service_name and api_version for User-Agent" {
     var request = Request.init("sts.us-east-1.amazonaws.com");
@@ -1906,7 +2035,7 @@ test "HttpClient sends amz-sdk-invocation-id header" {
 
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var client = HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
+    var client = try HttpClient.init(std.testing.allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     var request = Request.init("127.0.0.1");
@@ -1936,7 +2065,7 @@ test "adaptive retry: depleted bucket prevents retry" {
 
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var client = HttpClient.init(
+    var client = try HttpClient.init(
         std.testing.allocator,
         std.testing.io,
         &env_map,
@@ -1974,7 +2103,7 @@ test "adaptive retry: sufficient tokens allow retry" {
 
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var client = HttpClient.init(
+    var client = try HttpClient.init(
         std.testing.allocator,
         std.testing.io,
         &env_map,
@@ -2019,7 +2148,7 @@ test "adaptive retry: throttle error depletes bucket and stops retry" {
 
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var client = HttpClient.init(
+    var client = try HttpClient.init(
         std.testing.allocator,
         std.testing.io,
         &env_map,
@@ -2057,7 +2186,7 @@ test "adaptive retry: onSuccess restores capacity" {
 
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var client = HttpClient.init(
+    var client = try HttpClient.init(
         std.testing.allocator,
         std.testing.io,
         &env_map,
@@ -2118,7 +2247,7 @@ test "gzip response is decompressed by doRequest" {
 
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var client = HttpClient.init(allocator, std.testing.io, &env_map, .{});
+    var client = try HttpClient.init(allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     var request = Request.init("127.0.0.1");
@@ -2152,7 +2281,7 @@ test "gzip response is decompressed by sendStreamingRequest" {
 
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var client = HttpClient.init(allocator, std.testing.io, &env_map, .{});
+    var client = try HttpClient.init(allocator, std.testing.io, &env_map, .{});
     defer client.deinit();
 
     var request = Request.init("127.0.0.1");

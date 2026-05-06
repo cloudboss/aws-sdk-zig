@@ -102,7 +102,7 @@ class ClientGenerator(
         writer.openBlock("pub const Client = struct {")
         writer.write("allocator: std.mem.Allocator,")
         writer.write("config: *aws.Config,")
-        writer.write("http_client: aws.http.HttpClient,")
+        writer.write("options: aws.http.RequestOptions = .{},")
         writer.blankLine()
 
         writer.write("const Self = @This();")
@@ -114,7 +114,6 @@ class ClientGenerator(
         writer.openBlock("return .{")
         writer.write(".allocator = allocator,")
         writer.write(".config = config,")
-        writer.write(".http_client = aws.http.HttpClient.init(allocator, config.io, config.env_map, .{ .retry_mode = config.retry_mode }),")
         writer.closeBlock("};")
         writer.closeBlock("}")
         writer.blankLine()
@@ -124,14 +123,14 @@ class ClientGenerator(
         writer.openBlock("return .{")
         writer.write(".allocator = allocator,")
         writer.write(".config = config,")
-        writer.write(".http_client = aws.http.HttpClient.init(allocator, config.io, config.env_map, .{ .retry_mode = config.retry_mode, .request_options = options }),")
+        writer.write(".options = options,")
         writer.closeBlock("};")
         writer.closeBlock("}")
         writer.blankLine()
 
         // deinit
         writer.openBlock("pub fn deinit(self: *Self) void {")
-        writer.write("self.http_client.deinit();")
+        writer.write("_ = self;")
         writer.closeBlock("}")
 
         // Operation methods

@@ -17,7 +17,7 @@ const paginator = @import("paginator.zig");
 pub const Client = struct {
     allocator: std.mem.Allocator,
     config: *aws.Config,
-    http_client: aws.http.HttpClient,
+    options: aws.http.RequestOptions = .{},
 
     const Self = @This();
     pub const sdk_id = "Support App";
@@ -26,7 +26,6 @@ pub const Client = struct {
         return .{
             .allocator = allocator,
             .config = config,
-            .http_client = aws.http.HttpClient.init(allocator, config.io, config.env_map, .{ .retry_mode = config.retry_mode }),
         };
     }
 
@@ -34,12 +33,12 @@ pub const Client = struct {
         return .{
             .allocator = allocator,
             .config = config,
-            .http_client = aws.http.HttpClient.init(allocator, config.io, config.env_map, .{ .retry_mode = config.retry_mode, .request_options = options }),
+            .options = options,
         };
     }
 
     pub fn deinit(self: *Self) void {
-        self.http_client.deinit();
+        _ = self;
     }
 
     /// Creates a Slack channel configuration for your Amazon Web Services account.

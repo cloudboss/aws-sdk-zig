@@ -51,7 +51,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateClust
     const creds = try client.config.credentials.getCredentials(client.allocator);
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "route53-recovery-control-config");
 
-    var response = try client.http_client.sendRequest(&request);
+    var response = try client.config.http_client.sendRequestWithOptions(&request, client.options);
     defer response.deinit();
 
     if (!response.isSuccess()) {

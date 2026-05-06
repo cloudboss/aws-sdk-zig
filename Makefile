@@ -63,21 +63,17 @@ test: $(HAS_IMAGE_LOCAL)
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "zig build test $(ZIG_BUILD_FLAGS)"
 
 test-integration-localstack: $(HAS_IMAGE_LOCAL) certs | $(DIR_OUT)
-	@docker run --rm $(CTR_IMAGE_LOCAL) cat /etc/ssl/certs/ca-certificates.crt \
-		> $(DIR_OUT)/tls-ca-bundle.crt
-	@cat tests/integration/certs/ca.crt >> $(DIR_OUT)/tls-ca-bundle.crt
 	@docker run --rm \
 		-v $(DIR_ROOT):/code \
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		-v $(DIR_ROOT)/tests/integration/tls-hosts:/etc/hosts \
-		-v $(DIR_ROOT)/$(DIR_OUT)/tls-ca-bundle.crt:/etc/ssl/certs/ca-certificates.crt:ro \
 		--group-add $(DOCKER_GID) \
 		--security-opt label=type:container_runtime_t \
 		-e LOCALSTACK_IMG=$(LOCALSTACK_IMG) \
 		-e "ZIG_BUILD_FLAGS=$(ZIG_BUILD_FLAGS)" \
 		-e SCENARIO=$(SCENARIO) \
 		-e SCENARIO_TIMEOUT_SECS \
-		-e AWS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
+		-e AWS_CA_BUNDLE=/code/tests/integration/certs/ca.crt \
 		-e TLS_CERT_HOST_PATH=$(DIR_ROOT)/tests/integration/certs/server.pem \
 		-w /code \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "./tests/integration/scenarios-localstack/run.sh"

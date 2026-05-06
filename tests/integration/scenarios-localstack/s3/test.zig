@@ -313,33 +313,22 @@ test "presigned GetObject URL retrieves object without signing" {
         .{ .expires_seconds = 60 },
     );
 
-    var http_client = std.http.Client{ .allocator = allocator, .io = std.testing.io };
-    defer http_client.deinit();
-
     const uri = std.Uri.parse(presigned_url) catch
         return error.InvalidPresignedUrl;
 
-    var req = http_client.request(.GET, uri, .{}) catch
-        return error.ConnectionFailed;
-    defer req.deinit();
+    var request = aws.http.Request.init(uri.host.?.percent_encoded);
+    defer request.deinit(allocator);
+    request.method = .GET;
+    request.tls = std.mem.eql(u8, uri.scheme, "https");
+    request.port = uri.port;
+    request.path = uri.path.percent_encoded;
+    if (uri.query) |q| request.query = q.percent_encoded;
 
-    req.sendBodiless() catch return error.RequestFailed;
+    var response = try shared_cfg.http_client.sendRequest(&request);
+    defer response.deinit();
 
-    var redirect_buf: [4096]u8 = undefined;
-    var response = req.receiveHead(&redirect_buf) catch
-        return error.RequestFailed;
-
-    try std.testing.expect(response.head.status == .ok);
-
-    var transfer_buf: [4096]u8 = undefined;
-    const body_reader = response.reader(&transfer_buf);
-    const body = body_reader.allocRemaining(
-        allocator,
-        std.Io.Limit.limited(1024 * 1024),
-    ) catch return error.ReadFailed;
-    defer allocator.free(body);
-
-    try std.testing.expectEqualStrings("hello world", body);
+    try std.testing.expect(response.isSuccess());
+    try std.testing.expectEqualStrings("hello world", response.body);
 }
 
 test "waitUntilBucketExists succeeds after CreateBucket" {

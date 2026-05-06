@@ -12,9 +12,6 @@ test "GetCallerIdentity with SigV4a signing succeeds" {
     var cfg = try aws.Config.load(allocator, std.testing.io, &env_map, .{});
     defer cfg.deinit();
 
-    var http_client = aws.http.HttpClient.init(allocator, std.testing.io, &env_map, .{});
-    defer http_client.deinit();
-
     var request = try makeGetCallerIdentityRequest(arena.allocator(), &cfg);
     defer request.deinit(arena.allocator());
     request.signing_algorithm = .sigv4a;
@@ -38,7 +35,7 @@ test "GetCallerIdentity with SigV4a signing succeeds" {
         std.mem.indexOf(u8, auth, "/*/sts/aws4_request") != null,
     );
 
-    var response = try http_client.sendRequest(&request);
+    var response = try cfg.http_client.sendRequest(&request);
     defer response.deinit();
     try std.testing.expect(response.isSuccess());
 }

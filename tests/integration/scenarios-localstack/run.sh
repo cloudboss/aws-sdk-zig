@@ -81,7 +81,7 @@ wait_for_localstack() {
     local endpoint="https://localhost"
     echo "Waiting for LocalStack at ${endpoint}..."
     for i in $(seq 1 30); do
-        if curl -sf "${endpoint}/_localstack/health" >/dev/null 2>&1; then
+        if curl -sf --cacert "${AWS_CA_BUNDLE}" "${endpoint}/_localstack/health" >/dev/null 2>&1; then
             echo "LocalStack is ready."
             return 0
         fi

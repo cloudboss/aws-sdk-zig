@@ -9,6 +9,7 @@ const credentials_mod = @import("credentials.zig");
 const CredentialsProvider = credentials_mod.CredentialsProvider;
 const ChainProvider = credentials_mod.ChainProvider;
 const endpoint_mod = @import("endpoint.zig");
+const http_mod = @import("http.zig");
 const sts_common_mod = @import("sts_common.zig");
 
 /// Retry mode for transient failures
@@ -122,6 +123,9 @@ pub const Config = struct {
     profile: []const u8 = "default",
     /// STS regional endpoint mode
     sts_regional_endpoints: StsRegionalEndpoints = .regional,
+    /// Shared HTTP client used by all service clients constructed from this Config.
+    /// Built by Config.load and torn down by Config.deinit.
+    http_client: http_mod.HttpClient,
 
     allocator: Allocator,
     io: std.Io,
@@ -209,6 +213,12 @@ pub const Config = struct {
             env_map.get("AWS_CA_BUNDLE") orelse
             (if (profile) |p| p.ca_bundle else null);
 
+        var http_client = try http_mod.HttpClient.init(allocator, io, env_map, .{
+            .retry_mode = retry_mode,
+            .ca_bundle_path = ca_bundle,
+        });
+        errdefer http_client.deinit();
+
         return Self{
             .region = region,
             .credentials = credentials,
@@ -221,6 +231,7 @@ pub const Config = struct {
             .ca_bundle = ca_bundle,
             .config_file = cf,
             .profile = resolved_profile,
+            .http_client = http_client,
             .allocator = allocator,
             .io = io,
             .env_map = env_map,
@@ -229,6 +240,7 @@ pub const Config = struct {
 
     /// Free owned resources
     pub fn deinit(self: *Self) void {
+        self.http_client.deinit();
         self.credentials.deinit();
         self.allocator.free(self.region);
         if (self.config_file) |*cf| cf.deinit();
@@ -252,6 +264,7 @@ pub const Config = struct {
                     .session_token = session_token,
                 },
             },
+            .http_client = undefined, // Not owned, don't call deinit
             .allocator = undefined, // Not owned, don't call deinit
             .io = io,
             .env_map = env_map,
@@ -267,6 +280,7 @@ pub const Config = struct {
         return .{
             .region = region,
             .credentials = .{ .environment = env_map },
+            .http_client = undefined, // Not owned, don't call deinit
             .allocator = undefined, // Not owned, don't call deinit
             .io = io,
             .env_map = env_map,

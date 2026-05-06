@@ -59,7 +59,7 @@ const waiters = @import("waiters.zig");
 pub const Client = struct {
     allocator: std.mem.Allocator,
     config: *aws.Config,
-    http_client: aws.http.HttpClient,
+    options: aws.http.RequestOptions = .{},
 
     const Self = @This();
     pub const sdk_id = "Elastic Load Balancing v2";
@@ -68,7 +68,6 @@ pub const Client = struct {
         return .{
             .allocator = allocator,
             .config = config,
-            .http_client = aws.http.HttpClient.init(allocator, config.io, config.env_map, .{ .retry_mode = config.retry_mode }),
         };
     }
 
@@ -76,12 +75,12 @@ pub const Client = struct {
         return .{
             .allocator = allocator,
             .config = config,
-            .http_client = aws.http.HttpClient.init(allocator, config.io, config.env_map, .{ .retry_mode = config.retry_mode, .request_options = options }),
+            .options = options,
         };
     }
 
     pub fn deinit(self: *Self) void {
-        self.http_client.deinit();
+        _ = self;
     }
 
     /// Adds the specified SSL server certificate to the certificate list for the

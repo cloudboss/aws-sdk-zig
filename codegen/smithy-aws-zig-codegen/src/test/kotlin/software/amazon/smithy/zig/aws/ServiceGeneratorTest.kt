@@ -235,7 +235,7 @@ class ServiceGeneratorTest {
         assertTrue(client.contains("pub const Client = struct"), "Missing Client struct")
         assertTrue(client.contains("allocator: std.mem.Allocator"), "Missing allocator field")
         assertTrue(client.contains("config: *aws.Config"), "Missing config field")
-        assertTrue(client.contains("http_client: aws.http.HttpClient"), "Missing http_client field")
+        assertTrue(client.contains("options: aws.http.RequestOptions"), "Missing per-client options field")
     }
 
     @Test
@@ -245,8 +245,7 @@ class ServiceGeneratorTest {
 
         assertTrue(client.contains("pub fn init("), "Missing init function")
         assertTrue(client.contains("pub fn deinit("), "Missing deinit function")
-        assertTrue(client.contains("self.http_client.deinit()"), "Missing http_client cleanup")
-        assertTrue(client.contains("config.retry_mode"), "Missing retry_mode wiring")
+        assertTrue(client.contains(".config = config"), "Missing config reference")
     }
 
     @Test

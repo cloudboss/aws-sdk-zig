@@ -4,7 +4,6 @@ const aws = @import("aws");
 const bucket_name = "sdk-zig-gzip-test";
 
 var gpa: std.heap.DebugAllocator(.{}) = .init;
-var shared_client: aws.http.HttpClient = undefined;
 var shared_cfg: aws.Config = undefined;
 var shared_env_map: std.process.Environ.Map = undefined;
 var shared_init = false;
@@ -12,12 +11,6 @@ test "zest.beforeAll" {
     const allocator = gpa.allocator();
     shared_env_map = try std.process.Environ.createMap(std.testing.environ, allocator);
     shared_cfg = try aws.Config.load(allocator, std.testing.io, &shared_env_map, .{});
-    shared_client = aws.http.HttpClient.init(
-        allocator,
-        std.testing.io,
-        &shared_env_map,
-        .{ .request_options = .{ .keep_alive = false } },
-    );
     {
         var arena = std.heap.ArenaAllocator.init(allocator);
         defer arena.deinit();
@@ -45,7 +38,7 @@ test "zest.beforeAll" {
             "s3",
         );
 
-        var response = try shared_client.sendRequest(&request);
+        var response = try shared_cfg.http_client.sendRequestWithOptions(&request, .{ .keep_alive = false });
         defer response.deinit();
         try std.testing.expect(response.isSuccess());
     }
@@ -82,7 +75,7 @@ test "zest.afterAll" {
                 shared_cfg.region,
                 "s3",
             );
-            var resp = try shared_client.sendRequest(&req);
+            var resp = try shared_cfg.http_client.sendRequestWithOptions(&req, .{ .keep_alive = false });
             defer resp.deinit();
             _ = resp.isSuccess();
         }
@@ -108,11 +101,10 @@ test "zest.afterAll" {
             "s3",
         );
 
-        var response = try shared_client.sendRequest(&request);
+        var response = try shared_cfg.http_client.sendRequestWithOptions(&request, .{ .keep_alive = false });
         defer response.deinit();
         try std.testing.expect(response.isSuccess());
     }
-    shared_client.deinit();
     shared_cfg.deinit();
     shared_env_map.deinit();
     try std.testing.expect(gpa.deinit() == .ok);
@@ -154,7 +146,7 @@ test "PutObject with gzip compression sends smaller body and sets Content-Encodi
         return error.MissingContentEncoding;
     try std.testing.expectEqualStrings("gzip", encoding);
 
-    var response = try shared_client.sendRequest(&request);
+    var response = try shared_cfg.http_client.sendRequestWithOptions(&request, .{ .keep_alive = false });
     defer response.deinit();
     try std.testing.expect(response.isSuccess());
 }
@@ -194,7 +186,7 @@ test "PutObject without compression sends full body" {
         request.headers.get("content-encoding") == null,
     );
 
-    var response = try shared_client.sendRequest(&request);
+    var response = try shared_cfg.http_client.sendRequestWithOptions(&request, .{ .keep_alive = false });
     defer response.deinit();
     try std.testing.expect(response.isSuccess());
 }
@@ -235,7 +227,7 @@ test "PutObject small body skips compression" {
         request.headers.get("content-encoding") == null,
     );
 
-    var response = try shared_client.sendRequest(&request);
+    var response = try shared_cfg.http_client.sendRequestWithOptions(&request, .{ .keep_alive = false });
     defer response.deinit();
     try std.testing.expect(response.isSuccess());
 }

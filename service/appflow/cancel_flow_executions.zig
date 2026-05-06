@@ -46,7 +46,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelFlowE
     const creds = try client.config.credentials.getCredentials(client.allocator);
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "appflow");
 
-    var response = try client.http_client.sendRequest(&request);
+    var response = try client.config.http_client.sendRequestWithOptions(&request, client.options);
     defer response.deinit();
 
     if (!response.isSuccess()) {
