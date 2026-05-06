@@ -605,6 +605,9 @@ pub const ChainProvider = struct {
         if (self.imds_provider) |*provider| {
             provider.deinit();
         }
+        if (self.web_identity_provider) |*provider| {
+            provider.deinit(self.allocator);
+        }
     }
 };
 

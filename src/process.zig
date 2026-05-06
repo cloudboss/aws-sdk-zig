@@ -23,8 +23,22 @@ pub const ProcessProvider = struct {
         defer allocator.free(output);
 
         const creds = try parseProcessOutput(allocator, output);
+        self.freeCachedCredentials(allocator);
         self.cached = creds;
         return creds;
+    }
+
+    pub fn deinit(self: *Self, allocator: Allocator) void {
+        self.freeCachedCredentials(allocator);
+    }
+
+    fn freeCachedCredentials(self: *Self, allocator: Allocator) void {
+        if (self.cached) |cached| {
+            allocator.free(cached.access_key_id);
+            allocator.free(cached.secret_access_key);
+            if (cached.session_token) |token| allocator.free(token);
+        }
+        self.cached = null;
     }
 };
 
@@ -118,6 +132,20 @@ fn parseJsonField(json: []const u8, field: []const u8) ?[]const u8 {
 }
 
 // Tests
+
+test "ProcessProvider deinit frees cached credentials" {
+    const allocator = std.testing.allocator;
+    var provider = ProcessProvider{
+        .io = std.testing.io,
+        .command = "ignored",
+    };
+    provider.cached = .{
+        .access_key_id = try allocator.dupe(u8, "AKIA1"),
+        .secret_access_key = try allocator.dupe(u8, "secret1"),
+        .session_token = try allocator.dupe(u8, "token1"),
+    };
+    provider.deinit(allocator);
+}
 
 test "parseProcessOutput valid JSON with all fields" {
     const allocator = std.testing.allocator;

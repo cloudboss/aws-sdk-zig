@@ -64,10 +64,44 @@ pub const WebIdentityProvider = struct {
         defer allocator.free(response);
 
         const creds = try sts_common.parseStsCredentials(allocator, response);
+        self.freeCachedCredentials(allocator);
         self.cached = creds;
         return creds;
     }
+
+    pub fn deinit(self: *Self, allocator: Allocator) void {
+        self.freeCachedCredentials(allocator);
+    }
+
+    fn freeCachedCredentials(self: *Self, allocator: Allocator) void {
+        if (self.cached) |cached| {
+            allocator.free(cached.access_key_id);
+            allocator.free(cached.secret_access_key);
+            if (cached.session_token) |token| allocator.free(token);
+        }
+        self.cached = null;
+    }
 };
+
+test "WebIdentityProvider deinit frees cached credentials" {
+    const allocator = std.testing.allocator;
+    var env_map: std.process.Environ.Map = .init(allocator);
+    defer env_map.deinit();
+    var provider = WebIdentityProvider{
+        .io = std.testing.io,
+        .env_map = &env_map,
+        .role_arn = "arn:aws:iam::123:role/R",
+        .token_file = "/tmp/token",
+        .session_name = "s",
+        .region = "us-east-1",
+    };
+    provider.cached = .{
+        .access_key_id = try allocator.dupe(u8, "AKIA1"),
+        .secret_access_key = try allocator.dupe(u8, "secret1"),
+        .session_token = try allocator.dupe(u8, "token1"),
+    };
+    provider.deinit(allocator);
+}
 
 test "WebIdentityProvider struct initialization" {
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);

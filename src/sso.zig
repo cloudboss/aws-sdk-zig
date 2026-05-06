@@ -41,8 +41,22 @@ pub const SsoProvider = struct {
             self.sso_role_name,
             token.access_token,
         );
+        self.freeCachedCredentials(allocator);
         self.cached = creds;
         return creds;
+    }
+
+    pub fn deinit(self: *Self, allocator: Allocator) void {
+        self.freeCachedCredentials(allocator);
+    }
+
+    fn freeCachedCredentials(self: *Self, allocator: Allocator) void {
+        if (self.cached) |cached| {
+            allocator.free(cached.access_key_id);
+            allocator.free(cached.secret_access_key);
+            if (cached.session_token) |token| allocator.free(token);
+        }
+        self.cached = null;
     }
 };
 
@@ -242,6 +256,26 @@ pub fn ssoCacheFilename(cache_key: []const u8) [Sha1.digest_length * 2]u8 {
 }
 
 // Tests
+
+test "SsoProvider deinit frees cached credentials" {
+    const allocator = std.testing.allocator;
+    var env_map: std.process.Environ.Map = .init(allocator);
+    defer env_map.deinit();
+    var provider = SsoProvider{
+        .io = std.testing.io,
+        .env_map = &env_map,
+        .sso_account_id = "111111111111",
+        .sso_role_name = "Role",
+        .sso_region = "us-east-1",
+        .cache_key = "session",
+    };
+    provider.cached = .{
+        .access_key_id = try allocator.dupe(u8, "AKIA1"),
+        .secret_access_key = try allocator.dupe(u8, "secret1"),
+        .session_token = try allocator.dupe(u8, "token1"),
+    };
+    provider.deinit(allocator);
+}
 
 test "ssoCacheFilename" {
     const hex = ssoCacheFilename("my-sso");
