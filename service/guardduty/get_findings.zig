@@ -66,9 +66,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetFindings
 fn serializeRequest(allocator: std.mem.Allocator, input: GetFindingsInput, config: *aws.Config) !aws.http.Request {
     const endpoint = try config.getEndpointForService("guardduty", "GuardDuty", allocator);
 
-    const host = aws.url.parseHost(endpoint);
-    const tls = !std.mem.startsWith(u8, endpoint, "http://");
-    const port = aws.url.parsePort(endpoint);
+    const ep = try aws.url.parseEndpoint(endpoint);
 
     var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/detector/");
@@ -94,11 +92,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetFindingsInput, confi
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
 
-    var request = aws.http.Request.init(host);
+    var request = aws.http.Request.init(ep.host);
     request.method = .POST;
     request.path = path;
-    request.tls = tls;
-    request.port = port;
+    request.tls = ep.tls;
+    request.port = ep.port;
     request.body = body;
     try request.headers.put(allocator, "Content-Type", "application/json");
 

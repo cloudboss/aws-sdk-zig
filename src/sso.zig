@@ -140,17 +140,18 @@ fn callGetRoleCredentials(
     const endpoint = try std.fmt.allocPrint(allocator, "https://portal.sso.{s}.{s}", .{ sso_region, partition.dns_suffix });
     defer allocator.free(endpoint);
 
-    const host = url_mod.parseHost(endpoint);
+    const ep = try url_mod.parseEndpoint(endpoint);
 
     const path = try std.fmt.allocPrint(allocator, "/federation/credentials?role_name={s}&account_id={s}", .{ role_name, account_id });
     defer allocator.free(path);
 
-    var request = http.Request.init(host);
+    var request = http.Request.init(ep.host);
     defer request.deinit(allocator);
 
     request.method = .GET;
     request.path = path;
-    request.tls = true;
+    request.port = ep.port;
+    request.tls = ep.tls;
 
     try request.headers.put(allocator, "x-amz-sso_bearer_token", access_token);
 

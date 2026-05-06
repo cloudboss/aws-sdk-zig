@@ -130,9 +130,7 @@ class RestXmlProtocol : ProtocolGenerator {
         writer.blankLine()
 
         // Parse host from endpoint
-        writer.write("const host = aws.url.parseHost(endpoint);")
-        writer.write("const tls = !std.mem.startsWith(u8, endpoint, \"http://\");")
-        writer.write("const port = aws.url.parsePort(endpoint);")
+        writer.write("const ep = try aws.url.parseEndpoint(endpoint);")
         writer.blankLine()
 
         // Split URI pattern into path and static query
@@ -156,11 +154,11 @@ class RestXmlProtocol : ProtocolGenerator {
         val needsContentMd5 = shouldAutoComputeS3ContentMd5(ctx)
 
         // Build request
-        writer.write("var request = aws.http.Request.init(host);")
+        writer.write("var request = aws.http.Request.init(ep.host);")
         writer.write("request.method = .\$L;", httpTrait.method.uppercase())
         writer.write("request.path = path;")
-        writer.write("request.tls = tls;")
-        writer.write("request.port = port;")
+        writer.write("request.tls = ep.tls;")
+        writer.write("request.port = ep.port;")
         writer.write("request.body = body;")
 
         if (hasQuery) {

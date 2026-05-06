@@ -70,9 +70,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTargets
 fn serializeRequest(allocator: std.mem.Allocator, input: ListTargetsInput, config: *aws.Config) !aws.http.Request {
     const endpoint = try config.getEndpointForService("vpc-lattice", "VPC Lattice", allocator);
 
-    const host = aws.url.parseHost(endpoint);
-    const tls = !std.mem.startsWith(u8, endpoint, "http://");
-    const port = aws.url.parsePort(endpoint);
+    const ep = try aws.url.parseEndpoint(endpoint);
 
     var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/targetgroups/");
@@ -113,11 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTargetsInput, confi
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
 
-    var request = aws.http.Request.init(host);
+    var request = aws.http.Request.init(ep.host);
     request.method = .POST;
     request.path = path;
-    request.tls = tls;
-    request.port = port;
+    request.tls = ep.tls;
+    request.port = ep.port;
     request.body = body;
     request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/json");

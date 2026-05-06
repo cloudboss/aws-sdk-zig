@@ -48,17 +48,15 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDirectoryLimitsInput
     _ = input;
     const endpoint = try config.getEndpointForService("ds", "Directory Service", allocator);
 
-    const host = aws.url.parseHost(endpoint);
-    const tls = !std.mem.startsWith(u8, endpoint, "http://");
-    const port = aws.url.parsePort(endpoint);
+    const ep = try aws.url.parseEndpoint(endpoint);
 
     const body = "{}";
 
-    var request = aws.http.Request.init(host);
+    var request = aws.http.Request.init(ep.host);
     request.method = .POST;
     request.path = "/";
-    request.tls = tls;
-    request.port = port;
+    request.tls = ep.tls;
+    request.port = ep.port;
     request.body = body;
     try request.headers.put(allocator, "Content-Type", "application/x-amz-json-1.1");
     try request.headers.put(allocator, "X-Amz-Target", "DirectoryService_20150416.GetDirectoryLimits");

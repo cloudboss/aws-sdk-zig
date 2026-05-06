@@ -68,17 +68,15 @@ pub fn callStsUnsigned(
     endpoint: []const u8,
     body: []const u8,
 ) ![]const u8 {
-    const host = url_mod.parseHost(endpoint);
-    const port = url_mod.parsePort(endpoint);
-    const tls = if (std.mem.find(u8, endpoint, "https://")) |_| true else false;
+    const ep = try url_mod.parseEndpoint(endpoint);
 
-    var request = http.Request.init(host);
+    var request = http.Request.init(ep.host);
     defer request.deinit(allocator);
 
     request.method = .POST;
     request.path = "/";
-    request.port = port;
-    request.tls = tls;
+    request.port = ep.port;
+    request.tls = ep.tls;
     request.body = body;
 
     try request.headers.put(allocator, "Content-Type", "application/x-www-form-urlencoded");
@@ -106,31 +104,29 @@ pub fn callStsSigned(
     creds: Credentials,
     region: []const u8,
 ) ![]const u8 {
-    const host = url_mod.parseHost(endpoint);
-    const port = url_mod.parsePort(endpoint);
-    const tls = if (std.mem.find(u8, endpoint, "https://")) |_| true else false;
+    const ep = try url_mod.parseEndpoint(endpoint);
 
     // Arena for request + signing allocations (header values, canonical request, etc.)
     var arena = std.heap.ArenaAllocator.init(allocator);
     defer arena.deinit();
     const alloc = arena.allocator();
 
-    var request = http.Request.init(host);
+    var request = http.Request.init(ep.host);
 
     request.method = .POST;
     request.path = "/";
-    request.port = port;
-    request.tls = tls;
+    request.port = ep.port;
+    request.tls = ep.tls;
     request.body = body;
 
     try request.headers.put(alloc, "Content-Type", "application/x-www-form-urlencoded");
 
     // Add host header for signing (with port if non-default)
-    if (port) |p| {
-        const host_with_port = try std.fmt.allocPrint(alloc, "{s}:{d}", .{ host, p });
+    if (ep.port) |p| {
+        const host_with_port = try std.fmt.allocPrint(alloc, "{s}:{d}", .{ ep.host, p });
         try request.headers.put(alloc, "host", host_with_port);
     } else {
-        try request.headers.put(alloc, "host", host);
+        try request.headers.put(alloc, "host", ep.host);
     }
 
     try signing.signRequest(alloc, io, &request, creds, region, "sts");

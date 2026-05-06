@@ -11,6 +11,7 @@ const log = std.log.scoped(.aws_sdk);
 
 const http = @import("http.zig");
 const date = @import("date.zig");
+const url_mod = @import("url.zig");
 
 /// Default IMDS IPv4 endpoint (link-local address)
 pub const default_ipv4_endpoint = "http://169.254.169.254";
@@ -242,7 +243,7 @@ pub const Client = struct {
         const ttl_str = try std.fmt.allocPrint(self.allocator, "{d}", .{self.token_ttl});
         defer self.allocator.free(ttl_str);
 
-        const ep = try parseEndpoint(self.endpoint);
+        const ep = url_mod.parseEndpoint(self.endpoint) catch return error.RequestFailed;
 
         var request = http.Request.init(ep.host);
         defer request.deinit(self.allocator);
@@ -311,7 +312,7 @@ pub const Client = struct {
 
     /// Inner GET request (used by doGetRequest for retry logic)
     fn doGetRequestInner(self: *Self, path: []const u8, token: []const u8, options: CallOptions) ![]const u8 {
-        const ep = try parseEndpoint(self.endpoint);
+        const ep = url_mod.parseEndpoint(self.endpoint) catch return error.RequestFailed;
 
         var request = http.Request.init(ep.host);
         defer request.deinit(self.allocator);
@@ -340,25 +341,6 @@ pub const Client = struct {
         return self.allocator.dupe(u8, response.body) catch return error.OutOfMemory;
     }
 
-    /// Parse endpoint into host, port, and TLS fields for http.Request
-    const EndpointInfo = struct {
-        host: []const u8,
-        port: ?u16,
-        tls: bool,
-    };
-
-    fn parseEndpoint(endpoint: []const u8) !EndpointInfo {
-        const uri = std.Uri.parse(endpoint) catch return error.RequestFailed;
-        const host = if (uri.host) |h| switch (h) {
-            .raw => |r| r,
-            .percent_encoded => |p| p,
-        } else return error.RequestFailed;
-        return .{
-            .host = host,
-            .port = uri.port,
-            .tls = std.mem.eql(u8, uri.scheme, "https"),
-        };
-    }
 };
 
 /// Fill diagnostic from an HTTP-layer error

@@ -67,9 +67,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ImportApiKe
 fn serializeRequest(allocator: std.mem.Allocator, input: ImportApiKeysInput, config: *aws.Config) !aws.http.Request {
     const endpoint = try config.getEndpointForService("apigateway", "API Gateway", allocator);
 
-    const host = aws.url.parseHost(endpoint);
-    const tls = !std.mem.startsWith(u8, endpoint, "http://");
-    const port = aws.url.parsePort(endpoint);
+    const ep = try aws.url.parseEndpoint(endpoint);
 
     const path = "/apikeys";
 
@@ -91,11 +89,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportApiKeysInput, con
 
     const body = input.body;
 
-    var request = aws.http.Request.init(host);
+    var request = aws.http.Request.init(ep.host);
     request.method = .POST;
     request.path = path;
-    request.tls = tls;
-    request.port = port;
+    request.tls = ep.tls;
+    request.port = ep.port;
     request.body = body;
     request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/json");

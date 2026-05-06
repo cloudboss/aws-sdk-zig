@@ -43,19 +43,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetHealthCheckCountInpu
     _ = input;
     const endpoint = try config.getEndpointForService("route53", "Route 53", allocator);
 
-    const host = aws.url.parseHost(endpoint);
-    const tls = !std.mem.startsWith(u8, endpoint, "http://");
-    const port = aws.url.parsePort(endpoint);
+    const ep = try aws.url.parseEndpoint(endpoint);
 
     const path = "/2013-04-01/healthcheckcount";
 
     const body: ?[]const u8 = null;
 
-    var request = aws.http.Request.init(host);
+    var request = aws.http.Request.init(ep.host);
     request.method = .GET;
     request.path = path;
-    request.tls = tls;
-    request.port = port;
+    request.tls = ep.tls;
+    request.port = ep.port;
     request.body = body;
 
     return request;

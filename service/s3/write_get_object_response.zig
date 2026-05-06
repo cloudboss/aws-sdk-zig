@@ -362,19 +362,17 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: WriteGetObj
 fn serializeRequest(allocator: std.mem.Allocator, input: WriteGetObjectResponseInput, config: *aws.Config) !aws.http.Request {
     const endpoint = try config.getEndpointForService("s3", "S3", allocator);
 
-    const host = aws.url.parseHost(endpoint);
-    const tls = !std.mem.startsWith(u8, endpoint, "http://");
-    const port = aws.url.parsePort(endpoint);
+    const ep = try aws.url.parseEndpoint(endpoint);
 
     const path = "/WriteGetObjectResponse";
 
     const body = input.body orelse "";
 
-    var request = aws.http.Request.init(host);
+    var request = aws.http.Request.init(ep.host);
     request.method = .POST;
     request.path = path;
-    request.tls = tls;
-    request.port = port;
+    request.tls = ep.tls;
+    request.port = ep.port;
     request.body = body;
     try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.accept_ranges) |v| {

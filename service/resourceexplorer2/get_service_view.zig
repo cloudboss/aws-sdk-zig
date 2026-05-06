@@ -53,9 +53,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetServiceV
 fn serializeRequest(allocator: std.mem.Allocator, input: GetServiceViewInput, config: *aws.Config) !aws.http.Request {
     const endpoint = try config.getEndpointForService("resource-explorer-2", "Resource Explorer 2", allocator);
 
-    const host = aws.url.parseHost(endpoint);
-    const tls = !std.mem.startsWith(u8, endpoint, "http://");
-    const port = aws.url.parsePort(endpoint);
+    const ep = try aws.url.parseEndpoint(endpoint);
 
     const path = "/GetServiceView";
 
@@ -71,11 +69,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetServiceViewInput, co
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
 
-    var request = aws.http.Request.init(host);
+    var request = aws.http.Request.init(ep.host);
     request.method = .POST;
     request.path = path;
-    request.tls = tls;
-    request.port = port;
+    request.tls = ep.tls;
+    request.port = ep.port;
     request.body = body;
     try request.headers.put(allocator, "Content-Type", "application/json");
 

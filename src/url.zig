@@ -18,21 +18,57 @@ pub fn appendUrlEncoded(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value
     }
 }
 
-/// Extract the host from an endpoint URL, stripping scheme, port, and path.
-pub fn parseHost(endpoint: []const u8) []const u8 {
-    // Strip scheme
-    const after_scheme = if (std.mem.find(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
-    // Strip port and path
-    const end = std.mem.findAny(u8, after_scheme, ":/") orelse after_scheme.len;
-    return after_scheme[0..end];
+/// Host, port, and TLS flag pulled out of an endpoint URL by parseEndpoint.
+pub const EndpointInfo = struct {
+    host: []const u8,
+    port: ?u16,
+    tls: bool,
+};
+
+/// Parse an endpoint URL into its host, port, and scheme via std.Uri so that
+/// IPv6 literals (e.g. http://[fd00:ec2::254]/...) and userinfo
+/// (https://user:pass@host) are handled correctly. AWS endpoint resolution
+/// can yield scheme-less hostnames (e.g. iam.amazonaws.com) -- those are
+/// treated as https. The returned host slice borrows from the input.
+pub fn parseEndpoint(endpoint: []const u8) !EndpointInfo {
+    // AWS endpoint resolution can yield a bare hostname (no scheme),
+    // which std.Uri.parse rejects. Default such inputs to https and split
+    // host/port directly without going through std.Uri.
+    if (std.mem.find(u8, endpoint, "://") == null) {
+        return parseHostPort(endpoint, true);
+    }
+    const uri = std.Uri.parse(endpoint) catch return error.InvalidEndpoint;
+    const host_component = uri.host orelse return error.InvalidEndpoint;
+    const host = switch (host_component) {
+        .raw => |r| r,
+        .percent_encoded => |p| p,
+    };
+    return .{
+        .host = host,
+        .port = uri.port,
+        .tls = std.mem.eql(u8, uri.scheme, "https"),
+    };
 }
 
-/// Extract the port from an endpoint URL, or null if none is specified.
-pub fn parsePort(endpoint: []const u8) ?u16 {
-    const after_scheme = if (std.mem.find(u8, endpoint, "://")) |idx| endpoint[idx + 3 ..] else endpoint;
-    const colon = std.mem.findScalar(u8, after_scheme, ':') orelse return null;
-    const port_end = std.mem.findScalarPos(u8, after_scheme, colon + 1, '/') orelse after_scheme.len;
-    return std.fmt.parseInt(u16, after_scheme[colon + 1 .. port_end], 10) catch null;
+/// Parse a "host" or "host:port" string with no scheme. IPv6 literals must
+/// be bracketed ("[fd00::1]:443"); a bare colon in an IPv6 address is
+/// ambiguous without brackets and is rejected.
+fn parseHostPort(input: []const u8, tls: bool) !EndpointInfo {
+    if (input.len == 0) return error.InvalidEndpoint;
+    if (input[0] == '[') {
+        const end = std.mem.findScalar(u8, input, ']') orelse return error.InvalidEndpoint;
+        const host = input[0 .. end + 1];
+        if (end + 1 == input.len) return .{ .host = host, .port = null, .tls = tls };
+        if (input[end + 1] != ':') return error.InvalidEndpoint;
+        const port = std.fmt.parseInt(u16, input[end + 2 ..], 10) catch return error.InvalidEndpoint;
+        return .{ .host = host, .port = port, .tls = tls };
+    }
+    if (std.mem.findScalar(u8, input, ':')) |colon| {
+        if (std.mem.findScalarPos(u8, input, colon + 1, ':') != null) return error.InvalidEndpoint;
+        const port = std.fmt.parseInt(u16, input[colon + 1 ..], 10) catch return error.InvalidEndpoint;
+        return .{ .host = input[0..colon], .port = port, .tls = tls };
+    }
+    return .{ .host = input, .port = null, .tls = tls };
 }
 
 // ---- Tests ----
@@ -64,30 +100,37 @@ test "appendUrlEncoded percent-encodes special characters" {
     try std.testing.expectEqualStrings("a%3Db%26c", buf.items);
 }
 
-test "parseHost with scheme and port" {
-    try std.testing.expectEqualStrings("localhost", parseHost("http://localhost:4566"));
+test "parseEndpoint with scheme and port" {
+    const ep = try parseEndpoint("http://localhost:4566");
+    try std.testing.expectEqualStrings("localhost", ep.host);
+    try std.testing.expectEqual(@as(?u16, 4566), ep.port);
+    try std.testing.expectEqual(false, ep.tls);
 }
 
-test "parseHost with scheme and path" {
-    try std.testing.expectEqualStrings("example.com", parseHost("https://example.com/path"));
+test "parseEndpoint with https and path" {
+    const ep = try parseEndpoint("https://example.com/path");
+    try std.testing.expectEqualStrings("example.com", ep.host);
+    try std.testing.expectEqual(@as(?u16, null), ep.port);
+    try std.testing.expectEqual(true, ep.tls);
 }
 
-test "parseHost without scheme" {
-    try std.testing.expectEqualStrings("myhost", parseHost("myhost:8080"));
+test "parseEndpoint with bracketed IPv6 host" {
+    const ep = try parseEndpoint("http://[fd00:ec2::254]/latest/meta-data/");
+    try std.testing.expectEqualStrings("[fd00:ec2::254]", ep.host);
+    try std.testing.expectEqual(@as(?u16, null), ep.port);
+    try std.testing.expectEqual(false, ep.tls);
 }
 
-test "parseHost plain hostname" {
-    try std.testing.expectEqualStrings("example.com", parseHost("example.com"));
+test "parseEndpoint with userinfo" {
+    const ep = try parseEndpoint("https://user:pass@example.com:8443/path");
+    try std.testing.expectEqualStrings("example.com", ep.host);
+    try std.testing.expectEqual(@as(?u16, 8443), ep.port);
+    try std.testing.expectEqual(true, ep.tls);
 }
 
-test "parsePort with scheme and port" {
-    try std.testing.expectEqual(@as(u16, 4566), parsePort("http://localhost:4566").?);
-}
-
-test "parsePort no port" {
-    try std.testing.expect(parsePort("https://example.com") == null);
-}
-
-test "parsePort with trailing path" {
-    try std.testing.expectEqual(@as(u16, 8080), parsePort("http://host:8080/path").?);
+test "parseEndpoint accepts scheme-less hostname as https" {
+    const ep = try parseEndpoint("sts.us-east-1.amazonaws.com");
+    try std.testing.expectEqualStrings("sts.us-east-1.amazonaws.com", ep.host);
+    try std.testing.expectEqual(@as(?u16, null), ep.port);
+    try std.testing.expectEqual(true, ep.tls);
 }

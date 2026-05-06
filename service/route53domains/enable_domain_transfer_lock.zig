@@ -53,17 +53,15 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableDomai
 fn serializeRequest(allocator: std.mem.Allocator, input: EnableDomainTransferLockInput, config: *aws.Config) !aws.http.Request {
     const endpoint = try config.getEndpointForService("route53domains", "Route 53 Domains", allocator);
 
-    const host = aws.url.parseHost(endpoint);
-    const tls = !std.mem.startsWith(u8, endpoint, "http://");
-    const port = aws.url.parsePort(endpoint);
+    const ep = try aws.url.parseEndpoint(endpoint);
 
     const body = try aws.json.jsonStringify(input, allocator);
 
-    var request = aws.http.Request.init(host);
+    var request = aws.http.Request.init(ep.host);
     request.method = .POST;
     request.path = "/";
-    request.tls = tls;
-    request.port = port;
+    request.tls = ep.tls;
+    request.port = ep.port;
     request.body = body;
     try request.headers.put(allocator, "Content-Type", "application/x-amz-json-1.1");
     try request.headers.put(allocator, "X-Amz-Target", "Route53Domains_v20140515.EnableDomainTransferLock");

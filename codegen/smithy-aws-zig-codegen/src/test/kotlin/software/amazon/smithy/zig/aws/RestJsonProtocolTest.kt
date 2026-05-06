@@ -550,8 +550,7 @@ class RestJsonProtocolTest {
 
         assertTrue(op.contains("aws.json.findJsonValue("), "Missing findJsonValue usage")
         assertTrue(op.contains("aws.url.appendUrlEncoded("), "Missing appendUrlEncoded usage")
-        assertTrue(op.contains("aws.url.parseHost("), "Missing parseHost usage")
-        assertTrue(op.contains("aws.url.parsePort("), "Missing parsePort usage")
+        assertTrue(op.contains("aws.url.parseEndpoint("), "Missing parseEndpoint usage")
     }
 
     // ---- No XML helpers ----

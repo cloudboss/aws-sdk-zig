@@ -719,10 +719,9 @@ class RestXmlProtocolTest {
     fun helperFunctionsPresent() {
         val files = generateFiles()
 
-        // All operations use parseHost/parsePort for endpoint parsing
+        // All operations use parseEndpoint for endpoint parsing
         val putObject = files["put_object.zig"]!!
-        assertTrue(putObject.contains("aws.url.parseHost("), "Missing parseHost usage in put_object")
-        assertTrue(putObject.contains("aws.url.parsePort("), "Missing parsePort usage in put_object")
+        assertTrue(putObject.contains("aws.url.parseEndpoint("), "Missing parseEndpoint usage")
 
         // Error parsing uses findElement for XML error responses
         assertTrue(putObject.contains("aws.xml.findElement("), "Missing findElement usage in put_object")

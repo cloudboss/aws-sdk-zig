@@ -381,8 +381,7 @@ class AwsJsonProtocolTest {
         val op = files["put_item.zig"]!!
 
         assertTrue(op.contains("aws.json.findJsonValue("), "Missing findJsonValue usage")
-        assertTrue(op.contains("aws.url.parseHost("), "Missing parseHost usage")
-        assertTrue(op.contains("aws.url.parsePort("), "Missing parsePort usage")
+        assertTrue(op.contains("aws.url.parseEndpoint("), "Missing parseEndpoint usage")
     }
 
     // ---- No XML helpers ----

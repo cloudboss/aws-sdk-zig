@@ -74,17 +74,15 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRelat
 fn serializeRequest(allocator: std.mem.Allocator, input: UpdateRelationshipInput, config: *aws.Config) !aws.http.Request {
     const endpoint = try config.getEndpointForService("partnercentral-channel", "PartnerCentral Channel", allocator);
 
-    const host = aws.url.parseHost(endpoint);
-    const tls = !std.mem.startsWith(u8, endpoint, "http://");
-    const port = aws.url.parsePort(endpoint);
+    const ep = try aws.url.parseEndpoint(endpoint);
 
     const body = try aws.json.jsonStringify(input, allocator);
 
-    var request = aws.http.Request.init(host);
+    var request = aws.http.Request.init(ep.host);
     request.method = .POST;
     request.path = "/";
-    request.tls = tls;
-    request.port = port;
+    request.tls = ep.tls;
+    request.port = ep.port;
     request.body = body;
     try request.headers.put(allocator, "Content-Type", "application/x-amz-json-1.0");
     try request.headers.put(allocator, "X-Amz-Target", "PartnerCentralChannel.UpdateRelationship");

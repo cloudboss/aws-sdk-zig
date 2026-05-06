@@ -57,9 +57,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateConti
 fn serializeRequest(allocator: std.mem.Allocator, input: UpdateContinuousDeploymentPolicyInput, config: *aws.Config) !aws.http.Request {
     const endpoint = try config.getEndpointForService("cloudfront", "CloudFront", allocator);
 
-    const host = aws.url.parseHost(endpoint);
-    const tls = !std.mem.startsWith(u8, endpoint, "http://");
-    const port = aws.url.parsePort(endpoint);
+    const ep = try aws.url.parseEndpoint(endpoint);
 
     var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/2020-05-31/continuous-deployment-policy/");
@@ -72,11 +70,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateContinuousDeploym
     try body_buf.appendSlice(allocator, "</ContinuousDeploymentPolicyConfig>");
     const body = try body_buf.toOwnedSlice(allocator);
 
-    var request = aws.http.Request.init(host);
+    var request = aws.http.Request.init(ep.host);
     request.method = .PUT;
     request.path = path;
-    request.tls = tls;
-    request.port = port;
+    request.tls = ep.tls;
+    request.port = ep.port;
     request.body = body;
     try request.headers.put(allocator, "Content-Type", "application/xml");
     if (input.if_match) |v| {

@@ -83,9 +83,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetDirectQu
 fn serializeRequest(allocator: std.mem.Allocator, input: GetDirectQueryDataSourceInput, config: *aws.Config) !aws.http.Request {
     const endpoint = try config.getEndpointForService("es", "OpenSearch", allocator);
 
-    const host = aws.url.parseHost(endpoint);
-    const tls = !std.mem.startsWith(u8, endpoint, "http://");
-    const port = aws.url.parsePort(endpoint);
+    const ep = try aws.url.parseEndpoint(endpoint);
 
     var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/2021-01-01/opensearch/directQueryDataSource/");
@@ -94,11 +92,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDirectQueryDataSourc
 
     const body: ?[]const u8 = null;
 
-    var request = aws.http.Request.init(host);
+    var request = aws.http.Request.init(ep.host);
     request.method = .GET;
     request.path = path;
-    request.tls = tls;
-    request.port = port;
+    request.tls = ep.tls;
+    request.port = ep.port;
     request.body = body;
     try request.headers.put(allocator, "Content-Type", "application/json");
 

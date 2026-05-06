@@ -97,14 +97,12 @@ fn makeGetCallerIdentityRequest(
     cfg: *aws.Config,
 ) !aws.http.Request {
     const endpoint = try cfg.getEndpointForService("sts", "STS", allocator);
-    const host = aws.url.parseHost(endpoint);
-    const tls = !std.mem.startsWith(u8, endpoint, "http://");
-    const port = aws.url.parsePort(endpoint);
+    const ep = try aws.url.parseEndpoint(endpoint);
 
-    var request = aws.http.Request.init(host);
+    var request = aws.http.Request.init(ep.host);
     request.method = .POST;
-    request.tls = tls;
-    request.port = port;
+    request.tls = ep.tls;
+    request.port = ep.port;
     request.path = "/";
     request.body = "Action=GetCallerIdentity&Version=2011-06-15";
     try request.headers.put(

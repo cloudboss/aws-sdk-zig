@@ -48,9 +48,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelQuery
 fn serializeRequest(allocator: std.mem.Allocator, input: CancelQueryInput, config: *aws.Config) !aws.http.Request {
     const endpoint = try config.getEndpointForService("neptune-graph", "Neptune Graph", allocator);
 
-    const host = aws.url.parseHost(endpoint);
-    const tls = !std.mem.startsWith(u8, endpoint, "http://");
-    const port = aws.url.parsePort(endpoint);
+    const ep = try aws.url.parseEndpoint(endpoint);
 
     var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/queries/");
@@ -59,11 +57,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CancelQueryInput, confi
 
     const body: ?[]const u8 = null;
 
-    var request = aws.http.Request.init(host);
+    var request = aws.http.Request.init(ep.host);
     request.method = .DELETE;
     request.path = path;
-    request.tls = tls;
-    request.port = port;
+    request.tls = ep.tls;
+    request.port = ep.port;
     request.body = body;
     try request.headers.put(allocator, "Content-Type", "application/json");
     try request.headers.put(allocator, "graphIdentifier", input.graph_identifier);
