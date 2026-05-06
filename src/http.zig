@@ -84,6 +84,11 @@ pub const Request = struct {
     path: []const u8 = "/",
     query: ?[]const u8 = null,
     headers: std.StringHashMapUnmanaged([]const u8),
+    /// Header values whose memory is owned by this Request and must be
+    /// freed in deinit. signRequest and similar callers that allocPrint
+    /// or dupe values into headers register them here so the Request is
+    /// safe to use without an arena.
+    owned_header_values: std.ArrayList([]const u8) = .empty,
     body: ?[]const u8 = null,
     tls: bool = true,
     service_name: []const u8 = "",
@@ -102,7 +107,23 @@ pub const Request = struct {
     }
 
     pub fn deinit(self: *Self, allocator: Allocator) void {
+        for (self.owned_header_values.items) |v| allocator.free(v);
+        self.owned_header_values.deinit(allocator);
         self.headers.deinit(allocator);
+    }
+
+    /// Insert a header whose value memory is owned by this Request. The
+    /// value will be freed in deinit. Use this for allocPrint / dupe results
+    /// instead of plain headers.put, so the Request does not need an arena.
+    pub fn putOwnedHeader(
+        self: *Self,
+        allocator: Allocator,
+        name: []const u8,
+        owned_value: []const u8,
+    ) !void {
+        try self.owned_header_values.append(allocator, owned_value);
+        errdefer _ = self.owned_header_values.pop();
+        try self.headers.put(allocator, name, owned_value);
     }
 
     /// Get full URI
@@ -1269,6 +1290,17 @@ test "Request getUri with port" {
     const uri = request.getUri();
     try std.testing.expectEqualStrings("http", uri.scheme);
     try std.testing.expectEqual(@as(u16, 4566), uri.port.?);
+}
+
+test "Request.deinit frees header values added via putOwnedHeader" {
+    const allocator = std.testing.allocator;
+    var request = Request.init("example.com");
+    defer request.deinit(allocator);
+
+    const dup = try allocator.dupe(u8, "Bearer abc123");
+    try request.putOwnedHeader(allocator, "authorization", dup);
+
+    try std.testing.expectEqualStrings("Bearer abc123", request.headers.get("authorization").?);
 }
 
 test "Response status helpers" {

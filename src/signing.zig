@@ -273,9 +273,10 @@ pub fn signRequest(
     Sha256.hash(payload, &payload_hash, .{});
     const payload_hash_hex = std.fmt.bytesToHex(&payload_hash, .lower);
 
-    // Add required headers (dupe stack values onto heap so they survive after return)
-    try request.headers.put(allocator, "x-amz-date", try allocator.dupe(u8, &datetime));
-    try request.headers.put(
+    // Add required headers. The duped values are owned by the Request so
+    // they get freed in Request.deinit, even when the caller is not arena-backed.
+    try request.putOwnedHeader(allocator, "x-amz-date", try allocator.dupe(u8, &datetime));
+    try request.putOwnedHeader(
         allocator,
         "x-amz-content-sha256",
         try allocator.dupe(u8, &payload_hash_hex),
@@ -296,7 +297,7 @@ pub fn signRequest(
                 "{s}:{d}",
                 .{ request.host, request.port.? },
             );
-            try request.headers.put(allocator, "host", host_with_port);
+            try request.putOwnedHeader(allocator, "host", host_with_port);
         } else {
             try request.headers.put(allocator, "host", request.host);
         }
@@ -349,7 +350,7 @@ pub fn signRequest(
                     signature_hex,
                 },
             );
-            try request.headers.put(allocator, "authorization", authorization);
+            try request.putOwnedHeader(allocator, "authorization", authorization);
         },
         .sigv4a => {
             const credential_scope_v4a = try std.fmt.allocPrint(
@@ -387,7 +388,7 @@ pub fn signRequest(
                     sig_hex,
                 },
             );
-            try request.headers.put(allocator, "authorization", authorization);
+            try request.putOwnedHeader(allocator, "authorization", authorization);
         },
     }
 }
@@ -746,6 +747,31 @@ test "deriveSigningKey matches AWS example" {
         0x86, 0xda, 0x6e, 0xd3, 0xc1, 0x54, 0xa4, 0xb9,
     };
     try std.testing.expectEqualSlices(u8, &expected, &key);
+}
+
+test "signRequest does not leak header values without an arena" {
+    // std.testing.allocator detects leaks. If signRequest dups any value
+    // into request.headers without registering it for cleanup, this fails.
+    const allocator = std.testing.allocator;
+
+    var request = http.Request.init("s3.us-east-1.amazonaws.com");
+    defer request.deinit(allocator);
+    request.method = .POST;
+    request.path = "/bucket/key";
+    request.body = "payload";
+    request.port = 8443; // non-default, exercises the host_with_port allocPrint
+
+    const creds = Credentials{
+        .access_key_id = "AKID",
+        .secret_access_key = "SECRET",
+        .session_token = "tok",
+    };
+
+    try signRequest(allocator, std.testing.io, &request, creds, "us-east-1", "s3");
+
+    try std.testing.expect(request.headers.get("authorization") != null);
+    try std.testing.expect(request.headers.get("x-amz-date") != null);
+    try std.testing.expect(request.headers.get("x-amz-content-sha256") != null);
 }
 
 test "deriveSigningKey rejects oversized secret_key" {
