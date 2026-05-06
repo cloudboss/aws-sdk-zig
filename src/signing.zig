@@ -128,7 +128,7 @@ pub fn presignRequest(
     defer allocator.free(string_to_sign);
 
     // Signature
-    const signing_key = deriveSigningKey(credentials.secret_access_key, datestamp, signing_region, service);
+    const signing_key = try deriveSigningKey(credentials.secret_access_key, datestamp, signing_region, service);
     var signature: [Hmac.mac_length]u8 = undefined;
     Hmac.create(&signature, string_to_sign, &signing_key);
     const signature_hex = std.fmt.bytesToHex(&signature, .lower);
@@ -329,7 +329,7 @@ pub fn signRequest(
 
     switch (request.signing_algorithm) {
         .sigv4 => {
-            const signing_key = deriveSigningKey(
+            const signing_key = try deriveSigningKey(
                 credentials.secret_access_key,
                 datestamp,
                 signing_region,
@@ -418,9 +418,10 @@ fn deriveSigningKey(
     datestamp: []const u8,
     region: []const u8,
     service: []const u8,
-) [Hmac.mac_length]u8 {
+) ![Hmac.mac_length]u8 {
     var k_secret: [256]u8 = undefined;
     const prefix = "AWS4";
+    if (secret_key.len > k_secret.len - prefix.len) return error.InvalidCredentials;
     @memcpy(k_secret[0..prefix.len], prefix);
     @memcpy(k_secret[prefix.len..][0..secret_key.len], secret_key);
     const k_secret_len = prefix.len + secret_key.len;
@@ -454,13 +455,16 @@ fn deriveSigningKeyV4a(
     };
 
     var ikm: [261]u8 = undefined;
-    @memcpy(ikm[0..5], "AWS4A");
-    const ikm_len = 5 + secret_access_key.len;
-    @memcpy(ikm[5..ikm_len], secret_access_key);
+    const ikm_prefix = "AWS4A";
+    if (secret_access_key.len > ikm.len - ikm_prefix.len) return error.InvalidCredentials;
+    @memcpy(ikm[0..ikm_prefix.len], ikm_prefix);
+    const ikm_len = ikm_prefix.len + secret_access_key.len;
+    @memcpy(ikm[ikm_prefix.len..ikm_len], secret_access_key);
 
     var counter: u8 = 1;
     while (counter < 255) : (counter += 1) {
         var msg: [256 + 2]u8 = undefined;
+        if (access_key_id.len > msg.len - 2) return error.InvalidCredentials;
         @memcpy(msg[0..access_key_id.len], access_key_id);
         msg[access_key_id.len] = 0x00;
         msg[access_key_id.len + 1] = counter;
@@ -727,7 +731,7 @@ test "formatAmzDate" {
 
 test "deriveSigningKey matches AWS example" {
     // AWS SigV4 test suite example
-    const key = deriveSigningKey(
+    const key = try deriveSigningKey(
         "wJalrXUtnFEMI/K7MDENG+bPxRfiCYEXAMPLEKEY",
         "20150830",
         "us-east-1",
@@ -742,6 +746,24 @@ test "deriveSigningKey matches AWS example" {
         0x86, 0xda, 0x6e, 0xd3, 0xc1, 0x54, 0xa4, 0xb9,
     };
     try std.testing.expectEqualSlices(u8, &expected, &key);
+}
+
+test "deriveSigningKey rejects oversized secret_key" {
+    const oversized = "A" ** 253; // "AWS4" prefix + 253 = 257 > 256-byte buffer
+    const result = deriveSigningKey(oversized, "20150830", "us-east-1", "iam");
+    try std.testing.expectError(error.InvalidCredentials, result);
+}
+
+test "deriveSigningKeyV4a rejects oversized secret_access_key" {
+    const oversized = "A" ** 257; // "AWS4A" prefix + 257 = 262 > 261-byte buffer
+    const result = deriveSigningKeyV4a(oversized, "AKIAIOSFODNN7EXAMPLE");
+    try std.testing.expectError(error.InvalidCredentials, result);
+}
+
+test "deriveSigningKeyV4a rejects oversized access_key_id" {
+    const oversized = "A" ** 257; // access_key_id + 2 > 256+2-byte msg buffer
+    const result = deriveSigningKeyV4a("wJalrXUtnFEMI/K7MDENG+bPxRfiCYEXAMPLEKEY", oversized);
+    try std.testing.expectError(error.InvalidCredentials, result);
 }
 
 test "encodeUri basic" {
