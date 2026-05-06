@@ -4,8 +4,8 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCENARIOS_DIR="${SCRIPT_DIR}"
 CERT_DIR="${SCRIPT_DIR}/../certs"
-LOCALSTACK_CONTAINER=""
-LOCALSTACK_IMG="${LOCALSTACK_IMG:-localstack/localstack:4.3.0}"
+CTR_LOCALSTACK=""
+CTR_IMAGE_LOCALSTACK="${CTR_IMAGE_LOCALSTACK:?CTR_IMAGE_LOCALSTACK must be defined}"
 ZIG_BUILD_FLAGS="${ZIG_BUILD_FLAGS:-}"
 TLS_CERT_HOST_PATH="${TLS_CERT_HOST_PATH:-}"
 export SCENARIO_TIMEOUT_SECS="${SCENARIO_TIMEOUT_SECS:-30}"
@@ -38,9 +38,9 @@ ERRORS=()
 # --- LocalStack lifecycle ---
 
 cleanup() {
-    if [[ -n "${LOCALSTACK_CONTAINER}" ]]; then
+    if [[ -n "${CTR_LOCALSTACK}" ]]; then
         echo "Stopping LocalStack..."
-        docker rm -f "${LOCALSTACK_CONTAINER}" 2>/dev/null || true
+        docker rm -f "${CTR_LOCALSTACK}" 2>/dev/null || true
     fi
 }
 trap cleanup EXIT
@@ -74,7 +74,7 @@ start_localstack() {
         -e "GATEWAY_LISTEN=:443"
     )
 
-    LOCALSTACK_CONTAINER=$(docker run "${docker_args[@]}" "${LOCALSTACK_IMG}")
+    CTR_LOCALSTACK=$(docker run "${docker_args[@]}" "${CTR_IMAGE_LOCALSTACK}")
 }
 
 wait_for_localstack() {

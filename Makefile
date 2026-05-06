@@ -4,8 +4,8 @@ DIR_OUT = _output
 
 ZIG_VERSION = 0.16.0
 GRADLE_VERSION = 8.7
-CTR_IMAGE_BASE = alpine:3.21
-LOCALSTACK_IMG = localstack/localstack:4.14.0
+CTR_IMAGE_BASE = ghcr.io/cloudboss/docker.io/library/alpine:3.23.2
+CTR_IMAGE_LOCALSTACK = ghcr.io/cloudboss/docker.io/localstack/localstack:4.14.0
 
 AWS_MODELS_COMMIT = 29144b97ed688d6b1a89b6fd21099823cbc0b3fb
 
@@ -69,7 +69,7 @@ test-integration-localstack: $(HAS_IMAGE_LOCAL) certs | $(DIR_OUT)
 		-v $(DIR_ROOT)/tests/integration/tls-hosts:/etc/hosts \
 		--group-add $(DOCKER_GID) \
 		--security-opt label=type:container_runtime_t \
-		-e LOCALSTACK_IMG=$(LOCALSTACK_IMG) \
+		-e CTR_IMAGE_LOCALSTACK=$(CTR_IMAGE_LOCALSTACK) \
 		-e "ZIG_BUILD_FLAGS=$(ZIG_BUILD_FLAGS)" \
 		-e SCENARIO=$(SCENARIO) \
 		-e SCENARIO_TIMEOUT_SECS \
