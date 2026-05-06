@@ -565,8 +565,7 @@ pub const HttpClient = struct {
         ) catch return error.RequestFailed;
 
         const status = @intFromEnum(response.head.status);
-        const resp_headers = self.parseResponseHeaders(&response) orelse
-            return error.OutOfMemory;
+        const resp_headers = try self.parseResponseHeaders(&response);
 
         // Initialize body reader -- this invalidates head strings
         // but we've already duped them.
@@ -670,8 +669,7 @@ pub const HttpClient = struct {
         var redirect_buf: [8192]u8 = undefined;
         var response = req.receiveHead(&redirect_buf) catch return error.RequestFailed;
 
-        var resp_headers = self.parseResponseHeaders(&response) orelse
-            return error.OutOfMemory;
+        var resp_headers = try self.parseResponseHeaders(&response);
         errdefer freeResponseHeaders(self.allocator, &resp_headers);
 
         var transfer_buf: [8192]u8 = undefined;
@@ -741,22 +739,23 @@ pub const HttpClient = struct {
     fn parseResponseHeaders(
         self: *Self,
         response: anytype,
-    ) ?std.StringHashMapUnmanaged([]const u8) {
+    ) error{OutOfMemory}!std.StringHashMapUnmanaged([]const u8) {
         var resp_headers: std.StringHashMapUnmanaged([]const u8) = .empty;
+        errdefer freeResponseHeaders(self.allocator, &resp_headers);
         var header_iter = response.head.iterateHeaders();
         while (header_iter.next()) |header| {
             const key = std.ascii.allocLowerString(
                 self.allocator,
                 header.name,
-            ) catch return null;
+            ) catch return error.OutOfMemory;
             const value = self.allocator.dupe(u8, header.value) catch {
                 self.allocator.free(key);
-                return null;
+                return error.OutOfMemory;
             };
             const gop = resp_headers.getOrPut(self.allocator, key) catch {
                 self.allocator.free(key);
                 self.allocator.free(value);
-                return null;
+                return error.OutOfMemory;
             };
             if (gop.found_existing) {
                 self.allocator.free(key);
@@ -2379,3 +2378,27 @@ test "syncClockSkew sets clock_skew_offset from Date header" {
     try std.testing.expect(client.clock_skew_offset >= expected_min - std.time.ns_per_s);
     try std.testing.expect(client.clock_skew_offset <= expected_max + std.time.ns_per_s);
 }
+
+test "parseResponseHeaders frees prior headers on OOM mid-loop" {
+    var failing = std.testing.FailingAllocator.init(std.testing.allocator, .{ .fail_index = 3 });
+    const fa = failing.allocator();
+
+    var client: HttpClient = undefined;
+    client.allocator = fa;
+
+    const MockResponse = struct {
+        head: MockHead,
+        const MockHead = struct {
+            fn iterateHeaders(self: MockHead) std.http.HeaderIterator {
+                _ = self;
+                return std.http.HeaderIterator.init(
+                    "200 OK\r\na: 1\r\nb: 2\r\nc: 3\r\n\r\n",
+                );
+            }
+        };
+    };
+    const response = MockResponse{ .head = .{} };
+
+    try std.testing.expectError(error.OutOfMemory, client.parseResponseHeaders(response));
+}
+
