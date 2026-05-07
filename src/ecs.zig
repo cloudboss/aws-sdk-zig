@@ -9,6 +9,7 @@ const std = @import("std");
 const Allocator = std.mem.Allocator;
 
 const date = @import("date.zig");
+const http = @import("http.zig");
 
 /// Default ECS metadata endpoint (link-local address)
 pub const default_endpoint = "http://169.254.170.2";
@@ -16,8 +17,8 @@ pub const default_endpoint = "http://169.254.170.2";
 /// ECS container credentials provider
 pub const Provider = struct {
     allocator: Allocator,
-    io: std.Io,
     env_map: *const std.process.Environ.Map,
+    http_client: http.HttpClient,
 
     const Self = @This();
 
@@ -25,8 +26,21 @@ pub const Provider = struct {
         allocator: Allocator,
         io: std.Io,
         env_map: *const std.process.Environ.Map,
-    ) Self {
-        return .{ .allocator = allocator, .io = io, .env_map = env_map };
+    ) !Self {
+        return .{
+            .allocator = allocator,
+            .env_map = env_map,
+            .http_client = try http.HttpClient.init(allocator, io, env_map, .{
+                .request_options = .{
+                    .max_attempts = 2,
+                    .max_response_size = 64 * 1024,
+                },
+            }),
+        };
+    }
+
+    pub fn deinit(self: *Self) void {
+        self.http_client.deinit();
     }
 
     /// Load credentials from ECS container metadata service
@@ -68,7 +82,7 @@ pub const Provider = struct {
         // 2. Check for token file
         if (self.env_map.get("AWS_CONTAINER_AUTHORIZATION_TOKEN_FILE")) |token_file| {
             const token = std.Io.Dir.cwd().readFileAlloc(
-                self.io,
+                self.http_client.io,
                 token_file,
                 self.allocator,
                 std.Io.Limit.limited(8192),
@@ -88,34 +102,35 @@ pub const Provider = struct {
     /// Make HTTP request to credentials endpoint
     fn doRequest(self: *Self, uri_str: []const u8, auth_token: ?[]const u8) ![]const u8 {
         const uri = std.Uri.parse(uri_str) catch return error.EcsRequestFailed;
+        const host_component = uri.host orelse return error.EcsRequestFailed;
+        const host = switch (host_component) {
+            .raw => |r| r,
+            .percent_encoded => |p| p,
+        };
+        const path_raw = switch (uri.path) {
+            .raw => |r| r,
+            .percent_encoded => |p| p,
+        };
 
-        var client = std.http.Client{ .allocator = self.allocator, .io = self.io };
-        defer client.deinit();
+        var request = http.Request.init(host);
+        defer request.deinit(self.allocator);
+        request.method = .GET;
+        request.path = path_raw;
+        request.port = uri.port orelse 80;
+        request.tls = std.mem.eql(u8, uri.scheme, "https");
 
-        var extra_headers_buf: [1]std.http.Header = undefined;
-        const extra_headers: []const std.http.Header = if (auth_token) |token| blk: {
-            extra_headers_buf[0] = .{ .name = "Authorization", .value = token };
-            break :blk &extra_headers_buf;
-        } else &.{};
+        if (auth_token) |token| {
+            try request.putOwnedHeader(self.allocator, "Authorization", try self.allocator.dupe(u8, token));
+        }
 
-        var req = client.request(.GET, uri, .{
-            .extra_headers = extra_headers,
-        }) catch return error.EcsConnectionFailed;
-        defer req.deinit();
+        var response = try self.http_client.sendRequest(&request);
+        defer response.deinit();
 
-        req.sendBodiless() catch return error.EcsRequestFailed;
-
-        var redirect_buf: [1024]u8 = undefined;
-        var response = req.receiveHead(&redirect_buf) catch return error.EcsRequestFailed;
-
-        if (response.head.status != .ok) {
+        if (!response.isSuccess()) {
             return error.EcsRequestFailed;
         }
 
-        var transfer_buf: [4096]u8 = undefined;
-        const body_reader = response.reader(&transfer_buf);
-        const body = body_reader.allocRemaining(self.allocator, std.Io.Limit.limited(64 * 1024)) catch return error.EcsRequestFailed;
-        return body;
+        return try self.allocator.dupe(u8, response.body);
     }
 };
 

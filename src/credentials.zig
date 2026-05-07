@@ -99,6 +99,7 @@ pub const CredentialsProvider = union(enum) {
     pub fn deinit(self: *CredentialsProvider) void {
         switch (self.*) {
             .imds => |*i| i.deinit(),
+            .ecs => |*e| e.deinit(),
             .chain => |*c| c.deinit(),
             else => {},
         }
@@ -176,7 +177,7 @@ pub const EcsProvider = struct {
     /// Load credentials from ECS container metadata service
     pub fn load(self: *Self, allocator: Allocator) !Credentials {
         if (self.provider == null) {
-            self.provider = ecs.Provider.init(allocator, self.io, self.env_map);
+            self.provider = try ecs.Provider.init(allocator, self.io, self.env_map);
         }
 
         var ecs_creds = try self.provider.?.getCredentials();
@@ -197,6 +198,10 @@ pub const EcsProvider = struct {
             .session_token = token,
             .expiration = ecs_creds.expiration,
         };
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.provider) |*p| p.deinit();
     }
 };
 
@@ -602,6 +607,9 @@ pub const ChainProvider = struct {
 
         self.freeCachedCredentials();
 
+        if (self.ecs_provider) |*provider| {
+            provider.deinit();
+        }
         if (self.imds_provider) |*provider| {
             provider.deinit();
         }
