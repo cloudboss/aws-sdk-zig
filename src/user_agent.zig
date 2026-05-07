@@ -24,45 +24,29 @@ pub fn buildUserAgent(
 }
 
 test "buildUserAgent starts with aws-sdk-zig/" {
-    var gpa = std.heap.DebugAllocator(.{}){};
-    defer _ = gpa.deinit();
-    const allocator = gpa.allocator();
-
-    const ua = try buildUserAgent(allocator, "sts", "2011-06-15");
-    defer allocator.free(ua);
+    const ua = try buildUserAgent(std.testing.allocator, "sts", "2011-06-15");
+    defer std.testing.allocator.free(ua);
 
     try std.testing.expect(std.mem.startsWith(u8, ua, "aws-sdk-zig/"));
 }
 
 test "buildUserAgent contains ua/2.1" {
-    var gpa = std.heap.DebugAllocator(.{}){};
-    defer _ = gpa.deinit();
-    const allocator = gpa.allocator();
-
-    const ua = try buildUserAgent(allocator, "sts", "2011-06-15");
-    defer allocator.free(ua);
+    const ua = try buildUserAgent(std.testing.allocator, "sts", "2011-06-15");
+    defer std.testing.allocator.free(ua);
 
     try std.testing.expect(std.mem.containsAtLeast(u8, ua, 1, "ua/2.1"));
 }
 
 test "buildUserAgent contains lang/zig#" {
-    var gpa = std.heap.DebugAllocator(.{}){};
-    defer _ = gpa.deinit();
-    const allocator = gpa.allocator();
-
-    const ua = try buildUserAgent(allocator, "sts", "2011-06-15");
-    defer allocator.free(ua);
+    const ua = try buildUserAgent(std.testing.allocator, "sts", "2011-06-15");
+    defer std.testing.allocator.free(ua);
 
     try std.testing.expect(std.mem.containsAtLeast(u8, ua, 1, "lang/zig#"));
 }
 
 test "buildUserAgent contains api/sts#2011-06-15" {
-    var gpa = std.heap.DebugAllocator(.{}){};
-    defer _ = gpa.deinit();
-    const allocator = gpa.allocator();
-
-    const ua = try buildUserAgent(allocator, "sts", "2011-06-15");
-    defer allocator.free(ua);
+    const ua = try buildUserAgent(std.testing.allocator, "sts", "2011-06-15");
+    defer std.testing.allocator.free(ua);
 
     try std.testing.expect(
         std.mem.containsAtLeast(u8, ua, 1, "api/sts#2011-06-15"),
@@ -70,12 +54,8 @@ test "buildUserAgent contains api/sts#2011-06-15" {
 }
 
 test "buildUserAgent contains os/" {
-    var gpa = std.heap.DebugAllocator(.{}){};
-    defer _ = gpa.deinit();
-    const allocator = gpa.allocator();
-
-    const ua = try buildUserAgent(allocator, "sts", "2011-06-15");
-    defer allocator.free(ua);
+    const ua = try buildUserAgent(std.testing.allocator, "sts", "2011-06-15");
+    defer std.testing.allocator.free(ua);
 
     try std.testing.expect(std.mem.containsAtLeast(u8, ua, 1, "os/"));
 }
