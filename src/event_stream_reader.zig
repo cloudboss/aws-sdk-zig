@@ -26,9 +26,8 @@ pub const EventStreamReader = struct {
         body: http.StreamingBody,
     ) !EventStreamReader {
         const buf = try allocator.alloc(u8, initial_buf_size);
-        var b = body;
         return .{
-            .reader = b.reader(),
+            .reader = body.inner.body_reader,
             .allocator = allocator,
             .buf = buf,
             .prev_msg = null,

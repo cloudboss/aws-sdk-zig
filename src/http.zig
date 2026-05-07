@@ -588,7 +588,7 @@ pub const HttpClient = struct {
             .status = status,
             .headers = resp_headers,
             .body = StreamingBody{
-                ._inner = inner,
+                .inner = inner,
                 .io = self.io,
                 .stall_protection = self.stall_protection,
             },
@@ -1006,7 +1006,7 @@ fn parseHttpDate(date_str: []const u8) ?i64 {
 /// Streaming body for responses where the HTTP connection stays open.
 /// Used for `@streaming` blob payloads (e.g., S3 GetObject).
 pub const StreamingBody = struct {
-    _inner: *Inner,
+    inner: *Inner,
     io: std.Io,
     stall_protection: StallProtectionOptions,
 
@@ -1045,7 +1045,7 @@ pub const StreamingBody = struct {
             const max_chunk = remaining +| 1;
             const chunk_len = @min(buf.len, max_chunk);
             var buffers = [_][]u8{buf[0..chunk_len]};
-            const read_len = self._inner.body_reader.readVec(&buffers) catch |err| switch (err) {
+            const read_len = self.inner.body_reader.readVec(&buffers) catch |err| switch (err) {
                 error.EndOfStream => break,
                 else => return error.RequestFailed,
             };
@@ -1098,12 +1098,12 @@ pub const StreamingBody = struct {
     }
 
     pub fn reader(self: *StreamingBody) *std.Io.Reader {
-        return self._inner.body_reader;
+        return self.inner.body_reader;
     }
 
     pub fn deinit(self: *StreamingBody) void {
-        self._inner.http_request.deinit();
-        self._inner.allocator.destroy(self._inner);
+        self.inner.http_request.deinit();
+        self.inner.allocator.destroy(self.inner);
     }
 };
 
