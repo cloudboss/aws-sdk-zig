@@ -293,6 +293,7 @@ pub const ElementStart = struct {
 
 pub const Error = error{
     UnexpectedEndOfInput,
+    InvalidEntity,
 };
 
 /// Simple string-search XML element finder. Searches for `<tag_name>` or
@@ -350,6 +351,70 @@ pub fn appendXmlEscaped(alloc: std.mem.Allocator, buf: *std.ArrayList(u8), value
             else => try buf.append(alloc, c),
         }
     }
+}
+
+/// Decode XML entity references (&amp; &lt; &gt; &quot; &apos; &#NNN; &#xHH;)
+/// into an owned string. Returns a copy of the input if no entities were
+/// found, materializing a decoded copy when needed.
+pub fn unescapeXml(allocator: std.mem.Allocator, source: []const u8) ![]const u8 {
+    if (std.mem.findScalar(u8, source, '&')) |amp_pos| {
+        var buf: std.ArrayList(u8) = .empty;
+        errdefer buf.deinit(allocator);
+        try buf.appendSlice(allocator, source[0..amp_pos]);
+        var pos = amp_pos;
+
+        while (pos < source.len) {
+            if (source[pos] == '&') {
+                const rest = source[pos..];
+                if (rest.len < 2) {
+                    try buf.append(allocator, '&');
+                    pos += 1;
+                    continue;
+                }
+                const semicolon = std.mem.findScalarPos(u8, rest, 0, ';') orelse {
+                    try buf.append(allocator, '&');
+                    pos += 1;
+                    continue;
+                };
+                const entity = rest[1..semicolon];
+
+                if (std.mem.eql(u8, entity, "amp")) {
+                    try buf.append(allocator, '&');
+                } else if (std.mem.eql(u8, entity, "lt")) {
+                    try buf.append(allocator, '<');
+                } else if (std.mem.eql(u8, entity, "gt")) {
+                    try buf.append(allocator, '>');
+                } else if (std.mem.eql(u8, entity, "quot")) {
+                    try buf.append(allocator, '"');
+                } else if (std.mem.eql(u8, entity, "apos")) {
+                    try buf.append(allocator, '\'');
+                } else if (entity.len > 0 and entity[0] == '#') {
+                    const decoded = try decodeXmlCharRef(entity[1..]);
+                    try buf.append(allocator, decoded);
+                } else {
+                    // Unknown entity -- pass through verbatim
+                    try buf.appendSlice(allocator, rest[0 .. semicolon + 1]);
+                }
+                pos += semicolon + 1;
+            } else {
+                try buf.append(allocator, source[pos]);
+                pos += 1;
+            }
+        }
+        return buf.toOwnedSlice(allocator);
+    }
+    return allocator.dupe(u8, source);
+}
+
+/// Decode &#NNN; or &#xHH; numeric character reference (the &# and ; already stripped).
+fn decodeXmlCharRef(num_str: []const u8) !u8 {
+    if (num_str.len == 0) return error.InvalidEntity;
+    if (num_str[0] == 'x' or num_str[0] == 'X') {
+        // Hex: &#xHH;
+        return std.fmt.parseInt(u8, num_str[1..], 16) catch return error.InvalidEntity;
+    }
+    // Decimal: &#NNN;
+    return std.fmt.parseInt(u8, num_str, 10) catch return error.InvalidEntity;
 }
 
 // ---- Tests ----
@@ -575,4 +640,61 @@ test "AWS-style response" {
     try reader.skipElement();
     // </GetCallerIdentityResponse>
     try testing.expect((try reader.next()).? == .element_end);
+}
+
+test "unescapeXml returns copy for text without entities" {
+    const result = try unescapeXml(testing.allocator, "plain text");
+    defer testing.allocator.free(result);
+    try testing.expectEqualStrings("plain text", result);
+}
+
+test "unescapeXml decodes amp" {
+    const result = try unescapeXml(testing.allocator, "a &amp; b");
+    defer testing.allocator.free(result);
+    try testing.expectEqualStrings("a & b", result);
+}
+
+test "unescapeXml decodes lt and gt" {
+    const result = try unescapeXml(testing.allocator, "&lt;code&gt;");
+    defer testing.allocator.free(result);
+    try testing.expectEqualStrings("<code>", result);
+}
+
+test "unescapeXml decodes quot and apos" {
+    const result = try unescapeXml(testing.allocator, "&quot;hello&apos;");
+    defer testing.allocator.free(result);
+    try testing.expectEqualStrings("\"hello'", result);
+}
+
+test "unescapeXml decodes decimal numeric ref" {
+    const result = try unescapeXml(testing.allocator, "&#65;&#66;&#67;");
+    defer testing.allocator.free(result);
+    try testing.expectEqualStrings("ABC", result);
+}
+
+test "unescapeXml decodes hex numeric ref" {
+    const result = try unescapeXml(testing.allocator, "&#x41;&#x42;&#x43;");
+    defer testing.allocator.free(result);
+    try testing.expectEqualStrings("ABC", result);
+}
+
+test "unescapeXml passes unknown entity through" {
+    const result = try unescapeXml(testing.allocator, "&unknown;");
+    defer testing.allocator.free(result);
+    try testing.expectEqualStrings("&unknown;", result);
+}
+
+test "unescapeXml handles trailing ampersand" {
+    const result = try unescapeXml(testing.allocator, "end&");
+    defer testing.allocator.free(result);
+    try testing.expectEqualStrings("end&", result);
+}
+
+test "unescapeXml decodes mixed entities and text" {
+    const result = try unescapeXml(
+        testing.allocator,
+        "if a &lt; b &amp;&amp; c &gt; d then &quot;ok&quot;",
+    );
+    defer testing.allocator.free(result);
+    try testing.expectEqualStrings("if a < b && c > d then \"ok\"", result);
 }
