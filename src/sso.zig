@@ -12,6 +12,7 @@ const http = @import("http.zig");
 const url_mod = @import("url.zig");
 const endpoint_mod = @import("endpoint.zig");
 const date = @import("date.zig");
+const json_mod = @import("json.zig");
 
 pub const SsoProvider = struct {
     io: std.Io,
@@ -99,11 +100,11 @@ fn readSsoCache(
 
 /// Parse SSO cache JSON: { "accessToken": "...", "expiresAt": "2024-01-01T00:00:00UTC" }
 fn parseSsoCacheJson(allocator: Allocator, json: []const u8) !SsoToken {
-    const access_token_raw = findJsonStringValue(json, "accessToken") orelse return error.SsoTokenNotFound;
+    const access_token_raw = json_mod.findJsonStringValue(json, "accessToken") orelse return error.SsoTokenNotFound;
     const access_token = try allocator.dupe(u8, access_token_raw);
     errdefer allocator.free(access_token);
 
-    const expires_at_str = findJsonStringValue(json, "expiresAt") orelse return error.SsoTokenNotFound;
+    const expires_at_str = json_mod.findJsonStringValue(json, "expiresAt") orelse return error.SsoTokenNotFound;
 
     // Parse the expiresAt timestamp -- can be ISO 8601 with various suffixes
     const expires_at = parseExpiresAt(expires_at_str) catch return error.SsoTokenNotFound;
@@ -166,22 +167,22 @@ fn callGetRoleCredentials(
 /// Parse GetRoleCredentials JSON response
 fn parseSsoCredentialsJson(allocator: Allocator, json: []const u8) !Credentials {
     // { "roleCredentials": { "accessKeyId": "...", ... } }
-    const access_key_raw = findJsonStringValue(json, "accessKeyId") orelse return error.SsoResponseMissingField;
+    const access_key_raw = json_mod.findJsonStringValue(json, "accessKeyId") orelse return error.SsoResponseMissingField;
     const access_key = try allocator.dupe(u8, access_key_raw);
     errdefer allocator.free(access_key);
 
-    const secret_key_raw = findJsonStringValue(json, "secretAccessKey") orelse return error.SsoResponseMissingField;
+    const secret_key_raw = json_mod.findJsonStringValue(json, "secretAccessKey") orelse return error.SsoResponseMissingField;
     const secret_key = try allocator.dupe(u8, secret_key_raw);
     errdefer allocator.free(secret_key);
 
-    const session_token: ?[]const u8 = if (findJsonStringValue(json, "sessionToken")) |t|
+    const session_token: ?[]const u8 = if (json_mod.findJsonStringValue(json, "sessionToken")) |t|
         try allocator.dupe(u8, t)
     else
         null;
     errdefer if (session_token) |t| allocator.free(t);
 
     // expiration is epoch milliseconds (number, not string)
-    const expiration: ?i64 = if (findJsonNumberValue(json, "expiration")) |ms|
+    const expiration: ?i64 = if (json_mod.findJsonNumberValue(json, "expiration")) |ms|
         @divTrunc(ms, 1000)
     else
         null;
@@ -192,61 +193,6 @@ fn parseSsoCredentialsJson(allocator: Allocator, json: []const u8) !Credentials 
         .session_token = session_token,
         .expiration = expiration,
     };
-}
-
-/// Find a JSON string value for a given key. Returns slice borrowing from json.
-fn findJsonStringValue(json: []const u8, field: []const u8) ?[]const u8 {
-    var pos: usize = 0;
-    while (pos < json.len) {
-        const field_start = std.mem.findPos(u8, json, pos, "\"") orelse return null;
-        const after_quote = field_start + 1;
-        if (after_quote + field.len > json.len) return null;
-
-        if (std.mem.eql(u8, json[after_quote .. after_quote + field.len], field)) {
-            const end_quote = after_quote + field.len;
-            if (end_quote < json.len and json[end_quote] == '"') {
-                const after_field = json[end_quote + 1 ..];
-                const colon = std.mem.findScalar(u8, after_field, ':') orelse return null;
-                const after_colon = std.mem.trimStart(u8, after_field[colon + 1 ..], " \t\r\n");
-                if (after_colon.len > 0 and after_colon[0] == '"') {
-                    const value_start = after_colon[1..];
-                    const value_end = std.mem.findScalar(u8, value_start, '"') orelse return null;
-                    return value_start[0..value_end];
-                }
-                return null;
-            }
-        }
-        pos = field_start + 1;
-    }
-    return null;
-}
-
-/// Find a JSON number value for a given key.
-fn findJsonNumberValue(json: []const u8, field: []const u8) ?i64 {
-    var pos: usize = 0;
-    while (pos < json.len) {
-        const field_start = std.mem.findPos(u8, json, pos, "\"") orelse return null;
-        const after_quote = field_start + 1;
-        if (after_quote + field.len > json.len) return null;
-
-        if (std.mem.eql(u8, json[after_quote .. after_quote + field.len], field)) {
-            const end_quote = after_quote + field.len;
-            if (end_quote < json.len and json[end_quote] == '"') {
-                const after_field = json[end_quote + 1 ..];
-                const colon = std.mem.findScalar(u8, after_field, ':') orelse return null;
-                const after_colon = std.mem.trimStart(u8, after_field[colon + 1 ..], " \t\r\n");
-                // Parse number
-                var end: usize = 0;
-                while (end < after_colon.len and (after_colon[end] >= '0' and after_colon[end] <= '9')) {
-                    end += 1;
-                }
-                if (end == 0) return null;
-                return std.fmt.parseInt(i64, after_colon[0..end], 10) catch null;
-            }
-        }
-        pos = field_start + 1;
-    }
-    return null;
 }
 
 /// Compute the SHA1 hex of a cache key (exported for testing)
@@ -367,9 +313,9 @@ test "findJsonStringValue" {
         \\{ "name": "value", "other": "data" }
     ;
 
-    try std.testing.expectEqualStrings("value", findJsonStringValue(json, "name").?);
-    try std.testing.expectEqualStrings("data", findJsonStringValue(json, "other").?);
-    try std.testing.expect(findJsonStringValue(json, "missing") == null);
+    try std.testing.expectEqualStrings("value", json_mod.findJsonStringValue(json, "name").?);
+    try std.testing.expectEqualStrings("data", json_mod.findJsonStringValue(json, "other").?);
+    try std.testing.expect(json_mod.findJsonStringValue(json, "missing") == null);
 }
 
 test "findJsonNumberValue" {
@@ -377,6 +323,6 @@ test "findJsonNumberValue" {
         \\{ "expiration": 1704067200000 }
     ;
 
-    try std.testing.expectEqual(@as(i64, 1704067200000), findJsonNumberValue(json, "expiration").?);
-    try std.testing.expect(findJsonNumberValue(json, "missing") == null);
+    try std.testing.expectEqual(@as(i64, 1704067200000), json_mod.findJsonNumberValue(json, "expiration").?);
+    try std.testing.expect(json_mod.findJsonNumberValue(json, "missing") == null);
 }

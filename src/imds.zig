@@ -12,6 +12,7 @@ const log = std.log.scoped(.aws_sdk);
 const http = @import("http.zig");
 const date = @import("date.zig");
 const url_mod = @import("url.zig");
+const json_mod = @import("json.zig");
 
 /// Default IMDS IPv4 endpoint (link-local address)
 pub const default_ipv4_endpoint = "http://169.254.169.254";
@@ -175,7 +176,9 @@ pub const Client = struct {
         const doc = try self.getMetadata("/latest/dynamic/instance-identity/document", options);
         defer self.allocator.free(doc);
 
-        return parseJsonField(self.allocator, doc, "region");
+        const region = json_mod.findJsonStringValue(doc, "region") orelse
+            return error.JsonFieldNotFound;
+        return try self.allocator.dupe(u8, region);
     }
 
     /// Get the instance ID
@@ -390,18 +393,23 @@ pub const IamCredentials = struct {
 
 /// Parse IAM credentials from IMDS JSON response
 fn parseIamCredentials(allocator: Allocator, json: []const u8) !IamCredentials {
-    const access_key = try parseJsonField(allocator, json, "AccessKeyId");
+    const access_key_raw = json_mod.findJsonStringValue(json, "AccessKeyId") orelse
+        return error.JsonFieldNotFound;
+    const access_key = try allocator.dupe(u8, access_key_raw);
     errdefer allocator.free(access_key);
 
-    const secret_key = try parseJsonField(allocator, json, "SecretAccessKey");
+    const secret_key_raw = json_mod.findJsonStringValue(json, "SecretAccessKey") orelse
+        return error.JsonFieldNotFound;
+    const secret_key = try allocator.dupe(u8, secret_key_raw);
     errdefer allocator.free(secret_key);
 
-    const token = try parseJsonField(allocator, json, "Token");
+    const token_raw = json_mod.findJsonStringValue(json, "Token") orelse
+        return error.JsonFieldNotFound;
+    const token = try allocator.dupe(u8, token_raw);
     errdefer allocator.free(token);
 
-    const expiration_str = try parseJsonField(allocator, json, "Expiration");
-    defer allocator.free(expiration_str);
-
+    const expiration_str = json_mod.findJsonStringValue(json, "Expiration") orelse
+        return error.JsonFieldNotFound;
     const expiration = try date.parseIso8601(expiration_str);
 
     return IamCredentials{
@@ -411,111 +419,6 @@ fn parseIamCredentials(allocator: Allocator, json: []const u8) !IamCredentials {
         .expiration = expiration,
         .allocator = allocator,
     };
-}
-
-/// Simple JSON string field parser (no dependencies)
-fn parseJsonField(allocator: Allocator, json: []const u8, field: []const u8) ![]const u8 {
-    // Look for "field" : "value" or "field": "value"
-    const search_pattern = try std.fmt.allocPrint(allocator, "\"{s}\"", .{field});
-    defer allocator.free(search_pattern);
-
-    const field_start = std.mem.find(u8, json, search_pattern) orelse
-        return error.JsonFieldNotFound;
-
-    // Find the colon after the field name
-    const after_field = json[field_start + search_pattern.len ..];
-    const colon_pos = std.mem.findScalar(u8, after_field, ':') orelse
-        return error.JsonFieldNotFound;
-
-    // Find the opening quote of the value
-    const after_colon = after_field[colon_pos + 1 ..];
-    const quote_start = std.mem.findScalar(u8, after_colon, '"') orelse
-        return error.JsonFieldNotFound;
-
-    // Find the closing quote
-    const value_start = after_colon[quote_start + 1 ..];
-    const quote_end = std.mem.findScalar(u8, value_start, '"') orelse
-        return error.JsonFieldNotFound;
-
-    return try allocator.dupe(u8, value_start[0..quote_end]);
-}
-
-// Tests
-
-test "parseJsonField" {
-    const allocator = std.testing.allocator;
-
-    const json =
-        \\{
-        \\  "Code" : "Success",
-        \\  "AccessKeyId" : "ASIAXXX",
-        \\  "SecretAccessKey" : "secretXXX",
-        \\  "Token" : "tokenXXX",
-        \\  "Expiration" : "2024-01-15T12:00:00Z"
-        \\}
-    ;
-
-    const access_key = try parseJsonField(allocator, json, "AccessKeyId");
-    defer allocator.free(access_key);
-    try std.testing.expectEqualStrings("ASIAXXX", access_key);
-
-    const secret = try parseJsonField(allocator, json, "SecretAccessKey");
-    defer allocator.free(secret);
-    try std.testing.expectEqualStrings("secretXXX", secret);
-}
-
-test "parseJsonField returns error for missing field" {
-    const allocator = std.testing.allocator;
-    const json =
-        \\{ "Name" : "value" }
-    ;
-    try std.testing.expectError(error.JsonFieldNotFound, parseJsonField(allocator, json, "Missing"));
-}
-
-test "parseJsonField extracts empty string value" {
-    const allocator = std.testing.allocator;
-    const json =
-        \\{ "Key" : "" }
-    ;
-    const val = try parseJsonField(allocator, json, "Key");
-    defer allocator.free(val);
-    try std.testing.expectEqualStrings("", val);
-}
-
-test "parseJsonField returns error for empty JSON" {
-    const allocator = std.testing.allocator;
-    try std.testing.expectError(error.JsonFieldNotFound, parseJsonField(allocator, "", "Key"));
-}
-
-test "parseJsonField returns error for truncated JSON missing closing quote" {
-    const allocator = std.testing.allocator;
-    const json =
-        \\{ "Key" : "no closing quote
-    ;
-    try std.testing.expectError(error.JsonFieldNotFound, parseJsonField(allocator, json, "Key"));
-}
-
-test "parseJsonField returns error for field without colon" {
-    const allocator = std.testing.allocator;
-    // Field name present but no colon follows
-    const json =
-        \\"Key"
-    ;
-    try std.testing.expectError(error.JsonFieldNotFound, parseJsonField(allocator, json, "Key"));
-}
-
-test "parseJsonField matches first occurrence of field name" {
-    const allocator = std.testing.allocator;
-    // When "Token" appears before "SecurityToken", verify it gets the right one
-    const json =
-        \\{
-        \\  "Token" : "first_value",
-        \\  "SecurityToken" : "second_value"
-        \\}
-    ;
-    const val = try parseJsonField(allocator, json, "Token");
-    defer allocator.free(val);
-    try std.testing.expectEqualStrings("first_value", val);
 }
 
 test "parseIamCredentials parses valid IMDS JSON" {

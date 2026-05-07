@@ -10,6 +10,7 @@ const Allocator = std.mem.Allocator;
 
 const date = @import("date.zig");
 const http = @import("http.zig");
+const json_mod = @import("json.zig");
 
 /// Default ECS metadata endpoint (link-local address)
 pub const default_endpoint = "http://169.254.170.2";
@@ -158,17 +159,23 @@ pub const Credentials = struct {
 
 /// Parse credentials from ECS JSON response
 fn parseCredentials(allocator: Allocator, json: []const u8) !Credentials {
-    const access_key = try parseJsonField(allocator, json, "AccessKeyId");
+    const access_key_raw = json_mod.findJsonStringValue(json, "AccessKeyId") orelse
+        return error.JsonFieldNotFound;
+    const access_key = try allocator.dupe(u8, access_key_raw);
     errdefer allocator.free(access_key);
 
-    const secret_key = try parseJsonField(allocator, json, "SecretAccessKey");
+    const secret_key_raw = json_mod.findJsonStringValue(json, "SecretAccessKey") orelse
+        return error.JsonFieldNotFound;
+    const secret_key = try allocator.dupe(u8, secret_key_raw);
     errdefer allocator.free(secret_key);
 
-    const token = try parseJsonField(allocator, json, "Token");
+    const token_raw = json_mod.findJsonStringValue(json, "Token") orelse
+        return error.JsonFieldNotFound;
+    const token = try allocator.dupe(u8, token_raw);
     errdefer allocator.free(token);
 
-    const expiration_str = try parseJsonField(allocator, json, "Expiration");
-    defer allocator.free(expiration_str);
+    const expiration_str = json_mod.findJsonStringValue(json, "Expiration") orelse
+        return error.JsonFieldNotFound;
 
     const expiration = date.parseIso8601(expiration_str) catch 0;
 
@@ -179,52 +186,6 @@ fn parseCredentials(allocator: Allocator, json: []const u8) !Credentials {
         .expiration = expiration,
         .allocator = allocator,
     };
-}
-
-/// Simple JSON string field parser
-fn parseJsonField(allocator: Allocator, json: []const u8, field: []const u8) ![]const u8 {
-    const search_pattern = try std.fmt.allocPrint(allocator, "\"{s}\"", .{field});
-    defer allocator.free(search_pattern);
-
-    const field_start = std.mem.find(u8, json, search_pattern) orelse
-        return error.JsonFieldNotFound;
-
-    const after_field = json[field_start + search_pattern.len ..];
-    const colon_pos = std.mem.findScalar(u8, after_field, ':') orelse
-        return error.JsonFieldNotFound;
-
-    const after_colon = after_field[colon_pos + 1 ..];
-    const quote_start = std.mem.findScalar(u8, after_colon, '"') orelse
-        return error.JsonFieldNotFound;
-
-    const value_start = after_colon[quote_start + 1 ..];
-    const quote_end = std.mem.findScalar(u8, value_start, '"') orelse
-        return error.JsonFieldNotFound;
-
-    return try allocator.dupe(u8, value_start[0..quote_end]);
-}
-
-// Tests
-
-test "parseJsonField" {
-    const allocator = std.testing.allocator;
-
-    const json =
-        \\{
-        \\  "AccessKeyId" : "ASIAXXX",
-        \\  "SecretAccessKey" : "secretXXX",
-        \\  "Token" : "tokenXXX",
-        \\  "Expiration" : "2024-01-15T12:00:00Z"
-        \\}
-    ;
-
-    const access_key = try parseJsonField(allocator, json, "AccessKeyId");
-    defer allocator.free(access_key);
-    try std.testing.expectEqualStrings("ASIAXXX", access_key);
-
-    const token = try parseJsonField(allocator, json, "Token");
-    defer allocator.free(token);
-    try std.testing.expectEqualStrings("tokenXXX", token);
 }
 
 test "resolveCredentialsUri with relative URI" {

@@ -316,34 +316,60 @@ fn parseBool(scanner: *Scanner, alloc: Allocator) ParseError!bool {
 /// Simple JSON value finder that searches for "key": value patterns.
 /// Returns the value as a string slice (without quotes for string values).
 /// Used for error response parsing where a full JSON parse is not needed.
-pub fn findJsonValue(json: []const u8, key: []const u8) ?[]const u8 {
-    // Build search pattern: "key"
+/// Find the position just after the colon and whitespace following a JSON key.
+/// Returns null if the key is not found or the JSON is malformed.
+fn findJsonKeySeparator(json: []const u8, key: []const u8) ?usize {
     var buf: [258]u8 = undefined;
     if (key.len + 2 > buf.len) return null;
-    buf[0] = 0x22; // double-quote
+    buf[0] = '"';
     @memcpy(buf[1..][0..key.len], key);
-    buf[key.len + 1] = 0x22; // double-quote
+    buf[key.len + 1] = '"';
     const search = buf[0 .. key.len + 2];
+
     const key_start = std.mem.find(u8, json, search) orelse return null;
     var pos = key_start + search.len;
-
-    // Skip whitespace and colon
-    while (pos < json.len) : (pos += 1) {
-        if (json[pos] != ' ' and json[pos] != ':') break;
+    pos = std.mem.findScalarPos(u8, json, pos, ':') orelse return null;
+    pos += 1;
+    while (pos < json.len and (json[pos] == ' ' or json[pos] == '\t' or json[pos] == '\r' or json[pos] == '\n')) {
+        pos += 1;
     }
+    return pos;
+}
+
+/// Find a JSON string value by key. Returns a slice into the input JSON
+/// (the characters between the quotes), or null if not found.
+pub fn findJsonStringValue(json: []const u8, key: []const u8) ?[]const u8 {
+    const pos = findJsonKeySeparator(json, key) orelse return null;
+    if (pos >= json.len or json[pos] != '"') return null;
+    const end = std.mem.findScalarPos(u8, json, pos + 1, '"') orelse return null;
+    return json[pos + 1 .. end];
+}
+
+/// Find a JSON number value by key. Returns the parsed i64, or null if not found.
+pub fn findJsonNumberValue(json: []const u8, key: []const u8) ?i64 {
+    const pos = findJsonKeySeparator(json, key) orelse return null;
+    if (pos >= json.len) return null;
+    var end = pos;
+    while (end < json.len and json[end] >= '0' and json[end] <= '9') : (end += 1) {}
+    if (end == pos) return null;
+    return std.fmt.parseInt(i64, json[pos..end], 10) catch null;
+}
+
+/// Find a JSON value by key. Returns a slice into the input for both string
+/// values (content between quotes) and non-string values (raw token).
+pub fn findJsonValue(json: []const u8, key: []const u8) ?[]const u8 {
+    const pos = findJsonKeySeparator(json, key) orelse return null;
     if (pos >= json.len) return null;
 
-    if (json[pos] == 0x22) {
-        const start = pos + 1;
-        const end = std.mem.findScalarPos(u8, json, start, 0x22) orelse return null;
-        return json[start..end];
+    if (json[pos] == '"') {
+        const end = std.mem.findScalarPos(u8, json, pos + 1, '"') orelse return null;
+        return json[pos + 1 .. end];
     }
 
     const start = pos;
-    while (pos < json.len) : (pos += 1) {
-        if (json[pos] == ',' or json[pos] == '}' or json[pos] == ' ') break;
-    }
-    return json[start..pos];
+    var end = pos;
+    while (end < json.len and json[end] != ',' and json[end] != '}' and json[end] != ' ') : (end += 1) {}
+    return json[start..end];
 }
 
 // ---------------------------------------------------------------------------
@@ -583,7 +609,9 @@ test "parse simple struct" {
         };
     };
 
-    const json = "{\"Name\":\"hello\",\"Count\":42,\"Active\":true}";
+    const json =
+        \\{"Name":"hello","Count":42,"Active":true}
+    ;
     const result = try parseJsonObject(TestStruct, json, std.testing.allocator);
     defer {
         if (result.name) |v| std.testing.allocator.free(v);
@@ -605,7 +633,9 @@ test "parse null fields" {
         };
     };
 
-    const json = "{\"Name\":null}";
+    const json =
+        \\{"Name":null}
+    ;
     const result = try parseJsonObject(TestStruct, json, std.testing.allocator);
     try std.testing.expect(result.name == null);
     try std.testing.expect(result.value == null);
@@ -620,7 +650,9 @@ test "parse unknown fields are skipped" {
         };
     };
 
-    const json = "{\"Name\":\"test\",\"Unknown\":\"ignored\",\"Also\":[1,2,3]}";
+    const json =
+        \\{"Name":"test","Unknown":"ignored","Also":[1,2,3]}
+    ;
     const result = try parseJsonObject(TestStruct, json, std.testing.allocator);
     defer {
         if (result.name) |v| std.testing.allocator.free(v);
@@ -637,7 +669,9 @@ test "parse array of strings" {
         };
     };
 
-    const json = "{\"Items\":[\"a\",\"b\",\"c\"]}";
+    const json =
+        \\{"Items":["a","b","c"]}
+    ;
     const result = try parseJsonObject(TestStruct, json, std.testing.allocator);
     defer {
         if (result.items) |items| {
@@ -671,7 +705,9 @@ test "parse nested struct" {
         };
     };
 
-    const json = "{\"Name\":\"test\",\"Inner\":{\"Value\":\"nested\"}}";
+    const json =
+        \\{"Name":"test","Inner":{"Value":"nested"}}
+    ;
     const result = try parseJsonObject(Outer, json, std.testing.allocator);
     defer {
         if (result.name) |v| std.testing.allocator.free(v);
@@ -703,7 +739,9 @@ test "parse array of structs" {
         };
     };
 
-    const json = "{\"Items\":[{\"Name\":\"a\",\"Count\":1},{\"Name\":\"b\",\"Count\":2}]}";
+    const json =
+        \\{"Items":[{"Name":"a","Count":1},{"Name":"b","Count":2}]}
+    ;
     const result = try parseJsonObject(Container, json, std.testing.allocator);
     defer {
         if (result.items) |items| {
@@ -740,7 +778,9 @@ test "parse enum" {
         };
     };
 
-    const json = "{\"Status\":\"ACTIVE\"}";
+    const json =
+        \\{"Status":"ACTIVE"}
+    ;
     const result = try parseJsonObject(TestStruct, json, std.testing.allocator);
     try std.testing.expectEqual(Status.active, result.status.?);
 }
@@ -764,7 +804,9 @@ test "parse unknown optional enum yields null" {
         };
     };
 
-    const json = "{\"Status\":\"NEW_STATUS\"}";
+    const json =
+        \\{"Status":"NEW_STATUS"}
+    ;
     const result = try parseJsonObject(TestStruct, json, std.testing.allocator);
     try std.testing.expect(result.status == null);
 }
@@ -790,7 +832,9 @@ test "serialize simple struct" {
 
     const json = try jsonStringify(value, std.testing.allocator);
     defer std.testing.allocator.free(json);
-    try std.testing.expectEqualStrings("{\"Name\":\"hello\",\"Count\":42,\"Active\":true}", json);
+    try std.testing.expectEqualStrings(
+        \\{"Name":"hello","Count":42,"Active":true}
+    , json);
 }
 
 test "serialize skips null optionals" {
@@ -807,7 +851,9 @@ test "serialize skips null optionals" {
     const value = TestStruct{ .name = "test" };
     const json = try jsonStringify(value, std.testing.allocator);
     defer std.testing.allocator.free(json);
-    try std.testing.expectEqualStrings("{\"Name\":\"test\"}", json);
+    try std.testing.expectEqualStrings(
+        \\{"Name":"test"}
+    , json);
 }
 
 test "serialize array of structs" {
@@ -836,7 +882,9 @@ test "serialize array of structs" {
     const value = Container{ .items = &items };
     const json = try jsonStringify(value, std.testing.allocator);
     defer std.testing.allocator.free(json);
-    try std.testing.expectEqualStrings("{\"Items\":[{\"Name\":\"a\",\"Value\":1},{\"Name\":\"b\",\"Value\":2}]}", json);
+    try std.testing.expectEqualStrings(
+        \\{"Items":[{"Name":"a","Value":1},{"Name":"b","Value":2}]}
+    , json);
 }
 
 test "roundtrip parse and serialize" {
@@ -860,7 +908,9 @@ test "roundtrip parse and serialize" {
         };
     };
 
-    const input = "{\"Name\":\"test\",\"Items\":[{\"Tag\":\"x\"},{\"Tag\":\"y\"}],\"Count\":99}";
+    const input =
+        \\{"Name":"test","Items":[{"Tag":"x"},{"Tag":"y"}],"Count":99}
+    ;
     const parsed = try parseJsonObject(TestStruct, input, std.testing.allocator);
     defer {
         if (parsed.name) |v| std.testing.allocator.free(v);
@@ -902,37 +952,47 @@ test "serialize string escaping" {
 }
 
 test "findJsonValue string value" {
-    const json = "{\"__type\":\"ResourceNotFoundException\",\"message\":\"Table not found\"}";
+    const json =
+        \\{"__type":"ResourceNotFoundException","message":"Table not found"}
+    ;
     try std.testing.expectEqualStrings("ResourceNotFoundException", findJsonValue(json, "__type").?);
     try std.testing.expectEqualStrings("Table not found", findJsonValue(json, "message").?);
 }
 
 test "findJsonValue with namespace prefix" {
-    const json = "{\"__type\":\"com.amazonaws.dynamodb.v20120810#ResourceNotFoundException\"}";
+    const json =
+        \\{"__type":"com.amazonaws.dynamodb.v20120810#ResourceNotFoundException"}
+    ;
     const type_str = findJsonValue(json, "__type").?;
     try std.testing.expectEqualStrings("com.amazonaws.dynamodb.v20120810#ResourceNotFoundException", type_str);
 }
 
 test "findJsonValue number value" {
-    const json = "{\"code\":404,\"message\":\"not found\"}";
+    const json =
+        \\{"code":404,"message":"not found"}
+    ;
     try std.testing.expectEqualStrings("404", findJsonValue(json, "code").?);
 }
 
 test "findJsonValue missing key" {
-    const json = "{\"name\":\"test\"}";
+    const json =
+        \\{"name":"test"}
+    ;
     try std.testing.expect(findJsonValue(json, "missing") == null);
 }
 
 test "findJsonValue both message variants" {
-    const json = "{\"Message\":\"uppercase\"}";
+    const json =
+        \\{"Message":"uppercase"}
+    ;
     try std.testing.expect(findJsonValue(json, "message") == null);
     try std.testing.expectEqualStrings("uppercase", findJsonValue(json, "Message").?);
 }
 
 test "findJsonValue returns slice into input buffer" {
     const json =
-        "{\"__type\":\"ResourceNotFoundException\"," ++
-        "\"message\":\"Table not found\"}";
+        \\{"__type":"ResourceNotFoundException","message":"Table not found"}
+    ;
     const value = findJsonValue(json, "__type").?;
     try std.testing.expect(
         @intFromPtr(value.ptr) >= @intFromPtr(json.ptr),
@@ -942,12 +1002,61 @@ test "findJsonValue returns slice into input buffer" {
     );
 }
 
+test "findJsonStringValue returns string content" {
+    const json =
+        \\{"Name":"value","Other":"data"}
+    ;
+    try std.testing.expectEqualStrings("value", findJsonStringValue(json, "Name").?);
+    try std.testing.expectEqualStrings("data", findJsonStringValue(json, "Other").?);
+}
+
+test "findJsonStringValue empty string" {
+    const json =
+        \\{"Key":""}
+    ;
+    try std.testing.expectEqualStrings("", findJsonStringValue(json, "Key").?);
+}
+
+test "findJsonStringValue null for missing key" {
+    const json =
+        \\{"Name":"value"}
+    ;
+    try std.testing.expect(findJsonStringValue(json, "Missing") == null);
+}
+
+test "findJsonStringValue null when value is number" {
+    const json =
+        \\{"Version":1}
+    ;
+    try std.testing.expect(findJsonStringValue(json, "Version") == null);
+}
+
+test "findJsonNumberValue parses integer" {
+    const json =
+        \\{"Version":1,"Count":42}
+    ;
+    try std.testing.expectEqual(@as(i64, 1), findJsonNumberValue(json, "Version").?);
+    try std.testing.expectEqual(@as(i64, 42), findJsonNumberValue(json, "Count").?);
+}
+
+test "findJsonNumberValue null for missing key" {
+    const json =
+        \\{"Name":"value"}
+    ;
+    try std.testing.expect(findJsonNumberValue(json, "Missing") == null);
+}
+
+test "findJsonNumberValue null when value is string" {
+    const json =
+        \\{"Name":"value"}
+    ;
+    try std.testing.expect(findJsonNumberValue(json, "Name") == null);
+}
+
 test "duped error strings survive source buffer free" {
     const alloc = std.testing.allocator;
-    const body = try alloc.dupe(
-        u8,
-        "{\"__type\":\"ResourceNotFoundException\"," ++
-            "\"message\":\"Table not found\"}",
+    const body = try alloc.dupe(u8,
+        \\{"__type":"ResourceNotFoundException","message":"Table not found"}
     );
     const raw_message = findJsonValue(body, "message") orelse "";
     const owned_message = try alloc.dupe(u8, raw_message);
@@ -980,7 +1089,9 @@ test "parse string map entries" {
         };
     };
 
-    const json = "{\"Tags\":{\"Name\":\"test\",\"Env\":\"prod\"}}";
+    const json =
+        \\{"Tags":{"Name":"test","Env":"prod"}}
+    ;
     const result = try parseJsonObject(TestStruct, json, std.testing.allocator);
     defer {
         if (result.tags) |entries| {
@@ -1016,7 +1127,9 @@ test "serialize string map entries" {
     const value = TestStruct{ .tags = &entries };
     const json = try jsonStringify(value, std.testing.allocator);
     defer std.testing.allocator.free(json);
-    try std.testing.expectEqualStrings("{\"Tags\":{\"Name\":\"test\",\"Env\":\"prod\"}}", json);
+    try std.testing.expectEqualStrings(
+        \\{"Tags":{"Name":"test","Env":"prod"}}
+    , json);
 }
 
 test "parse map with integer values" {
@@ -1030,7 +1143,9 @@ test "parse map with integer values" {
         };
     };
 
-    const json = "{\"Counts\":{\"a\":1,\"b\":2}}";
+    const json =
+        \\{"Counts":{"a":1,"b":2}}
+    ;
     const result = try parseJsonObject(TestStruct, json, std.testing.allocator);
     defer {
         if (result.counts) |entries| {
@@ -1054,7 +1169,9 @@ test "roundtrip map entries" {
         };
     };
 
-    const input = "{\"Tags\":{\"Key\":\"Value\"}}";
+    const input =
+        \\{"Tags":{"Key":"Value"}}
+    ;
     const parsed = try parseJsonObject(TestStruct, input, std.testing.allocator);
     defer {
         if (parsed.tags) |entries| {
@@ -1081,7 +1198,9 @@ test "parse empty map" {
         };
     };
 
-    const json = "{\"Tags\":{}}";
+    const json =
+        \\{"Tags":{}}
+    ;
     const result = try parseJsonObject(TestStruct, json, std.testing.allocator);
     defer {
         if (result.tags) |entries| {
@@ -1109,7 +1228,9 @@ test "parse array of zero-sized enum" {
         };
     };
 
-    const json = "{\"Values\":[\"ONLY\",\"ONLY\"]}";
+    const json =
+        \\{"Values":["ONLY","ONLY"]}
+    ;
     const result = try parseJsonObject(TestStruct, json, std.testing.allocator);
     defer if (result.values) |values| std.testing.allocator.free(values);
 
