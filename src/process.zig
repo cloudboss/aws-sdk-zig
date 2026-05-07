@@ -4,6 +4,7 @@
 //! Activated via `credential_process` in ~/.aws/config profiles.
 
 const std = @import("std");
+const builtin = @import("builtin");
 const Allocator = std.mem.Allocator;
 
 const Credentials = @import("credentials.zig").Credentials;
@@ -43,8 +44,13 @@ pub const ProcessProvider = struct {
 };
 
 fn runCommand(allocator: Allocator, io: std.Io, command: []const u8) ![]const u8 {
+    const argv: [3][]const u8 = if (builtin.os.tag == .windows)
+        .{ "cmd.exe", "/C", command }
+    else
+        .{ "sh", "-c", command };
+
     const result = std.process.run(allocator, io, .{
-        .argv = &.{ "/bin/sh", "-c", command },
+        .argv = &argv,
         .stdout_limit = .limited(1024 * 1024),
         .stderr_limit = .limited(1024 * 1024),
     }) catch return error.ProcessCredentialsFailed;
@@ -243,4 +249,34 @@ test "parseJsonField returns null for missing field" {
     ;
 
     try std.testing.expect(parseJsonField(json, "Missing") == null);
+}
+
+test "runCommand invokes shell and returns stdout" {
+    if (builtin.os.tag == .windows) return error.SkipZigTest;
+
+    const allocator = std.testing.allocator;
+    const output = try runCommand(
+        allocator,
+        std.testing.io,
+        "echo '{\"Version\":1,\"AccessKeyId\":\"AKID\",\"SecretAccessKey\":\"SECRET\"}'",
+    );
+    defer allocator.free(output);
+
+    const creds = try parseProcessOutput(allocator, output);
+    defer {
+        allocator.free(creds.access_key_id);
+        allocator.free(creds.secret_access_key);
+    }
+
+    try std.testing.expectEqualStrings("AKID", creds.access_key_id);
+    try std.testing.expectEqualStrings("SECRET", creds.secret_access_key);
+}
+
+test "runCommand non-zero exit returns error" {
+    if (builtin.os.tag == .windows) return error.SkipZigTest;
+
+    try std.testing.expectError(
+        error.ProcessCredentialsFailed,
+        runCommand(std.testing.allocator, std.testing.io, "exit 1"),
+    );
 }
