@@ -14,6 +14,9 @@ const http = @import("http.zig");
 const gzip_mod = @import("gzip.zig");
 
 pub const algorithm = "AWS4-HMAC-SHA256";
+
+/// Minimum body size in bytes before gzip compression is applied.
+pub const compression_threshold_bytes = 1024;
 pub const algorithm_sigv4a = "AWS4-ECDSA-P256-SHA256";
 
 /// Options for presigning a request.
@@ -258,11 +261,9 @@ pub fn signRequest(
     const signing_region = endpoint_mod.pinnedSigningRegion(service, region) orelse region;
 
     // Compress body if requested and body exceeds threshold
-    const COMPRESSION_THRESHOLD = 1024;
-
     if (request.request_compression) |compression_algorithm| {
         const body = request.body orelse "";
-        if (body.len >= COMPRESSION_THRESHOLD) {
+        if (body.len >= compression_threshold_bytes) {
             switch (compression_algorithm) {
                 .gzip => {
                     const compressed_bytes = try gzip_mod.compress(allocator, body);
