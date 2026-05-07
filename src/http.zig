@@ -184,8 +184,9 @@ pub const RequestError = error{
 };
 
 pub const Interceptor = struct {
-    pre_send: ?*const fn (*const Request) void = null,
-    post_receive: ?*const fn (*const Response) RequestError!void = null,
+    pre_send: ?*const fn (user_data: ?*anyopaque, request: *const Request) void = null,
+    post_receive: ?*const fn (user_data: ?*anyopaque, response: *const Response) RequestError!void = null,
+    user_data: ?*anyopaque = null,
 };
 
 /// Token bucket for adaptive retry rate limiting.
@@ -664,7 +665,7 @@ pub const HttpClient = struct {
         }
 
         for (self.interceptors) |ic| {
-            if (ic.pre_send) |hook| hook(request);
+            if (ic.pre_send) |hook| hook(ic.user_data, request);
         }
 
         var req = self.inner.request(request.method.toStd(), request.getUri(), .{
@@ -713,7 +714,7 @@ pub const HttpClient = struct {
         };
 
         for (self.interceptors) |ic| {
-            if (ic.post_receive) |hook| hook(&final_response) catch |err| return err;
+            if (ic.post_receive) |hook| hook(ic.user_data, &final_response) catch |err| return err;
         }
 
         return final_response;
@@ -1260,17 +1261,17 @@ const HookState = struct {
     status_index: usize = 0,
 };
 
-var hook_state: ?*HookState = null;
-
-fn testPreSend(request: *const Request) void {
+fn testPreSend(user_data: ?*anyopaque, request: *const Request) void {
     _ = request;
-    if (hook_state) |state| {
+    if (user_data) |data| {
+        const state: *HookState = @ptrCast(@alignCast(data));
         state.pre_count += 1;
     }
 }
 
-fn testPostReceive(response: *const Response) RequestError!void {
-    if (hook_state) |state| {
+fn testPostReceive(user_data: ?*anyopaque, response: *const Response) RequestError!void {
+    if (user_data) |data| {
+        const state: *HookState = @ptrCast(@alignCast(data));
         state.post_count += 1;
         if (state.status_index < state.statuses.len) {
             state.statuses[state.status_index] = response.status;
@@ -1639,11 +1640,9 @@ test "HttpClient interceptors fire on success" {
     defer client.deinit();
 
     var state = HookState{};
-    hook_state = &state;
-    defer hook_state = null;
 
     client.interceptors = &[_]Interceptor{
-        .{ .pre_send = testPreSend, .post_receive = testPostReceive },
+        .{ .pre_send = testPreSend, .post_receive = testPostReceive, .user_data = &state },
     };
 
     var request = Request.init("127.0.0.1");
@@ -1680,11 +1679,9 @@ test "HttpClient interceptors fire per retry" {
     defer client.deinit();
 
     var state = HookState{};
-    hook_state = &state;
-    defer hook_state = null;
 
     client.interceptors = &[_]Interceptor{
-        .{ .pre_send = testPreSend, .post_receive = testPostReceive },
+        .{ .pre_send = testPreSend, .post_receive = testPostReceive, .user_data = &state },
     };
 
     var request = Request.init("127.0.0.1");

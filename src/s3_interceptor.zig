@@ -10,11 +10,11 @@ pub const S3ChecksumInterceptor = struct {
         return .{ .pre_send = preSend, .post_receive = postReceive };
     }
 
-    fn preSend(request: *const http.Request) void {
+    fn preSend(_: ?*anyopaque, request: *const http.Request) void {
         _ = request;
     }
 
-    fn postReceive(response: *const http.Response) http.RequestError!void {
+    fn postReceive(_: ?*anyopaque, response: *const http.Response) http.RequestError!void {
         const alg_headers = [_]struct {
             alg: checksum_mod.Algorithm,
             header: []const u8,
@@ -77,7 +77,7 @@ test "post_receive validates CRC32 header" {
     );
     defer response.deinit();
 
-    try S3ChecksumInterceptor.postReceive(&response);
+    try S3ChecksumInterceptor.postReceive(null, &response);
 }
 
 test "post_receive returns error on mismatched checksum" {
@@ -92,7 +92,7 @@ test "post_receive returns error on mismatched checksum" {
 
     try std.testing.expectError(
         error.ChecksumMismatch,
-        S3ChecksumInterceptor.postReceive(&response),
+        S3ChecksumInterceptor.postReceive(null, &response),
     );
 }
 
