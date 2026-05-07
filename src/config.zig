@@ -489,12 +489,21 @@ pub const ConfigFile = struct {
 pub fn parseConfigFile(
     allocator: Allocator,
     content: []const u8,
-) ConfigFile {
+) !ConfigFile {
     var profiles = std.StringHashMap(Profile).init(allocator);
+    errdefer profiles.deinit();
     var sso_sessions = std.StringHashMap(SsoSession).init(allocator);
+    errdefer sso_sessions.deinit();
     var services = std.StringHashMap(
         std.StringHashMap(ServiceConfig),
     ).init(allocator);
+    errdefer {
+        var it = services.iterator();
+        while (it.next()) |entry| {
+            entry.value_ptr.deinit();
+        }
+        services.deinit();
+    }
 
     var current_kind: SectionInfo.Kind = .none;
     var current_name: []const u8 = "";
@@ -516,20 +525,20 @@ pub fn parseConfigFile(
             switch (current_kind) {
                 .profile => {
                     if (!profiles.contains(current_name)) {
-                        profiles.put(current_name, .{}) catch {};
+                        try profiles.put(current_name, .{});
                     }
                 },
                 .sso_session => {
                     if (!sso_sessions.contains(current_name)) {
-                        sso_sessions.put(current_name, .{}) catch {};
+                        try sso_sessions.put(current_name, .{});
                     }
                 },
                 .services => {
                     if (!services.contains(current_name)) {
-                        services.put(
+                        try services.put(
                             current_name,
                             std.StringHashMap(ServiceConfig).init(allocator),
-                        ) catch {};
+                        );
                     }
                 },
                 .none => {},
@@ -558,7 +567,7 @@ pub fn parseConfigFile(
                 current_service_name = svc_name;
                 if (services.getPtr(current_name)) |inner| {
                     if (!inner.contains(svc_name)) {
-                        inner.put(svc_name, .{}) catch {};
+                        try inner.put(svc_name, .{});
                     }
                 }
             } else {
@@ -743,7 +752,7 @@ pub fn loadConfigFile(
         error.OutOfMemory => return err,
         else => return parseConfigFile(allocator, ""),
     };
-    var cf = parseConfigFile(allocator, content);
+    var cf = try parseConfigFile(allocator, content);
     cf.content = content;
     return cf;
 }
@@ -930,7 +939,7 @@ test "parseConfigFile with multiple profiles" {
         \\credential_process = /usr/local/bin/my-cred-helper
     ;
 
-    var cf = parseConfigFile(std.testing.allocator, content);
+    var cf = try parseConfigFile(std.testing.allocator, content);
     defer cf.deinit();
 
     // default profile
@@ -979,7 +988,7 @@ test "parseConfigFile sso-session sections" {
         \\sso_registration_scopes = sso:account:access
     ;
 
-    var cf = parseConfigFile(std.testing.allocator, content);
+    var cf = try parseConfigFile(std.testing.allocator, content);
     defer cf.deinit();
 
     const profile = cf.getProfile("sso-user").?;
@@ -994,10 +1003,18 @@ test "parseConfigFile sso-session sections" {
 }
 
 test "parseConfigFile empty content" {
-    var cf = parseConfigFile(std.testing.allocator, "");
+    var cf = try parseConfigFile(std.testing.allocator, "");
     defer cf.deinit();
 
     try std.testing.expect(cf.getProfile("default") == null);
+}
+
+test "parseConfigFile returns OutOfMemory when allocator fails" {
+    const content =
+        \\[default]
+        \\region = us-west-2
+    ;
+    try std.testing.expectError(error.OutOfMemory, parseConfigFile(std.testing.failing_allocator, content));
 }
 
 test "parseConfigFile comments and whitespace" {
@@ -1010,7 +1027,7 @@ test "parseConfigFile comments and whitespace" {
         \\  role_arn  =  arn:aws:iam::123:role/Test
     ;
 
-    var cf = parseConfigFile(std.testing.allocator, content);
+    var cf = try parseConfigFile(std.testing.allocator, content);
     defer cf.deinit();
 
     const def = cf.getProfile("default").?;
@@ -1053,7 +1070,7 @@ test "Profile with new endpoint fields" {
         \\max_attempts = 5
     ;
 
-    var cf = parseConfigFile(std.testing.allocator, content);
+    var cf = try parseConfigFile(std.testing.allocator, content);
     defer cf.deinit();
 
     const def = cf.getProfile("default").?;
@@ -1070,7 +1087,7 @@ test "Profile with invalid max_attempts" {
         \\max_attempts = invalid
     ;
 
-    var cf = parseConfigFile(std.testing.allocator, content);
+    var cf = try parseConfigFile(std.testing.allocator, content);
     defer cf.deinit();
 
     const def = cf.getProfile("default").?;
@@ -1094,7 +1111,7 @@ test "parseConfigFile services with multiple services" {
         "s3 =\n" ++
         "  endpoint_url = http://localhost:9000\n";
 
-    var cf = parseConfigFile(std.testing.allocator, content);
+    var cf = try parseConfigFile(std.testing.allocator, content);
     defer cf.deinit();
 
     const svc = cf.getServicesSection("my-services").?;
@@ -1115,7 +1132,7 @@ test "parseConfigFile empty services section" {
     const content =
         "[services empty-svc]\n";
 
-    var cf = parseConfigFile(std.testing.allocator, content);
+    var cf = try parseConfigFile(std.testing.allocator, content);
     defer cf.deinit();
 
     const svc = cf.getServicesSection("empty-svc").?;
@@ -1136,7 +1153,7 @@ test "parseConfigFile profile with services section" {
         "[profile dev]\n" ++
         "region = eu-west-1\n";
 
-    var cf = parseConfigFile(std.testing.allocator, content);
+    var cf = try parseConfigFile(std.testing.allocator, content);
     defer cf.deinit();
 
     const def = cf.getProfile("default").?;
@@ -1394,7 +1411,7 @@ test "getEndpointForService: services section lookup" {
         "secrets_manager =\n" ++
         "  endpoint_url = http://secrets-svc:8080\n";
 
-    const cf = parseConfigFile(std.testing.allocator, content);
+    const cf = try parseConfigFile(std.testing.allocator, content);
 
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
@@ -1422,7 +1439,7 @@ test "getEndpointForService: profile endpoint_url" {
         "region = us-east-1\n" ++
         "endpoint_url = http://profile-endpoint\n";
 
-    const cf = parseConfigFile(std.testing.allocator, content);
+    const cf = try parseConfigFile(std.testing.allocator, content);
 
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
@@ -1456,7 +1473,7 @@ test "getEndpointForService: ignore flag skips config" {
         "sts =\n" ++
         "  endpoint_url = http://services-sts\n";
 
-    const cf = parseConfigFile(std.testing.allocator, content);
+    const cf = try parseConfigFile(std.testing.allocator, content);
 
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
@@ -1490,7 +1507,7 @@ test "getEndpointForService: services beats profile" {
         "sts =\n" ++
         "  endpoint_url = http://services-sts\n";
 
-    const cf = parseConfigFile(std.testing.allocator, content);
+    const cf = try parseConfigFile(std.testing.allocator, content);
 
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
@@ -1517,7 +1534,7 @@ test "getEndpointForService: code override beats ignore" {
         "[default]\n" ++
         "ignore_configured_endpoint_urls = true\n";
 
-    const cf = parseConfigFile(std.testing.allocator, content);
+    const cf = try parseConfigFile(std.testing.allocator, content);
 
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
