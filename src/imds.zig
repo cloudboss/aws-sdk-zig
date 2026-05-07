@@ -105,6 +105,8 @@ pub const Client = struct {
     session_token: ?[]const u8 = null,
     /// When the session token expires (epoch seconds)
     token_expiry: i64 = 0,
+    /// Mutex for thread-safe token access
+    mutex: std.Io.Mutex = .init,
 
     const Self = @This();
 
@@ -213,6 +215,9 @@ pub const Client = struct {
 
     /// Get or refresh the IMDSv2 session token
     fn getToken(self: *Self, options: CallOptions) ![]const u8 {
+        self.mutex.lockUncancelable(self.io);
+        defer self.mutex.unlock(self.io);
+
         const now = std.Io.Clock.real.now(self.io).toSeconds();
 
         // Return cached token if still valid (with 5 minute buffer)
@@ -234,6 +239,9 @@ pub const Client = struct {
 
     /// Invalidate the cached session token
     fn invalidateToken(self: *Self) void {
+        self.mutex.lockUncancelable(self.io);
+        defer self.mutex.unlock(self.io);
+
         if (self.session_token) |token| {
             self.allocator.free(token);
             self.session_token = null;
