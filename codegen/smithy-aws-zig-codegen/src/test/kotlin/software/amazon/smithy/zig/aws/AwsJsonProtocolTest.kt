@@ -327,7 +327,7 @@ class AwsJsonProtocolTest {
         val op = files["put_item.zig"]!!
 
         assertTrue(
-            op.contains("lastIndexOfScalar"),
+            op.contains("findScalarLast"),
             "Should strip namespace prefix from __type using '#' delimiter",
         )
     }

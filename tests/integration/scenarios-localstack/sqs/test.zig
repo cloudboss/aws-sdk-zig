@@ -230,7 +230,7 @@ test "DeleteQueue removes queue" {
 
     if (list_result.queue_urls) |urls| {
         for (urls) |url| {
-            if (std.mem.indexOf(u8, url, "sdk-zig-sqs-delete") != null) {
+            if (std.mem.find(u8, url, "sdk-zig-sqs-delete") != null) {
                 return error.QueueStillExists;
             }
         }
@@ -336,7 +336,7 @@ test "ListQueues returns created queue URL" {
         return error.MissingQueueUrls;
     var found = false;
     for (urls) |url| {
-        if (std.mem.indexOf(u8, url, "sdk-zig-sqs-list") != null) {
+        if (std.mem.find(u8, url, "sdk-zig-sqs-list") != null) {
             found = true;
             break;
         }

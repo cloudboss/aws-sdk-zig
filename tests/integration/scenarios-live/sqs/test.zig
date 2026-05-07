@@ -260,7 +260,7 @@ test "listQueues includes created queue" {
 
         if (list_result.queue_urls) |urls| {
             for (urls) |url| {
-                if (std.mem.indexOf(
+                if (std.mem.find(
                     u8,
                     url,
                     shared_queue_name,

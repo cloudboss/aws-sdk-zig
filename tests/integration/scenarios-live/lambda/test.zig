@@ -292,7 +292,7 @@ test "invoke returns expected response" {
     const payload = result.payload orelse
         return error.MissingPayload;
     try std.testing.expect(
-        std.mem.indexOf(
+        std.mem.find(
             u8,
             payload,
             "hello from sdk-zig",

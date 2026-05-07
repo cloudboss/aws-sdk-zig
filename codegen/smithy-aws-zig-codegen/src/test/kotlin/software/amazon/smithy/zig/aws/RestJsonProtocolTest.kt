@@ -521,7 +521,7 @@ class RestJsonProtocolTest {
         val op = files["invoke.zig"]!!
 
         assertTrue(
-            op.contains("lastIndexOfScalar"),
+            op.contains("findScalarLast"),
             "Should strip namespace prefix from __type using '#' delimiter",
         )
     }

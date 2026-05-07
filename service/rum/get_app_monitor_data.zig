@@ -141,7 +141,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
 fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
     const error_code = blk: {
         const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
-        if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {
+        if (std.mem.findScalarLast(u8, type_str, '#')) |idx| {
             break :blk type_str[idx + 1 ..];
         }
         break :blk type_str;

@@ -13,7 +13,7 @@ fn parseEndpoint(url: []const u8) struct { host: []const u8, port: ?u16, tls: bo
         tls = false;
     }
 
-    if (std.mem.indexOfScalar(u8, rest, ':')) |colon| {
+    if (std.mem.findScalar(u8, rest, ':')) |colon| {
         return .{
             .host = rest[0..colon],
             .port = std.fmt.parseInt(u16, rest[colon + 1 ..], 10) catch null,
@@ -68,7 +68,7 @@ test "SigV4 signed request accepted by STS" {
     // Verify success
     try std.testing.expect(response.isSuccess());
     // Response should contain GetCallerIdentityResult
-    try std.testing.expect(std.mem.indexOf(u8, response.body, "GetCallerIdentityResult") != null);
+    try std.testing.expect(std.mem.find(u8, response.body, "GetCallerIdentityResult") != null);
 }
 
 test "credential chain resolves from environment" {
@@ -179,7 +179,7 @@ test "SigV4 signing includes session token header when present" {
     // Verify success
     try std.testing.expect(response.isSuccess());
     // Response should contain GetCallerIdentityResult
-    try std.testing.expect(std.mem.indexOf(u8, response.body, "GetCallerIdentityResult") != null);
+    try std.testing.expect(std.mem.find(u8, response.body, "GetCallerIdentityResult") != null);
 }
 
 test "SigV4 signature includes x-amz-date header" {

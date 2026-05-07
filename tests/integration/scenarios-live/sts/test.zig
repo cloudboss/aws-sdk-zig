@@ -28,6 +28,6 @@ test "getCallerIdentity returns valid identity" {
 
     try std.testing.expectEqual(@as(usize, 12), account.len);
     try std.testing.expect(std.mem.startsWith(u8, arn, "arn:aws:"));
-    try std.testing.expect(std.mem.indexOf(u8, arn, account) != null);
+    try std.testing.expect(std.mem.find(u8, arn, account) != null);
     try std.testing.expect(user_id.len > 0);
 }

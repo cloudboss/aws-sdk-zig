@@ -663,7 +663,7 @@ class RestJsonProtocol : ProtocolGenerator {
         // Extract error code from __type, stripping namespace prefix
         writer.openBlock("const error_code = blk: {")
         writer.write("const type_str = aws.json.findJsonValue(body, \"__type\") orelse break :blk @as([]const u8, \"Unknown\");")
-        writer.openBlock("if (std.mem.lastIndexOfScalar(u8, type_str, '#')) |idx| {")
+        writer.openBlock("if (std.mem.findScalarLast(u8, type_str, '#')) |idx| {")
         writer.write("break :blk type_str[idx + 1 ..];")
         writer.closeBlock("}")
         writer.write("break :blk type_str;")

@@ -79,9 +79,9 @@ test "IMDS client retrieves identity document fields" {
     const doc = try client.getMetadata("/latest/dynamic/instance-identity/document", .{});
     defer allocator.free(doc);
 
-    try std.testing.expect(std.mem.indexOf(u8, doc, "instanceId") != null);
-    try std.testing.expect(std.mem.indexOf(u8, doc, "region") != null);
-    try std.testing.expect(std.mem.indexOf(u8, doc, "accountId") != null);
+    try std.testing.expect(std.mem.find(u8, doc, "instanceId") != null);
+    try std.testing.expect(std.mem.find(u8, doc, "region") != null);
+    try std.testing.expect(std.mem.find(u8, doc, "accountId") != null);
 }
 
 test "IMDS identity document includes availability zone" {
@@ -94,7 +94,7 @@ test "IMDS identity document includes availability zone" {
     const doc = try client.getMetadata("/latest/dynamic/instance-identity/document", .{});
     defer allocator.free(doc);
 
-    try std.testing.expect(std.mem.indexOf(u8, doc, "availabilityZone") != null);
+    try std.testing.expect(std.mem.find(u8, doc, "availabilityZone") != null);
 }
 
 test "IMDS identity document includes instance type" {
@@ -107,5 +107,5 @@ test "IMDS identity document includes instance type" {
     const doc = try client.getMetadata("/latest/dynamic/instance-identity/document", .{});
     defer allocator.free(doc);
 
-    try std.testing.expect(std.mem.indexOf(u8, doc, "instanceType") != null);
+    try std.testing.expect(std.mem.find(u8, doc, "instanceType") != null);
 }

@@ -202,7 +202,7 @@ test "SNS delivers published message to SQS subscription" {
 
     const body = messages[0].body orelse return error.MissingBody;
     try std.testing.expect(
-        std.mem.indexOf(u8, body, "SNS-to-SQS test message") != null,
+        std.mem.find(u8, body, "SNS-to-SQS test message") != null,
     );
 
     {

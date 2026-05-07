@@ -33,7 +33,7 @@ test "GetCallerIdentity with SigV4a signing succeeds" {
         std.mem.startsWith(u8, auth, "AWS4-ECDSA-P256-SHA256"),
     );
     try std.testing.expect(
-        std.mem.indexOf(u8, auth, "/*/sts/aws4_request") != null,
+        std.mem.find(u8, auth, "/*/sts/aws4_request") != null,
     );
 
     var response = try cfg.http_client.sendRequest(&request);
@@ -81,9 +81,9 @@ test "SigV4a Authorization header has correct format" {
         "Credential=test/{s}/*/sts/aws4_request",
         .{date},
     );
-    try std.testing.expect(std.mem.indexOf(u8, auth, expected_scope) != null);
+    try std.testing.expect(std.mem.find(u8, auth, expected_scope) != null);
     try std.testing.expect(
-        std.mem.indexOf(u8, auth, "SignedHeaders=") != null,
+        std.mem.find(u8, auth, "SignedHeaders=") != null,
     );
 
     const signature = try readSignature(arena.allocator(), auth);
@@ -120,7 +120,7 @@ fn readSigv4aDate(
     auth: []const u8,
 ) ![]const u8 {
     const marker = "Credential=test/";
-    const start_index = std.mem.indexOf(u8, auth, marker) orelse
+    const start_index = std.mem.find(u8, auth, marker) orelse
         return error.InvalidAuthorization;
     const date_start = start_index + marker.len;
     if (auth.len < date_start + 8) {
@@ -134,10 +134,10 @@ fn readSignature(
     auth: []const u8,
 ) ![]const u8 {
     const marker = "Signature=";
-    const start_index = std.mem.indexOf(u8, auth, marker) orelse
+    const start_index = std.mem.find(u8, auth, marker) orelse
         return error.InvalidAuthorization;
     const sig_start = start_index + marker.len;
-    const sig_end = std.mem.indexOfPos(u8, auth, sig_start, ",") orelse auth.len;
+    const sig_end = std.mem.findPos(u8, auth, sig_start, ",") orelse auth.len;
     return allocator.dupe(u8, auth[sig_start..sig_end]);
 }
 

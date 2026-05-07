@@ -169,7 +169,7 @@ test "GetCallerIdentity ARN contains account" {
     // The ARN must embed the account ID as a substring
     const account = result.account orelse return error.MissingAccount;
     const arn = result.arn orelse return error.MissingArn;
-    try std.testing.expect(std.mem.indexOf(u8, arn, account) != null);
+    try std.testing.expect(std.mem.find(u8, arn, account) != null);
 }
 
 test "GetSessionToken credentials differ from source credentials" {
