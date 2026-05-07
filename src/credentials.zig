@@ -260,7 +260,7 @@ pub const FileProvider = struct {
 /// profile_web_identity -> web_identity -> ecs -> imds
 pub const ChainProvider = struct {
     /// Long-lived allocator used for owning cached credential strings.
-    allocator: Allocator = std.heap.page_allocator,
+    allocator: Allocator,
     /// Io instance used by inner providers when they need to perform I/O.
     io: std.Io,
     /// Environment variables for env-based providers and HOME/AWS_PROFILE lookups.
