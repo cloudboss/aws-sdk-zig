@@ -142,12 +142,14 @@ pub fn presignRequest(
     // Assemble final URL
     const scheme: []const u8 = if (request.tls) "https" else "http";
 
+    var port_str_owned = false;
     const port_str = if (request.port) |p| blk: {
         const is_default = (request.tls and p == 443) or (!request.tls and p == 80);
-        if (is_default) break :blk try allocator.dupe(u8, "");
+        if (is_default) break :blk "";
+        port_str_owned = true;
         break :blk try std.fmt.allocPrint(allocator, ":{d}", .{p});
-    } else try allocator.dupe(u8, "");
-    defer allocator.free(port_str);
+    } else "";
+    defer if (port_str_owned) allocator.free(port_str);
 
     const path_str = if (request.path.len == 0) "/" else request.path;
 
