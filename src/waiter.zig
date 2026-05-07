@@ -36,13 +36,12 @@ pub const WaiterError = error{
 };
 
 /// Return a jittered delay between `min_s` and `max_s` (inclusive).
-/// Uses a cheap PRNG seeded from the clock -- good enough for backoff jitter.
 pub fn jitteredDelay(io: std.Io, min_s: u32, max_s: u32) u32 {
     if (min_s >= max_s) return min_s;
-    // Seed from nanosecond timestamp for reasonable entropy across calls.
-    const seed: u64 = @bitCast(@as(i64, @truncate(std.Io.Clock.real.now(io).toNanoseconds())));
-    var prng = std.Random.DefaultPrng.init(seed);
-    return min_s + prng.random().intRangeAtMost(u32, 0, max_s - min_s);
+    var bytes: [4]u8 = undefined;
+    io.random(&bytes);
+    const r = std.mem.readInt(u32, &bytes, .little);
+    return min_s + (r % (max_s - min_s + 1));
 }
 
 // ---------------------------------------------------------------------------
