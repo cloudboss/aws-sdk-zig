@@ -246,47 +246,6 @@ pub const Config = struct {
         if (self.config_file) |*cf| cf.deinit();
     }
 
-    /// Create config with static credentials (borrows strings, caller manages lifetime)
-    pub fn withStaticCredentials(
-        io: std.Io,
-        env_map: *const std.process.Environ.Map,
-        region: []const u8,
-        access_key_id: []const u8,
-        secret_access_key: []const u8,
-        session_token: ?[]const u8,
-    ) Self {
-        return .{
-            .region = region,
-            .credentials = .{
-                .static = .{
-                    .access_key_id = access_key_id,
-                    .secret_access_key = secret_access_key,
-                    .session_token = session_token,
-                },
-            },
-            .http_client = undefined, // Not owned, don't call deinit
-            .allocator = undefined, // Not owned, don't call deinit
-            .io = io,
-            .env_map = env_map,
-        };
-    }
-
-    /// Create config loading credentials from environment (borrows region)
-    pub fn fromEnvironment(
-        io: std.Io,
-        env_map: *const std.process.Environ.Map,
-        region: []const u8,
-    ) Self {
-        return .{
-            .region = region,
-            .credentials = .{ .environment = env_map },
-            .http_client = undefined, // Not owned, don't call deinit
-            .allocator = undefined, // Not owned, don't call deinit
-            .io = io,
-            .env_map = env_map,
-        };
-    }
-
     /// Build service endpoint URL
     pub fn getEndpoint(
         self: *const Self,
@@ -824,25 +783,11 @@ fn resolveRegion(
     return error.RegionNotFound;
 }
 
-test "Config with static credentials" {
-    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
-    defer env_map.deinit();
-    const config = Config.withStaticCredentials(
-        std.testing.io,
-        &env_map,
-        "us-east-1",
-        "AKIAIOSFODNN7EXAMPLE",
-        "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
-        null,
-    );
-
-    try std.testing.expectEqualStrings("us-east-1", config.region);
-}
-
 test "Config getEndpoint" {
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    const config = Config.fromEnvironment(std.testing.io, &env_map, "us-west-2");
+    var config = try Config.load(std.testing.allocator, std.testing.io, &env_map, .{ .region = "us-west-2" });
+    defer config.deinit();
     const endpoint = try config.getEndpoint("sts", std.testing.allocator);
     defer std.testing.allocator.free(endpoint);
 
@@ -852,7 +797,8 @@ test "Config getEndpoint" {
 test "Config getEndpoint with custom URL" {
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var config = Config.fromEnvironment(std.testing.io, &env_map, "us-east-1");
+    var config = try Config.load(std.testing.allocator, std.testing.io, &env_map, .{ .region = "us-east-1" });
+    defer config.deinit();
     config.endpoint_url = "http://localhost:4566";
 
     const endpoint = try config.getEndpoint("sts", std.testing.allocator);
@@ -864,7 +810,8 @@ test "Config getEndpoint with custom URL" {
 test "Config getEndpoint with FIPS" {
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var config = Config.fromEnvironment(std.testing.io, &env_map, "us-east-1");
+    var config = try Config.load(std.testing.allocator, std.testing.io, &env_map, .{ .region = "us-east-1" });
+    defer config.deinit();
     config.use_fips = true;
 
     const endpoint = try config.getEndpoint("sts", std.testing.allocator);
@@ -876,7 +823,8 @@ test "Config getEndpoint with FIPS" {
 test "Config getEndpoint with China region" {
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    const config_val = Config.fromEnvironment(std.testing.io, &env_map, "cn-north-1");
+    var config_val = try Config.load(std.testing.allocator, std.testing.io, &env_map, .{ .region = "cn-north-1" });
+    defer config_val.deinit();
     const ep = try config_val.getEndpoint("sts", std.testing.allocator);
     defer std.testing.allocator.free(ep);
     try std.testing.expectEqualStrings("sts.cn-north-1.amazonaws.com.cn", ep);
@@ -1132,7 +1080,8 @@ test "Profile with invalid max_attempts" {
 test "Config defaults" {
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    const config = Config.fromEnvironment(std.testing.io, &env_map, "us-east-1");
+    var config = try Config.load(std.testing.allocator, std.testing.io, &env_map, .{ .region = "us-east-1" });
+    defer config.deinit();
     try std.testing.expect(config.retry_mode == .standard);
     try std.testing.expect(config.ca_bundle == null);
 }
@@ -1399,7 +1348,8 @@ test "sdkIdToConfigKey" {
 test "getEndpointForService: code override wins" {
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var config = Config.fromEnvironment(std.testing.io, &env_map, "us-east-1");
+    var config = try Config.load(std.testing.allocator, std.testing.io, &env_map, .{ .region = "us-east-1" });
+    defer config.deinit();
     config.endpoint_url = "http://localhost:4566";
 
     const ep = try config.getEndpointForService(
@@ -1418,7 +1368,8 @@ test "getEndpointForService: code override wins" {
 test "getEndpointForService: partition default" {
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    const config = Config.fromEnvironment(std.testing.io, &env_map, "us-west-2");
+    var config = try Config.load(std.testing.allocator, std.testing.io, &env_map, .{ .region = "us-west-2" });
+    defer config.deinit();
 
     const ep = try config.getEndpointForService(
         "sts",
@@ -1443,12 +1394,12 @@ test "getEndpointForService: services section lookup" {
         "secrets_manager =\n" ++
         "  endpoint_url = http://secrets-svc:8080\n";
 
-    var cf = parseConfigFile(std.testing.allocator, content);
-    defer cf.deinit();
+    const cf = parseConfigFile(std.testing.allocator, content);
 
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var config = Config.fromEnvironment(std.testing.io, &env_map, "us-east-1");
+    var config = try Config.load(std.testing.allocator, std.testing.io, &env_map, .{ .region = "us-east-1" });
+    defer config.deinit();
     config.config_file = cf;
     config.profile = "default";
 
@@ -1471,12 +1422,12 @@ test "getEndpointForService: profile endpoint_url" {
         "region = us-east-1\n" ++
         "endpoint_url = http://profile-endpoint\n";
 
-    var cf = parseConfigFile(std.testing.allocator, content);
-    defer cf.deinit();
+    const cf = parseConfigFile(std.testing.allocator, content);
 
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var config = Config.fromEnvironment(std.testing.io, &env_map, "us-east-1");
+    var config = try Config.load(std.testing.allocator, std.testing.io, &env_map, .{ .region = "us-east-1" });
+    defer config.deinit();
     config.config_file = cf;
     config.profile = "default";
 
@@ -1505,12 +1456,12 @@ test "getEndpointForService: ignore flag skips config" {
         "sts =\n" ++
         "  endpoint_url = http://services-sts\n";
 
-    var cf = parseConfigFile(std.testing.allocator, content);
-    defer cf.deinit();
+    const cf = parseConfigFile(std.testing.allocator, content);
 
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var config = Config.fromEnvironment(std.testing.io, &env_map, "us-east-1");
+    var config = try Config.load(std.testing.allocator, std.testing.io, &env_map, .{ .region = "us-east-1" });
+    defer config.deinit();
     config.config_file = cf;
     config.profile = "default";
 
@@ -1539,12 +1490,12 @@ test "getEndpointForService: services beats profile" {
         "sts =\n" ++
         "  endpoint_url = http://services-sts\n";
 
-    var cf = parseConfigFile(std.testing.allocator, content);
-    defer cf.deinit();
+    const cf = parseConfigFile(std.testing.allocator, content);
 
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var config = Config.fromEnvironment(std.testing.io, &env_map, "us-east-1");
+    var config = try Config.load(std.testing.allocator, std.testing.io, &env_map, .{ .region = "us-east-1" });
+    defer config.deinit();
     config.config_file = cf;
     config.profile = "default";
 
@@ -1566,12 +1517,12 @@ test "getEndpointForService: code override beats ignore" {
         "[default]\n" ++
         "ignore_configured_endpoint_urls = true\n";
 
-    var cf = parseConfigFile(std.testing.allocator, content);
-    defer cf.deinit();
+    const cf = parseConfigFile(std.testing.allocator, content);
 
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    var config = Config.fromEnvironment(std.testing.io, &env_map, "us-east-1");
+    var config = try Config.load(std.testing.allocator, std.testing.io, &env_map, .{ .region = "us-east-1" });
+    defer config.deinit();
     config.config_file = cf;
     config.profile = "default";
     config.endpoint_url = "http://code-override";
@@ -1592,7 +1543,8 @@ test "getEndpointForService: code override beats ignore" {
 test "getEndpointForService: iam uses global endpoint in aws partition" {
     var env_map: std.process.Environ.Map = .init(std.testing.allocator);
     defer env_map.deinit();
-    const config = Config.fromEnvironment(std.testing.io, &env_map, "us-east-1");
+    var config = try Config.load(std.testing.allocator, std.testing.io, &env_map, .{ .region = "us-east-1" });
+    defer config.deinit();
 
     const ep = try config.getEndpointForService(
         "iam",
