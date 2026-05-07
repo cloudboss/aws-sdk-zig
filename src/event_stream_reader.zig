@@ -19,7 +19,7 @@ pub const EventStreamReader = struct {
     prev_msg: ?event_stream.Message,
     stream_body: ?http.StreamingBody,
 
-    const initial_buf_size = 4096;
+    const initial_buf_size = 16384;
 
     pub fn init(
         allocator: Allocator,
