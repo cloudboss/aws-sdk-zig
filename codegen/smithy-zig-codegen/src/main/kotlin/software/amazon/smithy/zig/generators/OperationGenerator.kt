@@ -391,7 +391,7 @@ class OperationGenerator(
         writer.blankLine()
 
         // Send streaming request
-        writer.write("var stream_resp = try client.config.http_client.sendStreamingRequest(&request);")
+        writer.write("var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);")
         writer.blankLine()
 
         // Free arena - request data already sent
@@ -491,7 +491,7 @@ class OperationGenerator(
         writer.blankLine()
 
         // Send streaming request
-        writer.write("var stream_resp = try client.config.http_client.sendStreamingRequest(&request);")
+        writer.write("var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);")
         writer.blankLine()
 
         // Free arena -- request data already sent

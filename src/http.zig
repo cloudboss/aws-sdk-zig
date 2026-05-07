@@ -514,6 +514,15 @@ pub const HttpClient = struct {
         self: *Self,
         request: *const Request,
     ) RequestError!StreamingResponse {
+        return self.sendStreamingRequestWithOptions(request, self.default_options);
+    }
+
+    /// Send a streaming request with per-call options.
+    pub fn sendStreamingRequestWithOptions(
+        self: *Self,
+        request: *const Request,
+        options: RequestOptions,
+    ) RequestError!StreamingResponse {
         const bypass = shouldBypassProxy(
             request.host,
             self.no_proxy,
@@ -553,7 +562,7 @@ pub const HttpClient = struct {
 
         inner.http_request = self.inner.request(request.method.toStd(), request.getUri(), .{
             .extra_headers = extra_headers_list.items,
-            .keep_alive = self.default_options.keep_alive,
+            .keep_alive = options.keep_alive,
         }) catch return error.ConnectionFailed;
         errdefer inner.http_request.deinit();
 
@@ -2333,6 +2342,43 @@ test "gzip response is decompressed by sendStreamingRequest" {
     try std.testing.expectEqualStrings(plain, data);
 }
 
+test "sendStreamingRequestWithOptions honors per-call keep_alive" {
+    const allocator = std.testing.allocator;
+
+    // Same gzip response as the gzip test; this exercises the options
+    // parameter through sendStreamingRequestWithOptions.
+    const plain = "honors-keep-alive-streaming";
+    const response_bytes = try buildGzipResponse(allocator, plain);
+    defer allocator.free(response_bytes);
+
+    const responses = [_][]const u8{response_bytes};
+    var server = try TestServer.init(responses[0..]);
+    defer server.deinit();
+    try server.start();
+
+    var env_map: std.process.Environ.Map = .init(allocator);
+    defer env_map.deinit();
+    var client = try HttpClient.init(allocator, std.testing.io, &env_map, .{});
+    defer client.deinit();
+
+    var request = Request.init("127.0.0.1");
+    defer request.deinit(allocator);
+    request.method = .GET;
+    request.path = "/";
+    request.port = server.address.getPort();
+    request.tls = false;
+
+    var response = try client.sendStreamingRequestWithOptions(&request, .{ .keep_alive = false });
+    defer response.deinit();
+
+    try std.testing.expectEqual(@as(u16, 200), response.status);
+
+    var body = response.body;
+    const data = try body.readAll(allocator, 10 * 1024 * 1024);
+    defer allocator.free(data);
+    try std.testing.expectEqualStrings(plain, data);
+}
+
 test "parseHttpDate parses known HTTP date" {
     // 2025-01-01 00:00:00 UTC = 1735689600
     // Jan 1 2025 is a Wednesday
@@ -2401,4 +2447,3 @@ test "parseResponseHeaders frees prior headers on OOM mid-loop" {
 
     try std.testing.expectError(error.OutOfMemory, client.parseResponseHeaders(response));
 }
-

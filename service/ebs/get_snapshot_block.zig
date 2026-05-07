@@ -72,7 +72,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSnapshot
     const creds = try client.config.credentials.getCredentials(client.allocator);
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "ebs", client.config.http_client.clock_skew_offset);
 
-    var stream_resp = try client.config.http_client.sendStreamingRequest(&request);
+    var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
 
     arena.deinit();
 
