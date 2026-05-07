@@ -224,7 +224,8 @@ pub const HttpClient = struct {
     env_map: *const std.process.Environ.Map,
     default_options: RequestOptions,
     proxy_arena: std.heap.ArenaAllocator,
-    no_proxy: ?[]const u8,
+    no_proxy_entries: []const []const u8 = &.{},
+    no_proxy_wildcard: bool = false,
     retry_mode: config_mod.RetryMode = .standard,
     token_bucket: TokenBucket = .{},
     clock_skew_offset: i64 = 0,
@@ -261,7 +262,8 @@ pub const HttpClient = struct {
             .env_map = env_map,
             .default_options = options.request_options,
             .proxy_arena = std.heap.ArenaAllocator.init(allocator),
-            .no_proxy = null,
+            .no_proxy_entries = &.{},
+            .no_proxy_wildcard = false,
             .retry_mode = options.retry_mode,
         };
         self.initProxies();
@@ -318,7 +320,19 @@ pub const HttpClient = struct {
         const arena = self.proxy_arena.allocator();
         self.inner.initDefaultProxies(arena, self.env_map) catch {};
         if (self.env_map.get("NO_PROXY") orelse self.env_map.get("no_proxy")) |raw| {
-            self.no_proxy = arena.dupe(u8, raw) catch null;
+            var list: std.ArrayList([]const u8) = .empty;
+            var iter = std.mem.splitScalar(u8, raw, ',');
+            while (iter.next()) |raw_entry| {
+                const entry = std.mem.trim(u8, raw_entry, " \t");
+                if (entry.len == 0) continue;
+                if (std.mem.eql(u8, entry, "*")) {
+                    self.no_proxy_wildcard = true;
+                    return;
+                }
+                const duped = arena.dupe(u8, entry) catch continue;
+                list.append(arena, duped) catch continue;
+            }
+            self.no_proxy_entries = list.toOwnedSlice(arena) catch &.{};
         }
     }
 
@@ -335,7 +349,8 @@ pub const HttpClient = struct {
     ) RequestError!Response {
         const bypass = shouldBypassProxy(
             request.host,
-            self.no_proxy,
+            self.no_proxy_entries,
+            self.no_proxy_wildcard,
         );
         const saved_http_proxy = self.inner.http_proxy;
         const saved_https_proxy = self.inner.https_proxy;
@@ -526,7 +541,8 @@ pub const HttpClient = struct {
     ) RequestError!StreamingResponse {
         const bypass = shouldBypassProxy(
             request.host,
-            self.no_proxy,
+            self.no_proxy_entries,
+            self.no_proxy_wildcard,
         );
         const saved_http_proxy = self.inner.http_proxy;
         const saved_https_proxy = self.inner.https_proxy;
@@ -846,22 +862,15 @@ pub fn statusForbidsBody(status: std.http.Status) bool {
 /// - Domain suffix: ".example.com" matches "api.example.com"
 pub fn shouldBypassProxy(
     host: []const u8,
-    no_proxy_list: ?[]const u8,
+    no_proxy_entries: []const []const u8,
+    no_proxy_wildcard: bool,
 ) bool {
-    const list = no_proxy_list orelse return false;
-    if (list.len == 0) return false;
-
-    var iter = std.mem.splitScalar(u8, list, ',');
-    while (iter.next()) |raw_entry| {
-        const entry = std.mem.trim(u8, raw_entry, " \t");
-        if (entry.len == 0) continue;
-        if (std.mem.eql(u8, entry, "*")) return true;
-        if (std.ascii.eqlIgnoreCase(entry, host))
-            return true;
+    if (no_proxy_wildcard) return true;
+    for (no_proxy_entries) |entry| {
+        if (std.ascii.eqlIgnoreCase(entry, host)) return true;
         if (entry[0] == '.' and host.len >= entry.len) {
             const suffix = host[host.len - entry.len ..];
-            if (std.ascii.eqlIgnoreCase(suffix, entry))
-                return true;
+            if (std.ascii.eqlIgnoreCase(suffix, entry)) return true;
         }
     }
     return false;
@@ -1511,63 +1520,57 @@ test "StreamingBody stall protection honors thresholds" {
     );
 }
 
-test "shouldBypassProxy returns false for null list" {
-    try std.testing.expect(!shouldBypassProxy("example.com", null));
-}
-
-test "shouldBypassProxy returns false for empty list" {
-    try std.testing.expect(!shouldBypassProxy("example.com", ""));
+test "shouldBypassProxy returns false for empty entries" {
+    try std.testing.expect(!shouldBypassProxy("example.com", &.{}, false));
 }
 
 test "shouldBypassProxy wildcard bypasses all" {
-    try std.testing.expect(shouldBypassProxy("anything.com", "*"));
-    try std.testing.expect(shouldBypassProxy("localhost", "foo, *"));
+    try std.testing.expect(shouldBypassProxy("anything.com", &.{}, true));
+    try std.testing.expect(shouldBypassProxy("localhost", &.{}, true));
 }
 
 test "shouldBypassProxy exact match" {
     try std.testing.expect(
-        shouldBypassProxy("example.com", "example.com"),
+        shouldBypassProxy("example.com", &.{"example.com"}, false),
     );
     try std.testing.expect(
-        !shouldBypassProxy("other.com", "example.com"),
+        !shouldBypassProxy("other.com", &.{"example.com"}, false),
     );
 }
 
 test "shouldBypassProxy case insensitive match" {
     try std.testing.expect(
-        shouldBypassProxy("Example.COM", "example.com"),
+        shouldBypassProxy("Example.COM", &.{"example.com"}, false),
     );
     try std.testing.expect(
-        shouldBypassProxy("example.com", "EXAMPLE.COM"),
+        shouldBypassProxy("example.com", &.{"EXAMPLE.COM"}, false),
     );
 }
 
 test "shouldBypassProxy domain suffix" {
     try std.testing.expect(
-        shouldBypassProxy("api.example.com", ".example.com"),
+        shouldBypassProxy("api.example.com", &.{".example.com"}, false),
     );
     try std.testing.expect(
-        shouldBypassProxy("deep.sub.example.com", ".example.com"),
+        shouldBypassProxy("deep.sub.example.com", &.{".example.com"}, false),
     );
-    // Bare domain does not match suffix rule
     try std.testing.expect(
-        !shouldBypassProxy("example.com", ".example.com"),
+        !shouldBypassProxy("example.com", &.{".example.com"}, false),
     );
-    // Partial name overlap is not a match
     try std.testing.expect(
-        !shouldBypassProxy("notexample.com", ".example.com"),
+        !shouldBypassProxy("notexample.com", &.{".example.com"}, false),
     );
 }
 
 test "shouldBypassProxy multiple entries" {
-    const list = "a.com, b.com, .internal.net";
-    try std.testing.expect(shouldBypassProxy("a.com", list));
-    try std.testing.expect(shouldBypassProxy("b.com", list));
+    const entries = &.{ "a.com", "b.com", ".internal.net" };
+    try std.testing.expect(shouldBypassProxy("a.com", entries, false));
+    try std.testing.expect(shouldBypassProxy("b.com", entries, false));
     try std.testing.expect(
-        shouldBypassProxy("svc.internal.net", list),
+        shouldBypassProxy("svc.internal.net", entries, false),
     );
     try std.testing.expect(
-        !shouldBypassProxy("external.com", list),
+        !shouldBypassProxy("external.com", entries, false),
     );
 }
 
