@@ -64,9 +64,12 @@ pub fn isRetryableHttpError(err: anyerror) bool {
         error.ConnectionRefused,
         error.ConnectionResetByPeer,
         error.ConnectionTimedOut,
+        error.ConnectionFailed,
         error.NetworkUnreachable,
         error.HostUnreachable,
         error.TemporaryNameServerFailure,
+        error.RequestFailed,
+        error.StreamStalled,
         => true,
         else => false,
     };

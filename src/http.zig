@@ -423,8 +423,8 @@ pub const HttpClient = struct {
                 }
                 return response;
             } else |err| {
-                // Don't retry on non-transient errors
-                if (err == error.ResponseTooLarge or err == error.OutOfMemory) {
+                // Only retry on transient connection errors
+                if (!errors.isRetryableHttpError(err)) {
                     log.debug(
                         "aws request failed: {s} invocation={s}",
                         .{ @errorName(err), invocation_id },
