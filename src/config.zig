@@ -769,7 +769,10 @@ pub fn loadConfigFile(
     io: std.Io,
     env_map: *const std.process.Environ.Map,
 ) !ConfigFile {
-    const path = try resolveConfigPath(allocator, env_map);
+    const path = resolveConfigPath(allocator, env_map) catch |err| switch (err) {
+        error.HomeDirectoryNotFound => return parseConfigFile(allocator, ""),
+        else => return err,
+    };
     defer allocator.free(path);
 
     const content = std.Io.Dir.cwd().readFileAlloc(
@@ -793,7 +796,7 @@ fn resolveConfigPath(
     if (env_map.get("AWS_CONFIG_FILE")) |p| {
         return try allocator.dupe(u8, p);
     }
-    const home = env_map.get("HOME") orelse return error.RegionNotFound;
+    const home = env_map.get("HOME") orelse return error.HomeDirectoryNotFound;
     return std.fmt.allocPrint(allocator, "{s}/.aws/config", .{home});
 }
 
@@ -1602,4 +1605,14 @@ test "getEndpointForService: iam uses global endpoint in aws partition" {
         "iam.amazonaws.com",
         ep,
     );
+}
+
+test "loadConfigFile returns empty config when HOME is unset" {
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+
+    var cf = try loadConfigFile(std.testing.allocator, std.testing.io, &env_map);
+    defer cf.deinit();
+
+    try std.testing.expect(cf.getProfile("default") == null);
 }
