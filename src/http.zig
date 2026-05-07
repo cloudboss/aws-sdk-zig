@@ -233,6 +233,7 @@ pub const HttpClient = struct {
     interceptors: []const Interceptor = &.{},
     default_max_attempts: u32 = 3,
     default_base_delay_ms: u32 = 1_000,
+    log_response_bodies: bool = false,
 
     const Self = @This();
 
@@ -240,6 +241,7 @@ pub const HttpClient = struct {
         retry_mode: config_mod.RetryMode = .standard,
         request_options: RequestOptions = .{},
         ca_bundle_path: ?[]const u8 = null,
+        log_response_bodies: bool = false,
     };
 
     pub const InitError = error{
@@ -265,6 +267,7 @@ pub const HttpClient = struct {
             .no_proxy_entries = &.{},
             .no_proxy_wildcard = false,
             .retry_mode = options.retry_mode,
+            .log_response_bodies = options.log_response_bodies,
         };
         self.initProxies();
         const bundle_path = options.ca_bundle_path orelse env_map.get("AWS_CA_BUNDLE");
@@ -424,17 +427,29 @@ pub const HttpClient = struct {
                         .{ response.status, elapsed_ms, invocation_id },
                     );
                 } else {
-                    log.debug(
-                        "aws request error: status={d} elapsed_ms={d} invocation={s} body({d} bytes)={s}{s}",
-                        .{
-                            response.status,
-                            elapsed_ms,
-                            invocation_id,
-                            response.body.len,
-                            response.body[0..@min(response.body.len, 4096)],
-                            @as([]const u8, if (response.body.len > 4096) "..." else ""),
-                        },
-                    );
+                    if (self.log_response_bodies) {
+                        log.debug(
+                            "aws request error: status={d} elapsed_ms={d} invocation={s} body({d} bytes)={s}{s}",
+                            .{
+                                response.status,
+                                elapsed_ms,
+                                invocation_id,
+                                response.body.len,
+                                response.body[0..@min(response.body.len, 4096)],
+                                @as([]const u8, if (response.body.len > 4096) "..." else ""),
+                            },
+                        );
+                    } else {
+                        log.debug(
+                            "aws request error: status={d} elapsed_ms={d} invocation={s} body({d} bytes)",
+                            .{
+                                response.status,
+                                elapsed_ms,
+                                invocation_id,
+                                response.body.len,
+                            },
+                        );
+                    }
                 }
                 return response;
             } else |err| {
