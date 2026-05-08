@@ -5,6 +5,9 @@ pub const DataQualityRulesetEvaluationRunFilter = struct {
     /// Filter based on a data source (an Glue table) associated with the run.
     data_source: DataSource,
 
+    /// Filter results by the name of the ruleset.
+    ruleset_name: ?[]const u8 = null,
+
     /// Filter results by runs that started after this time.
     started_after: ?i64 = null,
 
@@ -13,6 +16,7 @@ pub const DataQualityRulesetEvaluationRunFilter = struct {
 
     pub const json_field_names = .{
         .data_source = "DataSource",
+        .ruleset_name = "RulesetName",
         .started_after = "StartedAfter",
         .started_before = "StartedBefore",
     };

@@ -547,7 +547,7 @@ pub const Client = struct {
     ///   items contained in the remote directory or not. If your `Truncated` output
     ///   value is true, you can increase the value provided in the optional
     ///   `max-items` input attribute to be able to list more items (up to the
-    ///   maximum allowed list size of 10,000 items).
+    ///   maximum allowed list size of 200,000 items).
     pub fn startDirectoryListing(self: *Self, allocator: std.mem.Allocator, input: start_directory_listing.StartDirectoryListingInput, options: CallOptions) !start_directory_listing.StartDirectoryListingOutput {
         return start_directory_listing.execute(self, allocator, input, options);
     }

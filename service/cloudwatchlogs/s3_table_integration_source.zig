@@ -14,6 +14,9 @@ pub const S3TableIntegrationSource = struct {
     /// The unique identifier for this data source association.
     identifier: ?[]const u8 = null,
 
+    /// The identifier of the parent data source for this association.
+    parent_source_identifier: ?[]const u8 = null,
+
     /// The current status of the data source association.
     status: ?S3TableIntegrationSourceStatus = null,
 
@@ -24,6 +27,7 @@ pub const S3TableIntegrationSource = struct {
         .created_time_stamp = "createdTimeStamp",
         .data_source = "dataSource",
         .identifier = "identifier",
+        .parent_source_identifier = "parentSourceIdentifier",
         .status = "status",
         .status_reason = "statusReason",
     };

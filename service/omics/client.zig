@@ -1060,9 +1060,9 @@ pub const Client = struct {
     /// `s3UriSettings` (up to 100,000 runs).
     ///
     /// `StartRunBatch` validates common fields synchronously and returns
-    /// immediately with a batch ID and status `PENDING`. Runs are submitted
-    /// gradually and asynchronously at a rate governed by your `StartRun`
-    /// throughput quota.
+    /// immediately with a batch ID and status `CREATING`. The batch transitions to
+    /// `PENDING` once initial setup completes. Runs are then submitted gradually
+    /// and asynchronously at a rate governed by your `StartRun` throughput quota.
     pub fn startRunBatch(self: *Self, allocator: std.mem.Allocator, input: start_run_batch.StartRunBatchInput, options: CallOptions) !start_run_batch.StartRunBatchOutput {
         return start_run_batch.execute(self, allocator, input, options);
     }

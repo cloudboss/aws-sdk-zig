@@ -17,6 +17,9 @@ pub const ValidityTerm = struct {
     /// agreement start date is determined based on agreement signature time.
     agreement_start_date: ?i64 = null,
 
+    /// The unique identifier for the term.
+    id: ?[]const u8 = null,
+
     /// Category of the term being updated.
     @"type": ?[]const u8 = null,
 
@@ -24,6 +27,7 @@ pub const ValidityTerm = struct {
         .agreement_duration = "agreementDuration",
         .agreement_end_date = "agreementEndDate",
         .agreement_start_date = "agreementStartDate",
+        .id = "id",
         .@"type" = "type",
     };
 };

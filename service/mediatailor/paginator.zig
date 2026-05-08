@@ -7,6 +7,7 @@ const Client = @import("client.zig").Client;
 const get_channel_schedule = @import("get_channel_schedule.zig");
 const list_alerts = @import("list_alerts.zig");
 const list_channels = @import("list_channels.zig");
+const list_functions = @import("list_functions.zig");
 const list_live_sources = @import("list_live_sources.zig");
 const list_playback_configurations = @import("list_playback_configurations.zig");
 const list_prefetch_schedules = @import("list_prefetch_schedules.zig");
@@ -109,6 +110,46 @@ pub const ListChannelsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_channels.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListFunctionsPaginator = struct {
+    client: *Client,
+    params: list_functions.ListFunctionsInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_functions.ListFunctionsOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_functions.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

@@ -1,7 +1,7 @@
 /// Configuration for an Amazon Bedrock model provider.
 pub const HarnessBedrockModelConfig = struct {
-    /// The maximum number of tokens to allow in the generated response per
-    /// iteration.
+    /// The maximum number of tokens to allow in the generated response per model
+    /// call.
     max_tokens: ?i32 = null,
 
     /// The Bedrock model ID.

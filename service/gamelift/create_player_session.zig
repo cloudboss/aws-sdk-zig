@@ -7,7 +7,9 @@ const ServiceError = @import("errors.zig").ServiceError;
 const PlayerSession = @import("player_session.zig").PlayerSession;
 
 pub const CreatePlayerSessionInput = struct {
-    /// A unique identifier for the game session to add a player to.
+    /// An identifier for the game session that is unique across all regions to add
+    /// a player to. The value is always a full ARN in the following format:
+    /// `arn:aws:gamelift:::gamesession//`.
     game_session_id: []const u8,
 
     /// Developer-defined information related to a player. Amazon GameLift Servers

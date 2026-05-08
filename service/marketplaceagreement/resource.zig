@@ -6,8 +6,8 @@ pub const Resource = struct {
     /// `resourceId` is also a `productId`.
     id: ?[]const u8 = null,
 
-    /// Type of the resource, which is the product. Values include `SaaSProduct` or
-    /// `AmiProduct`.
+    /// Type of the resource, which is the product (for example, `SaaSProduct`,
+    /// `AmiProduct`, `ContainerProduct`).
     @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{

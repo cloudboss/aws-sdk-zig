@@ -1,8 +1,12 @@
+const ControlTitleFormatText = @import("control_title_format_text.zig").ControlTitleFormatText;
 const SliderControlDisplayOptions = @import("slider_control_display_options.zig").SliderControlDisplayOptions;
 
 /// A control to display a horizontal toggle bar. This is used to change a value
 /// by sliding the toggle.
 pub const ParameterSliderControl = struct {
+    /// The title text format configuration for the control.
+    control_title_format_text: ?ControlTitleFormatText = null,
+
     /// The display options of a control.
     display_options: ?SliderControlDisplayOptions = null,
 
@@ -22,9 +26,10 @@ pub const ParameterSliderControl = struct {
     step_size: f64 = 0,
 
     /// The title of the `ParameterSliderControl`.
-    title: []const u8,
+    title: []const u8 = "",
 
     pub const json_field_names = .{
+        .control_title_format_text = "ControlTitleFormatText",
         .display_options = "DisplayOptions",
         .maximum_value = "MaximumValue",
         .minimum_value = "MinimumValue",

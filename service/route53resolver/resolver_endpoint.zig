@@ -37,6 +37,12 @@ pub const ResolverEndpoint = struct {
     ///   hosted zones from your network.
     direction: ?ResolverEndpointDirection = null,
 
+    /// Indicates whether DNS64 is enabled for the inbound Resolver endpoint. When
+    /// `true`, Route 53 Resolver
+    /// synthesizes AAAA (IPv6) records for IPv4-only services by prepending the
+    /// `64:ff9b::/96` prefix to the IPv4 address.
+    dns_64_enabled: ?bool = null,
+
     /// The ID of the VPC that you want to create the Resolver endpoint in.
     host_vpc_id: ?[]const u8 = null,
 
@@ -46,6 +52,12 @@ pub const ResolverEndpoint = struct {
     /// The number of IP addresses that the Resolver endpoint can use for DNS
     /// queries.
     ip_address_count: ?i32 = null,
+
+    /// Indicates whether IPv6 internet access is enabled for the outbound Resolver
+    /// endpoint. When `true`,
+    /// the endpoint elastic network interfaces (ENIs) can forward DNS queries to
+    /// public IPv6 targets through an internet gateway.
+    ipv_6_internet_access_enabled: ?bool = null,
 
     /// The date and time that the endpoint was last modified, in Unix time format
     /// and Coordinated Universal Time (UTC).
@@ -170,9 +182,11 @@ pub const ResolverEndpoint = struct {
         .creation_time = "CreationTime",
         .creator_request_id = "CreatorRequestId",
         .direction = "Direction",
+        .dns_64_enabled = "Dns64Enabled",
         .host_vpc_id = "HostVPCId",
         .id = "Id",
         .ip_address_count = "IpAddressCount",
+        .ipv_6_internet_access_enabled = "Ipv6InternetAccessEnabled",
         .modification_time = "ModificationTime",
         .name = "Name",
         .outpost_arn = "OutpostArn",

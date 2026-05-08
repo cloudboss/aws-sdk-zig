@@ -7,7 +7,10 @@ const ServiceError = @import("errors.zig").ServiceError;
 const PlayerSession = @import("player_session.zig").PlayerSession;
 
 pub const DescribePlayerSessionsInput = struct {
-    /// A unique identifier for the game session to retrieve player sessions for.
+    /// An identifier for the game session that is unique across all regions to
+    /// retrieve player sessions for. The value is always a full ARN in the
+    /// following format:
+    /// `arn:aws:gamelift:::gamesession//`.
     game_session_id: ?[]const u8 = null,
 
     /// The maximum number of results to return. Use this parameter with `NextToken`

@@ -10,6 +10,14 @@ pub const ScteFilter = enum {
     provider_overlay_placement_opportunity,
     distributor_overlay_placement_opportunity,
     program,
+    chapter,
+    unscheduled_event,
+    alternate_content_opportunity,
+    network,
+    provider_promo,
+    distributor_promo,
+    provider_ad_block,
+    distributor_ad_block,
 
     pub const json_field_names = .{
         .splice_insert = "SPLICE_INSERT",
@@ -21,6 +29,14 @@ pub const ScteFilter = enum {
         .provider_overlay_placement_opportunity = "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
         .distributor_overlay_placement_opportunity = "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY",
         .program = "PROGRAM",
+        .chapter = "CHAPTER",
+        .unscheduled_event = "UNSCHEDULED_EVENT",
+        .alternate_content_opportunity = "ALTERNATE_CONTENT_OPPORTUNITY",
+        .network = "NETWORK",
+        .provider_promo = "PROVIDER_PROMO",
+        .distributor_promo = "DISTRIBUTOR_PROMO",
+        .provider_ad_block = "PROVIDER_AD_BLOCK",
+        .distributor_ad_block = "DISTRIBUTOR_AD_BLOCK",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -34,6 +50,14 @@ pub const ScteFilter = enum {
             .provider_overlay_placement_opportunity => "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
             .distributor_overlay_placement_opportunity => "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY",
             .program => "PROGRAM",
+            .chapter => "CHAPTER",
+            .unscheduled_event => "UNSCHEDULED_EVENT",
+            .alternate_content_opportunity => "ALTERNATE_CONTENT_OPPORTUNITY",
+            .network => "NETWORK",
+            .provider_promo => "PROVIDER_PROMO",
+            .distributor_promo => "DISTRIBUTOR_PROMO",
+            .provider_ad_block => "PROVIDER_AD_BLOCK",
+            .distributor_ad_block => "DISTRIBUTOR_AD_BLOCK",
         };
     }
 

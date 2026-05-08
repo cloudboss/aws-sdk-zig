@@ -1,4 +1,5 @@
 const CommitMode = @import("commit_mode.zig").CommitMode;
+const ControlTitleFormatText = @import("control_title_format_text.zig").ControlTitleFormatText;
 const DateTimePickerControlDisplayOptions = @import("date_time_picker_control_display_options.zig").DateTimePickerControlDisplayOptions;
 const SheetControlDateTimePickerType = @import("sheet_control_date_time_picker_type.zig").SheetControlDateTimePickerType;
 
@@ -7,6 +8,9 @@ pub const FilterDateTimePickerControl = struct {
     /// The visibility configurationof the Apply button on a
     /// `DateTimePickerControl`.
     commit_mode: ?CommitMode = null,
+
+    /// The title text format configuration for the control.
+    control_title_format_text: ?ControlTitleFormatText = null,
 
     /// The display options of a control.
     display_options: ?DateTimePickerControlDisplayOptions = null,
@@ -18,7 +22,7 @@ pub const FilterDateTimePickerControl = struct {
     source_filter_id: []const u8,
 
     /// The title of the `FilterDateTimePickerControl`.
-    title: []const u8,
+    title: []const u8 = "",
 
     /// The type of the `FilterDropDownControl`. Choose one of the following
     /// options:
@@ -30,6 +34,7 @@ pub const FilterDateTimePickerControl = struct {
 
     pub const json_field_names = .{
         .commit_mode = "CommitMode",
+        .control_title_format_text = "ControlTitleFormatText",
         .display_options = "DisplayOptions",
         .filter_control_id = "FilterControlId",
         .source_filter_id = "SourceFilterId",

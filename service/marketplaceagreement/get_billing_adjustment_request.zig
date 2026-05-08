@@ -35,8 +35,7 @@ pub const GetBillingAdjustmentRequestOutput = struct {
     /// The unique identifier of the billing adjustment request.
     billing_adjustment_request_id: []const u8,
 
-    /// The date and time when the billing adjustment request was created, as a
-    /// POSIX timestamp (Unix epoch seconds).
+    /// The date and time when the billing adjustment request was created.
     created_at: i64,
 
     /// The currency code for the adjustment amount (e.g., `USD`).
@@ -55,8 +54,7 @@ pub const GetBillingAdjustmentRequestOutput = struct {
     /// status. This field is populated only when the status is `VALIDATION_FAILED`.
     status_message: ?[]const u8 = null,
 
-    /// The date and time when the billing adjustment request was last updated, as a
-    /// POSIX timestamp (Unix epoch seconds).
+    /// The date and time when the billing adjustment request was last updated.
     updated_at: i64,
 
     pub const json_field_names = .{
@@ -159,6 +157,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
         return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

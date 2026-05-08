@@ -7,11 +7,15 @@ pub const LegalTerm = struct {
     /// the EULA.
     documents: ?[]const DocumentItem = null,
 
+    /// The unique identifer for the term.
+    id: ?[]const u8 = null,
+
     /// Category of the term being updated.
     @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .documents = "documents",
+        .id = "id",
         .@"type" = "type",
     };
 };

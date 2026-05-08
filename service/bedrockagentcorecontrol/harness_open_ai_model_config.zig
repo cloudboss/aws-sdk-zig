@@ -4,8 +4,8 @@ pub const HarnessOpenAiModelConfig = struct {
     /// The ARN of your OpenAI API key on AgentCore Identity.
     api_key_arn: []const u8,
 
-    /// The maximum number of tokens to allow in the generated response per
-    /// iteration.
+    /// The maximum number of tokens to allow in the generated response per model
+    /// call.
     max_tokens: ?i32 = null,
 
     /// The OpenAI model ID.

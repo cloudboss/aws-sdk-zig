@@ -5,7 +5,7 @@ pub const HarnessAgentCoreGatewayConfig = struct {
     /// The ARN of the desired AgentCore Gateway.
     gateway_arn: []const u8,
 
-    /// How Loopy authenticates to this Gateway. Defaults to AWS_IAM (SigV4) if
+    /// How harness authenticates to this Gateway. Defaults to AWS_IAM (SigV4) if
     /// omitted.
     outbound_auth: ?HarnessGatewayOutboundAuth = null,
 

@@ -1,4 +1,5 @@
 const AdMarkerHls = @import("ad_marker_hls.zig").AdMarkerHls;
+const ScteInManifests = @import("scte_in_manifests.zig").ScteInManifests;
 
 /// The SCTE configuration.
 pub const ScteHls = struct {
@@ -18,7 +19,15 @@ pub const ScteHls = struct {
     ///   EXT-X-DATERANGE](http://docs.aws.amazon.com/mediapackage/latest/ug/scte-35-ad-marker-ext-x-daterange.html).
     ad_marker_hls: ?AdMarkerHls = null,
 
+    /// Controls which SCTE-35 events appear in HLS manifests. `ALL` includes all
+    /// non-implicit SCTE-35 events. `MATCHES_FILTER` includes only events whose
+    /// type matches the configured `ScteFilter`.
+    ///
+    /// If you don't specify a value, the default is `ALL`.
+    scte_in_manifests: ?ScteInManifests = null,
+
     pub const json_field_names = .{
         .ad_marker_hls = "AdMarkerHls",
+        .scte_in_manifests = "ScteInManifests",
     };
 };

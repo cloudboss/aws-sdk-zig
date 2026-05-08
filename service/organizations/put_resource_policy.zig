@@ -7,48 +7,9 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Tag = @import("tag.zig").Tag;
 const ResourcePolicy = @import("resource_policy.zig").ResourcePolicy;
 
-pub const PutResourcePolicyInput = struct {
-    /// If provided, the new content for the resource policy. The text must be
-    /// correctly
-    /// formatted JSON that complies with the syntax for the resource policy's type.
-    /// For more
-    /// information, see [SCP
-    /// syntax](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_syntax.html) in the
-    /// *Organizations User Guide*.
-    content: []const u8,
+pub const PutResourcePolicyInput = @import("put_resource_policy_request.zig").PutResourcePolicyRequest;
 
-    /// A list of tags that you want to attach to the newly created resource policy.
-    /// For each
-    /// tag in the list, you must specify both a tag key and a value. You can set
-    /// the value to
-    /// an empty string, but you can't set it to `null`. For more information about
-    /// tagging, see [Tagging
-    /// Organizations
-    /// resources](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html) in the Organizations User Guide.
-    ///
-    /// Calls with tags apply to the initial creation of the resource policy,
-    /// otherwise an
-    /// exception is thrown. If any one of the tags is not valid or if you exceed
-    /// the
-    /// allowed number of tags for the resource policy, then the entire request
-    /// fails and
-    /// the resource policy is not created.
-    tags: ?[]const Tag = null,
-
-    pub const json_field_names = .{
-        .content = "Content",
-        .tags = "Tags",
-    };
-};
-
-pub const PutResourcePolicyOutput = struct {
-    /// A structure that contains details about the resource policy.
-    resource_policy: ?ResourcePolicy = null,
-
-    pub const json_field_names = .{
-        .resource_policy = "ResourcePolicy",
-    };
-};
+pub const PutResourcePolicyOutput = @import("put_resource_policy_response.zig").PutResourcePolicyResponse;
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutResourcePolicyInput, options: CallOptions) !PutResourcePolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -1,3 +1,4 @@
+const AudioFillerSettings = @import("audio_filler_settings.zig").AudioFillerSettings;
 const SpeechDetectionSensitivity = @import("speech_detection_sensitivity.zig").SpeechDetectionSensitivity;
 const SpeechRecognitionSettings = @import("speech_recognition_settings.zig").SpeechRecognitionSettings;
 const UnifiedSpeechSettings = @import("unified_speech_settings.zig").UnifiedSpeechSettings;
@@ -6,6 +7,12 @@ const VoiceSettings = @import("voice_settings.zig").VoiceSettings;
 /// Provides the bot locale parameters required for importing a bot
 /// locale.
 pub const BotLocaleImportSpecification = struct {
+    /// Audio filler settings to apply when importing the bot locale
+    /// configuration. Audio filler requires `unifiedSpeechSettings`
+    /// (speech-to-speech) to be enabled when `enabled` is
+    /// `true`.
+    audio_filler_settings: ?AudioFillerSettings = null,
+
     /// The identifier of the bot to import the locale to.
     bot_id: []const u8,
 
@@ -58,6 +65,7 @@ pub const BotLocaleImportSpecification = struct {
     voice_settings: ?VoiceSettings = null,
 
     pub const json_field_names = .{
+        .audio_filler_settings = "audioFillerSettings",
         .bot_id = "botId",
         .bot_version = "botVersion",
         .locale_id = "localeId",

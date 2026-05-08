@@ -46,7 +46,8 @@ pub const GetDomainSuggestionsInput = struct {
 
     /// The number of suggested domain names that you want Route 53 to return.
     /// Specify a value
-    /// between 1 and 50.
+    /// between 1 and 50. Note that fewer than the requested number might be
+    /// returned.
     suggestion_count: ?i32 = null,
 
     pub const json_field_names = .{
@@ -159,6 +160,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "OperationLimitExceeded")) {
         return .{ .arena = arena, .kind = .{ .operation_limit_exceeded = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TLDInMaintenance")) {
+        return .{ .arena = arena, .kind = .{ .tld_in_maintenance = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

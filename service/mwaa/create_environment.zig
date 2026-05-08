@@ -11,24 +11,22 @@ const WebserverAccessMode = @import("webserver_access_mode.zig").WebserverAccess
 
 pub const CreateEnvironmentInput = struct {
     /// A list of key-value pairs containing the Apache Airflow configuration
-    /// options you want to attach to your environment. For more information, see
-    /// [Apache Airflow configuration
+    /// options you want to attach to your environment. For more information, refer
+    /// to [Apache Airflow configuration
     /// options](https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html).
     airflow_configuration_options: ?[]const aws.map.StringMapEntry = null,
 
     /// The Apache Airflow version for your environment. If no value is specified,
-    /// it defaults to the latest version.
-    /// For more information, see [Apache Airflow versions on Amazon Managed
-    /// Workflows for Apache Airflow (Amazon
+    /// it defaults to the latest version. For more information, refer to [Apache
+    /// Airflow versions on Amazon Managed Workflows for Apache Airflow (Amazon
     /// MWAA)](https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html).
     ///
-    /// Valid values: `1.10.12`, `2.0.2`, `2.2.2`,
-    /// `2.4.3`, `2.5.1`, `2.6.3`, `2.7.2`,
-    /// `2.8.1`, `2.9.2`, `2.10.1`, and `2.10.3`.
+    /// Valid values: `2.7.2`, `2.8.1`, `2.9.2`, `2.10.1`, `2.10.3`, `2.11.0`, and
+    /// `3.0.6`.
     airflow_version: ?[]const u8 = null,
 
     /// The relative path to the DAGs folder on your Amazon S3 bucket. For example,
-    /// `dags`. For more information, see [Adding or updating
+    /// `dags`. For more information, refer to [Adding or updating
     /// DAGs](https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html).
     dag_s3_path: []const u8,
 
@@ -37,16 +35,16 @@ pub const CreateEnvironmentInput = struct {
     /// `SERVICE`, Amazon MWAA will create and manage the required VPC endpoints in
     /// your VPC. If set to `CUSTOMER`, you must create, and manage, the VPC
     /// endpoints for your VPC. If you choose to create an environment in a shared
-    /// VPC, you must set this value to `CUSTOMER`.
-    /// In a shared VPC deployment, the environment will remain in `PENDING` status
-    /// until you create the VPC endpoints. If you do not take action to
-    /// create the endpoints within 72 hours, the status will change to
-    /// `CREATE_FAILED`. You can delete the failed environment and create a new one.
+    /// VPC, you must set this value to `CUSTOMER`. In a shared VPC deployment, the
+    /// environment will remain in `PENDING` status until you create the VPC
+    /// endpoints. If you do not take action to create the endpoints within 72
+    /// hours, the status will change to `CREATE_FAILED`. You can delete the failed
+    /// environment and create a new one.
     endpoint_management: ?EndpointManagement = null,
 
     /// The environment class type. Valid values: `mw1.micro`, `mw1.small`,
     /// `mw1.medium`, `mw1.large`, `mw1.xlarge`, and `mw1.2xlarge`. For more
-    /// information, see [Amazon MWAA environment
+    /// information, refer to [Amazon MWAA environment
     /// class](https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html).
     environment_class: ?[]const u8 = null,
 
@@ -54,15 +52,15 @@ pub const CreateEnvironmentInput = struct {
     /// An execution role is an Amazon Web Services Identity and Access Management
     /// (IAM) role that grants MWAA permission to access Amazon Web Services
     /// services and resources used by your environment. For example,
-    /// `arn:aws:iam::123456789:role/my-execution-role`. For more information, see
-    /// [Amazon MWAA Execution
+    /// `arn:aws:iam::123456789:role/my-execution-role`. For more information, refer
+    /// to [Amazon MWAA Execution
     /// role](https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html).
     execution_role_arn: []const u8,
 
     /// The Amazon Web Services Key Management Service (KMS) key to encrypt the data
     /// in your environment. You can use an Amazon Web Services owned CMK, or a
-    /// Customer managed CMK (advanced). For more information, see [Create an Amazon
-    /// MWAA
+    /// Customer managed CMK (advanced). For more information, refer to [Create an
+    /// Amazon MWAA
     /// environment](https://docs.aws.amazon.com/mwaa/latest/userguide/create-environment.html).
     kms_key: ?[]const u8 = null,
 
@@ -71,20 +69,17 @@ pub const CreateEnvironmentInput = struct {
 
     /// The maximum number of web servers that you want to run in your environment.
     /// Amazon MWAA scales the number of Apache Airflow web servers up to the number
-    /// you specify for `MaxWebservers`
-    /// when you interact with your Apache Airflow environment using Apache Airflow
-    /// REST API, or
-    /// the Apache Airflow CLI. For example, in scenarios where your workload
-    /// requires network calls to the Apache Airflow REST API with a high
-    /// transaction-per-second (TPS)
-    /// rate, Amazon MWAA will increase the number of web servers up to the number
-    /// set in `MaxWebserers`. As TPS rates decrease
-    /// Amazon MWAA disposes of the additional web servers, and scales down to the
-    /// number set in `MinxWebserers`.
+    /// you specify for `MaxWebservers` when you interact with your Apache Airflow
+    /// environment using Apache Airflow REST API, or the Apache Airflow CLI. For
+    /// example, in scenarios where your workload requires network calls to the
+    /// Apache Airflow REST API with a high transaction-per-second (TPS) rate,
+    /// Amazon MWAA will increase the number of web servers up to the number set in
+    /// `MaxWebserers`. As TPS rates decrease Amazon MWAA disposes of the additional
+    /// web servers, and scales down to the number set in `MinxWebserers`.
     ///
     /// Valid values: For environments larger than mw1.micro, accepts values from
-    /// `2` to `5`. Defaults to `2` for all environment
-    /// sizes except mw1.micro, which defaults to `1`.
+    /// `2` to `5`. Defaults to `2` for all environment sizes except mw1.micro,
+    /// which defaults to `1`.
     max_webservers: ?i32 = null,
 
     /// The maximum number of workers that you want to run in your environment. MWAA
@@ -97,17 +92,15 @@ pub const CreateEnvironmentInput = struct {
 
     /// The minimum number of web servers that you want to run in your environment.
     /// Amazon MWAA scales the number of Apache Airflow web servers up to the number
-    /// you specify for `MaxWebservers`
-    /// when you interact with your Apache Airflow environment using Apache Airflow
-    /// REST API, or
-    /// the Apache Airflow CLI. As the transaction-per-second rate, and the network
-    /// load, decrease,
-    /// Amazon MWAA disposes of the additional web servers, and scales down to the
-    /// number set in `MinxWebserers`.
+    /// you specify for `MaxWebservers` when you interact with your Apache Airflow
+    /// environment using Apache Airflow REST API, or the Apache Airflow CLI. As the
+    /// transaction-per-second rate, and the network load, decrease, Amazon MWAA
+    /// disposes of the additional web servers, and scales down to the number set in
+    /// `MinxWebserers`.
     ///
     /// Valid values: For environments larger than mw1.micro, accepts values from
-    /// `2` to `5`. Defaults to `2` for all environment
-    /// sizes except mw1.micro, which defaults to `1`.
+    /// `2` to `5`. Defaults to `2` for all environment sizes except mw1.micro,
+    /// which defaults to `1`.
     min_webservers: ?i32 = null,
 
     /// The minimum number of workers that you want to run in your environment. MWAA
@@ -122,62 +115,60 @@ pub const CreateEnvironmentInput = struct {
 
     /// The VPC networking components used to secure and enable network traffic
     /// between the Amazon Web Services resources for your environment. For more
-    /// information, see [About networking on Amazon
+    /// information, refer to [About networking on Amazon
     /// MWAA](https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html).
     network_configuration: NetworkConfiguration,
 
     /// The version of the plugins.zip file on your Amazon S3 bucket. You must
     /// specify a version each time a plugins.zip file is updated. For more
-    /// information, see [How S3 Versioning
+    /// information, refer to [How S3 Versioning
     /// works](https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html).
     plugins_s3_object_version: ?[]const u8 = null,
 
     /// The relative path to the `plugins.zip` file on your Amazon S3 bucket. For
     /// example, `plugins.zip`. If specified, then the `plugins.zip` version is
-    /// required. For more information, see [Installing custom
+    /// required. For more information, refer to [Installing custom
     /// plugins](https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html).
     plugins_s3_path: ?[]const u8 = null,
 
     /// The version of the `requirements.txt` file on your Amazon S3 bucket. You
     /// must specify a version each time a requirements.txt file is updated. For
-    /// more information, see [How S3 Versioning
+    /// more information, refer to [How S3 Versioning
     /// works](https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html).
     requirements_s3_object_version: ?[]const u8 = null,
 
     /// The relative path to the `requirements.txt` file on your Amazon S3 bucket.
     /// For example, `requirements.txt`. If specified, then a version is required.
-    /// For more information, see [Installing Python
+    /// For more information, refer to [Installing Python
     /// dependencies](https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html).
     requirements_s3_path: ?[]const u8 = null,
 
     /// The number of Apache Airflow schedulers to run in your environment. Valid
     /// values:
     ///
-    /// * v2 - For environments larger than mw1.micro, accepts values from
-    /// `2` to `5`. Defaults to `2` for all
-    /// environment sizes except mw1.micro, which defaults to `1`.
-    ///
+    /// * v2 - For environments larger than mw1.micro, accepts values from `2` to
+    ///   `5`. Defaults to `2` for all environment sizes except mw1.micro, which
+    ///   defaults to `1`.
     /// * v1 - Accepts `1`.
     schedulers: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code
     /// and supporting files are stored. For example,
-    /// `arn:aws:s3:::my-airflow-bucket-unique-name`. For more information, see
+    /// `arn:aws:s3:::my-airflow-bucket-unique-name`. For more information, refer to
     /// [Create an Amazon S3 bucket for Amazon
     /// MWAA](https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html).
     source_bucket_arn: []const u8,
 
     /// The version of the startup shell script in your Amazon S3 bucket. You must
     /// specify the [version
-    /// ID](https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html) that Amazon S3 assigns to the file
-    /// every time you update the script.
+    /// ID](https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html) that Amazon S3 assigns to the file every time you update the script.
     ///
     /// Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings that are
     /// no more than 1,024 bytes long. The following is an example:
     ///
     /// `3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo`
     ///
-    /// For more information, see [Using a startup
+    /// For more information, refer to [Using a startup
     /// script](https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html).
     startup_script_s3_object_version: ?[]const u8 = null,
 
@@ -185,22 +176,20 @@ pub const CreateEnvironmentInput = struct {
     /// example, `s3://mwaa-environment/startup.sh`.
     ///
     /// Amazon MWAA runs the script as your environment starts, and before running
-    /// the Apache Airflow process.
-    /// You can use this script to install dependencies, modify Apache Airflow
-    /// configuration options, and set environment variables. For more information,
-    /// see
-    /// [Using a startup
+    /// the Apache Airflow process. You can use this script to install dependencies,
+    /// modify Apache Airflow configuration options, and set environment variables.
+    /// For more information, refer to [Using a startup
     /// script](https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html).
     startup_script_s3_path: ?[]const u8 = null,
 
     /// The key-value tag pairs you want to associate to your environment. For
-    /// example, `"Environment": "Staging"`. For more information, see [Tagging
+    /// example, `"Environment": "Staging"`. For more information, refer to [Tagging
     /// Amazon Web Services
     /// resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Defines the access mode for the Apache Airflow *web server*. For more
-    /// information, see [Apache Airflow access
+    /// information, refer to [Apache Airflow access
     /// modes](https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html).
     webserver_access_mode: ?WebserverAccessMode = null,
 
@@ -490,6 +479,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "RestApiServerException")) {
         return .{ .arena = arena, .kind = .{ .rest_api_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceUnavailableException")) {
+        return .{ .arena = arena, .kind = .{ .service_unavailable_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

@@ -3,16 +3,19 @@ const std = @import("std");
 pub const Oauth2FlowType = enum {
     user_federation,
     m2_m,
+    on_behalf_of_token_exchange,
 
     pub const json_field_names = .{
         .user_federation = "USER_FEDERATION",
         .m2_m = "M2M",
+        .on_behalf_of_token_exchange = "ON_BEHALF_OF_TOKEN_EXCHANGE",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .user_federation => "USER_FEDERATION",
             .m2_m => "M2M",
+            .on_behalf_of_token_exchange => "ON_BEHALF_OF_TOKEN_EXCHANGE",
         };
     }
 

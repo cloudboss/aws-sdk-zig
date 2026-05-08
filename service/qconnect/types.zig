@@ -233,6 +233,7 @@ pub const SpanAttributes = @import("span_attributes.zig").SpanAttributes;
 pub const SpanCitation = @import("span_citation.zig").SpanCitation;
 pub const SpanMessage = @import("span_message.zig").SpanMessage;
 pub const SpanMessageValue = @import("span_message_value.zig").SpanMessageValue;
+pub const SpanReasoningValue = @import("span_reasoning_value.zig").SpanReasoningValue;
 pub const SpanStatus = @import("span_status.zig").SpanStatus;
 pub const SpanTextValue = @import("span_text_value.zig").SpanTextValue;
 pub const SpanToolResultValue = @import("span_tool_result_value.zig").SpanToolResultValue;

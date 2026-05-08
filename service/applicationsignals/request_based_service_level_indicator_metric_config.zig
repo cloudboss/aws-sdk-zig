@@ -1,5 +1,6 @@
 const aws = @import("aws");
 
+const CompositeSliConfig = @import("composite_sli_config.zig").CompositeSliConfig;
 const DependencyConfig = @import("dependency_config.zig").DependencyConfig;
 const MetricSource = @import("metric_source.zig").MetricSource;
 const ServiceLevelIndicatorMetricType = @import("service_level_indicator_metric_type.zig").ServiceLevelIndicatorMetricType;
@@ -9,6 +10,10 @@ const MetricDataQuery = @import("metric_data_query.zig").MetricDataQuery;
 /// Use this structure to specify the information for the metric that a
 /// period-based SLO will monitor.
 pub const RequestBasedServiceLevelIndicatorMetricConfig = struct {
+    /// The composite SLI configuration for service-level SLOs that monitor multiple
+    /// operations of a service.
+    composite_sli_config: ?CompositeSliConfig = null,
+
     /// Identifies the dependency using the `DependencyKeyAttributes` and
     /// `DependencyOperationName`.
     dependency_config: ?DependencyConfig = null,
@@ -63,6 +68,7 @@ pub const RequestBasedServiceLevelIndicatorMetricConfig = struct {
     total_request_count_metric: ?[]const MetricDataQuery = null,
 
     pub const json_field_names = .{
+        .composite_sli_config = "CompositeSliConfig",
         .dependency_config = "DependencyConfig",
         .key_attributes = "KeyAttributes",
         .metric_name = "MetricName",

@@ -99,6 +99,8 @@ pub const ValidationExceptionType = enum {
     invalid_certificate_signature_algorithm,
     missing_certificate_domain_name,
     invalid_arn,
+    scte_in_manifests_invalid_configuration,
+    custom_ad_types_invalid_configuration,
 
     pub const json_field_names = .{
         .container_type_immutable = "CONTAINER_TYPE_IMMUTABLE",
@@ -199,6 +201,8 @@ pub const ValidationExceptionType = enum {
         .invalid_certificate_signature_algorithm = "INVALID_CERTIFICATE_SIGNATURE_ALGORITHM",
         .missing_certificate_domain_name = "MISSING_CERTIFICATE_DOMAIN_NAME",
         .invalid_arn = "INVALID_ARN",
+        .scte_in_manifests_invalid_configuration = "SCTE_IN_MANIFESTS_INVALID_CONFIGURATION",
+        .custom_ad_types_invalid_configuration = "CUSTOM_AD_TYPES_INVALID_CONFIGURATION",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -301,6 +305,8 @@ pub const ValidationExceptionType = enum {
             .invalid_certificate_signature_algorithm => "INVALID_CERTIFICATE_SIGNATURE_ALGORITHM",
             .missing_certificate_domain_name => "MISSING_CERTIFICATE_DOMAIN_NAME",
             .invalid_arn => "INVALID_ARN",
+            .scte_in_manifests_invalid_configuration => "SCTE_IN_MANIFESTS_INVALID_CONFIGURATION",
+            .custom_ad_types_invalid_configuration => "CUSTOM_AD_TYPES_INVALID_CONFIGURATION",
         };
     }
 

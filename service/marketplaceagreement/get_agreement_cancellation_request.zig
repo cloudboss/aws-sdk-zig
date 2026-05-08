@@ -29,8 +29,7 @@ pub const GetAgreementCancellationRequestOutput = struct {
     /// request. Use `DescribeAgreement` to retrieve full agreement details.
     agreement_id: ?[]const u8 = null,
 
-    /// The date and time when the cancellation request was created, as a POSIX
-    /// timestamp (Unix epoch seconds).
+    /// The date and time when the cancellation request was created.
     created_at: ?i64 = null,
 
     /// The detailed description of the cancellation reason, if provided.
@@ -39,17 +38,14 @@ pub const GetAgreementCancellationRequestOutput = struct {
     /// The reason code provided for the cancellation.
     reason_code: ?AgreementCancellationRequestReasonCode = null,
 
-    /// The current status of the cancellation request. Possible values include
-    /// `PENDING_APPROVAL`, `APPROVED`, `REJECTED`, `CANCELLED`, and
-    /// `VALIDATION_FAILED`.
+    /// The current status of the cancellation request.
     status: ?AgreementCancellationRequestStatus = null,
 
     /// A message providing additional context about the cancellation request
     /// status.
     status_message: ?[]const u8 = null,
 
-    /// The date and time when the cancellation request was last updated, as a POSIX
-    /// timestamp (Unix epoch seconds).
+    /// The date and time when the cancellation request was last updated.
     updated_at: ?i64 = null,
 
     pub const json_field_names = .{
@@ -150,6 +146,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
         return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

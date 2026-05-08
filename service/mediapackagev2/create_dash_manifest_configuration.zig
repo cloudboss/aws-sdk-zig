@@ -9,6 +9,7 @@ const DashProgramInformation = @import("dash_program_information.zig").DashProgr
 const ScteDash = @import("scte_dash.zig").ScteDash;
 const DashSegmentTemplateFormat = @import("dash_segment_template_format.zig").DashSegmentTemplateFormat;
 const DashSubtitleConfiguration = @import("dash_subtitle_configuration.zig").DashSubtitleConfiguration;
+const UriPathType = @import("uri_path_type.zig").UriPathType;
 const DashUtcTiming = @import("dash_utc_timing.zig").DashUtcTiming;
 
 /// Create a DASH manifest configuration.
@@ -87,6 +88,13 @@ pub const CreateDashManifestConfiguration = struct {
     /// the manifest.
     suggested_presentation_delay_seconds: ?i32 = null,
 
+    /// The type of path to use in manifest URIs. `LEAF` uses leaf-relative paths
+    /// (for example, `index_1.mpd`). `ROOT` uses root-relative paths that include
+    /// the full path from root (for example,
+    /// `/out/v1/channel-group/channel/endpoint/index_1.mpd`). If you don't specify
+    /// a value, the default is `LEAF`.
+    uri_path_type: ?UriPathType = null,
+
     /// Determines the type of UTC timing included in the DASH Media Presentation
     /// Description (MPD).
     utc_timing: ?DashUtcTiming = null,
@@ -108,6 +116,7 @@ pub const CreateDashManifestConfiguration = struct {
         .segment_template_format = "SegmentTemplateFormat",
         .subtitle_configuration = "SubtitleConfiguration",
         .suggested_presentation_delay_seconds = "SuggestedPresentationDelaySeconds",
+        .uri_path_type = "UriPathType",
         .utc_timing = "UtcTiming",
     };
 };

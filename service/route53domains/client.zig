@@ -151,7 +151,8 @@ pub const Client = struct {
     ///   the
     /// registrant contact. The email will come from
     /// `noreply@domainnameverification.net` or
-    /// `noreply@registrar.amazon.com`.
+    /// `noreply@emailverification.info` or
+    /// `noreply@registrar.amazon`.
     pub fn deleteDomain(self: *Self, allocator: std.mem.Allocator, input: delete_domain.DeleteDomainInput, options: CallOptions) !delete_domain.DeleteDomainOutput {
         return delete_domain.execute(self, allocator, input, options);
     }

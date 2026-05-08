@@ -11,6 +11,7 @@ const GetHlsManifestConfiguration = @import("get_hls_manifest_configuration.zig"
 const GetLowLatencyHlsManifestConfiguration = @import("get_low_latency_hls_manifest_configuration.zig").GetLowLatencyHlsManifestConfiguration;
 const GetMssManifestConfiguration = @import("get_mss_manifest_configuration.zig").GetMssManifestConfiguration;
 const Segment = @import("segment.zig").Segment;
+const UriSeparator = @import("uri_separator.zig").UriSeparator;
 
 pub const GetOriginEndpointInput = struct {
     /// The name that describes the channel group. The name is the primary
@@ -100,6 +101,9 @@ pub const GetOriginEndpointOutput = struct {
     /// endpoint.
     tags: ?[]const aws.map.StringMapEntry = null,
 
+    /// The separator character used in generated URIs for this origin endpoint.
+    uri_separator: ?UriSeparator = null,
+
     pub const json_field_names = .{
         .arn = "Arn",
         .channel_group_name = "ChannelGroupName",
@@ -119,6 +123,7 @@ pub const GetOriginEndpointOutput = struct {
         .segment = "Segment",
         .startover_window_seconds = "StartoverWindowSeconds",
         .tags = "Tags",
+        .uri_separator = "UriSeparator",
     };
 };
 

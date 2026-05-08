@@ -5,13 +5,15 @@ const EndpointIpAddressType = @import("endpoint_ip_address_type.zig").EndpointIp
 /// Configuration for a managed VPC Lattice resource. The gateway creates and
 /// manages the VPC Lattice resource gateway and resource configuration on your
 /// behalf using a service-linked role.
-pub const ManagedLatticeResource = struct {
+pub const ManagedVpcResource = struct {
     /// The IP address type for the resource configuration endpoint.
     endpoint_ip_address_type: EndpointIpAddressType,
 
-    /// An intermediate publicly resolvable domain used as the VPC Lattice resource
-    /// configuration endpoint. Required when your private endpoint uses a domain
-    /// that is not publicly resolvable.
+    /// An intermediate domain to use as the resource configuration endpoint instead
+    /// of the actual target domain. Use this when you want to route traffic through
+    /// an intermediate component such as a VPC endpoint or internal load balancer.
+    /// For more information, see xref:lattice-vpc-egress-routing-domain[Route
+    /// traffic through an intermediate domain].
     routing_domain: ?[]const u8 = null,
 
     /// The security group IDs to associate with the VPC Lattice resource gateway.

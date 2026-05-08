@@ -1,4 +1,5 @@
 const ResourceGatewayIpAddressType = @import("resource_gateway_ip_address_type.zig").ResourceGatewayIpAddressType;
+const ResourceConfigDnsResolution = @import("resource_config_dns_resolution.zig").ResourceConfigDnsResolution;
 const ResourceGatewayStatus = @import("resource_gateway_status.zig").ResourceGatewayStatus;
 
 /// Summary information about a resource gateway.
@@ -26,6 +27,10 @@ pub const ResourceGatewaySummary = struct {
     /// The name of the resource gateway.
     name: ?[]const u8 = null,
 
+    /// The DNS resolution type for resource configurations that are associated with
+    /// this resource gateway.
+    resource_config_dns_resolution: ?ResourceConfigDnsResolution = null,
+
     /// The IDs of the security groups applied to the resource gateway.
     security_group_ids: ?[]const []const u8 = null,
 
@@ -46,6 +51,7 @@ pub const ResourceGatewaySummary = struct {
         .ipv_4_addresses_per_eni = "ipv4AddressesPerEni",
         .last_updated_at = "lastUpdatedAt",
         .name = "name",
+        .resource_config_dns_resolution = "resourceConfigDnsResolution",
         .security_group_ids = "securityGroupIds",
         .status = "status",
         .subnet_ids = "subnetIds",

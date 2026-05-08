@@ -90,7 +90,7 @@ pub const DecryptInput = struct {
     ///
     /// To specify a KMS key, use its key ID, key ARN, alias name, or alias ARN.
     /// When using an alias name, prefix it with `"alias/"`. To specify a KMS key in
-    /// a different Amazon Web Services account, you must use the key ARN or alias
+    /// a different Amazon Web Services account, you should use the key ARN or alias
     /// ARN.
     ///
     /// For example:

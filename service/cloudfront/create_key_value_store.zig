@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ImportSource = @import("import_source.zig").ImportSource;
+const Tags = @import("tags.zig").Tags;
 const KeyValueStore = @import("key_value_store.zig").KeyValueStore;
 const serde = @import("serde.zig");
 
@@ -19,6 +20,8 @@ pub const CreateKeyValueStoreInput = struct {
     /// The name of the key value store. The minimum length is 1 character and the
     /// maximum length is 64 characters.
     name: []const u8,
+
+    tags: ?Tags = null,
 };
 
 pub const CreateKeyValueStoreOutput = struct {
@@ -79,6 +82,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateKeyValueStoreInpu
     try body_buf.appendSlice(allocator, "<Name>");
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.name);
     try body_buf.appendSlice(allocator, "</Name>");
+    if (input.tags) |v| {
+        try body_buf.appendSlice(allocator, "<Tags>");
+        try serde.serializeTags(allocator, &body_buf, v);
+        try body_buf.appendSlice(allocator, "</Tags>");
+    }
     try body_buf.appendSlice(allocator, "</CreateKeyValueStoreRequest>");
     const body = try body_buf.toOwnedSlice(allocator);
 

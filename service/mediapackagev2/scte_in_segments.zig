@@ -3,16 +3,19 @@ const std = @import("std");
 pub const ScteInSegments = enum {
     none,
     all,
+    matches_filter,
 
     pub const json_field_names = .{
         .none = "NONE",
         .all = "ALL",
+        .matches_filter = "MATCHES_FILTER",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .none => "NONE",
             .all => "ALL",
+            .matches_filter => "MATCHES_FILTER",
         };
     }
 

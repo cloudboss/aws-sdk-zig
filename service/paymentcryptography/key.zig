@@ -5,6 +5,7 @@ const KeyAttributes = @import("key_attributes.zig").KeyAttributes;
 const KeyCheckValueAlgorithm = @import("key_check_value_algorithm.zig").KeyCheckValueAlgorithm;
 const KeyOrigin = @import("key_origin.zig").KeyOrigin;
 const KeyState = @import("key_state.zig").KeyState;
+const MpaStatus = @import("mpa_status.zig").MpaStatus;
 const MultiRegionKeyType = @import("multi_region_key_type.zig").MultiRegionKeyType;
 const ReplicationStatusType = @import("replication_status_type.zig").ReplicationStatusType;
 
@@ -67,6 +68,9 @@ pub const Key = struct {
     /// The state of key that is being created or deleted.
     key_state: KeyState,
 
+    /// The Multi-Party Approval (MPA) status for the key, if applicable.
+    mpa_status: ?MpaStatus = null,
+
     /// Indicates whether this key is a Multi-Region key and its role in the
     /// Multi-Region key hierarchy.
     ///
@@ -119,6 +123,7 @@ pub const Key = struct {
         .key_check_value_algorithm = "KeyCheckValueAlgorithm",
         .key_origin = "KeyOrigin",
         .key_state = "KeyState",
+        .mpa_status = "MpaStatus",
         .multi_region_key_type = "MultiRegionKeyType",
         .primary_region = "PrimaryRegion",
         .replication_status = "ReplicationStatus",

@@ -30,6 +30,13 @@ pub const ImportKeyInput = struct {
 
     replication_regions: ?[]const []const u8 = null,
 
+    /// The comment from the requester explaining the reason for the import.
+    ///
+    /// Don't include personal, confidential or sensitive information in this field.
+    /// This field may be displayed in plaintext in CloudTrail logs and other
+    /// output.
+    requester_comment: ?[]const u8 = null,
+
     /// Assigns one or more tags to the Amazon Web Services Payment Cryptography
     /// key. Use this parameter to tag a key when it is imported. To tag an existing
     /// Amazon Web Services Payment Cryptography key, use the
@@ -55,6 +62,7 @@ pub const ImportKeyInput = struct {
         .key_check_value_algorithm = "KeyCheckValueAlgorithm",
         .key_material = "KeyMaterial",
         .replication_regions = "ReplicationRegions",
+        .requester_comment = "RequesterComment",
         .tags = "Tags",
     };
 };
@@ -148,6 +156,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "InternalServerException")) {
         return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "PublicPolicyException")) {
+        return .{ .arena = arena, .kind = .{ .public_policy_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

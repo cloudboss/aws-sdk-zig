@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AccessEndpoint = @import("access_endpoint.zig").AccessEndpoint;
+const AgentAccessConfig = @import("agent_access_config.zig").AgentAccessConfig;
 const ApplicationSettings = @import("application_settings.zig").ApplicationSettings;
 const ContentRedirection = @import("content_redirection.zig").ContentRedirection;
 const StorageConnector = @import("storage_connector.zig").StorageConnector;
@@ -17,6 +18,10 @@ pub const CreateStackInput = struct {
     /// the stack can connect to WorkSpaces Applications only through the specified
     /// endpoints.
     access_endpoints: ?[]const AccessEndpoint = null,
+
+    /// The configuration for agent access on the stack. If specified, agent access
+    /// is enabled for the stack.
+    agent_access_config: ?AgentAccessConfig = null,
 
     /// The persistent application settings for users of a stack. When these
     /// settings are enabled, changes that users make to applications and Windows
@@ -75,6 +80,7 @@ pub const CreateStackInput = struct {
 
     pub const json_field_names = .{
         .access_endpoints = "AccessEndpoints",
+        .agent_access_config = "AgentAccessConfig",
         .application_settings = "ApplicationSettings",
         .content_redirection = "ContentRedirection",
         .description = "Description",

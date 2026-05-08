@@ -42,6 +42,8 @@ pub const AdsInteractionExcludeEventType = enum {
     vod_time_based_avail_plan_warning_no_advertisements,
     interstitial_vod_success,
     interstitial_vod_failure,
+    pre_ads_request_hook_error,
+    pre_ads_request_function_error,
 
     pub const json_field_names = .{
         .ad_marker_found = "AD_MARKER_FOUND",
@@ -85,6 +87,8 @@ pub const AdsInteractionExcludeEventType = enum {
         .vod_time_based_avail_plan_warning_no_advertisements = "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS",
         .interstitial_vod_success = "INTERSTITIAL_VOD_SUCCESS",
         .interstitial_vod_failure = "INTERSTITIAL_VOD_FAILURE",
+        .pre_ads_request_hook_error = "PRE_ADS_REQUEST_HOOK_ERROR",
+        .pre_ads_request_function_error = "PRE_ADS_REQUEST_FUNCTION_ERROR",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -130,6 +134,8 @@ pub const AdsInteractionExcludeEventType = enum {
             .vod_time_based_avail_plan_warning_no_advertisements => "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS",
             .interstitial_vod_success => "INTERSTITIAL_VOD_SUCCESS",
             .interstitial_vod_failure => "INTERSTITIAL_VOD_FAILURE",
+            .pre_ads_request_hook_error => "PRE_ADS_REQUEST_HOOK_ERROR",
+            .pre_ads_request_function_error => "PRE_ADS_REQUEST_FUNCTION_ERROR",
         };
     }
 

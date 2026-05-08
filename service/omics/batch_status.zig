@@ -1,6 +1,7 @@
 const std = @import("std");
 
 pub const BatchStatus = enum {
+    creating,
     pending,
     submitting,
     inprogress,
@@ -12,6 +13,7 @@ pub const BatchStatus = enum {
     runs_deleted,
 
     pub const json_field_names = .{
+        .creating = "CREATING",
         .pending = "PENDING",
         .submitting = "SUBMITTING",
         .inprogress = "INPROGRESS",
@@ -25,6 +27,7 @@ pub const BatchStatus = enum {
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
+            .creating => "CREATING",
             .pending => "PENDING",
             .submitting => "SUBMITTING",
             .inprogress => "INPROGRESS",

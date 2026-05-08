@@ -1,6 +1,7 @@
 const InferenceComponentComputeResourceRequirements = @import("inference_component_compute_resource_requirements.zig").InferenceComponentComputeResourceRequirements;
 const InferenceComponentContainerSpecification = @import("inference_component_container_specification.zig").InferenceComponentContainerSpecification;
 const InferenceComponentDataCacheConfig = @import("inference_component_data_cache_config.zig").InferenceComponentDataCacheConfig;
+const ProductionVariantInstanceType = @import("production_variant_instance_type.zig").ProductionVariantInstanceType;
 const InferenceComponentSchedulingConfig = @import("inference_component_scheduling_config.zig").InferenceComponentSchedulingConfig;
 const InferenceComponentStartupParameters = @import("inference_component_startup_parameters.zig").InferenceComponentStartupParameters;
 
@@ -43,6 +44,11 @@ pub const InferenceComponentSpecification = struct {
     /// Settings that affect how the inference component caches data.
     data_cache_config: ?InferenceComponentDataCacheConfig = null,
 
+    /// The ML compute instance type for the inference component specification.
+    /// Specifies which instance type this specification applies to. Required when
+    /// using the `Specifications` parameter with multiple entries.
+    instance_type: ?ProductionVariantInstanceType = null,
+
     /// The name of an existing SageMaker AI model object in your account that you
     /// want to deploy with the inference component.
     model_name: ?[]const u8 = null,
@@ -59,6 +65,7 @@ pub const InferenceComponentSpecification = struct {
         .compute_resource_requirements = "ComputeResourceRequirements",
         .container = "Container",
         .data_cache_config = "DataCacheConfig",
+        .instance_type = "InstanceType",
         .model_name = "ModelName",
         .scheduling_config = "SchedulingConfig",
         .startup_parameters = "StartupParameters",

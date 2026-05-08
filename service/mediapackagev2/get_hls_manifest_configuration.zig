@@ -1,6 +1,7 @@
 const FilterConfiguration = @import("filter_configuration.zig").FilterConfiguration;
 const ScteHls = @import("scte_hls.zig").ScteHls;
 const StartTag = @import("start_tag.zig").StartTag;
+const UriPathType = @import("uri_path_type.zig").UriPathType;
 
 /// Retrieve the HTTP live streaming (HLS) manifest configuration.
 pub const GetHlsManifestConfiguration = struct {
@@ -39,6 +40,11 @@ pub const GetHlsManifestConfiguration = struct {
 
     start_tag: ?StartTag = null,
 
+    /// The type of path used in manifest URIs. `LEAF` indicates leaf-relative
+    /// paths. `ROOT` indicates root-relative paths that include the full path from
+    /// root.
+    uri_path_type: ?UriPathType = null,
+
     /// The egress domain URL for stream delivery from MediaPackage.
     url: []const u8,
 
@@ -57,6 +63,7 @@ pub const GetHlsManifestConfiguration = struct {
         .program_date_time_interval_seconds = "ProgramDateTimeIntervalSeconds",
         .scte_hls = "ScteHls",
         .start_tag = "StartTag",
+        .uri_path_type = "UriPathType",
         .url = "Url",
         .url_encode_child_manifest = "UrlEncodeChildManifest",
     };

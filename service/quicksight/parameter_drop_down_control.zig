@@ -1,6 +1,7 @@
 const CascadingControlConfiguration = @import("cascading_control_configuration.zig").CascadingControlConfiguration;
 const CommitMode = @import("commit_mode.zig").CommitMode;
 const ControlSortConfiguration = @import("control_sort_configuration.zig").ControlSortConfiguration;
+const ControlTitleFormatText = @import("control_title_format_text.zig").ControlTitleFormatText;
 const DropDownControlDisplayOptions = @import("drop_down_control_display_options.zig").DropDownControlDisplayOptions;
 const ParameterSelectableValues = @import("parameter_selectable_values.zig").ParameterSelectableValues;
 const SheetControlListType = @import("sheet_control_list_type.zig").SheetControlListType;
@@ -20,6 +21,9 @@ pub const ParameterDropDownControl = struct {
     /// sort configuration can be applied per control.
     control_sort_configurations: ?[]const ControlSortConfiguration = null,
 
+    /// The title text format configuration for the control.
+    control_title_format_text: ?ControlTitleFormatText = null,
+
     /// The display options of a control.
     display_options: ?DropDownControlDisplayOptions = null,
 
@@ -33,7 +37,7 @@ pub const ParameterDropDownControl = struct {
     source_parameter_name: []const u8,
 
     /// The title of the `ParameterDropDownControl`.
-    title: []const u8,
+    title: []const u8 = "",
 
     /// The type parameter name of the `ParameterDropDownControl`.
     @"type": ?SheetControlListType = null,
@@ -42,6 +46,7 @@ pub const ParameterDropDownControl = struct {
         .cascading_control_configuration = "CascadingControlConfiguration",
         .commit_mode = "CommitMode",
         .control_sort_configurations = "ControlSortConfigurations",
+        .control_title_format_text = "ControlTitleFormatText",
         .display_options = "DisplayOptions",
         .parameter_control_id = "ParameterControlId",
         .selectable_values = "SelectableValues",

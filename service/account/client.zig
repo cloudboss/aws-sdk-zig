@@ -83,9 +83,9 @@ pub const Client = struct {
     }
 
     /// Retrieves information about the specified account including its account
-    /// name, account ID, and account creation date and time. To use this API, an
-    /// IAM user or role must have the `account:GetAccountInformation` IAM
-    /// permission.
+    /// name, account ID, account creation date and time, and account state. To use
+    /// this API, an IAM user or role must have the `account:GetAccountInformation`
+    /// IAM permission.
     pub fn getAccountInformation(self: *Self, allocator: std.mem.Allocator, input: get_account_information.GetAccountInformationInput, options: CallOptions) !get_account_information.GetAccountInformationOutput {
         return get_account_information.execute(self, allocator, input, options);
     }

@@ -1,4 +1,5 @@
 const FontConfiguration = @import("font_configuration.zig").FontConfiguration;
+const ControlTitleFontConfiguration = @import("control_title_font_configuration.zig").ControlTitleFontConfiguration;
 const Font = @import("font.zig").Font;
 const VisualSubtitleFontConfiguration = @import("visual_subtitle_font_configuration.zig").VisualSubtitleFontConfiguration;
 const VisualTitleFontConfiguration = @import("visual_title_font_configuration.zig").VisualTitleFontConfiguration;
@@ -8,6 +9,9 @@ pub const Typography = struct {
     axis_label_font_configuration: ?FontConfiguration = null,
 
     axis_title_font_configuration: ?FontConfiguration = null,
+
+    /// Configures the display properties of the control title.
+    control_title_font_configuration: ?ControlTitleFontConfiguration = null,
 
     data_label_font_configuration: ?FontConfiguration = null,
 
@@ -27,6 +31,7 @@ pub const Typography = struct {
     pub const json_field_names = .{
         .axis_label_font_configuration = "AxisLabelFontConfiguration",
         .axis_title_font_configuration = "AxisTitleFontConfiguration",
+        .control_title_font_configuration = "ControlTitleFontConfiguration",
         .data_label_font_configuration = "DataLabelFontConfiguration",
         .font_families = "FontFamilies",
         .legend_title_font_configuration = "LegendTitleFontConfiguration",

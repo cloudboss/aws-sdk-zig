@@ -49,8 +49,9 @@ pub const UpdateHarnessInput = struct {
     /// If not specified, the existing value is retained.
     max_iterations: ?i32 = null,
 
-    /// The maximum number of tokens the agent can generate per iteration. If not
-    /// specified, the existing value is retained.
+    /// The maximum total number of output tokens the agent can generate across all
+    /// model calls within a single invocation. If not specified, the existing value
+    /// is retained.
     max_tokens: ?i32 = null,
 
     /// The AgentCore Memory configuration. Use the optionalValue wrapper to set a

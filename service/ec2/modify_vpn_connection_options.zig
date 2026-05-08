@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const VpnTunnelBandwidth = @import("vpn_tunnel_bandwidth.zig").VpnTunnelBandwidth;
 const VpnConnection = @import("vpn_connection.zig").VpnConnection;
 const serde = @import("serde.zig");
 
@@ -35,6 +36,12 @@ pub const ModifyVpnConnectionOptionsInput = struct {
     ///
     /// Default: `::/0`
     remote_ipv_6_network_cidr: ?[]const u8 = null,
+
+    /// The desired bandwidth specification for the VPN connection. `standard`
+    /// supports up to 1.25 Gbps per tunnel, while `large` supports up to 5 Gbps per
+    /// tunnel. Large bandwidth is only available for VPN connections attached to a
+    /// transit gateway or to Cloud WAN. The default value is `standard`.
+    tunnel_bandwidth: ?VpnTunnelBandwidth = null,
 
     /// The ID of the Site-to-Site VPN connection.
     vpn_connection_id: []const u8,
@@ -97,6 +104,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyVpnConnectionOpti
     if (input.remote_ipv_6_network_cidr) |v| {
         try body_buf.appendSlice(allocator, "&RemoteIpv6NetworkCidr=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
+    if (input.tunnel_bandwidth) |v| {
+        try body_buf.appendSlice(allocator, "&TunnelBandwidth=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     try body_buf.appendSlice(allocator, "&VpnConnectionId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.vpn_connection_id);

@@ -12,11 +12,15 @@ pub const RenewalTerm = struct {
     /// Additional parameters specified by the acceptor while accepting the term.
     configuration: ?RenewalTermConfiguration = null,
 
+    /// The unique identifier for the term.
+    id: ?[]const u8 = null,
+
     /// Category of the term being updated.
     @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",
+        .id = "id",
         .@"type" = "type",
     };
 };

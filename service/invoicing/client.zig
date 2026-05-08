@@ -60,6 +60,10 @@ pub const Client = struct {
         return create_invoice_unit.execute(self, allocator, input, options);
     }
 
+    /// * **This feature API is subject to changing at any time. For more
+    ///   information, see the [Amazon Web Services Service
+    ///   Terms](https://aws.amazon.com/service-terms/) (Betas and Previews).** *
+    ///
     /// Creates a procurement portal preference configuration for e-invoice delivery
     /// and purchase order retrieval. This preference defines how invoices are
     /// delivered to a procurement portal and how purchase orders are retrieved.
@@ -72,6 +76,10 @@ pub const Client = struct {
         return delete_invoice_unit.execute(self, allocator, input, options);
     }
 
+    /// * **This feature API is subject to changing at any time. For more
+    ///   information, see the [Amazon Web Services Service
+    ///   Terms](https://aws.amazon.com/service-terms/) (Betas and Previews).** *
+    ///
     /// Deletes an existing procurement portal preference. This action cannot be
     /// undone. Active e-invoice delivery and PO retrieval configurations will be
     /// terminated.
@@ -95,6 +103,10 @@ pub const Client = struct {
         return get_invoice_unit.execute(self, allocator, input, options);
     }
 
+    /// * **This feature API is subject to changing at any time. For more
+    ///   information, see the [Amazon Web Services Service
+    ///   Terms](https://aws.amazon.com/service-terms/) (Betas and Previews).** *
+    ///
     /// Retrieves the details of a specific procurement portal preference
     /// configuration.
     pub fn getProcurementPortalPreference(self: *Self, allocator: std.mem.Allocator, input: get_procurement_portal_preference.GetProcurementPortalPreferenceInput, options: CallOptions) !get_procurement_portal_preference.GetProcurementPortalPreferenceOutput {
@@ -112,6 +124,10 @@ pub const Client = struct {
         return list_invoice_units.execute(self, allocator, input, options);
     }
 
+    /// * **This feature API is subject to changing at any time. For more
+    ///   information, see the [Amazon Web Services Service
+    ///   Terms](https://aws.amazon.com/service-terms/) (Betas and Previews).** *
+    ///
     /// Retrieves a list of procurement portal preferences associated with the
     /// Amazon Web Services account.
     pub fn listProcurementPortalPreferences(self: *Self, allocator: std.mem.Allocator, input: list_procurement_portal_preferences.ListProcurementPortalPreferencesInput, options: CallOptions) !list_procurement_portal_preferences.ListProcurementPortalPreferencesOutput {
@@ -123,6 +139,10 @@ pub const Client = struct {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
+    /// * **This feature API is subject to changing at any time. For more
+    ///   information, see the [Amazon Web Services Service
+    ///   Terms](https://aws.amazon.com/service-terms/) (Betas and Previews).** *
+    ///
     /// Updates an existing procurement portal preference configuration. This
     /// operation can modify settings for e-invoice delivery and purchase order
     /// retrieval.
@@ -146,6 +166,10 @@ pub const Client = struct {
         return update_invoice_unit.execute(self, allocator, input, options);
     }
 
+    /// * **This feature API is subject to changing at any time. For more
+    ///   information, see the [Amazon Web Services Service
+    ///   Terms](https://aws.amazon.com/service-terms/) (Betas and Previews).** *
+    ///
     /// Updates the status of a procurement portal preference, including the
     /// activation state of e-invoice delivery and purchase order retrieval
     /// features.

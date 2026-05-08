@@ -13,7 +13,7 @@ pub const SpanMessage = struct {
     /// Message timestamp
     timestamp: i64,
 
-    /// Message content values (text, tool use, tool result)
+    /// Message content values (text, tool use, tool result, reasoning)
     values: []const SpanMessageValue,
 
     pub const json_field_names = .{

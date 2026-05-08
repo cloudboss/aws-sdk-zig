@@ -5,17 +5,32 @@ const batch_create_memory_records = @import("batch_create_memory_records.zig");
 const batch_delete_memory_records = @import("batch_delete_memory_records.zig");
 const batch_update_memory_records = @import("batch_update_memory_records.zig");
 const complete_resource_token_auth = @import("complete_resource_token_auth.zig");
+const create_ab_test = @import("create_ab_test.zig");
 const create_event = @import("create_event.zig");
+const create_payment_instrument = @import("create_payment_instrument.zig");
+const create_payment_session = @import("create_payment_session.zig");
+const delete_ab_test = @import("delete_ab_test.zig");
+const delete_batch_evaluation = @import("delete_batch_evaluation.zig");
 const delete_event = @import("delete_event.zig");
 const delete_memory_record = @import("delete_memory_record.zig");
+const delete_payment_instrument = @import("delete_payment_instrument.zig");
+const delete_payment_session = @import("delete_payment_session.zig");
+const delete_recommendation = @import("delete_recommendation.zig");
 const evaluate_ = @import("evaluate.zig");
+const get_ab_test = @import("get_ab_test.zig");
 const get_agent_card = @import("get_agent_card.zig");
+const get_batch_evaluation = @import("get_batch_evaluation.zig");
 const get_browser_session = @import("get_browser_session.zig");
 const get_code_interpreter_session = @import("get_code_interpreter_session.zig");
 const get_event = @import("get_event.zig");
 const get_memory_record = @import("get_memory_record.zig");
+const get_payment_instrument = @import("get_payment_instrument.zig");
+const get_payment_instrument_balance = @import("get_payment_instrument_balance.zig");
+const get_payment_session = @import("get_payment_session.zig");
+const get_recommendation = @import("get_recommendation.zig");
 const get_resource_api_key = @import("get_resource_api_key.zig");
 const get_resource_oauth_2_token = @import("get_resource_oauth_2_token.zig");
+const get_resource_payment_token = @import("get_resource_payment_token.zig");
 const get_workload_access_token = @import("get_workload_access_token.zig");
 const get_workload_access_token_for_jwt = @import("get_workload_access_token_for_jwt.zig");
 const get_workload_access_token_for_user_id = @import("get_workload_access_token_for_user_id.zig");
@@ -24,22 +39,32 @@ const invoke_agent_runtime_command = @import("invoke_agent_runtime_command.zig")
 const invoke_browser = @import("invoke_browser.zig");
 const invoke_code_interpreter = @import("invoke_code_interpreter.zig");
 const invoke_harness = @import("invoke_harness.zig");
+const list_ab_tests = @import("list_ab_tests.zig");
 const list_actors = @import("list_actors.zig");
+const list_batch_evaluations = @import("list_batch_evaluations.zig");
 const list_browser_sessions = @import("list_browser_sessions.zig");
 const list_code_interpreter_sessions = @import("list_code_interpreter_sessions.zig");
 const list_events = @import("list_events.zig");
 const list_memory_extraction_jobs = @import("list_memory_extraction_jobs.zig");
 const list_memory_records = @import("list_memory_records.zig");
+const list_payment_instruments = @import("list_payment_instruments.zig");
+const list_payment_sessions = @import("list_payment_sessions.zig");
+const list_recommendations = @import("list_recommendations.zig");
 const list_sessions = @import("list_sessions.zig");
+const process_payment = @import("process_payment.zig");
 const retrieve_memory_records = @import("retrieve_memory_records.zig");
 const save_browser_session_profile = @import("save_browser_session_profile.zig");
 const search_registry_records = @import("search_registry_records.zig");
+const start_batch_evaluation = @import("start_batch_evaluation.zig");
 const start_browser_session = @import("start_browser_session.zig");
 const start_code_interpreter_session = @import("start_code_interpreter_session.zig");
 const start_memory_extraction_job = @import("start_memory_extraction_job.zig");
+const start_recommendation = @import("start_recommendation.zig");
+const stop_batch_evaluation = @import("stop_batch_evaluation.zig");
 const stop_browser_session = @import("stop_browser_session.zig");
 const stop_code_interpreter_session = @import("stop_code_interpreter_session.zig");
 const stop_runtime_session = @import("stop_runtime_session.zig");
+const update_ab_test = @import("update_ab_test.zig");
 const update_browser_stream = @import("update_browser_stream.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
@@ -95,6 +120,14 @@ pub const Client = struct {
         return complete_resource_token_auth.execute(self, allocator, input, options);
     }
 
+    /// Creates an A/B test for comparing agent configurations. A/B tests split
+    /// traffic between a control variant and a treatment variant through a gateway,
+    /// then evaluate performance using online evaluation configurations to
+    /// determine which variant performs better.
+    pub fn createAbTest(self: *Self, allocator: std.mem.Allocator, input: create_ab_test.CreateABTestInput, options: CallOptions) !create_ab_test.CreateABTestOutput {
+        return create_ab_test.execute(self, allocator, input, options);
+    }
+
     /// Creates an event in an AgentCore Memory resource. Events represent
     /// interactions or activities that occur within a session and are associated
     /// with specific actors.
@@ -105,6 +138,26 @@ pub const Client = struct {
     /// This operation is subject to request rate limiting.
     pub fn createEvent(self: *Self, allocator: std.mem.Allocator, input: create_event.CreateEventInput, options: CallOptions) !create_event.CreateEventOutput {
         return create_event.execute(self, allocator, input, options);
+    }
+
+    /// Create a new payment instrument for a connector
+    pub fn createPaymentInstrument(self: *Self, allocator: std.mem.Allocator, input: create_payment_instrument.CreatePaymentInstrumentInput, options: CallOptions) !create_payment_instrument.CreatePaymentInstrumentOutput {
+        return create_payment_instrument.execute(self, allocator, input, options);
+    }
+
+    /// Create a new payment manager session
+    pub fn createPaymentSession(self: *Self, allocator: std.mem.Allocator, input: create_payment_session.CreatePaymentSessionInput, options: CallOptions) !create_payment_session.CreatePaymentSessionOutput {
+        return create_payment_session.execute(self, allocator, input, options);
+    }
+
+    /// Deletes an A/B test and its associated gateway rules.
+    pub fn deleteAbTest(self: *Self, allocator: std.mem.Allocator, input: delete_ab_test.DeleteABTestInput, options: CallOptions) !delete_ab_test.DeleteABTestOutput {
+        return delete_ab_test.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a batch evaluation and its associated results.
+    pub fn deleteBatchEvaluation(self: *Self, allocator: std.mem.Allocator, input: delete_batch_evaluation.DeleteBatchEvaluationInput, options: CallOptions) !delete_batch_evaluation.DeleteBatchEvaluationOutput {
+        return delete_batch_evaluation.execute(self, allocator, input, options);
     }
 
     /// Deletes an event from an AgentCore Memory resource. When you delete an
@@ -125,6 +178,65 @@ pub const Client = struct {
         return delete_memory_record.execute(self, allocator, input, options);
     }
 
+    /// Delete a payment instrument
+    ///
+    /// Marks a payment instrument as deleted by updating its status to DELETED.
+    /// This is a soft delete
+    /// operation that preserves the record in the database for audit and compliance
+    /// purposes. The record
+    /// remains queryable for audit purposes but is excluded from normal list and
+    /// get operations.
+    ///
+    /// Deleting an already-deleted or non-existent instrument returns
+    /// ResourceNotFoundException (404).
+    ///
+    /// Authorization: The caller must own the instrument (accountId, userId, and
+    /// paymentManagerId must match).
+    /// If authorization fails, a 403 Forbidden error is returned.
+    ///
+    /// Timestamp Management: The updatedAt timestamp is set to the current time,
+    /// while createdAt is preserved.
+    /// The version field is incremented for optimistic locking.
+    ///
+    /// Errors:
+    /// - ResourceNotFoundException: The instrument does not exist or is already
+    /// deleted
+    /// - AccessDeniedException: The caller is not authorized to delete this
+    /// instrument
+    /// - ValidationException: Required fields are missing or invalid
+    /// - InternalServerException: An unexpected server error occurred
+    pub fn deletePaymentInstrument(self: *Self, allocator: std.mem.Allocator, input: delete_payment_instrument.DeletePaymentInstrumentInput, options: CallOptions) !delete_payment_instrument.DeletePaymentInstrumentOutput {
+        return delete_payment_instrument.execute(self, allocator, input, options);
+    }
+
+    /// Delete a payment manager session
+    ///
+    /// Permanently removes a payment session record from the database. This is a
+    /// hard delete operation
+    /// that removes the session completely.
+    ///
+    /// Deleting a non-existent or already-deleted session returns
+    /// ResourceNotFoundException (404).
+    ///
+    /// Authorization: The caller must own the session (accountId, userId, and
+    /// paymentManagerId must match).
+    /// If authorization fails, a 403 Forbidden error is returned.
+    ///
+    /// Errors:
+    /// - ResourceNotFoundException: The session does not exist or has already been
+    /// deleted
+    /// - AccessDeniedException: The caller is not authorized to delete this session
+    /// - ValidationException: Required fields are missing or invalid
+    /// - InternalServerException: An unexpected server error occurred
+    pub fn deletePaymentSession(self: *Self, allocator: std.mem.Allocator, input: delete_payment_session.DeletePaymentSessionInput, options: CallOptions) !delete_payment_session.DeletePaymentSessionOutput {
+        return delete_payment_session.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a recommendation and its associated results.
+    pub fn deleteRecommendation(self: *Self, allocator: std.mem.Allocator, input: delete_recommendation.DeleteRecommendationInput, options: CallOptions) !delete_recommendation.DeleteRecommendationOutput {
+        return delete_recommendation.execute(self, allocator, input, options);
+    }
+
     /// Performs on-demand evaluation of agent traces using a specified evaluator.
     /// This synchronous API accepts traces in OpenTelemetry format and returns
     /// immediate scoring results with detailed explanations.
@@ -132,9 +244,21 @@ pub const Client = struct {
         return evaluate_.execute(self, allocator, input, options);
     }
 
+    /// Retrieves detailed information about an A/B test, including its
+    /// configuration, status, and statistical results.
+    pub fn getAbTest(self: *Self, allocator: std.mem.Allocator, input: get_ab_test.GetABTestInput, options: CallOptions) !get_ab_test.GetABTestOutput {
+        return get_ab_test.execute(self, allocator, input, options);
+    }
+
     /// Retrieves the A2A agent card associated with an AgentCore Runtime agent.
     pub fn getAgentCard(self: *Self, allocator: std.mem.Allocator, input: get_agent_card.GetAgentCardInput, options: CallOptions) !get_agent_card.GetAgentCardOutput {
         return get_agent_card.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves detailed information about a batch evaluation, including its
+    /// status, configuration, results, and any error details.
+    pub fn getBatchEvaluation(self: *Self, allocator: std.mem.Allocator, input: get_batch_evaluation.GetBatchEvaluationInput, options: CallOptions) !get_batch_evaluation.GetBatchEvaluationOutput {
+        return get_batch_evaluation.execute(self, allocator, input, options);
     }
 
     /// Retrieves detailed information about a specific browser session in Amazon
@@ -194,6 +318,27 @@ pub const Client = struct {
         return get_memory_record.execute(self, allocator, input, options);
     }
 
+    /// Get a payment instrument by ID
+    pub fn getPaymentInstrument(self: *Self, allocator: std.mem.Allocator, input: get_payment_instrument.GetPaymentInstrumentInput, options: CallOptions) !get_payment_instrument.GetPaymentInstrumentOutput {
+        return get_payment_instrument.execute(self, allocator, input, options);
+    }
+
+    /// Get the balance of a payment instrument
+    pub fn getPaymentInstrumentBalance(self: *Self, allocator: std.mem.Allocator, input: get_payment_instrument_balance.GetPaymentInstrumentBalanceInput, options: CallOptions) !get_payment_instrument_balance.GetPaymentInstrumentBalanceOutput {
+        return get_payment_instrument_balance.execute(self, allocator, input, options);
+    }
+
+    /// Get a payment session
+    pub fn getPaymentSession(self: *Self, allocator: std.mem.Allocator, input: get_payment_session.GetPaymentSessionInput, options: CallOptions) !get_payment_session.GetPaymentSessionOutput {
+        return get_payment_session.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves detailed information about a recommendation, including its
+    /// configuration, status, and results.
+    pub fn getRecommendation(self: *Self, allocator: std.mem.Allocator, input: get_recommendation.GetRecommendationInput, options: CallOptions) !get_recommendation.GetRecommendationOutput {
+        return get_recommendation.execute(self, allocator, input, options);
+    }
+
     /// Retrieves the API key associated with an API key credential provider.
     pub fn getResourceApiKey(self: *Self, allocator: std.mem.Allocator, input: get_resource_api_key.GetResourceApiKeyInput, options: CallOptions) !get_resource_api_key.GetResourceApiKeyOutput {
         return get_resource_api_key.execute(self, allocator, input, options);
@@ -202,6 +347,12 @@ pub const Client = struct {
     /// Returns the OAuth 2.0 token of the provided resource.
     pub fn getResourceOauth2Token(self: *Self, allocator: std.mem.Allocator, input: get_resource_oauth_2_token.GetResourceOauth2TokenInput, options: CallOptions) !get_resource_oauth_2_token.GetResourceOauth2TokenOutput {
         return get_resource_oauth_2_token.execute(self, allocator, input, options);
+    }
+
+    /// Generates authentication tokens for payment providers that use
+    /// vendor-specific authentication mechanisms.
+    pub fn getResourcePaymentToken(self: *Self, allocator: std.mem.Allocator, input: get_resource_payment_token.GetResourcePaymentTokenInput, options: CallOptions) !get_resource_payment_token.GetResourcePaymentTokenOutput {
+        return get_resource_payment_token.execute(self, allocator, input, options);
     }
 
     /// Obtains a workload access token for agentic workloads not acting on behalf
@@ -320,6 +471,11 @@ pub const Client = struct {
         return invoke_harness.execute(self, allocator, input, options);
     }
 
+    /// Lists all A/B tests in the account.
+    pub fn listAbTests(self: *Self, allocator: std.mem.Allocator, input: list_ab_tests.ListABTestsInput, options: CallOptions) !list_ab_tests.ListABTestsOutput {
+        return list_ab_tests.execute(self, allocator, input, options);
+    }
+
     /// Lists all actors in an AgentCore Memory resource. We recommend using
     /// pagination to ensure that the operation returns quickly and successfully.
     ///
@@ -327,6 +483,12 @@ pub const Client = struct {
     /// permission.
     pub fn listActors(self: *Self, allocator: std.mem.Allocator, input: list_actors.ListActorsInput, options: CallOptions) !list_actors.ListActorsOutput {
         return list_actors.execute(self, allocator, input, options);
+    }
+
+    /// Lists all batch evaluations in the account, providing summary information
+    /// about each evaluation's status and configuration.
+    pub fn listBatchEvaluations(self: *Self, allocator: std.mem.Allocator, input: list_batch_evaluations.ListBatchEvaluationsInput, options: CallOptions) !list_batch_evaluations.ListBatchEvaluationsOutput {
+        return list_batch_evaluations.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of browser sessions in Amazon Bedrock AgentCore that match
@@ -400,6 +562,21 @@ pub const Client = struct {
         return list_memory_records.execute(self, allocator, input, options);
     }
 
+    /// List payment instruments for a manager
+    pub fn listPaymentInstruments(self: *Self, allocator: std.mem.Allocator, input: list_payment_instruments.ListPaymentInstrumentsInput, options: CallOptions) !list_payment_instruments.ListPaymentInstrumentsOutput {
+        return list_payment_instruments.execute(self, allocator, input, options);
+    }
+
+    /// List payment manager sessions
+    pub fn listPaymentSessions(self: *Self, allocator: std.mem.Allocator, input: list_payment_sessions.ListPaymentSessionsInput, options: CallOptions) !list_payment_sessions.ListPaymentSessionsOutput {
+        return list_payment_sessions.execute(self, allocator, input, options);
+    }
+
+    /// Lists all recommendations in the account, with optional filtering by status.
+    pub fn listRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_recommendations.ListRecommendationsInput, options: CallOptions) !list_recommendations.ListRecommendationsOutput {
+        return list_recommendations.execute(self, allocator, input, options);
+    }
+
     /// Lists sessions in an AgentCore Memory resource based on specified criteria.
     /// We recommend using pagination to ensure that the operation returns quickly
     /// and successfully.
@@ -410,6 +587,11 @@ pub const Client = struct {
     /// permission.
     pub fn listSessions(self: *Self, allocator: std.mem.Allocator, input: list_sessions.ListSessionsInput, options: CallOptions) !list_sessions.ListSessionsOutput {
         return list_sessions.execute(self, allocator, input, options);
+    }
+
+    /// Process a payment transaction
+    pub fn processPayment(self: *Self, allocator: std.mem.Allocator, input: process_payment.ProcessPaymentInput, options: CallOptions) !process_payment.ProcessPaymentOutput {
+        return process_payment.execute(self, allocator, input, options);
     }
 
     /// Searches for and retrieves memory records from an AgentCore Memory resource
@@ -452,6 +634,14 @@ pub const Client = struct {
     /// specified registry.
     pub fn searchRegistryRecords(self: *Self, allocator: std.mem.Allocator, input: search_registry_records.SearchRegistryRecordsInput, options: CallOptions) !search_registry_records.SearchRegistryRecordsOutput {
         return search_registry_records.execute(self, allocator, input, options);
+    }
+
+    /// Starts a batch evaluation job that evaluates agent performance across
+    /// multiple sessions. Batch evaluations pull agent traces from CloudWatch Logs
+    /// or an existing online evaluation configuration and run specified evaluators
+    /// and insights against them.
+    pub fn startBatchEvaluation(self: *Self, allocator: std.mem.Allocator, input: start_batch_evaluation.StartBatchEvaluationInput, options: CallOptions) !start_batch_evaluation.StartBatchEvaluationOutput {
+        return start_batch_evaluation.execute(self, allocator, input, options);
     }
 
     /// Creates and initializes a browser session in Amazon Bedrock AgentCore. The
@@ -512,6 +702,19 @@ pub const Client = struct {
         return start_memory_extraction_job.execute(self, allocator, input, options);
     }
 
+    /// Starts a recommendation job that analyzes agent traces and generates
+    /// optimization suggestions for system prompts or tool descriptions to improve
+    /// agent performance.
+    pub fn startRecommendation(self: *Self, allocator: std.mem.Allocator, input: start_recommendation.StartRecommendationInput, options: CallOptions) !start_recommendation.StartRecommendationOutput {
+        return start_recommendation.execute(self, allocator, input, options);
+    }
+
+    /// Stops a running batch evaluation. Sessions that have already been evaluated
+    /// retain their results.
+    pub fn stopBatchEvaluation(self: *Self, allocator: std.mem.Allocator, input: stop_batch_evaluation.StopBatchEvaluationInput, options: CallOptions) !stop_batch_evaluation.StopBatchEvaluationOutput {
+        return stop_batch_evaluation.execute(self, allocator, input, options);
+    }
+
     /// Terminates an active browser session in Amazon Bedrock AgentCore. This
     /// operation stops the session, releases associated resources, and makes the
     /// session unavailable for further use.
@@ -554,13 +757,33 @@ pub const Client = struct {
         return stop_runtime_session.execute(self, allocator, input, options);
     }
 
+    /// Updates an A/B test's configuration, including variants, traffic allocation,
+    /// evaluation settings, or execution status.
+    pub fn updateAbTest(self: *Self, allocator: std.mem.Allocator, input: update_ab_test.UpdateABTestInput, options: CallOptions) !update_ab_test.UpdateABTestOutput {
+        return update_ab_test.execute(self, allocator, input, options);
+    }
+
     /// Updates a browser stream. To use this operation, you must have permissions
     /// to perform the bedrock:UpdateBrowserStream action.
     pub fn updateBrowserStream(self: *Self, allocator: std.mem.Allocator, input: update_browser_stream.UpdateBrowserStreamInput, options: CallOptions) !update_browser_stream.UpdateBrowserStreamOutput {
         return update_browser_stream.execute(self, allocator, input, options);
     }
 
+    pub fn listAbTestsPaginator(self: *Self, params: list_ab_tests.ListABTestsInput) paginator.ListABTestsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listActorsPaginator(self: *Self, params: list_actors.ListActorsInput) paginator.ListActorsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listBatchEvaluationsPaginator(self: *Self, params: list_batch_evaluations.ListBatchEvaluationsInput) paginator.ListBatchEvaluationsPaginator {
         return .{
             .client = self,
             .params = params,
@@ -582,6 +805,27 @@ pub const Client = struct {
     }
 
     pub fn listMemoryRecordsPaginator(self: *Self, params: list_memory_records.ListMemoryRecordsInput) paginator.ListMemoryRecordsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listPaymentInstrumentsPaginator(self: *Self, params: list_payment_instruments.ListPaymentInstrumentsInput) paginator.ListPaymentInstrumentsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listPaymentSessionsPaginator(self: *Self, params: list_payment_sessions.ListPaymentSessionsInput) paginator.ListPaymentSessionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listRecommendationsPaginator(self: *Self, params: list_recommendations.ListRecommendationsInput) paginator.ListRecommendationsPaginator {
         return .{
             .client = self,
             .params = params,

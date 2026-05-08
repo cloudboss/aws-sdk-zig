@@ -13,7 +13,7 @@ pub const GetAgreementTermsInput = struct {
     /// The maximum number of agreements to return in the response.
     max_results: ?i32 = null,
 
-    /// A token to specify where to start pagination
+    /// A token to specify where to start pagination.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -28,7 +28,8 @@ pub const GetAgreementTermsOutput = struct {
     /// acceptor as part of the agreement creation.
     accepted_terms: ?[]const AcceptedTerm = null,
 
-    /// A token to specify where to start pagination
+    /// The token used for pagination. The field is `null` if there are no more
+    /// results.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -123,6 +124,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
         return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

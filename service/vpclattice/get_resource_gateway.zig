@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ResourceGatewayIpAddressType = @import("resource_gateway_ip_address_type.zig").ResourceGatewayIpAddressType;
+const ResourceConfigDnsResolution = @import("resource_config_dns_resolution.zig").ResourceConfigDnsResolution;
 const ResourceGatewayStatus = @import("resource_gateway_status.zig").ResourceGatewayStatus;
 
 pub const GetResourceGatewayInput = struct {
@@ -36,11 +37,21 @@ pub const GetResourceGatewayOutput = struct {
     /// format.
     last_updated_at: ?i64 = null,
 
+    /// The AWS service that manages the resource gateway.
+    managed_by: ?[]const u8 = null,
+
     /// The name of the resource gateway.
     name: ?[]const u8 = null,
 
+    /// The DNS resolution type for resource configurations that are associated with
+    /// this resource gateway.
+    resource_config_dns_resolution: ?ResourceConfigDnsResolution = null,
+
     /// The security group IDs associated with the resource gateway.
     security_group_ids: ?[]const []const u8 = null,
+
+    /// Indicates whether the resource gateway is managed by an AWS service.
+    service_managed: ?bool = null,
 
     /// The status for the resource gateway.
     status: ?ResourceGatewayStatus = null,
@@ -58,8 +69,11 @@ pub const GetResourceGatewayOutput = struct {
         .ip_address_type = "ipAddressType",
         .ipv_4_addresses_per_eni = "ipv4AddressesPerEni",
         .last_updated_at = "lastUpdatedAt",
+        .managed_by = "managedBy",
         .name = "name",
+        .resource_config_dns_resolution = "resourceConfigDnsResolution",
         .security_group_ids = "securityGroupIds",
+        .service_managed = "serviceManaged",
         .status = "status",
         .subnet_ids = "subnetIds",
         .vpc_id = "vpcId",

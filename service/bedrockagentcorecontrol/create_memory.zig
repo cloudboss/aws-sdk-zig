@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const IndexedKey = @import("indexed_key.zig").IndexedKey;
 const MemoryStrategyInput = @import("memory_strategy_input.zig").MemoryStrategyInput;
 const StreamDeliveryResources = @import("stream_delivery_resources.zig").StreamDeliveryResources;
 const Memory = @import("memory.zig").Memory;
@@ -24,6 +25,10 @@ pub const CreateMemoryInput = struct {
     /// The duration after which memory events expire. Specified as an ISO 8601
     /// duration.
     event_expiry_duration: i32,
+
+    /// Metadata keys to index for filtering. Once declared, indexed keys cannot be
+    /// removed.
+    indexed_keys: ?[]const IndexedKey = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role that provides permissions for
     /// the memory to access Amazon Web Services services.
@@ -49,6 +54,7 @@ pub const CreateMemoryInput = struct {
         .description = "description",
         .encryption_key_arn = "encryptionKeyArn",
         .event_expiry_duration = "eventExpiryDuration",
+        .indexed_keys = "indexedKeys",
         .memory_execution_role_arn = "memoryExecutionRoleArn",
         .memory_strategies = "memoryStrategies",
         .name = "name",
@@ -125,6 +131,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateMemoryInput, conf
     try body_buf.appendSlice(allocator, "\"eventExpiryDuration\":");
     try aws.json.writeValue(@TypeOf(input.event_expiry_duration), input.event_expiry_duration, allocator, &body_buf);
     has_prev = true;
+    if (input.indexed_keys) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"indexedKeys\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.memory_execution_role_arn) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"memoryExecutionRoleArn\":");

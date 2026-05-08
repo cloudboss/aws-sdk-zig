@@ -25,6 +25,7 @@ const list_job_runs = @import("list_job_runs.zig");
 const list_lineage_events = @import("list_lineage_events.zig");
 const list_lineage_node_history = @import("list_lineage_node_history.zig");
 const list_metadata_generation_runs = @import("list_metadata_generation_runs.zig");
+const list_notebook_runs = @import("list_notebook_runs.zig");
 const list_notifications = @import("list_notifications.zig");
 const list_policy_grants = @import("list_policy_grants.zig");
 const list_project_memberships = @import("list_project_memberships.zig");
@@ -859,6 +860,46 @@ pub const ListMetadataGenerationRunsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_metadata_generation_runs.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListNotebookRunsPaginator = struct {
+    client: *Client,
+    params: list_notebook_runs.ListNotebookRunsInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_notebook_runs.ListNotebookRunsOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_notebook_runs.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

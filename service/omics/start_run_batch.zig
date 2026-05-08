@@ -44,7 +44,8 @@ pub const StartRunBatchOutput = struct {
     /// The identifier portion of the run batch ARN.
     id: ?[]const u8 = null,
 
-    /// The initial status of the run batch.
+    /// The initial status of the run batch. Returns `CREATING` while the batch is
+    /// being initialized.
     status: ?BatchStatus = null,
 
     /// AWS tags associated with the run batch.

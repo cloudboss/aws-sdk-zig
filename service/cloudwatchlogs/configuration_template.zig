@@ -2,6 +2,8 @@ const RecordField = @import("record_field.zig").RecordField;
 const OutputFormat = @import("output_format.zig").OutputFormat;
 const ConfigurationTemplateDeliveryConfigValues = @import("configuration_template_delivery_config_values.zig").ConfigurationTemplateDeliveryConfigValues;
 const DeliveryDestinationType = @import("delivery_destination_type.zig").DeliveryDestinationType;
+const DeliverySourceConfigurationSchema = @import("delivery_source_configuration_schema.zig").DeliverySourceConfigurationSchema;
+const S3TablesIntegration = @import("s3_tables_integration.zig").S3TablesIntegration;
 
 /// A structure containing information about the deafult settings and available
 /// settings that
@@ -45,12 +47,23 @@ pub const ConfigurationTemplate = struct {
     /// applies to.
     delivery_destination_type: ?DeliveryDestinationType = null,
 
+    /// The schema of the delivery source configuration that is available for this
+    /// log type.
+    /// Each element describes a configuration that can be set when calling
+    /// [PutDeliverySource](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html), including the configuration name, type, and default value.
+    delivery_source_configuration: ?[]const DeliverySourceConfigurationSchema = null,
+
     /// A string specifying which log type this configuration template applies to.
     log_type: ?[]const u8 = null,
 
     /// A string specifying which resource type this configuration template applies
     /// to.
     resource_type: ?[]const u8 = null,
+
+    /// The S3 Tables integration configuration for this configuration template,
+    /// including the
+    /// datasource name and type.
+    s_3_tables_integration: ?S3TablesIntegration = null,
 
     /// A string specifying which service this configuration template applies to.
     /// For more
@@ -67,8 +80,10 @@ pub const ConfigurationTemplate = struct {
         .allowed_suffix_path_fields = "allowedSuffixPathFields",
         .default_delivery_config_values = "defaultDeliveryConfigValues",
         .delivery_destination_type = "deliveryDestinationType",
+        .delivery_source_configuration = "deliverySourceConfiguration",
         .log_type = "logType",
         .resource_type = "resourceType",
+        .s_3_tables_integration = "s3TablesIntegration",
         .service = "service",
     };
 };

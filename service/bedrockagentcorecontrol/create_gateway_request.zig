@@ -62,7 +62,7 @@ pub const CreateGatewayRequest = struct {
     protocol_configuration: ?GatewayProtocolConfiguration = null,
 
     /// The protocol type for the gateway.
-    protocol_type: GatewayProtocolType,
+    protocol_type: ?GatewayProtocolType = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role that provides permissions for
     /// the gateway to access Amazon Web Services services.

@@ -1,5 +1,32 @@
 const std = @import("std");
 
+/// The stack attributes to delete.
+///
+/// * STORAGE_CONNECTORS
+///
+/// * STORAGE_CONNECTOR_HOMEFOLDERS
+///
+/// * STORAGE_CONNECTOR_GOOGLE_DRIVE
+///
+/// * STORAGE_CONNECTOR_ONE_DRIVE
+///
+/// * REDIRECT_URL
+///
+/// * FEEDBACK_URL
+///
+/// * THEME_NAME
+///
+/// * USER_SETTINGS
+///
+/// * EMBED_HOST_DOMAINS
+///
+/// * IAM_ROLE_ARN
+///
+/// * ACCESS_ENDPOINTS
+///
+/// * STREAMING_EXPERIENCE_SETTINGS
+///
+/// * AGENT_ACCESS_CONFIG
 pub const StackAttribute = enum {
     storage_connectors,
     storage_connector_homefolders,
@@ -14,6 +41,7 @@ pub const StackAttribute = enum {
     access_endpoints,
     streaming_experience_settings,
     content_redirection,
+    agent_access_config,
 
     pub const json_field_names = .{
         .storage_connectors = "STORAGE_CONNECTORS",
@@ -29,6 +57,7 @@ pub const StackAttribute = enum {
         .access_endpoints = "ACCESS_ENDPOINTS",
         .streaming_experience_settings = "STREAMING_EXPERIENCE_SETTINGS",
         .content_redirection = "CONTENT_REDIRECTION",
+        .agent_access_config = "AGENT_ACCESS_CONFIG",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -46,6 +75,7 @@ pub const StackAttribute = enum {
             .access_endpoints => "ACCESS_ENDPOINTS",
             .streaming_experience_settings => "STREAMING_EXPERIENCE_SETTINGS",
             .content_redirection => "CONTENT_REDIRECTION",
+            .agent_access_config => "AGENT_ACCESS_CONFIG",
         };
     }
 

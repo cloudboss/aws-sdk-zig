@@ -1,4 +1,7 @@
+const aws = @import("aws");
+
 const ChannelEngineVersionResponse = @import("channel_engine_version_response.zig").ChannelEngineVersionResponse;
+const MediaConnectRouterOutputConnection = @import("media_connect_router_output_connection.zig").MediaConnectRouterOutputConnection;
 
 /// Runtime details of a pipeline when a channel is running.
 pub const PipelineDetail = struct {
@@ -21,6 +24,10 @@ pub const PipelineDetail = struct {
     /// Current engine version of the encoder for this pipeline.
     channel_engine_version: ?ChannelEngineVersionResponse = null,
 
+    /// A map of output names to the MediaConnect Router connection for this
+    /// pipeline. Only present for channels with MediaConnect Router outputs.
+    media_connect_router_output_connection_map: ?[]const aws.map.MapEntry(MediaConnectRouterOutputConnection) = null,
+
     /// Pipeline ID
     pipeline_id: ?[]const u8 = null,
 
@@ -30,6 +37,7 @@ pub const PipelineDetail = struct {
         .active_motion_graphics_action_name = "ActiveMotionGraphicsActionName",
         .active_motion_graphics_uri = "ActiveMotionGraphicsUri",
         .channel_engine_version = "ChannelEngineVersion",
+        .media_connect_router_output_connection_map = "MediaConnectRouterOutputConnectionMap",
         .pipeline_id = "PipelineId",
     };
 };

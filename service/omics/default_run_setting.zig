@@ -2,6 +2,7 @@ const aws = @import("aws");
 
 const CacheBehavior = @import("cache_behavior.zig").CacheBehavior;
 const RunLogLevel = @import("run_log_level.zig").RunLogLevel;
+const NetworkingMode = @import("networking_mode.zig").NetworkingMode;
 const RunRetentionMode = @import("run_retention_mode.zig").RunRetentionMode;
 const StorageType = @import("storage_type.zig").StorageType;
 const WorkflowType = @import("workflow_type.zig").WorkflowType;
@@ -17,12 +18,19 @@ pub const DefaultRunSetting = struct {
     /// The identifier of the run cache to associate with the runs.
     cache_id: ?[]const u8 = null,
 
+    /// Optional configuration name to use for the workflow run.
+    configuration_name: ?[]const u8 = null,
+
     /// The verbosity level for CloudWatch Logs emitted during each run.
     log_level: ?RunLogLevel = null,
 
     /// An optional user-friendly name applied to each workflow run. Can be
     /// overridden per run.
     name: ?[]const u8 = null,
+
+    /// Optional configuration for run networking behavior. If not specified, this
+    /// will default to RESTRICTED.
+    networking_mode: ?NetworkingMode = null,
 
     /// The expected AWS account ID of the owner of the output S3 bucket. Can be
     /// overridden per run.
@@ -82,8 +90,10 @@ pub const DefaultRunSetting = struct {
     pub const json_field_names = .{
         .cache_behavior = "cacheBehavior",
         .cache_id = "cacheId",
+        .configuration_name = "configurationName",
         .log_level = "logLevel",
         .name = "name",
+        .networking_mode = "networkingMode",
         .output_bucket_owner_id = "outputBucketOwnerId",
         .output_uri = "outputUri",
         .parameters = "parameters",

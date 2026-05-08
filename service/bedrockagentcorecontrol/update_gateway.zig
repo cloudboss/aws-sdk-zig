@@ -55,7 +55,7 @@ pub const UpdateGatewayInput = struct {
     protocol_configuration: ?GatewayProtocolConfiguration = null,
 
     /// The updated protocol type for the gateway.
-    protocol_type: GatewayProtocolType,
+    protocol_type: ?GatewayProtocolType = null,
 
     /// The updated IAM role ARN that provides permissions for the gateway.
     role_arn: []const u8,
@@ -121,7 +121,7 @@ pub const UpdateGatewayOutput = struct {
     protocol_configuration: ?GatewayProtocolConfiguration = null,
 
     /// The updated protocol type for the gateway.
-    protocol_type: GatewayProtocolType,
+    protocol_type: ?GatewayProtocolType = null,
 
     /// The updated IAM role ARN that provides permissions for the gateway.
     role_arn: ?[]const u8 = null,
@@ -251,10 +251,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateGatewayInput, con
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"protocolType\":");
-    try aws.json.writeValue(@TypeOf(input.protocol_type), input.protocol_type, allocator, &body_buf);
-    has_prev = true;
+    if (input.protocol_type) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"protocolType\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"roleArn\":");
     try aws.json.writeValue(@TypeOf(input.role_arn), input.role_arn, allocator, &body_buf);

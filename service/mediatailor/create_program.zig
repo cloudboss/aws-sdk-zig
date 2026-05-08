@@ -88,7 +88,7 @@ pub const CreateProgramOutput = struct {
     /// The name to assign to the source location for this program.
     source_location_name: ?[]const u8 = null,
 
-    /// The tags to assign to the program. Tags are key-value pairs that you can
+    /// The tags assigned to the program. Tags are key-value pairs that you can
     /// associate with Amazon resources to help with organization, access control,
     /// and cost tracking. For more information, see [Tagging AWS Elemental
     /// MediaTailor

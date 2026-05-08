@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const Tag = @import("tag.zig").Tag;
 const DashboardValidationMessage = @import("dashboard_validation_message.zig").DashboardValidationMessage;
 const serde = @import("serde.zig");
 
@@ -25,9 +26,29 @@ pub const PutDashboardInput = struct {
     /// "_". This parameter is required.
     dashboard_name: []const u8,
 
+    /// A list of key-value pairs to associate with the dashboard. You can associate
+    /// as many
+    /// as 50 tags with a dashboard.
+    ///
+    /// Tags can help you organize and categorize your dashboards. You can also use
+    /// them to
+    /// scope user permissions by granting a user permission to access or change
+    /// only dashboards
+    /// with certain tag values.
+    ///
+    /// You can use this parameter only when creating a new dashboard. If you
+    /// specify
+    /// `Tags` when updating an existing dashboard, the tag updates are ignored. To
+    /// add or update tags on an existing dashboard, use
+    /// [TagResource](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html). To
+    /// remove tags, use
+    /// [UntagResource](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html).
+    tags: ?[]const Tag = null,
+
     pub const json_field_names = .{
         .dashboard_body = "DashboardBody",
         .dashboard_name = "DashboardName",
+        .tags = "Tags",
     };
 };
 
@@ -88,6 +109,23 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutDashboardInput, conf
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.dashboard_body);
     try body_buf.appendSlice(allocator, "&DashboardName=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.dashboard_name);
+    if (input.tags) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.member.{d}.Key=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.key);
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.member.{d}.Value=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.value);
+            }
+        }
+    }
 
     const body = try body_buf.toOwnedSlice(allocator);
 

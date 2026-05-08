@@ -3,16 +3,19 @@ const std = @import("std");
 pub const InvoiceType = enum {
     invoice,
     credit_memo,
+    payment_receipt,
 
     pub const json_field_names = .{
         .invoice = "INVOICE",
         .credit_memo = "CREDIT_MEMO",
+        .payment_receipt = "PAYMENT_RECEIPT",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .invoice => "INVOICE",
             .credit_memo => "CREDIT_MEMO",
+            .payment_receipt => "PAYMENT_RECEIPT",
         };
     }
 

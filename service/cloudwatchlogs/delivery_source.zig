@@ -1,5 +1,8 @@
 const aws = @import("aws");
 
+const DeliverySourceStatus = @import("delivery_source_status.zig").DeliverySourceStatus;
+const DeliverySourceStatusReason = @import("delivery_source_status_reason.zig").DeliverySourceStatusReason;
+
 /// This structure contains information about one *delivery source* in your
 /// account. A delivery source is an Amazon Web Services resource that sends
 /// logs to an Amazon Web Services destination. The destination can be
@@ -43,6 +46,9 @@ pub const DeliverySource = struct {
     /// source.
     arn: ?[]const u8 = null,
 
+    /// The map of key-value pairs that configure the delivery source.
+    delivery_source_configuration: ?[]const aws.map.StringMapEntry = null,
+
     /// The type of log that the source is sending. For valid values for this
     /// parameter, see the
     /// documentation for the source service.
@@ -60,15 +66,28 @@ pub const DeliverySource = struct {
     /// The Amazon Web Services service that is sending logs.
     service: ?[]const u8 = null,
 
+    /// The status of the delivery source. A delivery source can have the status
+    /// `ACTIVE` or `INACTIVE`. Note: This value is defined for selective log types.
+    status: ?DeliverySourceStatus = null,
+
+    /// The reason for the status of the delivery source. A status reason of
+    /// `RESOURCE_DELETED` indicates that the resource associated with the delivery
+    /// source has been deleted. Note: This value is defined for selective log
+    /// types.
+    status_reason: ?DeliverySourceStatusReason = null,
+
     /// The tags that have been assigned to this delivery source.
     tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .arn = "arn",
+        .delivery_source_configuration = "deliverySourceConfiguration",
         .log_type = "logType",
         .name = "name",
         .resource_arns = "resourceArns",
         .service = "service",
+        .status = "status",
+        .status_reason = "statusReason",
         .tags = "tags",
     };
 };

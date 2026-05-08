@@ -4,11 +4,15 @@ pub const CredentialProviderType = enum {
     gateway_iam_role,
     oauth,
     api_key,
+    caller_iam_credentials,
+    jwt_passthrough,
 
     pub const json_field_names = .{
         .gateway_iam_role = "GATEWAY_IAM_ROLE",
         .oauth = "OAUTH",
         .api_key = "API_KEY",
+        .caller_iam_credentials = "CALLER_IAM_CREDENTIALS",
+        .jwt_passthrough = "JWT_PASSTHROUGH",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +20,8 @@ pub const CredentialProviderType = enum {
             .gateway_iam_role => "GATEWAY_IAM_ROLE",
             .oauth => "OAUTH",
             .api_key => "API_KEY",
+            .caller_iam_credentials => "CALLER_IAM_CREDENTIALS",
+            .jwt_passthrough => "JWT_PASSTHROUGH",
         };
     }
 

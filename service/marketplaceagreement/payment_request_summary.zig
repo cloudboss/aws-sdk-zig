@@ -12,7 +12,7 @@ pub const PaymentRequestSummary = struct {
     /// approved. This field is only present for approved payment requests.
     charge_id: ?[]const u8 = null,
 
-    /// The date and time when the payment request was created, in ISO 8601 format.
+    /// The date and time when the payment request was created.
     created_at: ?i64 = null,
 
     /// The currency code for the charge amount.
@@ -29,8 +29,7 @@ pub const PaymentRequestSummary = struct {
     /// `REJECTED`, and `CANCELLED`.
     status: ?PaymentRequestStatus = null,
 
-    /// The date and time when the payment request was last updated, in ISO 8601
-    /// format.
+    /// The date and time when the payment request was last updated.
     updated_at: ?i64 = null,
 
     pub const json_field_names = .{

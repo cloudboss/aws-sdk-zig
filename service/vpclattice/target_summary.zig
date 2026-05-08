@@ -18,7 +18,7 @@ pub const TargetSummary = struct {
     ///
     /// * `DRAINING`: The target is being deregistered. No new connections are sent
     ///   to this target while current connections are being drained. The default
-    ///   draining time is 5 minutes.
+    ///   draining time is 1 minute.
     /// * `UNAVAILABLE`: Health checks are unavailable for the target group.
     /// * `HEALTHY`: The target is healthy.
     /// * `UNHEALTHY`: The target is unhealthy.

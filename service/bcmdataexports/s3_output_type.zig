@@ -2,14 +2,20 @@ const std = @import("std");
 
 pub const S3OutputType = enum {
     custom,
+    athena,
+    redshift,
 
     pub const json_field_names = .{
         .custom = "CUSTOM",
+        .athena = "ATHENA",
+        .redshift = "REDSHIFT",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .custom => "CUSTOM",
+            .athena => "ATHENA",
+            .redshift => "REDSHIFT",
         };
     }
 

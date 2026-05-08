@@ -91,9 +91,9 @@ pub const StringFilter = struct {
     ///
     /// * `ResourceType NOT_EQUALS AwsEc2NetworkInterface`
     ///
-    /// `CONTAINS` and `NOT_CONTAINS` operators can be used only with automation
-    /// rules V1.
-    /// `CONTAINS_WORD` operator is only supported in `GetFindingsV2`,
+    /// The `CONTAINS` operator works with automation rules V1 and V2.
+    /// The `NOT_CONTAINS` operator works only with automation rules V1.
+    /// The `CONTAINS_WORD` operator works only in the `GetFindingsV2`,
     /// `GetFindingStatisticsV2`, `GetResourcesV2`, and `GetResourcesStatisticsV2`
     /// APIs.
     /// For more information, see [Automation

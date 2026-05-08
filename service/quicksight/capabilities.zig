@@ -359,6 +359,9 @@ pub const Capabilities = struct {
     /// The ability to perform actions using SAP Product Master connectors.
     sap_product_master_data_action: ?CapabilityState = null,
 
+    /// The ability to perform Scenario-related actions.
+    scenario: ?CapabilityState = null,
+
     /// The ability to enable users to upgrade their user role.
     self_upgrade_user_role: ?CapabilityState = null,
 
@@ -523,6 +526,9 @@ pub const Capabilities = struct {
 
     /// The ability to perform space-related actions.
     space: ?CapabilityState = null,
+
+    /// The ability to perform Story-related actions.
+    story: ?CapabilityState = null,
 
     /// The ability to subscribe to email reports.
     subscribe_dashboard_email_reports: ?CapabilityState = null,
@@ -794,6 +800,7 @@ pub const Capabilities = struct {
         .sap_material_stock_action = "SAPMaterialStockAction",
         .sap_physical_inventory_action = "SAPPhysicalInventoryAction",
         .sap_product_master_data_action = "SAPProductMasterDataAction",
+        .scenario = "Scenario",
         .self_upgrade_user_role = "SelfUpgradeUserRole",
         .service_now_action = "ServiceNowAction",
         .share_amazon_bedrock_ars_action = "ShareAmazonBedrockARSAction",
@@ -849,6 +856,7 @@ pub const Capabilities = struct {
         .slack_action = "SlackAction",
         .smartsheet_action = "SmartsheetAction",
         .space = "Space",
+        .story = "Story",
         .subscribe_dashboard_email_reports = "SubscribeDashboardEmailReports",
         .textract_action = "TextractAction",
         .topic = "Topic",

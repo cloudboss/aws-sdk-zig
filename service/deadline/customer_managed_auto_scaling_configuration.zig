@@ -1,7 +1,7 @@
 /// The auto scaling configuration settings for a customer managed fleet.
 pub const CustomerManagedAutoScalingConfiguration = struct {
     /// The number of workers that can be added per minute to the fleet. The default
-    /// is a service-defined value that balances efficiency with cost.
+    /// is 10 workers per minute.
     scale_out_workers_per_minute: ?i32 = null,
 
     /// The number of idle workers maintained and ready to process incoming tasks.

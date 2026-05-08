@@ -34,8 +34,7 @@ pub const CancelAgreementCancellationRequestOutput = struct {
     /// request.
     agreement_id: ?[]const u8 = null,
 
-    /// The date and time when the cancellation request was originally created, as a
-    /// POSIX timestamp (Unix epoch seconds).
+    /// The date and time when the cancellation request was originally created.
     created_at: ?i64 = null,
 
     /// The detailed description of the original cancellation reason, if provided.
@@ -51,8 +50,7 @@ pub const CancelAgreementCancellationRequestOutput = struct {
     /// status.
     status_message: ?[]const u8 = null,
 
-    /// The date and time when the cancellation request was cancelled, as a POSIX
-    /// timestamp (Unix epoch seconds).
+    /// The date and time when the cancellation request was cancelled.
     updated_at: ?i64 = null,
 
     pub const json_field_names = .{
@@ -153,6 +151,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
         return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

@@ -11,6 +11,7 @@ const CreateHlsManifestConfiguration = @import("create_hls_manifest_configuratio
 const CreateLowLatencyHlsManifestConfiguration = @import("create_low_latency_hls_manifest_configuration.zig").CreateLowLatencyHlsManifestConfiguration;
 const CreateMssManifestConfiguration = @import("create_mss_manifest_configuration.zig").CreateMssManifestConfiguration;
 const Segment = @import("segment.zig").Segment;
+const UriSeparator = @import("uri_separator.zig").UriSeparator;
 const GetDashManifestConfiguration = @import("get_dash_manifest_configuration.zig").GetDashManifestConfiguration;
 const GetHlsManifestConfiguration = @import("get_hls_manifest_configuration.zig").GetHlsManifestConfiguration;
 const GetLowLatencyHlsManifestConfiguration = @import("get_low_latency_hls_manifest_configuration.zig").GetLowLatencyHlsManifestConfiguration;
@@ -80,6 +81,11 @@ pub const CreateOriginEndpointInput = struct {
     /// `"Key2": "Value2"`
     tags: ?[]const aws.map.StringMapEntry = null,
 
+    /// The separator character to use in generated URIs for this origin endpoint.
+    /// This setting applies to all manifest types on the endpoint. If you don't
+    /// specify a value, the default is `UNDERSCORE`.
+    uri_separator: ?UriSeparator = null,
+
     pub const json_field_names = .{
         .channel_group_name = "ChannelGroupName",
         .channel_name = "ChannelName",
@@ -95,6 +101,7 @@ pub const CreateOriginEndpointInput = struct {
         .segment = "Segment",
         .startover_window_seconds = "StartoverWindowSeconds",
         .tags = "Tags",
+        .uri_separator = "UriSeparator",
     };
 };
 
@@ -162,6 +169,9 @@ pub const CreateOriginEndpointOutput = struct {
     /// endpoint.
     tags: ?[]const aws.map.StringMapEntry = null,
 
+    /// The separator character used in generated URIs for this origin endpoint.
+    uri_separator: ?UriSeparator = null,
+
     pub const json_field_names = .{
         .arn = "Arn",
         .channel_group_name = "ChannelGroupName",
@@ -180,6 +190,7 @@ pub const CreateOriginEndpointOutput = struct {
         .segment = "Segment",
         .startover_window_seconds = "StartoverWindowSeconds",
         .tags = "Tags",
+        .uri_separator = "UriSeparator",
     };
 };
 
@@ -284,6 +295,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateOriginEndpointInp
     if (input.tags) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"Tags\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.uri_separator) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"UriSeparator\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

@@ -49,7 +49,8 @@ pub const CreateHarnessInput = struct {
     /// The maximum number of iterations the agent loop can execute per invocation.
     max_iterations: ?i32 = null,
 
-    /// The maximum number of tokens the agent can generate per iteration.
+    /// The maximum total number of output tokens the agent can generate across all
+    /// model calls within a single invocation.
     max_tokens: ?i32 = null,
 
     /// The AgentCore Memory configuration for persisting conversation context

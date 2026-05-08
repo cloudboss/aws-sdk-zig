@@ -10,6 +10,9 @@ pub const ConfigurableUpfrontPricingTerm = struct {
     /// Defines the currency for the prices mentioned in the term.
     currency_code: ?[]const u8 = null,
 
+    /// The unique identifier of the term.
+    id: ?[]const u8 = null,
+
     /// A rate card defines the per unit rates for product dimensions.
     rate_cards: ?[]const ConfigurableUpfrontRateCardItem = null,
 
@@ -19,6 +22,7 @@ pub const ConfigurableUpfrontPricingTerm = struct {
     pub const json_field_names = .{
         .configuration = "configuration",
         .currency_code = "currencyCode",
+        .id = "id",
         .rate_cards = "rateCards",
         .@"type" = "type",
     };

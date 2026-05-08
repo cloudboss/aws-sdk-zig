@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const AccessEndpoint = @import("access_endpoint.zig").AccessEndpoint;
+const AgentAccessConfigForUpdate = @import("agent_access_config_for_update.zig").AgentAccessConfigForUpdate;
 const ApplicationSettings = @import("application_settings.zig").ApplicationSettings;
 const StackAttribute = @import("stack_attribute.zig").StackAttribute;
 const ContentRedirection = @import("content_redirection.zig").ContentRedirection;
@@ -18,6 +19,11 @@ pub const UpdateStackInput = struct {
     /// the stack can connect to WorkSpaces Applications only through the specified
     /// endpoints.
     access_endpoints: ?[]const AccessEndpoint = null,
+
+    /// The configuration for agent access on the stack. Specify this to update
+    /// agent access settings. To remove agent access, use AttributesToDelete with
+    /// the AGENT_ACCESS_CONFIG value.
+    agent_access_config: ?AgentAccessConfigForUpdate = null,
 
     /// The persistent application settings for users of a stack. When these
     /// settings are enabled, changes that users make to applications and Windows
@@ -67,6 +73,7 @@ pub const UpdateStackInput = struct {
 
     pub const json_field_names = .{
         .access_endpoints = "AccessEndpoints",
+        .agent_access_config = "AgentAccessConfig",
         .application_settings = "ApplicationSettings",
         .attributes_to_delete = "AttributesToDelete",
         .content_redirection = "ContentRedirection",

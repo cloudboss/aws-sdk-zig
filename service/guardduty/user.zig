@@ -2,7 +2,9 @@ const Account = @import("account.zig").Account;
 
 /// Contains information about the user involved in the attack sequence.
 pub const User = struct {
-    /// Contains information about the Amazon Web Services account.
+    /// Contains information about the Amazon Web Services account within which the
+    /// activity took place. This is not necessarily the account that owns the user
+    /// identity.
     account: ?Account = null,
 
     /// The credentials of the user ID.

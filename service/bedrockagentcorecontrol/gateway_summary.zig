@@ -20,7 +20,7 @@ pub const GatewaySummary = struct {
     name: []const u8,
 
     /// The protocol type used by the gateway.
-    protocol_type: GatewayProtocolType,
+    protocol_type: GatewayProtocolType = .mcp,
 
     /// The current status of the gateway.
     status: GatewayStatus,

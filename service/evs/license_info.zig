@@ -4,11 +4,11 @@
 pub const LicenseInfo = struct {
     /// The VCF solution key. This license unlocks VMware VCF product features,
     /// including vSphere, NSX, SDDC Manager, and vCenter Server. The VCF solution
-    /// key must cover a minimum of 256 cores.
+    /// key must meet the instance-type-specific minimum core requirements.
     solution_key: []const u8,
 
     /// The VSAN license key. This license unlocks vSAN features. The vSAN license
-    /// key must provide at least 110 TiB of vSAN capacity.
+    /// key must meet the instance-type-specific minimum capacity requirements.
     vsan_key: []const u8,
 
     pub const json_field_names = .{

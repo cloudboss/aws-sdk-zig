@@ -10,6 +10,9 @@ pub const VariablePaymentTerm = struct {
     /// Defines the currency for the prices mentioned in the term.
     currency_code: ?[]const u8 = null,
 
+    /// The unique identifier for the term.
+    id: ?[]const u8 = null,
+
     /// The maximum total amount that can be charged to the customer through
     /// variable payment requests under this term.
     max_total_charge_amount: ?[]const u8 = null,
@@ -20,6 +23,7 @@ pub const VariablePaymentTerm = struct {
     pub const json_field_names = .{
         .configuration = "configuration",
         .currency_code = "currencyCode",
+        .id = "id",
         .max_total_charge_amount = "maxTotalChargeAmount",
         .@"type" = "type",
     };

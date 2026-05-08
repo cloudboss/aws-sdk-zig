@@ -1,7 +1,11 @@
+const ControlTitleFormatText = @import("control_title_format_text.zig").ControlTitleFormatText;
 const TextAreaControlDisplayOptions = @import("text_area_control_display_options.zig").TextAreaControlDisplayOptions;
 
 /// A control to display a text box that is used to enter multiple entries.
 pub const FilterTextAreaControl = struct {
+    /// The title text format configuration for the control.
+    control_title_format_text: ?ControlTitleFormatText = null,
+
     /// The delimiter that is used to separate the lines in text.
     delimiter: ?[]const u8 = null,
 
@@ -15,9 +19,10 @@ pub const FilterTextAreaControl = struct {
     source_filter_id: []const u8,
 
     /// The title of the `FilterTextAreaControl`.
-    title: []const u8,
+    title: []const u8 = "",
 
     pub const json_field_names = .{
+        .control_title_format_text = "ControlTitleFormatText",
         .delimiter = "Delimiter",
         .display_options = "DisplayOptions",
         .filter_control_id = "FilterControlId",

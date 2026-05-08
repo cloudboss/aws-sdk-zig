@@ -7,6 +7,9 @@ pub const RecurringPaymentTerm = struct {
     /// Defines the currency for the prices mentioned in this term.
     currency_code: ?[]const u8 = null,
 
+    /// The unique identifier for the term.
+    id: ?[]const u8 = null,
+
     /// Amount charged to the buyer every billing period.
     price: ?[]const u8 = null,
 
@@ -16,6 +19,7 @@ pub const RecurringPaymentTerm = struct {
     pub const json_field_names = .{
         .billing_period = "billingPeriod",
         .currency_code = "currencyCode",
+        .id = "id",
         .price = "price",
         .@"type" = "type",
     };

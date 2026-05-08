@@ -3,10 +3,14 @@
 /// Marketplace because they already paid for the product outside of AWS
 /// Marketplace.
 pub const ByolPricingTerm = struct {
+    /// The unique identifier for the term.
+    id: ?[]const u8 = null,
+
     /// Type of the term being updated.
     @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .id = "id",
         .@"type" = "type",
     };
 };

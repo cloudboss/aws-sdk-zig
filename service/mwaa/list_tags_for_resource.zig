@@ -17,7 +17,7 @@ pub const ListTagsForResourceInput = struct {
 
 pub const ListTagsForResourceOutput = struct {
     /// The key-value tag pairs associated to your environment. For more
-    /// information, see [Tagging Amazon Web Services
+    /// information, refer to [Tagging Amazon Web Services
     /// resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
     tags: ?[]const aws.map.StringMapEntry = null,
 
@@ -126,6 +126,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "RestApiServerException")) {
         return .{ .arena = arena, .kind = .{ .rest_api_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceUnavailableException")) {
+        return .{ .arena = arena, .kind = .{ .service_unavailable_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

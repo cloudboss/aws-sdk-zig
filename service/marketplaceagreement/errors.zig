@@ -9,6 +9,7 @@ pub const ServiceError = struct {
         conflict_exception: ConflictException,
         internal_server_exception: InternalServerException,
         resource_not_found_exception: ResourceNotFoundException,
+        service_quota_exceeded_exception: ServiceQuotaExceededException,
         throttling_exception: ThrottlingException,
         validation_exception: ValidationException,
         unknown: UnknownServiceError,
@@ -19,6 +20,7 @@ pub const ServiceError = struct {
                 .conflict_exception => "ConflictException",
                 .internal_server_exception => "InternalServerException",
                 .resource_not_found_exception => "ResourceNotFoundException",
+                .service_quota_exceeded_exception => "ServiceQuotaExceededException",
                 .throttling_exception => "ThrottlingException",
                 .validation_exception => "ValidationException",
                 .unknown => |e| e.code,
@@ -31,6 +33,7 @@ pub const ServiceError = struct {
                 .conflict_exception => |e| e.message,
                 .internal_server_exception => |e| e.message,
                 .resource_not_found_exception => |e| e.message,
+                .service_quota_exceeded_exception => |e| e.message,
                 .throttling_exception => |e| e.message,
                 .validation_exception => |e| e.message,
                 .unknown => |e| e.message,
@@ -43,6 +46,7 @@ pub const ServiceError = struct {
                 .conflict_exception => 409,
                 .internal_server_exception => 500,
                 .resource_not_found_exception => 404,
+                .service_quota_exceeded_exception => 402,
                 .throttling_exception => 429,
                 .validation_exception => 400,
                 .unknown => |e| e.http_status,
@@ -55,6 +59,7 @@ pub const ServiceError = struct {
                 .conflict_exception => |e| e.request_id,
                 .internal_server_exception => |e| e.request_id,
                 .resource_not_found_exception => |e| e.request_id,
+                .service_quota_exceeded_exception => |e| e.request_id,
                 .throttling_exception => |e| e.request_id,
                 .validation_exception => |e| e.request_id,
                 .unknown => |e| e.request_id,
@@ -99,6 +104,11 @@ pub const InternalServerException = struct {
 };
 
 pub const ResourceNotFoundException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };

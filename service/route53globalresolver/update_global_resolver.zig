@@ -25,12 +25,18 @@ pub const UpdateGlobalResolverInput = struct {
     /// resolution logs will be propagated.
     observability_region: ?[]const u8 = null,
 
+    /// The list of Amazon Web Services Regions where the Global Resolver will
+    /// operate. The resolver will be distributed across these Regions to provide
+    /// global availability and low-latency DNS resolution.
+    regions: ?[]const []const u8 = null,
+
     pub const json_field_names = .{
         .description = "description",
         .global_resolver_id = "globalResolverId",
         .ip_address_type = "ipAddressType",
         .name = "name",
         .observability_region = "observabilityRegion",
+        .regions = "regions",
     };
 };
 
@@ -160,6 +166,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateGlobalResolverInp
     if (input.observability_region) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"observabilityRegion\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.regions) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"regions\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

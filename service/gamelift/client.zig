@@ -42,6 +42,7 @@ const describe_build = @import("describe_build.zig");
 const describe_compute = @import("describe_compute.zig");
 const describe_container_fleet = @import("describe_container_fleet.zig");
 const describe_container_group_definition = @import("describe_container_group_definition.zig");
+const describe_container_group_port_mappings = @import("describe_container_group_port_mappings.zig");
 const describe_ec2_instance_limits = @import("describe_ec2_instance_limits.zig");
 const describe_fleet_attributes = @import("describe_fleet_attributes.zig");
 const describe_fleet_capacity = @import("describe_fleet_capacity.zig");
@@ -1731,6 +1732,52 @@ pub const Client = struct {
         return describe_container_group_definition.execute(self, allocator, input, options);
     }
 
+    /// **This API works with the following fleet types:** Container
+    ///
+    /// Retrieves the port mappings for a container group running on a container
+    /// fleet. Port
+    /// mappings show how container ports are mapped to connection ports on the
+    /// fleet instance.
+    /// Use this operation to find the connection port for a specific container on a
+    /// fleet
+    /// instance.
+    ///
+    /// **Request options**
+    ///
+    /// * Get port mappings for a game server container group. Provide the fleet ID,
+    /// set `ContainerGroupType` to `GAME_SERVER`, and specify the
+    /// `ComputeName` for the game server container group.
+    ///
+    /// * Get port mappings for a per-instance container group. Provide the fleet
+    ///   ID,
+    /// set `ContainerGroupType` to `PER_INSTANCE`, and specify the
+    /// `InstanceId` for the instance.
+    ///
+    /// * Optionally filter results to a single container by providing a
+    /// `ContainerName`.
+    ///
+    /// **Results**
+    ///
+    /// This operation returns the fleet ID, location, container group definition
+    /// ARN, container group type, compute name (for game server container groups),
+    /// instance ID,
+    /// and a list of `ContainerGroupPortMapping` objects. Each object contains the
+    /// container name, runtime ID, and a list of port mappings that show how
+    /// container ports map
+    /// to connection ports on the instance.
+    ///
+    /// **Learn more**
+    ///
+    /// [Connect to
+    /// containers](https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-remote-access.html)
+    ///
+    /// [Create a
+    /// container group
+    /// definition](https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-create-groups.html)
+    pub fn describeContainerGroupPortMappings(self: *Self, allocator: std.mem.Allocator, input: describe_container_group_port_mappings.DescribeContainerGroupPortMappingsInput, options: CallOptions) !describe_container_group_port_mappings.DescribeContainerGroupPortMappingsOutput {
+        return describe_container_group_port_mappings.execute(self, allocator, input, options);
+    }
+
     /// **This API works with the following fleet types:** EC2
     ///
     /// Retrieves the instance limits and current utilization for an Amazon Web
@@ -1754,25 +1801,28 @@ pub const Client = struct {
     /// Amazon Web Services
     /// Region (either explicitly or as your default settings). To get the limit for
     /// a remote
-    /// location, you must also specify the location. For example, the following
-    /// requests all
+    /// location, you must also specify the location. To learn more about how Amazon
+    /// GameLift Servers handles
+    /// locations, see [Amazon GameLift Servers service
+    /// locations](https://docs.aws.amazon.com/gameliftservers/latest/developerguide/gamelift-regions.html). For example, the following requests all
     /// return different results:
     ///
     /// * Request specifies the Region `ap-northeast-1` with no location. The
-    /// result is limits and usage data on all instance types that are deployed in
-    /// `us-east-2`, by all of the fleets that reside in
+    /// result is limits and usage data on all of the fleets that reside in
+    /// `ap-northeast-1`, for all instance types that are deployed in
     /// `ap-northeast-1`.
     ///
-    /// * Request specifies the Region `us-east-1` with location
-    /// `ca-central-1`. The result is limits and usage data on all
-    /// instance types that are deployed in `ca-central-1`, by all of the
-    /// fleets that reside in `us-east-2`. These limits do not affect fleets
-    /// in any other Regions that deploy instances to `ca-central-1`.
+    /// * Request specifies the Region `ap-northeast-1` with location
+    /// `us-west-2`. The result is limits and usage data on all of the
+    /// fleets that reside in `ap-northeast-1`, for all instance types
+    /// that are deployed in `us-west-2`.
     ///
-    /// * Request specifies the Region `eu-west-1` with location
-    /// `ca-central-1`. The result is limits and usage data on all
-    /// instance types that are deployed in `ca-central-1`, by all of the
-    /// fleets that reside in `eu-west-1`.
+    /// * Request specifies the Region `us-east-1` with location
+    /// `ap-northeast-1`. The result is limits and usage data on all of
+    /// the fleets that reside in `us-east-1`, for all instance types
+    /// that are deployed in `ap-northeast-1`. These limits do not affect
+    /// fleets in any other Regions that deploy instances to
+    /// `ap-northeast-1`.
     ///
     /// This operation can be used in the following ways:
     ///
@@ -3389,9 +3439,9 @@ pub const Client = struct {
     /// following game session attributes. For game session search examples, see the
     /// Examples section of this topic.
     ///
-    /// * **gameSessionId** -- A unique identifier for the game session. You can use
-    ///   either a
-    /// `GameSessionId` or `GameSessionArn` value.
+    /// * **gameSessionId** -- An identifier for the game session that is unique
+    ///   across all regions. You must use the
+    /// full ARN value.
     ///
     /// * **gameSessionName** -- Name assigned to a game
     /// session. Game session names do not need to be unique to a game session.

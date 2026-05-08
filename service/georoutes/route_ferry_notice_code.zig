@@ -8,6 +8,8 @@ pub const RouteFerryNoticeCode = enum {
     violated_avoid_rail_ferry,
     seasonal_closure,
     potential_violated_vehicle_restriction_usage,
+    violated_avoid_areas,
+    violated_vehicle_restriction,
 
     pub const json_field_names = .{
         .accurate_polyline_unavailable = "AccuratePolylineUnavailable",
@@ -17,6 +19,8 @@ pub const RouteFerryNoticeCode = enum {
         .violated_avoid_rail_ferry = "ViolatedAvoidRailFerry",
         .seasonal_closure = "SeasonalClosure",
         .potential_violated_vehicle_restriction_usage = "PotentialViolatedVehicleRestrictionUsage",
+        .violated_avoid_areas = "ViolatedAvoidAreas",
+        .violated_vehicle_restriction = "ViolatedVehicleRestriction",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -28,6 +32,8 @@ pub const RouteFerryNoticeCode = enum {
             .violated_avoid_rail_ferry => "ViolatedAvoidRailFerry",
             .seasonal_closure => "SeasonalClosure",
             .potential_violated_vehicle_restriction_usage => "PotentialViolatedVehicleRestrictionUsage",
+            .violated_avoid_areas => "ViolatedAvoidAreas",
+            .violated_vehicle_restriction => "ViolatedVehicleRestriction",
         };
     }
 

@@ -29,6 +29,7 @@ pub const PrivateDnsPreference = @import("private_dns_preference.zig").PrivateDn
 pub const ProtocolType = @import("protocol_type.zig").ProtocolType;
 pub const PutResourcePolicyRequest = @import("put_resource_policy_request.zig").PutResourcePolicyRequest;
 pub const PutResourcePolicyResponse = @import("put_resource_policy_response.zig").PutResourcePolicyResponse;
+pub const ResourceConfigDnsResolution = @import("resource_config_dns_resolution.zig").ResourceConfigDnsResolution;
 pub const ResourceConfigurationDefinition = @import("resource_configuration_definition.zig").ResourceConfigurationDefinition;
 pub const ResourceConfigurationIpAddressType = @import("resource_configuration_ip_address_type.zig").ResourceConfigurationIpAddressType;
 pub const ResourceConfigurationStatus = @import("resource_configuration_status.zig").ResourceConfigurationStatus;

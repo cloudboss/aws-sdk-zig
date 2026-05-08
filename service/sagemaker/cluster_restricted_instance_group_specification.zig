@@ -8,7 +8,7 @@ const ScheduledUpdateConfig = @import("scheduled_update_config.zig").ScheduledUp
 /// The specifications of a restricted instance group that you need to define.
 pub const ClusterRestrictedInstanceGroupSpecification = struct {
     /// The configuration for the restricted instance groups (RIG) environment.
-    environment_config: EnvironmentConfig,
+    environment_config: ?EnvironmentConfig = null,
 
     /// Specifies an IAM execution role to be assumed by the restricted instance
     /// group.

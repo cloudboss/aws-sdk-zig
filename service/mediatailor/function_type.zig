@@ -1,0 +1,31 @@
+const std = @import("std");
+
+/// -- Define Enums
+pub const FunctionType = enum {
+    http_request,
+    custom_output,
+    sequential_executor,
+
+    pub const json_field_names = .{
+        .http_request = "HTTP_REQUEST",
+        .custom_output = "CUSTOM_OUTPUT",
+        .sequential_executor = "SEQUENTIAL_EXECUTOR",
+    };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .http_request => "HTTP_REQUEST",
+            .custom_output => "CUSTOM_OUTPUT",
+            .sequential_executor => "SEQUENTIAL_EXECUTOR",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
+};

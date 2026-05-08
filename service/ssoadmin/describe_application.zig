@@ -39,6 +39,10 @@ pub const DescribeApplicationOutput = struct {
     /// The description of the .
     description: ?[]const u8 = null,
 
+    /// The ARN of the identity store that is connected to the instance of IAM
+    /// Identity Center.
+    identity_store_arn: ?[]const u8 = null,
+
     /// The ARN of the IAM Identity Center application under which the operation
     /// will run. For more information about ARNs, see [Amazon Resource Names (ARNs)
     /// and Amazon Web Services Service
@@ -63,6 +67,7 @@ pub const DescribeApplicationOutput = struct {
         .created_date = "CreatedDate",
         .created_from = "CreatedFrom",
         .description = "Description",
+        .identity_store_arn = "IdentityStoreArn",
         .instance_arn = "InstanceArn",
         .name = "Name",
         .portal_options = "PortalOptions",

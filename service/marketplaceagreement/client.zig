@@ -1,21 +1,31 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const accept_agreement_cancellation_request = @import("accept_agreement_cancellation_request.zig");
+const accept_agreement_payment_request = @import("accept_agreement_payment_request.zig");
+const accept_agreement_request = @import("accept_agreement_request.zig");
 const batch_create_billing_adjustment_request = @import("batch_create_billing_adjustment_request.zig");
+const cancel_agreement = @import("cancel_agreement.zig");
 const cancel_agreement_cancellation_request = @import("cancel_agreement_cancellation_request.zig");
 const cancel_agreement_payment_request = @import("cancel_agreement_payment_request.zig");
+const create_agreement_request = @import("create_agreement_request.zig");
 const describe_agreement = @import("describe_agreement.zig");
 const get_agreement_cancellation_request = @import("get_agreement_cancellation_request.zig");
+const get_agreement_entitlements = @import("get_agreement_entitlements.zig");
 const get_agreement_payment_request = @import("get_agreement_payment_request.zig");
 const get_agreement_terms = @import("get_agreement_terms.zig");
 const get_billing_adjustment_request = @import("get_billing_adjustment_request.zig");
 const list_agreement_cancellation_requests = @import("list_agreement_cancellation_requests.zig");
+const list_agreement_charges = @import("list_agreement_charges.zig");
 const list_agreement_invoice_line_items = @import("list_agreement_invoice_line_items.zig");
 const list_agreement_payment_requests = @import("list_agreement_payment_requests.zig");
 const list_billing_adjustment_requests = @import("list_billing_adjustment_requests.zig");
+const reject_agreement_cancellation_request = @import("reject_agreement_cancellation_request.zig");
+const reject_agreement_payment_request = @import("reject_agreement_payment_request.zig");
 const search_agreements = @import("search_agreements.zig");
 const send_agreement_cancellation_request = @import("send_agreement_cancellation_request.zig");
 const send_agreement_payment_request = @import("send_agreement_payment_request.zig");
+const update_purchase_orders = @import("update_purchase_orders.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
@@ -46,17 +56,51 @@ pub const Client = struct {
         _ = self;
     }
 
+    /// Allows buyers (acceptors) to accept a cancellation request that is in
+    /// `PENDING_APPROVAL` status. Once accepted, the cancellation request
+    /// transitions to `APPROVED` status and the agreement cancellation will be
+    /// processed.
+    ///
+    /// Only cancellation requests in `PENDING_APPROVAL` status can be accepted. A
+    /// `ConflictException` is thrown if the cancellation request is in any other
+    /// status.
+    pub fn acceptAgreementCancellationRequest(self: *Self, allocator: std.mem.Allocator, input: accept_agreement_cancellation_request.AcceptAgreementCancellationRequestInput, options: CallOptions) !accept_agreement_cancellation_request.AcceptAgreementCancellationRequestOutput {
+        return accept_agreement_cancellation_request.execute(self, allocator, input, options);
+    }
+
+    /// Allows buyers (acceptors) to accept a payment request that is in
+    /// `PENDING_APPROVAL` status. Once accepted, the payment request transitions to
+    /// `APPROVED` status and the charge will be processed. Buyers can optionally
+    /// provide a purchase order reference for their internal tracking.
+    ///
+    /// Only payment requests in `PENDING_APPROVAL` status can be accepted. A
+    /// `ConflictException` is thrown if the payment request is in any other status.
+    pub fn acceptAgreementPaymentRequest(self: *Self, allocator: std.mem.Allocator, input: accept_agreement_payment_request.AcceptAgreementPaymentRequestInput, options: CallOptions) !accept_agreement_payment_request.AcceptAgreementPaymentRequestOutput {
+        return accept_agreement_payment_request.execute(self, allocator, input, options);
+    }
+
+    /// Accepts an agreement request to finalize the agreement. The acceptor can
+    /// optionally provide purchase orders to associate with the agreement charges.
+    pub fn acceptAgreementRequest(self: *Self, allocator: std.mem.Allocator, input: accept_agreement_request.AcceptAgreementRequestInput, options: CallOptions) !accept_agreement_request.AcceptAgreementRequestOutput {
+        return accept_agreement_request.execute(self, allocator, input, options);
+    }
+
     /// Allows sellers (proposers) to submit billing adjustment requests for one or
     /// more invoices within an agreement. Each entry in the batch specifies an
     /// invoice and the adjustment amount. The operation returns successfully
-    /// created adjustment request IDs and any errors for entries that failed
-    /// validation.
+    /// created adjustment request IDs and any errors for entries that failed to
+    /// process.
     ///
-    /// Each entry requires a unique `clientToken` for idempotency. A
-    /// `ValidationException` is returned if the adjustment amount exceeds the
-    /// maximum refundable amount for the invoice.
+    /// Each entry requires a unique `clientToken` for idempotency.
     pub fn batchCreateBillingAdjustmentRequest(self: *Self, allocator: std.mem.Allocator, input: batch_create_billing_adjustment_request.BatchCreateBillingAdjustmentRequestInput, options: CallOptions) !batch_create_billing_adjustment_request.BatchCreateBillingAdjustmentRequestOutput {
         return batch_create_billing_adjustment_request.execute(self, allocator, input, options);
+    }
+
+    /// Allows an acceptor to cancel an active agreement. Not all agreements are
+    /// eligible for cancellation. Use the error response to determine why a
+    /// cancellation request was rejected.
+    pub fn cancelAgreement(self: *Self, allocator: std.mem.Allocator, input: cancel_agreement.CancelAgreementInput, options: CallOptions) !cancel_agreement.CancelAgreementOutput {
+        return cancel_agreement.execute(self, allocator, input, options);
     }
 
     /// Allows sellers (proposers) to withdraw an existing agreement cancellation
@@ -82,6 +126,14 @@ pub const Client = struct {
         return cancel_agreement_payment_request.execute(self, allocator, input, options);
     }
 
+    /// Creates an agreement request that acts as a quote for the terms you want to
+    /// accept. The agreement request captures the requested terms, calculates
+    /// charges, and returns a summary. Use `AcceptAgreementRequest` with the
+    /// returned `agreementRequestId` to finalize the agreement.
+    pub fn createAgreementRequest(self: *Self, allocator: std.mem.Allocator, input: create_agreement_request.CreateAgreementRequestInput, options: CallOptions) !create_agreement_request.CreateAgreementRequestOutput {
+        return create_agreement_request.execute(self, allocator, input, options);
+    }
+
     /// Provides details about an agreement, such as the proposer, acceptor, start
     /// date, and end date.
     pub fn describeAgreement(self: *Self, allocator: std.mem.Allocator, input: describe_agreement.DescribeAgreementInput, options: CallOptions) !describe_agreement.DescribeAgreementOutput {
@@ -91,12 +143,13 @@ pub const Client = struct {
     /// Retrieves detailed information about a specific agreement cancellation
     /// request. Both sellers (proposers) and buyers (acceptors) can use this
     /// operation to view cancellation requests associated with their agreements.
-    ///
-    /// The calling identity must be either the acceptor or proposer of the
-    /// agreement. A `ResourceNotFoundException` is returned if the cancellation
-    /// request does not exist.
     pub fn getAgreementCancellationRequest(self: *Self, allocator: std.mem.Allocator, input: get_agreement_cancellation_request.GetAgreementCancellationRequestInput, options: CallOptions) !get_agreement_cancellation_request.GetAgreementCancellationRequestOutput {
         return get_agreement_cancellation_request.execute(self, allocator, input, options);
+    }
+
+    /// Obtains details about the entitlements of an agreement.
+    pub fn getAgreementEntitlements(self: *Self, allocator: std.mem.Allocator, input: get_agreement_entitlements.GetAgreementEntitlementsInput, options: CallOptions) !get_agreement_entitlements.GetAgreementEntitlementsOutput {
+        return get_agreement_entitlements.execute(self, allocator, input, options);
     }
 
     /// Retrieves detailed information about a specific payment request. Both
@@ -135,9 +188,6 @@ pub const Client = struct {
     /// Retrieves detailed information about a specific billing adjustment request.
     /// Sellers (proposers) can use this operation to view the status and details of
     /// a billing adjustment request they submitted.
-    ///
-    /// A `ResourceNotFoundException` is returned if the billing adjustment request
-    /// does not exist or the caller does not have permission to access it.
     pub fn getBillingAdjustmentRequest(self: *Self, allocator: std.mem.Allocator, input: get_billing_adjustment_request.GetBillingAdjustmentRequestInput, options: CallOptions) !get_billing_adjustment_request.GetBillingAdjustmentRequestOutput {
         return get_billing_adjustment_request.execute(self, allocator, input, options);
     }
@@ -148,18 +198,24 @@ pub const Client = struct {
     /// optional filters.
     ///
     /// `PartyType` is a required parameter. A `ValidationException` is returned if
-    /// `PartyType` is not provided. Pagination is supported through `maxResults`
-    /// (1-50, default 20) and `nextToken` parameters.
+    /// `PartyType` is not provided.
     pub fn listAgreementCancellationRequests(self: *Self, allocator: std.mem.Allocator, input: list_agreement_cancellation_requests.ListAgreementCancellationRequestsInput, options: CallOptions) !list_agreement_cancellation_requests.ListAgreementCancellationRequestsOutput {
         return list_agreement_cancellation_requests.execute(self, allocator, input, options);
+    }
+
+    /// Allows acceptors to view charges and purchase orders that are associated
+    /// with an agreement. The response includes details about all charges
+    /// regardless of whether a purchase order is linked to each charge.
+    pub fn listAgreementCharges(self: *Self, allocator: std.mem.Allocator, input: list_agreement_charges.ListAgreementChargesInput, options: CallOptions) !list_agreement_charges.ListAgreementChargesOutput {
+        return list_agreement_charges.execute(self, allocator, input, options);
     }
 
     /// Allows sellers (proposers) to retrieve aggregated billing data from AWS
     /// Marketplace agreements using flexible grouping. Supports invoice-level
     /// aggregation with filtering by billing period, invoice type, and issued date.
     ///
-    /// The `groupBy` parameter is required and currently supports only `INVOICE_ID`
-    /// as a value. The `agreementId` parameter is required.
+    /// The `groupBy` parameter is required and supports only `INVOICE_ID` as a
+    /// value. The `agreementId` parameter is required.
     pub fn listAgreementInvoiceLineItems(self: *Self, allocator: std.mem.Allocator, input: list_agreement_invoice_line_items.ListAgreementInvoiceLineItemsInput, options: CallOptions) !list_agreement_invoice_line_items.ListAgreementInvoiceLineItemsOutput {
         return list_agreement_invoice_line_items.execute(self, allocator, input, options);
     }
@@ -178,14 +234,36 @@ pub const Client = struct {
     /// Lists billing adjustment requests for a specific agreement. Sellers
     /// (proposers) can use this operation to view all billing adjustment requests
     /// associated with an agreement.
-    ///
-    /// Pagination is supported through `maxResults` and `nextToken` parameters.
     pub fn listBillingAdjustmentRequests(self: *Self, allocator: std.mem.Allocator, input: list_billing_adjustment_requests.ListBillingAdjustmentRequestsInput, options: CallOptions) !list_billing_adjustment_requests.ListBillingAdjustmentRequestsOutput {
         return list_billing_adjustment_requests.execute(self, allocator, input, options);
     }
 
-    /// Searches across all agreements that a proposer has in AWS Marketplace. The
-    /// search returns a list of agreements with basic agreement information.
+    /// Allows buyers (acceptors) to reject a cancellation request that is in
+    /// `PENDING_APPROVAL` status. Once rejected, the cancellation request
+    /// transitions to `REJECTED` status and the agreement remains active. Buyers
+    /// must provide a reason for the rejection.
+    ///
+    /// Only cancellation requests in `PENDING_APPROVAL` status can be rejected. A
+    /// `ConflictException` is thrown if the cancellation request is in any other
+    /// status.
+    pub fn rejectAgreementCancellationRequest(self: *Self, allocator: std.mem.Allocator, input: reject_agreement_cancellation_request.RejectAgreementCancellationRequestInput, options: CallOptions) !reject_agreement_cancellation_request.RejectAgreementCancellationRequestOutput {
+        return reject_agreement_cancellation_request.execute(self, allocator, input, options);
+    }
+
+    /// Allows buyers (acceptors) to reject a payment request that is in
+    /// `PENDING_APPROVAL` status. Once rejected, the payment request transitions to
+    /// `REJECTED` status and cannot be accepted. Buyers can optionally provide a
+    /// reason for the rejection.
+    ///
+    /// Only payment requests in `PENDING_APPROVAL` status can be rejected. A
+    /// `ConflictException` is thrown if the payment request is in any other status.
+    pub fn rejectAgreementPaymentRequest(self: *Self, allocator: std.mem.Allocator, input: reject_agreement_payment_request.RejectAgreementPaymentRequestInput, options: CallOptions) !reject_agreement_payment_request.RejectAgreementPaymentRequestOutput {
+        return reject_agreement_payment_request.execute(self, allocator, input, options);
+    }
+
+    /// Searches across all agreements that a proposer or an acceptor has in AWS
+    /// Marketplace. The search returns a list of agreements with basic agreement
+    /// information.
     ///
     /// The following filter combinations are supported when the `PartyType` is
     /// `Proposer`:
@@ -196,10 +274,10 @@ pub const Client = struct {
     /// * `AgreementType` + `ResourceType` + `EndTime`
     /// * `AgreementType` + `ResourceType` + `Status`
     /// * `AgreementType` + `ResourceType` + `Status` + `EndTime`
-    /// * `AgreementType` + `ResourceId`
-    /// * `AgreementType` + `ResourceId` + `EndTime`
-    /// * `AgreementType` + `ResourceId` + `Status`
-    /// * `AgreementType` + `ResourceId` + `Status` + `EndTime`
+    /// * `AgreementType` + `ResourceIdentifier`
+    /// * `AgreementType` + `ResourceIdentifier` + `EndTime`
+    /// * `AgreementType` + `ResourceIdentifier` + `Status`
+    /// * `AgreementType` + `ResourceIdentifier` + `Status` + `EndTime`
     /// * `AgreementType` + `AcceptorAccountId`
     /// * `AgreementType` + `AcceptorAccountId` + `EndTime`
     /// * `AgreementType` + `AcceptorAccountId` + `Status`
@@ -208,10 +286,10 @@ pub const Client = struct {
     /// * `AgreementType` + `AcceptorAccountId` + `OfferId` + `Status`
     /// * `AgreementType` + `AcceptorAccountId` + `OfferId` + `EndTime`
     /// * `AgreementType` + `AcceptorAccountId` + `OfferId` + `Status` + `EndTime`
-    /// * `AgreementType` + `AcceptorAccountId` + `ResourceId`
-    /// * `AgreementType` + `AcceptorAccountId` + `ResourceId` + `Status`
-    /// * `AgreementType` + `AcceptorAccountId` + `ResourceId` + `EndTime`
-    /// * `AgreementType` + `AcceptorAccountId` + `ResourceId` + `Status` +
+    /// * `AgreementType` + `AcceptorAccountId` + `ResourceIdentifier`
+    /// * `AgreementType` + `AcceptorAccountId` + `ResourceIdentifier` + `Status`
+    /// * `AgreementType` + `AcceptorAccountId` + `ResourceIdentifier` + `EndTime`
+    /// * `AgreementType` + `AcceptorAccountId` + `ResourceIdentifier` + `Status` +
     ///   `EndTime`
     /// * `AgreementType` + `AcceptorAccountId` + `ResourceType`
     /// * `AgreementType` + `AcceptorAccountId` + `ResourceType` + `EndTime`
@@ -229,8 +307,30 @@ pub const Client = struct {
     /// * `AgreementType` + `OfferSetId` + `Status`
     /// * `AgreementType` + `OfferSetId` + `Status` + `EndTime`
     ///
-    /// To filter by `EndTime`, you can use either `BeforeEndTime` or
-    /// `AfterEndTime`. Only `EndTime` is supported for sorting.
+    /// To filter by `EndTime`, you can use `BeforeEndTime` and/or `AfterEndTime`.
+    /// Only `EndTime` is supported for sorting.
+    ///
+    /// The following filter combinations are supported when the `PartyType` is
+    /// `Acceptor`:
+    ///
+    /// * `AgreementType`
+    /// * `AgreementType` + `Status`
+    /// * `AgreementType` + `EndTime`
+    /// * `AgreementType` + `Status` + `EndTime`
+    /// * `AgreementType` + `ResourceIdentifier`
+    /// * `AgreementType` + `ResourceIdentifier` + `EndTime`
+    /// * `AgreementType` + `ResourceIdentifier` + `Status`
+    /// * `AgreementType` + `ResourceIdentifier` + `Status` + `EndTime`
+    /// * `AgreementType` + `ResourceType`
+    /// * `AgreementType` + `ResourceType` + `EndTime`
+    /// * `AgreementType` + `OfferId`
+    /// * `AgreementType` + `OfferId` + `EndTime`
+    /// * `AgreementType` + `OfferId` + `Status`
+    /// * `AgreementType` + `OfferId` + `Status` + `EndTime`
+    /// * `AgreementType` + `OfferSetId`
+    /// * `AgreementType` + `OfferSetId` + `EndTime`
+    /// * `AgreementType` + `OfferSetId` + `Status`
+    /// * `AgreementType` + `OfferSetId` + `Status` + `EndTime`
     pub fn searchAgreements(self: *Self, allocator: std.mem.Allocator, input: search_agreements.SearchAgreementsInput, options: CallOptions) !search_agreements.SearchAgreementsOutput {
         return search_agreements.execute(self, allocator, input, options);
     }
@@ -254,6 +354,19 @@ pub const Client = struct {
         return send_agreement_payment_request.execute(self, allocator, input, options);
     }
 
+    /// Allows acceptors to associate purchase orders with agreement charges after
+    /// an agreement is created.
+    pub fn updatePurchaseOrders(self: *Self, allocator: std.mem.Allocator, input: update_purchase_orders.UpdatePurchaseOrdersInput, options: CallOptions) !update_purchase_orders.UpdatePurchaseOrdersOutput {
+        return update_purchase_orders.execute(self, allocator, input, options);
+    }
+
+    pub fn getAgreementEntitlementsPaginator(self: *Self, params: get_agreement_entitlements.GetAgreementEntitlementsInput) paginator.GetAgreementEntitlementsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn getAgreementTermsPaginator(self: *Self, params: get_agreement_terms.GetAgreementTermsInput) paginator.GetAgreementTermsPaginator {
         return .{
             .client = self,
@@ -262,6 +375,13 @@ pub const Client = struct {
     }
 
     pub fn listAgreementCancellationRequestsPaginator(self: *Self, params: list_agreement_cancellation_requests.ListAgreementCancellationRequestsInput) paginator.ListAgreementCancellationRequestsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listAgreementChargesPaginator(self: *Self, params: list_agreement_charges.ListAgreementChargesInput) paginator.ListAgreementChargesPaginator {
         return .{
             .client = self,
             .params = params,

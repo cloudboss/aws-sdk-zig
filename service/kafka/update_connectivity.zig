@@ -5,23 +5,28 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ConnectivityInfo = @import("connectivity_info.zig").ConnectivityInfo;
+const ZookeeperAccess = @import("zookeeper_access.zig").ZookeeperAccess;
 
 pub const UpdateConnectivityInput = struct {
     /// The Amazon Resource Name (ARN) of the configuration.
     cluster_arn: []const u8,
 
     /// Information about the broker access configuration.
-    connectivity_info: ConnectivityInfo,
+    connectivity_info: ?ConnectivityInfo = null,
 
     /// The version of the MSK cluster to update. Cluster versions aren't simple
     /// numbers. You can describe an MSK cluster to find its version. When this
     /// update operation is successful, it generates a new cluster version.
     current_version: []const u8,
 
+    /// Access control settings for zookeeper
+    zookeeper_access: ?ZookeeperAccess = null,
+
     pub const json_field_names = .{
         .cluster_arn = "ClusterArn",
         .connectivity_info = "ConnectivityInfo",
         .current_version = "CurrentVersion",
+        .zookeeper_access = "ZookeeperAccess",
     };
 };
 
@@ -78,14 +83,22 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateConnectivityInput
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"ConnectivityInfo\":");
-    try aws.json.writeValue(@TypeOf(input.connectivity_info), input.connectivity_info, allocator, &body_buf);
-    has_prev = true;
+    if (input.connectivity_info) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"ConnectivityInfo\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"CurrentVersion\":");
     try aws.json.writeValue(@TypeOf(input.current_version), input.current_version, allocator, &body_buf);
     has_prev = true;
+    if (input.zookeeper_access) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"ZookeeperAccess\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);

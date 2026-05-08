@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const FunctionConfig = @import("function_config.zig").FunctionConfig;
+const Tags = @import("tags.zig").Tags;
 const FunctionSummary = @import("function_summary.zig").FunctionSummary;
 const serde = @import("serde.zig");
 
@@ -20,6 +21,8 @@ pub const CreateFunctionInput = struct {
 
     /// A name to identify the function.
     name: []const u8,
+
+    tags: ?Tags = null,
 };
 
 pub const CreateFunctionOutput = struct {
@@ -77,6 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFunctionInput, co
     try body_buf.appendSlice(allocator, "<Name>");
     try aws.xml.appendXmlEscaped(allocator, &body_buf, input.name);
     try body_buf.appendSlice(allocator, "</Name>");
+    if (input.tags) |v| {
+        try body_buf.appendSlice(allocator, "<Tags>");
+        try serde.serializeTags(allocator, &body_buf, v);
+        try body_buf.appendSlice(allocator, "</Tags>");
+    }
     try body_buf.appendSlice(allocator, "</CreateFunctionRequest>");
     const body = try body_buf.toOwnedSlice(allocator);
 

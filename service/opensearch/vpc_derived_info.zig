@@ -9,6 +9,12 @@ pub const VPCDerivedInfo = struct {
     /// The list of Availability Zones associated with the VPC subnets.
     availability_zones: ?[]const []const u8 = null,
 
+    /// Indicates whether egress traffic from the domain is routed through the
+    /// customer VPC.
+    /// When `true`, outbound traffic flows through the VPC. When
+    /// `false`, outbound traffic goes through the public internet.
+    egress_enabled: ?bool = null,
+
     /// The list of security group IDs associated with the VPC endpoints for the
     /// domain.
     security_group_ids: ?[]const []const u8 = null,
@@ -21,6 +27,7 @@ pub const VPCDerivedInfo = struct {
 
     pub const json_field_names = .{
         .availability_zones = "AvailabilityZones",
+        .egress_enabled = "EgressEnabled",
         .security_group_ids = "SecurityGroupIds",
         .subnet_ids = "SubnetIds",
         .vpc_id = "VPCId",

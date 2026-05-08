@@ -95,6 +95,7 @@ const get_lineage_event = @import("get_lineage_event.zig");
 const get_lineage_node = @import("get_lineage_node.zig");
 const get_listing = @import("get_listing.zig");
 const get_metadata_generation_run = @import("get_metadata_generation_run.zig");
+const get_notebook_run = @import("get_notebook_run.zig");
 const get_project = @import("get_project.zig");
 const get_project_profile = @import("get_project_profile.zig");
 const get_rule = @import("get_rule.zig");
@@ -125,6 +126,7 @@ const list_job_runs = @import("list_job_runs.zig");
 const list_lineage_events = @import("list_lineage_events.zig");
 const list_lineage_node_history = @import("list_lineage_node_history.zig");
 const list_metadata_generation_runs = @import("list_metadata_generation_runs.zig");
+const list_notebook_runs = @import("list_notebook_runs.zig");
 const list_notifications = @import("list_notifications.zig");
 const list_policy_grants = @import("list_policy_grants.zig");
 const list_project_memberships = @import("list_project_memberships.zig");
@@ -154,6 +156,8 @@ const search_types = @import("search_types.zig");
 const search_user_profiles = @import("search_user_profiles.zig");
 const start_data_source_run = @import("start_data_source_run.zig");
 const start_metadata_generation_run = @import("start_metadata_generation_run.zig");
+const start_notebook_run = @import("start_notebook_run.zig");
+const stop_notebook_run = @import("stop_notebook_run.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_account_pool = @import("update_account_pool.zig");
@@ -1014,6 +1018,11 @@ pub const Client = struct {
         return get_metadata_generation_run.execute(self, allocator, input, options);
     }
 
+    /// Gets the details of a notebook run in an Amazon DataZone domain.
+    pub fn getNotebookRun(self: *Self, allocator: std.mem.Allocator, input: get_notebook_run.GetNotebookRunInput, options: CallOptions) !get_notebook_run.GetNotebookRunOutput {
+        return get_notebook_run.execute(self, allocator, input, options);
+    }
+
     /// Gets a project in Amazon DataZone.
     pub fn getProject(self: *Self, allocator: std.mem.Allocator, input: get_project.GetProjectInput, options: CallOptions) !get_project.GetProjectOutput {
         return get_project.execute(self, allocator, input, options);
@@ -1203,6 +1212,11 @@ pub const Client = struct {
     /// * User must have access to metadata generation runs in the domain.
     pub fn listMetadataGenerationRuns(self: *Self, allocator: std.mem.Allocator, input: list_metadata_generation_runs.ListMetadataGenerationRunsInput, options: CallOptions) !list_metadata_generation_runs.ListMetadataGenerationRunsOutput {
         return list_metadata_generation_runs.execute(self, allocator, input, options);
+    }
+
+    /// Lists notebook runs in an Amazon DataZone domain.
+    pub fn listNotebookRuns(self: *Self, allocator: std.mem.Allocator, input: list_notebook_runs.ListNotebookRunsInput, options: CallOptions) !list_notebook_runs.ListNotebookRunsOutput {
+        return list_notebook_runs.execute(self, allocator, input, options);
     }
 
     /// Lists all Amazon DataZone notifications.
@@ -1481,6 +1495,19 @@ pub const Client = struct {
     ///   domain/project.
     pub fn startMetadataGenerationRun(self: *Self, allocator: std.mem.Allocator, input: start_metadata_generation_run.StartMetadataGenerationRunInput, options: CallOptions) !start_metadata_generation_run.StartMetadataGenerationRunOutput {
         return start_metadata_generation_run.execute(self, allocator, input, options);
+    }
+
+    /// Starts a notebook run in an Amazon DataZone domain. A notebook run
+    /// represents the execution of a Amazon DataZone notebook within a project. You
+    /// can configure compute, network, timeout, and environment settings for the
+    /// run.
+    pub fn startNotebookRun(self: *Self, allocator: std.mem.Allocator, input: start_notebook_run.StartNotebookRunInput, options: CallOptions) !start_notebook_run.StartNotebookRunOutput {
+        return start_notebook_run.execute(self, allocator, input, options);
+    }
+
+    /// Stops a running notebook run in an Amazon DataZone domain.
+    pub fn stopNotebookRun(self: *Self, allocator: std.mem.Allocator, input: stop_notebook_run.StopNotebookRunInput, options: CallOptions) !stop_notebook_run.StopNotebookRunOutput {
+        return stop_notebook_run.execute(self, allocator, input, options);
     }
 
     /// Tags a resource in Amazon DataZone.
@@ -1771,6 +1798,13 @@ pub const Client = struct {
     }
 
     pub fn listMetadataGenerationRunsPaginator(self: *Self, params: list_metadata_generation_runs.ListMetadataGenerationRunsInput) paginator.ListMetadataGenerationRunsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listNotebookRunsPaginator(self: *Self, params: list_notebook_runs.ListNotebookRunsInput) paginator.ListNotebookRunsPaginator {
         return .{
             .client = self,
             .params = params,

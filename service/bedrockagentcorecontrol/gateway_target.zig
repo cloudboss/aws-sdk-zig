@@ -3,6 +3,7 @@ const CredentialProviderConfiguration = @import("credential_provider_configurati
 const MetadataConfiguration = @import("metadata_configuration.zig").MetadataConfiguration;
 const PrivateEndpoint = @import("private_endpoint.zig").PrivateEndpoint;
 const ManagedResourceDetails = @import("managed_resource_details.zig").ManagedResourceDetails;
+const TargetProtocolType = @import("target_protocol_type.zig").TargetProtocolType;
 const TargetStatus = @import("target_status.zig").TargetStatus;
 const TargetConfiguration = @import("target_configuration.zig").TargetConfiguration;
 
@@ -42,6 +43,9 @@ pub const GatewayTarget = struct {
     /// managed VPC Lattice resource configuration.
     private_endpoint_managed_resources: ?[]const ManagedResourceDetails = null,
 
+    /// The protocol type of the gateway target.
+    protocol_type: ?TargetProtocolType = null,
+
     /// The status of the gateway target.
     status: TargetStatus,
 
@@ -67,6 +71,7 @@ pub const GatewayTarget = struct {
         .name = "name",
         .private_endpoint = "privateEndpoint",
         .private_endpoint_managed_resources = "privateEndpointManagedResources",
+        .protocol_type = "protocolType",
         .status = "status",
         .status_reasons = "statusReasons",
         .target_configuration = "targetConfiguration",

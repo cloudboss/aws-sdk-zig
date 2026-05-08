@@ -13,6 +13,9 @@ pub const FixedUpfrontPricingTerm = struct {
     /// execution.
     grants: ?[]const GrantItem = null,
 
+    /// The unique identifier for the term.
+    id: ?[]const u8 = null,
+
     /// Fixed amount to be charged to the customer when this term is accepted.
     price: ?[]const u8 = null,
 
@@ -23,6 +26,7 @@ pub const FixedUpfrontPricingTerm = struct {
         .currency_code = "currencyCode",
         .duration = "duration",
         .grants = "grants",
+        .id = "id",
         .price = "price",
         .@"type" = "type",
     };

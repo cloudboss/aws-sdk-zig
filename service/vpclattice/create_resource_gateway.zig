@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const ResourceGatewayIpAddressType = @import("resource_gateway_ip_address_type.zig").ResourceGatewayIpAddressType;
+const ResourceConfigDnsResolution = @import("resource_config_dns_resolution.zig").ResourceConfigDnsResolution;
 const ResourceGatewayStatus = @import("resource_gateway_status.zig").ResourceGatewayStatus;
 
 pub const CreateResourceGatewayInput = struct {
@@ -42,6 +43,20 @@ pub const CreateResourceGatewayInput = struct {
     /// The name of the resource gateway.
     name: []const u8,
 
+    /// Indicates how DNS is resolved for resource configurations associated to this
+    /// resource gateway. ResourceConfigDnsResolution is set at creation time and
+    /// cannot be changed.
+    ///
+    /// * `IN_VPC` - DNS resolution occurs privately within the resource gateway's
+    ///   VPC. DNS queries for resources behind this resource gateway resolve using
+    ///   the DNS resolvers defined in the VPC's DHCP option sets. Use this when
+    ///   your resource domain names are hosted in private Route 53 hosted zones or
+    ///   on-premises DNS servers reachable from the VPC.
+    /// * `PUBLIC` - DNS resolution occurs against public DNS resolvers. DNS queries
+    ///   for resources behind this resource gateway resolve using standard public
+    ///   DNS. Use this when your resource domain names are publicly resolvable.
+    resource_config_dns_resolution: ?ResourceConfigDnsResolution = null,
+
     /// The IDs of the security groups to apply to the resource gateway. The
     /// security groups must be in the same VPC.
     security_group_ids: ?[]const []const u8 = null,
@@ -60,6 +75,7 @@ pub const CreateResourceGatewayInput = struct {
         .ip_address_type = "ipAddressType",
         .ipv_4_addresses_per_eni = "ipv4AddressesPerEni",
         .name = "name",
+        .resource_config_dns_resolution = "resourceConfigDnsResolution",
         .security_group_ids = "securityGroupIds",
         .subnet_ids = "subnetIds",
         .tags = "tags",
@@ -83,6 +99,10 @@ pub const CreateResourceGatewayOutput = struct {
     /// The name of the resource gateway.
     name: ?[]const u8 = null,
 
+    /// The DNS resolution type for resource configurations that are associated with
+    /// this resource gateway.
+    resource_config_dns_resolution: ?ResourceConfigDnsResolution = null,
+
     /// The IDs of the security groups for the resource gateway.
     security_group_ids: ?[]const []const u8 = null,
 
@@ -101,6 +121,7 @@ pub const CreateResourceGatewayOutput = struct {
         .ip_address_type = "ipAddressType",
         .ipv_4_addresses_per_eni = "ipv4AddressesPerEni",
         .name = "name",
+        .resource_config_dns_resolution = "resourceConfigDnsResolution",
         .security_group_ids = "securityGroupIds",
         .status = "status",
         .subnet_ids = "subnetIds",
@@ -166,6 +187,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateResourceGatewayIn
     try body_buf.appendSlice(allocator, "\"name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
     has_prev = true;
+    if (input.resource_config_dns_resolution) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"resourceConfigDnsResolution\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.security_group_ids) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"securityGroupIds\":");

@@ -33,6 +33,8 @@ pub const ManifestServiceExcludeEventType = enum {
     error_profile_name_interpolation,
     error_bumper_start_interpolation,
     error_bumper_end_interpolation,
+    pre_session_init_hook_error,
+    pre_session_init_function_error,
 
     pub const json_field_names = .{
         .generated_manifest = "GENERATED_MANIFEST",
@@ -67,6 +69,8 @@ pub const ManifestServiceExcludeEventType = enum {
         .error_profile_name_interpolation = "ERROR_PROFILE_NAME_INTERPOLATION",
         .error_bumper_start_interpolation = "ERROR_BUMPER_START_INTERPOLATION",
         .error_bumper_end_interpolation = "ERROR_BUMPER_END_INTERPOLATION",
+        .pre_session_init_hook_error = "PRE_SESSION_INIT_HOOK_ERROR",
+        .pre_session_init_function_error = "PRE_SESSION_INIT_FUNCTION_ERROR",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -103,6 +107,8 @@ pub const ManifestServiceExcludeEventType = enum {
             .error_profile_name_interpolation => "ERROR_PROFILE_NAME_INTERPOLATION",
             .error_bumper_start_interpolation => "ERROR_BUMPER_START_INTERPOLATION",
             .error_bumper_end_interpolation => "ERROR_BUMPER_END_INTERPOLATION",
+            .pre_session_init_hook_error => "PRE_SESSION_INIT_HOOK_ERROR",
+            .pre_session_init_function_error => "PRE_SESSION_INIT_FUNCTION_ERROR",
         };
     }
 

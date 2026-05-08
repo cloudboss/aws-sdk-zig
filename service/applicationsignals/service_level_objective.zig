@@ -17,6 +17,10 @@ pub const ServiceLevelObjective = struct {
     /// The ARN of this SLO.
     arn: []const u8,
 
+    /// Indicates whether DevOps Agent will automatically investigate this SLO when
+    /// it is breached
+    auto_investigation_enabled: ?bool = null,
+
     /// Each object in this array defines the length of the look-back window used to
     /// calculate one burn rate metric for this SLO. The burn rate measures how fast
     /// the service is consuming the error budget, relative to the attainment goal
@@ -64,6 +68,7 @@ pub const ServiceLevelObjective = struct {
 
     pub const json_field_names = .{
         .arn = "Arn",
+        .auto_investigation_enabled = "AutoInvestigationEnabled",
         .burn_rate_configurations = "BurnRateConfigurations",
         .created_time = "CreatedTime",
         .description = "Description",

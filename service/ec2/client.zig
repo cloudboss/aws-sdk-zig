@@ -5257,7 +5257,11 @@ pub const Client = struct {
 
     /// Describes the specified instance types. By default, all instance types for
     /// the current
-    /// Region are described. Alternatively, you can filter the results.
+    /// Region are described. Alternatively, you can filter the results. To include
+    /// instance types
+    /// that are not supported in the current Region, set
+    /// `IncludeUnsupportedInRegion`
+    /// to `true`.
     pub fn describeInstanceTypes(self: *Self, allocator: std.mem.Allocator, input: describe_instance_types.DescribeInstanceTypesInput, options: CallOptions) !describe_instance_types.DescribeInstanceTypesOutput {
         return describe_instance_types.execute(self, allocator, input, options);
     }

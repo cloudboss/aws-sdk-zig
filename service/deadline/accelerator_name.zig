@@ -5,12 +5,14 @@ pub const AcceleratorName = enum {
     a10_g,
     l4,
     l40_s,
+    rtx_pro_server_6000,
 
     pub const json_field_names = .{
         .t4 = "t4",
         .a10_g = "a10g",
         .l4 = "l4",
         .l40_s = "l40s",
+        .rtx_pro_server_6000 = "rtx-pro-server-6000",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +21,7 @@ pub const AcceleratorName = enum {
             .a10_g => "a10g",
             .l4 => "l4",
             .l40_s => "l40s",
+            .rtx_pro_server_6000 => "rtx-pro-server-6000",
         };
     }
 

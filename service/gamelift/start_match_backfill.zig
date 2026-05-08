@@ -16,8 +16,10 @@ pub const StartMatchBackfillInput = struct {
     /// property.
     configuration_name: []const u8,
 
-    /// A unique identifier for the game session. Use the game session ID. When
-    /// using FlexMatch as a standalone matchmaking
+    /// An identifier for the game session that is unique across all regions. The
+    /// value is always a full ARN in the following format:
+    /// `arn:aws:gamelift:::gamesession//`. When using FlexMatch as a standalone
+    /// matchmaking
     /// solution, this parameter is not needed.
     game_session_arn: ?[]const u8 = null,
 

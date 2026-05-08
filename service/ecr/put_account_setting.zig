@@ -12,7 +12,7 @@ pub const PutAccountSettingInput = struct {
 
     /// Setting value that is specified. Valid value for basic scan type:
     /// `AWS_NATIVE`.
-    /// Valid values for registry policy scope: `V1` or `V2`.
+    /// Valid values for registry policy scope: `V2`.
     /// Valid values for blob mounting: `ENABLED` or `DISABLED`.
     value: []const u8,
 

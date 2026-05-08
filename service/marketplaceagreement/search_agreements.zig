@@ -20,8 +20,7 @@ pub const SearchAgreementsInput = struct {
     /// * `ResourceType` – Type of the resource, which is the product (`AmiProduct`,
     ///   `ContainerProduct`, `SaaSProduct`, `ProfessionalServicesProduct`, or
     ///   `MachineLearningProduct`).
-    /// * `PartyType` – The party type of the caller. For agreements where the
-    ///   caller is the proposer, use the `Proposer` filter.
+    /// * `PartyType` – The party type of the caller. Use `Proposer` or `Acceptor`.
     /// * `AcceptorAccountId` – The AWS account ID of the party accepting the
     ///   agreement terms.
     /// * `OfferId` – The unique identifier of the offer in which the terms are
@@ -161,6 +160,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
         return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

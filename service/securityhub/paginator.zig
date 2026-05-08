@@ -15,6 +15,7 @@ const get_findings = @import("get_findings.zig");
 const get_findings_trends_v2 = @import("get_findings_trends_v2.zig");
 const get_findings_v2 = @import("get_findings_v2.zig");
 const get_insights = @import("get_insights.zig");
+const get_recommended_policy_v2 = @import("get_recommended_policy_v2.zig");
 const get_resources_trends_v2 = @import("get_resources_trends_v2.zig");
 const get_resources_v2 = @import("get_resources_v2.zig");
 const list_aggregators_v2 = @import("list_aggregators_v2.zig");
@@ -444,6 +445,46 @@ pub const GetInsightsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try get_insights.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const GetRecommendedPolicyV2Paginator = struct {
+    client: *Client,
+    params: get_recommended_policy_v2.GetRecommendedPolicyV2Input,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_recommended_policy_v2.GetRecommendedPolicyV2Output {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try get_recommended_policy_v2.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

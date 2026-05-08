@@ -32,7 +32,7 @@ pub const GetAgreementPaymentRequestOutput = struct {
     /// follows the pattern `ch-[a-zA-Z0-9]+`.
     charge_id: ?[]const u8 = null,
 
-    /// The date and time when the payment request was created, in ISO 8601 format.
+    /// The date and time when the payment request was created.
     created_at: ?i64 = null,
 
     /// The currency code for the charge amount.
@@ -62,8 +62,7 @@ pub const GetAgreementPaymentRequestOutput = struct {
     /// status, such as a rejection reason or validation failure details.
     status_message: ?[]const u8 = null,
 
-    /// The date and time when the payment request was last updated, in ISO 8601
-    /// format.
+    /// The date and time when the payment request was last updated.
     updated_at: ?i64 = null,
 
     pub const json_field_names = .{
@@ -167,6 +166,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
         return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

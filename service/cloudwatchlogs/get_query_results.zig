@@ -10,10 +10,20 @@ const QueryStatistics = @import("query_statistics.zig").QueryStatistics;
 const QueryStatus = @import("query_status.zig").QueryStatus;
 
 pub const GetQueryResultsInput = struct {
+    /// The maximum number of log events to return in the response. The maximum is
+    /// 10,000 log events.
+    max_items: ?i32 = null,
+
+    /// The token for the next set of items to return. The token expires after 1
+    /// hour.
+    next_token: ?[]const u8 = null,
+
     /// The ID number of the query.
     query_id: []const u8,
 
     pub const json_field_names = .{
+        .max_items = "maxItems",
+        .next_token = "nextToken",
         .query_id = "queryId",
     };
 };
@@ -26,6 +36,12 @@ pub const GetQueryResultsOutput = struct {
     /// [StartQuery](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html) stores
     /// them.
     encryption_key: ?[]const u8 = null,
+
+    /// If there are more log events remaining in the results, the response includes
+    /// a
+    /// `nextToken`. You can use this token in a subsequent `GetQueryResults`
+    /// request to get the next set of results.
+    next_token: ?[]const u8 = null,
 
     /// The query language used for this query. For more information about the query
     /// languages
@@ -61,6 +77,7 @@ pub const GetQueryResultsOutput = struct {
 
     pub const json_field_names = .{
         .encryption_key = "encryptionKey",
+        .next_token = "nextToken",
         .query_language = "queryLanguage",
         .results = "results",
         .statistics = "statistics",

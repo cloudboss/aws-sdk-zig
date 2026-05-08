@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const AccountState = @import("account_state.zig").AccountState;
 
 pub const GetAccountInformationInput = struct {
     /// Specifies the 12 digit account ID number of the Amazon Web Services account
@@ -48,10 +49,18 @@ pub const GetAccountInformationOutput = struct {
     /// The name of the account.
     account_name: ?[]const u8 = null,
 
+    /// The state of the account. Each account state represents a specific phase in
+    /// the account lifecycle. Use this information to manage account access,
+    /// automate workflows, or trigger actions based on account state changes.
+    ///
+    /// Valid values: `PENDING_ACTIVATION | ACTIVE | SUSPENDED | CLOSED`
+    account_state: ?AccountState = null,
+
     pub const json_field_names = .{
         .account_created_date = "AccountCreatedDate",
         .account_id = "AccountId",
         .account_name = "AccountName",
+        .account_state = "AccountState",
     };
 };
 

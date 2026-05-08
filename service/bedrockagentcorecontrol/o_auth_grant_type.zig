@@ -3,16 +3,19 @@ const std = @import("std");
 pub const OAuthGrantType = enum {
     client_credentials,
     authorization_code,
+    token_exchange,
 
     pub const json_field_names = .{
         .client_credentials = "CLIENT_CREDENTIALS",
         .authorization_code = "AUTHORIZATION_CODE",
+        .token_exchange = "TOKEN_EXCHANGE",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .client_credentials => "CLIENT_CREDENTIALS",
             .authorization_code => "AUTHORIZATION_CODE",
+            .token_exchange => "TOKEN_EXCHANGE",
         };
     }
 

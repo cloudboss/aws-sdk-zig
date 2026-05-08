@@ -120,6 +120,7 @@ pub const WebAppEndpointType = @import("web_app_endpoint_type.zig").WebAppEndpoi
 pub const WebAppIdentityProviderDetails = @import("web_app_identity_provider_details.zig").WebAppIdentityProviderDetails;
 pub const WebAppUnits = @import("web_app_units.zig").WebAppUnits;
 pub const WebAppVpcConfig = @import("web_app_vpc_config.zig").WebAppVpcConfig;
+pub const WebAppVpcEndpointIpAddressType = @import("web_app_vpc_endpoint_ip_address_type.zig").WebAppVpcEndpointIpAddressType;
 pub const WorkflowDetail = @import("workflow_detail.zig").WorkflowDetail;
 pub const WorkflowDetails = @import("workflow_details.zig").WorkflowDetails;
 pub const WorkflowStep = @import("workflow_step.zig").WorkflowStep;

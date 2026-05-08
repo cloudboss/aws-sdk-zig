@@ -11,6 +11,10 @@ const ServiceLevelIndicatorConfig = @import("service_level_indicator_config.zig"
 const ServiceLevelObjective = @import("service_level_objective.zig").ServiceLevelObjective;
 
 pub const UpdateServiceLevelObjectiveInput = struct {
+    /// Indicates whether DevOps Agent will automatically investigate this SLO when
+    /// it is breached
+    auto_investigation_enabled: ?bool = null,
+
     /// Use this array to create *burn rates* for this SLO. Each burn rate is a
     /// metric that indicates how fast the service is consuming the error budget,
     /// relative to the attainment goal of the SLO.
@@ -39,6 +43,7 @@ pub const UpdateServiceLevelObjectiveInput = struct {
     sli_config: ?ServiceLevelIndicatorConfig = null,
 
     pub const json_field_names = .{
+        .auto_investigation_enabled = "AutoInvestigationEnabled",
         .burn_rate_configurations = "BurnRateConfigurations",
         .description = "Description",
         .goal = "Goal",
@@ -96,6 +101,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateServiceLevelObjec
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.auto_investigation_enabled) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"AutoInvestigationEnabled\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.burn_rate_configurations) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"BurnRateConfigurations\":");

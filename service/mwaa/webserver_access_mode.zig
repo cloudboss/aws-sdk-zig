@@ -3,16 +3,19 @@ const std = @import("std");
 pub const WebserverAccessMode = enum {
     private_only,
     public_only,
+    public_and_private,
 
     pub const json_field_names = .{
         .private_only = "PRIVATE_ONLY",
         .public_only = "PUBLIC_ONLY",
+        .public_and_private = "PUBLIC_AND_PRIVATE",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .private_only => "PRIVATE_ONLY",
             .public_only => "PUBLIC_ONLY",
+            .public_and_private => "PUBLIC_AND_PRIVATE",
         };
     }
 

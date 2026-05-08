@@ -8,6 +8,7 @@ pub const ServiceError = struct {
         access_denied_exception: AccessDeniedException,
         conflict_exception: ConflictException,
         internal_server_exception: InternalServerException,
+        public_policy_exception: PublicPolicyException,
         resource_not_found_exception: ResourceNotFoundException,
         service_quota_exceeded_exception: ServiceQuotaExceededException,
         service_unavailable_exception: ServiceUnavailableException,
@@ -20,6 +21,7 @@ pub const ServiceError = struct {
                 .access_denied_exception => "AccessDeniedException",
                 .conflict_exception => "ConflictException",
                 .internal_server_exception => "InternalServerException",
+                .public_policy_exception => "PublicPolicyException",
                 .resource_not_found_exception => "ResourceNotFoundException",
                 .service_quota_exceeded_exception => "ServiceQuotaExceededException",
                 .service_unavailable_exception => "ServiceUnavailableException",
@@ -34,6 +36,7 @@ pub const ServiceError = struct {
                 .access_denied_exception => |e| e.message,
                 .conflict_exception => |e| e.message,
                 .internal_server_exception => |e| e.message,
+                .public_policy_exception => |e| e.message,
                 .resource_not_found_exception => |e| e.message,
                 .service_quota_exceeded_exception => |e| e.message,
                 .service_unavailable_exception => |e| e.message,
@@ -48,6 +51,7 @@ pub const ServiceError = struct {
                 .access_denied_exception => 403,
                 .conflict_exception => 409,
                 .internal_server_exception => 500,
+                .public_policy_exception => 400,
                 .resource_not_found_exception => 404,
                 .service_quota_exceeded_exception => 402,
                 .service_unavailable_exception => 503,
@@ -62,6 +66,7 @@ pub const ServiceError = struct {
                 .access_denied_exception => |e| e.request_id,
                 .conflict_exception => |e| e.request_id,
                 .internal_server_exception => |e| e.request_id,
+                .public_policy_exception => |e| e.request_id,
                 .resource_not_found_exception => |e| e.request_id,
                 .service_quota_exceeded_exception => |e| e.request_id,
                 .service_unavailable_exception => |e| e.request_id,
@@ -104,6 +109,11 @@ pub const ConflictException = struct {
 };
 
 pub const InternalServerException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const PublicPolicyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };

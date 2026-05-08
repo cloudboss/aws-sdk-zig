@@ -53,6 +53,13 @@ pub const PlaybackConfiguration = struct {
     /// The configuration for a DASH source.
     dash_configuration: ?DashConfiguration = null,
 
+    /// A map of lifecycle hook event names to function identifiers. The function
+    /// mapping specifies which function MediaTailor executes at each lifecycle hook
+    /// during ad insertion. Valid keys are `PRE_SESSION_INITIALIZATION` and
+    /// `PRE_ADS_REQUEST`. For more information, see [Functions lifecycle
+    /// hooks](https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html) in the *MediaTailor User Guide*.
+    function_mapping: ?[]const aws.map.StringMapEntry = null,
+
     /// The configuration for HLS content.
     hls_configuration: ?HlsConfiguration = null,
 
@@ -134,6 +141,7 @@ pub const PlaybackConfiguration = struct {
         .cdn_configuration = "CdnConfiguration",
         .configuration_aliases = "ConfigurationAliases",
         .dash_configuration = "DashConfiguration",
+        .function_mapping = "FunctionMapping",
         .hls_configuration = "HlsConfiguration",
         .insertion_mode = "InsertionMode",
         .live_pre_roll_configuration = "LivePreRollConfiguration",

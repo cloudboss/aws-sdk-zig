@@ -3,16 +3,19 @@ const std = @import("std");
 pub const ModificationStateEnum = enum {
     update_initiated,
     update_in_progress,
+    update_failed,
 
     pub const json_field_names = .{
         .update_initiated = "UPDATE_INITIATED",
         .update_in_progress = "UPDATE_IN_PROGRESS",
+        .update_failed = "UPDATE_FAILED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .update_initiated => "UPDATE_INITIATED",
             .update_in_progress => "UPDATE_IN_PROGRESS",
+            .update_failed => "UPDATE_FAILED",
         };
     }
 

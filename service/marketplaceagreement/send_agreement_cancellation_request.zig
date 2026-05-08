@@ -20,10 +20,7 @@ pub const SendAgreementCancellationRequestInput = struct {
     /// characters).
     description: ?[]const u8 = null,
 
-    /// The reason code for the cancellation request. Valid values include
-    /// `INCORRECT_TERMS_ACCEPTED`, `REPLACING_AGREEMENT`, `TEST_AGREEMENT`,
-    /// `ALTERNATIVE_PROCUREMENT_CHANNEL`, `PRODUCT_DISCONTINUED`,
-    /// `UNINTENDED_RENEWAL`, `BUYER_DISSATISFACTION`, and `OTHER`.
+    /// The reason code for the cancellation request.
     reason_code: AgreementCancellationRequestReasonCode,
 
     pub const json_field_names = .{
@@ -41,8 +38,7 @@ pub const SendAgreementCancellationRequestOutput = struct {
     /// The unique identifier of the agreement.
     agreement_id: ?[]const u8 = null,
 
-    /// The time when the cancellation request was created, as a POSIX timestamp
-    /// (Unix epoch seconds).
+    /// The time when the cancellation request was created.
     created_at: ?i64 = null,
 
     /// The detailed description of the cancellation reason, if provided.
@@ -55,8 +51,7 @@ pub const SendAgreementCancellationRequestOutput = struct {
     /// `PENDING_APPROVAL`.
     status: ?AgreementCancellationRequestStatus = null,
 
-    /// The time when the cancellation request was last updated, as a POSIX
-    /// timestamp (Unix epoch seconds).
+    /// The time when the cancellation request was last updated.
     updated_at: ?i64 = null,
 
     pub const json_field_names = .{
@@ -156,6 +151,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
         return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

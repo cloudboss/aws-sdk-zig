@@ -24,6 +24,11 @@ pub const EvaluatorSummary = struct {
     /// provided by the service or a custom evaluator created by the user.
     evaluator_type: EvaluatorType,
 
+    /// The Amazon Resource Name (ARN) of the customer managed KMS key used to
+    /// encrypt the evaluator's sensitive data. This field is only present for
+    /// evaluators encrypted with a customer managed key.
+    kms_key_arn: ?[]const u8 = null,
+
     /// The evaluation level (`TOOL_CALL`, `TRACE`, or `SESSION`) that determines
     /// the scope of evaluation.
     level: ?EvaluatorLevel = null,
@@ -45,6 +50,7 @@ pub const EvaluatorSummary = struct {
         .evaluator_id = "evaluatorId",
         .evaluator_name = "evaluatorName",
         .evaluator_type = "evaluatorType",
+        .kms_key_arn = "kmsKeyArn",
         .level = "level",
         .locked_for_modification = "lockedForModification",
         .status = "status",

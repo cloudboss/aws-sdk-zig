@@ -8,8 +8,8 @@ const TerminationMode = @import("termination_mode.zig").TerminationMode;
 const GameSession = @import("game_session.zig").GameSession;
 
 pub const TerminateGameSessionInput = struct {
-    /// A unique identifier for the game session to be terminated. A game session
-    /// ARN has the following format:
+    /// An identifier for the game session that is unique across all regions to be
+    /// terminated. The value is always a full ARN in the following format:
     /// `arn:aws:gamelift:::gamesession//`.
     game_session_id: []const u8,
 

@@ -96,6 +96,10 @@ pub const SpanAttributes = struct {
     /// Sampling temperature for generation
     temperature: ?f32 = null,
 
+    /// Time to first token in milliseconds, measured from when Amazon Bedrock was
+    /// invoked to when the first token was returned
+    time_to_first_token_ms: ?i32 = null,
+
     /// Top-p sampling parameter for generation
     top_p: ?f32 = null,
 
@@ -139,6 +143,7 @@ pub const SpanAttributes = struct {
         .session_name = "sessionName",
         .system_instructions = "systemInstructions",
         .temperature = "temperature",
+        .time_to_first_token_ms = "timeToFirstTokenMs",
         .top_p = "topP",
         .usage_input_tokens = "usageInputTokens",
         .usage_output_tokens = "usageOutputTokens",

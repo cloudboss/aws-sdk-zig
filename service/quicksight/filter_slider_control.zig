@@ -1,9 +1,13 @@
+const ControlTitleFormatText = @import("control_title_format_text.zig").ControlTitleFormatText;
 const SliderControlDisplayOptions = @import("slider_control_display_options.zig").SliderControlDisplayOptions;
 const SheetControlSliderType = @import("sheet_control_slider_type.zig").SheetControlSliderType;
 
 /// A control to display a horizontal toggle bar. This is used to change a value
 /// by sliding the toggle.
 pub const FilterSliderControl = struct {
+    /// The title text format configuration for the control.
+    control_title_format_text: ?ControlTitleFormatText = null,
+
     /// The display options of a control.
     display_options: ?SliderControlDisplayOptions = null,
 
@@ -23,7 +27,7 @@ pub const FilterSliderControl = struct {
     step_size: f64 = 0,
 
     /// The title of the `FilterSliderControl`.
-    title: []const u8,
+    title: []const u8 = "",
 
     /// The type of the `FilterSliderControl`. Choose one of the following options:
     ///
@@ -33,6 +37,7 @@ pub const FilterSliderControl = struct {
     @"type": ?SheetControlSliderType = null,
 
     pub const json_field_names = .{
+        .control_title_format_text = "ControlTitleFormatText",
         .display_options = "DisplayOptions",
         .filter_control_id = "FilterControlId",
         .maximum_value = "MaximumValue",

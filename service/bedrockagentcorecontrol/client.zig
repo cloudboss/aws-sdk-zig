@@ -7,13 +7,18 @@ const create_api_key_credential_provider = @import("create_api_key_credential_pr
 const create_browser = @import("create_browser.zig");
 const create_browser_profile = @import("create_browser_profile.zig");
 const create_code_interpreter = @import("create_code_interpreter.zig");
+const create_configuration_bundle = @import("create_configuration_bundle.zig");
 const create_evaluator = @import("create_evaluator.zig");
 const create_gateway = @import("create_gateway.zig");
+const create_gateway_rule = @import("create_gateway_rule.zig");
 const create_gateway_target = @import("create_gateway_target.zig");
 const create_harness = @import("create_harness.zig");
 const create_memory = @import("create_memory.zig");
 const create_oauth_2_credential_provider = @import("create_oauth_2_credential_provider.zig");
 const create_online_evaluation_config = @import("create_online_evaluation_config.zig");
+const create_payment_connector = @import("create_payment_connector.zig");
+const create_payment_credential_provider = @import("create_payment_credential_provider.zig");
+const create_payment_manager = @import("create_payment_manager.zig");
 const create_policy = @import("create_policy.zig");
 const create_policy_engine = @import("create_policy_engine.zig");
 const create_registry = @import("create_registry.zig");
@@ -25,13 +30,18 @@ const delete_api_key_credential_provider = @import("delete_api_key_credential_pr
 const delete_browser = @import("delete_browser.zig");
 const delete_browser_profile = @import("delete_browser_profile.zig");
 const delete_code_interpreter = @import("delete_code_interpreter.zig");
+const delete_configuration_bundle = @import("delete_configuration_bundle.zig");
 const delete_evaluator = @import("delete_evaluator.zig");
 const delete_gateway = @import("delete_gateway.zig");
+const delete_gateway_rule = @import("delete_gateway_rule.zig");
 const delete_gateway_target = @import("delete_gateway_target.zig");
 const delete_harness = @import("delete_harness.zig");
 const delete_memory = @import("delete_memory.zig");
 const delete_oauth_2_credential_provider = @import("delete_oauth_2_credential_provider.zig");
 const delete_online_evaluation_config = @import("delete_online_evaluation_config.zig");
+const delete_payment_connector = @import("delete_payment_connector.zig");
+const delete_payment_credential_provider = @import("delete_payment_credential_provider.zig");
+const delete_payment_manager = @import("delete_payment_manager.zig");
 const delete_policy = @import("delete_policy.zig");
 const delete_policy_engine = @import("delete_policy_engine.zig");
 const delete_registry = @import("delete_registry.zig");
@@ -44,13 +54,19 @@ const get_api_key_credential_provider = @import("get_api_key_credential_provider
 const get_browser = @import("get_browser.zig");
 const get_browser_profile = @import("get_browser_profile.zig");
 const get_code_interpreter = @import("get_code_interpreter.zig");
+const get_configuration_bundle = @import("get_configuration_bundle.zig");
+const get_configuration_bundle_version = @import("get_configuration_bundle_version.zig");
 const get_evaluator = @import("get_evaluator.zig");
 const get_gateway = @import("get_gateway.zig");
+const get_gateway_rule = @import("get_gateway_rule.zig");
 const get_gateway_target = @import("get_gateway_target.zig");
 const get_harness = @import("get_harness.zig");
 const get_memory = @import("get_memory.zig");
 const get_oauth_2_credential_provider = @import("get_oauth_2_credential_provider.zig");
 const get_online_evaluation_config = @import("get_online_evaluation_config.zig");
+const get_payment_connector = @import("get_payment_connector.zig");
+const get_payment_credential_provider = @import("get_payment_credential_provider.zig");
+const get_payment_manager = @import("get_payment_manager.zig");
 const get_policy = @import("get_policy.zig");
 const get_policy_engine = @import("get_policy_engine.zig");
 const get_policy_generation = @import("get_policy_generation.zig");
@@ -66,13 +82,19 @@ const list_api_key_credential_providers = @import("list_api_key_credential_provi
 const list_browser_profiles = @import("list_browser_profiles.zig");
 const list_browsers = @import("list_browsers.zig");
 const list_code_interpreters = @import("list_code_interpreters.zig");
+const list_configuration_bundle_versions = @import("list_configuration_bundle_versions.zig");
+const list_configuration_bundles = @import("list_configuration_bundles.zig");
 const list_evaluators = @import("list_evaluators.zig");
+const list_gateway_rules = @import("list_gateway_rules.zig");
 const list_gateway_targets = @import("list_gateway_targets.zig");
 const list_gateways = @import("list_gateways.zig");
 const list_harnesses = @import("list_harnesses.zig");
 const list_memories = @import("list_memories.zig");
 const list_oauth_2_credential_providers = @import("list_oauth_2_credential_providers.zig");
 const list_online_evaluation_configs = @import("list_online_evaluation_configs.zig");
+const list_payment_connectors = @import("list_payment_connectors.zig");
+const list_payment_credential_providers = @import("list_payment_credential_providers.zig");
+const list_payment_managers = @import("list_payment_managers.zig");
 const list_policies = @import("list_policies.zig");
 const list_policy_engines = @import("list_policy_engines.zig");
 const list_policy_generation_assets = @import("list_policy_generation_assets.zig");
@@ -91,13 +113,18 @@ const untag_resource = @import("untag_resource.zig");
 const update_agent_runtime = @import("update_agent_runtime.zig");
 const update_agent_runtime_endpoint = @import("update_agent_runtime_endpoint.zig");
 const update_api_key_credential_provider = @import("update_api_key_credential_provider.zig");
+const update_configuration_bundle = @import("update_configuration_bundle.zig");
 const update_evaluator = @import("update_evaluator.zig");
 const update_gateway = @import("update_gateway.zig");
+const update_gateway_rule = @import("update_gateway_rule.zig");
 const update_gateway_target = @import("update_gateway_target.zig");
 const update_harness = @import("update_harness.zig");
 const update_memory = @import("update_memory.zig");
 const update_oauth_2_credential_provider = @import("update_oauth_2_credential_provider.zig");
 const update_online_evaluation_config = @import("update_online_evaluation_config.zig");
+const update_payment_connector = @import("update_payment_connector.zig");
+const update_payment_credential_provider = @import("update_payment_credential_provider.zig");
+const update_payment_manager = @import("update_payment_manager.zig");
 const update_policy = @import("update_policy.zig");
 const update_policy_engine = @import("update_policy_engine.zig");
 const update_registry = @import("update_registry.zig");
@@ -168,6 +195,12 @@ pub const Client = struct {
         return create_code_interpreter.execute(self, allocator, input, options);
     }
 
+    /// Creates a new configuration bundle resource. A configuration bundle stores
+    /// versioned component configurations for agent evaluation workflows.
+    pub fn createConfigurationBundle(self: *Self, allocator: std.mem.Allocator, input: create_configuration_bundle.CreateConfigurationBundleInput, options: CallOptions) !create_configuration_bundle.CreateConfigurationBundleOutput {
+        return create_configuration_bundle.execute(self, allocator, input, options);
+    }
+
     /// Creates a custom evaluator for agent quality assessment. Custom evaluators
     /// can use either LLM-as-a-Judge configurations with user-defined prompts,
     /// rating scales, and model settings, or code-based configurations with
@@ -184,6 +217,13 @@ pub const Client = struct {
     /// `authorizerConfiguration`.
     pub fn createGateway(self: *Self, allocator: std.mem.Allocator, input: create_gateway.CreateGatewayInput, options: CallOptions) !create_gateway.CreateGatewayOutput {
         return create_gateway.execute(self, allocator, input, options);
+    }
+
+    /// Creates a rule for a gateway. Rules define conditions and actions that
+    /// control how requests are routed and processed through the gateway, including
+    /// principal-based access control and path-based routing.
+    pub fn createGatewayRule(self: *Self, allocator: std.mem.Allocator, input: create_gateway_rule.CreateGatewayRuleInput, options: CallOptions) !create_gateway_rule.CreateGatewayRuleOutput {
+        return create_gateway_rule.execute(self, allocator, input, options);
     }
 
     /// Creates a target for a gateway. A target defines an endpoint that the
@@ -213,6 +253,31 @@ pub const Client = struct {
     /// quality in production.
     pub fn createOnlineEvaluationConfig(self: *Self, allocator: std.mem.Allocator, input: create_online_evaluation_config.CreateOnlineEvaluationConfigInput, options: CallOptions) !create_online_evaluation_config.CreateOnlineEvaluationConfigOutput {
         return create_online_evaluation_config.execute(self, allocator, input, options);
+    }
+
+    /// Creates a new payment connector for a payment manager. A payment connector
+    /// integrates with a supported payment provider to enable payment processing
+    /// capabilities.
+    pub fn createPaymentConnector(self: *Self, allocator: std.mem.Allocator, input: create_payment_connector.CreatePaymentConnectorInput, options: CallOptions) !create_payment_connector.CreatePaymentConnectorOutput {
+        return create_payment_connector.execute(self, allocator, input, options);
+    }
+
+    /// Creates a new payment credential provider for storing authentication
+    /// credentials used by payment connectors to communicate with external payment
+    /// providers.
+    pub fn createPaymentCredentialProvider(self: *Self, allocator: std.mem.Allocator, input: create_payment_credential_provider.CreatePaymentCredentialProviderInput, options: CallOptions) !create_payment_credential_provider.CreatePaymentCredentialProviderOutput {
+        return create_payment_credential_provider.execute(self, allocator, input, options);
+    }
+
+    /// Creates a new payment manager in your Amazon Web Services account. A payment
+    /// manager serves as the top-level resource for managing payment processing
+    /// capabilities, including payment connectors that integrate with supported
+    /// payment providers.
+    ///
+    /// If you specify `CUSTOM_JWT` as the `authorizerType`, you must provide an
+    /// `authorizerConfiguration`.
+    pub fn createPaymentManager(self: *Self, allocator: std.mem.Allocator, input: create_payment_manager.CreatePaymentManagerInput, options: CallOptions) !create_payment_manager.CreatePaymentManagerOutput {
+        return create_payment_manager.execute(self, allocator, input, options);
     }
 
     /// Creates a policy within the AgentCore Policy system. Policies provide
@@ -297,6 +362,11 @@ pub const Client = struct {
         return delete_code_interpreter.execute(self, allocator, input, options);
     }
 
+    /// Deletes a configuration bundle and all of its versions.
+    pub fn deleteConfigurationBundle(self: *Self, allocator: std.mem.Allocator, input: delete_configuration_bundle.DeleteConfigurationBundleInput, options: CallOptions) !delete_configuration_bundle.DeleteConfigurationBundleOutput {
+        return delete_configuration_bundle.execute(self, allocator, input, options);
+    }
+
     /// Deletes a custom evaluator. Builtin evaluators cannot be deleted. The
     /// evaluator must not be referenced by any active online evaluation
     /// configurations.
@@ -307,6 +377,11 @@ pub const Client = struct {
     /// Deletes a gateway.
     pub fn deleteGateway(self: *Self, allocator: std.mem.Allocator, input: delete_gateway.DeleteGatewayInput, options: CallOptions) !delete_gateway.DeleteGatewayOutput {
         return delete_gateway.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a gateway rule.
+    pub fn deleteGatewayRule(self: *Self, allocator: std.mem.Allocator, input: delete_gateway_rule.DeleteGatewayRuleInput, options: CallOptions) !delete_gateway_rule.DeleteGatewayRuleOutput {
+        return delete_gateway_rule.execute(self, allocator, input, options);
     }
 
     /// Deletes a gateway target.
@@ -338,6 +413,23 @@ pub const Client = struct {
     /// processes associated with it.
     pub fn deleteOnlineEvaluationConfig(self: *Self, allocator: std.mem.Allocator, input: delete_online_evaluation_config.DeleteOnlineEvaluationConfigInput, options: CallOptions) !delete_online_evaluation_config.DeleteOnlineEvaluationConfigOutput {
         return delete_online_evaluation_config.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a payment connector.
+    pub fn deletePaymentConnector(self: *Self, allocator: std.mem.Allocator, input: delete_payment_connector.DeletePaymentConnectorInput, options: CallOptions) !delete_payment_connector.DeletePaymentConnectorOutput {
+        return delete_payment_connector.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a payment credential provider and its associated stored credentials.
+    pub fn deletePaymentCredentialProvider(self: *Self, allocator: std.mem.Allocator, input: delete_payment_credential_provider.DeletePaymentCredentialProviderInput, options: CallOptions) !delete_payment_credential_provider.DeletePaymentCredentialProviderOutput {
+        return delete_payment_credential_provider.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a payment manager. All payment connectors associated with the
+    /// payment manager must be deleted before the payment manager can be deleted.
+    /// This operation initiates the deletion process asynchronously.
+    pub fn deletePaymentManager(self: *Self, allocator: std.mem.Allocator, input: delete_payment_manager.DeletePaymentManagerInput, options: CallOptions) !delete_payment_manager.DeletePaymentManagerOutput {
+        return delete_payment_manager.execute(self, allocator, input, options);
     }
 
     /// Deletes an existing policy from the AgentCore Policy system. Once deleted,
@@ -411,6 +503,18 @@ pub const Client = struct {
         return get_code_interpreter.execute(self, allocator, input, options);
     }
 
+    /// Gets the latest version of a configuration bundle. By default, returns the
+    /// latest version on the mainline branch. Use `GetConfigurationBundleVersion`
+    /// to retrieve a specific historical version.
+    pub fn getConfigurationBundle(self: *Self, allocator: std.mem.Allocator, input: get_configuration_bundle.GetConfigurationBundleInput, options: CallOptions) !get_configuration_bundle.GetConfigurationBundleOutput {
+        return get_configuration_bundle.execute(self, allocator, input, options);
+    }
+
+    /// Gets a specific version of a configuration bundle by its version identifier.
+    pub fn getConfigurationBundleVersion(self: *Self, allocator: std.mem.Allocator, input: get_configuration_bundle_version.GetConfigurationBundleVersionInput, options: CallOptions) !get_configuration_bundle_version.GetConfigurationBundleVersionOutput {
+        return get_configuration_bundle_version.execute(self, allocator, input, options);
+    }
+
     /// Retrieves detailed information about an evaluator, including its
     /// configuration, status, and metadata. Works with both built-in and custom
     /// evaluators.
@@ -421,6 +525,11 @@ pub const Client = struct {
     /// Retrieves information about a specific Gateway.
     pub fn getGateway(self: *Self, allocator: std.mem.Allocator, input: get_gateway.GetGatewayInput, options: CallOptions) !get_gateway.GetGatewayOutput {
         return get_gateway.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves detailed information about a specific gateway rule.
+    pub fn getGatewayRule(self: *Self, allocator: std.mem.Allocator, input: get_gateway_rule.GetGatewayRuleInput, options: CallOptions) !get_gateway_rule.GetGatewayRuleOutput {
+        return get_gateway_rule.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a specific gateway target.
@@ -447,6 +556,21 @@ pub const Client = struct {
     /// including its rules, data sources, evaluators, and execution status.
     pub fn getOnlineEvaluationConfig(self: *Self, allocator: std.mem.Allocator, input: get_online_evaluation_config.GetOnlineEvaluationConfigInput, options: CallOptions) !get_online_evaluation_config.GetOnlineEvaluationConfigOutput {
         return get_online_evaluation_config.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves information about a specific payment connector.
+    pub fn getPaymentConnector(self: *Self, allocator: std.mem.Allocator, input: get_payment_connector.GetPaymentConnectorInput, options: CallOptions) !get_payment_connector.GetPaymentConnectorOutput {
+        return get_payment_connector.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves information about a specific payment credential provider.
+    pub fn getPaymentCredentialProvider(self: *Self, allocator: std.mem.Allocator, input: get_payment_credential_provider.GetPaymentCredentialProviderInput, options: CallOptions) !get_payment_credential_provider.GetPaymentCredentialProviderOutput {
+        return get_payment_credential_provider.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves information about a specific payment manager.
+    pub fn getPaymentManager(self: *Self, allocator: std.mem.Allocator, input: get_payment_manager.GetPaymentManagerInput, options: CallOptions) !get_payment_manager.GetPaymentManagerOutput {
+        return get_payment_manager.execute(self, allocator, input, options);
     }
 
     /// Retrieves detailed information about a specific policy within the AgentCore
@@ -535,10 +659,26 @@ pub const Client = struct {
         return list_code_interpreters.execute(self, allocator, input, options);
     }
 
+    /// Lists all versions of a configuration bundle, with optional filtering by
+    /// branch name or creation source.
+    pub fn listConfigurationBundleVersions(self: *Self, allocator: std.mem.Allocator, input: list_configuration_bundle_versions.ListConfigurationBundleVersionsInput, options: CallOptions) !list_configuration_bundle_versions.ListConfigurationBundleVersionsOutput {
+        return list_configuration_bundle_versions.execute(self, allocator, input, options);
+    }
+
+    /// Lists all configuration bundles in the account.
+    pub fn listConfigurationBundles(self: *Self, allocator: std.mem.Allocator, input: list_configuration_bundles.ListConfigurationBundlesInput, options: CallOptions) !list_configuration_bundles.ListConfigurationBundlesOutput {
+        return list_configuration_bundles.execute(self, allocator, input, options);
+    }
+
     /// Lists all available evaluators, including both builtin evaluators provided
     /// by the service and custom evaluators created by the user.
     pub fn listEvaluators(self: *Self, allocator: std.mem.Allocator, input: list_evaluators.ListEvaluatorsInput, options: CallOptions) !list_evaluators.ListEvaluatorsOutput {
         return list_evaluators.execute(self, allocator, input, options);
+    }
+
+    /// Lists all rules for a gateway.
+    pub fn listGatewayRules(self: *Self, allocator: std.mem.Allocator, input: list_gateway_rules.ListGatewayRulesInput, options: CallOptions) !list_gateway_rules.ListGatewayRulesOutput {
+        return list_gateway_rules.execute(self, allocator, input, options);
     }
 
     /// Lists all targets for a specific gateway.
@@ -571,6 +711,21 @@ pub const Client = struct {
     /// information about each configuration's status and settings.
     pub fn listOnlineEvaluationConfigs(self: *Self, allocator: std.mem.Allocator, input: list_online_evaluation_configs.ListOnlineEvaluationConfigsInput, options: CallOptions) !list_online_evaluation_configs.ListOnlineEvaluationConfigsOutput {
         return list_online_evaluation_configs.execute(self, allocator, input, options);
+    }
+
+    /// Lists all payment connectors for a specified payment manager.
+    pub fn listPaymentConnectors(self: *Self, allocator: std.mem.Allocator, input: list_payment_connectors.ListPaymentConnectorsInput, options: CallOptions) !list_payment_connectors.ListPaymentConnectorsOutput {
+        return list_payment_connectors.execute(self, allocator, input, options);
+    }
+
+    /// Lists all payment credential providers in the account.
+    pub fn listPaymentCredentialProviders(self: *Self, allocator: std.mem.Allocator, input: list_payment_credential_providers.ListPaymentCredentialProvidersInput, options: CallOptions) !list_payment_credential_providers.ListPaymentCredentialProvidersOutput {
+        return list_payment_credential_providers.execute(self, allocator, input, options);
+    }
+
+    /// Lists all payment managers in the account.
+    pub fn listPaymentManagers(self: *Self, allocator: std.mem.Allocator, input: list_payment_managers.ListPaymentManagersInput, options: CallOptions) !list_payment_managers.ListPaymentManagersOutput {
+        return list_payment_managers.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of policies within the AgentCore Policy engine. This
@@ -718,6 +873,12 @@ pub const Client = struct {
         return update_api_key_credential_provider.execute(self, allocator, input, options);
     }
 
+    /// Updates a configuration bundle by creating a new version with the specified
+    /// changes. Each update creates a new version in the version history.
+    pub fn updateConfigurationBundle(self: *Self, allocator: std.mem.Allocator, input: update_configuration_bundle.UpdateConfigurationBundleInput, options: CallOptions) !update_configuration_bundle.UpdateConfigurationBundleOutput {
+        return update_configuration_bundle.execute(self, allocator, input, options);
+    }
+
     /// Updates a custom evaluator's configuration, description, or evaluation
     /// level. Built-in evaluators cannot be updated. The evaluator must not be
     /// locked for modification.
@@ -728,6 +889,11 @@ pub const Client = struct {
     /// Updates an existing gateway.
     pub fn updateGateway(self: *Self, allocator: std.mem.Allocator, input: update_gateway.UpdateGatewayInput, options: CallOptions) !update_gateway.UpdateGatewayOutput {
         return update_gateway.execute(self, allocator, input, options);
+    }
+
+    /// Updates a gateway rule's priority, conditions, actions, or description.
+    pub fn updateGatewayRule(self: *Self, allocator: std.mem.Allocator, input: update_gateway_rule.UpdateGatewayRuleInput, options: CallOptions) !update_gateway_rule.UpdateGatewayRuleOutput {
+        return update_gateway_rule.execute(self, allocator, input, options);
     }
 
     /// Updates an existing gateway target.
@@ -760,6 +926,24 @@ pub const Client = struct {
     /// for ongoing evaluations.
     pub fn updateOnlineEvaluationConfig(self: *Self, allocator: std.mem.Allocator, input: update_online_evaluation_config.UpdateOnlineEvaluationConfigInput, options: CallOptions) !update_online_evaluation_config.UpdateOnlineEvaluationConfigOutput {
         return update_online_evaluation_config.execute(self, allocator, input, options);
+    }
+
+    /// Updates an existing payment connector. This operation uses PATCH semantics,
+    /// so you only need to specify the fields you want to change.
+    pub fn updatePaymentConnector(self: *Self, allocator: std.mem.Allocator, input: update_payment_connector.UpdatePaymentConnectorInput, options: CallOptions) !update_payment_connector.UpdatePaymentConnectorOutput {
+        return update_payment_connector.execute(self, allocator, input, options);
+    }
+
+    /// Updates an existing payment credential provider with new authentication
+    /// credentials.
+    pub fn updatePaymentCredentialProvider(self: *Self, allocator: std.mem.Allocator, input: update_payment_credential_provider.UpdatePaymentCredentialProviderInput, options: CallOptions) !update_payment_credential_provider.UpdatePaymentCredentialProviderOutput {
+        return update_payment_credential_provider.execute(self, allocator, input, options);
+    }
+
+    /// Updates an existing payment manager. This operation uses PATCH semantics, so
+    /// you only need to specify the fields you want to change.
+    pub fn updatePaymentManager(self: *Self, allocator: std.mem.Allocator, input: update_payment_manager.UpdatePaymentManagerInput, options: CallOptions) !update_payment_manager.UpdatePaymentManagerOutput {
+        return update_payment_manager.execute(self, allocator, input, options);
     }
 
     /// Updates an existing policy within the AgentCore Policy system. This
@@ -853,7 +1037,28 @@ pub const Client = struct {
         };
     }
 
+    pub fn listConfigurationBundleVersionsPaginator(self: *Self, params: list_configuration_bundle_versions.ListConfigurationBundleVersionsInput) paginator.ListConfigurationBundleVersionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listConfigurationBundlesPaginator(self: *Self, params: list_configuration_bundles.ListConfigurationBundlesInput) paginator.ListConfigurationBundlesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listEvaluatorsPaginator(self: *Self, params: list_evaluators.ListEvaluatorsInput) paginator.ListEvaluatorsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listGatewayRulesPaginator(self: *Self, params: list_gateway_rules.ListGatewayRulesInput) paginator.ListGatewayRulesPaginator {
         return .{
             .client = self,
             .params = params,
@@ -896,6 +1101,27 @@ pub const Client = struct {
     }
 
     pub fn listOnlineEvaluationConfigsPaginator(self: *Self, params: list_online_evaluation_configs.ListOnlineEvaluationConfigsInput) paginator.ListOnlineEvaluationConfigsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listPaymentConnectorsPaginator(self: *Self, params: list_payment_connectors.ListPaymentConnectorsInput) paginator.ListPaymentConnectorsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listPaymentCredentialProvidersPaginator(self: *Self, params: list_payment_credential_providers.ListPaymentCredentialProvidersInput) paginator.ListPaymentCredentialProvidersPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listPaymentManagersPaginator(self: *Self, params: list_payment_managers.ListPaymentManagersInput) paginator.ListPaymentManagersPaginator {
         return .{
             .client = self,
             .params = params,

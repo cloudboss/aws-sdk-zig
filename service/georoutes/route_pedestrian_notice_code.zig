@@ -6,6 +6,7 @@ pub const RoutePedestrianNoticeCode = enum {
     violated_avoid_dirt_road,
     violated_avoid_tunnel,
     violated_pedestrian_option,
+    violated_avoid_areas,
 
     pub const json_field_names = .{
         .accurate_polyline_unavailable = "AccuratePolylineUnavailable",
@@ -13,6 +14,7 @@ pub const RoutePedestrianNoticeCode = enum {
         .violated_avoid_dirt_road = "ViolatedAvoidDirtRoad",
         .violated_avoid_tunnel = "ViolatedAvoidTunnel",
         .violated_pedestrian_option = "ViolatedPedestrianOption",
+        .violated_avoid_areas = "ViolatedAvoidAreas",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -22,6 +24,7 @@ pub const RoutePedestrianNoticeCode = enum {
             .violated_avoid_dirt_road => "ViolatedAvoidDirtRoad",
             .violated_avoid_tunnel => "ViolatedAvoidTunnel",
             .violated_pedestrian_option => "ViolatedPedestrianOption",
+            .violated_avoid_areas => "ViolatedAvoidAreas",
         };
     }
 

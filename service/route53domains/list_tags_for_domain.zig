@@ -120,6 +120,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "TLDInMaintenance")) {
+        return .{ .arena = arena, .kind = .{ .tld_in_maintenance = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "TLDRulesViolation")) {
         return .{ .arena = arena, .kind = .{ .tld_rules_violation = .{
             .message = owned_message,

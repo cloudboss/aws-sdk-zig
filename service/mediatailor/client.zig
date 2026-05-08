@@ -11,6 +11,7 @@ const create_source_location = @import("create_source_location.zig");
 const create_vod_source = @import("create_vod_source.zig");
 const delete_channel = @import("delete_channel.zig");
 const delete_channel_policy = @import("delete_channel_policy.zig");
+const delete_function = @import("delete_function.zig");
 const delete_live_source = @import("delete_live_source.zig");
 const delete_playback_configuration = @import("delete_playback_configuration.zig");
 const delete_prefetch_schedule = @import("delete_prefetch_schedule.zig");
@@ -24,10 +25,12 @@ const describe_source_location = @import("describe_source_location.zig");
 const describe_vod_source = @import("describe_vod_source.zig");
 const get_channel_policy = @import("get_channel_policy.zig");
 const get_channel_schedule = @import("get_channel_schedule.zig");
+const get_function = @import("get_function.zig");
 const get_playback_configuration = @import("get_playback_configuration.zig");
 const get_prefetch_schedule = @import("get_prefetch_schedule.zig");
 const list_alerts = @import("list_alerts.zig");
 const list_channels = @import("list_channels.zig");
+const list_functions = @import("list_functions.zig");
 const list_live_sources = @import("list_live_sources.zig");
 const list_playback_configurations = @import("list_playback_configurations.zig");
 const list_prefetch_schedules = @import("list_prefetch_schedules.zig");
@@ -35,6 +38,7 @@ const list_source_locations = @import("list_source_locations.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const list_vod_sources = @import("list_vod_sources.zig");
 const put_channel_policy = @import("put_channel_policy.zig");
+const put_function = @import("put_function.zig");
 const put_playback_configuration = @import("put_playback_configuration.zig");
 const start_channel = @import("start_channel.zig");
 const stop_channel = @import("stop_channel.zig");
@@ -138,6 +142,15 @@ pub const Client = struct {
         return delete_channel_policy.execute(self, allocator, input, options);
     }
 
+    /// Deletes a function. MediaTailor prevents deletion of a function that is
+    /// still referenced by a playback configuration or by another function. Remove
+    /// all references before deleting. For more information about functions, see
+    /// [Working with
+    /// functions](https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions.html) in the *MediaTailor User Guide*.
+    pub fn deleteFunction(self: *Self, allocator: std.mem.Allocator, input: delete_function.DeleteFunctionInput, options: CallOptions) !delete_function.DeleteFunctionOutput {
+        return delete_function.execute(self, allocator, input, options);
+    }
+
     /// The live source to delete.
     pub fn deleteLiveSource(self: *Self, allocator: std.mem.Allocator, input: delete_live_source.DeleteLiveSourceInput, options: CallOptions) !delete_live_source.DeleteLiveSourceOutput {
         return delete_live_source.execute(self, allocator, input, options);
@@ -221,6 +234,13 @@ pub const Client = struct {
         return get_channel_schedule.execute(self, allocator, input, options);
     }
 
+    /// Retrieves the configuration and metadata for a function. For more
+    /// information about functions, see [Working with
+    /// functions](https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions.html) in the *MediaTailor User Guide*.
+    pub fn getFunction(self: *Self, allocator: std.mem.Allocator, input: get_function.GetFunctionInput, options: CallOptions) !get_function.GetFunctionOutput {
+        return get_function.execute(self, allocator, input, options);
+    }
+
     /// Retrieves a playback configuration. For information about MediaTailor
     /// configurations, see [Working with configurations in AWS Elemental
     /// MediaTailor](https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html).
@@ -247,6 +267,13 @@ pub const Client = struct {
     /// current AWS account.
     pub fn listChannels(self: *Self, allocator: std.mem.Allocator, input: list_channels.ListChannelsInput, options: CallOptions) !list_channels.ListChannelsOutput {
         return list_channels.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves all functions associated with your AWS account in the current
+    /// Region. For more information about functions, see [Working with
+    /// functions](https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions.html) in the *MediaTailor User Guide*.
+    pub fn listFunctions(self: *Self, allocator: std.mem.Allocator, input: list_functions.ListFunctionsInput, options: CallOptions) !list_functions.ListFunctionsOutput {
+        return list_functions.execute(self, allocator, input, options);
     }
 
     /// Lists the live sources contained in a source location. A source represents a
@@ -293,6 +320,14 @@ pub const Client = struct {
     /// access to your channel.
     pub fn putChannelPolicy(self: *Self, allocator: std.mem.Allocator, input: put_channel_policy.PutChannelPolicyInput, options: CallOptions) !put_channel_policy.PutChannelPolicyOutput {
         return put_channel_policy.execute(self, allocator, input, options);
+    }
+
+    /// Creates or updates a function. A function defines reusable logic that
+    /// MediaTailor executes at lifecycle hooks during ad insertion. For more
+    /// information about functions, see [Working with
+    /// functions](https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions.html) in the *MediaTailor User Guide*.
+    pub fn putFunction(self: *Self, allocator: std.mem.Allocator, input: put_function.PutFunctionInput, options: CallOptions) !put_function.PutFunctionOutput {
+        return put_function.execute(self, allocator, input, options);
     }
 
     /// Creates a playback configuration. For information about MediaTailor
@@ -373,6 +408,13 @@ pub const Client = struct {
     }
 
     pub fn listChannelsPaginator(self: *Self, params: list_channels.ListChannelsInput) paginator.ListChannelsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listFunctionsPaginator(self: *Self, params: list_functions.ListFunctionsInput) paginator.ListFunctionsPaginator {
         return .{
             .client = self,
             .params = params,

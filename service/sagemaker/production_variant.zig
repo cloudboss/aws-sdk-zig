@@ -2,6 +2,7 @@ const ProductionVariantAcceleratorType = @import("production_variant_accelerator
 const ProductionVariantCapacityReservationConfig = @import("production_variant_capacity_reservation_config.zig").ProductionVariantCapacityReservationConfig;
 const ProductionVariantCoreDumpConfig = @import("production_variant_core_dump_config.zig").ProductionVariantCoreDumpConfig;
 const ProductionVariantInferenceAmiVersion = @import("production_variant_inference_ami_version.zig").ProductionVariantInferenceAmiVersion;
+const InstancePool = @import("instance_pool.zig").InstancePool;
 const ProductionVariantInstanceType = @import("production_variant_instance_type.zig").ProductionVariantInstanceType;
 const ProductionVariantManagedInstanceScaling = @import("production_variant_managed_instance_scaling.zig").ProductionVariantManagedInstanceScaling;
 const ProductionVariantRoutingConfig = @import("production_variant_routing_config.zig").ProductionVariantRoutingConfig;
@@ -97,6 +98,12 @@ pub const ProductionVariant = struct {
     /// defaults to 1.0.
     initial_variant_weight: ?f32 = null,
 
+    /// A list of instance pools for the production variant. Each instance pool
+    /// specifies an instance type and its priority for provisioning. Use instance
+    /// pools to configure heterogeneous endpoints that deploy models across
+    /// multiple instance types.
+    instance_pools: ?[]const InstancePool = null,
+
     /// The ML compute instance type.
     instance_type: ?ProductionVariantInstanceType = null,
 
@@ -121,6 +128,16 @@ pub const ProductionVariant = struct {
     /// endpoint configuration instead of an instance-based endpoint configuration.
     serverless_config: ?ProductionVariantServerlessConfig = null,
 
+    /// The timeout value, in seconds, for provisioning instances for the production
+    /// variant. When SageMaker encounters an insufficient capacity error while
+    /// provisioning instances, it retries with the next instance pool (if
+    /// configured) or waits until the timeout expires. This timeout applies only to
+    /// capacity provisioning and does not include the time for model download or
+    /// container startup.
+    ///
+    /// Valid values: 300 to 3600.
+    variant_instance_provision_timeout_in_seconds: ?i32 = null,
+
     /// The name of the production variant.
     variant_name: []const u8,
 
@@ -138,12 +155,14 @@ pub const ProductionVariant = struct {
         .inference_ami_version = "InferenceAmiVersion",
         .initial_instance_count = "InitialInstanceCount",
         .initial_variant_weight = "InitialVariantWeight",
+        .instance_pools = "InstancePools",
         .instance_type = "InstanceType",
         .managed_instance_scaling = "ManagedInstanceScaling",
         .model_data_download_timeout_in_seconds = "ModelDataDownloadTimeoutInSeconds",
         .model_name = "ModelName",
         .routing_config = "RoutingConfig",
         .serverless_config = "ServerlessConfig",
+        .variant_instance_provision_timeout_in_seconds = "VariantInstanceProvisionTimeoutInSeconds",
         .variant_name = "VariantName",
         .volume_size_in_gb = "VolumeSizeInGB",
     };

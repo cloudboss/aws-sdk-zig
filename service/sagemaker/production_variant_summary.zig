@@ -1,6 +1,7 @@
 const ProductionVariantCapacityReservationSummary = @import("production_variant_capacity_reservation_summary.zig").ProductionVariantCapacityReservationSummary;
 const ProductionVariantServerlessConfig = @import("production_variant_serverless_config.zig").ProductionVariantServerlessConfig;
 const DeployedImage = @import("deployed_image.zig").DeployedImage;
+const InstancePoolSummary = @import("instance_pool_summary.zig").InstancePoolSummary;
 const ProductionVariantManagedInstanceScaling = @import("production_variant_managed_instance_scaling.zig").ProductionVariantManagedInstanceScaling;
 const ProductionVariantRoutingConfig = @import("production_variant_routing_config.zig").ProductionVariantRoutingConfig;
 const ProductionVariantStatus = @import("production_variant_status.zig").ProductionVariantStatus;
@@ -39,6 +40,10 @@ pub const ProductionVariantSummary = struct {
     /// `UpdateEndpointWeightsAndCapacities` request.
     desired_weight: ?f32 = null,
 
+    /// A list of instance pools for the production variant. Each pool indicates the
+    /// instance type and the current number of instances of that type.
+    instance_pools: ?[]const InstancePoolSummary = null,
+
     /// Settings that control the range in the number of instances that the endpoint
     /// provisions as it scales up or down to accommodate traffic.
     managed_instance_scaling: ?ProductionVariantManagedInstanceScaling = null,
@@ -63,6 +68,7 @@ pub const ProductionVariantSummary = struct {
         .desired_instance_count = "DesiredInstanceCount",
         .desired_serverless_config = "DesiredServerlessConfig",
         .desired_weight = "DesiredWeight",
+        .instance_pools = "InstancePools",
         .managed_instance_scaling = "ManagedInstanceScaling",
         .routing_config = "RoutingConfig",
         .variant_name = "VariantName",

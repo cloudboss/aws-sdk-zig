@@ -1,4 +1,6 @@
 const CustomClaimValidationType = @import("custom_claim_validation_type.zig").CustomClaimValidationType;
+const PrivateEndpoint = @import("private_endpoint.zig").PrivateEndpoint;
+const PrivateEndpointOverride = @import("private_endpoint_override.zig").PrivateEndpointOverride;
 
 /// Configuration for inbound JWT-based authorization, specifying how incoming
 /// requests should be authenticated.
@@ -22,11 +24,18 @@ pub const CustomJWTAuthorizerConfiguration = struct {
     /// server metadata for validating incoming tokens.
     discovery_url: []const u8,
 
+    private_endpoint: ?PrivateEndpoint = null,
+
+    /// The private endpoint overrides for the custom JWT authorizer configuration.
+    private_endpoint_overrides: ?[]const PrivateEndpointOverride = null,
+
     pub const json_field_names = .{
         .allowed_audience = "allowedAudience",
         .allowed_clients = "allowedClients",
         .allowed_scopes = "allowedScopes",
         .custom_claims = "customClaims",
         .discovery_url = "discoveryUrl",
+        .private_endpoint = "privateEndpoint",
+        .private_endpoint_overrides = "privateEndpointOverrides",
     };
 };

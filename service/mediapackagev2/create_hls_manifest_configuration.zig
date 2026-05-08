@@ -1,6 +1,7 @@
 const FilterConfiguration = @import("filter_configuration.zig").FilterConfiguration;
 const ScteHls = @import("scte_hls.zig").ScteHls;
 const StartTag = @import("start_tag.zig").StartTag;
+const UriPathType = @import("uri_path_type.zig").UriPathType;
 
 /// Create an HTTP live streaming (HLS) manifest configuration.
 pub const CreateHlsManifestConfiguration = struct {
@@ -39,6 +40,13 @@ pub const CreateHlsManifestConfiguration = struct {
 
     start_tag: ?StartTag = null,
 
+    /// The type of path to use in manifest URIs. `LEAF` uses leaf-relative paths
+    /// (for example, `index_1.m3u8`). `ROOT` uses root-relative paths that include
+    /// the full path from root (for example,
+    /// `/out/v1/channel-group/channel/endpoint/index_1.m3u8`). If you don't specify
+    /// a value, the default is `LEAF`.
+    uri_path_type: ?UriPathType = null,
+
     /// When enabled, MediaPackage URL-encodes the query string for API requests for
     /// HLS child manifests to comply with Amazon Web Services Signature Version 4
     /// (SigV4) signature signing protocol. For more information, see [Amazon Web
@@ -54,6 +62,7 @@ pub const CreateHlsManifestConfiguration = struct {
         .program_date_time_interval_seconds = "ProgramDateTimeIntervalSeconds",
         .scte_hls = "ScteHls",
         .start_tag = "StartTag",
+        .uri_path_type = "UriPathType",
         .url_encode_child_manifest = "UrlEncodeChildManifest",
     };
 };

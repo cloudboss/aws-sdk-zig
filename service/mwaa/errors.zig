@@ -10,6 +10,7 @@ pub const ServiceError = struct {
         resource_not_found_exception: ResourceNotFoundException,
         rest_api_client_exception: RestApiClientException,
         rest_api_server_exception: RestApiServerException,
+        service_unavailable_exception: ServiceUnavailableException,
         validation_exception: ValidationException,
         unknown: UnknownServiceError,
 
@@ -20,6 +21,7 @@ pub const ServiceError = struct {
                 .resource_not_found_exception => "ResourceNotFoundException",
                 .rest_api_client_exception => "RestApiClientException",
                 .rest_api_server_exception => "RestApiServerException",
+                .service_unavailable_exception => "ServiceUnavailableException",
                 .validation_exception => "ValidationException",
                 .unknown => |e| e.code,
             };
@@ -32,6 +34,7 @@ pub const ServiceError = struct {
                 .resource_not_found_exception => |e| e.message,
                 .rest_api_client_exception => |e| e.message,
                 .rest_api_server_exception => |e| e.message,
+                .service_unavailable_exception => |e| e.message,
                 .validation_exception => |e| e.message,
                 .unknown => |e| e.message,
             };
@@ -44,6 +47,7 @@ pub const ServiceError = struct {
                 .resource_not_found_exception => 404,
                 .rest_api_client_exception => 400,
                 .rest_api_server_exception => 400,
+                .service_unavailable_exception => 503,
                 .validation_exception => 400,
                 .unknown => |e| e.http_status,
             };
@@ -56,6 +60,7 @@ pub const ServiceError = struct {
                 .resource_not_found_exception => |e| e.request_id,
                 .rest_api_client_exception => |e| e.request_id,
                 .rest_api_server_exception => |e| e.request_id,
+                .service_unavailable_exception => |e| e.request_id,
                 .validation_exception => |e| e.request_id,
                 .unknown => |e| e.request_id,
             };
@@ -104,6 +109,11 @@ pub const RestApiClientException = struct {
 };
 
 pub const RestApiServerException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const ServiceUnavailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };

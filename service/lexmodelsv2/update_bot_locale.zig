@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const AudioFillerSettings = @import("audio_filler_settings.zig").AudioFillerSettings;
 const GenerativeAISettings = @import("generative_ai_settings.zig").GenerativeAISettings;
 const SpeechDetectionSensitivity = @import("speech_detection_sensitivity.zig").SpeechDetectionSensitivity;
 const SpeechRecognitionSettings = @import("speech_recognition_settings.zig").SpeechRecognitionSettings;
@@ -12,6 +13,11 @@ const VoiceSettings = @import("voice_settings.zig").VoiceSettings;
 const BotLocaleStatus = @import("bot_locale_status.zig").BotLocaleStatus;
 
 pub const UpdateBotLocaleInput = struct {
+    /// Updated audio filler settings to apply to the bot locale. When
+    /// enabled, requires `unifiedSpeechSettings` (speech-to-speech)
+    /// to be configured on the bot locale.
+    audio_filler_settings: ?AudioFillerSettings = null,
+
     /// The unique identifier of the bot that contains the locale.
     bot_id: []const u8,
 
@@ -56,6 +62,7 @@ pub const UpdateBotLocaleInput = struct {
     voice_settings: ?VoiceSettings = null,
 
     pub const json_field_names = .{
+        .audio_filler_settings = "audioFillerSettings",
         .bot_id = "botId",
         .bot_version = "botVersion",
         .description = "description",
@@ -70,6 +77,9 @@ pub const UpdateBotLocaleInput = struct {
 };
 
 pub const UpdateBotLocaleOutput = struct {
+    /// The updated audio filler settings for the bot locale.
+    audio_filler_settings: ?AudioFillerSettings = null,
+
     /// The identifier of the bot that contains the updated locale.
     bot_id: ?[]const u8 = null,
 
@@ -130,6 +140,7 @@ pub const UpdateBotLocaleOutput = struct {
     voice_settings: ?VoiceSettings = null,
 
     pub const json_field_names = .{
+        .audio_filler_settings = "audioFillerSettings",
         .bot_id = "botId",
         .bot_locale_status = "botLocaleStatus",
         .bot_version = "botVersion",
@@ -192,6 +203,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateBotLocaleInput, c
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.audio_filler_settings) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"audioFillerSettings\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.description) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"description\":");

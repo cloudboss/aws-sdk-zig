@@ -137,9 +137,11 @@ pub const Client = struct {
     }
 
     /// Start importing bulk data into an `ACTIVE` data store. The import job
-    /// imports DICOM P10 files found in the S3 prefix specified by the `inputS3Uri`
-    /// parameter. The import job stores processing results in the file specified by
-    /// the `outputS3Uri` parameter.
+    /// imports DICOM P10 files or enhances existing DICOM files with JSON metadata.
+    /// The `importConfiguration` parameter specifies the import type. The data is
+    /// found in the S3 prefix specified by the `inputS3Uri` parameter. The import
+    /// job stores processing results in the file specified by the `outputS3Uri`
+    /// parameter.
     pub fn startDicomImportJob(self: *Self, allocator: std.mem.Allocator, input: start_dicom_import_job.StartDICOMImportJobInput, options: CallOptions) !start_dicom_import_job.StartDICOMImportJobOutput {
         return start_dicom_import_job.execute(self, allocator, input, options);
     }

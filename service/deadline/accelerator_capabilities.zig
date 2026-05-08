@@ -14,6 +14,7 @@ const AcceleratorSelection = @import("accelerator_selection.zig").AcceleratorSel
 /// * `a10g`: Uses G5 instance family
 /// * `l4`: Uses G6 and Gr6 instance families
 /// * `l40s`: Uses G6e instance family
+/// * `rtx-pro-server-6000`: Uses G7e instance family
 pub const AcceleratorCapabilities = struct {
     /// The number of GPU accelerators specified for worker hosts in this fleet.
     ///

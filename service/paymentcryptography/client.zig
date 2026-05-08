@@ -2,24 +2,30 @@ const aws = @import("aws");
 const std = @import("std");
 
 const add_key_replication_regions = @import("add_key_replication_regions.zig");
+const associate_mpa_team = @import("associate_mpa_team.zig");
 const create_alias = @import("create_alias.zig");
 const create_key = @import("create_key.zig");
 const delete_alias = @import("delete_alias.zig");
 const delete_key = @import("delete_key.zig");
+const delete_resource_policy = @import("delete_resource_policy.zig");
 const disable_default_key_replication_regions = @import("disable_default_key_replication_regions.zig");
+const disassociate_mpa_team = @import("disassociate_mpa_team.zig");
 const enable_default_key_replication_regions = @import("enable_default_key_replication_regions.zig");
 const export_key = @import("export_key.zig");
 const get_alias = @import("get_alias.zig");
 const get_certificate_signing_request = @import("get_certificate_signing_request.zig");
 const get_default_key_replication_regions = @import("get_default_key_replication_regions.zig");
 const get_key = @import("get_key.zig");
+const get_mpa_team_association = @import("get_mpa_team_association.zig");
 const get_parameters_for_export = @import("get_parameters_for_export.zig");
 const get_parameters_for_import = @import("get_parameters_for_import.zig");
 const get_public_key_certificate = @import("get_public_key_certificate.zig");
+const get_resource_policy = @import("get_resource_policy.zig");
 const import_key = @import("import_key.zig");
 const list_aliases = @import("list_aliases.zig");
 const list_keys = @import("list_keys.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
+const put_resource_policy = @import("put_resource_policy.zig");
 const remove_key_replication_regions = @import("remove_key_replication_regions.zig");
 const restore_key = @import("restore_key.zig");
 const start_key_usage = @import("start_key_usage.zig");
@@ -68,8 +74,10 @@ pub const Client = struct {
     /// multiple regions in a single operation, and the key will be available for
     /// use in those regions once replication is complete.
     ///
-    /// **Cross-account use:** This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use:** This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -81,6 +89,23 @@ pub const Client = struct {
     ///   [GetDefaultKeyReplicationRegions](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html)
     pub fn addKeyReplicationRegions(self: *Self, allocator: std.mem.Allocator, input: add_key_replication_regions.AddKeyReplicationRegionsInput, options: CallOptions) !add_key_replication_regions.AddKeyReplicationRegionsOutput {
         return add_key_replication_regions.execute(self, allocator, input, options);
+    }
+
+    /// Associates a Multi-Party Approval (MPA) team with a protected operation. For
+    /// more information, see [Multi-Party
+    /// Approval](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/mpa.html) in the *Amazon Web Services Payment Cryptography User Guide.*
+    ///
+    /// **Cross-account use:** This operation can't be used across different Amazon
+    /// Web Services accounts.
+    ///
+    /// **Related operations:**
+    ///
+    /// *
+    ///   [DisassociateMpaTeam](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisassociateMpaTeam.html)
+    /// *
+    ///   [GetMpaTeamAssociation](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetMpaTeamAssociation.html)
+    pub fn associateMpaTeam(self: *Self, allocator: std.mem.Allocator, input: associate_mpa_team.AssociateMpaTeamInput, options: CallOptions) !associate_mpa_team.AssociateMpaTeamOutput {
+        return associate_mpa_team.execute(self, allocator, input, options);
     }
 
     /// Creates an *alias*, or a friendly name, for an Amazon Web Services Payment
@@ -211,8 +236,10 @@ pub const Client = struct {
     /// consider deactivating it instead by calling
     /// [StopKeyUsage](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StopKeyUsage.html).
     ///
-    /// **Cross-account use:** This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use:** This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -224,6 +251,22 @@ pub const Client = struct {
     ///   [StopKeyUsage](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StopKeyUsage.html)
     pub fn deleteKey(self: *Self, allocator: std.mem.Allocator, input: delete_key.DeleteKeyInput, options: CallOptions) !delete_key.DeleteKeyOutput {
         return delete_key.execute(self, allocator, input, options);
+    }
+
+    /// Removes the resource-based policy attached to an Amazon Web Services Payment
+    /// Cryptography key.
+    ///
+    /// **Cross-account use:** This operation can't be used across different Amazon
+    /// Web Services accounts.
+    ///
+    /// **Related operations:**
+    ///
+    /// *
+    ///   [PutResourcePolicy](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_PutResourcePolicy.html)
+    /// *
+    ///   [GetResourcePolicy](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetResourcePolicy.html)
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: CallOptions) !delete_resource_policy.DeleteResourcePolicyOutput {
+        return delete_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Disables [Multi-Region key
@@ -249,6 +292,22 @@ pub const Client = struct {
     ///   [GetDefaultKeyReplicationRegions](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetDefaultKeyReplicationRegions.html)
     pub fn disableDefaultKeyReplicationRegions(self: *Self, allocator: std.mem.Allocator, input: disable_default_key_replication_regions.DisableDefaultKeyReplicationRegionsInput, options: CallOptions) !disable_default_key_replication_regions.DisableDefaultKeyReplicationRegionsOutput {
         return disable_default_key_replication_regions.execute(self, allocator, input, options);
+    }
+
+    /// Removes the association between a Multi-Party Approval (MPA) team and a
+    /// protected operation.
+    ///
+    /// **Cross-account use:** This operation can't be used across different Amazon
+    /// Web Services accounts.
+    ///
+    /// **Related operations:**
+    ///
+    /// *
+    ///   [AssociateMpaTeam](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_AssociateMpaTeam.html)
+    /// *
+    ///   [GetMpaTeamAssociation](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetMpaTeamAssociation.html)
+    pub fn disassociateMpaTeam(self: *Self, allocator: std.mem.Allocator, input: disassociate_mpa_team.DisassociateMpaTeamInput, options: CallOptions) !disassociate_mpa_team.DisassociateMpaTeamOutput {
+        return disassociate_mpa_team.execute(self, allocator, input, options);
     }
 
     /// Enables [Multi-Region key
@@ -436,8 +495,10 @@ pub const Client = struct {
     /// returns the working key as a TR-31 WrappedKeyBlock, where the wrapping key
     /// is the ECDH derived key.
     ///
-    /// **Cross-account use:** This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use:** This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -500,8 +561,10 @@ pub const Client = struct {
     /// created. Returns key metadata including attributes, state, and timestamps,
     /// but does not return the actual cryptographic key material.
     ///
-    /// **Cross-account use:** This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use:** This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -513,6 +576,22 @@ pub const Client = struct {
     ///   [ListKeys](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListKeys.html)
     pub fn getKey(self: *Self, allocator: std.mem.Allocator, input: get_key.GetKeyInput, options: CallOptions) !get_key.GetKeyOutput {
         return get_key.execute(self, allocator, input, options);
+    }
+
+    /// Returns the Multi-Party Approval (MPA) team association for a protected
+    /// operation.
+    ///
+    /// **Cross-account use:** This operation can't be used across different Amazon
+    /// Web Services accounts.
+    ///
+    /// **Related operations:**
+    ///
+    /// *
+    ///   [AssociateMpaTeam](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_AssociateMpaTeam.html)
+    /// *
+    ///   [DisassociateMpaTeam](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DisassociateMpaTeam.html)
+    pub fn getMpaTeamAssociation(self: *Self, allocator: std.mem.Allocator, input: get_mpa_team_association.GetMpaTeamAssociationInput, options: CallOptions) !get_mpa_team_association.GetMpaTeamAssociationOutput {
+        return get_mpa_team_association.execute(self, allocator, input, options);
     }
 
     /// Gets the export token and the signing key certificate to initiate a TR-34
@@ -573,10 +652,28 @@ pub const Client = struct {
     /// others to encrypt messages and verify signatures outside of Amazon Web
     /// Services Payment Cryptography
     ///
-    /// **Cross-account use:** This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use:** This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     pub fn getPublicKeyCertificate(self: *Self, allocator: std.mem.Allocator, input: get_public_key_certificate.GetPublicKeyCertificateInput, options: CallOptions) !get_public_key_certificate.GetPublicKeyCertificateOutput {
         return get_public_key_certificate.execute(self, allocator, input, options);
+    }
+
+    /// Returns the resource-based policy attached to an Amazon Web Services Payment
+    /// Cryptography key.
+    ///
+    /// **Cross-account use:** This operation can't be used across different Amazon
+    /// Web Services accounts.
+    ///
+    /// **Related operations:**
+    ///
+    /// *
+    ///   [PutResourcePolicy](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_PutResourcePolicy.html)
+    /// *
+    ///   [DeleteResourcePolicy](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteResourcePolicy.html)
+    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: CallOptions) !get_resource_policy.GetResourcePolicyOutput {
+        return get_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Imports symmetric keys and public key certificates in PEM format (base64
@@ -733,8 +830,10 @@ pub const Client = struct {
     /// * `CertificateAuthorityPublicKeyIdentifier`: The `keyARN` of the CA that
     ///   signed the public key certificate of the receiving ECC key pair.
     ///
-    /// **Cross-account use:** This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use:** This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -809,8 +908,10 @@ pub const Client = struct {
     /// with no NextToken (or an empty or null value), that means there are no more
     /// tags to get.
     ///
-    /// **Cross-account use:** This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use:** This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -820,6 +921,29 @@ pub const Client = struct {
     ///   [UntagResource](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UntagResource.html)
     pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
+    }
+
+    /// Attaches or replaces a resource-based policy on an Amazon Web Services
+    /// Payment Cryptography key. A resource-based policy can grant cross-account
+    /// access to your key.
+    ///
+    /// If the policy would grant public access, the request fails with a
+    /// `PublicPolicyException`.
+    ///
+    /// To remove a resource-based policy from a key, use
+    /// [DeleteResourcePolicy](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteResourcePolicy.html).
+    ///
+    /// **Cross-account use:** This operation can't be used across different Amazon
+    /// Web Services accounts.
+    ///
+    /// **Related operations:**
+    ///
+    /// *
+    ///   [GetResourcePolicy](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetResourcePolicy.html)
+    /// *
+    ///   [DeleteResourcePolicy](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteResourcePolicy.html)
+    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: CallOptions) !put_resource_policy.PutResourcePolicyOutput {
+        return put_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Removes Replication Regions from an existing Amazon Web Services Payment
@@ -835,8 +959,10 @@ pub const Client = struct {
     /// Ensure that no active cryptographic operations or applications depend on the
     /// key in the regions you're removing before performing this operation.
     ///
-    /// **Cross-account use:** This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use:** This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -856,8 +982,10 @@ pub const Client = struct {
     /// will be deleted. After `Key` is restored, the `KeyState` is
     /// `CREATE_COMPLETE`, and the value for `deletePendingTimestamp` is removed.
     ///
-    /// **Cross-account use:** This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use:** This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -875,8 +1003,10 @@ pub const Client = struct {
     /// active for cryptographic operations within Amazon Web Services Payment
     /// Cryptography
     ///
-    /// **Cross-account use:** This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use:** This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -892,8 +1022,10 @@ pub const Client = struct {
     /// You can use this operation instead of
     /// [DeleteKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html) to deactivate a key. You can enable the key in the future by calling [StartKeyUsage](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StartKeyUsage.html).
     ///
-    /// **Cross-account use:** This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use:** This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -917,8 +1049,10 @@ pub const Client = struct {
     /// Services Payment Cryptography key when you create it with
     /// [CreateKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html).
     ///
-    /// **Cross-account use:** This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use:** This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -935,8 +1069,10 @@ pub const Client = struct {
     /// Tagging or untagging an Amazon Web Services Payment Cryptography key can
     /// allow or deny permission to the key.
     ///
-    /// **Cross-account use:** This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use:** This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///

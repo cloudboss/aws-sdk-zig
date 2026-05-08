@@ -17,6 +17,9 @@ pub const NetworkMigrationMapperSegmentConstruct = struct {
     /// A description of the construct.
     description: ?[]const u8 = null,
 
+    /// Whether this construct is excluded from the migration.
+    excluded: ?bool = null,
+
     /// The logical identifier for the construct in the infrastructure code.
     logical_id: ?[]const u8 = null,
 
@@ -34,6 +37,7 @@ pub const NetworkMigrationMapperSegmentConstruct = struct {
         .construct_type = "constructType",
         .created_at = "createdAt",
         .description = "description",
+        .excluded = "excluded",
         .logical_id = "logicalID",
         .name = "name",
         .properties = "properties",

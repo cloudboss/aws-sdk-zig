@@ -1,7 +1,7 @@
 /// The auto scaling configuration settings for a service managed EC2 fleet.
 pub const ServiceManagedEc2AutoScalingConfiguration = struct {
     /// The number of workers that can be added per minute to the fleet. The default
-    /// is a service-defined value that balances efficiency with cost.
+    /// is 10 workers per minute.
     scale_out_workers_per_minute: ?i32 = null,
 
     /// The number of idle workers maintained and ready to process incoming tasks.

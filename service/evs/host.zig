@@ -25,8 +25,6 @@ pub const Host = struct {
 
     /// The EC2 instance type of the host.
     ///
-    /// Currently, Amazon EVS supports only the `i4i.metal` instance type.
-    ///
     /// EC2 instances created through Amazon EVS do not support associating an IAM
     /// instance profile.
     instance_type: ?InstanceType = null,

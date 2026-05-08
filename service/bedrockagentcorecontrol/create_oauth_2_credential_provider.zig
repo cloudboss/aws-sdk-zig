@@ -8,6 +8,7 @@ const CredentialProviderVendorType = @import("credential_provider_vendor_type.zi
 const Oauth2ProviderConfigInput = @import("oauth_2_provider_config_input.zig").Oauth2ProviderConfigInput;
 const Secret = @import("secret.zig").Secret;
 const Oauth2ProviderConfigOutput = @import("oauth_2_provider_config_output.zig").Oauth2ProviderConfigOutput;
+const Status = @import("status.zig").Status;
 
 pub const CreateOauth2CredentialProviderInput = struct {
     /// The vendor of the OAuth2 credential provider. This specifies which OAuth2
@@ -52,12 +53,16 @@ pub const CreateOauth2CredentialProviderOutput = struct {
 
     oauth_2_provider_config_output: ?Oauth2ProviderConfigOutput = null,
 
+    /// The current status of the OAuth2 credential provider.
+    status: ?Status = null,
+
     pub const json_field_names = .{
         .callback_url = "callbackUrl",
         .client_secret_arn = "clientSecretArn",
         .credential_provider_arn = "credentialProviderArn",
         .name = "name",
         .oauth_2_provider_config_output = "oauth2ProviderConfigOutput",
+        .status = "status",
     };
 };
 

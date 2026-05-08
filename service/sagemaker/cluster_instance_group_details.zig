@@ -2,6 +2,7 @@ const aws = @import("aws");
 
 const DeploymentConfiguration = @import("deployment_configuration.zig").DeploymentConfiguration;
 const ClusterCapacityRequirements = @import("cluster_capacity_requirements.zig").ClusterCapacityRequirements;
+const ClusterImageVersionStatus = @import("cluster_image_version_status.zig").ClusterImageVersionStatus;
 const ClusterInstanceRequirementDetails = @import("cluster_instance_requirement_details.zig").ClusterInstanceRequirementDetails;
 const ClusterInstanceStorageConfig = @import("cluster_instance_storage_config.zig").ClusterInstanceStorageConfig;
 const ClusterInstanceType = @import("cluster_instance_type.zig").ClusterInstanceType;
@@ -41,6 +42,11 @@ pub const ClusterInstanceGroupDetails = struct {
 
     /// The execution role for the instance group to assume.
     execution_role: ?[]const u8 = null,
+
+    /// The status of the image version for the instance group. Indicates whether
+    /// the instance group is running the latest image version or if an update is
+    /// available.
+    image_version_status: ?ClusterImageVersionStatus = null,
 
     /// The name of the instance group of a SageMaker HyperPod cluster.
     instance_group_name: ?[]const u8 = null,
@@ -161,6 +167,7 @@ pub const ClusterInstanceGroupDetails = struct {
         .current_image_id = "CurrentImageId",
         .desired_image_id = "DesiredImageId",
         .execution_role = "ExecutionRole",
+        .image_version_status = "ImageVersionStatus",
         .instance_group_name = "InstanceGroupName",
         .instance_requirements = "InstanceRequirements",
         .instance_storage_configs = "InstanceStorageConfigs",

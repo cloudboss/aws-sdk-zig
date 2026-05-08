@@ -8,7 +8,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 pub const GetMonitorSettingsInput = struct {
     /// The unique identifier of the monitor. This ID is returned by the
     /// `CreateMonitor` operation, and is included in the response to the
-    /// `GetMonitor` operation.
+    /// `ListMonitors` operation.
     monitor_id: []const u8,
 
     pub const json_field_names = .{
@@ -17,7 +17,7 @@ pub const GetMonitorSettingsInput = struct {
 };
 
 pub const GetMonitorSettingsOutput = struct {
-    /// Monitor settings as key-value pairs.
+    /// The monitor settings as key-value pairs.
     settings: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{

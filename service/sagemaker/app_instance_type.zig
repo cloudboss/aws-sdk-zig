@@ -164,6 +164,7 @@ pub const AppInstanceType = enum {
     ml_r6_id_16_xlarge,
     ml_r6_id_24_xlarge,
     ml_r6_id_32_xlarge,
+    ml_p5_4_xlarge,
 
     pub const json_field_names = .{
         .system = "system",
@@ -329,6 +330,7 @@ pub const AppInstanceType = enum {
         .ml_r6_id_16_xlarge = "ml.r6id.16xlarge",
         .ml_r6_id_24_xlarge = "ml.r6id.24xlarge",
         .ml_r6_id_32_xlarge = "ml.r6id.32xlarge",
+        .ml_p5_4_xlarge = "ml.p5.4xlarge",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -496,6 +498,7 @@ pub const AppInstanceType = enum {
             .ml_r6_id_16_xlarge => "ml.r6id.16xlarge",
             .ml_r6_id_24_xlarge => "ml.r6id.24xlarge",
             .ml_r6_id_32_xlarge => "ml.r6id.32xlarge",
+            .ml_p5_4_xlarge => "ml.p5.4xlarge",
         };
     }
 

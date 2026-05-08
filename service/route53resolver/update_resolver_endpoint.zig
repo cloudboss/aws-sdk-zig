@@ -10,6 +10,31 @@ const UpdateIpAddress = @import("update_ip_address.zig").UpdateIpAddress;
 const ResolverEndpoint = @import("resolver_endpoint.zig").ResolverEndpoint;
 
 pub const UpdateResolverEndpointInput = struct {
+    /// Specifies whether DNS64 is enabled for the inbound Resolver endpoint. When
+    /// set to `true`, Route 53 Resolver
+    /// synthesizes AAAA (IPv6) records for IPv4-only services by prepending the
+    /// `64:ff9b::/96` prefix to the IPv4 address.
+    /// This enables IPv6-only clients that send queries through the inbound
+    /// endpoint to reach IPv4-only services.
+    /// DNS64 works with NAT64 to provide complete IPv6-to-IPv4 translation.
+    dns_64_enabled: ?bool = null,
+
+    /// Specifies whether IPv6 internet access is enabled for the outbound Resolver
+    /// endpoint. When set to `true`,
+    /// the endpoint elastic network interfaces (ENIs) can forward DNS queries to
+    /// public IPv6 targets through an internet gateway.
+    ///
+    /// When you enable IPv6 internet access, use network controls like security
+    /// groups, NACLs, or egress-only internet gateways
+    /// to protect the endpoint ENIs from unsolicited ingress traffic. Be aware that
+    /// some network controls can affect DNS query
+    /// throughput due to connection tracking. For more information, see
+    /// [Amazon EC2 security group connection
+    /// tracking](https://docs.aws.amazon.com/ec2/latest/userguide/security-group-connection-tracking.html)
+    /// and [Resolver endpoint
+    /// scaling](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/best-practices-resolver-endpoint-scaling.html).
+    ipv_6_internet_access_enabled: ?bool = null,
+
     /// The name of the Resolver endpoint that you want to update.
     name: ?[]const u8 = null,
 
@@ -93,6 +118,8 @@ pub const UpdateResolverEndpointInput = struct {
     update_ip_addresses: ?[]const UpdateIpAddress = null,
 
     pub const json_field_names = .{
+        .dns_64_enabled = "Dns64Enabled",
+        .ipv_6_internet_access_enabled = "Ipv6InternetAccessEnabled",
         .name = "Name",
         .protocols = "Protocols",
         .resolver_endpoint_id = "ResolverEndpointId",

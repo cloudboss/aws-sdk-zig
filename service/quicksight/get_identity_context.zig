@@ -12,6 +12,24 @@ pub const GetIdentityContextInput = struct {
     /// Web Services account that contains your Quick Sight account.
     aws_account_id: []const u8,
 
+    /// The region in which the context is to be used. Use this parameter to obtain
+    /// an identity context for cross-region use.
+    ///
+    /// The specified region must meet the following conditions:
+    ///
+    /// * The region must be in the same Amazon Web Services partition as the region
+    ///   you are calling from. Cross-partition requests are not supported. For
+    ///   example, you cannot specify a region in the `aws-cn` partition when
+    ///   calling from a region in the `aws` partition.
+    ///
+    /// * It must be a valid Amazon QuickSight supported region.
+    ///
+    /// * The calling customer account must be enabled in the specified context
+    ///   region.
+    ///
+    /// * This parameter is not supported when calling from an opt-in region.
+    context_region: ?[]const u8 = null,
+
     /// The namespace of the user that you want to get identity context for. This
     /// parameter is required when the UserIdentifier is specified using Email or
     /// UserName.
@@ -25,6 +43,7 @@ pub const GetIdentityContextInput = struct {
 
     pub const json_field_names = .{
         .aws_account_id = "AwsAccountId",
+        .context_region = "ContextRegion",
         .namespace = "Namespace",
         .session_expires_at = "SessionExpiresAt",
         .user_identifier = "UserIdentifier",
@@ -90,6 +109,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetIdentityContextInput
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.context_region) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"ContextRegion\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.namespace) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"Namespace\":");

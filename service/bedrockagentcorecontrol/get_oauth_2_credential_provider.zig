@@ -7,6 +7,7 @@ const ServiceError = @import("errors.zig").ServiceError;
 const Secret = @import("secret.zig").Secret;
 const CredentialProviderVendorType = @import("credential_provider_vendor_type.zig").CredentialProviderVendorType;
 const Oauth2ProviderConfigOutput = @import("oauth_2_provider_config_output.zig").Oauth2ProviderConfigOutput;
+const Status = @import("status.zig").Status;
 
 pub const GetOauth2CredentialProviderInput = struct {
     /// The name of the OAuth2 credential provider to retrieve.
@@ -35,6 +36,10 @@ pub const GetOauth2CredentialProviderOutput = struct {
     /// The vendor of the OAuth2 credential provider.
     credential_provider_vendor: CredentialProviderVendorType,
 
+    /// The reason for failure if the OAuth2 credential provider is in a failed
+    /// state.
+    failure_reason: ?[]const u8 = null,
+
     /// The timestamp when the OAuth2 credential provider was last updated.
     last_updated_time: i64,
 
@@ -44,15 +49,20 @@ pub const GetOauth2CredentialProviderOutput = struct {
     /// The configuration output for the OAuth2 provider.
     oauth_2_provider_config_output: ?Oauth2ProviderConfigOutput = null,
 
+    /// The current status of the OAuth2 credential provider.
+    status: ?Status = null,
+
     pub const json_field_names = .{
         .callback_url = "callbackUrl",
         .client_secret_arn = "clientSecretArn",
         .created_time = "createdTime",
         .credential_provider_arn = "credentialProviderArn",
         .credential_provider_vendor = "credentialProviderVendor",
+        .failure_reason = "failureReason",
         .last_updated_time = "lastUpdatedTime",
         .name = "name",
         .oauth_2_provider_config_output = "oauth2ProviderConfigOutput",
+        .status = "status",
     };
 };
 

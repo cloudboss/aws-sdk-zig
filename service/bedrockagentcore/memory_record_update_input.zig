@@ -1,4 +1,7 @@
+const aws = @import("aws");
+
 const MemoryContent = @import("memory_content.zig").MemoryContent;
+const MemoryRecordMetadataValue = @import("memory_record_metadata_value.zig").MemoryRecordMetadataValue;
 
 /// Input structure to update an existing memory record.
 pub const MemoryRecordUpdateInput = struct {
@@ -12,6 +15,9 @@ pub const MemoryRecordUpdateInput = struct {
     /// grouped.
     memory_strategy_id: ?[]const u8 = null,
 
+    /// Metadata key-value pairs to be stored with the memory record.
+    metadata: ?[]const aws.map.MapEntry(MemoryRecordMetadataValue) = null,
+
     /// The updated list of namespace identifiers for categorizing the memory
     /// record.
     namespaces: ?[]const []const u8 = null,
@@ -23,6 +29,7 @@ pub const MemoryRecordUpdateInput = struct {
         .content = "content",
         .memory_record_id = "memoryRecordId",
         .memory_strategy_id = "memoryStrategyId",
+        .metadata = "metadata",
         .namespaces = "namespaces",
         .timestamp = "timestamp",
     };

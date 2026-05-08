@@ -9,6 +9,7 @@ const DashProgramInformation = @import("dash_program_information.zig").DashProgr
 const ScteDash = @import("scte_dash.zig").ScteDash;
 const DashSegmentTemplateFormat = @import("dash_segment_template_format.zig").DashSegmentTemplateFormat;
 const DashSubtitleConfiguration = @import("dash_subtitle_configuration.zig").DashSubtitleConfiguration;
+const UriPathType = @import("uri_path_type.zig").UriPathType;
 const DashUtcTiming = @import("dash_utc_timing.zig").DashUtcTiming;
 
 /// Retrieve the DASH manifest configuration.
@@ -83,6 +84,11 @@ pub const GetDashManifestConfiguration = struct {
     /// the manifest.
     suggested_presentation_delay_seconds: ?i32 = null,
 
+    /// The type of path used in manifest URIs. `LEAF` indicates leaf-relative
+    /// paths. `ROOT` indicates root-relative paths that include the full path from
+    /// root.
+    uri_path_type: ?UriPathType = null,
+
     /// The egress domain URL for stream delivery from MediaPackage.
     url: []const u8,
 
@@ -107,6 +113,7 @@ pub const GetDashManifestConfiguration = struct {
         .segment_template_format = "SegmentTemplateFormat",
         .subtitle_configuration = "SubtitleConfiguration",
         .suggested_presentation_delay_seconds = "SuggestedPresentationDelaySeconds",
+        .uri_path_type = "UriPathType",
         .url = "Url",
         .utc_timing = "UtcTiming",
     };

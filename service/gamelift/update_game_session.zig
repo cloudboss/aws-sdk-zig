@@ -30,7 +30,9 @@ pub const UpdateGameSessionInput = struct {
     ///   SearchGameSessions API results.
     game_properties: ?[]const GameProperty = null,
 
-    /// A unique identifier for the game session to update.
+    /// An identifier for the game session that is unique across all regions to
+    /// update. The value is always a full ARN in the following format:
+    /// `arn:aws:gamelift:::gamesession//`.
     game_session_id: []const u8,
 
     /// The maximum number of players that can be connected simultaneously to the

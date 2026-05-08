@@ -18,8 +18,7 @@ pub const BillingAdjustmentSummary = struct {
     /// The catalog in which the agreement was created.
     catalog: []const u8,
 
-    /// The date and time when the billing adjustment request was created, as a
-    /// POSIX timestamp (Unix epoch seconds).
+    /// The date and time when the billing adjustment request was created.
     created_at: i64,
 
     /// The currency code for the adjustment amount.
@@ -31,8 +30,7 @@ pub const BillingAdjustmentSummary = struct {
     /// The current status of the billing adjustment request.
     status: BillingAdjustmentStatus,
 
-    /// The date and time when the billing adjustment request was last updated, as a
-    /// POSIX timestamp (Unix epoch seconds).
+    /// The date and time when the billing adjustment request was last updated.
     updated_at: i64,
 
     pub const json_field_names = .{

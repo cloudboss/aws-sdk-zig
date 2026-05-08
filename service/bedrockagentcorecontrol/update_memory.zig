@@ -4,11 +4,16 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const IndexedKey = @import("indexed_key.zig").IndexedKey;
 const ModifyMemoryStrategies = @import("modify_memory_strategies.zig").ModifyMemoryStrategies;
 const StreamDeliveryResources = @import("stream_delivery_resources.zig").StreamDeliveryResources;
 const Memory = @import("memory.zig").Memory;
 
 pub const UpdateMemoryInput = struct {
+    /// Additional metadata keys to index. Previously indexed keys cannot be
+    /// removed.
+    add_indexed_keys: ?[]const IndexedKey = null,
+
     /// A client token is used for keeping track of idempotent requests. It can
     /// contain a session id which can be around 250 chars, combined with a unique
     /// AWS identifier.
@@ -35,6 +40,7 @@ pub const UpdateMemoryInput = struct {
     stream_delivery_resources: ?StreamDeliveryResources = null,
 
     pub const json_field_names = .{
+        .add_indexed_keys = "addIndexedKeys",
         .client_token = "clientToken",
         .description = "description",
         .event_expiry_duration = "eventExpiryDuration",
@@ -94,6 +100,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateMemoryInput, conf
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.add_indexed_keys) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"addIndexedKeys\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.client_token) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"clientToken\":");

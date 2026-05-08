@@ -16,7 +16,8 @@ pub const MetricDatum = struct {
     /// **Internal only**. The statistical values for the metric.
     statistic_values: ?StatisticSet = null,
 
-    /// **Internal only**. The time the metric data was received.
+    /// **Internal only**. The time the metric data was received, expressed as an
+    /// ISO 8601 datetime string.
     timestamp: i64,
 
     /// **Internal only**. The unit used to store the metric.

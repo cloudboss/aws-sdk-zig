@@ -10,10 +10,10 @@ pub const Filters = struct {
     /// receiver or the linked accounts in the rules.
     accounts: ?[]const []const u8 = null,
 
-    /// A list of Amazon Web Services account account IDs used to filter invoice
-    /// units. These are payer accounts from other Organizations that have delegated
-    /// their billing responsibility to the receiver account through the billing
-    /// transfer feature.
+    /// A list of Amazon Web Services account IDs used to filter invoice units.
+    /// These are payer accounts from other Organizations that have delegated their
+    /// billing responsibility to the receiver account through the billing transfer
+    /// feature.
     bill_source_accounts: ?[]const []const u8 = null,
 
     /// You can specify a list of Amazon Web Services account IDs inside filters to

@@ -75,8 +75,7 @@ pub const Client = struct {
     }
 
     /// Invokes the Apache Airflow REST API on the webserver with the specified
-    /// inputs. To
-    /// learn more, see [Using the Apache Airflow REST
+    /// inputs. To learn more, see [Using the Apache Airflow REST
     /// API](https://docs.aws.amazon.com/mwaa/latest/userguide/access-mwaa-apache-airflow-rest-api.html)
     pub fn invokeRestApi(self: *Self, allocator: std.mem.Allocator, input: invoke_rest_api.InvokeRestApiInput, options: CallOptions) !invoke_rest_api.InvokeRestApiOutput {
         return invoke_rest_api.execute(self, allocator, input, options);

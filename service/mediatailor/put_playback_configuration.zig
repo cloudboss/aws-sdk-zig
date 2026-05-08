@@ -58,6 +58,13 @@ pub const PutPlaybackConfigurationInput = struct {
     /// The configuration for DASH content.
     dash_configuration: ?DashConfigurationForPut = null,
 
+    /// A map of lifecycle hook event names to function identifiers. The function
+    /// mapping specifies which function MediaTailor executes at each lifecycle hook
+    /// during ad insertion. Valid keys are `PRE_SESSION_INITIALIZATION` and
+    /// `PRE_ADS_REQUEST`. For more information, see [Functions lifecycle
+    /// hooks](https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html) in the *MediaTailor User Guide*.
+    function_mapping: ?[]const aws.map.StringMapEntry = null,
+
     /// The setting that controls whether players can use stitched or guided ad
     /// insertion. The default, `STITCHED_ONLY`, forces all player sessions to use
     /// stitched (server-side) ad insertion. Choosing `PLAYER_SELECT` allows players
@@ -121,6 +128,7 @@ pub const PutPlaybackConfigurationInput = struct {
         .cdn_configuration = "CdnConfiguration",
         .configuration_aliases = "ConfigurationAliases",
         .dash_configuration = "DashConfiguration",
+        .function_mapping = "FunctionMapping",
         .insertion_mode = "InsertionMode",
         .live_pre_roll_configuration = "LivePreRollConfiguration",
         .manifest_processing_rules = "ManifestProcessingRules",
@@ -173,6 +181,13 @@ pub const PutPlaybackConfigurationOutput = struct {
 
     /// The configuration for DASH content.
     dash_configuration: ?DashConfiguration = null,
+
+    /// A map of lifecycle hook event names to function identifiers. The function
+    /// mapping specifies which function MediaTailor executes at each lifecycle hook
+    /// during ad insertion. Valid keys are `PRE_SESSION_INITIALIZATION` and
+    /// `PRE_ADS_REQUEST`. For more information, see [Functions lifecycle
+    /// hooks](https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html) in the *MediaTailor User Guide*.
+    function_mapping: ?[]const aws.map.StringMapEntry = null,
 
     /// The configuration for HLS content.
     hls_configuration: ?HlsConfiguration = null,
@@ -254,6 +269,7 @@ pub const PutPlaybackConfigurationOutput = struct {
         .cdn_configuration = "CdnConfiguration",
         .configuration_aliases = "ConfigurationAliases",
         .dash_configuration = "DashConfiguration",
+        .function_mapping = "FunctionMapping",
         .hls_configuration = "HlsConfiguration",
         .insertion_mode = "InsertionMode",
         .live_pre_roll_configuration = "LivePreRollConfiguration",
@@ -352,6 +368,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutPlaybackConfiguratio
     if (input.dash_configuration) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"DashConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.function_mapping) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"FunctionMapping\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

@@ -17,7 +17,9 @@ pub const DescribeGameSessionDetailsInput = struct {
     /// ID or ARN value.
     fleet_id: ?[]const u8 = null,
 
-    /// A unique identifier for the game session to retrieve.
+    /// An identifier for the game session that is unique across all regions to
+    /// retrieve. The value is always a full ARN in the following format:
+    /// `arn:aws:gamelift:::gamesession//`.
     game_session_id: ?[]const u8 = null,
 
     /// The maximum number of results to return. Use this parameter with `NextToken`

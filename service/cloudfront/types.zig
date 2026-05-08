@@ -21,6 +21,7 @@ pub const CachePolicyQueryStringBehavior = @import("cache_policy_query_string_be
 pub const CachePolicyQueryStringsConfig = @import("cache_policy_query_strings_config.zig").CachePolicyQueryStringsConfig;
 pub const CachePolicySummary = @import("cache_policy_summary.zig").CachePolicySummary;
 pub const CachePolicyType = @import("cache_policy_type.zig").CachePolicyType;
+pub const CacheTagConfig = @import("cache_tag_config.zig").CacheTagConfig;
 pub const CachedMethods = @import("cached_methods.zig").CachedMethods;
 pub const Certificate = @import("certificate.zig").Certificate;
 pub const CertificateSource = @import("certificate_source.zig").CertificateSource;

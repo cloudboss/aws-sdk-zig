@@ -71,6 +71,10 @@ pub const CreateOpenIDConnectProviderInput = struct {
     /// thumbprint for an OpenID Connect
     /// provider](https://docs.aws.amazon.com/IAM/latest/UserGuide/identity-providers-oidc-obtain-thumbprint.html) in the *IAM user
     /// Guide*.
+    ///
+    /// If your OIDC provider's discovery endpoint and JWKS endpoint
+    /// (`jwks_uri`) use different certificates or hosts, include the
+    /// thumbprints for both endpoints in this list.
     thumbprint_list: ?[]const []const u8 = null,
 
     /// The URL of the identity provider. The URL must begin with `https://` and

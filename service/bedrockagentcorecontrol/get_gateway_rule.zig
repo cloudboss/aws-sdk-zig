@@ -1,0 +1,239 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
+const ServiceError = @import("errors.zig").ServiceError;
+const Action = @import("action.zig").Action;
+const Condition = @import("condition.zig").Condition;
+const GatewayRuleStatus = @import("gateway_rule_status.zig").GatewayRuleStatus;
+const SystemManagedBlock = @import("system_managed_block.zig").SystemManagedBlock;
+
+pub const GetGatewayRuleInput = struct {
+    /// The identifier of the gateway containing the rule.
+    gateway_identifier: []const u8,
+
+    /// The unique identifier of the rule to retrieve.
+    rule_id: []const u8,
+
+    pub const json_field_names = .{
+        .gateway_identifier = "gatewayIdentifier",
+        .rule_id = "ruleId",
+    };
+};
+
+pub const GetGatewayRuleOutput = struct {
+    /// The actions to take when the rule conditions are met.
+    actions: ?[]const Action = null,
+
+    /// The conditions that must be met for the rule to apply.
+    conditions: ?[]const Condition = null,
+
+    /// The timestamp when the rule was created.
+    created_at: i64,
+
+    /// The description of the gateway rule.
+    description: ?[]const u8 = null,
+
+    /// The Amazon Resource Name (ARN) of the gateway that the rule belongs to.
+    gateway_arn: []const u8,
+
+    /// The priority of the rule. Rules are evaluated in order of priority, with
+    /// lower numbers evaluated first.
+    priority: i32,
+
+    /// The unique identifier of the gateway rule.
+    rule_id: []const u8,
+
+    /// The current status of the rule.
+    status: GatewayRuleStatus,
+
+    /// System-managed metadata for rules created by automated processes.
+    system: ?SystemManagedBlock = null,
+
+    /// The timestamp when the rule was last updated.
+    updated_at: ?i64 = null,
+
+    pub const json_field_names = .{
+        .actions = "actions",
+        .conditions = "conditions",
+        .created_at = "createdAt",
+        .description = "description",
+        .gateway_arn = "gatewayArn",
+        .priority = "priority",
+        .rule_id = "ruleId",
+        .status = "status",
+        .system = "system",
+        .updated_at = "updatedAt",
+    };
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetGatewayRuleInput, options: CallOptions) !GetGatewayRuleOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(client.allocator);
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "bedrock-agentcore", client.config.http_client.clock_skew_offset);
+
+    var response = try client.config.http_client.sendRequestWithOptions(&request, client.options);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
+    return result;
+}
+
+fn serializeRequest(allocator: std.mem.Allocator, input: GetGatewayRuleInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("bedrock-agentcore-control", "Bedrock AgentCore Control", allocator);
+
+    const ep = try aws.url.parseEndpoint(endpoint);
+
+    var path_buf: std.ArrayList(u8) = .empty;
+    try path_buf.appendSlice(allocator, "/gateways/");
+    try path_buf.appendSlice(allocator, input.gateway_identifier);
+    try path_buf.appendSlice(allocator, "/rules/");
+    try path_buf.appendSlice(allocator, input.rule_id);
+    const path = try path_buf.toOwnedSlice(allocator);
+
+    const body: ?[]const u8 = null;
+
+    var request = aws.http.Request.init(ep.host);
+    request.method = .GET;
+    request.path = path;
+    request.tls = ep.tls;
+    request.port = ep.port;
+    request.body = body;
+    try request.headers.put(allocator, "Content-Type", "application/json");
+
+    return request;
+}
+
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetGatewayRuleOutput {
+    var result: GetGatewayRuleOutput = .{};
+    if (body.len > 0) {
+        result = try aws.json.parseJsonObject(GetGatewayRuleOutput, body, allocator);
+    }
+    _ = status;
+    _ = headers;
+
+    return result;
+}
+
+fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.findScalarLast(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConcurrentModificationException")) {
+        return .{ .arena = arena, .kind = .{ .concurrent_modification_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DecryptionFailure")) {
+        return .{ .arena = arena, .kind = .{ .decryption_failure = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "EncryptionFailure")) {
+        return .{ .arena = arena, .kind = .{ .encryption_failure = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceLimitExceededException")) {
+        return .{ .arena = arena, .kind = .{ .resource_limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceException")) {
+        return .{ .arena = arena, .kind = .{ .service_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottledException")) {
+        return .{ .arena = arena, .kind = .{ .throttled_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnauthorizedException")) {
+        return .{ .arena = arena, .kind = .{ .unauthorized_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

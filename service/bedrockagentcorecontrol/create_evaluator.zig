@@ -29,6 +29,14 @@ pub const CreateEvaluatorInput = struct {
     /// The name of the evaluator. Must be unique within your account.
     evaluator_name: []const u8,
 
+    /// The Amazon Resource Name (ARN) of a customer managed KMS key to use for
+    /// encrypting sensitive evaluator data, including instructions and rating
+    /// scale. If you don't specify a KMS key, the evaluator data is encrypted with
+    /// an Amazon Web Services owned key. Only symmetric encryption KMS keys are
+    /// supported. For more information, see [Encryption at rest for AgentCore
+    /// Evaluations](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/evaluations-encryption.html).
+    kms_key_arn: ?[]const u8 = null,
+
     /// The evaluation level that determines the scope of evaluation. Valid values
     /// are `TOOL_CALL` for individual tool invocations, `TRACE` for single
     /// request-response interactions, or `SESSION` for entire conversation
@@ -45,6 +53,7 @@ pub const CreateEvaluatorInput = struct {
         .description = "description",
         .evaluator_config = "evaluatorConfig",
         .evaluator_name = "evaluatorName",
+        .kms_key_arn = "kmsKeyArn",
         .level = "level",
         .tags = "tags",
     };
@@ -127,6 +136,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateEvaluatorInput, c
     try body_buf.appendSlice(allocator, "\"evaluatorName\":");
     try aws.json.writeValue(@TypeOf(input.evaluator_name), input.evaluator_name, allocator, &body_buf);
     has_prev = true;
+    if (input.kms_key_arn) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"kmsKeyArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"level\":");
     try aws.json.writeValue(@TypeOf(input.level), input.level, allocator, &body_buf);

@@ -8,7 +8,9 @@ pub const ExtraParam = struct {
     /// the parameters
     /// that they require:
     ///
-    /// **.com.au and .net.au**
+    /// **.au, .com.au, and .net.au**
+    ///
+    /// * `AU_REGISTRANT_NAME`
     ///
     /// * `AU_ID_NUMBER`
     ///
@@ -21,6 +23,105 @@ pub const ExtraParam = struct {
     /// * `ACN` (Australian company number)
     ///
     /// * `TM` (Trademark number)
+    ///
+    /// * `AU_ELIGIBILITY_TYPE`
+    ///
+    /// Valid values include the following:
+    ///
+    /// * CHARITABLE_TRUST (Charitable trust)
+    ///
+    /// * CHARITY (Charity)
+    ///
+    /// * CHILD_CARE_CENTRE (Child care centre)
+    ///
+    /// * CLUB (Club)
+    ///
+    /// * COMMERCIAL_STATUTORY_BODY (Commercial statutory body)
+    ///
+    /// * COMMONWEALTH_ENTITY (Commonwealth entity)
+    ///
+    /// * COMPANY (Company)
+    ///
+    /// * COMPANY_LIMITED_BY_GUARANTEE (Company limited by guarantee)
+    ///
+    /// * EDUCATIONAL_INSTITUTION (Educational institution)
+    ///
+    /// * GOVERNMENT_SCHOOL (Government school)
+    ///
+    /// * HIGHER_EDUCATION_INSTITUTION (Higher education institution)
+    ///
+    /// * INCORPORATED_ASSOCIATION (Incorporated association)
+    ///
+    /// * INDIGENOUS_CORPORATION (Indigenous corporation)
+    ///
+    /// * INDUSTRY_BODY (Industry body)
+    ///
+    /// * INDUSTRY_ORGANISATION (Industry association)
+    ///
+    /// * NATIONAL_BODY (National body)
+    ///
+    /// * NON_DISTRIBUTING_COOPERATIVE (Non-distributing cooperative)
+    ///
+    /// * NON_GOVERNMENT_SCHOOL (Non-government school)
+    ///
+    /// * NON_PROFIT_ORGANISATION (Non-profit organisation)
+    ///
+    /// * NON_TRADING_COOPERATIVE (Non-trading cooperative)
+    ///
+    /// * NOT_FOR_PROFIT_COMMUNITY_GROUP (Not-for-profit community group)
+    ///
+    /// * PARTNERSHIP (Partnership)
+    ///
+    /// * PEAK_STATE_TERRITORY_BODY (Peak state/territory body)
+    ///
+    /// * PENDING_TM_OWNER (Pending TM owner)
+    ///
+    /// * POLITICAL_PARTY (Political party)
+    ///
+    /// * PRESCHOOL (Pre-school)
+    ///
+    /// * PUBLIC_PRIVATE_ANCILLARY_FUND (Public/private ancillary fund)
+    ///
+    /// * REGISTERED_BUSINESS (Registered business)
+    ///
+    /// * REGISTERED_ORGANISATION (Registered organisation)
+    ///
+    /// * REGISTRABLE_BODY (Registrable body)
+    ///
+    /// * RESEARCH_ORGANISATION (Research organisation)
+    ///
+    /// * STATUTORY_BODY (Statutory body)
+    ///
+    /// * TRADE_UNION (Trade union)
+    ///
+    /// * TRADEMARK_OWNER (Trademark owner)
+    ///
+    /// * TRADING_COOPERATIVE (Trading cooperative)
+    ///
+    /// * TRAINING_ORGANISATION (Training organisation)
+    ///
+    /// * TRUST (Trust)
+    ///
+    /// * UNINCORPORATED_ASSOCIATION (Unincorporated association)
+    ///
+    /// * EDUCATION_AND_CARE_SERVICES_CHILDCARE (Education and care services (child
+    ///   care))
+    ///
+    /// * GOVERNMENT_BODY (Government body)
+    ///
+    /// * PROVIDER_OF_NON_ACCREDITED_TRAINING (Provider of non-accredited training)
+    ///
+    /// * RELIGIOUS_CHURCH_GROUP (Religious/church group)
+    ///
+    /// * SOLE_TRADER (Sole trader)
+    ///
+    /// * `AU_POLICY_REASON`
+    ///
+    /// Valid values include the following:
+    ///
+    /// * `POLICY_REASON_1`
+    ///
+    /// `POLICY_REASON_2`
     ///
     /// **.ca**
     ///

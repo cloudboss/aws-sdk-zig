@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const AudioFillerSettings = @import("audio_filler_settings.zig").AudioFillerSettings;
 const GenerativeAISettings = @import("generative_ai_settings.zig").GenerativeAISettings;
 const SpeechDetectionSensitivity = @import("speech_detection_sensitivity.zig").SpeechDetectionSensitivity;
 const SpeechRecognitionSettings = @import("speech_recognition_settings.zig").SpeechRecognitionSettings;
@@ -12,6 +13,13 @@ const VoiceSettings = @import("voice_settings.zig").VoiceSettings;
 const BotLocaleStatus = @import("bot_locale_status.zig").BotLocaleStatus;
 
 pub const CreateBotLocaleInput = struct {
+    /// Audio filler settings to configure for the new bot locale. When
+    /// enabled, Amazon Lex plays a brief background audio filler during
+    /// speech-to-speech interactions to mask processing delays. Requires
+    /// `unifiedSpeechSettings` (speech-to-speech) to be configured
+    /// on the bot locale.
+    audio_filler_settings: ?AudioFillerSettings = null,
+
     /// The identifier of the bot to create the locale for.
     bot_id: []const u8,
 
@@ -71,6 +79,7 @@ pub const CreateBotLocaleInput = struct {
     voice_settings: ?VoiceSettings = null,
 
     pub const json_field_names = .{
+        .audio_filler_settings = "audioFillerSettings",
         .bot_id = "botId",
         .bot_version = "botVersion",
         .description = "description",
@@ -85,6 +94,9 @@ pub const CreateBotLocaleInput = struct {
 };
 
 pub const CreateBotLocaleOutput = struct {
+    /// The audio filler settings configured for the created bot locale.
+    audio_filler_settings: ?AudioFillerSettings = null,
+
     /// The specified bot identifier.
     bot_id: ?[]const u8 = null,
 
@@ -143,6 +155,7 @@ pub const CreateBotLocaleOutput = struct {
     voice_settings: ?VoiceSettings = null,
 
     pub const json_field_names = .{
+        .audio_filler_settings = "audioFillerSettings",
         .bot_id = "botId",
         .bot_locale_status = "botLocaleStatus",
         .bot_version = "botVersion",
@@ -201,6 +214,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBotLocaleInput, c
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.audio_filler_settings) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"audioFillerSettings\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.description) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"description\":");

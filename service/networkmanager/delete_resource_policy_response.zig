@@ -1,0 +1,2 @@
+pub const DeleteResourcePolicyResponse = struct {
+};

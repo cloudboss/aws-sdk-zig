@@ -13,8 +13,6 @@ pub const HostInfoForCreate = struct {
     host_name: []const u8,
 
     /// The EC2 instance type that represents the host.
-    ///
-    /// Currently, Amazon EVS supports only the `i4i.metal` instance type.
     instance_type: InstanceType,
 
     /// The name of the SSH key that is used to access the host.

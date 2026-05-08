@@ -22,6 +22,7 @@ const CachePolicyQueryStringBehavior = @import("cache_policy_query_string_behavi
 const CachePolicyQueryStringsConfig = @import("cache_policy_query_strings_config.zig").CachePolicyQueryStringsConfig;
 const CachePolicySummary = @import("cache_policy_summary.zig").CachePolicySummary;
 const CachePolicyType = @import("cache_policy_type.zig").CachePolicyType;
+const CacheTagConfig = @import("cache_tag_config.zig").CacheTagConfig;
 const CachedMethods = @import("cached_methods.zig").CachedMethods;
 const Certificate = @import("certificate.zig").Certificate;
 const CertificateSource = @import("certificate_source.zig").CertificateSource;
@@ -2058,6 +2059,24 @@ pub fn deserializeCachePolicySummary(allocator: std.mem.Allocator, reader: *aws.
     return result;
 }
 
+pub fn deserializeCacheTagConfig(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !CacheTagConfig {
+    var result: CacheTagConfig = undefined;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "HeaderName")) {
+                    result.header_name = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
 pub fn deserializeCachedMethods(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !CachedMethods {
     var result: CachedMethods = undefined;
     while (try reader.next()) |event| {
@@ -2902,6 +2921,7 @@ pub fn deserializeDistributionConfig(allocator: std.mem.Allocator, reader: *aws.
     result.aliases = null;
     result.anycast_ip_list_id = null;
     result.cache_behaviors = null;
+    result.cache_tag_config = null;
     result.connection_function_association = null;
     result.connection_mode = null;
     result.continuous_deployment_policy_id = null;
@@ -2927,6 +2947,8 @@ pub fn deserializeDistributionConfig(allocator: std.mem.Allocator, reader: *aws.
                     result.anycast_ip_list_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "CacheBehaviors")) {
                     result.cache_behaviors = try deserializeCacheBehaviors(allocator, reader);
+                } else if (std.mem.eql(u8, e.local, "CacheTagConfig")) {
+                    result.cache_tag_config = try deserializeCacheTagConfig(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "CallerReference")) {
                     result.caller_reference = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Comment")) {
@@ -7315,6 +7337,12 @@ pub fn serializeCachePolicyQueryStringsConfig(allocator: std.mem.Allocator, buf:
     }
 }
 
+pub fn serializeCacheTagConfig(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: CacheTagConfig) !void {
+    try buf.appendSlice(allocator, "<HeaderName>");
+    try aws.xml.appendXmlEscaped(allocator, buf, value.header_name);
+    try buf.appendSlice(allocator, "</HeaderName>");
+}
+
 pub fn serializeCachedMethods(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: CachedMethods) !void {
     try buf.appendSlice(allocator, "<Items>");
     try serializeMethodsList(allocator, buf, value.items, "Method");
@@ -7697,6 +7725,11 @@ pub fn serializeDistributionConfig(allocator: std.mem.Allocator, buf: *std.Array
         try buf.appendSlice(allocator, "<CacheBehaviors>");
         try serializeCacheBehaviors(allocator, buf, v);
         try buf.appendSlice(allocator, "</CacheBehaviors>");
+    }
+    if (value.cache_tag_config) |v| {
+        try buf.appendSlice(allocator, "<CacheTagConfig>");
+        try serializeCacheTagConfig(allocator, buf, v);
+        try buf.appendSlice(allocator, "</CacheTagConfig>");
     }
     try buf.appendSlice(allocator, "<CallerReference>");
     try aws.xml.appendXmlEscaped(allocator, buf, value.caller_reference);

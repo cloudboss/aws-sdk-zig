@@ -219,6 +219,10 @@ pub const DescribeInstanceTypesInput = struct {
     /// configured for the instance type. For example, "1" or "1,2".
     filters: ?[]const Filter = null,
 
+    /// If `true`, the response includes instance types that are not supported
+    /// in the current Region, in addition to the supported types. Default: `false`.
+    include_unsupported_in_region: ?bool = null,
+
     /// The instance types.
     instance_types: ?[]const InstanceType = null,
 
@@ -304,6 +308,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeInstanceTypesIn
                 }
             }
         }
+    }
+    if (input.include_unsupported_in_region) |v| {
+        try body_buf.appendSlice(allocator, "&IncludeUnsupportedInRegion=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.instance_types) |list| {
         for (list, 0..) |item, idx| {

@@ -8,6 +8,10 @@ const Oauth2FlowType = @import("oauth_2_flow_type.zig").Oauth2FlowType;
 const SessionStatus = @import("session_status.zig").SessionStatus;
 
 pub const GetResourceOauth2TokenInput = struct {
+    /// The audiences to include in the token request. These are used to specify the
+    /// intended recipients of the OAuth2 token.
+    audiences: ?[]const []const u8 = null,
+
     /// A map of custom parameters to include in the authorization request to the
     /// resource credential provider. These parameters are in addition to the
     /// standard OAuth 2.0 flow parameters, and will not override them.
@@ -34,6 +38,10 @@ pub const GetResourceOauth2TokenInput = struct {
     /// workload identity.
     resource_oauth_2_return_url: ?[]const u8 = null,
 
+    /// The resources to include in the token request. These are used to specify the
+    /// target resources for which the OAuth2 token is being requested.
+    resources: ?[]const []const u8 = null,
+
     /// The OAuth scopes being requested.
     scopes: []const []const u8,
 
@@ -47,12 +55,14 @@ pub const GetResourceOauth2TokenInput = struct {
     workload_identity_token: []const u8,
 
     pub const json_field_names = .{
+        .audiences = "audiences",
         .custom_parameters = "customParameters",
         .custom_state = "customState",
         .force_authentication = "forceAuthentication",
         .oauth_2_flow = "oauth2Flow",
         .resource_credential_provider_name = "resourceCredentialProviderName",
         .resource_oauth_2_return_url = "resourceOauth2ReturnUrl",
+        .resources = "resources",
         .scopes = "scopes",
         .session_uri = "sessionUri",
         .workload_identity_token = "workloadIdentityToken",
@@ -121,6 +131,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetResourceOauth2TokenI
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.audiences) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"audiences\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.custom_parameters) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"customParameters\":");
@@ -150,6 +166,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetResourceOauth2TokenI
     if (input.resource_oauth_2_return_url) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"resourceOauth2ReturnUrl\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.resources) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"resources\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

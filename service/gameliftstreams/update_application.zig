@@ -114,6 +114,7 @@ pub const UpdateApplicationOutput = struct {
     /// * For Windows applications
     ///
     /// * Microsoft Windows Server 2022 Base (`Type=WINDOWS, Version=2022`)
+    /// * Proton 10.0-4 (`Type=PROTON, Version=20260204`)
     /// * Proton 9.0-2 (`Type=PROTON, Version=20250516`)
     /// * Proton 8.0-5 (`Type=PROTON, Version=20241007`)
     /// * Proton 8.0-2c (`Type=PROTON, Version=20230704`)

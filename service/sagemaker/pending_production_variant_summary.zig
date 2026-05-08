@@ -1,6 +1,7 @@
 const ProductionVariantAcceleratorType = @import("production_variant_accelerator_type.zig").ProductionVariantAcceleratorType;
 const ProductionVariantServerlessConfig = @import("production_variant_serverless_config.zig").ProductionVariantServerlessConfig;
 const DeployedImage = @import("deployed_image.zig").DeployedImage;
+const InstancePoolSummary = @import("instance_pool_summary.zig").InstancePoolSummary;
 const ProductionVariantInstanceType = @import("production_variant_instance_type.zig").ProductionVariantInstanceType;
 const ProductionVariantManagedInstanceScaling = @import("production_variant_managed_instance_scaling.zig").ProductionVariantManagedInstanceScaling;
 const ProductionVariantRoutingConfig = @import("production_variant_routing_config.zig").ProductionVariantRoutingConfig;
@@ -47,6 +48,10 @@ pub const PendingProductionVariantSummary = struct {
     /// [CreateEndpointConfig](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html) operation.
     desired_weight: ?f32 = null,
 
+    /// A list of instance pools for the production variant. Each pool indicates the
+    /// instance type and the current number of instances of that type.
+    instance_pools: ?[]const InstancePoolSummary = null,
+
     /// The type of instances associated with the variant.
     instance_type: ?ProductionVariantInstanceType = null,
 
@@ -74,6 +79,7 @@ pub const PendingProductionVariantSummary = struct {
         .desired_instance_count = "DesiredInstanceCount",
         .desired_serverless_config = "DesiredServerlessConfig",
         .desired_weight = "DesiredWeight",
+        .instance_pools = "InstancePools",
         .instance_type = "InstanceType",
         .managed_instance_scaling = "ManagedInstanceScaling",
         .routing_config = "RoutingConfig",

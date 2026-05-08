@@ -4,11 +4,13 @@ pub const AuthorizerType = enum {
     custom_jwt,
     aws_iam,
     none,
+    authenticate_only,
 
     pub const json_field_names = .{
         .custom_jwt = "CUSTOM_JWT",
         .aws_iam = "AWS_IAM",
         .none = "NONE",
+        .authenticate_only = "AUTHENTICATE_ONLY",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const AuthorizerType = enum {
             .custom_jwt => "CUSTOM_JWT",
             .aws_iam => "AWS_IAM",
             .none => "NONE",
+            .authenticate_only => "AUTHENTICATE_ONLY",
         };
     }
 

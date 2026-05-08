@@ -9,6 +9,7 @@ const LoggingInfo = @import("logging_info.zig").LoggingInfo;
 const OpenMonitoring = @import("open_monitoring.zig").OpenMonitoring;
 const Rebalancing = @import("rebalancing.zig").Rebalancing;
 const StorageMode = @import("storage_mode.zig").StorageMode;
+const ZookeeperAccess = @import("zookeeper_access.zig").ZookeeperAccess;
 
 /// Information about cluster attributes that can be updated via update APIs.
 pub const MutableClusterInfo = struct {
@@ -58,6 +59,9 @@ pub const MutableClusterInfo = struct {
     /// This controls storage mode for supported storage tiers.
     storage_mode: ?StorageMode = null,
 
+    /// Access control settings for zookeeper
+    zookeeper_access: ?ZookeeperAccess = null,
+
     pub const json_field_names = .{
         .broker_count_update_info = "BrokerCountUpdateInfo",
         .broker_ebs_volume_info = "BrokerEBSVolumeInfo",
@@ -73,5 +77,6 @@ pub const MutableClusterInfo = struct {
         .open_monitoring = "OpenMonitoring",
         .rebalancing = "Rebalancing",
         .storage_mode = "StorageMode",
+        .zookeeper_access = "ZookeeperAccess",
     };
 };

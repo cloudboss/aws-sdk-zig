@@ -103,6 +103,11 @@ pub const CreateContainerFleetInput = struct {
     /// If you set values manually, Amazon GameLift Servers no longer calculates a
     /// port range for you,
     /// even if you later remove the manual settings.
+    ///
+    /// The port range must not overlap with the Amazon GameLift Servers reserved
+    /// port range
+    /// `4092-4191`. This range is reserved for internal Amazon GameLift Servers
+    /// services.
     instance_connection_port_range: ?ConnectionPortRange = null,
 
     /// The IP address ranges and port settings that allow inbound traffic to access
@@ -136,6 +141,11 @@ pub const CreateContainerFleetInput = struct {
     /// If you set values manually, Amazon GameLift Servers no longer calculates a
     /// port range for you,
     /// even if you later remove the manual settings.
+    ///
+    /// The port range must not overlap with the Amazon GameLift Servers reserved
+    /// port range
+    /// `4092-4191`. This range is reserved for internal Amazon GameLift Servers
+    /// services.
     instance_inbound_permissions: ?[]const IpPermission = null,
 
     /// The Amazon EC2 instance type to use for all instances in the fleet. For

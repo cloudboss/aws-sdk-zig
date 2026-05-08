@@ -81,8 +81,8 @@ pub const GameSession = struct {
     /// session](https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession).
     game_session_data: ?[]const u8 = null,
 
-    /// A unique identifier for the game session. A game session ARN has the
-    /// following format:
+    /// An identifier for the game session that is unique across all regions. The
+    /// value is always a full ARN in the following format:
     /// `arn:aws:gamelift:::gamesession//`.
     game_session_id: ?[]const u8 = null,
 

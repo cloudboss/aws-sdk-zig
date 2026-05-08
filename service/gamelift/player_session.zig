@@ -47,8 +47,10 @@ pub const PlayerSession = struct {
     /// on.
     fleet_id: ?[]const u8 = null,
 
-    /// A unique identifier for the game session that the player session is
-    /// connected to.
+    /// An identifier for the game session that is unique across all regions that
+    /// the player session is connected to. The value is always a full ARN in the
+    /// following format:
+    /// `arn:aws:gamelift:::gamesession//`.
     game_session_id: ?[]const u8 = null,
 
     /// The IP address of the game session. To connect to a Amazon GameLift Servers

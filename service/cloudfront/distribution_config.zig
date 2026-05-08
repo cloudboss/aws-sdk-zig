@@ -1,5 +1,6 @@
 const Aliases = @import("aliases.zig").Aliases;
 const CacheBehaviors = @import("cache_behaviors.zig").CacheBehaviors;
+const CacheTagConfig = @import("cache_tag_config.zig").CacheTagConfig;
 const ConnectionFunctionAssociation = @import("connection_function_association.zig").ConnectionFunctionAssociation;
 const ConnectionMode = @import("connection_mode.zig").ConnectionMode;
 const CustomErrorResponses = @import("custom_error_responses.zig").CustomErrorResponses;
@@ -34,6 +35,21 @@ pub const DistributionConfig = struct {
 
     /// A complex type that contains zero or more `CacheBehavior` elements.
     cache_behaviors: ?CacheBehaviors = null,
+
+    /// Configuration for cache tag extraction from origin responses. When
+    /// specified, CloudFront reads the header named in `HeaderName` from origin
+    /// responses and stores the comma-separated values as cache tags on the object.
+    ///
+    /// Distributions without `CacheTagConfig` do not extract tags. When
+    /// `CacheTagConfig` is removed from a distribution via `UpdateDistribution`,
+    /// CloudFront stops extracting tags from origin responses.
+    ///
+    /// Changing the `HeaderName` on an existing distribution does not retroactively
+    /// affect previously cached objects. Tag-based invalidations will not apply to
+    /// objects already cached using a previous header. To ensure tag invalidations
+    /// function after updating the header name, use path-based invalidations to
+    /// recache all objects that use cache tags.
+    cache_tag_config: ?CacheTagConfig = null,
 
     /// A unique value (for example, a date-time stamp) that ensures that the
     /// request can't be replayed.

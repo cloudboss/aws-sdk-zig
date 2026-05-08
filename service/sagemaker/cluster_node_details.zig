@@ -1,4 +1,5 @@
 const ClusterCapacityType = @import("cluster_capacity_type.zig").ClusterCapacityType;
+const ClusterImageVersionStatus = @import("cluster_image_version_status.zig").ClusterImageVersionStatus;
 const ClusterInstanceStatusDetails = @import("cluster_instance_status_details.zig").ClusterInstanceStatusDetails;
 const ClusterInstanceStorageConfig = @import("cluster_instance_storage_config.zig").ClusterInstanceStorageConfig;
 const ClusterInstanceType = @import("cluster_instance_type.zig").ClusterInstanceType;
@@ -22,6 +23,9 @@ pub const ClusterNodeDetails = struct {
 
     /// The ID of the Amazon Machine Image (AMI) desired for the node.
     desired_image_id: ?[]const u8 = null,
+
+    /// The status of the image version for the cluster node.
+    image_version_status: ?ClusterImageVersionStatus = null,
 
     /// The instance group name in which the instance is.
     instance_group_name: ?[]const u8 = null,
@@ -91,6 +95,7 @@ pub const ClusterNodeDetails = struct {
         .capacity_type = "CapacityType",
         .current_image_id = "CurrentImageId",
         .desired_image_id = "DesiredImageId",
+        .image_version_status = "ImageVersionStatus",
         .instance_group_name = "InstanceGroupName",
         .instance_id = "InstanceId",
         .instance_status = "InstanceStatus",

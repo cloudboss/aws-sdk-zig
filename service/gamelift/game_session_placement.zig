@@ -52,9 +52,10 @@ pub const GameSessionPlacement = struct {
     ///   SearchGameSessions API results.
     game_properties: ?[]const GameProperty = null,
 
-    /// Identifier for the game session created by this placement request. This
-    /// identifier is
-    /// unique across all Regions. This value isn't final until placement status is
+    /// An identifier for the game session that is unique across all regions. The
+    /// value is always a full ARN in the following format:
+    /// `arn:aws:gamelift:::gamesession//`. This value is the same as
+    /// `GameSessionId`. This value isn't final until placement status is
     /// `FULFILLED`.
     game_session_arn: ?[]const u8 = null,
 
@@ -64,8 +65,10 @@ pub const GameSessionPlacement = struct {
     /// session](https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession).
     game_session_data: ?[]const u8 = null,
 
-    /// A unique identifier for the game session. This value isn't final until
-    /// placement status is
+    /// An identifier for the game session that is unique across all regions. The
+    /// value is always a full ARN in the following format:
+    /// `arn:aws:gamelift:::gamesession//`. This value is the same as
+    /// `GameSessionArn`. This value isn't final until placement status is
     /// `FULFILLED`.
     game_session_id: ?[]const u8 = null,
 

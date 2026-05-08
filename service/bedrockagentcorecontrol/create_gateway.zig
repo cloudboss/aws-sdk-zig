@@ -110,10 +110,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateGatewayInput, con
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"protocolType\":");
-    try aws.json.writeValue(@TypeOf(input.protocol_type), input.protocol_type, allocator, &body_buf);
-    has_prev = true;
+    if (input.protocol_type) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"protocolType\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"roleArn\":");
     try aws.json.writeValue(@TypeOf(input.role_arn), input.role_arn, allocator, &body_buf);

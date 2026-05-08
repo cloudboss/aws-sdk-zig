@@ -4,12 +4,54 @@ const std = @import("std");
 const CallOptions = @import("call_options.zig").CallOptions;
 const Client = @import("client.zig").Client;
 
+const get_agreement_entitlements = @import("get_agreement_entitlements.zig");
 const get_agreement_terms = @import("get_agreement_terms.zig");
 const list_agreement_cancellation_requests = @import("list_agreement_cancellation_requests.zig");
+const list_agreement_charges = @import("list_agreement_charges.zig");
 const list_agreement_invoice_line_items = @import("list_agreement_invoice_line_items.zig");
 const list_agreement_payment_requests = @import("list_agreement_payment_requests.zig");
 const list_billing_adjustment_requests = @import("list_billing_adjustment_requests.zig");
 const search_agreements = @import("search_agreements.zig");
+
+pub const GetAgreementEntitlementsPaginator = struct {
+    client: *Client,
+    params: get_agreement_entitlements.GetAgreementEntitlementsInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !get_agreement_entitlements.GetAgreementEntitlementsOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try get_agreement_entitlements.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
 
 pub const GetAgreementTermsPaginator = struct {
     client: *Client,
@@ -67,6 +109,46 @@ pub const ListAgreementCancellationRequestsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_agreement_cancellation_requests.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListAgreementChargesPaginator = struct {
+    client: *Client,
+    params: list_agreement_charges.ListAgreementChargesInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_agreement_charges.ListAgreementChargesOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_agreement_charges.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

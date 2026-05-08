@@ -17,7 +17,9 @@ const std = @import("std");
 ///
 /// **DONT_KNOW**
 ///
-/// Reserved for future use.
+/// The TLD registry didn't respond in time or didn't provide a definitive
+/// answer about domain transferability, which can occur due to registry
+/// maintenance or temporary delays.
 ///
 /// **DOMAIN_IN_OWN_ACCOUNT**
 ///

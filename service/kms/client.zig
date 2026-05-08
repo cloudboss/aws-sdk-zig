@@ -26,6 +26,7 @@ const generate_data_key_pair_without_plaintext = @import("generate_data_key_pair
 const generate_data_key_without_plaintext = @import("generate_data_key_without_plaintext.zig");
 const generate_mac = @import("generate_mac.zig");
 const generate_random = @import("generate_random.zig");
+const get_key_last_usage = @import("get_key_last_usage.zig");
 const get_key_policy = @import("get_key_policy.zig");
 const get_key_rotation_status = @import("get_key_rotation_status.zig");
 const get_parameters_for_import = @import("get_parameters_for_import.zig");
@@ -804,10 +805,13 @@ pub const Client = struct {
     /// keys](https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
     /// in the *Key Management Service Developer Guide*.
     ///
-    /// **Cross-account use**: Yes. If you use the `KeyId`
-    /// parameter to identify a KMS key in a different Amazon Web Services account,
-    /// specify the key ARN or the alias
-    /// ARN of the KMS key.
+    /// **Cross-account use**: Yes. To specify a KMS key
+    /// in a different Amazon Web Services account, use the [key
+    /// ARN](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN) or [alias
+    /// ARN](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-alias-ARN). A short [key ID](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id) is also acceptable
+    /// when decrypting symmetric ciphertexts, though using a full key ARN is
+    /// recommended
+    /// to be more explicit about the intended KMS key.
     ///
     /// **Required permissions**:
     /// [kms:Decrypt](https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html) (key policy)
@@ -2124,6 +2128,73 @@ pub const Client = struct {
         return generate_random.execute(self, allocator, input, options);
     }
 
+    /// Returns usage information about the last successful cryptographic operation
+    /// performed with a
+    /// specified KMS key, including the operation type, timestamp, and associated
+    /// CloudTrail event
+    /// ID.
+    ///
+    /// The `TrackingStartDate` in the `GetKeyLastUsage` response indicates
+    /// the date from which KMS began recording cryptographic activity for a given
+    /// key. Use this
+    /// value together with `KeyCreationDate` to understand the key's usage
+    /// history:
+    ///
+    /// * If the `KeyLastUsage` response element is *present*,
+    /// the key has been used for a successful cryptographic operation since the
+    /// `TrackingStartDate`. The response includes the operation type, timestamp,
+    /// and
+    /// associated CloudTrail event ID.
+    ///
+    /// * If the `KeyLastUsage` response element is *empty* and
+    /// `KeyCreationDate` is on or after `TrackingStartDate`, the key has
+    /// not been used for a successful cryptographic operation since it was created.
+    ///
+    /// * If the `KeyLastUsage` response element is *empty* and
+    /// `KeyCreationDate` is before `TrackingStartDate`, there is no record
+    /// of the key being used for a successful cryptographic operation since the
+    /// `TrackingStartDate`. However, the key may have been used before tracking
+    /// began. To determine whether the key was used before the `TrackingStartDate`,
+    /// examine your past CloudTrail logs.
+    ///
+    /// For multi-Region KMS keys, primary and replica keys track last usage
+    /// independently. Each
+    /// key in a multi-Region key set maintains its own usage information.
+    ///
+    /// The `ReEncrypt` operation uses two keys: a source key for decryption and a
+    /// destination key for encryption. Usage information is recorded for both keys
+    /// independently,
+    /// each with the CloudTrail event ID from the respective key owner's account.
+    ///
+    /// Do not use `GetKeyLastUsage` as the sole indicator when scheduling a key for
+    /// deletion. Instead, first [disable the
+    /// key](https://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html) and monitor CloudTrail for
+    /// `DisabledException` entries, as there could be infrequent workflows that are
+    /// dependent on the key. By looking for this exception, you can identify
+    /// potential dependencies
+    /// and workload failures before they occur.
+    ///
+    /// **Cross-account use**: No. You cannot perform this operation
+    /// on a KMS key in a different Amazon Web Services account.
+    ///
+    /// **Required permissions**:
+    /// [kms:GetKeyLastUsage](https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html) (key policy)
+    ///
+    /// **Related operations:**
+    ///
+    /// * DescribeKey
+    ///
+    /// * DisableKey
+    ///
+    /// * ScheduleKeyDeletion
+    ///
+    /// **Eventual consistency**: The KMS API follows an eventual consistency model.
+    /// For more information, see [KMS eventual
+    /// consistency](https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency).
+    pub fn getKeyLastUsage(self: *Self, allocator: std.mem.Allocator, input: get_key_last_usage.GetKeyLastUsageInput, options: CallOptions) !get_key_last_usage.GetKeyLastUsageOutput {
+        return get_key_last_usage.execute(self, allocator, input, options);
+    }
+
     /// Gets a key policy attached to the specified KMS key.
     ///
     /// **Cross-account use**: No. You cannot perform this operation on a KMS key in
@@ -2943,8 +3014,14 @@ pub const Client = struct {
     /// destination KMS key can be in different Amazon Web Services accounts. Either
     /// or both KMS keys can be in a
     /// different account than the caller. To specify a KMS key in a different
-    /// account, you must use
-    /// its key ARN or alias ARN.
+    /// account, use the [key
+    /// ARN](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN)
+    /// or [alias
+    /// ARN](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-alias-ARN). A short [key ID](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id)
+    /// is also acceptable for the source key when decrypting symmetric ciphertexts,
+    /// though
+    /// using a full key ARN is recommended to be more explicit about the intended
+    /// KMS key.
     ///
     /// **Required permissions**:
     ///
@@ -3664,8 +3741,12 @@ pub const Client = struct {
     /// name (`NewCustomKeyStoreName`), to tell KMS about a change to the
     /// `kmsuser` crypto user password (`KeyStorePassword`), or to associate
     /// the custom key store with a different, but related, CloudHSM cluster
-    /// (`CloudHsmClusterId`). To update any property of an CloudHSM key store, the
+    /// (`CloudHsmClusterId`). To update most properties of an CloudHSM key store,
+    /// the
     /// `ConnectionState` of the CloudHSM key store must be `DISCONNECTED`.
+    /// However, you can update the `CustomKeyStoreName` of an AWS CloudHSM key
+    /// store
+    /// when it is in the `CONNECTED` or `DISCONNECTED` state.
     ///
     /// For an external key store, you can use this operation to change the custom
     /// key store

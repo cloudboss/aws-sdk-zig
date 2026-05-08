@@ -4,6 +4,7 @@ const ForceEndpointErrorConfiguration = @import("force_endpoint_error_configurat
 const ListHlsManifestConfiguration = @import("list_hls_manifest_configuration.zig").ListHlsManifestConfiguration;
 const ListLowLatencyHlsManifestConfiguration = @import("list_low_latency_hls_manifest_configuration.zig").ListLowLatencyHlsManifestConfiguration;
 const ListMssManifestConfiguration = @import("list_mss_manifest_configuration.zig").ListMssManifestConfiguration;
+const UriSeparator = @import("uri_separator.zig").UriSeparator;
 
 /// The configuration of the origin endpoint.
 pub const OriginEndpointListConfiguration = struct {
@@ -57,6 +58,9 @@ pub const OriginEndpointListConfiguration = struct {
     /// in the AWS Region and channel.
     origin_endpoint_name: []const u8,
 
+    /// The separator character used in generated URIs for this origin endpoint.
+    uri_separator: ?UriSeparator = null,
+
     pub const json_field_names = .{
         .arn = "Arn",
         .channel_group_name = "ChannelGroupName",
@@ -71,5 +75,6 @@ pub const OriginEndpointListConfiguration = struct {
         .modified_at = "ModifiedAt",
         .mss_manifests = "MssManifests",
         .origin_endpoint_name = "OriginEndpointName",
+        .uri_separator = "UriSeparator",
     };
 };

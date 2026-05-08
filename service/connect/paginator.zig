@@ -11,6 +11,7 @@ const get_metric_data = @import("get_metric_data.zig");
 const get_metric_data_v2 = @import("get_metric_data_v2.zig");
 const list_agent_statuses = @import("list_agent_statuses.zig");
 const list_approved_origins = @import("list_approved_origins.zig");
+const list_attached_files_configurations = @import("list_attached_files_configurations.zig");
 const list_authentication_profiles = @import("list_authentication_profiles.zig");
 const list_bots = @import("list_bots.zig");
 const list_child_hours_of_operations = @import("list_child_hours_of_operations.zig");
@@ -346,6 +347,46 @@ pub const ListApprovedOriginsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_approved_origins.execute(self.client, allocator, self.params, options);
+
+        if (output.next_token) |token| {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = self.client.allocator.dupe(u8, token) catch null;
+        } else {
+            if (self.next_token) |old| {
+                self.client.allocator.free(old);
+            }
+            self.next_token = null;
+            self.done = true;
+        }
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListAttachedFilesConfigurationsPaginator = struct {
+    client: *Client,
+    params: list_attached_files_configurations.ListAttachedFilesConfigurationsInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_attached_files_configurations.ListAttachedFilesConfigurationsOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_attached_files_configurations.execute(self.client, allocator, self.params, options);
 
         if (output.next_token) |token| {
             if (self.next_token) |old| {

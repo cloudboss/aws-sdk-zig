@@ -24,7 +24,9 @@ pub const GameSessionConnectionInfo = struct {
     /// you must use the DNS name, not the IP address.
     dns_name: ?[]const u8 = null,
 
-    /// A unique identifier for the game session. Use the game session ID.
+    /// An identifier for the game session that is unique across all regions. The
+    /// value is always a full ARN in the following format:
+    /// `arn:aws:gamelift:::gamesession//`.
     game_session_arn: ?[]const u8 = null,
 
     /// The IP address of the game session. To connect to a Amazon GameLift Servers

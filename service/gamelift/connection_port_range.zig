@@ -3,6 +3,11 @@
 /// ports are used by inbound traffic to connect with processes that are running
 /// in
 /// containers on the fleet.
+///
+/// The port range must not overlap with the Amazon GameLift Servers reserved
+/// port range
+/// `4092-4191`. This range is reserved for internal Amazon GameLift Servers
+/// services.
 pub const ConnectionPortRange = struct {
     /// Starting value for the port range.
     from_port: i32,

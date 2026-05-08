@@ -11,7 +11,7 @@ const serde = @import("serde.zig");
 pub const ModifyManagedResourceVisibilityInput = struct {
     /// The default visibility setting for managed resources. Valid values:
     /// `hidden` | `visible`.
-    default_visibility: ?ManagedResourceDefaultVisibility = null,
+    default_visibility: ManagedResourceDefaultVisibility,
 
     /// Checks whether you have the required permissions for the operation, without
     /// actually making the
@@ -59,10 +59,8 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyManagedResourceVi
     var body_buf: std.ArrayList(u8) = .empty;
 
     try body_buf.appendSlice(allocator, "Action=ModifyManagedResourceVisibility&Version=2016-11-15");
-    if (input.default_visibility) |v| {
-        try body_buf.appendSlice(allocator, "&DefaultVisibility=");
-        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
-    }
+    try body_buf.appendSlice(allocator, "&DefaultVisibility=");
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.default_visibility.wireName());
     if (input.dry_run) |v| {
         try body_buf.appendSlice(allocator, "&DryRun=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");

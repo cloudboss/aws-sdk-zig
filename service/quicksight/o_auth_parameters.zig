@@ -4,6 +4,12 @@ const VpcConnectionProperties = @import("vpc_connection_properties.zig").VpcConn
 /// connection that uses OAuth client credentials. This option is available for
 /// data source connections that are made with Snowflake and Starburst.
 pub const OAuthParameters = struct {
+    /// The S3 URI of the identity provider's CA certificates bundle in PEM format.
+    /// Use this parameter to provide a custom CA certificate bundle for the
+    /// identity provider when the default trust store does not include the required
+    /// certificates.
+    identity_provider_ca_certificates_bundle_s3_uri: ?[]const u8 = null,
+
     /// The resource uri of the identity provider.
     identity_provider_resource_uri: ?[]const u8 = null,
 
@@ -16,6 +22,7 @@ pub const OAuthParameters = struct {
     token_provider_url: []const u8,
 
     pub const json_field_names = .{
+        .identity_provider_ca_certificates_bundle_s3_uri = "IdentityProviderCACertificatesBundleS3Uri",
         .identity_provider_resource_uri = "IdentityProviderResourceUri",
         .identity_provider_vpc_connection_properties = "IdentityProviderVpcConnectionProperties",
         .o_auth_scope = "OAuthScope",

@@ -1,3 +1,4 @@
+pub const AccountState = @import("account_state.zig").AccountState;
 pub const AlternateContact = @import("alternate_contact.zig").AlternateContact;
 pub const AlternateContactType = @import("alternate_contact_type.zig").AlternateContactType;
 pub const AwsAccountState = @import("aws_account_state.zig").AwsAccountState;

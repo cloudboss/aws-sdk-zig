@@ -26,8 +26,7 @@ pub const CancelAgreementPaymentRequestOutput = struct {
     /// The amount that was requested to be charged.
     charge_amount: ?[]const u8 = null,
 
-    /// The date and time when the payment request was originally created, in ISO
-    /// 8601 format.
+    /// The date and time when the payment request was originally created.
     created_at: ?i64 = null,
 
     /// The currency code for the charge amount.
@@ -45,8 +44,7 @@ pub const CancelAgreementPaymentRequestOutput = struct {
     /// The updated status of the payment request, which is `CANCELLED`.
     status: ?PaymentRequestStatus = null,
 
-    /// The date and time when the payment request was cancelled, in ISO 8601
-    /// format.
+    /// The date and time when the payment request was cancelled.
     updated_at: ?i64 = null,
 
     pub const json_field_names = .{
@@ -148,6 +146,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
         return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

@@ -120,6 +120,9 @@ pub const InstanceTypeInfo = struct {
     /// Guide*.
     supported_boot_modes: ?[]const BootModeType = null,
 
+    /// Indicates whether the instance type is supported in the current Region.
+    supported_in_region: ?bool = null,
+
     /// The supported root device types.
     supported_root_device_types: ?[]const RootDeviceType = null,
 

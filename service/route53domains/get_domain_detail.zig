@@ -94,9 +94,7 @@ pub const GetDomainDetailOutput = struct {
     /// Reserved for future use.
     registry_domain_id: ?[]const u8 = null,
 
-    /// Reseller of the domain. Domains registered or transferred using Route 53
-    /// domains will
-    /// have `"Amazon"` as the reseller.
+    /// Reserved for future use.
     reseller: ?[]const u8 = null,
 
     /// An array of domain name status codes, also known as Extensible Provisioning
@@ -261,6 +259,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "OperationLimitExceeded")) {
         return .{ .arena = arena, .kind = .{ .operation_limit_exceeded = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TLDInMaintenance")) {
+        return .{ .arena = arena, .kind = .{ .tld_in_maintenance = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

@@ -108,6 +108,7 @@ const delete_workspace = @import("delete_workspace.zig");
 const delete_workspace_media = @import("delete_workspace_media.zig");
 const delete_workspace_page = @import("delete_workspace_page.zig");
 const describe_agent_status = @import("describe_agent_status.zig");
+const describe_attached_files_configuration = @import("describe_attached_files_configuration.zig");
 const describe_authentication_profile = @import("describe_authentication_profile.zig");
 const describe_contact = @import("describe_contact.zig");
 const describe_contact_evaluation = @import("describe_contact_evaluation.zig");
@@ -181,6 +182,7 @@ const list_analytics_data_associations = @import("list_analytics_data_associatio
 const list_analytics_data_lake_data_sets = @import("list_analytics_data_lake_data_sets.zig");
 const list_approved_origins = @import("list_approved_origins.zig");
 const list_associated_contacts = @import("list_associated_contacts.zig");
+const list_attached_files_configurations = @import("list_attached_files_configurations.zig");
 const list_authentication_profiles = @import("list_authentication_profiles.zig");
 const list_bots = @import("list_bots.zig");
 const list_child_hours_of_operations = @import("list_child_hours_of_operations.zig");
@@ -306,6 +308,7 @@ const transfer_contact = @import("transfer_contact.zig");
 const untag_contact = @import("untag_contact.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_agent_status = @import("update_agent_status.zig");
+const update_attached_files_configuration = @import("update_attached_files_configuration.zig");
 const update_authentication_profile = @import("update_authentication_profile.zig");
 const update_contact = @import("update_contact.zig");
 const update_contact_attributes = @import("update_contact_attributes.zig");
@@ -1495,6 +1498,16 @@ pub const Client = struct {
         return describe_agent_status.execute(self, allocator, input, options);
     }
 
+    /// Describes the attached files configuration for the specified Amazon Connect
+    /// instance and attachment scope.
+    ///
+    /// If a custom configuration exists for the specified attachment scope, the
+    /// custom configuration is returned. If no custom configuration exists, the
+    /// default configuration values for that attachment scope are returned.
+    pub fn describeAttachedFilesConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_attached_files_configuration.DescribeAttachedFilesConfigurationInput, options: CallOptions) !describe_attached_files_configuration.DescribeAttachedFilesConfigurationOutput {
+        return describe_attached_files_configuration.execute(self, allocator, input, options);
+    }
+
     /// This API is in preview release for Amazon Connect and is subject to change.
     /// To
     /// request access to this API, contact Amazon Web Services Support.
@@ -2310,6 +2323,16 @@ pub const Client = struct {
     /// a unique identifier.
     pub fn listAssociatedContacts(self: *Self, allocator: std.mem.Allocator, input: list_associated_contacts.ListAssociatedContactsInput, options: CallOptions) !list_associated_contacts.ListAssociatedContactsOutput {
         return list_associated_contacts.execute(self, allocator, input, options);
+    }
+
+    /// Provides summary information about the attached files configurations for the
+    /// specified Amazon Connect instance.
+    ///
+    /// This API returns effective configurations (custom overrides or defaults) for
+    /// each attachment scope. If no custom configuration exists for a scope, the
+    /// default configuration values are returned.
+    pub fn listAttachedFilesConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_attached_files_configurations.ListAttachedFilesConfigurationsInput, options: CallOptions) !list_attached_files_configurations.ListAttachedFilesConfigurationsOutput {
+        return list_attached_files_configurations.execute(self, allocator, input, options);
     }
 
     /// This API is in preview release for Amazon Connect and is subject to change.
@@ -3637,6 +3660,16 @@ pub const Client = struct {
         return update_agent_status.execute(self, allocator, input, options);
     }
 
+    /// Updates the attached files configuration for the specified Amazon Connect
+    /// instance and attachment scope.
+    ///
+    /// If no instance-specific configuration exists, this operation creates one.
+    /// Partial updates are supported—only specified fields are updated, while
+    /// unspecified fields retain their current values.
+    pub fn updateAttachedFilesConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_attached_files_configuration.UpdateAttachedFilesConfigurationInput, options: CallOptions) !update_attached_files_configuration.UpdateAttachedFilesConfigurationOutput {
+        return update_attached_files_configuration.execute(self, allocator, input, options);
+    }
+
     /// This API is in preview release for Amazon Connect and is subject to change.
     /// To
     /// request access to this API, contact Amazon Web Services Support.
@@ -4276,6 +4309,13 @@ pub const Client = struct {
     }
 
     pub fn listApprovedOriginsPaginator(self: *Self, params: list_approved_origins.ListApprovedOriginsInput) paginator.ListApprovedOriginsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listAttachedFilesConfigurationsPaginator(self: *Self, params: list_attached_files_configurations.ListAttachedFilesConfigurationsInput) paginator.ListAttachedFilesConfigurationsPaginator {
         return .{
             .client = self,
             .params = params,

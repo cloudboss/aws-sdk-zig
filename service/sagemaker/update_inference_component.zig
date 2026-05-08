@@ -23,11 +23,19 @@ pub const UpdateInferenceComponentInput = struct {
     /// including the model, container, and compute resources.
     specification: ?InferenceComponentSpecification = null,
 
+    /// A list of specification objects for the inference component, one per
+    /// instance type. Use this parameter when you want to specify different model
+    /// or resource configurations for the inference component on each instance
+    /// type. You can use either this parameter or the singular `Specification`
+    /// parameter, but not both.
+    specifications: ?[]const InferenceComponentSpecification = null,
+
     pub const json_field_names = .{
         .deployment_config = "DeploymentConfig",
         .inference_component_name = "InferenceComponentName",
         .runtime_config = "RuntimeConfig",
         .specification = "Specification",
+        .specifications = "Specifications",
     };
 };
 

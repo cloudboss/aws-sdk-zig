@@ -1,5 +1,6 @@
 const aws = @import("aws");
 
+const CompositeSliConfig = @import("composite_sli_config.zig").CompositeSliConfig;
 const DependencyConfig = @import("dependency_config.zig").DependencyConfig;
 const EvaluationType = @import("evaluation_type.zig").EvaluationType;
 const MetricSource = @import("metric_source.zig").MetricSource;
@@ -10,6 +11,10 @@ const MetricSourceType = @import("metric_source_type.zig").MetricSourceType;
 pub const ServiceLevelObjectiveSummary = struct {
     /// The ARN of this service level objective.
     arn: []const u8,
+
+    /// The composite SLI configuration for service-level SLOs that monitor multiple
+    /// operations of a service.
+    composite_sli_config: ?CompositeSliConfig = null,
 
     /// The date and time that this service level objective was created. It is
     /// expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
@@ -59,6 +64,7 @@ pub const ServiceLevelObjectiveSummary = struct {
 
     pub const json_field_names = .{
         .arn = "Arn",
+        .composite_sli_config = "CompositeSliConfig",
         .created_time = "CreatedTime",
         .dependency_config = "DependencyConfig",
         .evaluation_type = "EvaluationType",

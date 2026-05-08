@@ -7,8 +7,10 @@ const ServiceError = @import("errors.zig").ServiceError;
 const PlayerConnectionDetail = @import("player_connection_detail.zig").PlayerConnectionDetail;
 
 pub const GetPlayerConnectionDetailsInput = struct {
-    /// A unique identifier for the game session for which to retrieve player
-    /// connection details.
+    /// An identifier for the game session that is unique across all regions for
+    /// which to retrieve player connection details. The value is always a full ARN
+    /// in the following format:
+    /// `arn:aws:gamelift:::gamesession//`.
     game_session_id: []const u8,
 
     /// List of unique identifiers for players. Connection details are returned for
@@ -22,8 +24,10 @@ pub const GetPlayerConnectionDetailsInput = struct {
 };
 
 pub const GetPlayerConnectionDetailsOutput = struct {
-    /// A unique identifier for the game session for which the player connection
-    /// details were retrieved.
+    /// An identifier for the game session that is unique across all regions for
+    /// which the player connection details were retrieved. The value is always a
+    /// full ARN in the following format:
+    /// `arn:aws:gamelift:::gamesession//`.
     game_session_id: ?[]const u8 = null,
 
     /// A collection of player connection detail objects, one for each requested

@@ -37,7 +37,7 @@ pub const GetMonitorOutput = struct {
     /// authenticating monitor users.
     identity_center_instance_arn: []const u8,
 
-    /// The AWS region where IAM Identity Center is enabled.
+    /// The AWS Region where IAM Identity Center is enabled.
     identity_center_region: ?[]const u8 = null,
 
     /// The unique identifier for the monitor.

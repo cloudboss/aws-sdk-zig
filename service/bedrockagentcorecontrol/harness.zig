@@ -50,7 +50,8 @@ pub const Harness = struct {
     /// per invocation.
     max_iterations: ?i32 = null,
 
-    /// The maximum number of tokens allowed before exiting per invocation.
+    /// The maximum total number of output tokens the agent can generate across all
+    /// model calls within a single invocation.
     max_tokens: ?i32 = null,
 
     /// AgentCore Memory instance configuration for short and long term memory.

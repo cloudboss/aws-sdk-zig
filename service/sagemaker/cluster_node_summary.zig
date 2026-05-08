@@ -1,3 +1,4 @@
+const ClusterImageVersionStatus = @import("cluster_image_version_status.zig").ClusterImageVersionStatus;
 const ClusterInstanceStatusDetails = @import("cluster_instance_status_details.zig").ClusterInstanceStatusDetails;
 const ClusterInstanceType = @import("cluster_instance_type.zig").ClusterInstanceType;
 const UltraServerInfo = @import("ultra_server_info.zig").UltraServerInfo;
@@ -5,6 +6,9 @@ const UltraServerInfo = @import("ultra_server_info.zig").UltraServerInfo;
 /// Lists a summary of the properties of an instance (also called a *node*
 /// interchangeably) of a SageMaker HyperPod cluster.
 pub const ClusterNodeSummary = struct {
+    /// The status of the image version for the cluster node.
+    image_version_status: ?ClusterImageVersionStatus = null,
+
     /// The name of the instance group in which the instance is.
     instance_group_name: []const u8,
 
@@ -38,6 +42,7 @@ pub const ClusterNodeSummary = struct {
     ultra_server_info: ?UltraServerInfo = null,
 
     pub const json_field_names = .{
+        .image_version_status = "ImageVersionStatus",
         .instance_group_name = "InstanceGroupName",
         .instance_id = "InstanceId",
         .instance_status = "InstanceStatus",

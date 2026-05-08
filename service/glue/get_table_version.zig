@@ -4,9 +4,12 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const AuditContext = @import("audit_context.zig").AuditContext;
 const TableVersion = @import("table_version.zig").TableVersion;
 
 pub const GetTableVersionInput = struct {
+    audit_context: ?AuditContext = null,
+
     /// The ID of the Data Catalog where the tables reside. If none is provided, the
     /// Amazon Web Services account
     /// ID is used by default.
@@ -25,6 +28,7 @@ pub const GetTableVersionInput = struct {
     version_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .audit_context = "AuditContext",
         .catalog_id = "CatalogId",
         .database_name = "DatabaseName",
         .table_name = "TableName",

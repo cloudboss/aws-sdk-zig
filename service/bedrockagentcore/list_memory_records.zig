@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const MemoryMetadataFilterExpression = @import("memory_metadata_filter_expression.zig").MemoryMetadataFilterExpression;
 const MemoryRecordSummary = @import("memory_record_summary.zig").MemoryRecordSummary;
 
 pub const ListMemoryRecordsInput = struct {
@@ -18,6 +19,9 @@ pub const ListMemoryRecordsInput = struct {
     /// The memory strategy identifier to filter memory records by. If specified,
     /// only memory records with this strategy ID are returned.
     memory_strategy_id: ?[]const u8 = null,
+
+    /// A list of metadata filter expressions to scope the returned memory records.
+    metadata_filters: ?[]const MemoryMetadataFilterExpression = null,
 
     /// The namespace prefix to filter memory records by. Returns all memory records
     /// in namespaces that start with the provided prefix.
@@ -35,6 +39,7 @@ pub const ListMemoryRecordsInput = struct {
         .max_results = "maxResults",
         .memory_id = "memoryId",
         .memory_strategy_id = "memoryStrategyId",
+        .metadata_filters = "metadataFilters",
         .namespace = "namespace",
         .namespace_path = "namespacePath",
         .next_token = "nextToken",
@@ -104,6 +109,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListMemoryRecordsInput,
     if (input.memory_strategy_id) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"memoryStrategyId\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.metadata_filters) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"metadataFilters\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

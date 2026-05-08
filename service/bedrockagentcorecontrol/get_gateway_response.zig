@@ -53,7 +53,7 @@ pub const GetGatewayResponse = struct {
     protocol_configuration: ?GatewayProtocolConfiguration = null,
 
     /// Protocol applied to a gateway.
-    protocol_type: GatewayProtocolType,
+    protocol_type: GatewayProtocolType = .mcp,
 
     /// The IAM role ARN that provides permissions for the gateway.
     role_arn: ?[]const u8 = null,

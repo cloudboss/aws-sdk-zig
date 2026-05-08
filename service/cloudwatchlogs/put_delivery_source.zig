@@ -7,6 +7,12 @@ const ServiceError = @import("errors.zig").ServiceError;
 const DeliverySource = @import("delivery_source.zig").DeliverySource;
 
 pub const PutDeliverySourceInput = struct {
+    /// A map of key-value pairs to configure the delivery source. Both keys and
+    /// values must be
+    /// between 1 and 255 characters in length. For example,
+    /// `{"samplingRate": "50"}`.
+    delivery_source_configuration: ?[]const aws.map.StringMapEntry = null,
+
     /// Defines the type of log that the source is sending.
     ///
     /// * For Amazon Bedrock Agents, the valid values are `APPLICATION_LOGS` and
@@ -57,8 +63,8 @@ pub const PutDeliverySourceInput = struct {
     ///
     /// * For Network Load Balancer, the valid value is `NLB_ACCESS_LOGS`.
     ///
-    /// * For PCS, the valid values are `PCS_SCHEDULER_LOGS` and
-    /// `PCS_JOBCOMP_LOGS`.
+    /// * For PCS, the valid values are `PCS_SCHEDULER_LOGS`,
+    /// `PCS_JOBCOMP_LOGS`, and `PCS_SCHEDULER_AUDIT_LOGS`.
     ///
     /// * For Quick, the valid values are `CHAT_LOGS` and
     /// `FEEDBACK_LOGS`.
@@ -70,6 +76,9 @@ pub const PutDeliverySourceInput = struct {
     /// `SYNC_JOB_LOGS`.
     ///
     /// * For Amazon Web Services Security Hub CSPM, the valid value is
+    /// `SECURITY_FINDING_LOGS`.
+    ///
+    /// * For Amazon Web Services Security Hub, the valid value is
     /// `SECURITY_FINDING_LOGS`.
     ///
     /// * For Amazon SES mail manager, the valid values are
@@ -95,8 +104,10 @@ pub const PutDeliverySourceInput = struct {
     /// `arn:aws:workmail:us-east-1:123456789012:organization/m-1234EXAMPLEabcd1234abcd1234abcd1234`
     ///
     /// For the `SECURITY_FINDING_LOGS` logType, use a wildcard ARN for the hub
-    /// resource. For example,
+    /// resource. For Amazon Web Services Security Hub CSPM, use
     /// `arn:aws:securityhub:us-east-1:111122223333:hub/*`
+    /// and for Amazon Web Services Security Hub, use
+    /// `arn:aws:securityhub:us-east-1:111122223333:hubv2/*`
     resource_arn: []const u8,
 
     /// An optional list of key-value pairs to associate with the resource.
@@ -106,6 +117,7 @@ pub const PutDeliverySourceInput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
+        .delivery_source_configuration = "deliverySourceConfiguration",
         .log_type = "logType",
         .name = "name",
         .resource_arn = "resourceArn",

@@ -54,9 +54,7 @@ pub const UpdateCustomKeyStoreInput = struct {
     /// Do not include confidential or sensitive information in this field. This
     /// field may be displayed in plaintext in CloudTrail logs and other output.
     ///
-    /// To change this value, an CloudHSM key store must be disconnected. An
-    /// external key store can
-    /// be connected or disconnected.
+    /// To change this value, the custom key store can be connected or disconnected.
     new_custom_key_store_name: ?[]const u8 = null,
 
     /// Changes the credentials that KMS uses to sign requests to the external key

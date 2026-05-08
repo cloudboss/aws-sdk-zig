@@ -23,6 +23,10 @@ pub const Application = struct {
     /// The description of the application.
     description: ?[]const u8 = null,
 
+    /// The ARN of the identity store that is connected to the instance of IAM
+    /// Identity Center.
+    identity_store_arn: ?[]const u8 = null,
+
     /// The ARN of the instance of IAM Identity Center that is configured with this
     /// application.
     instance_arn: ?[]const u8 = null,
@@ -45,6 +49,7 @@ pub const Application = struct {
         .created_date = "CreatedDate",
         .created_from = "CreatedFrom",
         .description = "Description",
+        .identity_store_arn = "IdentityStoreArn",
         .instance_arn = "InstanceArn",
         .name = "Name",
         .portal_options = "PortalOptions",

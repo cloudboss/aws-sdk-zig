@@ -55,6 +55,12 @@ pub const DescribeInferenceComponentOutput = struct {
     /// Details about the resources that are deployed with this inference component.
     specification: ?InferenceComponentSpecificationSummary = null,
 
+    /// A list of specification summaries for the inference component, one per
+    /// instance type. This parameter is populated when the inference component was
+    /// created with multiple specifications. When this parameter is populated, the
+    /// singular `Specification` parameter is not returned.
+    specifications: ?[]const InferenceComponentSpecificationSummary = null,
+
     /// The name of the production variant that hosts the inference component.
     variant_name: ?[]const u8 = null,
 
@@ -70,6 +76,7 @@ pub const DescribeInferenceComponentOutput = struct {
         .last_modified_time = "LastModifiedTime",
         .runtime_config = "RuntimeConfig",
         .specification = "Specification",
+        .specifications = "Specifications",
         .variant_name = "VariantName",
     };
 };

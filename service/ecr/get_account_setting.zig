@@ -21,7 +21,7 @@ pub const GetAccountSettingOutput = struct {
 
     /// The setting value for the setting name. Valid value for basic scan type:
     /// `AWS_NATIVE`.
-    /// Valid values for registry policy scope: `V1` or `V2`.
+    /// Valid values for registry policy scope: `V2`.
     /// Valid values for blob mounting: `ENABLED` or `DISABLED`.
     value: ?[]const u8 = null,
 

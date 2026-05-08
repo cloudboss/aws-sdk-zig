@@ -1,4 +1,5 @@
 const AccessEndpoint = @import("access_endpoint.zig").AccessEndpoint;
+const AgentAccessConfig = @import("agent_access_config.zig").AgentAccessConfig;
 const ApplicationSettingsResponse = @import("application_settings_response.zig").ApplicationSettingsResponse;
 const ContentRedirection = @import("content_redirection.zig").ContentRedirection;
 const StackError = @import("stack_error.zig").StackError;
@@ -12,6 +13,9 @@ pub const Stack = struct {
     /// the stack can connect to WorkSpaces Applications only through the specified
     /// endpoints.
     access_endpoints: ?[]const AccessEndpoint = null,
+
+    /// The agent access configuration of the stack, if agent access is enabled.
+    agent_access_config: ?AgentAccessConfig = null,
 
     /// The persistent application settings for users of the stack.
     application_settings: ?ApplicationSettingsResponse = null,
@@ -64,6 +68,7 @@ pub const Stack = struct {
 
     pub const json_field_names = .{
         .access_endpoints = "AccessEndpoints",
+        .agent_access_config = "AgentAccessConfig",
         .application_settings = "ApplicationSettings",
         .arn = "Arn",
         .content_redirection = "ContentRedirection",

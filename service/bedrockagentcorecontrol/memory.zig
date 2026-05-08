@@ -1,3 +1,4 @@
+const IndexedKey = @import("indexed_key.zig").IndexedKey;
 const MemoryStatus = @import("memory_status.zig").MemoryStatus;
 const MemoryStrategy = @import("memory_strategy.zig").MemoryStrategy;
 const StreamDeliveryResources = @import("stream_delivery_resources.zig").StreamDeliveryResources;
@@ -25,6 +26,10 @@ pub const Memory = struct {
     /// The unique identifier of the memory.
     id: []const u8,
 
+    /// The indexed metadata keys for this memory. Only indexed keys can be used in
+    /// metadata filters.
+    indexed_keys: ?[]const IndexedKey = null,
+
     /// The ARN of the IAM role that provides permissions for the memory.
     memory_execution_role_arn: ?[]const u8 = null,
 
@@ -51,6 +56,7 @@ pub const Memory = struct {
         .event_expiry_duration = "eventExpiryDuration",
         .failure_reason = "failureReason",
         .id = "id",
+        .indexed_keys = "indexedKeys",
         .memory_execution_role_arn = "memoryExecutionRoleArn",
         .name = "name",
         .status = "status",

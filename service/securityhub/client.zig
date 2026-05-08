@@ -54,6 +54,7 @@ const enable_import_findings_for_product = @import("enable_import_findings_for_p
 const enable_organization_admin_account = @import("enable_organization_admin_account.zig");
 const enable_security_hub = @import("enable_security_hub.zig");
 const enable_security_hub_v2 = @import("enable_security_hub_v2.zig");
+const generate_recommended_policy_v2 = @import("generate_recommended_policy_v2.zig");
 const get_administrator_account = @import("get_administrator_account.zig");
 const get_aggregator_v2 = @import("get_aggregator_v2.zig");
 const get_automation_rule_v2 = @import("get_automation_rule_v2.zig");
@@ -72,6 +73,7 @@ const get_insights = @import("get_insights.zig");
 const get_invitations_count = @import("get_invitations_count.zig");
 const get_master_account = @import("get_master_account.zig");
 const get_members = @import("get_members.zig");
+const get_recommended_policy_v2 = @import("get_recommended_policy_v2.zig");
 const get_resources_statistics_v2 = @import("get_resources_statistics_v2.zig");
 const get_resources_trends_v2 = @import("get_resources_trends_v2.zig");
 const get_resources_v2 = @import("get_resources_v2.zig");
@@ -811,6 +813,13 @@ pub const Client = struct {
         return enable_security_hub_v2.execute(self, allocator, input, options);
     }
 
+    /// Begins the recommended policy generation to remediate a Security Hub
+    /// finding.
+    /// `GenerateRecommendedPolicyV2` only supports findings for unused permissions.
+    pub fn generateRecommendedPolicyV2(self: *Self, allocator: std.mem.Allocator, input: generate_recommended_policy_v2.GenerateRecommendedPolicyV2Input, options: CallOptions) !generate_recommended_policy_v2.GenerateRecommendedPolicyV2Output {
+        return generate_recommended_policy_v2.execute(self, allocator, input, options);
+    }
+
     /// Provides the details for the Security Hub CSPM administrator account for the
     /// current member account.
     ///
@@ -994,6 +1003,12 @@ pub const Client = struct {
     /// were invited manually.
     pub fn getMembers(self: *Self, allocator: std.mem.Allocator, input: get_members.GetMembersInput, options: CallOptions) !get_members.GetMembersOutput {
         return get_members.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the recommended policy to remediate a Security Hub finding.
+    /// `GetRecommendedPolicyV2` only supports findings for unused permissions.
+    pub fn getRecommendedPolicyV2(self: *Self, allocator: std.mem.Allocator, input: get_recommended_policy_v2.GetRecommendedPolicyV2Input, options: CallOptions) !get_recommended_policy_v2.GetRecommendedPolicyV2Output {
+        return get_recommended_policy_v2.execute(self, allocator, input, options);
     }
 
     /// Retrieves statistical information about Amazon Web Services resources and
@@ -1370,6 +1385,13 @@ pub const Client = struct {
     }
 
     pub fn getInsightsPaginator(self: *Self, params: get_insights.GetInsightsInput) paginator.GetInsightsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn getRecommendedPolicyV2Paginator(self: *Self, params: get_recommended_policy_v2.GetRecommendedPolicyV2Input) paginator.GetRecommendedPolicyV2Paginator {
         return .{
             .client = self,
             .params = params,

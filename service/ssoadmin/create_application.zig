@@ -65,8 +65,21 @@ pub const CreateApplicationOutput = struct {
     /// Specifies the ARN of the application.
     application_arn: ?[]const u8 = null,
 
+    /// The ARN of the identity store that is connected to the instance of IAM
+    /// Identity Center.
+    identity_store_arn: ?[]const u8 = null,
+
+    /// The ARN of the instance of IAM Identity Center under which the operation
+    /// will run. For more information about ARNs, see [Amazon Resource Names (ARNs)
+    /// and Amazon Web Services Service
+    /// Namespaces](/general/latest/gr/aws-arns-and-namespaces.html) in the *Amazon
+    /// Web Services General Reference*.
+    instance_arn: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .application_arn = "ApplicationArn",
+        .identity_store_arn = "IdentityStoreArn",
+        .instance_arn = "InstanceArn",
     };
 };
 

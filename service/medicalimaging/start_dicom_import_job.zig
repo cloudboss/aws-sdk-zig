@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const ImportConfiguration = @import("import_configuration.zig").ImportConfiguration;
 const JobStatus = @import("job_status.zig").JobStatus;
 
 pub const StartDICOMImportJobInput = struct {
@@ -16,6 +17,9 @@ pub const StartDICOMImportJobInput = struct {
 
     /// The data store identifier.
     datastore_id: []const u8,
+
+    /// The import configuration for the import job.
+    import_configuration: ?ImportConfiguration = null,
 
     /// The account ID of the source S3 bucket owner.
     input_owner_account_id: ?[]const u8 = null,
@@ -35,6 +39,7 @@ pub const StartDICOMImportJobInput = struct {
         .client_token = "clientToken",
         .data_access_role_arn = "dataAccessRoleArn",
         .datastore_id = "datastoreId",
+        .import_configuration = "importConfiguration",
         .input_owner_account_id = "inputOwnerAccountId",
         .input_s3_uri = "inputS3Uri",
         .job_name = "jobName",
@@ -110,6 +115,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartDICOMImportJobInpu
     try body_buf.appendSlice(allocator, "\"dataAccessRoleArn\":");
     try aws.json.writeValue(@TypeOf(input.data_access_role_arn), input.data_access_role_arn, allocator, &body_buf);
     has_prev = true;
+    if (input.import_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"importConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.input_owner_account_id) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"inputOwnerAccountId\":");

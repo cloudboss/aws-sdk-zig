@@ -14,9 +14,15 @@ pub const CreateAdConfigurationInput = struct {
     /// Ad configuration name. Defaults to “”.
     name: ?[]const u8 = null,
 
+    /// Array of 1-50 maps, each of the form `string:string (key:value)`. See [Best
+    /// practices and
+    /// strategies](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html) in *Tagging Amazon Web Services Resources and Tag Editor* for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
     pub const json_field_names = .{
         .media_tailor_playback_configurations = "mediaTailorPlaybackConfigurations",
         .name = "name",
+        .tags = "tags",
     };
 };
 
@@ -71,6 +77,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAdConfigurationIn
     if (input.name) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"name\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.tags) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"tags\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

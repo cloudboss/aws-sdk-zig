@@ -447,6 +447,7 @@ pub const MediaConnectFlow = @import("media_connect_flow.zig").MediaConnectFlow;
 pub const MediaConnectFlowRequest = @import("media_connect_flow_request.zig").MediaConnectFlowRequest;
 pub const MediaConnectRouterContainerSettings = @import("media_connect_router_container_settings.zig").MediaConnectRouterContainerSettings;
 pub const MediaConnectRouterGroupSettings = @import("media_connect_router_group_settings.zig").MediaConnectRouterGroupSettings;
+pub const MediaConnectRouterOutputConnection = @import("media_connect_router_output_connection.zig").MediaConnectRouterOutputConnection;
 pub const MediaConnectRouterOutputConnectionMap = @import("media_connect_router_output_connection_map.zig").MediaConnectRouterOutputConnectionMap;
 pub const MediaConnectRouterOutputDestinationSettings = @import("media_connect_router_output_destination_settings.zig").MediaConnectRouterOutputDestinationSettings;
 pub const MediaConnectRouterOutputEncryptionType = @import("media_connect_router_output_encryption_type.zig").MediaConnectRouterOutputEncryptionType;

@@ -143,7 +143,9 @@ pub const Client = struct {
 
     /// Deletes all dashboards that you specify. You can specify up to 100
     /// dashboards to
-    /// delete. If there is an error during this call, no dashboards are deleted.
+    /// delete. If there is an error during this call, the operation attempts to
+    /// delete as many
+    /// dashboards as possible.
     pub fn deleteDashboards(self: *Self, allocator: std.mem.Allocator, input: delete_dashboards.DeleteDashboardsInput, options: CallOptions) !delete_dashboards.DeleteDashboardsOutput {
         return delete_dashboards.execute(self, allocator, input, options);
     }
@@ -535,7 +537,7 @@ pub const Client = struct {
     /// whether CloudWatch vended metrics are enriched with resource ARN and
     /// resource tag
     /// labels and queryable using PromQL. For the list of supported resources, see
-    /// [Supported AWS infrastructure
+    /// [Supported Amazon Web Services infrastructure
     /// metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html).
     pub fn getOTelEnrichment(self: *Self, allocator: std.mem.Allocator, input: get_o_tel_enrichment.GetOTelEnrichmentInput, options: CallOptions) !get_o_tel_enrichment.GetOTelEnrichmentOutput {
         return get_o_tel_enrichment.execute(self, allocator, input, options);
@@ -608,9 +610,8 @@ pub const Client = struct {
         return list_metrics.execute(self, allocator, input, options);
     }
 
-    /// Displays the tags associated with a CloudWatch resource. Currently, alarms
-    /// and
-    /// Contributor Insights rules support tagging.
+    /// Displays the tags associated with a CloudWatch resource. Currently, alarms,
+    /// dashboards, metric streams and Contributor Insights rules support tagging.
     pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
@@ -1035,7 +1036,7 @@ pub const Client = struct {
     }
 
     /// Enables enrichment and PromQL access for CloudWatch vended metrics for
-    /// [supported AWS
+    /// [supported Amazon Web Services
     /// resources](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html) in the account. Once enabled, metrics that
     /// contain a resource identifier dimension (for example, EC2
     /// `CPUUtilization` with an `InstanceId` dimension) are enriched
@@ -1056,7 +1057,7 @@ pub const Client = struct {
     }
 
     /// Disables enrichment and PromQL access for CloudWatch vended metrics for
-    /// [supported AWS
+    /// [supported Amazon Web Services
     /// resources](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html) in the account. After disabling, these metrics
     /// are no longer enriched with resource ARN and resource tag labels, and cannot
     /// be
@@ -1067,9 +1068,9 @@ pub const Client = struct {
 
     /// Assigns one or more tags (key-value pairs) to the specified CloudWatch
     /// resource.
-    /// Currently, the only CloudWatch resources that can be tagged are alarms and
-    /// Contributor
-    /// Insights rules.
+    /// Currently, the only CloudWatch resources that can be tagged are alarms,
+    /// dashboards,
+    /// metric streams and Contributor Insights rules.
     ///
     /// Tags can help you organize and categorize your resources. You can also use
     /// them to
@@ -1095,7 +1096,9 @@ pub const Client = struct {
         return tag_resource.execute(self, allocator, input, options);
     }
 
-    /// Removes one or more tags from the specified resource.
+    /// Removes one or more tags from the specified resource. Currently, alarms,
+    /// dashboards,
+    /// metric streams and Contributor Insights rules support tagging.
     pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }

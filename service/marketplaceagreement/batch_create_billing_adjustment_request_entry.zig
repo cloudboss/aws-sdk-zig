@@ -7,10 +7,7 @@ pub const BatchCreateBillingAdjustmentRequestEntry = struct {
     /// currency of the invoice.
     adjustment_amount: []const u8,
 
-    /// The reason code for the billing adjustment. Valid values include
-    /// `INCORRECT_TERMS_ACCEPTED`, `INCORRECT_METERING`,
-    /// `TEST_ENVIRONMENT_CHARGES`, `ALTERNATIVE_PROCUREMENT_CHANNEL`,
-    /// `UNINTENDED_RENEWAL`, `BUYER_DISSATISFACTION`, and `OTHER`.
+    /// The reason code for the billing adjustment.
     adjustment_reason_code: BillingAdjustmentReasonCode,
 
     /// The unique identifier of the agreement associated with the invoice.
@@ -20,7 +17,8 @@ pub const BatchCreateBillingAdjustmentRequestEntry = struct {
     /// idempotency of the request.
     client_token: []const u8,
 
-    /// The 3-letter ISO 4217 currency code for the adjustment amount (e.g., `USD`).
+    /// The 3-letter ISO 4217 currency code for the adjustment amount. Must match
+    /// the currency code of the offer associated with the agreement (e.g., `USD`).
     currency_code: []const u8,
 
     /// An optional detailed description of the adjustment reason.

@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const IncludedData = @import("included_data.zig").IncludedData;
 const EvaluatorConfig = @import("evaluator_config.zig").EvaluatorConfig;
 const EvaluatorLevel = @import("evaluator_level.zig").EvaluatorLevel;
 const EvaluatorStatus = @import("evaluator_status.zig").EvaluatorStatus;
@@ -13,8 +14,17 @@ pub const GetEvaluatorInput = struct {
     /// evaluator ID (e.g., Builtin.Helpfulness) or a custom evaluator ID.
     evaluator_id: []const u8,
 
+    /// Controls which data is returned in the response. `ALL_DATA` (default)
+    /// returns the full evaluator including decrypted instructions and rating
+    /// scale. For evaluators encrypted with a customer managed KMS key, this
+    /// requires `kms:Decrypt` permission on the key. `METADATA_ONLY` returns
+    /// evaluator metadata and model configuration without instructions or rating
+    /// scale, and does not require any KMS permissions.
+    included_data: ?IncludedData = null,
+
     pub const json_field_names = .{
         .evaluator_id = "evaluatorId",
+        .included_data = "includedData",
     };
 };
 
@@ -38,6 +48,11 @@ pub const GetEvaluatorOutput = struct {
     /// The name of the evaluator.
     evaluator_name: []const u8,
 
+    /// The Amazon Resource Name (ARN) of the customer managed KMS key used to
+    /// encrypt the evaluator's sensitive data. This field is only present for
+    /// evaluators encrypted with a customer managed key.
+    kms_key_arn: ?[]const u8 = null,
+
     /// The evaluation level (`TOOL_CALL`, `TRACE`, or `SESSION`) that determines
     /// the scope of evaluation.
     level: EvaluatorLevel,
@@ -59,6 +74,7 @@ pub const GetEvaluatorOutput = struct {
         .evaluator_config = "evaluatorConfig",
         .evaluator_id = "evaluatorId",
         .evaluator_name = "evaluatorName",
+        .kms_key_arn = "kmsKeyArn",
         .level = "level",
         .locked_for_modification = "lockedForModification",
         .status = "status",
@@ -101,6 +117,16 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetEvaluatorInput, conf
     try path_buf.appendSlice(allocator, input.evaluator_id);
     const path = try path_buf.toOwnedSlice(allocator);
 
+    var query_buf: std.ArrayList(u8) = .empty;
+    var query_has_prev = false;
+    if (input.included_data) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "includedData=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
+        query_has_prev = true;
+    }
+    const query = try query_buf.toOwnedSlice(allocator);
+
     const body: ?[]const u8 = null;
 
     var request = aws.http.Request.init(ep.host);
@@ -109,6 +135,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetEvaluatorInput, conf
     request.tls = ep.tls;
     request.port = ep.port;
     request.body = body;
+    request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;

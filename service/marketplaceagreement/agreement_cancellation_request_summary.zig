@@ -16,8 +16,7 @@ pub const AgreementCancellationRequestSummary = struct {
     /// The catalog in which the agreement was created.
     catalog: ?[]const u8 = null,
 
-    /// The date and time when the cancellation request was created, as a POSIX
-    /// timestamp (Unix epoch seconds).
+    /// The date and time when the cancellation request was created.
     created_at: ?i64 = null,
 
     /// The reason code provided for the cancellation.
@@ -28,8 +27,7 @@ pub const AgreementCancellationRequestSummary = struct {
     /// `VALIDATION_FAILED`.
     status: ?AgreementCancellationRequestStatus = null,
 
-    /// The date and time when the cancellation request was last updated, as a POSIX
-    /// timestamp (Unix epoch seconds).
+    /// The date and time when the cancellation request was last updated.
     updated_at: ?i64 = null,
 
     pub const json_field_names = .{

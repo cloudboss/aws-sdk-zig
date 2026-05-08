@@ -4,9 +4,7 @@ const OutputLocationRef = @import("output_location_ref.zig").OutputLocationRef;
 
 /// Media Connect Router Output Settings
 pub const MediaConnectRouterOutputSettings = struct {
-    /// Shows the MediaConnect Router Inputs that are connected to this output. This
-    /// parameter is purely informative, and editing it will have no effect. To
-    /// connect or disconnect MediaConnect Router Inputs, go to MediaConnect.
+    /// This parameter is deprecated and unused.
     connected_router_inputs: ?MediaConnectRouterOutputConnectionMap = null,
 
     container_settings: MediaConnectRouterContainerSettings,

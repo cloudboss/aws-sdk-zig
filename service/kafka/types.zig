@@ -125,4 +125,5 @@ pub const VpcConnectivityIam = @import("vpc_connectivity_iam.zig").VpcConnectivi
 pub const VpcConnectivitySasl = @import("vpc_connectivity_sasl.zig").VpcConnectivitySasl;
 pub const VpcConnectivityScram = @import("vpc_connectivity_scram.zig").VpcConnectivityScram;
 pub const VpcConnectivityTls = @import("vpc_connectivity_tls.zig").VpcConnectivityTls;
+pub const ZookeeperAccess = @import("zookeeper_access.zig").ZookeeperAccess;
 pub const ZookeeperNodeInfo = @import("zookeeper_node_info.zig").ZookeeperNodeInfo;

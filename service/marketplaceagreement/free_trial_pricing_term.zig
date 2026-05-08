@@ -10,12 +10,16 @@ pub const FreeTrialPricingTerm = struct {
     /// execution.
     grants: ?[]const GrantItem = null,
 
+    /// The unique identifier for the terms.
+    id: ?[]const u8 = null,
+
     /// Category of the term.
     @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .duration = "duration",
         .grants = "grants",
+        .id = "id",
         .@"type" = "type",
     };
 };

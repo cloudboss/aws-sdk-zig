@@ -28,6 +28,7 @@ pub const RouteVehicleNoticeCode = enum {
     violated_turn_restriction,
     violated_vehicle_restriction,
     violated_zone_restriction,
+    travel_time_exceeds_driver_work_hours,
 
     pub const json_field_names = .{
         .accurate_polyline_unavailable = "AccuratePolylineUnavailable",
@@ -57,6 +58,7 @@ pub const RouteVehicleNoticeCode = enum {
         .violated_turn_restriction = "ViolatedTurnRestriction",
         .violated_vehicle_restriction = "ViolatedVehicleRestriction",
         .violated_zone_restriction = "ViolatedZoneRestriction",
+        .travel_time_exceeds_driver_work_hours = "TravelTimeExceedsDriverWorkHours",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -88,6 +90,7 @@ pub const RouteVehicleNoticeCode = enum {
             .violated_turn_restriction => "ViolatedTurnRestriction",
             .violated_vehicle_restriction => "ViolatedVehicleRestriction",
             .violated_zone_restriction => "ViolatedZoneRestriction",
+            .travel_time_exceeds_driver_work_hours => "TravelTimeExceedsDriverWorkHours",
         };
     }
 

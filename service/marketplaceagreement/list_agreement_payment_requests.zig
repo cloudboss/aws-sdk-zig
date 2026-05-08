@@ -23,8 +23,7 @@ pub const ListAgreementPaymentRequestsInput = struct {
     /// (1-50). Default is 50.
     max_results: ?i32 = null,
 
-    /// A token to specify where to start pagination. Use the `nextToken` value from
-    /// a previous response to retrieve the next page of results.
+    /// A token to specify where to start pagination.
     next_token: ?[]const u8 = null,
 
     /// The party type for the payment requests. Required parameter. Use `Proposer`
@@ -53,8 +52,8 @@ pub const ListAgreementPaymentRequestsOutput = struct {
     /// about each payment request.
     items: ?[]const PaymentRequestSummary = null,
 
-    /// A token to retrieve the next page of results. If `null`, there are no more
-    /// results to retrieve.
+    /// The token used for pagination. The field is `null` if there are no more
+    /// results.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -148,6 +147,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
         return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

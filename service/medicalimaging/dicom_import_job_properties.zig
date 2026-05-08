@@ -1,3 +1,4 @@
+const ImportConfiguration = @import("import_configuration.zig").ImportConfiguration;
 const JobStatus = @import("job_status.zig").JobStatus;
 
 /// Properties of the import job.
@@ -11,6 +12,9 @@ pub const DICOMImportJobProperties = struct {
 
     /// The timestamp for when the import job was ended.
     ended_at: ?i64 = null,
+
+    /// The object containing `DicomJsonMetadataImportConfiguration`.
+    import_configuration: ?ImportConfiguration = null,
 
     /// The input prefix path for the S3 bucket that contains the DICOM P10 files to
     /// be imported.
@@ -39,6 +43,7 @@ pub const DICOMImportJobProperties = struct {
         .data_access_role_arn = "dataAccessRoleArn",
         .datastore_id = "datastoreId",
         .ended_at = "endedAt",
+        .import_configuration = "importConfiguration",
         .input_s3_uri = "inputS3Uri",
         .job_id = "jobId",
         .job_name = "jobName",

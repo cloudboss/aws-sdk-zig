@@ -7,6 +7,9 @@ pub const PaymentScheduleTerm = struct {
     /// Defines the currency for the prices mentioned in the term.
     currency_code: ?[]const u8 = null,
 
+    /// The unique identifier for the term.
+    id: ?[]const u8 = null,
+
     /// List of the payment schedule where each element defines one installment of
     /// payment. It contains the information necessary for calculating the price.
     schedule: ?[]const ScheduleItem = null,
@@ -16,6 +19,7 @@ pub const PaymentScheduleTerm = struct {
 
     pub const json_field_names = .{
         .currency_code = "currencyCode",
+        .id = "id",
         .schedule = "schedule",
         .@"type" = "type",
     };

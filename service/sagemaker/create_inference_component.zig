@@ -22,6 +22,13 @@ pub const CreateInferenceComponentInput = struct {
     /// including the model, container, and compute resources.
     specification: ?InferenceComponentSpecification = null,
 
+    /// A list of specification objects for the inference component, one per
+    /// instance type. Use this parameter when you want to deploy a different model
+    /// or resource configuration for the inference component on each instance type.
+    /// You can use either this parameter or the singular `Specification` parameter,
+    /// but not both.
+    specifications: ?[]const InferenceComponentSpecification = null,
+
     /// A list of key-value pairs associated with the model. For more information,
     /// see [Tagging Amazon Web Services
     /// resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
@@ -37,6 +44,7 @@ pub const CreateInferenceComponentInput = struct {
         .inference_component_name = "InferenceComponentName",
         .runtime_config = "RuntimeConfig",
         .specification = "Specification",
+        .specifications = "Specifications",
         .tags = "Tags",
         .variant_name = "VariantName",
     };

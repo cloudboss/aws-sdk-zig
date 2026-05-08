@@ -19073,6 +19073,7 @@ pub fn deserializeInstanceTypeInfo(allocator: std.mem.Allocator, reader: *aws.xm
     result.processor_info = null;
     result.reboot_migration_support = null;
     result.supported_boot_modes = null;
+    result.supported_in_region = null;
     result.supported_root_device_types = null;
     result.supported_usage_classes = null;
     result.supported_virtualization_types = null;
@@ -19134,6 +19135,8 @@ pub fn deserializeInstanceTypeInfo(allocator: std.mem.Allocator, reader: *aws.xm
                     result.reboot_migration_support = RebootMigrationSupport.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "supportedBootModes")) {
                     result.supported_boot_modes = try deserializeBootModeTypeList(allocator, reader, "item");
+                } else if (std.mem.eql(u8, e.local, "supportedInRegion")) {
+                    result.supported_in_region = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "supportedRootDeviceTypes")) {
                     result.supported_root_device_types = try deserializeRootDeviceTypeList(allocator, reader, "item");
                 } else if (std.mem.eql(u8, e.local, "supportedUsageClasses")) {

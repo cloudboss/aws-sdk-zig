@@ -34,6 +34,7 @@ pub const JobType = @import("job_type.zig").JobType;
 pub const MatchGroup = @import("match_group.zig").MatchGroup;
 pub const MatchPurpose = @import("match_purpose.zig").MatchPurpose;
 pub const MatchedRecord = @import("matched_record.zig").MatchedRecord;
+pub const MatchingConfig = @import("matching_config.zig").MatchingConfig;
 pub const MatchingWorkflowSummary = @import("matching_workflow_summary.zig").MatchingWorkflowSummary;
 pub const NamespaceProviderProperties = @import("namespace_provider_properties.zig").NamespaceProviderProperties;
 pub const NamespaceRuleBasedProperties = @import("namespace_rule_based_properties.zig").NamespaceRuleBasedProperties;

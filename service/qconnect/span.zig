@@ -41,6 +41,9 @@ pub const Span = struct {
     /// Span completion status
     status: SpanStatus,
 
+    /// Human-readable error description when status is ERROR or TIMEOUT
+    status_description: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .assistant_id = "assistantId",
         .attributes = "attributes",
@@ -54,5 +57,6 @@ pub const Span = struct {
         .span_type = "spanType",
         .start_timestamp = "startTimestamp",
         .status = "status",
+        .status_description = "statusDescription",
     };
 };

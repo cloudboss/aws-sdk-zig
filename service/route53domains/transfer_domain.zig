@@ -46,13 +46,15 @@ pub const TransferDomainInput = struct {
     /// `example.com`.
     domain_name: []const u8,
 
-    /// The number of years that you want to register the domain for. Domains are
-    /// registered
-    /// for a minimum of one year. The maximum period depends on the top-level
-    /// domain.
+    /// Reserved for future use.
+    ///
+    /// Currently, the effect of a domain transfer on the registration period varies
+    /// by TLD. For information about how transferring a domain affects the
+    /// expiration date, see the Transfer Term column in the pricing information at
+    /// [Amazon Route 53 Pricing](http://aws.amazon.com/route53/pricing/).
     ///
     /// Default: 1
-    duration_in_years: i32,
+    duration_in_years: ?i32 = null,
 
     /// Reserved for future use.
     idn_lang_code: ?[]const u8 = null,
@@ -241,6 +243,12 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     }
     if (std.mem.eql(u8, error_code, "OperationLimitExceeded")) {
         return .{ .arena = arena, .kind = .{ .operation_limit_exceeded = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "TLDInMaintenance")) {
+        return .{ .arena = arena, .kind = .{ .tld_in_maintenance = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

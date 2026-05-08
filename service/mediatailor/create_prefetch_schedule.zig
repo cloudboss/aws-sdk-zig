@@ -106,7 +106,7 @@ pub const CreatePrefetchScheduleOutput = struct {
     /// prefetch schedules for the playback configuration, regardless of `StreamId`.
     stream_id: ?[]const u8 = null,
 
-    /// The tags to assign to the prefetch schedule. Tags are key-value pairs that
+    /// The tags assigned to the prefetch schedule. Tags are key-value pairs that
     /// you can associate with Amazon resources to help with organization, access
     /// control, and cost tracking. For more information, see [Tagging AWS Elemental
     /// MediaTailor

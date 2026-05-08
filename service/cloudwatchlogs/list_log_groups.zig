@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 const DataSourceFilter = @import("data_source_filter.zig").DataSourceFilter;
 const LogGroupClass = @import("log_group_class.zig").LogGroupClass;
+const TagFilter = @import("tag_filter.zig").TagFilter;
 const LogGroupSummary = @import("log_group_summary.zig").LogGroupSummary;
 
 pub const ListLogGroupsInput = struct {
@@ -77,6 +78,11 @@ pub const ListLogGroupsInput = struct {
     /// many as five times, and include the `|` symbol as many as four times.
     log_group_name_pattern: ?[]const u8 = null,
 
+    /// An array of tag filters to return only log groups that have specific tags.
+    /// Multiple
+    /// filters are combined with AND logic.
+    log_group_tags: ?[]const TagFilter = null,
+
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -87,6 +93,7 @@ pub const ListLogGroupsInput = struct {
         .limit = "limit",
         .log_group_class = "logGroupClass",
         .log_group_name_pattern = "logGroupNamePattern",
+        .log_group_tags = "logGroupTags",
         .next_token = "nextToken",
     };
 };

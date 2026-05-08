@@ -5,34 +5,9 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
 
-pub const DeleteResourcePolicyInput = struct {
-    /// The Amazon Resource Name (ARN) of the End User Messaging SMS resource you're
-    /// deleting the resource-based policy from.
-    resource_arn: []const u8,
+pub const DeleteResourcePolicyInput = @import("delete_resource_policy_request.zig").DeleteResourcePolicyRequest;
 
-    pub const json_field_names = .{
-        .resource_arn = "ResourceArn",
-    };
-};
-
-pub const DeleteResourcePolicyOutput = struct {
-    /// The time when the resource-based policy was created, in [UNIX epoch
-    /// time](https://www.epochconverter.com/) format.
-    created_timestamp: ?i64 = null,
-
-    /// The JSON formatted resource-based policy that was deleted.
-    policy: ?[]const u8 = null,
-
-    /// The Amazon Resource Name (ARN) of the End User Messaging SMS resource that
-    /// the resource-based policy was deleted from.
-    resource_arn: ?[]const u8 = null,
-
-    pub const json_field_names = .{
-        .created_timestamp = "CreatedTimestamp",
-        .policy = "Policy",
-        .resource_arn = "ResourceArn",
-    };
-};
+pub const DeleteResourcePolicyOutput = @import("delete_resource_policy_result.zig").DeleteResourcePolicyResult;
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteResourcePolicyInput, options: CallOptions) !DeleteResourcePolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

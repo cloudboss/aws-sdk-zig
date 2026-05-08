@@ -55,7 +55,7 @@ pub const CreateGatewayResponse = struct {
     protocol_configuration: ?GatewayProtocolConfiguration = null,
 
     /// The protocol type of the gateway.
-    protocol_type: GatewayProtocolType,
+    protocol_type: GatewayProtocolType = .mcp,
 
     /// The Amazon Resource Name (ARN) of the IAM role associated with the gateway.
     role_arn: ?[]const u8 = null,

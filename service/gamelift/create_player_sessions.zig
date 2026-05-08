@@ -7,7 +7,9 @@ const ServiceError = @import("errors.zig").ServiceError;
 const PlayerSession = @import("player_session.zig").PlayerSession;
 
 pub const CreatePlayerSessionsInput = struct {
-    /// A unique identifier for the game session to add players to.
+    /// An identifier for the game session that is unique across all regions to add
+    /// players to. The value is always a full ARN in the following format:
+    /// `arn:aws:gamelift:::gamesession//`.
     game_session_id: []const u8,
 
     /// Map of string pairs, each specifying a player ID and a set of

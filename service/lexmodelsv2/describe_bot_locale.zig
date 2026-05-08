@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const ServiceError = @import("errors.zig").ServiceError;
+const AudioFillerSettings = @import("audio_filler_settings.zig").AudioFillerSettings;
 const BotLocaleHistoryEvent = @import("bot_locale_history_event.zig").BotLocaleHistoryEvent;
 const BotLocaleStatus = @import("bot_locale_status.zig").BotLocaleStatus;
 const GenerativeAISettings = @import("generative_ai_settings.zig").GenerativeAISettings;
@@ -33,6 +34,9 @@ pub const DescribeBotLocaleInput = struct {
 };
 
 pub const DescribeBotLocaleOutput = struct {
+    /// The audio filler settings configured for the bot locale.
+    audio_filler_settings: ?AudioFillerSettings = null,
+
     /// The identifier of the bot associated with the locale.
     bot_id: ?[]const u8 = null,
 
@@ -107,6 +111,7 @@ pub const DescribeBotLocaleOutput = struct {
     voice_settings: ?VoiceSettings = null,
 
     pub const json_field_names = .{
+        .audio_filler_settings = "audioFillerSettings",
         .bot_id = "botId",
         .bot_locale_history_events = "botLocaleHistoryEvents",
         .bot_locale_status = "botLocaleStatus",
