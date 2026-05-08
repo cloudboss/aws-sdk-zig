@@ -98,6 +98,7 @@ pub const Client = struct {
     io: std.Io,
     env_map: *const std.process.Environ.Map,
     endpoint: []const u8,
+    endpoint_info: url_mod.EndpointInfo,
     token_ttl: u32,
     http_client: http.HttpClient,
 
@@ -122,11 +123,14 @@ pub const Client = struct {
         env_map: *const std.process.Environ.Map,
         options: Options,
     ) !Self {
+        const endpoint = try resolveEndpoint(env_map, options);
         return .{
             .allocator = allocator,
             .io = io,
             .env_map = env_map,
-            .endpoint = try resolveEndpoint(env_map, options),
+            .endpoint = endpoint,
+            .endpoint_info = url_mod.parseEndpoint(endpoint) catch
+                return error.InvalidEndpoint,
             .token_ttl = options.token_ttl,
             .http_client = try http.HttpClient.init(allocator, io, env_map, .{
                 .request_options = .{
@@ -254,7 +258,7 @@ pub const Client = struct {
         const ttl_str = try std.fmt.allocPrint(self.allocator, "{d}", .{self.token_ttl});
         defer self.allocator.free(ttl_str);
 
-        const ep = url_mod.parseEndpoint(self.endpoint) catch return error.RequestFailed;
+        const ep = self.endpoint_info;
 
         var request = http.Request.init(ep.host);
         defer request.deinit(self.allocator);
@@ -323,7 +327,7 @@ pub const Client = struct {
 
     /// Inner GET request (used by doGetRequest for retry logic)
     fn doGetRequestInner(self: *Self, path: []const u8, token: []const u8, options: CallOptions) ![]const u8 {
-        const ep = url_mod.parseEndpoint(self.endpoint) catch return error.RequestFailed;
+        const ep = self.endpoint_info;
 
         var request = http.Request.init(ep.host);
         defer request.deinit(self.allocator);
