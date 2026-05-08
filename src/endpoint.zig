@@ -116,6 +116,18 @@ pub fn pinnedSigningRegion(service: []const u8, region: []const u8) ?[]const u8 
     return null;
 }
 
+const GlobalEndpoint = struct {
+    service: []const u8,
+    target: []const u8,
+};
+
+const global_endpoints = [_]GlobalEndpoint{
+    .{ .service = "iam", .target = "iam.amazonaws.com" },
+    .{ .service = "route53", .target = "route53.amazonaws.com" },
+    .{ .service = "cloudfront", .target = "cloudfront.amazonaws.com" },
+    .{ .service = "globalaccelerator", .target = "globalaccelerator.us-west-2.amazonaws.com" },
+};
+
 /// Resolves the endpoint hostname (no scheme, no trailing slash) for a given
 /// service + region + options. Returns allocated string -- caller owns memory.
 /// For S3, do NOT call this -- use s3_endpoint.zig instead.
@@ -129,36 +141,14 @@ pub fn resolveEndpoint(
         return allocator.dupe(u8, override);
     }
 
-    // IAM uses a global endpoint in the aws partition.
-    if (std.mem.eql(u8, service, "iam") and
-        std.mem.eql(u8, partitionForRegion(region).name, "aws") and
-        !options.fips and !options.dual_stack)
+    if (!options.fips and !options.dual_stack and
+        std.mem.eql(u8, partitionForRegion(region).name, "aws"))
     {
-        return allocator.dupe(u8, "iam.amazonaws.com");
-    }
-
-    // Route53 uses a global endpoint in the aws partition.
-    if (std.mem.eql(u8, service, "route53") and
-        std.mem.eql(u8, partitionForRegion(region).name, "aws") and
-        !options.fips and !options.dual_stack)
-    {
-        return allocator.dupe(u8, "route53.amazonaws.com");
-    }
-
-    // CloudFront uses a global endpoint in the aws partition.
-    if (std.mem.eql(u8, service, "cloudfront") and
-        std.mem.eql(u8, partitionForRegion(region).name, "aws") and
-        !options.fips and !options.dual_stack)
-    {
-        return allocator.dupe(u8, "cloudfront.amazonaws.com");
-    }
-
-    // Global Accelerator endpoint is anchored to us-west-2 in aws partition.
-    if (std.mem.eql(u8, service, "globalaccelerator") and
-        std.mem.eql(u8, partitionForRegion(region).name, "aws") and
-        !options.fips and !options.dual_stack)
-    {
-        return allocator.dupe(u8, "globalaccelerator.us-west-2.amazonaws.com");
+        for (global_endpoints) |ge| {
+            if (std.mem.eql(u8, service, ge.service)) {
+                return allocator.dupe(u8, ge.target);
+            }
+        }
     }
 
     // Network Manager endpoint is anchored to us-west-2 in aws partition,
