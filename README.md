@@ -2,7 +2,7 @@
 
 An AWS SDK for Zig, providing AWS service clients from [Smithy models](https://aws.amazon.com/blogs/aws/introducing-aws-api-models-and-publicly-available-resources-for-aws-api-definitions/), built using a Kotlin code generator.
 
-Requires Zig 0.15.0 or later.
+The latest changes require Zig 0.16.0 or later. The `zig-0.15` branch exists for Zig 0.15.x.
 
 ## Available Services
 
@@ -33,13 +33,11 @@ const std = @import("std");
 const aws = @import("aws");
 const s3 = @import("s3");
 
-pub fn main() !void {
-    var gpa: std.heap.GeneralPurposeAllocator(.{}) = .init;
-    defer _ = gpa.deinit();
-    const allocator = gpa.allocator();
+pub fn main(init: std.process.Init) !void {
+    const allocator = init.gpa;
 
     // Load configuration from the environment and/or ~/.aws directory.
-    var config = try aws.Config.load(allocator, .{});
+    var config = try aws.Config.load(allocator, init.io, init.environ_map, .{});
     defer config.deinit();
 
     // Create the S3 client.

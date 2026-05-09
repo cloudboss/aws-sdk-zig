@@ -3,13 +3,11 @@ const std = @import("std");
 const aws = @import("aws");
 const s3 = @import("s3");
 
-pub fn main() !void {
-    var gpa: std.heap.DebugAllocator(.{}) = .init;
-    defer _ = gpa.deinit();
-    const allocator = gpa.allocator();
+pub fn main(init: std.process.Init) !void {
+    const allocator = init.gpa;
 
     // Load configuration from the environment and/or ~/.aws directory.
-    var config = try aws.Config.load(allocator, .{});
+    var config = try aws.Config.load(allocator, init.io, init.environ_map, .{});
     defer config.deinit();
 
     // Create an S3 client.
