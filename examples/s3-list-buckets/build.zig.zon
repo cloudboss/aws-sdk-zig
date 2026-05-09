@@ -5,8 +5,8 @@
     .minimum_zig_version = "0.15.2",
     .dependencies = .{
         .aws_sdk = .{
-            .url = "git+https://github.com/cloudboss/aws-sdk-zig.git#4be9ffd8e4e081f68504c31d0a8cb742c1b811a4",
-            .hash = "aws_sdk-0.0.1-ApQSL4OTMhDFbTJtcTNhB2oXNQ9J2ROPTvfV-Hvljt6x",
+            .url = "git+https://github.com/cloudboss/aws-sdk-zig.git#4b8e0646cbe1622f8fd07daf7e22df3bfee7c1e0",
+            .hash = "aws_sdk-0.0.1-ApQSL-HdixBVxS0U-xc2jrtlR4oL90TbPgVBl9BoLpJi",
         },
     },
     .paths = .{
