@@ -54,4 +54,6 @@ jobs:
       - name: Load build container image
         run: gunzip -c _output/docker-image.tar.gz | docker load
       - name: Run integration test
+        env:
+          ZEST_LOG_LEVEL: debug
         run: make --debug test-integration-localstack SCENARIO=${{ matrix.scenario }}
