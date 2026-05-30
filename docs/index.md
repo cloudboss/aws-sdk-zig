@@ -128,28 +128,6 @@ defer result.deinit();
 
 Every service defines `ServiceError` so this pattern can be used.
 
-## Development
+## Reference
 
-```bash
-# Run unit tests.
-make test
-
-# Run integration tests against LocalStack.
-make test-integration-localstack
-
-# Run integration tests against your actual AWS account.
-# Use AWS_PROFILE or any other authentication mechanism.
-AWS_PROFILE=<profile> make test-integration-live
-
-# Run a single integration test scenario (scenarios are directory names under
-# test/integration/scenarios-localstack and test/integration/scenarios-live).
-make test-integration-localstack SCENARIO=s3
-AWS_PROFILE=<profile> make test-integration-live SCENARIO=networking
-
-# Regenerate service code from Smithy models.
-make codegen
-```
-
-## License
-
-MIT
+The **Reference** section lists client operations for 50 of the top AWS services, from Smithy model docstrings.

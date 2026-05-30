@@ -123,14 +123,33 @@ codegen-%: $(HAS_IMAGE_LOCAL) fetch-models
 		DIR_ROOT="$(DIR_ROOT)" \
 		python3 hack/run-codegen
 
-docs: $(HAS_IMAGE_LOCAL) fetch-models
+# Generate the Markdown API reference under docs/reference/ for the cloudboss
+# MkDocs theme, plus every runtime module re-exported by src/root.zig. Defaults
+# to a curated set of the most-used services: documenting all ~415 services is
+# over 22,000 pages and takes MkDocs more than half an hour to build, while this
+# set is about a tenth of that. Override DOCS_SERVICES with a space-separated
+# list, or set DOCS_ALL=1 to document every service.
+DOCS_SERVICES ?= \
+	ec2 s3 lambda iam sts dynamodb rds sqs sns cloudwatch cloudwatchlogs \
+	cloudformation ecs eks ecr kms secretsmanager ssm route53 cloudfront \
+	autoscaling elasticloadbalancingv2 apigateway apigatewayv2 elasticache \
+	kinesis firehose glue athena emr redshift sfn eventbridge ses sesv2 \
+	cognitoidentityprovider organizations cloudtrail configservice efs fsx \
+	backup batch appsync wafv2 guardduty acm bedrock bedrockruntime sagemaker
+DOCS_SERVICES_ARG = $(if $(DOCS_ALL),--all-services,$(DOCS_SERVICES))
+docgen: $(HAS_IMAGE_LOCAL)
 	@docker run --rm \
 		-v $(DIR_ROOT):/code \
 		-w /code \
 		--security-opt label=type:container_runtime_t \
-		$(CTR_IMAGE_LOCAL) /bin/sh -c "zig build docs $(ZIG_BUILD_FLAGS) --prefix $(DIR_OUT)/zig-out"
-	@hack/generate-docs-index $(DIR_OUT)/zig-out/docs hack/services.txt \
-		$(DIR_OUT)/api-models-aws-$(AWS_MODELS_COMMIT)
+		$(CTR_IMAGE_LOCAL) /bin/sh -c "zig build docgen $(ZIG_BUILD_FLAGS) -- $(DOCS_SERVICES_ARG) --runtime-root src/root.zig"
+
+docgen-test: $(HAS_IMAGE_LOCAL)
+	@docker run --rm \
+		-v $(DIR_ROOT):/code \
+		-w /code \
+		--security-opt label=type:container_runtime_t \
+		$(CTR_IMAGE_LOCAL) /bin/sh -c "zig build docgen-test $(ZIG_BUILD_FLAGS)"
 
 certs:
 	@bash tests/integration/certs/generate.sh
@@ -138,4 +157,4 @@ certs:
 clean:
 	@rm -rf $(DIR_OUT)
 
-.PHONY: build test test-integration-localstack test-integration-live fetch-models codegen docs certs clean
+.PHONY: build test test-integration-localstack test-integration-live fetch-models codegen docgen docgen-test certs clean

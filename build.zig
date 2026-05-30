@@ -38,35 +38,32 @@ pub fn build(b: *std.Build) void {
         }
     } else |_| {}
 
-    // Documentation generation
-    const docs_step = b.step("docs", "Generate documentation");
-
-    // Runtime library docs
-    const lib = b.addLibrary(.{
-        .name = "aws",
-        .root_module = aws_module,
+    // Reference extractor (hack/docgen): parses the generated services and
+    // writes Markdown for the cloudboss MkDocs theme. `zig build docgen -- s3 sts`.
+    const docgen_mod = b.createModule(.{
+        .root_source_file = b.path("hack/docgen/main.zig"),
+        .target = target,
+        .optimize = optimize,
     });
-    const install_runtime_docs = b.addInstallDirectory(.{
-        .source_dir = lib.getEmittedDocs(),
-        .install_dir = .prefix,
-        .install_subdir = "docs/aws",
+    const docgen_exe = b.addExecutable(.{
+        .name = "docgen",
+        .root_module = docgen_mod,
     });
-    docs_step.dependOn(&install_runtime_docs.step);
+    const run_docgen = b.addRunArtifact(docgen_exe);
+    if (b.args) |cli_args| run_docgen.addArgs(cli_args);
+    const docgen_step = b.step("docgen", "Generate the Markdown API reference");
+    docgen_step.dependOn(&run_docgen.step);
 
-    // Service docs
-    var docs_iter = service_modules.iterator();
-    while (docs_iter.next()) |svc_entry| {
-        const svc_lib = b.addLibrary(.{
-            .name = svc_entry.key_ptr.*,
-            .root_module = svc_entry.value_ptr.*,
-        });
-        const install_svc_docs = b.addInstallDirectory(.{
-            .source_dir = svc_lib.getEmittedDocs(),
-            .install_dir = .prefix,
-            .install_subdir = b.fmt("docs/{s}", .{svc_entry.key_ptr.*}),
-        });
-        docs_step.dependOn(&install_svc_docs.step);
-    }
+    const docgen_tests = b.addTest(.{
+        .root_module = docgen_mod,
+        .test_runner = .{
+            .path = zest.path("src/root.zig"),
+            .mode = .simple,
+        },
+    });
+    const run_docgen_tests = b.addRunArtifact(docgen_tests);
+    const docgen_test_step = b.step("docgen-test", "Run the docgen extractor unit tests");
+    docgen_test_step.dependOn(&run_docgen_tests.step);
 
     // Unit tests
     const test_module = b.createModule(.{
@@ -86,6 +83,7 @@ pub fn build(b: *std.Build) void {
     const run_aws_tests = b.addRunArtifact(aws_tests);
     const test_step = b.step("test", "Run unit tests");
     test_step.dependOn(&run_aws_tests.step);
+    test_step.dependOn(&run_docgen_tests.step);
 
     // Compile-check all service modules during test
     var check_iter = service_modules.iterator();

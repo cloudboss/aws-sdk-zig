@@ -1,0 +1,21 @@
+name: docs
+
+on:
+  push:
+    tags:
+      - "*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version label for this build.
+        required: true
+        type: string
+
+jobs:
+  docs:
+    permissions:
+      contents: write
+    uses: cloudboss/cloudboss-docs/.github/workflows/docs.yml@main
+    with:
+      version: ${{ inputs.version || github.ref_name }}
+      generate: make docgen

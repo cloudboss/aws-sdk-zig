@@ -13,6 +13,9 @@ tests/integration/certs/server.*
 codegen/sdk-codegen/model/
 codegen/sdk-codegen/smithy-build.json
 
+# Generated API reference for the mkdocs site
+docs/reference/
+
 # Sisyphus orchestrator working directory
 .sisyphus/
 

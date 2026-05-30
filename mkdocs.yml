@@ -1,0 +1,34 @@
+site_name: AWS SDK for Zig
+site_url: https://www.cloudboss.co/aws-sdk-zig/
+repo_url: https://github.com/cloudboss/aws-sdk-zig
+repo_name: cloudboss/aws-sdk-zig
+copyright: Copyright (c) 2026 cloudboss
+
+theme:
+  name: cloudboss
+  logo: assets/logo.svg
+  favicon: assets/logo.svg
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+
+plugins:
+  - search
+  - literate-nav
+
+extra:
+  version:
+    provider: mike
+    default: latest
+
+nav:
+  - Introduction:
+      - Overview: index.md
+  - Reference: reference/
