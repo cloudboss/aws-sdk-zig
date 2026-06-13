@@ -15,6 +15,7 @@ jobs:
   docs:
     permissions:
       contents: write
+      id-token: write
     uses: cloudboss/cloudboss-docs/.github/workflows/docs.yml@main
     with:
       version: ${{ inputs.version || github.ref_name }}
