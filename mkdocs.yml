@@ -24,6 +24,7 @@ plugins:
   - literate-nav
 
 extra:
+  google_analytics_property: G-MZGMN4NWS2
   version:
     provider: mike
     default: latest
