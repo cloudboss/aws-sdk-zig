@@ -594,34 +594,95 @@ test "PutItem with failing condition returns ConditionalCheckFailedException" {
             .item = &.{
                 .{ .key = "pk", .value = .{ .s = "cond-fail" } },
                 .{ .key = "sk", .value = .{ .s = "1" } },
+                .{ .key = "hash", .value = .{ .s = "original-hash" } },
             },
         }, .{});
     }
 
-    var diagnostic: dynamodb.ServiceError = undefined;
-    const result = shared_client.putItem(arena.allocator(), .{
-        .table_name = "sdk-zig-ddb-shared",
-        .item = &.{
-            .{ .key = "pk", .value = .{ .s = "cond-fail" } },
-            .{ .key = "sk", .value = .{ .s = "1" } },
-        },
-        .condition_expression = "attribute_not_exists(pk)",
-    }, .{ .diagnostic = &diagnostic });
+    {
+        var diagnostic: dynamodb.ServiceError = undefined;
+        const result = shared_client.putItem(arena.allocator(), .{
+            .table_name = "sdk-zig-ddb-shared",
+            .item = &.{
+                .{ .key = "pk", .value = .{ .s = "cond-fail" } },
+                .{ .key = "sk", .value = .{ .s = "1" } },
+                .{ .key = "hash", .value = .{ .s = "replacement-hash" } },
+            },
+            .condition_expression = "attribute_not_exists(pk)",
+        }, .{ .diagnostic = &diagnostic });
 
-    try std.testing.expectError(error.ServiceError, result);
-    defer diagnostic.deinit();
+        try std.testing.expectError(error.ServiceError, result);
+        defer diagnostic.deinit();
 
-    switch (diagnostic.kind) {
-        .conditional_check_failed_exception => |e| {
-            try std.testing.expect(e.message.len > 0);
-        },
-        else => {
-            std.debug.print(
-                "Expected ConditionalCheckFailedException, got: {s}\n",
-                .{diagnostic.code()},
-            );
-            return error.UnexpectedError;
-        },
+        switch (diagnostic.kind) {
+            .conditional_check_failed_exception => |e| {
+                try std.testing.expect(e.message.len > 0);
+                try std.testing.expect(e.item == null);
+            },
+            else => {
+                std.debug.print(
+                    "Expected ConditionalCheckFailedException, got: {s}\n",
+                    .{diagnostic.code()},
+                );
+                return error.UnexpectedError;
+            },
+        }
+    }
+
+    {
+        var diagnostic: dynamodb.ServiceError = undefined;
+        const result = shared_client.putItem(arena.allocator(), .{
+            .table_name = "sdk-zig-ddb-shared",
+            .item = &.{
+                .{ .key = "pk", .value = .{ .s = "cond-fail" } },
+                .{ .key = "sk", .value = .{ .s = "1" } },
+                .{ .key = "hash", .value = .{ .s = "replacement-hash" } },
+            },
+            .condition_expression = "attribute_not_exists(pk)",
+            .return_values_on_condition_check_failure = .all_old,
+        }, .{ .diagnostic = &diagnostic });
+
+        try std.testing.expectError(error.ServiceError, result);
+        defer diagnostic.deinit();
+
+        switch (diagnostic.kind) {
+            .conditional_check_failed_exception => |e| {
+                const item = e.item orelse return error.MissingItem;
+                var found_pk = false;
+                var found_sk = false;
+                var found_hash = false;
+                for (item) |entry| {
+                    const expected = if (std.mem.eql(u8, entry.key, "pk")) blk: {
+                        found_pk = true;
+                        break :blk "cond-fail";
+                    } else if (std.mem.eql(u8, entry.key, "sk")) blk: {
+                        found_sk = true;
+                        break :blk "1";
+                    } else if (std.mem.eql(u8, entry.key, "hash")) blk: {
+                        found_hash = true;
+                        break :blk "original-hash";
+                    } else continue;
+
+                    switch (entry.value) {
+                        .s => |value| try std.testing.expectEqualStrings(
+                            expected,
+                            value orelse return error.MissingValue,
+                        ),
+                        else => return error.UnexpectedType,
+                    }
+                }
+                try std.testing.expect(found_pk);
+                try std.testing.expect(found_sk);
+                try std.testing.expect(found_hash);
+            },
+            else => {
+                std.debug.print(
+                    "Expected ConditionalCheckFailedException, got: {s}\n",
+                    .{diagnostic.code()},
+                );
+                return error.UnexpectedError;
+            },
+        }
     }
 }
 

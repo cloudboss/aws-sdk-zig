@@ -138,7 +138,12 @@ class OperationGenerator(
             // Intra-service imports written after standard imports
             writer.write("const Client = @import(\"client.zig\").Client;")
             writer.write("const CallOptions = @import(\"call_options.zig\").CallOptions;")
-            writer.write("const ServiceError = @import(\"errors.zig\").ServiceError;")
+            if (protocol.parsesModeledErrorBodies()) {
+                writer.write("const errors = @import(\"errors.zig\");")
+                writer.write("const ServiceError = errors.ServiceError;")
+            } else {
+                writer.write("const ServiceError = @import(\"errors.zig\").ServiceError;")
+            }
 
             // Import shared types referenced by input/output members
             val sharedTypes = collectSharedTypes()
@@ -404,7 +409,7 @@ class OperationGenerator(
         writer.write("const error_body = stream_resp.body.readAll(client.allocator, 10 * 1024 * 1024) catch return error.RequestFailed;")
         writer.write("defer client.allocator.free(error_body);")
         writer.openBlock("if (options.diagnostic) |d| {")
-        writer.write("d.* = parseErrorResponse(client.allocator, error_body, stream_resp.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(stream_resp.status) } } };")
+        writeDiagnosticAssignment(writer, "error_body", "stream_resp.status")
         writer.closeBlock("}")
         writer.write("return error.ServiceError;")
         writer.closeBlock("}")
@@ -455,7 +460,7 @@ class OperationGenerator(
         // Check for errors
         writer.openBlock("if (!response.isSuccess()) {")
         writer.openBlock("if (options.diagnostic) |d| {")
-        writer.write("d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };")
+        writeDiagnosticAssignment(writer, "response.body", "response.status")
         writer.closeBlock("}")
         writer.write("return error.ServiceError;")
         writer.closeBlock("}")
@@ -504,7 +509,7 @@ class OperationGenerator(
         writer.write("const error_body = stream_resp.body.readAll(client.allocator, 10 * 1024 * 1024) catch return error.RequestFailed;")
         writer.write("defer client.allocator.free(error_body);")
         writer.openBlock("if (options.diagnostic) |d| {")
-        writer.write("d.* = parseErrorResponse(client.allocator, error_body, stream_resp.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(stream_resp.status) } } };")
+        writeDiagnosticAssignment(writer, "error_body", "stream_resp.status")
         writer.closeBlock("}")
         writer.write("return error.ServiceError;")
         writer.closeBlock("}")
@@ -515,6 +520,20 @@ class OperationGenerator(
         writer.write("return result;")
 
         writer.closeBlock("}")
+    }
+
+    private fun writeDiagnosticAssignment(writer: ZigWriter, body: String, status: String) {
+        if (protocol.parsesModeledErrorBodies()) {
+            writer.write(
+                "d.* = parseErrorResponse(client.allocator, \$L, \$L) catch return error.OutOfMemory;",
+                body, status,
+            )
+        } else {
+            writer.write(
+                "d.* = parseErrorResponse(client.allocator, \$L, \$L) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(\$L) } } };",
+                body, status, status,
+            )
+        }
     }
 
     private fun writePresignOptions(writer: ZigWriter) {
