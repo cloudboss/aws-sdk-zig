@@ -58,9 +58,14 @@ pub const ServiceError = struct {
     }
 };
 
+/// This exception is thrown when an internal service error occurs.
 pub const MarketplaceCommerceAnalyticsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

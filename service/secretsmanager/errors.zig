@@ -113,64 +113,146 @@ pub const ServiceError = struct {
     }
 };
 
+/// Secrets Manager can't decrypt the protected secret text using the provided
+/// KMS key.
 pub const DecryptionFailure = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Secrets Manager can't encrypt the protected secret text using the provided
+/// KMS key. Check that the
+/// KMS key is available, enabled, and not in an invalid state. For more
+/// information, see [Key state: Effect on your KMS
+/// key](https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html).
 pub const EncryptionFailure = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// An error occurred on the server side.
 pub const InternalServiceError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The `NextToken` value is invalid.
 pub const InvalidNextTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The parameter name or value is invalid.
 pub const InvalidParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A parameter value is not valid for the current state of the
+/// resource.
+///
+/// Possible causes:
+///
+/// * The secret is scheduled for deletion.
+///
+/// * You tried to enable rotation on a secret that doesn't already have a
+///   Lambda function
+/// ARN configured and you didn't include such an ARN as a parameter in this
+/// call.
+///
+/// * The secret is managed by another service, and you must use that service to
+///   update it.
+/// For more information, see [Secrets managed by other Amazon Web Services
+/// services](https://docs.aws.amazon.com/secretsmanager/latest/userguide/service-linked-secrets.html).
 pub const InvalidRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request failed because it would exceed one of the Secrets Manager
+/// quotas.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource policy has syntax errors.
 pub const MalformedPolicyDocumentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request failed because you did not complete all the prerequisite steps.
 pub const PreconditionNotMetException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The `BlockPublicPolicy` parameter is set to true, and the resource policy
+/// did not prevent broad access to the secret.
 pub const PublicPolicyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A resource with the ID you requested already exists.
 pub const ResourceExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Secrets Manager can't find the resource that you asked for.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

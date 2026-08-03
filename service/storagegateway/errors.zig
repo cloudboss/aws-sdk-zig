@@ -1,5 +1,7 @@
 const std = @import("std");
 
+const StorageGatewayError = @import("storage_gateway_error.zig").StorageGatewayError;
+
 pub const ServiceError = struct {
     arena: ?std.heap.ArenaAllocator = null,
     kind: Kind,
@@ -68,19 +70,55 @@ pub const ServiceError = struct {
     }
 };
 
+/// An internal server error has occurred during the request. For more
+/// information, see the
+/// error and message fields.
 pub const InternalServerError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// A StorageGatewayError that provides more information about the cause
+    /// of the error.
+    @"error": ?StorageGatewayError = null,
+
+    pub const json_field_names = .{
+        .@"error" = "error",
+        .message = "message",
+    };
 };
 
+/// An exception occurred because an invalid gateway request was issued to the
+/// service. For
+/// more information, see the error and message fields.
 pub const InvalidGatewayRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// A StorageGatewayError that provides more detail about the cause of the
+    /// error.
+    @"error": ?StorageGatewayError = null,
+
+    pub const json_field_names = .{
+        .@"error" = "error",
+        .message = "message",
+    };
 };
 
+/// An internal server error has occurred because the service is unavailable.
+/// For more
+/// information, see the error and message fields.
 pub const ServiceUnavailableError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// A StorageGatewayError that provides more information about the cause
+    /// of the error.
+    @"error": ?StorageGatewayError = null,
+
+    pub const json_field_names = .{
+        .@"error" = "error",
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

@@ -1,5 +1,7 @@
 const std = @import("std");
 
+const ThrottleReason = @import("throttle_reason.zig").ThrottleReason;
+
 pub const ServiceError = struct {
     arena: ?std.heap.ArenaAllocator = null,
     kind: Kind,
@@ -83,34 +85,82 @@ pub const ServiceError = struct {
     }
 };
 
+/// Indicates a platform issue, which may be due to a transient condition or
+/// outage.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Indicates that something is wrong with the input to the request. For
+/// example, a
+/// required parameter may be missing or out of range.
 pub const InvalidRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    athena_error_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .athena_error_code = "AthenaErrorCode",
+        .message = "Message",
+    };
 };
 
+/// An exception that Athena received when it called a custom metastore.
+/// Occurs if the error is not caused by user input (`InvalidRequestException`)
+/// or from the Athena platform (`InternalServerException`). For
+/// example, if a user-created Lambda function is missing permissions, the
+/// Lambda
+/// `4XX` exception is returned in a `MetadataException`.
 pub const MetadataException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A resource, such as a workgroup, was not found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The name of the Amazon resource.
+    resource_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .resource_name = "ResourceName",
+    };
 };
 
+/// The specified session already exists.
 pub const SessionAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Indicates that the request was throttled.
 pub const TooManyRequestsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    reason: ?ThrottleReason = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .reason = "Reason",
+    };
 };
 
 pub const UnknownServiceError = struct {

@@ -83,34 +83,91 @@ pub const ServiceError = struct {
     }
 };
 
+/// The operation cannot proceed because you have insufficient permissions.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// A description of why you have insufficient permissions.
+    error_code: []const u8,
+
+    pub const json_field_names = .{
+        .error_code = "ErrorCode",
+        .message = "Message",
+    };
 };
 
+/// The operation cannot proceed because it is not supported.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// A description of why the operation is not supported.
+    error_code: []const u8,
+
+    pub const json_field_names = .{
+        .error_code = "ErrorCode",
+        .message = "Message",
+    };
 };
 
+/// The operation did not succeed because an internal error occurred. Try again
+/// later.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// A description of which internal error occured.
+    error_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .error_code = "ErrorCode",
+        .message = "Message",
+    };
 };
 
+/// A resource that is required for the action wasn't found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// A description of which resource wasn't found.
+    error_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .error_code = "ErrorCode",
+        .message = "Message",
+    };
 };
 
+/// TPS has been limited to protect against intentional or unintentional
+/// high request volumes.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// Error: TPS has been limited to protect against intentional or unintentional
+    /// high request volumes.
+    error_code: []const u8,
+
+    pub const json_field_names = .{
+        .error_code = "ErrorCode",
+        .message = "Message",
+    };
 };
 
+/// The operation did not succeed because a validation error occurred.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// A description of what caused the validation error.
+    error_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .error_code = "ErrorCode",
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

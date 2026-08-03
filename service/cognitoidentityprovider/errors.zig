@@ -338,289 +338,659 @@ pub const ServiceError = struct {
     }
 };
 
+/// This exception is thrown when you don't have sufficient permissions to
+/// perform the requested operation.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when a user tries to confirm the account with an
+/// email
+/// address or phone number that has already been supplied as an alias for a
+/// different user
+/// profile. This exception indicates that an account with this email address or
+/// phone
+/// already exists in a user pool that you've configured to use email address or
+/// phone
+/// number as a sign-in alias.
 pub const AliasExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when a verification code fails to deliver
+/// successfully.
 pub const CodeDeliveryFailureException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown if the provided code doesn't match what the server
+/// was
+/// expecting.
 pub const CodeMismatchException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown if two or more modifications are happening
+/// concurrently.
 pub const ConcurrentModificationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when a user attempts to confirm a device with a
+/// device key
+/// that already exists.
 pub const DeviceKeyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when the provider is already supported by the user
+/// pool.
 pub const DuplicateProviderException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when there is a code mismatch and the service fails
+/// to
+/// configure the software token TOTP multi-factor authentication (MFA).
 pub const EnableSoftwareTokenMFAException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown if a code has expired.
 pub const ExpiredCodeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when a feature you attempted to configure isn't
+/// available in your current feature plan.
 pub const FeatureUnavailableInTierException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when WAF doesn't allow your request based on a web
+/// ACL that's associated with your user pool.
 pub const ForbiddenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when Amazon Cognito encounters a group that already
+/// exists in the user
+/// pool.
 pub const GroupExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when Amazon Cognito encounters an internal error.
 pub const InternalErrorException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when Amazon Cognito encounters an internal server
+/// error.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when Amazon Cognito isn't allowed to use your email
+/// identity. HTTP
+/// status code: 400.
 pub const InvalidEmailRoleAccessPolicyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when Amazon Cognito encounters an invalid Lambda
+/// response.
 pub const InvalidLambdaResponseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when the specified OAuth flow is not valid.
 pub const InvalidOAuthFlowException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when the Amazon Cognito service encounters an
+/// invalid
+/// parameter.
 pub const InvalidParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The reason code of the exception.
+    reason_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .reason_code = "reasonCode",
+    };
 };
 
+/// This exception is thrown when Amazon Cognito encounters an invalid password.
 pub const InvalidPasswordException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is returned when the role provided for SMS configuration
+/// doesn't have
+/// permission to publish using Amazon SNS.
 pub const InvalidSmsRoleAccessPolicyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when the trust relationship is not valid for the
+/// role
+/// provided for SMS configuration. This can happen if you don't trust
+/// `cognito-idp.amazonaws.com` or the external ID provided in the role does
+/// not match what is provided in the SMS configuration for the user pool.
 pub const InvalidSmsRoleTrustRelationshipException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when the user pool configuration is not valid.
 pub const InvalidUserPoolConfigurationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when a user exceeds the limit for a requested
+/// Amazon Web Services
+/// resource.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when you attempt to apply a managed login branding
+/// style to
+/// an app client that already has an assigned style.
 pub const ManagedLoginBrandingExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when Amazon Cognito can't find a multi-factor
+/// authentication
+/// (MFA) method.
 pub const MFAMethodNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when a user isn't authorized.
 pub const NotAuthorizedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The message returned when a user's new password matches a previous password
+/// and
+/// doesn't comply with the password-history policy.
 pub const PasswordHistoryPolicyViolationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when a password reset is required.
 pub const PasswordResetRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when a precondition is not met.
 pub const PreconditionNotMetException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is throw when your application requests token refresh with a
+/// refresh
+/// token that has been invalidated by refresh-token rotation.
 pub const RefreshTokenReuseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when the Amazon Cognito service can't find the
+/// requested
+/// resource.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when the specified scope doesn't exist.
 pub const ScopeDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when the software token time-based one-time
+/// password (TOTP)
+/// multi-factor authentication (MFA) isn't activated for the user pool.
 pub const SoftwareTokenMFANotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Terms document names must be unique to the app client. This exception is
+/// thrown when
+/// you attempt to create terms documents with a duplicate `TermsName`.
 pub const TermsExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when you've attempted to change your feature plan
+/// but
+/// the operation isn't permitted.
 pub const TierChangeNotAllowedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when the user has made too many failed attempts for
+/// a given
+/// action, such as sign-in.
 pub const TooManyFailedAttemptsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when the user has made too many requests for a
+/// given
+/// operation.
 pub const TooManyRequestsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Exception that is thrown when the request isn't authorized. This can happen
+/// due to an
+/// invalid access token in the request.
 pub const UnauthorizedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when Amazon Cognito encounters an unexpected
+/// exception with
+/// Lambda.
 pub const UnexpectedLambdaException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when the specified identifier isn't supported.
 pub const UnsupportedIdentityProviderException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Exception that is thrown when you attempt to perform an operation that isn't
+/// enabled
+/// for the user pool client.
 pub const UnsupportedOperationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Exception that is thrown when an unsupported token is passed to an
+/// operation.
 pub const UnsupportedTokenTypeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request failed because the user is in an unsupported state.
 pub const UnsupportedUserStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when you're trying to modify a user pool while a
+/// user import
+/// job is in progress for that pool.
 pub const UserImportInProgressException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when the Amazon Cognito service encounters a user
+/// validation exception
+/// with the Lambda service.
 pub const UserLambdaValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when a user isn't confirmed successfully.
 pub const UserNotConfirmedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when a user isn't found.
 pub const UserNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when user pool add-ons aren't enabled.
 pub const UserPoolAddOnNotEnabledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when a user pool tag can't be set or updated.
 pub const UserPoolTaggingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when Amazon Cognito encounters a user name that
+/// already
+/// exists in the user pool.
 pub const UsernameExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when the challenge from `StartWebAuthn`
+/// registration has expired.
 pub const WebAuthnChallengeNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when the access token is for a different client
+/// than the one
+/// in the original `StartWebAuthnRegistration` request.
 pub const WebAuthnClientMismatchException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when a user pool doesn't have a configured relying
+/// party
+/// id or a user pool domain.
 pub const WebAuthnConfigurationMissingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when a user presents passkey credentials from an
+/// unsupported
+/// device or provider.
 pub const WebAuthnCredentialNotSupportedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when the passkey feature isn't enabled for the user
+/// pool.
 pub const WebAuthnNotEnabledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when the passkey credential's registration origin
+/// does not
+/// align with the user pool relying party id.
 pub const WebAuthnOriginNotAllowedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when the given passkey credential is associated
+/// with a
+/// different relying party ID than the user pool relying party ID.
 pub const WebAuthnRelyingPartyMismatchException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

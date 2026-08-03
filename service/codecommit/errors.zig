@@ -998,949 +998,2102 @@ pub const ServiceError = struct {
     }
 };
 
+/// The specified Amazon Resource Name (ARN) does not exist in the Amazon Web
+/// Services account.
 pub const ActorDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The content for the approval rule is empty. You must provide some content
+/// for an approval rule. The content cannot be null.
 pub const ApprovalRuleContentRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified approval rule does not exist.
 pub const ApprovalRuleDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An approval rule with that name already exists. Approval rule names must be
+/// unique
+/// within the scope of a pull request.
 pub const ApprovalRuleNameAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An approval rule name is required, but was not specified.
 pub const ApprovalRuleNameRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The content for the approval rule template is empty. You must provide some
+/// content for an approval rule template. The content cannot be null.
 pub const ApprovalRuleTemplateContentRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified approval rule template does not exist. Verify that the name is
+/// correct and that you are signed in to the Amazon Web Services Region where
+/// the template
+/// was created, and then try again.
 pub const ApprovalRuleTemplateDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The approval rule template is associated with one or more repositories. You
+/// cannot delete a template that is associated with a repository. Remove
+/// all associations, and then try again.
 pub const ApprovalRuleTemplateInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// You cannot create an approval rule template with that name because a
+/// template with
+/// that name already exists in this Amazon Web Services Region for your Amazon
+/// Web Services account. Approval rule template
+/// names must be unique.
 pub const ApprovalRuleTemplateNameAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An approval rule template name is required, but was not specified.
 pub const ApprovalRuleTemplateNameRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An approval state is required, but was not specified.
 pub const ApprovalStateRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified Amazon Resource Name (ARN) does not exist in the Amazon Web
+/// Services account.
 pub const AuthorDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The before commit ID and the after commit ID are the same, which is not
+/// valid. The before commit ID and the after commit ID must be different commit
+/// IDs.
 pub const BeforeCommitIdAndAfterCommitIdAreSameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified blob does not exist.
 pub const BlobIdDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A blob ID is required, but was not specified.
 pub const BlobIdRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified branch does not exist.
 pub const BranchDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Cannot create the branch with the specified name because the commit
+/// conflicts with an existing branch with the same name.
+///
+/// Branch names must be unique.
 pub const BranchNameExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified branch name is not valid because it is a tag name. Enter the
+/// name of a
+/// branch in the repository. For a list of valid branch names, use
+/// ListBranches.
 pub const BranchNameIsTagNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A branch name is required, but was not specified.
 pub const BranchNameRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The approval rule cannot be deleted from the pull request because it was
+/// created by an
+/// approval rule template and applied to the pull request automatically.
 pub const CannotDeleteApprovalRuleFromTemplateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The approval rule cannot be modified for the pull request because it was
+/// created by an
+/// approval rule template and applied to the pull request automatically.
 pub const CannotModifyApprovalRuleFromTemplateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A client request token is required. A client request token is an unique,
+/// client-generated idempotency token that, when provided in a request, ensures
+/// the request
+/// cannot be repeated with a changed parameter. If a request is received with
+/// the same
+/// parameters and a token is included, the request returns information about
+/// the initial
+/// request that used that token.
 pub const ClientRequestTokenRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The comment is empty. You must provide some content for a comment. The
+/// content cannot be null.
 pub const CommentContentRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The comment is too large. Comments are limited to 10,240 characters.
 pub const CommentContentSizeLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This comment has already been deleted. You cannot edit or delete a deleted
+/// comment.
 pub const CommentDeletedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// No comment exists with the provided ID. Verify that you have used the
+/// correct ID, and
+/// then try again.
 pub const CommentDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The comment ID is missing or null. A comment ID is required.
 pub const CommentIdRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// You cannot modify or delete this comment. Only comment authors can modify or
+/// delete their comments.
 pub const CommentNotCreatedByCallerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified commit does not exist or no commit was specified, and the
+/// specified repository has no default branch.
 pub const CommitDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified commit ID does not exist.
 pub const CommitIdDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A commit ID was not specified.
 pub const CommitIdRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The maximum number of allowed commit IDs in a batch request is 100. Verify
+/// that your batch requests contains no more than 100 commit IDs, and then try
+/// again.
 pub const CommitIdsLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A list of commit IDs is required, but was either not specified or the list
+/// was empty.
 pub const CommitIdsListRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The commit message is too long. Provide a shorter string.
 pub const CommitMessageLengthExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A commit was not specified.
 pub const CommitRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The merge cannot be completed because the target branch has been modified.
+/// Another user might have modified the target branch while the merge was in
+/// progress. Wait a few minutes, and then try again.
 pub const ConcurrentReferenceUpdateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified branch is the default branch for the repository, and cannot be
+/// deleted. To delete this branch, you must first set another branch as the
+/// default branch.
 pub const DefaultBranchCannotBeDeletedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A file cannot be added to the repository because the specified path name has
+/// the same name as a file that already exists in this repository.
+/// Either provide a different name for the file, or specify a different path
+/// for the file.
 pub const DirectoryNameConflictsWithFileNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An encryption integrity check failed.
 pub const EncryptionIntegrityChecksFailedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An encryption key could not be accessed.
 pub const EncryptionKeyAccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The encryption key is disabled.
 pub const EncryptionKeyDisabledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The Key Management Service encryption key is not valid.
 pub const EncryptionKeyInvalidIdException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A KMS encryption key was used to try and encrypt or decrypt a repository,
+/// but either the repository or the key was not
+/// in a valid state to support the operation.
 pub const EncryptionKeyInvalidUsageException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// No encryption key was found.
 pub const EncryptionKeyNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A KMS encryption key ID is required but was not specified.
 pub const EncryptionKeyRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The encryption key is not available.
 pub const EncryptionKeyUnavailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The commit cannot be created because both a source file and file content
+/// have been
+/// specified for the same file. You cannot provide both. Either specify a
+/// source file or
+/// provide the file content directly.
 pub const FileContentAndSourceFileSpecifiedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The file cannot be added because it is empty. Empty files cannot be added to
+/// the repository with this API.
 pub const FileContentRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The file cannot be added because it is too large. The maximum file size is 6
+/// MB, and
+/// the combined file content change size is 7 MB. Consider making these changes
+/// using a Git
+/// client.
 pub const FileContentSizeLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified file does not exist. Verify that you have used the correct
+/// file name,
+/// full path, and extension.
 pub const FileDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The commit cannot be created because no files have been specified as added,
+/// updated, or changed (PutFile or DeleteFile) for the commit.
 pub const FileEntryRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The commit cannot be created because no file mode has been specified. A file
+/// mode is
+/// required to update mode permissions for a file.
 pub const FileModeRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A file cannot be added to the repository because the specified file name has
+/// the same name as a directory in this repository. Either provide
+/// another name for the file, or add the file in a directory that does not
+/// match the file name.
 pub const FileNameConflictsWithDirectoryNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The commit cannot be created because a specified file path points to a
+/// submodule. Verify that the destination files
+/// have valid file paths that do not point to a submodule.
 pub const FilePathConflictsWithSubmodulePathException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified file exceeds the file size limit for CodeCommit. For more
+/// information about limits in CodeCommit, see
+/// [Quotas](https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html) in the *CodeCommit User Guide*.
 pub const FileTooLargeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The commit cannot be created because at least one of the overall changes in
+/// the commit results in a
+/// folder whose contents exceed the limit of 6 MB. Either reduce the number and
+/// size of your changes,
+/// or split the changes across multiple folders.
 pub const FolderContentSizeLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified folder does not exist. Either the folder name is not correct,
+/// or you did
+/// not enter the full path to the folder.
 pub const FolderDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The client request token is not valid. Either the token is not in a valid
+/// format, or
+/// the token has been used in a previous request and cannot be reused.
 pub const IdempotencyParameterMismatchException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The Amazon Resource Name (ARN) is not valid. Make sure that you have
+/// provided the full ARN for the user who initiated the change for the pull
+/// request,
+/// and then try again.
 pub const InvalidActorArnException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The content for the approval rule is not valid.
 pub const InvalidApprovalRuleContentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The name for the approval rule is not valid.
 pub const InvalidApprovalRuleNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The content of the approval rule template is not valid.
 pub const InvalidApprovalRuleTemplateContentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The description for the approval rule template is not valid because it
+/// exceeds the
+/// maximum characters allowed for a description. For more information about
+/// limits in CodeCommit,
+/// see
+/// [Quotas](https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html) in the *CodeCommit User Guide*.
 pub const InvalidApprovalRuleTemplateDescriptionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The name of the approval rule template is not valid. Template names must be
+/// between 1
+/// and 100 valid characters in length. For more information about limits in
+/// CodeCommit,
+/// see
+/// [Quotas](https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html) in the *CodeCommit User Guide*.
 pub const InvalidApprovalRuleTemplateNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The state for the approval is not valid. Valid values include APPROVE and
+/// REVOKE.
 pub const InvalidApprovalStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The Amazon Resource Name (ARN) is not valid. Make sure that you have
+/// provided the full ARN for the author of the pull request, and then try
+/// again.
 pub const InvalidAuthorArnException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified blob is not valid.
 pub const InvalidBlobIdException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified reference name is not valid.
 pub const InvalidBranchNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The client request token is not valid.
 pub const InvalidClientRequestTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The comment ID is not in a valid format. Make sure that you have provided
+/// the full comment ID.
 pub const InvalidCommentIdException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified commit is not valid.
 pub const InvalidCommitException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified commit ID is not valid.
 pub const InvalidCommitIdException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified conflict detail level is not valid.
 pub const InvalidConflictDetailLevelException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified conflict resolution list is not valid.
 pub const InvalidConflictResolutionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified conflict resolution strategy is not valid.
 pub const InvalidConflictResolutionStrategyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified continuation token is not valid.
 pub const InvalidContinuationTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified deletion parameter is not valid.
 pub const InvalidDeletionParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The pull request description is not valid. Descriptions cannot be more than
+/// 1,000
+/// characters.
 pub const InvalidDescriptionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The destination commit specifier is not valid. You must provide a valid
+/// branch name, tag, or full commit ID.
 pub const InvalidDestinationCommitSpecifierException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified email address either contains one or more characters that are
+/// not allowed, or it exceeds the maximum number of characters
+/// allowed for an email address.
 pub const InvalidEmailException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The location of the file is not valid. Make sure that you include the file
+/// name and
+/// extension.
 pub const InvalidFileLocationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified file mode permission is not valid. For a list of valid file
+/// mode permissions, see PutFile.
 pub const InvalidFileModeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The position is not valid. Make sure that the line number exists in the
+/// version of the file you want to comment on.
 pub const InvalidFilePositionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified value for the number of conflict files to return is not valid.
 pub const InvalidMaxConflictFilesException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified value for the number of merge hunks to return is not valid.
 pub const InvalidMaxMergeHunksException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified number of maximum results is not valid.
 pub const InvalidMaxResultsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified merge option is not valid for this operation. Not all merge
+/// strategies are supported for all operations.
 pub const InvalidMergeOptionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified sort order is not valid.
 pub const InvalidOrderException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The override status is not valid. Valid statuses are OVERRIDE and REVOKE.
 pub const InvalidOverrideStatusException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The parent commit ID is not valid. The commit ID cannot be empty, and must
+/// match the head commit ID for the branch of the repository where you
+/// want to add or update a file.
 pub const InvalidParentCommitIdException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified path is not valid.
 pub const InvalidPathException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The pull request event type is not valid.
 pub const InvalidPullRequestEventTypeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The pull request ID is not valid. Make sure that you have provided the full
+/// ID and that the pull request is in the specified repository, and then try
+/// again.
 pub const InvalidPullRequestIdException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The pull request status is not valid. The only valid values are `OPEN` and
+/// `CLOSED`.
 pub const InvalidPullRequestStatusException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The pull request status update is not valid. The only valid update is from
+/// `OPEN` to `CLOSED`.
 pub const InvalidPullRequestStatusUpdateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The Amazon Resource Name (ARN) of the user or identity is not valid.
 pub const InvalidReactionUserArnException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The value of the reaction is not valid. For more information, see the
+/// [CodeCommit User
+/// Guide](https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html).
 pub const InvalidReactionValueException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified reference name format is not valid. Reference names must
+/// conform to the
+/// Git references format (for example, refs/heads/main). For more information,
+/// see [Git Internals -
+/// Git References](https://git-scm.com/book/en/v2/Git-Internals-Git-References)
+/// or consult your Git documentation.
 pub const InvalidReferenceNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Either the enum is not in a valid format, or the specified file version enum
+/// is not valid in respect to the current file version.
 pub const InvalidRelativeFileVersionEnumException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Automerge was specified for resolving the conflict, but the replacement type
+/// is not valid or content is missing.
 pub const InvalidReplacementContentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Automerge was specified for resolving the conflict, but the specified
+/// replacement type is not valid.
 pub const InvalidReplacementTypeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified repository description is not valid.
 pub const InvalidRepositoryDescriptionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A specified repository name is not valid.
+///
+/// This exception occurs only when a specified repository name is not valid.
+/// Other
+/// exceptions occur when a required repository parameter is missing, or when a
+/// specified repository does not exist.
 pub const InvalidRepositoryNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// One or more branch names specified for the trigger is not valid.
 pub const InvalidRepositoryTriggerBranchNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The custom data provided for the trigger is not valid.
 pub const InvalidRepositoryTriggerCustomDataException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The Amazon Resource Name (ARN) for the trigger is not valid for the
+/// specified destination. The most common reason for this error is that the ARN
+/// does not meet the requirements for the service type.
 pub const InvalidRepositoryTriggerDestinationArnException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// One or more events specified for the trigger is not valid. Check to make
+/// sure that all events specified match the requirements for allowed events.
 pub const InvalidRepositoryTriggerEventsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The name of the trigger is not valid.
 pub const InvalidRepositoryTriggerNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The Amazon Web Services Region for the trigger target does not match the
+/// Amazon Web Services Region for the
+/// repository. Triggers must be created in the same Amazon Web Services Region
+/// as the target for the
+/// trigger.
 pub const InvalidRepositoryTriggerRegionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The value for the resource ARN is not valid. For more information about
+/// resources in CodeCommit, see
+/// [CodeCommit Resources and
+/// Operations](https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats)
+/// in the CodeCommit User Guide.
 pub const InvalidResourceArnException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The revision ID is not valid. Use GetPullRequest to determine the value.
 pub const InvalidRevisionIdException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The SHA-256 hash signature for the rule content is not valid.
 pub const InvalidRuleContentSha256Exception = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified sort by value is not valid.
 pub const InvalidSortByException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The source commit specifier is not valid. You must provide a valid branch
+/// name, tag, or full commit ID.
 pub const InvalidSourceCommitSpecifierException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified tag is not valid. Key names cannot be prefixed with aws:.
 pub const InvalidSystemTagUsageException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The list of tags is not valid.
 pub const InvalidTagKeysListException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The map of tags is not valid.
 pub const InvalidTagsMapException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified target branch is not valid.
 pub const InvalidTargetBranchException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The target for the pull request is not valid. A target must contain the full
+/// values for the repository name, source branch, and destination branch for
+/// the pull request.
 pub const InvalidTargetException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The targets for the pull request is not valid or not in a valid format.
+/// Targets are a list of target objects. Each target object must contain the
+/// full values for
+/// the repository name, source branch, and destination branch for a pull
+/// request.
 pub const InvalidTargetsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The title of the pull request is not valid. Pull request titles cannot
+/// exceed 100 characters in length.
 pub const InvalidTitleException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The pull request cannot be merged automatically into the destination branch.
+/// You must manually merge the branches and resolve any conflicts.
 pub const ManualMergeRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The number of branches for the trigger was exceeded.
 pub const MaximumBranchesExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The number of allowed conflict resolution entries was exceeded.
 pub const MaximumConflictResolutionEntriesExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The number of files to load exceeds the allowed limit.
 pub const MaximumFileContentToLoadExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The number of specified files to change as part of this commit exceeds the
+/// maximum number of files
+/// that can be changed in a single commit. Consider using a Git client for
+/// these changes.
 pub const MaximumFileEntriesExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The number of items to compare between the source or destination branches
+/// and the merge base has exceeded the maximum allowed.
 pub const MaximumItemsToCompareExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The number of approvals required for the approval rule exceeds the maximum
+/// number allowed.
 pub const MaximumNumberOfApprovalsExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// You cannot create the pull request because the repository has too many open
+/// pull requests.
+/// The maximum number of open pull requests for a repository is 1,000. Close
+/// one or more open pull requests, and then try again.
 pub const MaximumOpenPullRequestsExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The maximum number of allowed repository names was exceeded. Currently, this
+/// number is 100.
 pub const MaximumRepositoryNamesExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The number of triggers allowed for the repository was exceeded.
 pub const MaximumRepositoryTriggersExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The maximum number of approval rule templates for a repository has been
+/// exceeded. You cannot associate more than 25
+/// approval rule templates with a repository.
 pub const MaximumRuleTemplatesAssociatedWithRepositoryException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A merge option or stategy is required, and none was provided.
 pub const MergeOptionRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// More than one conflict resolution entries exists for the conflict. A
+/// conflict can have only one conflict resolution entry.
 pub const MultipleConflictResolutionEntriesException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// You cannot include more than one repository in a pull request. Make sure you
+/// have specified only one repository name in your request, and then try again.
 pub const MultipleRepositoriesInPullRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The user name is not valid because it has exceeded the character limit for
+/// author names.
 pub const NameLengthExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The commit cannot be created because no changes will be made to the
+/// repository as a result of this commit. A commit must contain at least one
+/// change.
 pub const NoChangeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The maximum number of approval rule templates has been exceeded for this
+/// Amazon Web Services Region.
 pub const NumberOfRuleTemplatesExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The approval rule cannot be added. The pull request has the maximum number
+/// of approval rules associated with it.
 pub const NumberOfRulesExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The requested action is not allowed.
 pub const OperationNotAllowedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The pull request has already had its approval rules set to override.
 pub const OverrideAlreadySetException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An override status is required, but no value was provided. Valid values
+/// include OVERRIDE and REVOKE.
 pub const OverrideStatusRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The parent commit ID is not valid because it does not exist. The specified
+/// parent commit ID does not exist in the specified branch of the repository.
 pub const ParentCommitDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The file could not be added because the provided parent commit ID is not the
+/// current tip of the specified branch. To view the full commit ID of the
+/// current head
+/// of the branch, use GetBranch.
 pub const ParentCommitIdOutdatedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A parent commit ID is required. To view the full commit ID of a branch in a
+/// repository, use GetBranch or a Git command
+/// (for example, git pull or git log).
 pub const ParentCommitIdRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified path does not exist.
 pub const PathDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The folderPath for a location cannot be null.
 pub const PathRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The pull request status cannot be updated because it is already closed.
 pub const PullRequestAlreadyClosedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The pull request cannot be merged because one or more approval rules applied
+/// to the pull request have conditions that have not been met.
 pub const PullRequestApprovalRulesNotSatisfiedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The approval cannot be applied because the user approving the pull request
+/// matches the user who created the pull request. You cannot approve a pull
+/// request that you created.
 pub const PullRequestCannotBeApprovedByAuthorException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The pull request ID could not be found. Make sure that you have specified
+/// the correct repository name and pull request ID, and then try again.
 pub const PullRequestDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A pull request ID is required, but none was provided.
 pub const PullRequestIdRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A pull request status is required, but none was provided.
 pub const PullRequestStatusRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The commit cannot be created because one or more files specified in the
+/// commit reference both a file and a folder.
 pub const PutFileEntryConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The number of reactions has been exceeded. Reactions are limited to one
+/// reaction per user for each individual comment ID.
 pub const ReactionLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A reaction value is required.
 pub const ReactionValueRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified reference does not exist. You must provide a full commit ID.
 pub const ReferenceDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A reference name is required, but none was provided.
 pub const ReferenceNameRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified reference is not a supported type.
 pub const ReferenceTypeNotSupportedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// USE_NEW_CONTENT was specified, but no replacement content has been provided.
 pub const ReplacementContentRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A replacement type is required.
 pub const ReplacementTypeRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified repository does not exist.
 pub const RepositoryDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A repository resource limit was exceeded.
 pub const RepositoryLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified repository name already exists.
 pub const RepositoryNameExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A repository name is required, but was not specified.
 pub const RepositoryNameRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// At least one repository name object is required, but was not specified.
 pub const RepositoryNamesRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The repository does not contain any pull requests with that pull request ID.
+/// Use GetPullRequest to verify the correct repository name for the pull
+/// request ID.
 pub const RepositoryNotAssociatedWithPullRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// At least one branch name is required, but was not specified in the trigger
+/// configuration.
 pub const RepositoryTriggerBranchNameListRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A destination ARN for the target service for the trigger is required, but
+/// was not
+/// specified.
 pub const RepositoryTriggerDestinationArnRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// At least one event for the trigger is required, but was not specified.
 pub const RepositoryTriggerEventsListRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A name for the trigger is required, but was not specified.
 pub const RepositoryTriggerNameRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The list of triggers for the repository is required, but was not specified.
 pub const RepositoryTriggersListRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A valid Amazon Resource Name (ARN) for an CodeCommit resource is required.
+/// For a list of valid resources in CodeCommit, see
+/// [CodeCommit Resources and
+/// Operations](https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats)
+/// in the CodeCommit User Guide.
 pub const ResourceArnRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The commit cannot be created because one of the changes specifies copying or
+/// moving a .gitkeep file.
 pub const RestrictedSourceFileException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A revision ID is required, but was not provided.
 pub const RevisionIdRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The revision ID provided in the request does not match the current revision
+/// ID. Use GetPullRequest to retrieve the current revision ID.
 pub const RevisionNotCurrentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The file was not added or updated because the content of the file is exactly
+/// the same as the content of that file in the repository and branch
+/// that you specified.
 pub const SameFileContentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The commit cannot be created because one or more changes in this commit
+/// duplicate actions in the same file path. For example,
+/// you cannot make the same delete request to the same file in the same file
+/// path twice, or make a delete request and a move request to the same
+/// file as part of the same commit.
 pub const SamePathRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The source branch and destination branch for the pull request are the same.
+/// You must
+/// specify different branches for the source and destination.
 pub const SourceAndDestinationAreSameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The commit cannot be created because no source files or file content have
+/// been specified for the commit.
 pub const SourceFileOrContentRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A list of tag keys is required. The list cannot be empty or null.
 pub const TagKeysListRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The tag policy is not valid.
 pub const TagPolicyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A map of tags is required.
 pub const TagsMapRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A pull request target is required. It cannot be empty or null. A pull
+/// request target must contain the full values for the repository name, source
+/// branch, and destination branch for the pull request.
 pub const TargetRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An array of target objects is required. It cannot be empty or null.
 pub const TargetsRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The tip of the source branch in the destination repository does not match
+/// the tip of the source branch specified in your request.
+/// The pull request might have been updated. Make sure that you have the latest
+/// changes.
 pub const TipOfSourceReferenceIsDifferentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The divergence between the tips of the provided commit specifiers is too
+/// great to determine whether there might be
+/// any merge conflicts. Locally compare the specifiers using `git diff` or a
+/// diff tool.
 pub const TipsDivergenceExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A pull request title is required. It cannot be empty or null.
 pub const TitleRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The maximum number of tags for an CodeCommit resource has been exceeded.
 pub const TooManyTagsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

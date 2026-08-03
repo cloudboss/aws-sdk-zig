@@ -3,7 +3,8 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
-const ServiceError = @import("errors.zig").ServiceError;
+const errors = @import("errors.zig");
+const ServiceError = errors.ServiceError;
 const Attachment = @import("attachment.zig").Attachment;
 
 pub const AddAttachmentsToSetInput = struct {
@@ -65,7 +66,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AddAttachme
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch return error.OutOfMemory;
         }
         return error.ServiceError;
     }
@@ -116,64 +117,124 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     const owned_request_id = try arena_alloc.dupe(u8, "");
 
     if (std.mem.eql(u8, error_code, "AttachmentIdNotFound")) {
-        return .{ .arena = arena, .kind = .{ .attachment_id_not_found = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.AttachmentIdNotFound = aws.json.parseJsonObject(errors.AttachmentIdNotFound, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .attachment_id_not_found = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "AttachmentLimitExceeded")) {
-        return .{ .arena = arena, .kind = .{ .attachment_limit_exceeded = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.AttachmentLimitExceeded = aws.json.parseJsonObject(errors.AttachmentLimitExceeded, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .attachment_limit_exceeded = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "AttachmentSetExpired")) {
-        return .{ .arena = arena, .kind = .{ .attachment_set_expired = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.AttachmentSetExpired = aws.json.parseJsonObject(errors.AttachmentSetExpired, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .attachment_set_expired = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "AttachmentSetIdNotFound")) {
-        return .{ .arena = arena, .kind = .{ .attachment_set_id_not_found = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.AttachmentSetIdNotFound = aws.json.parseJsonObject(errors.AttachmentSetIdNotFound, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .attachment_set_id_not_found = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "AttachmentSetSizeLimitExceeded")) {
-        return .{ .arena = arena, .kind = .{ .attachment_set_size_limit_exceeded = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.AttachmentSetSizeLimitExceeded = aws.json.parseJsonObject(errors.AttachmentSetSizeLimitExceeded, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .attachment_set_size_limit_exceeded = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "CaseCreationLimitExceeded")) {
-        return .{ .arena = arena, .kind = .{ .case_creation_limit_exceeded = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.CaseCreationLimitExceeded = aws.json.parseJsonObject(errors.CaseCreationLimitExceeded, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .case_creation_limit_exceeded = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "CaseIdNotFound")) {
-        return .{ .arena = arena, .kind = .{ .case_id_not_found = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.CaseIdNotFound = aws.json.parseJsonObject(errors.CaseIdNotFound, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .case_id_not_found = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "DescribeAttachmentLimitExceeded")) {
-        return .{ .arena = arena, .kind = .{ .describe_attachment_limit_exceeded = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.DescribeAttachmentLimitExceeded = aws.json.parseJsonObject(errors.DescribeAttachmentLimitExceeded, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .describe_attachment_limit_exceeded = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "InternalServerError")) {
-        return .{ .arena = arena, .kind = .{ .internal_server_error = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.InternalServerError = aws.json.parseJsonObject(errors.InternalServerError, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .internal_server_error = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "ThrottlingException")) {
-        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.ThrottlingException = aws.json.parseJsonObject(errors.ThrottlingException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .throttling_exception = typed_error } };
+        }
     }
 
     const owned_code = try arena_alloc.dupe(u8, error_code);

@@ -103,54 +103,116 @@ pub const ServiceError = struct {
     }
 };
 
+/// The user does not have permission to perform the action. Check the IAM
+/// policy associated with this user.
 pub const AuthorizationErrorException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Conflict error.
 pub const ConflictErrorException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The home Region is not set. Set the home Region to continue.
 pub const HomeRegionNotSetException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// One or more parameters are not valid. Verify the parameters and try again.
 pub const InvalidParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The value of one or more parameters are either invalid or out of range.
+/// Verify the
+/// parameter values and try again.
 pub const InvalidParameterValueException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The limit of 200 configuration IDs per request has been exceeded.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This operation is not permitted.
 pub const OperationNotPermittedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This issue occurs when the same `clientRequestToken` is used with the
+/// `StartImportTask` action, but with different parameters. For example, you
+/// use the
+/// same request token but have two different import URLs, you can encounter
+/// this issue. If the
+/// import tasks are meant to be different, use a different
+/// `clientRequestToken`, and
+/// try again.
 pub const ResourceInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified configuration ID was not located. Verify the configuration ID
+/// and try
+/// again.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The server experienced an internal error. Try again.
 pub const ServerInternalErrorException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

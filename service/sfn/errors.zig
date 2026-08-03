@@ -1,5 +1,8 @@
 const std = @import("std");
 
+const KmsKeyState = @import("kms_key_state.zig").KmsKeyState;
+const ValidationExceptionReason = @import("validation_exception_reason.zig").ValidationExceptionReason;
+
 pub const ServiceError = struct {
     arena: ?std.heap.ArenaAllocator = null,
     kind: Kind,
@@ -218,169 +221,386 @@ pub const ServiceError = struct {
     }
 };
 
+/// Activity already exists. `EncryptionConfiguration` may not be updated.
 pub const ActivityAlreadyExists = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified activity does not exist.
 pub const ActivityDoesNotExist = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The maximum number of activities has been reached. Existing activities must
+/// be deleted
+/// before a new activity can be created.
 pub const ActivityLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The maximum number of workers concurrently polling for activity tasks has
+/// been
+/// reached.
 pub const ActivityWorkerLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Updating or deleting a resource can cause an inconsistent state. This error
+/// occurs when there're concurrent requests for DeleteStateMachineVersion,
+/// PublishStateMachineVersion, or UpdateStateMachine with the `publish`
+/// parameter set to `true`.
+///
+/// HTTP Status Code: 409
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The execution has the same `name` as another execution (but a different
+/// `input`).
+///
+/// Executions with the same `name` and `input` are considered
+/// idempotent.
 pub const ExecutionAlreadyExists = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified execution does not exist.
 pub const ExecutionDoesNotExist = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The maximum number of running executions has been reached. Running
+/// executions must end or
+/// be stopped before a new execution can be started.
 pub const ExecutionLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The execution Amazon Resource Name (ARN) that you specified for
+/// `executionArn` cannot be redriven.
 pub const ExecutionNotRedrivable = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The provided Amazon Resource Name (ARN) is not valid.
 pub const InvalidArn = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The provided Amazon States Language definition is not valid.
 pub const InvalidDefinition = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Received when `encryptionConfiguration` is specified but various conditions
+/// exist which make the configuration invalid. For example, if `type` is set to
+/// `CUSTOMER_MANAGED_KMS_KEY`, but `kmsKeyId` is null, or
+/// `kmsDataKeyReusePeriodSeconds` is not between 60 and 900, or the KMS key is
+/// not symmetric or inactive.
 pub const InvalidEncryptionConfiguration = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The provided JSON input data is not valid.
 pub const InvalidExecutionInput = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Configuration is not valid.
 pub const InvalidLoggingConfiguration = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The provided name is not valid.
 pub const InvalidName = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The provided JSON output data is not valid.
 pub const InvalidOutput = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The provided token is not valid.
 pub const InvalidToken = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Your `tracingConfiguration` key does not match, or `enabled` has not
+/// been set to `true` or `false`.
 pub const InvalidTracingConfiguration = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Either your KMS key policy or API caller does not have the required
+/// permissions.
 pub const KmsAccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The KMS key is not in valid state, for example: Disabled or Deleted.
 pub const KmsInvalidStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// Current status of the KMS; key. For example: `DISABLED`, `PENDING_DELETION`,
+    /// `PENDING_IMPORT`, `UNAVAILABLE`, `CREATING`.
+    kms_key_state: ?KmsKeyState = null,
+
+    pub const json_field_names = .{
+        .kms_key_state = "kmsKeyState",
+        .message = "message",
+    };
 };
 
+/// Received when KMS returns `ThrottlingException` for a KMS call that Step
+/// Functions makes on behalf of the caller.
 pub const KmsThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Request is missing a required parameter. This error occurs if both
+/// `definition`
+/// and `roleArn` are not specified.
 pub const MissingRequiredParameter = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Could not find the referenced resource.
 pub const ResourceNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    resource_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource_name = "resourceName",
+    };
 };
 
+/// The request would cause a service quota to be exceeded.
+///
+/// HTTP Status Code: 402
 pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A state machine with the same name but a different definition or role ARN
+/// already
+/// exists.
 pub const StateMachineAlreadyExists = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified state machine is being deleted.
 pub const StateMachineDeleting = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified state machine does not exist.
 pub const StateMachineDoesNotExist = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The maximum number of state machines has been reached. Existing state
+/// machines must be
+/// deleted before a new state machine can be created.
 pub const StateMachineLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// State machine type is not supported.
 pub const StateMachineTypeNotSupported = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The activity does not exist.
 pub const TaskDoesNotExist = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The task token has either expired or the task associated with the token has
+/// already been closed.
 pub const TaskTimedOut = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// You've exceeded the number of tags allowed for a resource. See the [ Limits
+/// Topic](https://docs.aws.amazon.com/step-functions/latest/dg/limits.html) in
+/// the
+/// Step Functions Developer Guide.
 pub const TooManyTags = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    resource_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource_name = "resourceName",
+    };
 };
 
+/// The input does not satisfy the constraints specified by an Amazon Web
+/// Services service.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The input does not satisfy the constraints specified by an Amazon Web
+    /// Services service.
+    reason: ?ValidationExceptionReason = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .reason = "reason",
+    };
 };
 
 pub const UnknownServiceError = struct {

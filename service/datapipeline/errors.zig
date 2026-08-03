@@ -78,29 +78,57 @@ pub const ServiceError = struct {
     }
 };
 
+/// An internal service error occurred.
 pub const InternalServiceError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request was not valid. Verify that your request was properly formatted,
+/// that the signature was generated with the correct credentials, and that you
+/// haven't exceeded any of the service limits for your account.
 pub const InvalidRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified pipeline has been deleted.
 pub const PipelineDeletedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified pipeline was not found. Verify that you used the correct user
+/// and account identifiers.
 pub const PipelineNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified task was not found.
 pub const TaskNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

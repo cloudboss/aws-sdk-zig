@@ -163,114 +163,249 @@ pub const ServiceError = struct {
     }
 };
 
+/// The directory is already in use by another WorkMail organization in the same
+/// account and Region.
 pub const DirectoryInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The directory service doesn't recognize the credentials supplied by
+/// WorkMail.
 pub const DirectoryServiceAuthenticationFailedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The directory is unavailable. It might be located in another Region or
+/// deleted.
 pub const DirectoryUnavailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The email address that you're trying to assign is already created for a
+/// different
+/// user, group, or resource.
 pub const EmailAddressInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The user, group, or resource that you're trying to register is already
+/// registered.
 pub const EntityAlreadyRegisteredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The identifier supplied for the user, group, or resource does not exist in
+/// your
+/// organization.
 pub const EntityNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You are performing an operation on a user, group, or resource that isn't in
+/// the
+/// expected state, such as trying to delete an active user.
 pub const EntityStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The configuration for a resource isn't valid. A resource must either be able
+/// to
+/// auto-respond to requests or have at least one delegate associated that can
+/// do so on its
+/// behalf.
 pub const InvalidConfigurationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You SES configuration has customizations that WorkMail cannot save. The
+/// error message lists the invalid setting. For examples of invalid settings,
+/// refer to
+/// [CreateReceiptRule](https://docs.aws.amazon.com/ses/latest/APIReference/API_CreateReceiptRule.html).
 pub const InvalidCustomSesConfigurationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// One or more of the input parameters don't match the service's restrictions.
 pub const InvalidParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The supplied password doesn't match the minimum security constraints, such
+/// as length
+/// or use of special characters.
 pub const InvalidPasswordException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request exceeds the limit of the resource.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The domain you're trying to change is in use by another user or organization
+/// in your account. See the error message for details.
 pub const MailDomainInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The domain specified is not found in your organization.
 pub const MailDomainNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// After a domain has been added to the organization, it must be verified. The
+/// domain is
+/// not yet verified.
 pub const MailDomainStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The user, group, or resource name isn't unique in WorkMail.
 pub const NameAvailabilityException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// An operation received a valid organization identifier that either doesn't
+/// belong or
+/// exist in the system.
 pub const OrganizationNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The organization must have a valid state to perform certain
+/// operations on the organization or its members.
 pub const OrganizationStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This user, group, or resource name is not allowed in WorkMail.
 pub const ReservedNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource cannot be found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource can have up to 50 user-applied tags.
 pub const TooManyTagsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You can't perform a write operation against a read-only directory.
 pub const UnsupportedOperationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

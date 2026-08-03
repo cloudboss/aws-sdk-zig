@@ -108,59 +108,125 @@ pub const ServiceError = struct {
     }
 };
 
+/// There is concurrent modification on a rule, target, archive, or replay.
 pub const ConcurrentModificationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An error occurred because a replay can be canceled only when the state is
+/// Running or
+/// Starting.
 pub const IllegalStatusException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception occurs due to unexpected causes.
 pub const InternalException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The event pattern is not valid.
 pub const InvalidEventPatternException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified state is not a valid state for an event source.
 pub const InvalidStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request failed because it attempted to create resource beyond the
+/// allowed service
+/// quota.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This rule was created by an Amazon Web Services service on behalf of your
+/// account. It is managed by that
+/// service. If you see this error in response to `DeleteRule` or
+/// `RemoveTargets`, you can use the `Force` parameter in those calls to
+/// delete the rule or remove targets from the rule. You cannot modify these
+/// managed rules by
+/// using `DisableRule`, `EnableRule`, `PutTargets`,
+/// `PutRule`, `TagResource`, or `UntagResource`.
 pub const ManagedRuleException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The operation you are attempting is not available in this region.
 pub const OperationDisabledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The event bus policy is too long. For more information, see the limits.
 pub const PolicyLengthExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The resource you are trying to create already exists.
 pub const ResourceAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An entity that you specified does not exist.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

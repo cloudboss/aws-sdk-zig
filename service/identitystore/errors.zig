@@ -1,5 +1,12 @@
 const std = @import("std");
 
+const AccessDeniedExceptionReason = @import("access_denied_exception_reason.zig").AccessDeniedExceptionReason;
+const ConflictExceptionReason = @import("conflict_exception_reason.zig").ConflictExceptionReason;
+const ResourceNotFoundExceptionReason = @import("resource_not_found_exception_reason.zig").ResourceNotFoundExceptionReason;
+const ResourceType = @import("resource_type.zig").ResourceType;
+const ThrottlingExceptionReason = @import("throttling_exception_reason.zig").ThrottlingExceptionReason;
+const ValidationExceptionReason = @import("validation_exception_reason.zig").ValidationExceptionReason;
+
 pub const ServiceError = struct {
     arena: ?std.heap.ArenaAllocator = null,
     kind: Kind,
@@ -88,39 +95,143 @@ pub const ServiceError = struct {
     }
 };
 
+/// You do not have sufficient access to perform this action.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// Indicates the reason for an access denial when returned by KMS while
+    /// accessing a Customer Managed KMS key. For non-KMS access-denied errors, this
+    /// field is not included.
+    reason: ?AccessDeniedExceptionReason = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .reason = "Reason",
+        .request_id = "RequestId",
+    };
 };
 
+/// This request cannot be completed for one of the following reasons:
+///
+/// * Performing the requested operation would violate an existing uniqueness
+///   claim in the identity store. Resolve the conflict before retrying this
+///   request.
+/// * The requested resource was being concurrently modified by another request.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// Indicates the reason for a conflict error when the service is unable to
+    /// access a Customer Managed KMS key. For non-KMS permission errors, this field
+    /// is not included.
+    reason: ?ConflictExceptionReason = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .reason = "Reason",
+        .request_id = "RequestId",
+    };
 };
 
+/// The request processing has failed because of an unknown error, exception or
+/// failure with an internal server.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The number of seconds to wait before retrying the next request.
+    retry_after_seconds: ?i32 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+        .retry_after_seconds = "RetryAfterSeconds",
+    };
 };
 
+/// Indicates that a requested resource is not found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// Indicates the reason for a resource not found error when the service is
+    /// unable to access a Customer Managed KMS key. For non-KMS permission errors,
+    /// this field is not included.
+    reason: ?ResourceNotFoundExceptionReason = null,
+
+    /// The identifier for a resource in the identity store that can be used as
+    /// `UserId` or `GroupId`. The format for `ResourceId` is either `UUID` or
+    /// `1234567890-UUID`, where `UUID` is a randomly generated value for each
+    /// resource when it is created and `1234567890` represents the `
+    /// IdentityStoreId` string value. In the case that the identity store is
+    /// migrated from a legacy SSO identity store, the `ResourceId` for that
+    /// identity store will be in the format of `UUID`. Otherwise, it will be in the
+    /// `1234567890-UUID` format.
+    resource_id: ?[]const u8 = null,
+
+    /// An enum object indicating the type of resource in the identity store
+    /// service. Valid values include USER, GROUP, and IDENTITY_STORE.
+    resource_type: ?ResourceType = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .reason = "Reason",
+        .request_id = "RequestId",
+        .resource_id = "ResourceId",
+        .resource_type = "ResourceType",
+    };
 };
 
+/// The request would cause the number of users or groups in the identity store
+/// to exceed the maximum allowed.
 pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// Indicates that the principal has crossed the throttling limits of the API
+/// operations.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// Indicates the reason for the throttling error when the service is unable to
+    /// access a Customer Managed KMS key. For non-KMS permission errors, this field
+    /// is not included.
+    reason: ?ThrottlingExceptionReason = null,
+
+    /// The number of seconds to wait before retrying the next request.
+    retry_after_seconds: ?i32 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .reason = "Reason",
+        .request_id = "RequestId",
+        .retry_after_seconds = "RetryAfterSeconds",
+    };
 };
 
+/// The request failed because it contains a syntax error.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// Indicates the reason for the validation error when the service is unable to
+    /// access a Customer Managed KMS key. For non-KMS permission errors, this field
+    /// is not included.
+    reason: ?ValidationExceptionReason = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .reason = "Reason",
+        .request_id = "RequestId",
+    };
 };
 
 pub const UnknownServiceError = struct {

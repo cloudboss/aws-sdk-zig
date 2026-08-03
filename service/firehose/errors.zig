@@ -93,44 +93,103 @@ pub const ServiceError = struct {
     }
 };
 
+/// Another modification has already happened. Fetch `VersionId` again and use
+/// it to update the destination.
 pub const ConcurrentModificationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified input parameter has a value that is not valid.
 pub const InvalidArgumentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Firehose throws this exception when an attempt to put records or to start
+/// or stop Firehose stream encryption fails. This happens when the KMS service
+/// throws one of
+/// the following exception types: `AccessDeniedException`,
+/// `InvalidStateException`, `DisabledException`, or
+/// `NotFoundException`.
 pub const InvalidKMSResourceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "code",
+        .message = "message",
+    };
 };
 
+/// Only requests from CloudWatch Logs are supported when CloudWatch Logs
+/// decompression is enabled.
 pub const InvalidSourceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "code",
+        .message = "message",
+    };
 };
 
+/// You have already reached the limit for a requested resource.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The resource is already in use and not available for this operation.
 pub const ResourceInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified resource could not be found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The service is unavailable. Back off and retry the operation. If you
+/// continue to see
+/// the exception, throughput limits for the Firehose stream may have been
+/// exceeded. For more
+/// information about limits and how to request an increase, see [Amazon
+/// Firehose
+/// Limits](https://docs.aws.amazon.com/firehose/latest/dev/limits.html).
 pub const ServiceUnavailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

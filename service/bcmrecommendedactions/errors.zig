@@ -1,5 +1,8 @@
 const std = @import("std");
 
+const ValidationExceptionField = @import("validation_exception_field.zig").ValidationExceptionField;
+const ValidationExceptionReason = @import("validation_exception_reason.zig").ValidationExceptionReason;
+
 pub const ServiceError = struct {
     arena: ?std.heap.ArenaAllocator = null,
     kind: Kind,
@@ -73,24 +76,53 @@ pub const ServiceError = struct {
     }
 };
 
+/// You do not have sufficient access to perform this action.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An unexpected error occurred during the processing of your request.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request was denied due to request throttling.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The input fails to satisfy the constraints specified by an Amazon Web
+/// Services service.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// Lists each problematic field and why it failed validation.
+    field_list: ?[]const ValidationExceptionField = null,
+
+    /// Provides a single, overarching explanation for the validation failure.
+    reason: ValidationExceptionReason,
+
+    pub const json_field_names = .{
+        .field_list = "fieldList",
+        .message = "message",
+        .reason = "reason",
+    };
 };
 
 pub const UnknownServiceError = struct {

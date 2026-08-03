@@ -1,5 +1,7 @@
 const std = @import("std");
 
+const ThrottlingReason = @import("throttling_reason.zig").ThrottlingReason;
+
 pub const ServiceError = struct {
     arena: ?std.heap.ArenaAllocator = null,
     kind: Kind,
@@ -133,84 +135,175 @@ pub const ServiceError = struct {
     }
 };
 
+/// You do not have access required to perform this action.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You are trying to update a resource or configuration that is already being
+/// created or updated. Wait for the previous operation to finish and try again.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// One or more of request parameters specified is not valid.
 pub const InvalidArgsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The requested Amazon Resource Name (ARN) does not refer to an existing
+/// resource.
 pub const InvalidArnException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// One or more values in the DomainValidationOption structure is incorrect.
 pub const InvalidDomainValidationOptionsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An input parameter was invalid.
 pub const InvalidParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Processing has reached an invalid state.
 pub const InvalidStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// One or both of the values that make up the key-value pair is not valid. For
+/// example, you cannot specify a tag value that begins with `aws:`.
 pub const InvalidTagException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An ACM quota has been exceeded.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The certificate request is in process and the certificate in your account
+/// has not yet been issued.
 pub const RequestInProgressException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The certificate is in use by another Amazon Web Services service in the
+/// caller's account. Remove the association and try again.
 pub const ResourceInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified certificate cannot be found in the caller's account or the
+/// caller's account cannot be found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A specified tag did not comply with an existing tag policy and was rejected.
 pub const TagPolicyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request was denied because it exceeded a quota.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// One or more reasons why the request was throttled.
+    throttling_reasons: ?[]const ThrottlingReason = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .throttling_reasons = "throttlingReasons",
+    };
 };
 
+/// The request contains too many tags. Try the request again with fewer tags.
 pub const TooManyTagsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The supplied input failed to satisfy constraints of an Amazon Web Services
+/// service.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

@@ -3,7 +3,8 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
-const ServiceError = @import("errors.zig").ServiceError;
+const errors = @import("errors.zig");
+const ServiceError = errors.ServiceError;
 const StatusDetailFilters = @import("status_detail_filters.zig").StatusDetailFilters;
 const MemberAccountStatus = @import("member_account_status.zig").MemberAccountStatus;
 
@@ -62,7 +63,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetOrganiza
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch return error.OutOfMemory;
         }
         return error.ServiceError;
     }
@@ -113,340 +114,676 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     const owned_request_id = try arena_alloc.dupe(u8, "");
 
     if (std.mem.eql(u8, error_code, "ConflictException")) {
-        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.ConflictException = aws.json.parseJsonObject(errors.ConflictException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .conflict_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "ConformancePackTemplateValidationException")) {
-        return .{ .arena = arena, .kind = .{ .conformance_pack_template_validation_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.ConformancePackTemplateValidationException = aws.json.parseJsonObject(errors.ConformancePackTemplateValidationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .conformance_pack_template_validation_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "IdempotentParameterMismatch")) {
-        return .{ .arena = arena, .kind = .{ .idempotent_parameter_mismatch = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.IdempotentParameterMismatch = aws.json.parseJsonObject(errors.IdempotentParameterMismatch, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .idempotent_parameter_mismatch = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "InsufficientDeliveryPolicyException")) {
-        return .{ .arena = arena, .kind = .{ .insufficient_delivery_policy_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.InsufficientDeliveryPolicyException = aws.json.parseJsonObject(errors.InsufficientDeliveryPolicyException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .insufficient_delivery_policy_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "InsufficientPermissionsException")) {
-        return .{ .arena = arena, .kind = .{ .insufficient_permissions_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.InsufficientPermissionsException = aws.json.parseJsonObject(errors.InsufficientPermissionsException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .insufficient_permissions_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "InvalidConfigurationRecorderNameException")) {
-        return .{ .arena = arena, .kind = .{ .invalid_configuration_recorder_name_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.InvalidConfigurationRecorderNameException = aws.json.parseJsonObject(errors.InvalidConfigurationRecorderNameException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_configuration_recorder_name_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "InvalidDeliveryChannelNameException")) {
-        return .{ .arena = arena, .kind = .{ .invalid_delivery_channel_name_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.InvalidDeliveryChannelNameException = aws.json.parseJsonObject(errors.InvalidDeliveryChannelNameException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_delivery_channel_name_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "InvalidExpressionException")) {
-        return .{ .arena = arena, .kind = .{ .invalid_expression_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.InvalidExpressionException = aws.json.parseJsonObject(errors.InvalidExpressionException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_expression_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "InvalidLimitException")) {
-        return .{ .arena = arena, .kind = .{ .invalid_limit_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.InvalidLimitException = aws.json.parseJsonObject(errors.InvalidLimitException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_limit_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "InvalidNextTokenException")) {
-        return .{ .arena = arena, .kind = .{ .invalid_next_token_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.InvalidNextTokenException = aws.json.parseJsonObject(errors.InvalidNextTokenException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_next_token_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "InvalidParameterValueException")) {
-        return .{ .arena = arena, .kind = .{ .invalid_parameter_value_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.InvalidParameterValueException = aws.json.parseJsonObject(errors.InvalidParameterValueException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_parameter_value_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "InvalidRecordingGroupException")) {
-        return .{ .arena = arena, .kind = .{ .invalid_recording_group_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.InvalidRecordingGroupException = aws.json.parseJsonObject(errors.InvalidRecordingGroupException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_recording_group_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "InvalidResultTokenException")) {
-        return .{ .arena = arena, .kind = .{ .invalid_result_token_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.InvalidResultTokenException = aws.json.parseJsonObject(errors.InvalidResultTokenException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_result_token_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "InvalidRoleException")) {
-        return .{ .arena = arena, .kind = .{ .invalid_role_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.InvalidRoleException = aws.json.parseJsonObject(errors.InvalidRoleException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_role_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "InvalidS3KeyPrefixException")) {
-        return .{ .arena = arena, .kind = .{ .invalid_s3_key_prefix_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.InvalidS3KeyPrefixException = aws.json.parseJsonObject(errors.InvalidS3KeyPrefixException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_s3_key_prefix_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "InvalidS3KmsKeyArnException")) {
-        return .{ .arena = arena, .kind = .{ .invalid_s3_kms_key_arn_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.InvalidS3KmsKeyArnException = aws.json.parseJsonObject(errors.InvalidS3KmsKeyArnException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_s3_kms_key_arn_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "InvalidSNSTopicARNException")) {
-        return .{ .arena = arena, .kind = .{ .invalid_sns_topic_arn_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.InvalidSNSTopicARNException = aws.json.parseJsonObject(errors.InvalidSNSTopicARNException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_sns_topic_arn_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "InvalidTimeRangeException")) {
-        return .{ .arena = arena, .kind = .{ .invalid_time_range_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.InvalidTimeRangeException = aws.json.parseJsonObject(errors.InvalidTimeRangeException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_time_range_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "LastDeliveryChannelDeleteFailedException")) {
-        return .{ .arena = arena, .kind = .{ .last_delivery_channel_delete_failed_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.LastDeliveryChannelDeleteFailedException = aws.json.parseJsonObject(errors.LastDeliveryChannelDeleteFailedException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .last_delivery_channel_delete_failed_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "LimitExceededException")) {
-        return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.LimitExceededException = aws.json.parseJsonObject(errors.LimitExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "MaxActiveResourcesExceededException")) {
-        return .{ .arena = arena, .kind = .{ .max_active_resources_exceeded_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.MaxActiveResourcesExceededException = aws.json.parseJsonObject(errors.MaxActiveResourcesExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .max_active_resources_exceeded_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "MaxNumberOfConfigRulesExceededException")) {
-        return .{ .arena = arena, .kind = .{ .max_number_of_config_rules_exceeded_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.MaxNumberOfConfigRulesExceededException = aws.json.parseJsonObject(errors.MaxNumberOfConfigRulesExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .max_number_of_config_rules_exceeded_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "MaxNumberOfConfigurationRecordersExceededException")) {
-        return .{ .arena = arena, .kind = .{ .max_number_of_configuration_recorders_exceeded_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.MaxNumberOfConfigurationRecordersExceededException = aws.json.parseJsonObject(errors.MaxNumberOfConfigurationRecordersExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .max_number_of_configuration_recorders_exceeded_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "MaxNumberOfConformancePacksExceededException")) {
-        return .{ .arena = arena, .kind = .{ .max_number_of_conformance_packs_exceeded_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.MaxNumberOfConformancePacksExceededException = aws.json.parseJsonObject(errors.MaxNumberOfConformancePacksExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .max_number_of_conformance_packs_exceeded_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "MaxNumberOfDeliveryChannelsExceededException")) {
-        return .{ .arena = arena, .kind = .{ .max_number_of_delivery_channels_exceeded_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.MaxNumberOfDeliveryChannelsExceededException = aws.json.parseJsonObject(errors.MaxNumberOfDeliveryChannelsExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .max_number_of_delivery_channels_exceeded_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "MaxNumberOfOrganizationConfigRulesExceededException")) {
-        return .{ .arena = arena, .kind = .{ .max_number_of_organization_config_rules_exceeded_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.MaxNumberOfOrganizationConfigRulesExceededException = aws.json.parseJsonObject(errors.MaxNumberOfOrganizationConfigRulesExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .max_number_of_organization_config_rules_exceeded_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "MaxNumberOfOrganizationConformancePacksExceededException")) {
-        return .{ .arena = arena, .kind = .{ .max_number_of_organization_conformance_packs_exceeded_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.MaxNumberOfOrganizationConformancePacksExceededException = aws.json.parseJsonObject(errors.MaxNumberOfOrganizationConformancePacksExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .max_number_of_organization_conformance_packs_exceeded_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "MaxNumberOfRetentionConfigurationsExceededException")) {
-        return .{ .arena = arena, .kind = .{ .max_number_of_retention_configurations_exceeded_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.MaxNumberOfRetentionConfigurationsExceededException = aws.json.parseJsonObject(errors.MaxNumberOfRetentionConfigurationsExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .max_number_of_retention_configurations_exceeded_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "NoAvailableConfigurationRecorderException")) {
-        return .{ .arena = arena, .kind = .{ .no_available_configuration_recorder_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.NoAvailableConfigurationRecorderException = aws.json.parseJsonObject(errors.NoAvailableConfigurationRecorderException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .no_available_configuration_recorder_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "NoAvailableDeliveryChannelException")) {
-        return .{ .arena = arena, .kind = .{ .no_available_delivery_channel_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.NoAvailableDeliveryChannelException = aws.json.parseJsonObject(errors.NoAvailableDeliveryChannelException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .no_available_delivery_channel_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "NoAvailableOrganizationException")) {
-        return .{ .arena = arena, .kind = .{ .no_available_organization_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.NoAvailableOrganizationException = aws.json.parseJsonObject(errors.NoAvailableOrganizationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .no_available_organization_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "NoRunningConfigurationRecorderException")) {
-        return .{ .arena = arena, .kind = .{ .no_running_configuration_recorder_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.NoRunningConfigurationRecorderException = aws.json.parseJsonObject(errors.NoRunningConfigurationRecorderException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .no_running_configuration_recorder_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "NoSuchBucketException")) {
-        return .{ .arena = arena, .kind = .{ .no_such_bucket_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.NoSuchBucketException = aws.json.parseJsonObject(errors.NoSuchBucketException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .no_such_bucket_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "NoSuchConfigRuleException")) {
-        return .{ .arena = arena, .kind = .{ .no_such_config_rule_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.NoSuchConfigRuleException = aws.json.parseJsonObject(errors.NoSuchConfigRuleException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .no_such_config_rule_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "NoSuchConfigRuleInConformancePackException")) {
-        return .{ .arena = arena, .kind = .{ .no_such_config_rule_in_conformance_pack_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.NoSuchConfigRuleInConformancePackException = aws.json.parseJsonObject(errors.NoSuchConfigRuleInConformancePackException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .no_such_config_rule_in_conformance_pack_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "NoSuchConfigurationAggregatorException")) {
-        return .{ .arena = arena, .kind = .{ .no_such_configuration_aggregator_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.NoSuchConfigurationAggregatorException = aws.json.parseJsonObject(errors.NoSuchConfigurationAggregatorException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .no_such_configuration_aggregator_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "NoSuchConfigurationRecorderException")) {
-        return .{ .arena = arena, .kind = .{ .no_such_configuration_recorder_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.NoSuchConfigurationRecorderException = aws.json.parseJsonObject(errors.NoSuchConfigurationRecorderException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .no_such_configuration_recorder_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "NoSuchConformancePackException")) {
-        return .{ .arena = arena, .kind = .{ .no_such_conformance_pack_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.NoSuchConformancePackException = aws.json.parseJsonObject(errors.NoSuchConformancePackException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .no_such_conformance_pack_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "NoSuchDeliveryChannelException")) {
-        return .{ .arena = arena, .kind = .{ .no_such_delivery_channel_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.NoSuchDeliveryChannelException = aws.json.parseJsonObject(errors.NoSuchDeliveryChannelException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .no_such_delivery_channel_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "NoSuchOrganizationConfigRuleException")) {
-        return .{ .arena = arena, .kind = .{ .no_such_organization_config_rule_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.NoSuchOrganizationConfigRuleException = aws.json.parseJsonObject(errors.NoSuchOrganizationConfigRuleException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .no_such_organization_config_rule_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "NoSuchOrganizationConformancePackException")) {
-        return .{ .arena = arena, .kind = .{ .no_such_organization_conformance_pack_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.NoSuchOrganizationConformancePackException = aws.json.parseJsonObject(errors.NoSuchOrganizationConformancePackException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .no_such_organization_conformance_pack_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "NoSuchRemediationConfigurationException")) {
-        return .{ .arena = arena, .kind = .{ .no_such_remediation_configuration_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.NoSuchRemediationConfigurationException = aws.json.parseJsonObject(errors.NoSuchRemediationConfigurationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .no_such_remediation_configuration_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "NoSuchRemediationExceptionException")) {
-        return .{ .arena = arena, .kind = .{ .no_such_remediation_exception_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.NoSuchRemediationExceptionException = aws.json.parseJsonObject(errors.NoSuchRemediationExceptionException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .no_such_remediation_exception_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "NoSuchRetentionConfigurationException")) {
-        return .{ .arena = arena, .kind = .{ .no_such_retention_configuration_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.NoSuchRetentionConfigurationException = aws.json.parseJsonObject(errors.NoSuchRetentionConfigurationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .no_such_retention_configuration_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "OrganizationAccessDeniedException")) {
-        return .{ .arena = arena, .kind = .{ .organization_access_denied_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.OrganizationAccessDeniedException = aws.json.parseJsonObject(errors.OrganizationAccessDeniedException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .organization_access_denied_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "OrganizationAllFeaturesNotEnabledException")) {
-        return .{ .arena = arena, .kind = .{ .organization_all_features_not_enabled_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.OrganizationAllFeaturesNotEnabledException = aws.json.parseJsonObject(errors.OrganizationAllFeaturesNotEnabledException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .organization_all_features_not_enabled_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "OrganizationConformancePackTemplateValidationException")) {
-        return .{ .arena = arena, .kind = .{ .organization_conformance_pack_template_validation_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.OrganizationConformancePackTemplateValidationException = aws.json.parseJsonObject(errors.OrganizationConformancePackTemplateValidationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .organization_conformance_pack_template_validation_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "OversizedConfigurationItemException")) {
-        return .{ .arena = arena, .kind = .{ .oversized_configuration_item_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.OversizedConfigurationItemException = aws.json.parseJsonObject(errors.OversizedConfigurationItemException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .oversized_configuration_item_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "RemediationInProgressException")) {
-        return .{ .arena = arena, .kind = .{ .remediation_in_progress_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.RemediationInProgressException = aws.json.parseJsonObject(errors.RemediationInProgressException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .remediation_in_progress_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "ResourceConcurrentModificationException")) {
-        return .{ .arena = arena, .kind = .{ .resource_concurrent_modification_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.ResourceConcurrentModificationException = aws.json.parseJsonObject(errors.ResourceConcurrentModificationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_concurrent_modification_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "ResourceInUseException")) {
-        return .{ .arena = arena, .kind = .{ .resource_in_use_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.ResourceInUseException = aws.json.parseJsonObject(errors.ResourceInUseException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_in_use_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "ResourceNotDiscoveredException")) {
-        return .{ .arena = arena, .kind = .{ .resource_not_discovered_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.ResourceNotDiscoveredException = aws.json.parseJsonObject(errors.ResourceNotDiscoveredException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_not_discovered_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
-        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.ResourceNotFoundException = aws.json.parseJsonObject(errors.ResourceNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_not_found_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "TooManyTagsException")) {
-        return .{ .arena = arena, .kind = .{ .too_many_tags_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.TooManyTagsException = aws.json.parseJsonObject(errors.TooManyTagsException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .too_many_tags_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "UnmodifiableEntityException")) {
-        return .{ .arena = arena, .kind = .{ .unmodifiable_entity_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.UnmodifiableEntityException = aws.json.parseJsonObject(errors.UnmodifiableEntityException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .unmodifiable_entity_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "ValidationException")) {
-        return .{ .arena = arena, .kind = .{ .validation_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.ValidationException = aws.json.parseJsonObject(errors.ValidationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .validation_exception = typed_error } };
+        }
     }
 
     const owned_code = try arena_alloc.dupe(u8, error_code);

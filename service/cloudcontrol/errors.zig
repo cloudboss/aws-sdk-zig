@@ -158,109 +158,247 @@ pub const ServiceError = struct {
     }
 };
 
+/// The resource with the name requested already exists.
 pub const AlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified client token has already been used in another resource
+/// request.
+///
+/// It's best practice for client tokens to be unique for each resource
+/// operation request.
+/// However, client token expire after 36 hours.
 pub const ClientTokenConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource is currently being modified by another operation.
 pub const ConcurrentModificationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Another resource operation is currently being performed on this resource.
 pub const ConcurrentOperationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource handler has returned that the downstream service generated an
+/// error that
+/// doesn't map to any other handler error code.
 pub const GeneralServiceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource handler has failed without a returning a more specific error
+/// code. This can
+/// include timeouts.
 pub const HandlerFailureException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource handler has returned that an unexpected error occurred within
+/// the resource
+/// handler.
 pub const HandlerInternalFailureException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource handler has returned that the credentials provided by the user
+/// are
+/// invalid.
 pub const InvalidCredentialsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource handler has returned that invalid input from the user has
+/// generated a generic
+/// exception.
 pub const InvalidRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource handler has returned that the request couldn't be completed due
+/// to networking
+/// issues, such as a failure to receive a response from the server.
 pub const NetworkFailureException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource handler has returned that the downstream resource failed to
+/// complete all of
+/// its ready-state checks.
 pub const NotStabilizedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// One or more properties included in this resource operation are defined as
+/// create-only, and
+/// therefore can't be updated.
 pub const NotUpdatableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Cloud Control API hasn't received a valid response from the resource
+/// handler, due to a configuration
+/// error. This includes issues such as the resource handler returning an
+/// invalid response, or
+/// timing out.
 pub const PrivateTypeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A resource operation with the specified request token can't be found.
 pub const RequestTokenNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource is temporarily unavailable to be acted upon. For example, if
+/// the resource is
+/// currently undergoing an operation and can't be acted upon until that
+/// operation is
+/// finished.
 pub const ResourceConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A resource with the specified identifier can't be found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource handler has returned that the downstream service returned an
+/// internal error,
+/// typically with a `5XX HTTP` status code.
 pub const ServiceInternalErrorException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource handler has returned that a non-transient resource limit was
+/// reached on the
+/// service side.
 pub const ServiceLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request was denied due to request throttling.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified extension doesn't exist in the CloudFormation registry.
 pub const TypeNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified resource doesn't support this resource operation.
 pub const UnsupportedActionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

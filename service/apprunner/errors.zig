@@ -78,29 +78,61 @@ pub const ServiceError = struct {
     }
 };
 
+/// An unexpected service exception occurred.
 pub const InternalServiceErrorException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// One or more input parameters aren't valid. Refer to the API action's
+/// document page, correct the input parameters, and try the action again.
 pub const InvalidRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You can't perform this action when the resource is in its current state.
 pub const InvalidStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A resource doesn't exist for the specified Amazon Resource Name (ARN) in
+/// your Amazon Web Services account.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// App Runner can't create this resource. You've reached your account quota for
+/// this resource type.
+///
+/// For App Runner per-resource quotas, see [App Runner endpoints and
+/// quotas](https://docs.aws.amazon.com/general/latest/gr/apprunner.html) in the
+/// *Amazon Web Services General Reference*.
 pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

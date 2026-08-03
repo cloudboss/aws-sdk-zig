@@ -68,19 +68,36 @@ pub const ServiceError = struct {
     }
 };
 
+/// An internal error has occurred. Retry your request. If the problem persists,
+/// post a
+/// message with details on the AWS forums.
 pub const InternalServiceErrorException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// One or more parameters in your request was invalid.
 pub const InvalidParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The calls to the GetEntitlements API are throttled.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

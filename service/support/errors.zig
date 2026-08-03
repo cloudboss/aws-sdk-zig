@@ -103,54 +103,112 @@ pub const ServiceError = struct {
     }
 };
 
+/// An attachment with the specified ID could not be found.
 pub const AttachmentIdNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The limit for the number of attachment sets created in a short period of
+/// time has been
+/// exceeded.
 pub const AttachmentLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The expiration time of the attachment set has passed. The set expires 1 hour
+/// after it
+/// is created.
 pub const AttachmentSetExpired = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An attachment set with the specified ID could not be found.
 pub const AttachmentSetIdNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A limit for the size of an attachment set has been exceeded. The limits are
+/// three
+/// attachments and 5 MB per attachment.
 pub const AttachmentSetSizeLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The case creation limit for the account has been exceeded.
 pub const CaseCreationLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The requested `caseId` couldn't be located.
 pub const CaseIdNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The limit for the number of DescribeAttachment requests in a short
+/// period of time has been exceeded.
 pub const DescribeAttachmentLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An internal server error occurred.
 pub const InternalServerError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// You have exceeded the maximum allowed TPS (Transactions Per Second) for the
+/// operations.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

@@ -98,49 +98,125 @@ pub const ServiceError = struct {
     }
 };
 
+/// Concurrent updates caused an exception, for example, if you request an
+/// update to an
+/// Application Auto Scaling resource that already has a pending update.
 pub const ConcurrentUpdateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Failed access to resources caused an exception. This exception is thrown
+/// when Application Auto Scaling
+/// is unable to retrieve the alarms associated with a scaling policy due to a
+/// client error,
+/// for example, if the role ARN specified for a scalable target does not have
+/// permission to
+/// call the CloudWatch
+/// [DescribeAlarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarms.html) on your behalf.
 pub const FailedResourceAccessException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The service encountered an internal error.
 pub const InternalServiceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The next token supplied was invalid.
 pub const InvalidNextTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A per-account resource limit is exceeded. For more information, see
+/// [Application Auto Scaling service
+/// quotas](https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-limits.html).
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified object could not be found. For any operation that depends on
+/// the existence
+/// of a scalable target, this exception is thrown if the scalable target with
+/// the specified
+/// service namespace, resource ID, and scalable dimension does not exist. For
+/// any operation
+/// that deletes or deregisters a resource, this exception is thrown if the
+/// resource cannot be
+/// found.
 pub const ObjectNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified resource doesn't exist.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The name of the Application Auto Scaling resource. This value is an Amazon
+    /// Resource Name (ARN).
+    resource_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .resource_name = "ResourceName",
+    };
 };
 
+/// The request contains too many tags. Try the request again with fewer tags.
 pub const TooManyTagsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The name of the Application Auto Scaling resource. This value is an Amazon
+    /// Resource Name (ARN).
+    resource_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .resource_name = "ResourceName",
+    };
 };
 
+/// An exception was thrown for a validation issue. Review the available
+/// parameters for the
+/// API request.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

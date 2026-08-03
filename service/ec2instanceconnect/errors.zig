@@ -113,64 +113,138 @@ pub const ServiceError = struct {
     }
 };
 
+/// Either your AWS credentials are not valid or you do not have access to the
+/// EC2 instance.
 pub const AuthException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified instance was not found.
 pub const EC2InstanceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Unable to connect because the instance is not in a valid state.
+/// Connecting to a stopped or terminated instance is not supported. If the
+/// instance is stopped,
+/// start your instance, and try to connect again.
 pub const EC2InstanceStateInvalidException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The instance type is not supported for connecting via the serial console.
+/// Only Nitro
+/// instance types are currently supported.
 pub const EC2InstanceTypeInvalidException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The instance is currently unavailable. Wait a few minutes and try again.
 pub const EC2InstanceUnavailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// One of the parameters is not valid.
 pub const InvalidArgsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Your account is not authorized to use the EC2 Serial Console. To authorize
+/// your
+/// account, run the EnableSerialConsoleAccess API. For more information, see
+/// [EnableSerialConsoleAccess](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EnableSerialConsoleAccess.html) in the *Amazon EC2 API Reference*.
 pub const SerialConsoleAccessDisabledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The instance currently has 1 active serial console session. Only 1 session
+/// is supported at a time.
 pub const SerialConsoleSessionLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Unable to start a serial console session. Please try again.
 pub const SerialConsoleSessionUnavailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Your instance's BIOS version is unsupported for serial console connection.
+/// Reboot your instance to update its BIOS, and then try again to connect.
 pub const SerialConsoleSessionUnsupportedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The service encountered an error. Follow the instructions in the error
+/// message and try again.
 pub const ServiceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The requests were made too frequently and have been throttled. Wait a while
+/// and try again.
+/// To increase the limit on your request frequency, contact AWS Support.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

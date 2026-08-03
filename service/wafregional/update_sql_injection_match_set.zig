@@ -3,7 +3,8 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
-const ServiceError = @import("errors.zig").ServiceError;
+const errors = @import("errors.zig");
+const ServiceError = errors.ServiceError;
 const SqlInjectionMatchSetUpdate = @import("sql_injection_match_set_update.zig").SqlInjectionMatchSetUpdate;
 
 pub const UpdateSqlInjectionMatchSetInput = struct {
@@ -62,7 +63,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSqlIn
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch return error.OutOfMemory;
         }
         return error.ServiceError;
     }
@@ -113,124 +114,244 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     const owned_request_id = try arena_alloc.dupe(u8, "");
 
     if (std.mem.eql(u8, error_code, "WAFBadRequestException")) {
-        return .{ .arena = arena, .kind = .{ .waf_bad_request_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.WAFBadRequestException = aws.json.parseJsonObject(errors.WAFBadRequestException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .waf_bad_request_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "WAFDisallowedNameException")) {
-        return .{ .arena = arena, .kind = .{ .waf_disallowed_name_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.WAFDisallowedNameException = aws.json.parseJsonObject(errors.WAFDisallowedNameException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .waf_disallowed_name_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "WAFEntityMigrationException")) {
-        return .{ .arena = arena, .kind = .{ .waf_entity_migration_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.WAFEntityMigrationException = aws.json.parseJsonObject(errors.WAFEntityMigrationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .waf_entity_migration_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "WAFInternalErrorException")) {
-        return .{ .arena = arena, .kind = .{ .waf_internal_error_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.WAFInternalErrorException = aws.json.parseJsonObject(errors.WAFInternalErrorException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .waf_internal_error_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "WAFInvalidAccountException")) {
-        return .{ .arena = arena, .kind = .{ .waf_invalid_account_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.WAFInvalidAccountException = aws.json.parseJsonObject(errors.WAFInvalidAccountException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .waf_invalid_account_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "WAFInvalidOperationException")) {
-        return .{ .arena = arena, .kind = .{ .waf_invalid_operation_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.WAFInvalidOperationException = aws.json.parseJsonObject(errors.WAFInvalidOperationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .waf_invalid_operation_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "WAFInvalidParameterException")) {
-        return .{ .arena = arena, .kind = .{ .waf_invalid_parameter_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.WAFInvalidParameterException = aws.json.parseJsonObject(errors.WAFInvalidParameterException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .waf_invalid_parameter_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "WAFInvalidPermissionPolicyException")) {
-        return .{ .arena = arena, .kind = .{ .waf_invalid_permission_policy_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.WAFInvalidPermissionPolicyException = aws.json.parseJsonObject(errors.WAFInvalidPermissionPolicyException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .waf_invalid_permission_policy_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "WAFInvalidRegexPatternException")) {
-        return .{ .arena = arena, .kind = .{ .waf_invalid_regex_pattern_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.WAFInvalidRegexPatternException = aws.json.parseJsonObject(errors.WAFInvalidRegexPatternException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .waf_invalid_regex_pattern_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "WAFLimitsExceededException")) {
-        return .{ .arena = arena, .kind = .{ .waf_limits_exceeded_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.WAFLimitsExceededException = aws.json.parseJsonObject(errors.WAFLimitsExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .waf_limits_exceeded_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "WAFNonEmptyEntityException")) {
-        return .{ .arena = arena, .kind = .{ .waf_non_empty_entity_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.WAFNonEmptyEntityException = aws.json.parseJsonObject(errors.WAFNonEmptyEntityException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .waf_non_empty_entity_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "WAFNonexistentContainerException")) {
-        return .{ .arena = arena, .kind = .{ .waf_nonexistent_container_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.WAFNonexistentContainerException = aws.json.parseJsonObject(errors.WAFNonexistentContainerException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .waf_nonexistent_container_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "WAFNonexistentItemException")) {
-        return .{ .arena = arena, .kind = .{ .waf_nonexistent_item_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.WAFNonexistentItemException = aws.json.parseJsonObject(errors.WAFNonexistentItemException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .waf_nonexistent_item_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "WAFReferencedItemException")) {
-        return .{ .arena = arena, .kind = .{ .waf_referenced_item_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.WAFReferencedItemException = aws.json.parseJsonObject(errors.WAFReferencedItemException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .waf_referenced_item_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "WAFServiceLinkedRoleErrorException")) {
-        return .{ .arena = arena, .kind = .{ .waf_service_linked_role_error_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.WAFServiceLinkedRoleErrorException = aws.json.parseJsonObject(errors.WAFServiceLinkedRoleErrorException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .waf_service_linked_role_error_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "WAFStaleDataException")) {
-        return .{ .arena = arena, .kind = .{ .waf_stale_data_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.WAFStaleDataException = aws.json.parseJsonObject(errors.WAFStaleDataException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .waf_stale_data_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "WAFSubscriptionNotFoundException")) {
-        return .{ .arena = arena, .kind = .{ .waf_subscription_not_found_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.WAFSubscriptionNotFoundException = aws.json.parseJsonObject(errors.WAFSubscriptionNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .waf_subscription_not_found_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "WAFTagOperationException")) {
-        return .{ .arena = arena, .kind = .{ .waf_tag_operation_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.WAFTagOperationException = aws.json.parseJsonObject(errors.WAFTagOperationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .waf_tag_operation_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "WAFTagOperationInternalErrorException")) {
-        return .{ .arena = arena, .kind = .{ .waf_tag_operation_internal_error_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.WAFTagOperationInternalErrorException = aws.json.parseJsonObject(errors.WAFTagOperationInternalErrorException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .waf_tag_operation_internal_error_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "WAFUnavailableEntityException")) {
-        return .{ .arena = arena, .kind = .{ .waf_unavailable_entity_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.WAFUnavailableEntityException = aws.json.parseJsonObject(errors.WAFUnavailableEntityException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .waf_unavailable_entity_exception = typed_error } };
+        }
     }
 
     const owned_code = try arena_alloc.dupe(u8, error_code);

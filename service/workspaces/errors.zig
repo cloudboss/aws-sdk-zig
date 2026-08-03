@@ -168,119 +168,251 @@ pub const ServiceError = struct {
     }
 };
 
+/// The user is not authorized to access a resource.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified application is not supported.
 pub const ApplicationNotSupportedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
+/// The compute type of the WorkSpace is not compatible with the application.
 pub const ComputeNotCompatibleException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
+/// The `TargetAccountId` is already linked or invited.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified application is not compatible with the resource.
 pub const IncompatibleApplicationsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
+/// Unexpected server error occured.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Two or more of the selected parameter values cannot be used together.
 pub const InvalidParameterCombinationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// One or more parameter values are not valid.
 pub const InvalidParameterValuesException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The state of the resource is not valid for this operation.
 pub const InvalidResourceStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The operating system of the WorkSpace is not compatible with the
+/// application.
 pub const OperatingSystemNotCompatibleException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
+/// The properties of this WorkSpace are currently being modified. Try again in
+/// a moment.
 pub const OperationInProgressException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This operation is not supported.
 pub const OperationNotSupportedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The exception error reason.
+    reason: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .reason = "reason",
+    };
 };
 
+/// The specified resource already exists.
 pub const ResourceAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The resource is associated with a directory.
 pub const ResourceAssociatedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The resource could not be created.
 pub const ResourceCreationFailedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified resource is currently in use.
 pub const ResourceInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The ID of the resource that is in use.
+    resource_id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource_id = "ResourceId",
+    };
 };
 
+/// Your resource limits have been exceeded.
 pub const ResourceLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The resource could not be found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The ID of the resource that could not be found.
+    resource_id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource_id = "ResourceId",
+    };
 };
 
+/// The specified resource is not available.
 pub const ResourceUnavailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The identifier of the resource that is not available.
+    resource_id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource_id = "ResourceId",
+    };
 };
 
+/// The configuration of this network is not supported for this operation, or
+/// your network configuration
+/// conflicts with the Amazon WorkSpaces management network IP range. For more
+/// information, see
+/// [
+/// Configure a VPC for Amazon
+/// WorkSpaces](https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-vpc.html).
 pub const UnsupportedNetworkConfigurationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The configuration of this WorkSpace is not supported for this operation. For
+/// more information, see
+/// [Required
+/// Configuration and Service Components for WorkSpaces
+/// ](https://docs.aws.amazon.com/workspaces/latest/adminguide/required-service-components.html).
 pub const UnsupportedWorkspaceConfigurationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// You either haven't provided a `TargetAccountId` or
+/// are using the same value for `TargetAccountId` and `SourceAccountId`.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The workspaces_DefaultRole role could not be found. If this is the first
+/// time you are registering a directory, you
+/// will need to create the workspaces_DefaultRole role before you can register
+/// a directory. For more information, see [Creating the workspaces_DefaultRole
+/// Role](https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role).
 pub const WorkspacesDefaultRoleNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

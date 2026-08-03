@@ -88,39 +88,80 @@ pub const ServiceError = struct {
     }
 };
 
+/// The request was rejected because the requester does not have permission to
+/// perform the
+/// requested operation.
 pub const CloudHsmAccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request was rejected because of an CloudHSM internal failure. The
+/// request can
+/// be retried.
 pub const CloudHsmInternalFailureException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request was rejected because it is not a valid request.
 pub const CloudHsmInvalidRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request was rejected because it exceeds an CloudHSM limit.
 pub const CloudHsmResourceLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request was rejected because it refers to a resource that cannot be
+/// found.
 pub const CloudHsmResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request was rejected because an error occurred.
 pub const CloudHsmServiceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request was rejected because of a tagging failure. Verify the tag
+/// conditions in all applicable policies, and then retry the request.
 pub const CloudHsmTagException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

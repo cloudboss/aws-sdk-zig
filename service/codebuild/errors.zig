@@ -83,34 +83,68 @@ pub const ServiceError = struct {
     }
 };
 
+/// An Amazon Web Services service limit was exceeded for the calling Amazon Web
+/// Services account.
 pub const AccountLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The CodeBuild access has been suspended for the calling Amazon Web Services
+/// account.
 pub const AccountSuspendedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The input value that was provided is not valid.
 pub const InvalidInputException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// There was a problem with the underlying OAuth provider.
 pub const OAuthProviderException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified Amazon Web Services resource cannot be created, because an
+/// Amazon Web Services resource with the same
+/// settings already exists.
 pub const ResourceAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified Amazon Web Services resource cannot be found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

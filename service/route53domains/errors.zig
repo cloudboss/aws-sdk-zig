@@ -93,44 +93,100 @@ pub const ServiceError = struct {
     }
 };
 
+/// This error is returned if you call `AssociateDelegationSignerToDomain`
+/// when the specified domain has reached the maximum number of DS records. You
+/// can't add
+/// any additional DS records unless you delete an existing one first.
 pub const DnssecLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The number of domains has exceeded the allowed threshold for the account.
 pub const DomainLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request is already in progress for the domain.
 pub const DuplicateRequest = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+        .request_id = "requestId",
+    };
 };
 
+/// The requested item is not acceptable. For example, for APIs that accept a
+/// domain name,
+/// the request might specify a domain name that doesn't belong to the account
+/// that
+/// submitted the request. For `AcceptDomainTransferFromAnotherAwsAccount`, the
+/// password might be invalid.
 pub const InvalidInput = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The number of operations or jobs running exceeded the allowed threshold for
+/// the
+/// account.
 pub const OperationLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The top-level domain is currently undergoing maintenance and the request
+/// cannot be processed. Try again later.
 pub const TLDInMaintenance = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The top-level domain that is currently undergoing maintenance.
+    tld: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .tld = "tld",
+    };
 };
 
+/// The top-level domain does not support this operation.
 pub const TLDRulesViolation = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Amazon Route 53 does not support this top-level domain (TLD).
 pub const UnsupportedTLD = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

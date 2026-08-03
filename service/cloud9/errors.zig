@@ -93,44 +93,132 @@ pub const ServiceError = struct {
     }
 };
 
+/// The target request is invalid.
 pub const BadRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    class_name: ?[]const u8 = null,
+
+    code: ?i32 = null,
+
+    pub const json_field_names = .{
+        .class_name = "className",
+        .code = "code",
+        .message = "message",
+    };
 };
 
+/// A concurrent access issue occurred.
 pub const ConcurrentAccessException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    class_name: ?[]const u8 = null,
+
+    code: ?i32 = null,
+
+    pub const json_field_names = .{
+        .class_name = "className",
+        .code = "code",
+        .message = "message",
+    };
 };
 
+/// A conflict occurred.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    class_name: ?[]const u8 = null,
+
+    code: ?i32 = null,
+
+    pub const json_field_names = .{
+        .class_name = "className",
+        .code = "code",
+        .message = "message",
+    };
 };
 
+/// An access permissions issue occurred.
 pub const ForbiddenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    class_name: ?[]const u8 = null,
+
+    code: ?i32 = null,
+
+    pub const json_field_names = .{
+        .class_name = "className",
+        .code = "code",
+        .message = "message",
+    };
 };
 
+/// An internal server error occurred.
 pub const InternalServerErrorException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    class_name: ?[]const u8 = null,
+
+    code: ?i32 = null,
+
+    pub const json_field_names = .{
+        .class_name = "className",
+        .code = "code",
+        .message = "message",
+    };
 };
 
+/// A service limit was exceeded.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    class_name: ?[]const u8 = null,
+
+    code: ?i32 = null,
+
+    pub const json_field_names = .{
+        .class_name = "className",
+        .code = "code",
+        .message = "message",
+    };
 };
 
+/// The target resource cannot be found.
 pub const NotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    class_name: ?[]const u8 = null,
+
+    code: ?i32 = null,
+
+    pub const json_field_names = .{
+        .class_name = "className",
+        .code = "code",
+        .message = "message",
+    };
 };
 
+/// Too many service requests were made over the given time period.
 pub const TooManyRequestsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    class_name: ?[]const u8 = null,
+
+    code: ?i32 = null,
+
+    pub const json_field_names = .{
+        .class_name = "className",
+        .code = "code",
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

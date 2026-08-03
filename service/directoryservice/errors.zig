@@ -253,204 +253,487 @@ pub const ServiceError = struct {
     }
 };
 
+/// You do not have sufficient access to perform this action.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// A directory assessment is automatically created when you create a hybrid
+/// directory.
+/// There are two types of assessments: `CUSTOMER` and `SYSTEM`. Your
+/// Amazon Web Services account has a limit of 100 `CUSTOMER` directory
+/// assessments.
+///
+/// If you attempt to create a hybrid directory; and you already have 100
+/// `CUSTOMER` directory assessments;, you will encounter an error. Delete
+/// assessments to free up capacity before trying again.
+///
+/// You can request an increase to your `CUSTOMER` directory assessment quota
+/// by contacting customer support or delete existing CUSTOMER directory
+/// assessments; to
+/// free up capacity.
 pub const ADAssessmentLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// An authentication error occurred.
 pub const AuthenticationFailedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The certificate has already been registered into the system.
 pub const CertificateAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The certificate is not present in the system for describe or deregister
+/// activities.
 pub const CertificateDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The certificate is being used for the LDAP security connection and cannot be
+/// removed
+/// without disabling LDAP security.
 pub const CertificateInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The certificate could not be added because the certificate limit has been
+/// reached.
 pub const CertificateLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// A client exception has occurred.
 pub const ClientException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The Region you specified is the same Region where the Managed Microsoft AD
+/// directory was created.
+/// Specify a different Region and try again.
 pub const DirectoryAlreadyInRegionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The specified directory has already been shared with this Amazon Web
+/// Services account.
 pub const DirectoryAlreadySharedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The specified directory does not exist in the system.
 pub const DirectoryDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The directory is already updated to desired update type settings.
 pub const DirectoryInDesiredStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The maximum number of directories in the region has been reached. You can
+/// use the
+/// GetDirectoryLimits operation to determine your directory limits in
+/// the region.
 pub const DirectoryLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The specified directory has not been shared with this Amazon Web Services
+/// account.
 pub const DirectoryNotSharedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The specified directory is unavailable.
 pub const DirectoryUnavailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// A disable operation for CA enrollment policy is already in progress for this
+/// directory.
 pub const DisableAlreadyInProgressException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The maximum allowed number of domain controllers per directory was exceeded.
+/// The
+/// default limit per directory is 20 domain controllers.
 pub const DomainControllerLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// An enable operation for CA enrollment policy is already in progress for this
+/// directory.
 pub const EnableAlreadyInProgressException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The specified entity already exists.
 pub const EntityAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The specified entity could not be found.
 pub const EntityDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The specified directory setting is not compatible with other settings.
 pub const IncompatibleSettingsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The account does not have sufficient permission to perform the operation.
 pub const InsufficientPermissionsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The certificate PEM that was provided has incorrect encoding.
 pub const InvalidCertificateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// Client authentication is already enabled.
 pub const InvalidClientAuthStatusException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The LDAP activities could not be performed because they are limited by the
+/// LDAPS
+/// status.
 pub const InvalidLDAPSStatusException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The `NextToken` value is not valid.
 pub const InvalidNextTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// One or more parameters are not valid.
 pub const InvalidParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The new password provided by the user does not meet the password complexity
+/// requirements defined in your directory.
 pub const InvalidPasswordException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The specified shared target is not valid.
 pub const InvalidTargetException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The maximum allowed number of IP addresses was exceeded. The default limit
+/// is 100 IP
+/// address blocks.
 pub const IpRouteLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// Client authentication setup could not be completed because at least one
+/// valid certificate
+/// must be registered in the system.
 pub const NoAvailableCertificateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// Exception encountered while trying to access your Amazon Web Services
+/// organization.
 pub const OrganizationsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// You have reached the limit for maximum number of simultaneous Region
+/// replications per
+/// directory.
 pub const RegionLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// An exception has occurred in Directory Service.
 pub const ServiceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The maximum number of Amazon Web Services accounts that you can share with
+/// this directory has been
+/// reached.
 pub const ShareLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The maximum number of manual snapshots for the directory has been reached.
+/// You can
+/// use the GetSnapshotLimits operation to determine the snapshot limits
+/// for a directory.
 pub const SnapshotLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The maximum allowed number of tags was exceeded.
 pub const TagLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The operation is not supported.
 pub const UnsupportedOperationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The specified directory setting is not supported.
 pub const UnsupportedSettingsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
+/// The user provided a username that does not exist in your directory.
 pub const UserDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .request_id = "RequestId",
+    };
 };
 
 pub const UnknownServiceError = struct {

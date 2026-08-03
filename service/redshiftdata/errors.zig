@@ -98,49 +98,107 @@ pub const ServiceError = struct {
     }
 };
 
+/// The Amazon Redshift Data API operation failed because the maximum number of
+/// active sessions exceeded.
 pub const ActiveSessionsExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The number of active statements exceeds the limit.
 pub const ActiveStatementsExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// An SQL statement encountered an environmental error while running.
 pub const BatchExecuteStatementException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// Statement identifier of the exception.
+    statement_id: []const u8,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .statement_id = "StatementId",
+    };
 };
 
+/// Connection to a database failed.
 pub const DatabaseConnectionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The SQL statement encountered an environmental error while running.
 pub const ExecuteStatementException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// Statement identifier of the exception.
+    statement_id: []const u8,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .statement_id = "StatementId",
+    };
 };
 
+/// The Amazon Redshift Data API operation failed due to invalid input.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The Amazon Redshift Data API operation failed due to timeout.
 pub const QueryTimeoutException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The Amazon Redshift Data API operation failed due to a missing resource.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// Resource identifier associated with the exception.
+    resource_id: []const u8,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .resource_id = "ResourceId",
+    };
 };
 
+/// The Amazon Redshift Data API operation failed due to invalid input.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

@@ -3,7 +3,8 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
-const ServiceError = @import("errors.zig").ServiceError;
+const errors = @import("errors.zig");
+const ServiceError = errors.ServiceError;
 const CloseStatusFilter = @import("close_status_filter.zig").CloseStatusFilter;
 const ExecutionTimeFilter = @import("execution_time_filter.zig").ExecutionTimeFilter;
 const WorkflowExecutionFilter = @import("workflow_execution_filter.zig").WorkflowExecutionFilter;
@@ -108,7 +109,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CountClosed
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch return error.OutOfMemory;
         }
         return error.ServiceError;
     }
@@ -158,70 +159,136 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     const owned_request_id = try arena_alloc.dupe(u8, "");
 
     if (std.mem.eql(u8, error_code, "DefaultUndefinedFault")) {
-        return .{ .arena = arena, .kind = .{ .default_undefined_fault = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.DefaultUndefinedFault = aws.json.parseJsonObject(errors.DefaultUndefinedFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .default_undefined_fault = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "DomainAlreadyExistsFault")) {
-        return .{ .arena = arena, .kind = .{ .domain_already_exists_fault = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.DomainAlreadyExistsFault = aws.json.parseJsonObject(errors.DomainAlreadyExistsFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .domain_already_exists_fault = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "DomainDeprecatedFault")) {
-        return .{ .arena = arena, .kind = .{ .domain_deprecated_fault = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.DomainDeprecatedFault = aws.json.parseJsonObject(errors.DomainDeprecatedFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .domain_deprecated_fault = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "LimitExceededFault")) {
-        return .{ .arena = arena, .kind = .{ .limit_exceeded_fault = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.LimitExceededFault = aws.json.parseJsonObject(errors.LimitExceededFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .limit_exceeded_fault = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "OperationNotPermittedFault")) {
-        return .{ .arena = arena, .kind = .{ .operation_not_permitted_fault = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.OperationNotPermittedFault = aws.json.parseJsonObject(errors.OperationNotPermittedFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .operation_not_permitted_fault = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "TooManyTagsFault")) {
-        return .{ .arena = arena, .kind = .{ .too_many_tags_fault = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.TooManyTagsFault = aws.json.parseJsonObject(errors.TooManyTagsFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .too_many_tags_fault = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "TypeAlreadyExistsFault")) {
-        return .{ .arena = arena, .kind = .{ .type_already_exists_fault = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.TypeAlreadyExistsFault = aws.json.parseJsonObject(errors.TypeAlreadyExistsFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .type_already_exists_fault = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "TypeDeprecatedFault")) {
-        return .{ .arena = arena, .kind = .{ .type_deprecated_fault = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.TypeDeprecatedFault = aws.json.parseJsonObject(errors.TypeDeprecatedFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .type_deprecated_fault = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "TypeNotDeprecatedFault")) {
-        return .{ .arena = arena, .kind = .{ .type_not_deprecated_fault = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.TypeNotDeprecatedFault = aws.json.parseJsonObject(errors.TypeNotDeprecatedFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .type_not_deprecated_fault = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "UnknownResourceFault")) {
-        return .{ .arena = arena, .kind = .{ .unknown_resource_fault = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.UnknownResourceFault = aws.json.parseJsonObject(errors.UnknownResourceFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .unknown_resource_fault = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "WorkflowExecutionAlreadyStartedFault")) {
-        return .{ .arena = arena, .kind = .{ .workflow_execution_already_started_fault = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.WorkflowExecutionAlreadyStartedFault = aws.json.parseJsonObject(errors.WorkflowExecutionAlreadyStartedFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .workflow_execution_already_started_fault = typed_error } };
+        }
     }
 
     const owned_code = try arena_alloc.dupe(u8, error_code);

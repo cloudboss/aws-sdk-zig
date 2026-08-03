@@ -113,64 +113,143 @@ pub const ServiceError = struct {
     }
 };
 
+/// You do not have sufficient access to perform this action.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "code",
+        .message = "message",
+    };
 };
 
+/// The submitted action has conflicts.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when the request was successful, but dry run was
+/// enabled so no action was taken.
 pub const DryRunException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// There is an insufficient capacity to perform the action.
 pub const InsufficientCapacityException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request processing has failed because of an unknown error, exception or
+/// failure.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The provided pagination token is invalid.
 pub const InvalidPaginationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// There are no subnets in your VPC with associated IPv6 CIDR blocks. To use
+/// dual-stack mode, associate an IPv6 CIDR block with each subnet in your VPC.
 pub const Ipv6CidrBlockNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The resource could not be found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The name of the resource that could not be found.
+    resource_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource_name = "resourceName",
+    };
 };
 
+/// The service limit was exceeded.
 pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request was denied due to request throttling.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "code",
+        .message = "message",
+    };
 };
 
+/// The request exceeded the number of tags allowed for a resource.
 pub const TooManyTagsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The name of the resource that exceeded the number of tags allowed for a
+    /// resource.
+    resource_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource_name = "resourceName",
+    };
 };
 
+/// The input failed to satisfy the constraints specified by an Amazon Web
+/// Services service.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

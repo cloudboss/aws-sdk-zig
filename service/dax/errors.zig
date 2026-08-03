@@ -193,144 +193,304 @@ pub const ServiceError = struct {
     }
 };
 
+/// You already have a DAX cluster with the given identifier.
 pub const ClusterAlreadyExistsFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The requested cluster ID does not refer to an existing DAX
+/// cluster.
 pub const ClusterNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// You have attempted to exceed the maximum number of DAX clusters for
+/// your Amazon Web Services account.
 pub const ClusterQuotaForCustomerExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// There are not enough system resources to create the cluster you requested
+/// (or to
+/// resize an already-existing cluster).
 pub const InsufficientClusterCapacityFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The Amazon Resource Name (ARN) supplied in the request is not valid.
 pub const InvalidARNFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The requested DAX cluster is not in the
+/// *available* state.
 pub const InvalidClusterStateFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Two or more incompatible parameters were specified.
 pub const InvalidParameterCombinationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// One or more parameters in a parameter group are in an invalid state.
 pub const InvalidParameterGroupStateFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The value for a parameter is invalid.
 pub const InvalidParameterValueException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An invalid subnet identifier was specified.
 pub const InvalidSubnet = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The VPC network is in an invalid state.
 pub const InvalidVPCNetworkStateFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// None of the nodes in the cluster have the given node ID.
 pub const NodeNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// You have attempted to exceed the maximum number of nodes for a DAX
+/// cluster.
 pub const NodeQuotaForClusterExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// You have attempted to exceed the maximum number of nodes for your Amazon Web
+/// Services account.
 pub const NodeQuotaForCustomerExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified parameter group already exists.
 pub const ParameterGroupAlreadyExistsFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified parameter group does not exist.
 pub const ParameterGroupNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// You have attempted to exceed the maximum number of parameter groups.
 pub const ParameterGroupQuotaExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified service linked role (SLR) was not found.
 pub const ServiceLinkedRoleNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// You have reached the maximum number of x509 certificates that can be created
+/// for
+/// encrypted clusters in a 30 day period. Contact Amazon Web Services customer
+/// support to
+/// discuss options for continuing to create encrypted clusters.
 pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
+/// The specified subnet group already exists.
 pub const SubnetGroupAlreadyExistsFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified subnet group is currently in use.
 pub const SubnetGroupInUseFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The requested subnet group name does not refer to an existing subnet
+/// group.
 pub const SubnetGroupNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request cannot be processed because it would exceed the allowed number
+/// of
+/// subnets in a subnet group.
 pub const SubnetGroupQuotaExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The requested subnet is being used by another subnet group.
 pub const SubnetInUse = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified subnet can't be used for the requested network type. This
+/// error
+/// occurs when either there aren't enough subnets of the required network type
+/// to create
+/// the cluster, or when you try to use a subnet that doesn't support the
+/// requested network
+/// type (for example, trying to create a dual-stack cluster with a subnet that
+/// doesn't have
+/// IPv6 CIDR).
 pub const SubnetNotAllowedFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request cannot be processed because it would exceed the allowed number
+/// of
+/// subnets in a subnet group.
 pub const SubnetQuotaExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The tag does not exist.
 pub const TagNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// You have exceeded the maximum number of tags for this DAX cluster.
 pub const TagQuotaPerResourceExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

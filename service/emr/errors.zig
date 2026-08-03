@@ -68,19 +68,37 @@ pub const ServiceError = struct {
     }
 };
 
+/// Indicates that an error occurred while processing the request and that the
+/// request was
+/// not completed.
 pub const InternalServerError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
+/// This exception occurs when there is an internal failure in the Amazon EMR
+/// service.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception occurs when there is something wrong with user input.
 pub const InvalidRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The error code associated with the exception.
+    error_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .error_code = "ErrorCode",
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

@@ -1,5 +1,8 @@
 const std = @import("std");
 
+const ConflictType = @import("conflict_type.zig").ConflictType;
+const ResourceType = @import("resource_type.zig").ResourceType;
+
 pub const ServiceError = struct {
     arena: ?std.heap.ArenaAllocator = null,
     kind: Kind,
@@ -88,39 +91,114 @@ pub const ServiceError = struct {
     }
 };
 
+/// You do not have sufficient permissions to perform this action. Check the
+/// error message
+/// and try again.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request failed due to a conflict. Check the `ConflictType` and error
+/// message for more details.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The type of conflict which caused a ConflictException. Possible types and
+    /// the
+    /// corresponding error messages are as follows:
+    ///
+    /// * `DOMAIN_NOT_ACTIVE`: The domain is not active.
+    ///
+    /// * `CANNOT_CHANGE_SPEAKER_AFTER_ENROLLMENT`: You cannot change the
+    /// speaker ID after an enrollment has been requested.
+    ///
+    /// * `ENROLLMENT_ALREADY_EXISTS`: There is already an enrollment for
+    /// this session.
+    ///
+    /// * `SPEAKER_NOT_SET`: You must set the speaker ID before requesting an
+    /// enrollment.
+    ///
+    /// * `SPEAKER_OPTED_OUT`: You cannot request an enrollment for an opted
+    /// out speaker.
+    ///
+    /// * `CONCURRENT_CHANGES`: The request could not be processed as the
+    /// resource was modified by another request during execution.
+    conflict_type: ?ConflictType = null,
+
+    pub const json_field_names = .{
+        .conflict_type = "ConflictType",
+        .message = "Message",
+    };
 };
 
+/// The request failed due to an unknown error on the server side.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified resource cannot be found. Check the `ResourceType` and error
+/// message for more details.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The type of resource which cannot not be found. Possible types are
+    /// `BATCH_JOB`, `COMPLIANCE_CONSENT`, `DOMAIN`,
+    /// `FRAUDSTER`, `SESSION` and `SPEAKER`.
+    resource_type: ?ResourceType = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .resource_type = "ResourceType",
+    };
 };
 
+/// The request exceeded the service quota. Refer to [Voice ID Service
+/// Quotas](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#voiceid-quotas) and try your request again.
 pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request was denied due to request throttling. Please slow down your
+/// request rate.
+/// Refer to [
+/// Amazon Connect Voice ID Service API throttling quotas
+/// ](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html##voiceid-api-quotas) and try your
+/// request again.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request failed one or more validations; check the error message for more
+/// details.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

@@ -78,29 +78,64 @@ pub const ServiceError = struct {
     }
 };
 
+/// You do not have sufficient access to perform this action.
+///
+/// HTTP Status Code: 403
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request processing has an invalid argument.
 pub const IllegalArgumentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The operation failed because the current state of the resource doesn't allow
+/// the operation to proceed.
+///
+/// HTTP Status Code: 400
 pub const IllegalStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request processing has failed because of an unknown error, exception, or
+/// failure.
+///
+/// HTTP Status Code: 500
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified resource was not found.
+///
+/// HTTP Status Code: 404
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

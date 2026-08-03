@@ -1,5 +1,7 @@
 const std = @import("std");
 
+const FederationSourceErrorCode = @import("federation_source_error_code.zig").FederationSourceErrorCode;
+
 pub const ServiceError = struct {
     arena: ?std.heap.ArenaAllocator = null,
     kind: Kind,
@@ -293,244 +295,502 @@ pub const ServiceError = struct {
     }
 };
 
+/// Access to a resource was denied.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A resource to be created or added already exists.
 pub const AlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// An exception thrown when you try to stop a task run when there is no task
+/// running.
 pub const ColumnStatisticsTaskNotRunningException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// An exception thrown when you try to start another job while running a column
+/// stats generation job.
 pub const ColumnStatisticsTaskRunningException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// An exception thrown when you try to stop a task run.
 pub const ColumnStatisticsTaskStoppingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Two processes are trying to modify a resource simultaneously.
 pub const ConcurrentModificationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Too many jobs are being run concurrently.
 pub const ConcurrentRunsExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A specified condition was not satisfied.
 pub const ConditionCheckFailureException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The `CreatePartitions` API was called on a table that has indexes enabled.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified crawler is not running.
 pub const CrawlerNotRunningException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The operation cannot be performed because the crawler is already running.
 pub const CrawlerRunningException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified crawler is stopping.
 pub const CrawlerStoppingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A specified entity does not exist
 pub const EntityNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// Indicates whether or not the exception relates to a federated source.
+    from_federation_source: ?bool = null,
+
+    pub const json_field_names = .{
+        .from_federation_source = "FromFederationSource",
+        .message = "Message",
+    };
 };
 
+/// A federated resource already exists.
 pub const FederatedResourceAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The associated Glue resource already exists.
+    associated_glue_resource: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .associated_glue_resource = "AssociatedGlueResource",
+        .message = "Message",
+    };
 };
 
+/// A federation source failed.
 pub const FederationSourceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The error code of the problem.
+    federation_source_error_code: ?FederationSourceErrorCode = null,
+
+    pub const json_field_names = .{
+        .federation_source_error_code = "FederationSourceErrorCode",
+        .message = "Message",
+    };
 };
 
+/// A federation source failed, but the operation may be retried.
 pub const FederationSourceRetryableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// An encryption operation failed.
 pub const GlueEncryptionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The same unique identifier was associated with two different records.
 pub const IdempotentParameterMismatchException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The blueprint is in an invalid state to perform a requested operation.
 pub const IllegalBlueprintStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The session is in an invalid state to perform a requested operation.
 pub const IllegalSessionStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The workflow is in an invalid state to perform a requested operation.
 pub const IllegalWorkflowStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The requested operation conflicts with another operation.
 pub const IntegrationConflictOperationFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified integration could not be found.
 pub const IntegrationNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The data processed through your integration exceeded your quota.
 pub const IntegrationQuotaExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// An internal server error occurred.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// An internal service error occurred.
 pub const InternalServiceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The input provided was not valid.
 pub const InvalidInputException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// Indicates whether or not the exception relates to a federated source.
+    from_federation_source: ?bool = null,
+
+    pub const json_field_names = .{
+        .from_federation_source = "FromFederationSource",
+        .message = "Message",
+    };
 };
 
+/// The integration is in an invalid state.
 pub const InvalidIntegrationStateFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// An error that indicates your data is in an invalid state.
 pub const InvalidStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The KMS key specified is not accessible.
 pub const KMSKeyNotAccessibleFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Exception thrown when stopping a task that is not in running state.
 pub const MaterializedViewRefreshTaskNotRunningException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Exception thrown when a task is already in running state.
 pub const MaterializedViewRefreshTaskRunningException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Exception thrown when a task is already in stopping state.
 pub const MaterializedViewRefreshTaskStoppingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The machine learning transform is not ready to run.
 pub const MLTransformNotReadyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// There is no applicable schedule.
 pub const NoScheduleException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The operation is not available in the region.
 pub const OperationNotSupportedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The operation timed out.
 pub const OperationTimeoutException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The operation timed out.
 pub const PermissionTypeMismatchException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource could not be found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A resource was not ready for a transaction.
 pub const ResourceNotReadyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A resource numerical limit was exceeded.
 pub const ResourceNumberLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified scheduler is not running.
 pub const SchedulerNotRunningException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified scheduler is already running.
 pub const SchedulerRunningException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified scheduler is transitioning.
 pub const SchedulerTransitioningException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The target resource could not be found.
 pub const TargetResourceNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The throttling threshhold was exceeded.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A value could not be validated.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// There was a version conflict.
 pub const VersionMismatchException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

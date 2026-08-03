@@ -1,5 +1,8 @@
 const std = @import("std");
 
+const ActiveDirectoryErrorType = @import("active_directory_error_type.zig").ActiveDirectoryErrorType;
+const ServiceLimit = @import("service_limit.zig").ServiceLimit;
+
 pub const ServiceError = struct {
     arena: ?std.heap.ArenaAllocator = null,
     kind: Kind,
@@ -253,204 +256,502 @@ pub const ServiceError = struct {
     }
 };
 
+/// An access point with that name already exists in the Amazon Web Services
+/// Region in your Amazon Web Services account.
 pub const AccessPointAlreadyOwnedByYou = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// An error code indicating that an access point with that name already exists
+    /// in the Amazon Web Services Region in your Amazon Web Services account.
+    error_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .error_code = "ErrorCode",
+        .message = "Message",
+    };
 };
 
+/// An Active Directory error.
 pub const ActiveDirectoryError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The directory ID of the directory that an error pertains to.
+    active_directory_id: []const u8,
+
+    /// The type of Active Directory error.
+    @"type": ?ActiveDirectoryErrorType = null,
+
+    pub const json_field_names = .{
+        .active_directory_id = "ActiveDirectoryId",
+        .message = "Message",
+        .@"type" = "Type",
+    };
 };
 
+/// You can't delete a backup while it's being copied.
 pub const BackupBeingCopied = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    backup_id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .backup_id = "BackupId",
+        .message = "Message",
+    };
 };
 
+/// Another backup is already under way. Wait for completion before initiating
+/// additional backups of this file system.
 pub const BackupInProgress = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// No Amazon FSx backups were found based upon the supplied parameters.
 pub const BackupNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You can't delete a backup while it's being used to restore a file
+/// system.
 pub const BackupRestoring = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The ID of a file system being restored from the backup.
+    file_system_id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .file_system_id = "FileSystemId",
+        .message = "Message",
+    };
 };
 
+/// A generic error indicating a failure with a client request.
 pub const BadRequest = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// No data repository associations were found based upon the supplied
+/// parameters.
 pub const DataRepositoryAssociationNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The data repository task could not be canceled because the task has already
+/// ended.
 pub const DataRepositoryTaskEnded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// An existing data repository task is currently executing on the file system.
+/// Wait until the existing task has completed, then create the new task.
 pub const DataRepositoryTaskExecuting = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The data repository task or tasks you specified could not be found.
 pub const DataRepositoryTaskNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// No caches were found based upon supplied parameters.
 pub const FileCacheNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// No Amazon FSx file systems were found based upon supplied parameters.
 pub const FileSystemNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The error returned when a second request is received with the same client
+/// request
+/// token but different parameters settings. A client request token should
+/// always uniquely
+/// identify a single request.
 pub const IncompatibleParameterError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// A parameter that is incompatible with the earlier request.
+    parameter: []const u8,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .parameter = "Parameter",
+    };
 };
 
+/// Amazon FSx doesn't support Multi-AZ Windows File Server copy backup in the
+/// destination Region, so the copied backup can't be restored.
 pub const IncompatibleRegionForMultiAZ = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A generic error indicating a server-side failure.
 pub const InternalServerError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The access point specified doesn't exist.
 pub const InvalidAccessPoint = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// An error code indicating that the access point specified doesn't exist.
+    error_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .error_code = "ErrorCode",
+        .message = "Message",
+    };
 };
 
+/// You have filtered the response to a data repository type that is not
+/// supported.
 pub const InvalidDataRepositoryType = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The Key Management Service (KMS) key of the destination backup is not
+/// valid.
 pub const InvalidDestinationKmsKey = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The path provided for data repository export isn't valid.
 pub const InvalidExportPath = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The path provided for data repository import isn't valid.
 pub const InvalidImportPath = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// One or more network settings specified in the request are invalid.
 pub const InvalidNetworkSettings = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The route table ID is either invalid or not part of the VPC specified.
+    invalid_route_table_id: ?[]const u8 = null,
+
+    /// The security group ID is either invalid or not part of the VPC specified.
+    invalid_security_group_id: ?[]const u8 = null,
+
+    /// The subnet ID that is either invalid or not part of the VPC specified.
+    invalid_subnet_id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .invalid_route_table_id = "InvalidRouteTableId",
+        .invalid_security_group_id = "InvalidSecurityGroupId",
+        .invalid_subnet_id = "InvalidSubnetId",
+        .message = "Message",
+    };
 };
 
+/// An invalid value for `PerUnitStorageThroughput` was provided. Please create
+/// your file system again, using a valid value.
 pub const InvalidPerUnitStorageThroughput = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The Region provided for `SourceRegion` is not valid or is in a different
+/// Amazon Web Services partition.
 pub const InvalidRegion = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The action or operation requested is invalid. Verify that the action is
+/// typed correctly.
 pub const InvalidRequest = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// An error code indicating that the action or operation requested is invalid.
+    error_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .error_code = "ErrorCode",
+        .message = "Message",
+    };
 };
 
+/// The Key Management Service (KMS) key of the source backup is not
+/// valid.
 pub const InvalidSourceKmsKey = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A cache configuration is required for this operation.
 pub const MissingFileCacheConfiguration = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A file system configuration is required for this operation.
 pub const MissingFileSystemConfiguration = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A volume configuration is required for this operation.
 pub const MissingVolumeConfiguration = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource specified for the tagging operation is not a resource type
+/// owned by
+/// Amazon FSx. Use the API of the relevant service to perform the operation.
 pub const NotServiceResourceError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The Amazon Resource Name (ARN) of the non-Amazon FSx resource.
+    resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .resource_arn = "ResourceARN",
+    };
 };
 
+/// The resource specified does not support tagging.
 pub const ResourceDoesNotSupportTagging = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The Amazon Resource Name (ARN) of the resource that doesn't support
+    /// tagging.
+    resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .resource_arn = "ResourceARN",
+    };
 };
 
+/// The resource specified by the Amazon Resource Name (ARN) can't be found.
 pub const ResourceNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The resource ARN of the resource that can't be found.
+    resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .resource_arn = "ResourceARN",
+    };
 };
 
+/// The access point specified was not found.
 pub const S3AccessPointAttachmentNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// An error indicating that a particular service limit was exceeded. You can
+/// increase
+/// some service limits by contacting Amazon Web Services Support.
 pub const ServiceLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// Enumeration of the service limit that was exceeded.
+    limit: ServiceLimit,
+
+    pub const json_field_names = .{
+        .limit = "Limit",
+        .message = "Message",
+    };
 };
 
+/// No Amazon FSx snapshots were found based on the supplied parameters.
 pub const SnapshotNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request was rejected because the lifecycle status of the source backup
+/// isn't
+/// `AVAILABLE`.
 pub const SourceBackupUnavailable = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    backup_id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .backup_id = "BackupId",
+        .message = "Message",
+    };
 };
 
+/// No FSx for ONTAP SVMs were found based upon the supplied parameters.
 pub const StorageVirtualMachineNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You have reached the maximum number of S3 access points attachments allowed
+/// for your account in this Amazon Web Services Region, or for the file system.
+/// For more information, or to request an increase,
+/// see [Service quotas on FSx
+/// resources](https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/limits.html)
+/// in the FSx for OpenZFS User Guide.
 pub const TooManyAccessPoints = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// An error code indicating that you have reached the maximum number of S3
+    /// access points attachments allowed for your account in this Amazon Web
+    /// Services Region, or for the file system.
+    error_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .error_code = "ErrorCode",
+        .message = "Message",
+    };
 };
 
+/// The requested operation is not supported for this resource or API.
 pub const UnsupportedOperation = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// No Amazon FSx volumes were found based upon the supplied parameters.
 pub const VolumeNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

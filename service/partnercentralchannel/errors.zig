@@ -1,5 +1,8 @@
 const std = @import("std");
 
+const ValidationExceptionField = @import("validation_exception_field.zig").ValidationExceptionField;
+const ValidationExceptionReason = @import("validation_exception_reason.zig").ValidationExceptionReason;
+
 pub const ServiceError = struct {
     arena: ?std.heap.ArenaAllocator = null,
     kind: Kind,
@@ -88,39 +91,124 @@ pub const ServiceError = struct {
     }
 };
 
+/// The request was denied due to insufficient permissions.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The reason for the access denial.
+    reason: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .reason = "reason",
+    };
 };
 
+/// The request could not be completed due to a conflict with the current state
+/// of the resource.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The identifier of the resource that caused the conflict.
+    resource_id: []const u8,
+
+    /// The type of the resource that caused the conflict.
+    resource_type: []const u8,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource_id = "resourceId",
+        .resource_type = "resourceType",
+    };
 };
 
+/// An internal server error occurred while processing the request.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified resource was not found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The identifier of the resource that was not found.
+    resource_id: ?[]const u8 = null,
+
+    /// The type of the resource that was not found.
+    resource_type: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource_id = "resourceId",
+        .resource_type = "resourceType",
+    };
 };
 
+/// The request would exceed a service quota limit.
 pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The code identifying the specific quota that would be exceeded.
+    quota_code: []const u8,
+
+    /// The identifier of the resource that would exceed the quota.
+    resource_id: []const u8,
+
+    /// The type of the resource that would exceed the quota.
+    resource_type: []const u8,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .quota_code = "quotaCode",
+        .resource_id = "resourceId",
+        .resource_type = "resourceType",
+    };
 };
 
+/// The request was throttled due to too many requests being sent in a short
+/// period.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The quota code associated with the throttling error.
+    quota_code: ?[]const u8 = null,
+
+    /// The service code associated with the throttling error.
+    service_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .quota_code = "quotaCode",
+        .service_code = "serviceCode",
+    };
 };
 
+/// The request failed validation due to invalid input parameters.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// A list of fields that failed validation.
+    field_list: ?[]const ValidationExceptionField = null,
+
+    /// The reason for the validation failure.
+    reason: ValidationExceptionReason,
+
+    pub const json_field_names = .{
+        .field_list = "fieldList",
+        .message = "message",
+        .reason = "reason",
+    };
 };
 
 pub const UnknownServiceError = struct {

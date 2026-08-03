@@ -138,89 +138,188 @@ pub const ServiceError = struct {
     }
 };
 
+/// Access to resource denied.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The Amazon Web Services user account does not have permission to perform the
+/// action. Check the IAM
+/// policy associated with this account.
 pub const AuthorizationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// There was a conflict processing the request. Try your request again.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The entitlement is not allowed.
 pub const EntitlementNotAllowedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A dependency required to run the API is missing.
 pub const FailedDependencyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    error_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .error_code = "ErrorCode",
+        .message = "Message",
+    };
 };
 
+/// The request uses too many filters or too many filter values.
 pub const FilterLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// One or more parameter values are not valid.
 pub const InvalidParameterValueException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// License Manager cannot allocate a license to a resource because of its
+/// state.
+///
+/// For example, you cannot allocate a license to an instance in the process of
+/// shutting
+/// down.
 pub const InvalidResourceStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You do not have enough licenses available to support a new resource launch.
 pub const LicenseUsageException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// There are no entitlements found for this license, or the entitlement maximum
+/// count is reached.
 pub const NoEntitlementsAllowedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Too many requests have been submitted. Try again after a brief wait.
 pub const RateLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This is not the correct Region for the resource. Try again.
 pub const RedirectException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    location: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .location = "Location",
+        .message = "Message",
+    };
 };
 
+/// Your resource limits have been exceeded.
 pub const ResourceLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource cannot be found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The server experienced an internal error. Try again.
 pub const ServerInternalException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The digital signature method is unsupported. Try your request again.
 pub const UnsupportedDigitalSignatureMethodException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The provided input is not valid. Try your request again.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

@@ -183,134 +183,272 @@ pub const ServiceError = struct {
     }
 };
 
+/// DMS was denied access to the endpoint. Check that the
+/// role is correctly configured.
 pub const AccessDeniedFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified collector doesn't exist.
 pub const CollectorNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A dependency threw an exception.
 pub const FailedDependencyFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// There are not enough resources allocated to the database migration.
 pub const InsufficientResourceCapacityFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The certificate was not valid.
 pub const InvalidCertificateFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The action or operation requested isn't valid.
 pub const InvalidOperationFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The resource is in a state that prevents it from being used for database
+/// migration.
 pub const InvalidResourceStateFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The subnet provided isn't valid.
 pub const InvalidSubnet = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The ciphertext references a key that doesn't exist or that the DMS account
+/// doesn't have access to.
 pub const KMSAccessDeniedFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified KMS key isn't enabled.
 pub const KMSDisabledFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An Key Management Service (KMS) error is preventing access to KMS.
 pub const KMSFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The state of the specified KMS resource isn't valid for this request.
 pub const KMSInvalidStateFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// DMS cannot access the KMS key.
 pub const KMSKeyNotAccessibleFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified KMS entity or resource can't be found.
 pub const KMSNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This request triggered KMS request throttling.
 pub const KMSThrottlingFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The replication subnet group does not cover enough Availability Zones (AZs).
+/// Edit the replication subnet group and add more AZs.
 pub const ReplicationSubnetGroupDoesNotCoverEnoughAZs = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The resource you are attempting to create already exists.
 pub const ResourceAlreadyExistsFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    resource_arn: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource_arn = "resourceArn",
+    };
 };
 
+/// The resource could not be found.
 pub const ResourceNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The quota for this resource quota has been exceeded.
 pub const ResourceQuotaExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Insufficient privileges are preventing access to an Amazon S3 object.
 pub const S3AccessDeniedFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A specified Amazon S3 bucket, bucket folder, or other object can't be
+/// found.
 pub const S3ResourceNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The SNS topic is invalid.
 pub const SNSInvalidTopicFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// You are not authorized for the SNS subscription.
 pub const SNSNoAuthorizationFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The storage quota has been exceeded.
 pub const StorageQuotaExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified subnet is already in use.
 pub const SubnetAlreadyInUse = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An upgrade dependency is preventing the database migration.
 pub const UpgradeDependencyFailureFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

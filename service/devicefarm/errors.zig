@@ -113,64 +113,142 @@ pub const ServiceError = struct {
     }
 };
 
+/// An invalid argument was specified.
 pub const ArgumentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The requested object could not be deleted.
 pub const CannotDeleteException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An entity with the same name already exists.
 pub const IdempotencyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An internal exception was raised in the service. Contact
+/// [aws-devicefarm-support@amazon.com](mailto:aws-devicefarm-support@amazon.com) if you see this
+/// error.
 pub const InternalServiceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// There was an error with the update request, or you do not have sufficient
+/// permissions
+/// to update this VPC endpoint configuration.
 pub const InvalidOperationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A limit was exceeded.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Exception gets thrown when a user is not eligible to perform the specified
+/// transaction.
 pub const NotEligibleException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified entity was not found.
 pub const NotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// There was a problem with the service account.
 pub const ServiceAccountException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The operation was not successful. Try again.
 pub const TagOperationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    resource_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource_name = "resourceName",
+    };
 };
 
+/// The request doesn't comply with the AWS Identity and Access Management (IAM)
+/// tag
+/// policy. Correct your request and then retry it.
 pub const TagPolicyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    resource_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource_name = "resourceName",
+    };
 };
 
+/// The list of tags on the repository is over the limit. The maximum number of
+/// tags that
+/// can be applied to a repository is 50.
 pub const TooManyTagsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    resource_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource_name = "resourceName",
+    };
 };
 
 pub const UnknownServiceError = struct {

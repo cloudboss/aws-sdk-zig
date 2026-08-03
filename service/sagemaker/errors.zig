@@ -73,24 +73,46 @@ pub const ServiceError = struct {
     }
 };
 
+/// There was a conflict when you attempted to modify a SageMaker entity such as
+/// an `Experiment` or `Artifact`.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Resource being accessed is in use.
 pub const ResourceInUse = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You have exceeded an SageMaker resource limit. For example, you might have
+/// too many training jobs created.
 pub const ResourceLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Resource being access is not found.
 pub const ResourceNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {
