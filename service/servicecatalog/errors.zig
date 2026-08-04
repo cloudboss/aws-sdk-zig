@@ -93,44 +93,94 @@ pub const ServiceError = struct {
     }
 };
 
+/// The specified resource is a duplicate.
 pub const DuplicateResourceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// One or more parameters provided to the operation are not valid.
 pub const InvalidParametersException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// An attempt was made to modify a resource that is in a state that is not
+/// valid.
+/// Check your resources to ensure that they are in valid states before retrying
+/// the operation.
 pub const InvalidStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The current limits of the service would have been exceeded by this
+/// operation. Decrease your
+/// resource use or increase your service limits and retry the operation.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The operation is not supported.
 pub const OperationNotSupportedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A resource that is currently in use. Ensure that the resource is not in use
+/// and retry the operation.
 pub const ResourceInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified resource was not found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// An operation requiring TagOptions failed because the TagOptions migration
+/// process has
+/// not been performed for this account. Use the Amazon Web Services Management
+/// Console to perform the migration
+/// process before retrying the operation.
 pub const TagOptionNotMigratedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

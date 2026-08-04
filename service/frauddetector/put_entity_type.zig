@@ -3,7 +3,8 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
-const ServiceError = @import("errors.zig").ServiceError;
+const errors = @import("errors.zig");
+const ServiceError = errors.ServiceError;
 const Tag = @import("tag.zig").Tag;
 
 pub const PutEntityTypeInput = struct {
@@ -42,7 +43,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutEntityTy
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch return error.OutOfMemory;
         }
         return error.ServiceError;
     }
@@ -94,46 +95,88 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     const owned_request_id = try arena_alloc.dupe(u8, "");
 
     if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
-        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.AccessDeniedException = aws.json.parseJsonObject(errors.AccessDeniedException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .access_denied_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
-        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.ConflictException = aws.json.parseJsonObject(errors.ConflictException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .conflict_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "InternalServerException")) {
-        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.InternalServerException = aws.json.parseJsonObject(errors.InternalServerException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .internal_server_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
-        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.ResourceNotFoundException = aws.json.parseJsonObject(errors.ResourceNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_not_found_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "ResourceUnavailableException")) {
-        return .{ .arena = arena, .kind = .{ .resource_unavailable_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.ResourceUnavailableException = aws.json.parseJsonObject(errors.ResourceUnavailableException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_unavailable_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "ThrottlingException")) {
-        return .{ .arena = arena, .kind = .{ .throttling_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.ThrottlingException = aws.json.parseJsonObject(errors.ThrottlingException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .throttling_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "ValidationException")) {
-        return .{ .arena = arena, .kind = .{ .validation_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.ValidationException = aws.json.parseJsonObject(errors.ValidationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .validation_exception = typed_error } };
+        }
     }
 
     const owned_code = try arena_alloc.dupe(u8, error_code);

@@ -148,99 +148,229 @@ pub const ServiceError = struct {
     }
 };
 
+/// Exception thrown when the customer does not have a valid subscription for
+/// the
+/// product.
 pub const CustomerNotEntitledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The API is disabled in the Region.
 pub const DisabledApiException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A metering record has already been emitted by the same EC2 instance, ECS
+/// task, or EKS
+/// pod for the given {`usageDimension`, `timestamp`} with a different
+/// `usageQuantity`.
 pub const DuplicateRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The submitted registration token has expired. This can happen if the buyer's
+/// browser
+/// takes too long to redirect to your page, the buyer has resubmitted the
+/// registration
+/// token, or your application has held on to the registration token for too
+/// long. Your SaaS
+/// registration website should redeem this token as soon as it is submitted by
+/// the buyer's
+/// browser.
 pub const ExpiredTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The `ClientToken` is being used for multiple requests.
 pub const IdempotencyConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An internal error has occurred. Retry your request. If the problem persists,
+/// post a
+/// message with details on the Amazon Web Services forums.
 pub const InternalServiceErrorException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// You have metered usage for a `CustomerIdentifier` that does not
+/// exist.
 pub const InvalidCustomerIdentifierException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The endpoint being called is in a Amazon Web Services Region different from
+/// your EC2 instance, ECS
+/// task, or EKS pod. The Region of the Metering Service endpoint and the Amazon
+/// Web Services Region of
+/// the resource must match.
 pub const InvalidEndpointRegionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Ensure the `LicenseArn` is valid, matches the customer, and usage is within
+/// the license activation period.
 pub const InvalidLicenseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The product code passed does not match the product code used for publishing
+/// the
+/// product.
 pub const InvalidProductCodeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Public Key version is invalid.
 pub const InvalidPublicKeyVersionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// `RegisterUsage` must be called in the same Amazon Web Services Region the
+/// ECS task was
+/// launched in. This prevents a container from hardcoding a Region (e.g.
+/// withRegion(“us-east-1”) when calling `RegisterUsage`.
 pub const InvalidRegionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The tag is invalid, or the number of tags is greater than 5.
 pub const InvalidTagException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Registration token is invalid.
 pub const InvalidTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Sum of allocated usage quantities is not equal to the usage quantity.
 pub const InvalidUsageAllocationsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The usage dimension does not match one of the `UsageDimensions` associated
+/// with products.
 pub const InvalidUsageDimensionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Amazon Web Services Marketplace does not support metering usage from the
+/// underlying platform. Currently, Amazon ECS, Amazon EKS, and Fargate are
+/// supported.
 pub const PlatformNotSupportedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The calls to the API are throttled.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The `timestamp` value passed in the `UsageRecord` is out of
+/// allowed range.
+///
+/// For `BatchMeterUsage`, if any of the records are outside of the allowed
+/// range, the entire batch is not processed. You must remove invalid records
+/// and try
+/// again.
 pub const TimestampOutOfBoundsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

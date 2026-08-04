@@ -93,44 +93,102 @@ pub const ServiceError = struct {
     }
 };
 
+/// A second request to use or change an object was not allowed. This can result
+/// from retrying a request using a parameter that was not present in the
+/// original request.
 pub const IdempotentParameterMismatchException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?i32 = null,
+
+    pub const json_field_names = .{
+        .code = "code",
+        .message = "message",
+    };
 };
 
+/// An error on the server occurred when trying to process a request.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?i32 = null,
+
+    pub const json_field_names = .{
+        .code = "code",
+        .message = "message",
+    };
 };
 
+/// An error on the client occurred. Typically, the cause is an invalid input
+/// value.
 pub const InvalidInputException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?i32 = null,
+
+    pub const json_field_names = .{
+        .code = "code",
+        .message = "message",
+    };
 };
 
 pub const InvalidTagException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The subscriber exceeded the maximum number of operations. This exception can
+/// occur when listing objects such as `DataSource`.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?i32 = null,
+
+    pub const json_field_names = .{
+        .code = "code",
+        .message = "message",
+    };
 };
 
+/// The exception is thrown when a predict request is made to an unmounted
+/// `MLModel`.
 pub const PredictorNotMountedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A specified resource cannot be located.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?i32 = null,
+
+    pub const json_field_names = .{
+        .code = "code",
+        .message = "message",
+    };
 };
 
 pub const TagLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

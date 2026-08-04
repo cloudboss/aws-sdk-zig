@@ -138,89 +138,188 @@ pub const ServiceError = struct {
     }
 };
 
+/// You do not have sufficient permission to perform this action.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The action you attempted is not allowed unless Service Access with Service
+/// Quotas is enabled in
+/// your organization.
 pub const AWSServiceAccessNotEnabledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You can't perform this action because a dependency does not have access.
 pub const DependencyAccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Invalid input was provided.
 pub const IllegalArgumentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Invalid input was provided.
 pub const InvalidPaginationTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource is in an invalid state.
 pub const InvalidResourceStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The Amazon Web Services account making this call is not a member of an
+/// organization.
 pub const NoAvailableOrganizationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified resource does not exist.
 pub const NoSuchResourceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The organization that your Amazon Web Services account belongs to is not in
+/// All Features
+/// mode.
 pub const OrganizationNotInAllFeaturesModeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You have exceeded your service quota. To perform the requested action,
+/// remove some of
+/// the relevant resources, or use Service Quotas to request a service quota
+/// increase.
 pub const QuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified resource already exists.
 pub const ResourceAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Something went wrong.
 pub const ServiceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The quota request template is not associated with your organization.
 pub const ServiceQuotaTemplateNotInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified tag is a reserved word and cannot be used.
 pub const TagPolicyViolationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The Service Quotas template is not available in this Amazon Web Services
+/// Region.
 pub const TemplatesNotAvailableInRegionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Due to throttling, the request was denied. Slow down the rate of request
+/// calls, or
+/// request an increase for this quota.
 pub const TooManyRequestsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You've exceeded the number of tags allowed for a resource. For more
+/// information, see
+/// [Tag
+/// restrictions](https://docs.aws.amazon.com/servicequotas/latest/userguide/sq-tagging.html#sq-tagging-restrictions) in the *Service Quotas User Guide*.
 pub const TooManyTagsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

@@ -88,39 +88,83 @@ pub const ServiceError = struct {
     }
 };
 
+/// You do not have sufficient permissions to perform this action. Verify your
+/// IAM permissions and any resource policies.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request could not be completed due to a conflict with the current state
+/// of the resource. For example, attempting to create a resource that already
+/// exists or is being created.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An internal error occurred while processing the request. Retry your request.
+/// If the problem persists, contact Amazon Web Services Support.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified resource (dashboard, policy, or widget) was not found. Verify
+/// the ARN and try again.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request would exceed a service quota. Review the service quotas for
+/// Amazon Web Services Billing and Cost Management Dashboards and retry your
+/// request.
 pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request was denied due to request throttling. Reduce the frequency of
+/// requests and use exponential backoff.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The input parameters do not satisfy the requirements. Check the error
+/// message for specific validation details.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

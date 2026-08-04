@@ -93,44 +93,91 @@ pub const ServiceError = struct {
     }
 };
 
+/// User does not have permissions to perform this action.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request is not understood by the server.
 pub const BadRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The server encountered an internal error and is unable to complete the
+/// request.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource is already created or in use.
 pub const ResourceInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource does not exist in the customer account.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Tags are already registered for the specified application ARN.
 pub const TagsAlreadyExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The number of the provided tags is beyond the limit, or the number of total
+/// tags you are
+/// trying to attach to the specified resource exceeds the limit.
 pub const TooManyTagsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The name of the resource with too many tags.
+    resource_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .resource_name = "ResourceName",
+    };
 };
 
+/// The parameter is not valid.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

@@ -78,29 +78,67 @@ pub const ServiceError = struct {
     }
 };
 
+/// Your request didn't pass one or more validation tests. This can occur when
+/// the entity
+/// you're trying to delete doesn't exist or if it's in a non-terminal state
+/// (such as
+/// `IN PROGRESS`). See the exception message field for more
+/// information.
 pub const BadRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A resource already exists with this name. Resource names must be unique
+/// within an
+/// Amazon Web Services account.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// There was an internal error. Check the error message, correct the issue, and
+/// try your
+/// request again.
 pub const InternalFailureException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You've either sent too many requests or your input file is too long. Wait
+/// before
+/// retrying your request, or use a smaller file and try your request again.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// We can't find the requested resource. Check that the specified name is
+/// correct and try
+/// your request again.
 pub const NotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

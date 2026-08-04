@@ -3,7 +3,8 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
-const ServiceError = @import("errors.zig").ServiceError;
+const errors = @import("errors.zig");
+const ServiceError = errors.ServiceError;
 const Backup = @import("backup.zig").Backup;
 
 pub const DescribeBackupsInput = struct {
@@ -98,7 +99,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeBac
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch return error.OutOfMemory;
         }
         return error.ServiceError;
     }
@@ -149,46 +150,88 @@ fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u1
     const owned_request_id = try arena_alloc.dupe(u8, "");
 
     if (std.mem.eql(u8, error_code, "CloudHsmAccessDeniedException")) {
-        return .{ .arena = arena, .kind = .{ .cloud_hsm_access_denied_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.CloudHsmAccessDeniedException = aws.json.parseJsonObject(errors.CloudHsmAccessDeniedException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .cloud_hsm_access_denied_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "CloudHsmInternalFailureException")) {
-        return .{ .arena = arena, .kind = .{ .cloud_hsm_internal_failure_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.CloudHsmInternalFailureException = aws.json.parseJsonObject(errors.CloudHsmInternalFailureException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .cloud_hsm_internal_failure_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "CloudHsmInvalidRequestException")) {
-        return .{ .arena = arena, .kind = .{ .cloud_hsm_invalid_request_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.CloudHsmInvalidRequestException = aws.json.parseJsonObject(errors.CloudHsmInvalidRequestException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .cloud_hsm_invalid_request_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "CloudHsmResourceLimitExceededException")) {
-        return .{ .arena = arena, .kind = .{ .cloud_hsm_resource_limit_exceeded_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.CloudHsmResourceLimitExceededException = aws.json.parseJsonObject(errors.CloudHsmResourceLimitExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .cloud_hsm_resource_limit_exceeded_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "CloudHsmResourceNotFoundException")) {
-        return .{ .arena = arena, .kind = .{ .cloud_hsm_resource_not_found_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.CloudHsmResourceNotFoundException = aws.json.parseJsonObject(errors.CloudHsmResourceNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .cloud_hsm_resource_not_found_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "CloudHsmServiceException")) {
-        return .{ .arena = arena, .kind = .{ .cloud_hsm_service_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.CloudHsmServiceException = aws.json.parseJsonObject(errors.CloudHsmServiceException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .cloud_hsm_service_exception = typed_error } };
+        }
     }
     if (std.mem.eql(u8, error_code, "CloudHsmTagException")) {
-        return .{ .arena = arena, .kind = .{ .cloud_hsm_tag_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
+        const parsed_error: ?errors.CloudHsmTagException = aws.json.parseJsonObject(errors.CloudHsmTagException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .cloud_hsm_tag_exception = typed_error } };
+        }
     }
 
     const owned_code = try arena_alloc.dupe(u8, error_code);

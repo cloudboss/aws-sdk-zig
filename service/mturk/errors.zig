@@ -63,14 +63,31 @@ pub const ServiceError = struct {
     }
 };
 
+/// Your request is invalid.
 pub const RequestError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    turk_error_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .turk_error_code = "TurkErrorCode",
+    };
 };
 
+/// Amazon Mechanical Turk is temporarily unable to process your request. Try
+/// your call again.
 pub const ServiceFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    turk_error_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .turk_error_code = "TurkErrorCode",
+    };
 };
 
 pub const UnknownServiceError = struct {

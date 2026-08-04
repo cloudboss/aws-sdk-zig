@@ -8,6 +8,8 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
 
     override fun contentType(): String = "application/x-amz-json-$version"
 
+    override fun parsesModeledErrorBodies(): Boolean = true
+
     override fun writeSerializeRequest(writer: ZigWriter, ctx: OperationContext) {
         val inputName = "${ctx.operationName}Input"
         val targetPrefix = ctx.service.id.name
@@ -108,10 +110,19 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
         // Match error codes to ServiceError variants
         for (info in ctx.errorInfos) {
             writer.openBlock("if (std.mem.eql(u8, error_code, \"\$L\")) {", info.smithyName)
-            writer.write("return .{ .arena = arena, .kind = .{ .\$L = .{", info.variantName)
-            writer.write("    .message = owned_message,")
-            writer.write("    .request_id = owned_request_id,")
-            writer.write("} } };")
+            writer.openBlock(
+                "const parsed_error: ?errors.\$L = aws.json.parseJsonObject(errors.\$L, body, arena_alloc) catch |err| switch (err) {",
+                info.structName, info.structName,
+            )
+            writer.write("error.OutOfMemory => return error.OutOfMemory,")
+            writer.write("else => null,")
+            writer.closeBlock("};")
+            writer.openBlock("if (parsed_error) |parsed| {")
+            writer.write("var typed_error = parsed;")
+            writer.write("typed_error.message = owned_message;")
+            writer.write("typed_error.request_id = owned_request_id;")
+            writer.write("return .{ .arena = arena, .kind = .{ .\$L = typed_error } };", info.variantName)
+            writer.closeBlock("}")
             writer.closeBlock("}")
         }
 

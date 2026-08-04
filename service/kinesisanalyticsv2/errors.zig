@@ -118,69 +118,159 @@ pub const ServiceError = struct {
     }
 };
 
+/// The user-provided application code (query) is not valid. This can be a
+/// simple syntax
+/// error.
 pub const CodeValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Exception thrown as a result of concurrent modifications to an application.
+/// This error can
+/// be the result of attempting to modify an application without using the
+/// current application
+/// ID.
 pub const ConcurrentModificationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The user-provided application configuration is not valid.
 pub const InvalidApplicationConfigurationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified input parameter value is not valid.
 pub const InvalidArgumentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request JSON is not valid for the operation.
 pub const InvalidRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The number of allowed resources has been exceeded.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The application is not available for this operation.
 pub const ResourceInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Specified application can't be found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Discovery failed to get a record from the streaming source because of the
+/// Kinesis
+/// Streams `ProvisionedThroughputExceededException`. For more information, see
+/// [GetRecords](http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetRecords.html) in the Amazon Kinesis Streams API Reference.
 pub const ResourceProvisionedThroughputExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The service cannot complete the request.
 pub const ServiceUnavailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Application created with too many tags, or too many tags added to an
+/// application. Note that the maximum
+/// number of application tags includes system tags. The maximum number of
+/// user-defined application tags is 50.
 pub const TooManyTagsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The data format is not valid. Kinesis Data Analytics cannot detect the
+/// schema for
+/// the given streaming source.
 pub const UnableToDetectSchemaException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// Stream data that was modified by the processor specified in the
+    /// `InputProcessingConfiguration` parameter.
+    processed_input_records: ?[]const []const u8 = null,
+
+    /// Raw stream data that was sampled to infer the schema.
+    raw_input_records: ?[]const []const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .processed_input_records = "ProcessedInputRecords",
+        .raw_input_records = "RawInputRecords",
+    };
 };
 
+/// The request was rejected because a specified parameter is not supported or a
+/// specified resource is not valid for this
+/// operation.
 pub const UnsupportedOperationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

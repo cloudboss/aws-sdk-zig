@@ -143,94 +143,287 @@ pub const ServiceError = struct {
     }
 };
 
+/// You aren't authorized to perform the action. Use the Amazon Resource Name
+/// (ARN)
+/// of an authorized user or IAM role to perform the operation.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .message = "Message",
+    };
 };
 
+/// Amazon Textract isn't able to read the document. For more information on the
+/// document
+/// limits in Amazon Textract, see limits.
 pub const BadDocumentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .message = "Message",
+    };
 };
 
+/// Updating or deleting a resource can cause an inconsistent state.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .message = "Message",
+    };
 };
 
+/// The document can't be processed because it's too large. The maximum document
+/// size for
+/// synchronous operations 10 MB. The maximum document size for asynchronous
+/// operations is 500
+/// MB for PDF files.
 pub const DocumentTooLargeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .message = "Message",
+    };
 };
 
+/// Indicates you have exceeded the maximum number of active human in the loop
+/// workflows available
 pub const HumanLoopQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// The quota code.
+    quota_code: ?[]const u8 = null,
+
+    /// The resource type.
+    resource_type: ?[]const u8 = null,
+
+    /// The service code.
+    service_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .message = "Message",
+        .quota_code = "QuotaCode",
+        .resource_type = "ResourceType",
+        .service_code = "ServiceCode",
+    };
 };
 
+/// A `ClientRequestToken` input parameter was reused with an operation, but at
+/// least one of the other input parameters is different from the previous call
+/// to the
+/// operation.
 pub const IdempotentParameterMismatchException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .message = "Message",
+    };
 };
 
+/// Amazon Textract experienced a service issue. Try your call again.
 pub const InternalServerError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .message = "Message",
+    };
 };
 
+/// An invalid job identifier was passed to an asynchronous analysis operation.
 pub const InvalidJobIdException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .message = "Message",
+    };
 };
 
+/// Indicates you do not have decrypt permissions with the KMS key entered, or
+/// the KMS key
+/// was entered incorrectly.
 pub const InvalidKMSKeyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .message = "Message",
+    };
 };
 
+/// An input parameter violated a constraint. For example, in synchronous
+/// operations,
+/// an `InvalidParameterException` exception occurs
+/// when neither of the `S3Object` or `Bytes` values are supplied in the
+/// `Document`
+/// request parameter.
+/// Validate your parameter before calling the API operation again.
 pub const InvalidParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .message = "Message",
+    };
 };
 
+/// Amazon Textract is unable to access the S3 object that's specified in the
+/// request.
+/// for more information, [Configure Access to Amazon
+/// S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html)
+/// For troubleshooting information, see [Troubleshooting Amazon
+/// S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/troubleshooting.html)
 pub const InvalidS3ObjectException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .message = "Message",
+    };
 };
 
+/// An Amazon Textract service limit was exceeded. For example, if you start too
+/// many
+/// asynchronous jobs concurrently, calls to start operations
+/// (`StartDocumentTextDetection`, for example) raise a LimitExceededException
+/// exception (HTTP status code: 400) until the number of concurrently running
+/// jobs is below
+/// the Amazon Textract service limit.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .message = "Message",
+    };
 };
 
+/// The number of requests exceeded your throughput limit. If you want to
+/// increase this limit,
+/// contact Amazon Textract.
 pub const ProvisionedThroughputExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .message = "Message",
+    };
 };
 
+/// Returned when an operation tried to access a nonexistent resource.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .message = "Message",
+    };
 };
 
+/// Returned when a request cannot be completed as it would exceed a maximum
+/// service quota.
 pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .message = "Message",
+    };
 };
 
+/// Amazon Textract is temporarily unable to process the request. Try your call
+/// again.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .message = "Message",
+    };
 };
 
+/// The format of the input document isn't supported. Documents for operations
+/// can be in
+/// PNG, JPEG, PDF, or TIFF format.
 pub const UnsupportedDocumentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .message = "Message",
+    };
 };
 
+/// Indicates that a request was not valid. Check request for proper formatting.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

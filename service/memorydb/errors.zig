@@ -338,289 +338,589 @@ pub const ServiceError = struct {
     }
 };
 
+/// An ACL with the specified name already exists.
 pub const ACLAlreadyExistsFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified ACL does not exist.
 pub const ACLNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request cannot be processed because it would exceed the maximum number
+/// of ACLs allowed.
 pub const ACLQuotaExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The customer has exceeded the maximum number of API requests allowed per
+/// time period.
 pub const APICallRateForCustomerExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A cluster with the specified name already exists.
 pub const ClusterAlreadyExistsFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified cluster does not exist.
 pub const ClusterNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request cannot be processed because it would exceed the maximum number
+/// of clusters allowed for this customer.
 pub const ClusterQuotaForCustomerExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A default user is required and must be specified.
 pub const DefaultUserRequired = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A user with the specified name already exists.
 pub const DuplicateUserNameFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The cluster does not have sufficient capacity to perform the requested
+/// operation.
 pub const InsufficientClusterCapacityFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The ACL is not in a valid state for the requested operation.
 pub const InvalidACLStateFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified Amazon Resource Name (ARN) is not valid.
 pub const InvalidARNFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The cluster is not in a valid state for the requested operation.
 pub const InvalidClusterStateFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The provided credentials are not valid.
 pub const InvalidCredentialsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified KMS key is not valid or accessible.
 pub const InvalidKMSKeyFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The requested operation cannot be performed on the multi-Region cluster in
+/// its current state.
 pub const InvalidMultiRegionClusterStateFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The node is not in a valid state for the requested operation.
 pub const InvalidNodeStateFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified parameter combination is not valid.
 pub const InvalidParameterCombinationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The parameter group is not in a valid state for the requested operation.
 pub const InvalidParameterGroupStateFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified parameter value is not valid.
 pub const InvalidParameterValueException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The snapshot is not in a valid state for the requested operation.
 pub const InvalidSnapshotStateFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified subnet is not valid.
 pub const InvalidSubnet = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The user is not in a valid state for the requested operation.
 pub const InvalidUserStateFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The VPC network is not in a valid state for the requested operation.
 pub const InvalidVPCNetworkStateFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A multi-Region cluster with the specified name already exists.
 pub const MultiRegionClusterAlreadyExistsFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified multi-Region cluster does not exist.
 pub const MultiRegionClusterNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified multi-Region parameter group does not exist.
 pub const MultiRegionParameterGroupNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The requested operation would result in no changes.
 pub const NoOperationFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request cannot be processed because it would exceed the maximum number
+/// of nodes allowed for this cluster.
 pub const NodeQuotaForClusterExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request cannot be processed because it would exceed the maximum number
+/// of nodes allowed for this customer.
 pub const NodeQuotaForCustomerExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A parameter group with the specified name already exists.
 pub const ParameterGroupAlreadyExistsFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified parameter group does not exist.
 pub const ParameterGroupNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request cannot be processed because it would exceed the maximum number
+/// of parameter groups allowed.
 pub const ParameterGroupQuotaExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// You already have a reservation with the given identifier.
 pub const ReservedNodeAlreadyExistsFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The requested node does not exist.
 pub const ReservedNodeNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request cannot be processed because it would exceed the user's node
+/// quota.
 pub const ReservedNodeQuotaExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The requested node offering does not exist.
 pub const ReservedNodesOfferingNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The required service-linked role was not found.
 pub const ServiceLinkedRoleNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified service update does not exist.
 pub const ServiceUpdateNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified shard does not exist.
 pub const ShardNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request cannot be processed because it would exceed the maximum number
+/// of shards allowed per cluster.
 pub const ShardsPerClusterQuotaExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A snapshot with the specified name already exists.
 pub const SnapshotAlreadyExistsFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified snapshot does not exist.
 pub const SnapshotNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request cannot be processed because it would exceed the maximum number
+/// of snapshots allowed.
 pub const SnapshotQuotaExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A subnet group with the specified name already exists.
 pub const SubnetGroupAlreadyExistsFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The subnet group is currently in use and cannot be deleted.
 pub const SubnetGroupInUseFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified subnet group does not exist.
 pub const SubnetGroupNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request cannot be processed because it would exceed the maximum number
+/// of subnet groups allowed.
 pub const SubnetGroupQuotaExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The subnet is currently in use and cannot be deleted.
 pub const SubnetInUse = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified subnet is not allowed for this operation.
 pub const SubnetNotAllowedFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request cannot be processed because it would exceed the maximum number
+/// of subnets allowed.
 pub const SubnetQuotaExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified tag does not exist.
 pub const TagNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request cannot be processed because it would exceed the maximum number
+/// of tags allowed per resource.
 pub const TagQuotaPerResourceExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Test failover is not available for this cluster configuration.
 pub const TestFailoverNotAvailableFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A user with the specified name already exists.
 pub const UserAlreadyExistsFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified user does not exist.
 pub const UserNotFoundFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request cannot be processed because it would exceed the maximum number
+/// of users allowed.
 pub const UserQuotaExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

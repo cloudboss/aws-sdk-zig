@@ -168,119 +168,436 @@ pub const ServiceError = struct {
     }
 };
 
+/// You are not authorized to perform the action.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
+/// A User with the same Id already exists within the collection, or the update
+/// or deletion
+/// of the User caused an inconsistent state. **
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
+/// The number of in-progress human reviews you have has exceeded the number
+/// allowed.
 pub const HumanLoopQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    /// The quota code.
+    quota_code: ?[]const u8 = null,
+
+    /// The resource type.
+    resource_type: ?[]const u8 = null,
+
+    /// The service code.
+    service_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+        .quota_code = "QuotaCode",
+        .resource_type = "ResourceType",
+        .service_code = "ServiceCode",
+    };
 };
 
+/// A `ClientRequestToken` input parameter was reused with an operation, but at
+/// least one of the other input
+/// parameters is different from the previous call to the operation.
 pub const IdempotentParameterMismatchException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
+/// The input image size exceeds the allowed limit. If you are calling
+/// DetectProtectiveEquipment, the image size or resolution exceeds the allowed
+/// limit. For more
+/// information, see Guidelines and quotas in Amazon Rekognition in the Amazon
+/// Rekognition Developer Guide.
 pub const ImageTooLargeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
+/// Amazon Rekognition experienced a service issue. Try your call again.
 pub const InternalServerError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
+/// The provided image format is not supported.
 pub const InvalidImageFormatException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
+/// Indicates that a provided manifest file is empty or larger than the allowed
+/// limit.
 pub const InvalidManifestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
+/// Pagination token in the request is not valid.
 pub const InvalidPaginationTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
+/// Input parameter violated a constraint. Validate your parameter before
+/// calling the API
+/// operation again.
 pub const InvalidParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
+/// The supplied revision id for the project policy is invalid.
 pub const InvalidPolicyRevisionIdException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
+/// Amazon Rekognition is unable to access the S3 object specified in the
+/// request.
 pub const InvalidS3ObjectException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
+/// An Amazon Rekognition service limit was exceeded. For example, if you start
+/// too many jobs
+/// concurrently, subsequent calls to start operations (ex:
+/// `StartLabelDetection`) will raise a `LimitExceededException`
+/// exception (HTTP status code: 400) until the number of concurrently running
+/// jobs is below
+/// the Amazon Rekognition service limit.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
+/// The format of the project policy document that you supplied to
+/// `PutProjectPolicy` is incorrect.
 pub const MalformedPolicyDocumentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
+/// The number of requests exceeded your throughput limit. If you want to
+/// increase this
+/// limit, contact Amazon Rekognition.
 pub const ProvisionedThroughputExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
+/// A resource with the specified ID already exists.
 pub const ResourceAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
+/// The specified resource is already being used.
 pub const ResourceInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
+/// The resource specified in the request cannot be found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
+/// The requested resource isn't ready. For example,
+/// this exception occurs when you call `DetectCustomLabels` with a
+/// model version that isn't deployed.
 pub const ResourceNotReadyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
+/// The size of the collection exceeds the allowed limit. For more information,
+/// see Guidelines and quotas in Amazon Rekognition in the Amazon Rekognition
+/// Developer Guide.
 pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
+/// Occurs when a given sessionId is not found.
 pub const SessionNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
+/// Amazon Rekognition is temporarily unable to process the request. Try your
+/// call again.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
+/// The file size or duration of the supplied media is too large. The maximum
+/// file size is 10GB.
+/// The maximum duration is 6 hours.
 pub const VideoTooLargeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// A universally unique identifier (UUID) for the request.
+    logref: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "Code",
+        .logref = "Logref",
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

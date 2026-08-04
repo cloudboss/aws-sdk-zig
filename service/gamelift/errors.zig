@@ -133,84 +133,203 @@ pub const ServiceError = struct {
     }
 };
 
+/// The requested operation would cause a conflict with the current state of a
+/// service
+/// resource associated with the request. Resolve the conflict before retrying
+/// this
+/// request.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified fleet has no available instances to fulfill a
+/// `CreateGameSession` request. Clients can retry such requests immediately
+/// or after a waiting period.
 pub const FleetCapacityExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The game instance is currently full and cannot allow the requested player(s)
+/// to join.
+/// Clients can retry such requests immediately or after a waiting period.
 pub const GameSessionFullException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A game session with this custom ID string already exists in this fleet.
+/// Resolve this
+/// conflict before retrying this request.
 pub const IdempotentParameterMismatchException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The service encountered an unrecoverable internal failure while processing
+/// the
+/// request. Clients can retry such requests immediately or after a waiting
+/// period.
 pub const InternalServiceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The requested operation would cause a conflict with the current state of a
+/// resource
+/// associated with the request and/or the fleet. Resolve the conflict before
+/// retrying.
 pub const InvalidFleetStatusException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The requested operation would cause a conflict with the current state of a
+/// resource
+/// associated with the request and/or the game instance. Resolve the conflict
+/// before
+/// retrying.
 pub const InvalidGameSessionStatusException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// One or more parameter values in the request are invalid. Correct the invalid
+/// parameter
+/// values before retrying.
 pub const InvalidRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The requested operation would cause the resource to exceed the allowed
+/// service limit.
+/// Resolve the issue before retrying.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The requested resources was not found. The resource was either not created
+/// yet or deleted.
 pub const NotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The operation failed because Amazon GameLift Servers has not yet finished
+/// validating this compute. We
+/// recommend attempting 8 to 10 retries over 3 to 5 minutes with [exponential
+/// backoffs and
+/// jitter](http://aws.amazon.com/blogs/https:/aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/).
 pub const NotReadyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified game server group has no available game servers to fulfill a
+/// `ClaimGameServer` request. Clients can retry such requests immediately or
+/// after a waiting period.
 pub const OutOfCapacityException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The requested tagging operation did not succeed. This may be due to invalid
+/// tag format
+/// or the maximum tag limit may have been exceeded. Resolve the issue before
+/// retrying.
 pub const TaggingFailedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The service is unable to resolve the routing for a particular alias because
+/// it has a
+/// terminal `RoutingStrategy` associated with it. The message returned in this
+/// exception is the message defined in the routing strategy itself. Such
+/// requests should
+/// only be retried if the routing strategy for the specified alias is modified.
 pub const TerminalRoutingStrategyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The client failed authentication. Clients should not retry such requests.
 pub const UnauthorizedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The requested operation is not supported in the Region specified.
 pub const UnsupportedRegionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

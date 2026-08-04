@@ -108,59 +108,132 @@ pub const ServiceError = struct {
     }
 };
 
+/// Thrown if there are parallel requests to modify a resource.
 pub const ConcurrentModificationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The provided developer user identifier is already registered with Cognito
+/// under a
+/// different identity ID.
 pub const DeveloperUserAlreadyRegisteredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An exception thrown when a dependent service such as Facebook or Twitter is
+/// not
+/// responding
 pub const ExternalServiceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Thrown when the service encounters an error during processing the request.
 pub const InternalErrorException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// If you provided authentication information in the request, the identity pool
+/// has no
+/// authenticated role configured, or STS returned an error response to the
+/// request to assume the authenticated role from the identity pool. If you
+/// provided no
+/// authentication information in the request, the identity pool has no
+/// unauthenticated role
+/// configured, or STS returned an error response to the request to assume the
+/// unauthenticated role from the identity pool.
+///
+/// Your role trust policy must grant `AssumeRoleWithWebIdentity` permissions to
+/// `cognito-identity.amazonaws.com`.
 pub const InvalidIdentityPoolConfigurationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Thrown for missing or bad input parameter(s).
 pub const InvalidParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Thrown when the total number of user pools has exceeded a preset limit.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Thrown when a user is not authorized to access the requested resource.
 pub const NotAuthorizedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Thrown when a user tries to use a login which is already linked to another
+/// account.
 pub const ResourceConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Thrown when the requested resource (for example, a dataset or record) does
+/// not
+/// exist.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Thrown when a request is throttled.
 pub const TooManyRequestsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

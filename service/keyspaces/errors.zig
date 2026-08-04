@@ -83,34 +83,77 @@ pub const ServiceError = struct {
     }
 };
 
+/// You don't have sufficient access permissions to perform this action.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Amazon Keyspaces couldn't complete the requested action. This error may
+/// occur if you try to perform an action and the same or a different action is
+/// already in progress, or if you try to create a resource that already exists.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Amazon Keyspaces was unable to fully process this request because of an
+/// internal server error.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The operation tried to access a keyspace, table, or type that doesn't exist.
+/// The resource might not be specified correctly, or its status might not be
+/// `ACTIVE`.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The unique identifier in the format of Amazon Resource Name (ARN) for the
+    /// resource couldn't be found.
+    resource_arn: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource_arn = "resourceArn",
+    };
 };
 
+/// The operation exceeded the service quota for this resource. For more
+/// information on service quotas, see
+/// [Quotas](https://docs.aws.amazon.com/keyspaces/latest/devguide/quotas.html)
+/// in the *Amazon Keyspaces Developer Guide*.
 pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The operation failed due to an invalid or malformed request.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

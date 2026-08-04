@@ -483,434 +483,1063 @@ pub const ServiceError = struct {
     }
 };
 
+/// You do not have sufficient access to perform this action.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when you start a new import and a previous import
+/// is still in
+/// progress.
 pub const AccountHasOngoingImportException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the specified account is not found or not part
+/// of an
+/// organization.
 pub const AccountNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the specified account is not registered as the
+/// CloudTrail delegated administrator.
 pub const AccountNotRegisteredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the account is already registered as the
+/// CloudTrail
+/// delegated administrator.
 pub const AccountRegisteredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the management account of an organization is
+/// registered as
+/// the CloudTrail delegated administrator.
 pub const CannotDelegateManagementAccountException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the provided channel already exists.
 pub const ChannelAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the specified value of `ChannelARN` is not
+/// valid.
 pub const ChannelARNInvalidException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the specified event data store cannot yet be
+/// deleted because it
+/// is in use by a channel.
 pub const ChannelExistsForEDSException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the maximum number of channels limit is
+/// exceeded.
 pub const ChannelMaxLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when CloudTrail cannot find the specified channel.
 pub const ChannelNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when trusted access has not been enabled between
+/// CloudTrail and Organizations. For more information, see [How to enable or
+/// disable trusted
+/// access](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_how-to-enable-disable-trusted-access) in the *Organizations User Guide* and [Prepare For Creating a Trail For Your Organization](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html) in the *CloudTrail User Guide*.
 pub const CloudTrailAccessNotEnabledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when an operation is called with an ARN that is not
+/// valid.
+///
+/// The following is the format of a trail ARN:
+/// `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
+///
+/// The following is the format of an event data store ARN:
+/// `arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
+///
+/// The following is the format of a dashboard ARN:
+/// `arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash`
+///
+/// The following is the format of a channel ARN:
+/// `arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890`
 pub const CloudTrailARNInvalidException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when a call results in the `InvalidClientTokenId`
+/// error code. This can occur when you are creating or updating a trail to send
+/// notifications
+/// to an Amazon SNS topic that is in a suspended Amazon Web Services account.
 pub const CloudTrailInvalidClientTokenIdException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Cannot set a CloudWatch Logs delivery for this Region.
 pub const CloudWatchLogsDeliveryUnavailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You are trying to update a resource when another request is in progress.
+/// Allow sufficient wait time for the previous request to complete, then retry
+/// your request.
 pub const ConcurrentModificationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the specified resource is not ready for an
+/// operation. This
+/// can occur when you try to run an operation on a resource before CloudTrail
+/// has time
+/// to fully load the resource, or because another operation is modifying the
+/// resource. If this exception occurs, wait a few minutes, and then try the
+/// operation again.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the maximum number of CloudTrail delegated
+/// administrators is reached.
 pub const DelegatedAdminAccountLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// An event data store with that name already exists.
 pub const EventDataStoreAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified event data store ARN is not valid or does not map to an event
+/// data store
+/// in your account.
 pub const EventDataStoreARNInvalidException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You cannot delete the event data store because Lake query federation is
+/// enabled. To delete the event data store, run the `DisableFederation`
+/// operation to
+/// disable Lake query federation on the event data store.
 pub const EventDataStoreFederationEnabledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when you try to update or delete an event data
+/// store that
+/// currently has an import in progress.
 pub const EventDataStoreHasOngoingImportException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Your account has used the maximum number of event data stores.
 pub const EventDataStoreMaxLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified event data store was not found.
 pub const EventDataStoreNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The event data store cannot be deleted because termination protection is
+/// enabled for
+/// it.
 pub const EventDataStoreTerminationProtectedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when a valid query could not be generated for the
+/// provided prompt.
 pub const GenerateResponseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified import was not found.
 pub const ImportNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The event data store is inactive.
 pub const InactiveEventDataStoreException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified query cannot be canceled because it is in the `FINISHED`,
+/// `FAILED`, `TIMED_OUT`, or `CANCELLED` state.
 pub const InactiveQueryException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// If you run `GetInsightSelectors` on a trail or event data store that does
+/// not have Insights
+/// events enabled, the operation throws the exception
+/// `InsightNotEnabledException`.
 pub const InsightNotEnabledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the IAM identity that is used to create
+/// the organization resource lacks one or more required permissions for
+/// creating an
+/// organization resource in a required service.
 pub const InsufficientDependencyServiceAccessPermissionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// For the `CreateTrail`
+/// `PutInsightSelectors`, `UpdateTrail`, `StartQuery`, and `StartImport`
+/// operations, this exception is thrown
+/// when the policy on the S3 bucket or KMS key does
+/// not have sufficient permissions for the operation.
+///
+/// For all other operations, this exception is thrown when the policy for the
+/// KMS key does
+/// not have sufficient permissions for the operation.
 pub const InsufficientEncryptionPolicyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The task can't be completed because you are signed in with an account that
+/// lacks permissions to view or create a service-linked role. Sign in with an
+/// account that has the required permissions and then try again.
 pub const InsufficientIAMAccessPermissionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the policy on the S3 bucket is not sufficient.
 pub const InsufficientS3BucketPolicyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the policy on the Amazon SNS topic is not
+/// sufficient.
 pub const InsufficientSnsTopicPolicyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the provided CloudWatch Logs log group is not
+/// valid.
 pub const InvalidCloudWatchLogsLogGroupArnException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the provided role is not valid.
 pub const InvalidCloudWatchLogsRoleArnException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A date range for the query was specified that is not valid. Be sure that the
+/// start time
+/// is chronologically before the end time. For more information about writing a
+/// query, see
+/// [Create or edit a
+/// query](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-create-edit-query.html) in the *CloudTrail User Guide*.
 pub const InvalidDateRangeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Occurs if an event category that is not valid is specified as a value of
+/// `EventCategory`.
 pub const InvalidEventCategoryException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when event categories of specified event data
+/// stores are not
+/// valid.
 pub const InvalidEventDataStoreCategoryException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The event data store is not in a status that supports the operation.
 pub const InvalidEventDataStoreStatusException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the `PutEventSelectors` operation is called
+/// with a number of event selectors, advanced event selectors, or data
+/// resources that is not
+/// valid. The combination of event selectors or advanced event selectors and
+/// data resources is
+/// not valid. A trail can have up to 5 event selectors. If a trail uses
+/// advanced event
+/// selectors, a maximum of 500 total values for all conditions in all advanced
+/// event selectors
+/// is allowed. A trail is limited to 250 data resources. These data resources
+/// can be
+/// distributed across event selectors, but the overall total cannot exceed 250.
+///
+/// You can:
+///
+/// * Specify a valid number of event selectors (1 to 5) for a trail.
+///
+/// * Specify a valid number of data resources (1 to 250) for an event selector.
+///   The
+/// limit of number of resources on an individual event selector is configurable
+/// up to
+/// 250. However, this upper limit is allowed only if the total number of data
+/// resources
+/// does not exceed 250 across all event selectors for a trail.
+///
+/// * Specify up to 500 values for all conditions in all advanced event
+///   selectors for a
+/// trail.
+///
+/// * Specify a valid value for a parameter. For example, specifying the
+/// `ReadWriteType` parameter with a value of `read-only` is not
+/// valid.
 pub const InvalidEventSelectorsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when an operation is called on a trail from a
+/// Region other than
+/// the Region in which the trail was created.
 pub const InvalidHomeRegionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the provided source S3 bucket is not valid for
+/// import.
 pub const InvalidImportSourceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// For `PutInsightSelectors`, this exception is thrown when the formatting or
+/// syntax of the `InsightSelectors` JSON statement is not
+/// valid, or the specified `InsightType` in the `InsightSelectors` statement is
+/// not
+/// valid. Valid values for `InsightType` are `ApiCallRateInsight` and
+/// `ApiErrorRateInsight`. To enable Insights on an event data store, the
+/// destination event data store specified by the
+/// `InsightsDestination` parameter must log Insights events and the source
+/// event data
+/// store specified by the `EventDataStore` parameter must log management
+/// events.
+///
+/// For `UpdateEventDataStore`, this exception is thrown if Insights are enabled
+/// on the event data store and the updated
+/// advanced event selectors are not compatible with the configured
+/// `InsightSelectors`.
+/// If the `InsightSelectors` includes an `InsightType` of `ApiCallRateInsight`,
+/// the source event data store must log `write` management events.
+/// If the `InsightSelectors` includes an `InsightType` of
+/// `ApiErrorRateInsight`, the source event data store must log management
+/// events.
 pub const InvalidInsightSelectorsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the KMS key ARN is not valid.
 pub const InvalidKmsKeyIdException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Occurs when a lookup attribute is specified that is not valid.
 pub const InvalidLookupAttributesException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown if the limit specified is not valid.
 pub const InvalidMaxResultsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A token that is not valid, or a token that was previously used in a request
+/// with
+/// different parameters. This exception is thrown if the token is not valid.
 pub const InvalidNextTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the combination of parameters provided is not
+/// valid.
 pub const InvalidParameterCombinationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request includes a parameter that is not valid.
 pub const InvalidParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The query that was submitted has validation errors, or uses incorrect syntax
+/// or
+/// unsupported keywords. For more information about writing a query, see
+/// [Create or edit a
+/// query](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-create-edit-query.html) in the *CloudTrail User
+/// Guide*.
 pub const InvalidQueryStatementException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The query status is not valid for the operation.
 pub const InvalidQueryStatusException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the provided S3 bucket name is not valid.
 pub const InvalidS3BucketNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the provided S3 prefix is not valid.
 pub const InvalidS3PrefixException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the provided SNS topic name is not valid.
 pub const InvalidSnsTopicNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the specified value of `Source` is not valid.
 pub const InvalidSourceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the specified tag key or values are not valid.
+/// It can also
+/// occur if there are duplicate tags or too many tags on the resource.
 pub const InvalidTagParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Occurs if the timestamp values are not valid. Either the start time occurs
+/// after the end
+/// time, or the time range is outside the range of possible values.
 pub const InvalidTimeRangeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Reserved for future use.
 pub const InvalidTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the provided trail name is not valid. Trail
+/// names must
+/// meet the following requirements:
+///
+/// * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.),
+///   underscores
+/// (_), or dashes (-)
+///
+/// * Start with a letter or number, and end with a letter or number
+///
+/// * Be between 3 and 128 characters
+///
+/// * Have no adjacent periods, underscores or dashes. Names like
+/// `my-_namespace` and `my--namespace` are not valid.
+///
+/// * Not be in IP address format (for example, 192.168.5.4)
 pub const InvalidTrailNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when there is an issue with the specified KMS
+/// key and the trail or event data store can't be updated.
 pub const KmsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is no longer in use.
 pub const KmsKeyDisabledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the KMS key does not exist, when the S3
+/// bucket and the KMS key are not in the same Region, or when the KMS key
+/// associated with the Amazon SNS topic either does not exist or is
+/// not in the same Region.
 pub const KmsKeyNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You are already running the maximum number of concurrent queries. The
+/// maximum number of concurrent queries is 10. Wait a minute for some
+/// queries to finish, and then run the query again.
 pub const MaxConcurrentQueriesException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the maximum number of trails is reached.
 pub const MaximumNumberOfTrailsExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the management account does not have a
+/// service-linked
+/// role.
 pub const NoManagementAccountSLRExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the account making the request is not the
+/// organization's
+/// management account.
 pub const NotOrganizationManagementAccountException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the Amazon Web Services account making the
+/// request to
+/// create or update an organization trail or event data store is not the
+/// management account
+/// for an organization in Organizations. For more information, see [Prepare For
+/// Creating a Trail For Your
+/// Organization](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html) or [Organization event data stores](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-organizations.html).
 pub const NotOrganizationMasterAccountException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the requested operation is not permitted.
 pub const OperationNotPermittedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when Organizations is not configured to support all
+/// features. All features must be enabled in Organizations to support creating
+/// an
+/// organization trail or event data store.
 pub const OrganizationNotInAllFeaturesModeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the request is made from an Amazon Web
+/// Services account
+/// that is not a member of an organization. To make this request, sign in using
+/// the
+/// credentials of an account that belongs to an organization.
 pub const OrganizationsNotInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The query ID does not exist or does not map to a query.
 pub const QueryIdNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the provided resource does not exist, or the
+/// ARN format of the resource is not valid.
+///
+/// The following is the format of an event data store ARN:
+/// `arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
+///
+/// The following is the format of a dashboard ARN:
+/// `arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash`
+///
+/// The following is the format of a channel ARN:
+/// `arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890`
 pub const ResourceARNNotValidException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the specified resource is not found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the specified resource policy is not found.
 pub const ResourcePolicyNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the resouce-based policy has syntax errors, or
+/// contains a principal that is not valid.
 pub const ResourcePolicyNotValidException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the specified resource type is not supported
+/// by CloudTrail.
 pub const ResourceTypeNotSupportedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the specified S3 bucket does not exist.
 pub const S3BucketDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the quota is exceeded. For information about
+/// CloudTrail quotas, see [Service
+/// quotas](https://docs.aws.amazon.com/general/latest/gr/ct.html#limits_cloudtrail)
+/// in the *Amazon Web Services General Reference*.
 pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The number of tags per trail, event data store, dashboard, or channel has
+/// exceeded the permitted amount. Currently, the limit is
+/// 50.
 pub const TagsLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the request rate exceeds the limit.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the specified trail already exists.
 pub const TrailAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the trail with the given name is not found.
 pub const TrailNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is no longer in use.
 pub const TrailNotProvidedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the requested operation is not supported.
 pub const UnsupportedOperationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

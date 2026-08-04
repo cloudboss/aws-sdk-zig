@@ -1,5 +1,12 @@
 const std = @import("std");
 
+const InvalidNetworkInterface = @import("invalid_network_interface.zig").InvalidNetworkInterface;
+const InvalidSignal = @import("invalid_signal.zig").InvalidSignal;
+const InvalidSignalDecoder = @import("invalid_signal_decoder.zig").InvalidSignalDecoder;
+const Node = @import("node.zig").Node;
+const ValidationExceptionField = @import("validation_exception_field.zig").ValidationExceptionField;
+const ValidationExceptionReason = @import("validation_exception_reason.zig").ValidationExceptionReason;
+
 pub const ServiceError = struct {
     arena: ?std.heap.ArenaAllocator = null,
     kind: Kind,
@@ -103,54 +110,186 @@ pub const ServiceError = struct {
     }
 };
 
+/// You don't have sufficient permission to perform this action.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request has conflicting operations. This can occur if you're trying to
+/// perform
+/// more than one operation on the same resource at the same time.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The resource on which there are conflicting operations.
+    resource: []const u8,
+
+    /// The type of resource on which there are conflicting operations..
+    resource_type: []const u8,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource = "resource",
+        .resource_type = "resourceType",
+    };
 };
 
+/// The request couldn't be completed because it contains signal decoders with
+/// one or more
+/// validation errors.
 pub const DecoderManifestValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The request couldn't be completed because of invalid network interfaces in
+    /// the
+    /// request.
+    invalid_network_interfaces: ?[]const InvalidNetworkInterface = null,
+
+    /// The request couldn't be completed because of invalid signals in the request.
+    invalid_signals: ?[]const InvalidSignalDecoder = null,
+
+    pub const json_field_names = .{
+        .invalid_network_interfaces = "invalidNetworkInterfaces",
+        .invalid_signals = "invalidSignals",
+        .message = "message",
+    };
 };
 
+/// The request couldn't be completed because the server temporarily failed.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The number of seconds to wait before retrying the command.
+    retry_after_seconds: ?i32 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .retry_after_seconds = "retryAfterSeconds",
+    };
 };
 
+/// The specified node type doesn't match the expected node type for a node. You
+/// can
+/// specify the node type as branch, sensor, actuator, or attribute.
 pub const InvalidNodeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The specified node type isn't valid.
+    invalid_nodes: ?[]const Node = null,
+
+    /// The reason the node validation failed.
+    reason: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .invalid_nodes = "invalidNodes",
+        .message = "message",
+        .reason = "reason",
+    };
 };
 
+/// The request couldn't be completed because it contains signals that aren't
+/// valid.
 pub const InvalidSignalsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The signals which caused the exception.
+    invalid_signals: ?[]const InvalidSignal = null,
+
+    pub const json_field_names = .{
+        .invalid_signals = "invalidSignals",
+        .message = "message",
+    };
 };
 
+/// A service quota was exceeded.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The identifier of the resource that was exceeded.
+    resource_id: []const u8,
+
+    /// The type of resource that was exceeded.
+    resource_type: []const u8,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource_id = "resourceId",
+        .resource_type = "resourceType",
+    };
 };
 
+/// The resource wasn't found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The identifier of the resource that wasn't found.
+    resource_id: []const u8,
+
+    /// The type of resource that wasn't found.
+    resource_type: []const u8,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource_id = "resourceId",
+        .resource_type = "resourceType",
+    };
 };
 
+/// The request couldn't be completed due to throttling.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The quota identifier of the applied throttling rules for this request.
+    quota_code: ?[]const u8 = null,
+
+    /// The number of seconds to wait before retrying the command.
+    retry_after_seconds: ?i32 = null,
+
+    /// The code for the service that couldn't be completed due to throttling.
+    service_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .quota_code = "quotaCode",
+        .retry_after_seconds = "retryAfterSeconds",
+        .service_code = "serviceCode",
+    };
 };
 
+/// The input fails to satisfy the constraints specified by an Amazon Web
+/// Services service.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The list of fields that fail to satisfy the constraints specified by an
+    /// Amazon Web Services
+    /// service.
+    field_list: ?[]const ValidationExceptionField = null,
+
+    /// The reason the input failed to satisfy the constraints specified by an
+    /// Amazon Web Services
+    /// service.
+    reason: ?ValidationExceptionReason = null,
+
+    pub const json_field_names = .{
+        .field_list = "fieldList",
+        .message = "message",
+        .reason = "reason",
+    };
 };
 
 pub const UnknownServiceError = struct {

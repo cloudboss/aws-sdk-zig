@@ -258,206 +258,435 @@ pub const ServiceError = struct {
     }
 };
 
+/// The action execution was not found.
 pub const ActionExecutionNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified action cannot be found.
 pub const ActionNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified action type cannot be found.
 pub const ActionTypeNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The approval action has already been approved or rejected.
 pub const ApprovalAlreadyCompletedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Unable to modify the tag due to a simultaneous update request.
 pub const ConcurrentModificationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The pipeline has reached the limit for concurrent pipeline executions.
 pub const ConcurrentPipelineExecutionsLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Unable to override because the condition does not allow overrides.
 pub const ConditionNotOverridableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Your request cannot be handled because the pipeline is busy handling ongoing
+/// activities. Try again later.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The pipeline execution is already in a `Stopping` state. If you already
+/// chose to stop and wait, you cannot make that request again. You can choose
+/// to stop and
+/// abandon now, but be aware that this option can lead to failed tasks or out
+/// of sequence
+/// tasks. If you already chose to stop and abandon, you cannot make that
+/// request
+/// again.
 pub const DuplicatedStopRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The action declaration was specified in an invalid format.
 pub const InvalidActionDeclarationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The approval request already received a response or has expired.
 pub const InvalidApprovalTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified resource ARN is invalid.
 pub const InvalidArnException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Reserved for future use.
 pub const InvalidBlockerDeclarationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The client token was specified in an invalid format
 pub const InvalidClientTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The job was specified in an invalid format or cannot be found.
 pub const InvalidJobException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The job state was specified in an invalid format.
 pub const InvalidJobStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The next token was specified in an invalid format. Make sure that the next
+/// token
+/// you provide is the token returned by a previous call.
 pub const InvalidNextTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The nonce was specified in an invalid format.
 pub const InvalidNonceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The stage declaration was specified in an invalid format.
 pub const InvalidStageDeclarationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The structure was specified in an invalid format.
 pub const InvalidStructureException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified resource tags are invalid.
 pub const InvalidTagsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified authentication type is in an invalid format.
 pub const InvalidWebhookAuthenticationParametersException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified event filter rule is in an invalid format.
 pub const InvalidWebhookFilterPatternException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The job was specified in an invalid format or cannot be found.
 pub const JobNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The number of pipelines associated with the Amazon Web Services account has
+/// exceeded
+/// the limit allowed for the account.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The stage has failed in a later run of the pipeline and the
+/// `pipelineExecutionId` associated with the request is out of
+/// date.
 pub const NotLatestPipelineExecutionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Exceeded the total size limit for all variables in the pipeline.
 pub const OutputVariablesSizeExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The pipeline execution was specified in an invalid format or cannot be
+/// found, or an
+/// execution ID does not belong to the specified pipeline.
 pub const PipelineExecutionNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Unable to stop the pipeline execution. The execution might already be in a
+/// `Stopped` state, or it might no longer be in progress.
 pub const PipelineExecutionNotStoppableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified pipeline execution is outdated and cannot be used as a target
+/// pipeline
+/// execution for rollback.
 pub const PipelineExecutionOutdatedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified pipeline name is already in use.
 pub const PipelineNameInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The pipeline was specified in an invalid format or cannot be found.
 pub const PipelineNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The pipeline version was specified in an invalid format or cannot be
+/// found.
 pub const PipelineVersionNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request failed because of an unknown error, exception, or failure.
 pub const RequestFailedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The resource was specified in an invalid format.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The stage was specified in an invalid format or cannot be found.
 pub const StageNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Unable to retry. The pipeline structure or stage state might have changed
+/// while
+/// actions awaited retry, or the stage contains no failed
+/// actions.
 pub const StageNotRetryableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The tags limit for a resource has been exceeded.
 pub const TooManyTagsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Unable to roll back the stage. The cause might be if the pipeline version
+/// has changed
+/// since the target pipeline execution was deployed, the stage is currently
+/// running, or an
+/// incorrect target pipeline execution ID was provided.
 pub const UnableToRollbackStageException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The validation was specified in an invalid format.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified webhook was entered in an invalid format or cannot be
+/// found.
 pub const WebhookNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",

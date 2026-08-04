@@ -83,34 +83,86 @@ pub const ServiceError = struct {
     }
 };
 
+/// When creating a resource, thrown when a resource with the same name already
+/// exists or is being created. When deleting a resource, thrown when the
+/// resource is not in the ACTIVE, FAILED, or UPDATE_FAILED state.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Thrown when an error internal to the service occurs while processing a
+/// request.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Thrown when the collection you're attempting to create results in a number
+/// of search or indexing OCUs that exceeds the account limit.
 pub const OcuLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Thrown when accessing or deleting a resource that does not exist.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Thrown when you attempt to create more resources than the service allows
+/// based on service quotas.
 pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// Service Quotas requirement to identify originating quota.
+    quota_code: ?[]const u8 = null,
+
+    /// Identifier of the resource affected.
+    resource_id: ?[]const u8 = null,
+
+    /// Type of the resource affected.
+    resource_type: ?[]const u8 = null,
+
+    /// Service Quotas requirement to identify originating service.
+    service_code: []const u8,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .quota_code = "quotaCode",
+        .resource_id = "resourceId",
+        .resource_type = "resourceType",
+        .service_code = "serviceCode",
+    };
 };
 
+/// Thrown when the HTTP request contains invalid input or is missing required
+/// input.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

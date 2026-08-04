@@ -128,79 +128,203 @@ pub const ServiceError = struct {
     }
 };
 
+/// The health check for the instance that's specified by `ServiceId` and
+/// `InstanceId` isn't a custom health check.
 pub const CustomHealthNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The operation is already in progress.
 pub const DuplicateRequest = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The ID of the operation that's already in progress.
+    duplicate_operation_id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .duplicate_operation_id = "DuplicateOperationId",
+        .message = "Message",
+    };
 };
 
+/// No instance exists with the specified ID, or the instance was recently
+/// registered, and
+/// information about the instance hasn't propagated yet.
 pub const InstanceNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// One or more specified values aren't valid. For example, a required value
+/// might be missing, a
+/// numeric value might be outside the allowed range, or a string value might
+/// exceed length
+/// constraints.
 pub const InvalidInput = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The namespace that you're trying to create already exists.
 pub const NamespaceAlreadyExists = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The `CreatorRequestId` that was used to create the namespace.
+    creator_request_id: ?[]const u8 = null,
+
+    /// The ID of the existing namespace.
+    namespace_id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .creator_request_id = "CreatorRequestId",
+        .message = "Message",
+        .namespace_id = "NamespaceId",
+    };
 };
 
+/// No namespace exists with the specified ID.
 pub const NamespaceNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// No operation exists with the specified ID.
 pub const OperationNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The operation can't be completed because you've reached the quota for the
+/// number of
+/// requests. For more information, see [Cloud Map API request throttling
+/// quota](https://docs.aws.amazon.com/cloud-map/latest/dg/throttling.html) in
+/// the
+/// *Cloud Map Developer Guide*.
 pub const RequestLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified resource can't be deleted because it contains other resources.
+/// For example,
+/// you can't delete a service that contains any instances.
 pub const ResourceInUse = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource can't be created because you've reached the quota on the number
+/// of
+/// resources.
 pub const ResourceLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The operation can't be completed because the resource was not found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The service can't be created because a service with the same name already
+/// exists.
 pub const ServiceAlreadyExists = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The `CreatorRequestId` that was used to create the service.
+    creator_request_id: ?[]const u8 = null,
+
+    /// The ARN of the existing service.
+    service_arn: ?[]const u8 = null,
+
+    /// The ID of the existing service.
+    service_id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .creator_request_id = "CreatorRequestId",
+        .message = "Message",
+        .service_arn = "ServiceArn",
+        .service_id = "ServiceId",
+    };
 };
 
+/// The attribute can't be added to the service because you've exceeded the
+/// quota for the number
+/// of attributes you can add to a service.
 pub const ServiceAttributesLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// No service exists with the specified ID.
 pub const ServiceNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The list of tags on the resource is over the quota. The maximum number of
+/// tags that can be
+/// applied to a resource is 50.
 pub const TooManyTagsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The name of the resource.
+    resource_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .resource_name = "ResourceName",
+    };
 };
 
 pub const UnknownServiceError = struct {

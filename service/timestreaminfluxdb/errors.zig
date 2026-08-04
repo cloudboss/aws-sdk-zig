@@ -1,5 +1,7 @@
 const std = @import("std");
 
+const ValidationExceptionReason = @import("validation_exception_reason.zig").ValidationExceptionReason;
+
 pub const ServiceError = struct {
     arena: ?std.heap.ArenaAllocator = null,
     kind: Kind,
@@ -88,39 +90,102 @@ pub const ServiceError = struct {
     }
 };
 
+/// You do not have sufficient access to perform this action.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request conflicts with an existing resource in Timestream for InfluxDB.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The identifier for the Timestream for InfluxDB resource associated with the
+    /// request.
+    resource_id: []const u8,
+
+    /// The type of Timestream for InfluxDB resource associated with the request.
+    resource_type: []const u8,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource_id = "resourceId",
+        .resource_type = "resourceType",
+    };
 };
 
+/// The request processing has failed because of an unknown error, exception or
+/// failure.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The requested resource was not found or does not exist.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The identifier for the Timestream for InfluxDB resource associated with the
+    /// request.
+    resource_id: []const u8,
+
+    /// The type of Timestream for InfluxDB resource associated with the request.
+    resource_type: []const u8,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource_id = "resourceId",
+        .resource_type = "resourceType",
+    };
 };
 
+/// The request exceeds the service quota.
 pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request was denied due to request throttling.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The number of seconds the caller should wait before retrying.
+    retry_after_seconds: ?i32 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .retry_after_seconds = "retryAfterSeconds",
+    };
 };
 
+/// The input fails to satisfy the constraints specified by Timestream for
+/// InfluxDB.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The reason that validation failed.
+    reason: ValidationExceptionReason,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .reason = "reason",
+    };
 };
 
 pub const UnknownServiceError = struct {

@@ -113,64 +113,143 @@ pub const ServiceError = struct {
     }
 };
 
+/// User-provided application code (query) is invalid. This can be a simple
+/// syntax error.
 pub const CodeValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Exception thrown as a result of concurrent modification to an application.
+/// For example, two individuals attempting to edit the same application at the
+/// same time.
 pub const ConcurrentModificationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// User-provided application configuration is not valid.
 pub const InvalidApplicationConfigurationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Specified input parameter value is invalid.
 pub const InvalidArgumentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Exceeded the number of applications allowed.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Application is not available for this operation.
 pub const ResourceInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Specified application can't be found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Discovery failed to get a record from the
+/// streaming source because of the Amazon Kinesis Streams
+/// ProvisionedThroughputExceededException. For more information,
+/// see
+/// [GetRecords](https://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetRecords.html)
+/// in the Amazon Kinesis Streams API Reference.
 pub const ResourceProvisionedThroughputExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The service is unavailable. Back off and retry the operation.
 pub const ServiceUnavailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Application created with too many tags, or too many tags added to an
+/// application. Note that the maximum number of application tags includes
+/// system tags. The maximum number of user-defined application tags is 50.
 pub const TooManyTagsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Data format is not valid. Amazon Kinesis Analytics is not able to detect
+/// schema for
+/// the given streaming source.
 pub const UnableToDetectSchemaException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    processed_input_records: ?[]const []const u8 = null,
+
+    raw_input_records: ?[]const []const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .processed_input_records = "ProcessedInputRecords",
+        .raw_input_records = "RawInputRecords",
+    };
 };
 
+/// The request was rejected because a specified parameter is not supported or a
+/// specified resource is not valid for this operation.
 pub const UnsupportedOperationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

@@ -63,14 +63,34 @@ pub const ServiceError = struct {
     }
 };
 
+/// This exception is thrown when an error occurs in the DataSync
+/// service.
 pub const InternalException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    error_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .error_code = "errorCode",
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when the client submits a malformed request.
 pub const InvalidRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    datasync_error_code: ?[]const u8 = null,
+
+    error_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .datasync_error_code = "datasyncErrorCode",
+        .error_code = "errorCode",
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

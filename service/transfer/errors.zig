@@ -98,49 +98,114 @@ pub const ServiceError = struct {
     }
 };
 
+/// You do not have sufficient access to perform this action.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the `UpdateServer` is called for a file
+/// transfer protocol-enabled server that has VPC as the endpoint type and the
+/// server's `VpcEndpointID` is not in the available state.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when an error occurs in the Transfer Family
+/// service.
 pub const InternalServiceError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The `NextToken` parameter that was passed is invalid.
 pub const InvalidNextTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This exception is thrown when the client submits a malformed request.
 pub const InvalidRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The requested resource does not exist, or exists in a region other than the
+/// one specified for the command.
 pub const ResourceExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    resource: []const u8,
+
+    resource_type: []const u8,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .resource = "Resource",
+        .resource_type = "ResourceType",
+    };
 };
 
+/// This exception is thrown when a resource is not found by the Amazon Web
+/// ServicesTransfer Family service.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    resource: []const u8,
+
+    resource_type: []const u8,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .resource = "Resource",
+        .resource_type = "ResourceType",
+    };
 };
 
+/// The request has failed because the Amazon Web ServicesTransfer Family
+/// service is not available.
 pub const ServiceUnavailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request was denied due to request throttling.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    retry_after_seconds: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .retry_after_seconds = "RetryAfterSeconds",
+    };
 };
 
 pub const UnknownServiceError = struct {

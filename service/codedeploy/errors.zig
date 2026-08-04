@@ -603,554 +603,1191 @@ pub const ServiceError = struct {
     }
 };
 
+/// The maximum number of alarms for a deployment group (10) was exceeded.
 pub const AlarmsLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An application with the specified name with the user or Amazon Web Services
+/// account
+/// already exists.
 pub const ApplicationAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The application does not exist with the user or Amazon Web Services account.
 pub const ApplicationDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// More applications were attempted to be created than are allowed.
 pub const ApplicationLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The minimum number of required application names was not specified.
 pub const ApplicationNameRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified ARN is not supported. For example, it might be an ARN for a
+/// resource
+/// that is not expected.
 pub const ArnNotSupportedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The maximum number of names or IDs allowed for this request (100) was
+/// exceeded.
 pub const BatchLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A bucket name is required, but was not provided.
 pub const BucketNameFilterRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The deployment is already complete.
 pub const DeploymentAlreadyCompletedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A deployment configuration with the specified name with the user or Amazon
+/// Web Services account already exists.
 pub const DeploymentConfigAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The deployment configuration does not exist with the user or Amazon Web
+/// Services account.
 pub const DeploymentConfigDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The deployment configuration is still in use.
 pub const DeploymentConfigInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The deployment configurations limit was exceeded.
 pub const DeploymentConfigLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The deployment configuration name was not specified.
 pub const DeploymentConfigNameRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The deployment with the user or Amazon Web Services account does not exist.
 pub const DeploymentDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A deployment group with the specified name with the user or Amazon Web
+/// Services account
+/// already exists.
 pub const DeploymentGroupAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The named deployment group with the user or Amazon Web Services account does
+/// not
+/// exist.
 pub const DeploymentGroupDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The deployment groups limit was exceeded.
 pub const DeploymentGroupLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The deployment group name was not specified.
 pub const DeploymentGroupNameRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// At least one deployment ID must be specified.
 pub const DeploymentIdRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The deployment does not have a status of Ready and can't continue yet.
 pub const DeploymentIsNotInReadyStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The number of allowed deployments was exceeded.
 pub const DeploymentLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified deployment has not started.
 pub const DeploymentNotStartedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The provided target ID does not belong to the attempted deployment.
 pub const DeploymentTargetDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A deployment target ID was not provided.
 pub const DeploymentTargetIdRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The maximum number of targets that can be associated with an Amazon ECS or
+/// Lambda deployment was exceeded. The target list of both types of
+/// deployments must have exactly one item. This exception does not apply to
+/// EC2/On-premises
+/// deployments.
 pub const DeploymentTargetListSizeExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The description is too long.
 pub const DescriptionTooLongException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The Amazon ECS service is associated with more than one deployment groups.
+/// An
+/// Amazon ECS service can be associated with only one deployment group.
 pub const ECSServiceMappingLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// No GitHub account connection exists with the named specified in the call.
 pub const GitHubAccountTokenDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The call is missing a required GitHub account connection name.
 pub const GitHubAccountTokenNameRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// No IAM ARN was included in the request. You must use an IAM session ARN or
+/// user ARN in the request.
 pub const IamArnRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request included an IAM session ARN that has already been used to
+/// register a different instance.
 pub const IamSessionArnAlreadyRegisteredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified user ARN is already registered with an on-premises instance.
 pub const IamUserArnAlreadyRegisteredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An user ARN was not specified.
 pub const IamUserArnRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified instance does not exist in the deployment group.
 pub const InstanceDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The instance ID was not specified.
 pub const InstanceIdRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The maximum number of allowed on-premises instances in a single call was
+/// exceeded.
 pub const InstanceLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified on-premises instance name is already registered.
 pub const InstanceNameAlreadyRegisteredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An on-premises instance name was not specified.
 pub const InstanceNameRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified on-premises instance is not registered.
 pub const InstanceNotRegisteredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The format of the alarm configuration is invalid. Possible causes include:
+///
+/// * The alarm list is null.
+///
+/// * The alarm object is null.
+///
+/// * The alarm name is empty or null or exceeds the limit of 255 characters.
+///
+/// * Two alarms with the same name have been specified.
+///
+/// * The alarm configuration is enabled, but the alarm list is empty.
 pub const InvalidAlarmConfigException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The application name was specified in an invalid format.
 pub const InvalidApplicationNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified ARN is not in a valid format.
 pub const InvalidArnException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The automatic rollback configuration was specified in an invalid format. For
+/// example,
+/// automatic rollback is enabled, but an invalid triggering event type or no
+/// event types
+/// were listed.
 pub const InvalidAutoRollbackConfigException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The Auto Scaling group was specified in an invalid format or does not
+/// exist.
 pub const InvalidAutoScalingGroupException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The configuration for the blue/green deployment group was provided in an
+/// invalid
+/// format. For information about deployment configuration format, see
+/// CreateDeploymentConfig.
 pub const InvalidBlueGreenDeploymentConfigurationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The bucket name either doesn't exist or was specified in an invalid format.
 pub const InvalidBucketNameFilterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The computePlatform is invalid. The computePlatform should be `Lambda`,
+/// `Server`, or `ECS`.
 pub const InvalidComputePlatformException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The deployed state filter was specified in an invalid format.
 pub const InvalidDeployedStateFilterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The deployment configuration name was specified in an invalid format.
 pub const InvalidDeploymentConfigNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The deployment group name was specified in an invalid format.
 pub const InvalidDeploymentGroupNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// At least one of the deployment IDs was specified in an invalid format.
 pub const InvalidDeploymentIdException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An instance type was specified for an in-place deployment. Instance types
+/// are
+/// supported for blue/green deployments only.
 pub const InvalidDeploymentInstanceTypeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified deployment status doesn't exist or cannot be determined.
 pub const InvalidDeploymentStatusException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An invalid deployment style was specified. Valid deployment types include
+/// "IN_PLACE"
+/// and "BLUE_GREEN." Valid deployment options include "WITH_TRAFFIC_CONTROL"
+/// and
+/// "WITHOUT_TRAFFIC_CONTROL."
 pub const InvalidDeploymentStyleException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The target ID provided was not valid.
 pub const InvalidDeploymentTargetIdException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The wait type is invalid.
 pub const InvalidDeploymentWaitTypeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A call was submitted that specified both Ec2TagFilters and Ec2TagSet, but
+/// only one of
+/// these data types can be used in a single call.
 pub const InvalidEC2TagCombinationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The tag was specified in an invalid format.
 pub const InvalidEC2TagException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The Amazon ECS service identifier is not valid.
 pub const InvalidECSServiceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The external ID was specified in an invalid format.
 pub const InvalidExternalIdException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An invalid fileExistsBehavior option was specified to determine how
+/// CodeDeploy handles files or directories that already exist in a deployment
+/// target location, but weren't part of the previous successful deployment.
+/// Valid values
+/// include "DISALLOW," "OVERWRITE," and "RETAIN."
 pub const InvalidFileExistsBehaviorException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The GitHub token is not valid.
 pub const InvalidGitHubAccountTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The format of the specified GitHub account connection name is invalid.
 pub const InvalidGitHubAccountTokenNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The IAM session ARN was specified in an invalid format.
 pub const InvalidIamSessionArnException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The user ARN was specified in an invalid format.
 pub const InvalidIamUserArnException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The IgnoreApplicationStopFailures value is invalid. For Lambda
+/// deployments, `false` is expected. For EC2/On-premises deployments,
+/// `true` or `false` is expected.
 pub const InvalidIgnoreApplicationStopFailuresValueException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The input was specified in an invalid format.
 pub const InvalidInputException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The on-premises instance name was specified in an invalid format.
 pub const InvalidInstanceNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified instance status does not exist.
 pub const InvalidInstanceStatusException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An invalid instance type was specified for instances in a blue/green
+/// deployment. Valid
+/// values include "Blue" for an original environment and "Green" for a
+/// replacement
+/// environment.
 pub const InvalidInstanceTypeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified key prefix filter was specified in an invalid format.
 pub const InvalidKeyPrefixFilterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A lifecycle event hook is invalid. Review the `hooks` section in your
+/// AppSpec file to ensure the lifecycle events and `hooks` functions are
+/// valid.
 pub const InvalidLifecycleEventHookExecutionIdException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The result of a Lambda validation function that verifies a lifecycle event
+/// is invalid. It should return `Succeeded` or `Failed`.
 pub const InvalidLifecycleEventHookExecutionStatusException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An invalid load balancer name, or no load balancer name, was specified.
 pub const InvalidLoadBalancerInfoException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The minimum healthy instance value was specified in an invalid format.
 pub const InvalidMinimumHealthyHostValueException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The next token was specified in an invalid format.
 pub const InvalidNextTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A call was submitted that specified both OnPremisesTagFilters and
+/// OnPremisesTagSet,
+/// but only one of these data types can be used in a single call.
 pub const InvalidOnPremisesTagCombinationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An invalid operation was detected.
 pub const InvalidOperationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The registration status was specified in an invalid format.
 pub const InvalidRegistrationStatusException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The revision was specified in an invalid format.
 pub const InvalidRevisionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The service role ARN was specified in an invalid format. Or, if an Auto
+/// Scaling
+/// group was specified, the specified service role does not grant the
+/// appropriate
+/// permissions to Amazon EC2 Auto Scaling.
 pub const InvalidRoleException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The column name to sort by is either not present or was specified in an
+/// invalid
+/// format.
 pub const InvalidSortByException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The sort order was specified in an invalid format.
 pub const InvalidSortOrderException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The tag was specified in an invalid format.
 pub const InvalidTagException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The tag filter was specified in an invalid format.
 pub const InvalidTagFilterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified tags are not valid.
 pub const InvalidTagsToAddException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The target filter name is invalid.
 pub const InvalidTargetFilterNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A target group pair associated with this deployment is not valid.
 pub const InvalidTargetGroupPairException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The target instance configuration is invalid. Possible causes include:
+///
+/// * Configuration data for target instances was entered for an in-place
+/// deployment.
+///
+/// * The limit of 10 tags for a tag type was exceeded.
+///
+/// * The combined length of the tag names exceeded the limit.
+///
+/// * A specified tag is not currently applied to any instances.
 pub const InvalidTargetInstancesException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified time range was specified in an invalid format.
 pub const InvalidTimeRangeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The configuration that specifies how traffic is routed during a deployment
+/// is
+/// invalid.
 pub const InvalidTrafficRoutingConfigurationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The trigger was specified in an invalid format.
 pub const InvalidTriggerConfigException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The UpdateOutdatedInstancesOnly value is invalid. For Lambda
+/// deployments, `false` is expected. For EC2/On-premises deployments,
+/// `true` or `false` is expected.
 pub const InvalidUpdateOutdatedInstancesOnlyValueException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The `ZonalConfig` object is not valid.
 pub const InvalidZonalDeploymentConfigurationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An attempt to return the status of an already completed lifecycle event
+/// occurred.
 pub const LifecycleEventAlreadyCompletedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The limit for lifecycle hooks was exceeded.
 pub const LifecycleHookLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Both an user ARN and an IAM session ARN were included in the request.
+/// Use only one ARN type.
 pub const MultipleIamArnsProvidedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The API used does not support the deployment.
 pub const OperationNotSupportedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The ARN of a resource is required, but was not found.
 pub const ResourceArnRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified resource could not be validated.
 pub const ResourceValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The named revision does not exist with the user or Amazon Web Services
+/// account.
 pub const RevisionDoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The revision ID was not specified.
 pub const RevisionRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The role ID was not specified.
 pub const RoleRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The maximum allowed number of tags was exceeded.
 pub const TagLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A tag was not specified.
 pub const TagRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The number of tag groups included in the tag set list exceeded the maximum
+/// allowed
+/// limit of 3.
 pub const TagSetListLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An API function was called too frequently.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The maximum allowed number of triggers was exceeded.
 pub const TriggerTargetsLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A call was submitted that is not supported for the specified deployment
+/// type.
 pub const UnsupportedActionForDeploymentTypeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

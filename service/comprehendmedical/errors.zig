@@ -93,44 +93,99 @@ pub const ServiceError = struct {
     }
 };
 
+/// An internal server error occurred. Retry your request.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The input text was not in valid UTF-8 character encoding. Check your text
+/// then retry your
+/// request.
 pub const InvalidEncodingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request that you made is invalid. Check your request to determine why
+/// it's invalid
+/// and then retry the request.
 pub const InvalidRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource identified by the specified Amazon Resource Name (ARN) was not
+/// found. Check
+/// the ARN and try your request again.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The Amazon Comprehend Medical service is temporarily unavailable. Please
+/// wait and then retry your request.
 pub const ServiceUnavailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The size of the text you submitted exceeds the size limit. Reduce the size
+/// of the text or
+/// use a smaller document and then retry your request.
 pub const TextSizeLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You have made too many requests within a short period of time. Wait for a
+/// short time and
+/// then try your request again. Contact customer support for more information
+/// about a service
+/// limit increase.
 pub const TooManyRequestsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The filter that you specified for the operation is invalid. Check the filter
+/// values that
+/// you entered and try your request again.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

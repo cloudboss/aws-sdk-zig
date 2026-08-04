@@ -68,19 +68,46 @@ pub const ServiceError = struct {
     }
 };
 
+/// Indicates that an internal error occurred.
 pub const CloudHsmInternalException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// Indicates if the action can be retried.
+    retryable: ?bool = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .retryable = "retryable",
+    };
 };
 
+/// Indicates that an exception occurred in the AWS CloudHSM service.
 pub const CloudHsmServiceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// Indicates if the action can be retried.
+    retryable: ?bool = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .retryable = "retryable",
+    };
 };
 
+/// Indicates that one or more of the request parameters are not valid.
 pub const InvalidRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// Indicates if the action can be retried.
+    retryable: ?bool = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .retryable = "retryable",
+    };
 };
 
 pub const UnknownServiceError = struct {

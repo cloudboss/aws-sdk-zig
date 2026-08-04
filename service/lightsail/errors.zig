@@ -93,44 +93,175 @@ pub const ServiceError = struct {
     }
 };
 
+/// Lightsail throws this exception when the user cannot be authenticated or
+/// uses invalid
+/// credentials to access a resource.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    docs: ?[]const u8 = null,
+
+    tip: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "code",
+        .docs = "docs",
+        .message = "message",
+        .tip = "tip",
+    };
 };
 
+/// Lightsail throws this exception when an account is still in the setup in
+/// progress
+/// state.
 pub const AccountSetupInProgressException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    docs: ?[]const u8 = null,
+
+    tip: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "code",
+        .docs = "docs",
+        .message = "message",
+        .tip = "tip",
+    };
 };
 
+/// Lightsail throws this exception when user input does not conform to the
+/// validation rules
+/// of an input field.
+///
+/// Domain and distribution APIs are only available in the N. Virginia
+/// (`us-east-1`) Amazon Web Services Region. Please set your Amazon Web
+/// Services
+/// Region configuration to `us-east-1` to create, view, or edit these
+/// resources.
 pub const InvalidInputException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    docs: ?[]const u8 = null,
+
+    tip: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "code",
+        .docs = "docs",
+        .message = "message",
+        .tip = "tip",
+    };
 };
 
+/// Lightsail throws this exception when it cannot find a resource.
 pub const NotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    docs: ?[]const u8 = null,
+
+    tip: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "code",
+        .docs = "docs",
+        .message = "message",
+        .tip = "tip",
+    };
 };
 
+/// Lightsail throws this exception when an operation fails to execute.
 pub const OperationFailureException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    docs: ?[]const u8 = null,
+
+    tip: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "code",
+        .docs = "docs",
+        .message = "message",
+        .tip = "tip",
+    };
 };
 
+/// Lightsail throws this exception when an operation is performed on resources
+/// in an opt-in
+/// Region that is currently being set up.
 pub const RegionSetupInProgressException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    /// [Regions
+    /// and Availability Zones for
+    /// Lightsail](https://docs.aws.amazon.com/lightsail/latest/userguide/understanding-regions-and-availability-zones-in-amazon-lightsail.html)
+    docs: ?[]const u8 = null,
+
+    /// Opt-in Regions typically take a few minutes to finish setting up before you
+    /// can work with them. Wait a few minutes and try again.
+    tip: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "code",
+        .docs = "docs",
+        .message = "message",
+        .tip = "tip",
+    };
 };
 
+/// A general service exception.
 pub const ServiceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    docs: ?[]const u8 = null,
+
+    tip: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "code",
+        .docs = "docs",
+        .message = "message",
+        .tip = "tip",
+    };
 };
 
+/// Lightsail throws this exception when the user has not been authenticated.
 pub const UnauthenticatedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    code: ?[]const u8 = null,
+
+    docs: ?[]const u8 = null,
+
+    tip: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .code = "code",
+        .docs = "docs",
+        .message = "message",
+        .tip = "tip",
+    };
 };
 
 pub const UnknownServiceError = struct {

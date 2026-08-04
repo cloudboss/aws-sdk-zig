@@ -1,5 +1,7 @@
 const std = @import("std");
 
+const QueryCompileError = @import("query_compile_error.zig").QueryCompileError;
+
 pub const ServiceError = struct {
     arena: ?std.heap.ArenaAllocator = null,
     kind: Kind,
@@ -143,94 +145,220 @@ pub const ServiceError = struct {
     }
 };
 
+/// You don't have sufficient permissions to perform this action.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This operation attempted to create a resource that already exists.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The event was already logged.
+///
+/// `PutLogEvents` actions are now always accepted and never return
+/// `DataAlreadyAcceptedException` regardless of whether a given batch of log
+/// events has already been accepted.
 pub const DataAlreadyAcceptedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    expected_sequence_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .expected_sequence_token = "expectedSequenceToken",
+        .message = "message",
+    };
 };
 
+/// An internal server error occurred while processing the request. This
+/// exception is returned
+/// when the service encounters an unexpected condition that prevents it from
+/// fulfilling the
+/// request.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The operation is not valid on the specified resource.
 pub const InvalidOperationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A parameter is specified incorrectly.
 pub const InvalidParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The sequence token is not valid. You can get the correct sequence token in
+/// the
+/// `expectedSequenceToken` field in the `InvalidSequenceTokenException`
+/// message.
+///
+/// `PutLogEvents` actions are now always accepted and never return
+/// `InvalidSequenceTokenException` regardless of receiving an invalid sequence
+/// token.
 pub const InvalidSequenceTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    expected_sequence_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .expected_sequence_token = "expectedSequenceToken",
+        .message = "message",
+    };
 };
 
+/// You have reached the maximum number of resources that can be created.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The query string is not valid. Details about this error are displayed in a
+/// `QueryCompileError` object. For more information, see
+/// [QueryCompileError](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_QueryCompileError.html).
+///
+/// For more information about valid query syntax, see [CloudWatch Logs Insights
+/// Query
+/// Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html).
 pub const MalformedQueryException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    query_compile_error: ?QueryCompileError = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .query_compile_error = "queryCompileError",
+    };
 };
 
+/// Multiple concurrent requests to update the same resource were in conflict.
 pub const OperationAbortedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified resource already exists.
 pub const ResourceAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified resource does not exist.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// This request exceeds a service quota.
 pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The service cannot complete the request.
 pub const ServiceUnavailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request was throttled because of quota limits.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A resource can have no more than 50 tags.
 pub const TooManyTagsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The name of the resource.
+    resource_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource_name = "resourceName",
+    };
 };
 
+/// The most likely cause is an Amazon Web Services access key ID or secret key
+/// that's not
+/// valid.
 pub const UnrecognizedClientException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// One of the parameters for the request is not valid.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

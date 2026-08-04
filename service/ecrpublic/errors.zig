@@ -173,124 +173,289 @@ pub const ServiceError = struct {
     }
 };
 
+/// The specified layer upload doesn't contain any layer parts.
 pub const EmptyUploadException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified image has already been pushed, and there were no changes to
+/// the manifest
+/// or image tag after the last push.
 pub const ImageAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified image digest doesn't match the digest that Amazon ECR
+/// calculated for the
+/// image.
 pub const ImageDigestDoesNotMatchException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The image requested doesn't exist in the specified repository.
 pub const ImageNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified image is tagged with a tag that already exists. The repository
+/// is
+/// configured for tag immutability.
 pub const ImageTagAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The layer digest calculation performed by Amazon ECR when the image layer
+/// doesn't match the
+/// digest specified.
 pub const InvalidLayerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The layer part size isn't valid, or the first byte specified isn't
+/// consecutive to the
+/// last byte of a previous layer part upload.
 pub const InvalidLayerPartException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The position of the last byte of the layer part.
+    last_valid_byte_received: ?i64 = null,
+
+    /// The Amazon Web Services account ID that's associated with the layer part.
+    registry_id: ?[]const u8 = null,
+
+    /// The name of the repository.
+    repository_name: ?[]const u8 = null,
+
+    /// The upload ID that's associated with the layer part.
+    upload_id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .last_valid_byte_received = "lastValidByteReceived",
+        .message = "message",
+        .registry_id = "registryId",
+        .repository_name = "repositoryName",
+        .upload_id = "uploadId",
+    };
 };
 
+/// The specified parameter is invalid. Review the available parameters for the
+/// API
+/// request.
 pub const InvalidParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An invalid parameter has been specified. Tag keys can have a maximum
+/// character length of 128 characters, and tag values can have a maximum length
+/// of 256 characters.
 pub const InvalidTagParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The image layer already exists in the associated repository.
 pub const LayerAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Layer parts must be at least 5 MiB in size.
 pub const LayerPartTooSmallException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified layers can't be found, or the specified layer isn't valid for
+/// this
+/// repository.
 pub const LayersNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The operation didn't succeed because it would have exceeded a service limit
+/// for your
+/// account. For more information, see [Amazon ECR Service
+/// Quotas](https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html) in the
+/// Amazon Elastic Container Registry User Guide.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The manifest list is referencing an image that doesn't exist.
 pub const ReferencedImagesNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The registry doesn't exist.
 pub const RegistryNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified repository already exists in the specified registry.
 pub const RepositoryAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The repository catalog data doesn't exist.
 pub const RepositoryCatalogDataNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified repository contains images. To delete a repository that
+/// contains images,
+/// you must force the deletion with the `force` parameter.
 pub const RepositoryNotEmptyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified repository can't be found. Check the spelling of the specified
+/// repository
+/// and ensure that you're performing operations on the correct registry.
 pub const RepositoryNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified repository and registry combination doesn't have an associated
+/// repository
+/// policy.
 pub const RepositoryPolicyNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// These errors are usually caused by a server-side issue.
 pub const ServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The list of tags on the repository is over the limit. The maximum number of
+/// tags that
+/// can be applied to a repository is 50.
 pub const TooManyTagsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The action isn't supported in this Region.
 pub const UnsupportedCommandException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The upload can't be found, or the specified upload ID isn't valid for this
+/// repository.
 pub const UploadNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {

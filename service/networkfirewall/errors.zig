@@ -113,64 +113,141 @@ pub const ServiceError = struct {
     }
 };
 
+/// Amazon Web Services doesn't currently have enough available capacity to
+/// fulfill your request. Try your
+/// request later.
 pub const InsufficientCapacityException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Your request is valid, but Network Firewall couldn't perform the operation
+/// because of a
+/// system problem. Retry your request.
 pub const InternalServerError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The operation failed because it's not valid. For example, you might have
+/// tried to delete
+/// a rule group or firewall policy that's in use.
 pub const InvalidOperationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The operation failed because of a problem with your request. Examples
+/// include:
+///
+/// * You specified an unsupported parameter name or value.
+///
+/// * You tried to update a property with a value that isn't among the available
+/// types.
+///
+/// * Your request references an ARN that is malformed, or corresponds to a
+///   resource
+/// that isn't valid in the context of the request.
 pub const InvalidRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The policy statement failed validation.
 pub const InvalidResourcePolicyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The token you provided is stale or isn't valid for the operation.
 pub const InvalidTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Unable to perform the operation because doing so would violate a limit
+/// setting.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Unable to send logs to a configured logging destination.
 pub const LogDestinationPermissionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Unable to locate a resource using the parameters that you provided.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Unable to change the resource because your account doesn't own it.
 pub const ResourceOwnerCheckException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Unable to process the request due to throttling limitations.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The operation you requested isn't supported by Network Firewall.
 pub const UnsupportedOperationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

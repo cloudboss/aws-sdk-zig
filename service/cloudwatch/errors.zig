@@ -1,5 +1,7 @@
 const std = @import("std");
 
+const DashboardValidationMessage = @import("dashboard_validation_message.zig").DashboardValidationMessage;
+
 pub const ServiceError = struct {
     arena: ?std.heap.ArenaAllocator = null,
     kind: Kind,
@@ -123,74 +125,154 @@ pub const ServiceError = struct {
     }
 };
 
+/// More than one process tried to modify a resource at the same time.
 pub const ConcurrentModificationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This operation attempted to create a resource that already exists.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Some part of the dashboard data is invalid.
 pub const DashboardInvalidInputError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    dashboard_validation_messages: ?[]const DashboardValidationMessage = null,
+
+    pub const json_field_names = .{
+        .dashboard_validation_messages = "dashboardValidationMessages",
+        .message = "message",
+    };
 };
 
+/// The specified dashboard does not exist.
 pub const DashboardNotFoundError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Request processing has failed due to some unknown error, exception, or
+/// failure.
 pub const InternalServiceFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Data was not syntactically valid JSON.
 pub const InvalidFormatFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The next token specified is invalid.
 pub const InvalidNextToken = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Parameters were used together that cannot be used together.
 pub const InvalidParameterCombinationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The value of an input parameter is bad or out-of-range.
 pub const InvalidParameterValueException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The operation exceeded one or more limits.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The quota for alarms for this customer has already been reached.
 pub const LimitExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An input parameter that is required is missing.
 pub const MissingRequiredParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The named resource does not exist.
 pub const ResourceNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The named resource does not exist.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    resource_id: ?[]const u8 = null,
+
+    resource_type: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .resource_id = "ResourceId",
+        .resource_type = "ResourceType",
+    };
 };
 
 pub const UnknownServiceError = struct {

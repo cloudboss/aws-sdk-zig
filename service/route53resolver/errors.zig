@@ -138,89 +138,216 @@ pub const ServiceError = struct {
     }
 };
 
+/// The current account doesn't have the IAM permissions required to perform the
+/// specified Resolver operation.
+///
+/// This error can also be thrown when a customer has reached the 5120 character
+/// limit for a
+/// resource policy for CloudWatch Logs.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The requested state transition isn't valid. For example, you can't delete a
+/// firewall
+/// domain list if it is in the process of being deleted, or you can't import
+/// domains into a
+/// domain list that is in the process of being deleted.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// We encountered an unknown error. Try again in a few minutes.
 pub const InternalServiceErrorException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The value that you specified for `NextToken` in a `List` request isn't
+/// valid.
 pub const InvalidNextTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// One or more parameters in this request are not valid.
 pub const InvalidParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// For an `InvalidParameterException` error, the name of the parameter that's
+    /// invalid.
+    field_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .field_name = "FieldName",
+        .message = "Message",
+    };
 };
 
+/// The specified Resolver rule policy is invalid.
 pub const InvalidPolicyDocument = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request is invalid.
 pub const InvalidRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified tag is invalid.
 pub const InvalidTagException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request caused one or more limits to be exceeded.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// For a `LimitExceededException` error, the type of resource that exceeded the
+    /// current limit.
+    resource_type: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .resource_type = "ResourceType",
+    };
 };
 
+/// The resource that you tried to create already exists.
 pub const ResourceExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// For a `ResourceExistsException` error, the type of resource that the error
+    /// applies to.
+    resource_type: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .resource_type = "ResourceType",
+    };
 };
 
+/// The resource that you tried to update or delete is currently in use.
 pub const ResourceInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// For a `ResourceInUseException` error, the type of resource that is currently
+    /// in use.
+    resource_type: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .resource_type = "ResourceType",
+    };
 };
 
+/// The specified resource doesn't exist.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// For a `ResourceNotFoundException` error, the type of resource that doesn't
+    /// exist.
+    resource_type: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .resource_type = "ResourceType",
+    };
 };
 
+/// The specified resource isn't available.
 pub const ResourceUnavailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// For a `ResourceUnavailableException` error, the type of resource that isn't
+    /// available.
+    resource_type: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .resource_type = "ResourceType",
+    };
 };
 
+/// Fulfilling the request would cause one or more quotas to be exceeded.
 pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request was throttled. Try again in a few minutes.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified resource doesn't exist.
 pub const UnknownResourceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You have provided an invalid command. If you ran the `UpdateFirewallDomains`
+/// request. supported values are `ADD`,
+/// `REMOVE`, or `REPLACE` a domain.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

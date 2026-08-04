@@ -128,79 +128,201 @@ pub const ServiceError = struct {
     }
 };
 
+/// Another modification is being made. That modification must complete before
+/// you can make
+/// your change.
 pub const ConcurrentModificationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// There was a conflict processing the request. Try your request again.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The confidence that Amazon Comprehend accurately detected the source
+/// language is low. If a
+/// low confidence level is acceptable for your application, you can use the
+/// language in the
+/// exception to call Amazon Translate again. For more information, see the
+/// [DetectDominantLanguage](https://docs.aws.amazon.com/comprehend/latest/dg/API_DetectDominantLanguage.html) operation in the *Amazon Comprehend Developer
+/// Guide*.
 pub const DetectedLanguageLowConfidenceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The language code of the auto-detected language from Amazon Comprehend.
+    detected_language_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .detected_language_code = "DetectedLanguageCode",
+        .message = "Message",
+    };
 };
 
+/// An internal server error occurred. Retry your request.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The filter specified for the operation is not valid. Specify a different
+/// filter.
 pub const InvalidFilterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The value of the parameter is not valid. Review the value of the parameter
+/// you are using
+/// to correct it, and then retry your operation.
 pub const InvalidParameterValueException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request that you made is not valid. Check your request to determine why
+/// it's not
+/// valid and then retry the request.
 pub const InvalidRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified limit has been exceeded. Review your request and retry it with
+/// a quantity
+/// below the stated limit.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource you are looking for has not been found. Review the resource
+/// you're looking
+/// for and see if a different resource will accomplish your needs before
+/// retrying the revised
+/// request.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The Amazon Translate service is temporarily unavailable. Wait a bit and then
+/// retry your
+/// request.
 pub const ServiceUnavailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The size of the text you submitted exceeds the size limit. Reduce the size
+/// of the text or
+/// use a smaller document and then retry your request.
 pub const TextSizeLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You have made too many requests within a short period of time. Wait for a
+/// short time and
+/// then try your request again.
 pub const TooManyRequestsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You have added too many tags to this resource. The maximum is 50 tags.
 pub const TooManyTagsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    resource_arn: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource_arn = "ResourceArn",
+    };
 };
 
+/// Requested display language code is not supported.
 pub const UnsupportedDisplayLanguageCodeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// Language code passed in with the request.
+    display_language_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .display_language_code = "DisplayLanguageCode",
+        .message = "Message",
+    };
 };
 
+/// Amazon Translate does not support translation from the language of the
+/// source text into the requested
+/// target language. For more information, see [Supported
+/// languages](https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html).
 pub const UnsupportedLanguagePairException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The language code for the language of the input text.
+    source_language_code: ?[]const u8 = null,
+
+    /// The language code for the language of the translated text.
+    target_language_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .source_language_code = "SourceLanguageCode",
+        .target_language_code = "TargetLanguageCode",
+    };
 };
 
 pub const UnknownServiceError = struct {

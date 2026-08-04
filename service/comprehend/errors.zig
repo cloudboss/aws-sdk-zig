@@ -1,5 +1,8 @@
 const std = @import("std");
 
+const InvalidRequestDetail = @import("invalid_request_detail.zig").InvalidRequestDetail;
+const InvalidRequestReason = @import("invalid_request_reason.zig").InvalidRequestReason;
+
 pub const ServiceError = struct {
     arena: ?std.heap.ArenaAllocator = null,
     kind: Kind,
@@ -133,84 +136,193 @@ pub const ServiceError = struct {
     }
 };
 
+/// The number of documents in the request exceeds the limit of 25. Try your
+/// request again
+/// with fewer documents.
 pub const BatchSizeLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Concurrent modification of the tags associated with an Amazon Comprehend
+/// resource is not
+/// supported.
 pub const ConcurrentModificationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// An internal server error occurred. Retry your request.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The filter specified for the operation is invalid. Specify a different
+/// filter.
 pub const InvalidFilterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request is invalid.
 pub const InvalidRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    detail: ?InvalidRequestDetail = null,
+
+    reason: ?InvalidRequestReason = null,
+
+    pub const json_field_names = .{
+        .detail = "Detail",
+        .message = "Message",
+        .reason = "Reason",
+    };
 };
 
+/// The specified job was not found. Check the job ID and try again.
 pub const JobNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The KMS customer managed key (CMK) entered cannot be validated. Verify the
+/// key and
+/// re-enter it.
 pub const KmsKeyValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified resource name is already in use. Use a different name and try
+/// your request
+/// again.
 pub const ResourceInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The maximum number of resources per account has been exceeded. Review the
+/// resources, and
+/// then try your request again.
 pub const ResourceLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified resource ARN was not found. Check the ARN and try your request
+/// again.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified resource is not available. Check the resource and try your
+/// request
+/// again.
 pub const ResourceUnavailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The size of the input text exceeds the limit. Use a smaller document.
 pub const TextSizeLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The number of requests exceeds the limit. Resubmit your request later.
 pub const TooManyRequestsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request contains more tag keys than can be associated with a resource
+/// (50 tag keys per
+/// resource).
 pub const TooManyTagKeysException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request contains more tags than can be associated with a resource (50
+/// tags per
+/// resource). The maximum number of tags includes both existing tags and those
+/// included in your
+/// current request.
 pub const TooManyTagsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Amazon Comprehend can't process the language of the input text. For a list
+/// of supported languages,
+/// [Supported
+/// languages](https://docs.aws.amazon.com/comprehend/latest/dg/supported-languages.html) in the Comprehend Developer Guide.
 pub const UnsupportedLanguageException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {

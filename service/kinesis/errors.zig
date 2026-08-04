@@ -133,84 +133,202 @@ pub const ServiceError = struct {
     }
 };
 
+/// Specifies that you do not have the permissions required to perform this
+/// operation.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The provided iterator exceeds the maximum age allowed.
 pub const ExpiredIteratorException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The pagination token passed to the operation is expired.
 pub const ExpiredNextTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The processing of the request failed because of an unknown error, exception,
+/// or
+/// failure.
 pub const InternalFailureException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A specified parameter exceeds its restrictions, is not supported, or can't
+/// be used.
+/// For more information, see the returned message.
 pub const InvalidArgumentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The ciphertext references a key that doesn't exist or that you don't have
+/// access
+/// to.
 pub const KMSAccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request was rejected because the specified customer master key (CMK)
+/// isn't
+/// enabled.
 pub const KMSDisabledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request was rejected because the state of the specified resource isn't
+/// valid for
+/// this request. For more information, see [How Key State Affects Use of a
+/// Customer Master
+/// Key](https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+/// in the *Amazon Web Services Key Management
+/// Service Developer Guide*.
 pub const KMSInvalidStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request was rejected because the specified entity or resource can't be
+/// found.
 pub const KMSNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The Amazon Web Services access key ID needs a subscription for the service.
 pub const KMSOptInRequired = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request was denied due to request throttling. For more information about
+/// throttling, see
+/// [Limits](https://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second) in
+/// the *Amazon Web Services Key Management Service Developer
+/// Guide*.
 pub const KMSThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The requested resource exceeds the maximum number allowed, or the number of
+/// concurrent
+/// stream requests exceeds the maximum number allowed.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request rate for the stream is too high, or the requested data is too
+/// large for
+/// the available throughput. Reduce the frequency or size of your requests. For
+/// more
+/// information, see [Streams
+/// Limits](https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html) in the
+/// *Amazon Kinesis Data Streams Developer Guide*, and [Error Retries and
+/// Exponential Backoff in Amazon Web
+/// Services](https://docs.aws.amazon.com/general/latest/gr/api-retries.html) in
+/// the *Amazon Web Services General Reference*.
 pub const ProvisionedThroughputExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The resource is not available for this operation. For successful operation,
+/// the
+/// resource must be in the `ACTIVE` state.
 pub const ResourceInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The requested resource could not be found. The stream might not be specified
+/// correctly.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Specifies that you tried to invoke this API for a data stream with the
+/// on-demand
+/// capacity mode. This API is only supported for data streams with the
+/// provisioned capacity
+/// mode.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {
