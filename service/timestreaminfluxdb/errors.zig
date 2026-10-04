@@ -180,7 +180,7 @@ pub const ValidationException = struct {
     request_id: []const u8 = "",
 
     /// The reason that validation failed.
-    reason: ValidationExceptionReason,
+    reason: ?ValidationExceptionReason = null,
 
     pub const json_field_names = .{
         .message = "message",

@@ -124,7 +124,7 @@ pub const AccessDeniedException = struct {
     can_retry: bool,
 
     /// Code that indicates the type of error that is generated.
-    error_code: AccessDeniedErrorCode,
+    error_code: ?AccessDeniedErrorCode = null,
 
     pub const json_field_names = .{
         .can_retry = "canRetry",
@@ -204,7 +204,7 @@ pub const InvalidCrossAccountRoleException = struct {
     can_retry: bool,
 
     /// Code that indicates the type of error that is generated.
-    error_code: InvalidCrossAccountRoleErrorCode,
+    error_code: ?InvalidCrossAccountRoleErrorCode = null,
 
     pub const json_field_names = .{
         .can_retry = "canRetry",
@@ -224,7 +224,7 @@ pub const InvalidInputException = struct {
     can_retry: bool,
 
     /// Code that indicates the type of error that is generated.
-    error_code: InvalidInputErrorCode,
+    error_code: ?InvalidInputErrorCode = null,
 
     pub const json_field_names = .{
         .can_retry = "canRetry",
@@ -244,7 +244,7 @@ pub const LimitExceededException = struct {
     can_retry: bool,
 
     /// Code that indicates the type of error that is generated.
-    error_code: LimitExceededErrorCode,
+    error_code: ?LimitExceededErrorCode = null,
 
     pub const json_field_names = .{
         .can_retry = "canRetry",
@@ -264,7 +264,7 @@ pub const NoSuchEntityException = struct {
     can_retry: bool,
 
     /// Code that indicates the type of error that is generated.
-    error_code: NoSuchEntityErrorCode,
+    error_code: ?NoSuchEntityErrorCode = null,
 
     pub const json_field_names = .{
         .can_retry = "canRetry",

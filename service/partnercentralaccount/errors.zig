@@ -102,7 +102,7 @@ pub const AccessDeniedException = struct {
     request_id: []const u8 = "",
 
     /// The specific reason for the access denial.
-    reason: AccessDeniedExceptionReason,
+    reason: ?AccessDeniedExceptionReason = null,
 
     pub const json_field_names = .{
         .message = "Message",
@@ -119,7 +119,7 @@ pub const ConflictException = struct {
     request_id: []const u8 = "",
 
     /// The specific reason for the conflict.
-    reason: ConflictExceptionReason,
+    reason: ?ConflictExceptionReason = null,
 
     pub const json_field_names = .{
         .message = "Message",
@@ -145,7 +145,7 @@ pub const ResourceNotFoundException = struct {
     request_id: []const u8 = "",
 
     /// The specific reason why the resource was not found.
-    reason: ResourceNotFoundExceptionReason,
+    reason: ?ResourceNotFoundExceptionReason = null,
 
     pub const json_field_names = .{
         .message = "Message",
@@ -161,7 +161,7 @@ pub const ServiceQuotaExceededException = struct {
     request_id: []const u8 = "",
 
     /// The specific reason for the service quota being exceeded.
-    reason: ServiceQuotaExceededExceptionReason,
+    reason: ?ServiceQuotaExceededExceptionReason = null,
 
     pub const json_field_names = .{
         .message = "Message",
@@ -200,7 +200,7 @@ pub const ValidationException = struct {
     error_details: ?[]const ValidationError = null,
 
     /// The reason for the validation failure.
-    reason: ValidationExceptionReason,
+    reason: ?ValidationExceptionReason = null,
 
     pub const json_field_names = .{
         .error_details = "ErrorDetails",

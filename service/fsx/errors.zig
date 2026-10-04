@@ -670,7 +670,7 @@ pub const ServiceLimitExceeded = struct {
     request_id: []const u8 = "",
 
     /// Enumeration of the service limit that was exceeded.
-    limit: ServiceLimit,
+    limit: ?ServiceLimit = null,
 
     pub const json_field_names = .{
         .limit = "Limit",

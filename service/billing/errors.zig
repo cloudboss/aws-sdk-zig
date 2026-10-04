@@ -216,7 +216,7 @@ pub const ValidationException = struct {
 
     /// The input fails to satisfy the constraints specified by an Amazon Web
     /// Services service.
-    reason: ValidationExceptionReason,
+    reason: ?ValidationExceptionReason = null,
 
     pub const json_field_names = .{
         .field_list = "fieldList",

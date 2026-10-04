@@ -209,7 +209,7 @@ pub const ValidationException = struct {
     ///
     /// Fix: Check that your change aligns with the business rules defined by AWS
     /// Partner Central.
-    reason: ValidationExceptionReason,
+    reason: ?ValidationExceptionReason = null,
 
     pub const json_field_names = .{
         .error_list = "ErrorList",

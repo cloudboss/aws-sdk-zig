@@ -213,7 +213,7 @@ class ErrorGenerator(
                     model,
                     context.symbolProvider(),
                 )
-                val isOptional = !memberShape.isRequired || !isScalarType(targetShape)
+                val isOptional = !memberShape.isRequired || !isPrimitiveType(targetShape)
                 val zigType = when {
                     hasMemberDefault -> "?$baseType"
                     defaultValue != null -> defaultValue.typeName
@@ -241,13 +241,7 @@ class ErrorGenerator(
             service.hasTrait("aws.protocols#awsJson1_1")
     }
 
-    private fun isScalarType(shape: Shape): Boolean {
-        if (shape is EnumShape || shape is IntEnumShape ||
-            (shape is StringShape && shape.hasTrait(EnumTrait::class.java))
-        ) {
-            return true
-        }
-
+    private fun isPrimitiveType(shape: Shape): Boolean {
         return context.symbolProvider().toSymbol(shape).name in setOf(
             "[]const u8", "bool", "i8", "i16", "i32", "i64",
             "f32", "f64", "i128", "f128",

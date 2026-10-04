@@ -158,7 +158,7 @@ pub const ResourceNotFoundException = struct {
     resource_id: []const u8,
 
     /// The resource type of the resource referenced in the failed request.
-    resource_type: ResourceType,
+    resource_type: ?ResourceType = null,
 
     pub const json_field_names = .{
         .message = "message",
@@ -179,7 +179,7 @@ pub const ServiceQuotaExceededException = struct {
     resource_id: ?[]const u8 = null,
 
     /// The resource type of the resource referenced in the failed request.
-    resource_type: ResourceType,
+    resource_type: ?ResourceType = null,
 
     /// The code for the Amazon Web Services service that owns the quota.
     service_code: ?[]const u8 = null,

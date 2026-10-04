@@ -203,7 +203,7 @@ pub const ValidationException = struct {
     field_list: ?[]const ValidationExceptionField = null,
 
     /// The reason why the validation failed.
-    reason: ValidationExceptionReason,
+    reason: ?ValidationExceptionReason = null,
 
     pub const json_field_names = .{
         .field_list = "fieldList",

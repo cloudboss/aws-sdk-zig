@@ -60,6 +60,13 @@ class AwsJsonProtocolTest {
                     .addMember("requestId", ShapeId.from("smithy.api#String"))
                     .addMember(
                         MemberShape.builder()
+                            .id("test#ConditionalCheckFailedException\$Reason")
+                            .target("test#ErrorReason")
+                            .addTrait(RequiredTrait())
+                            .build()
+                    )
+                    .addMember(
+                        MemberShape.builder()
                             .id("test#ConditionalCheckFailedException\$Item")
                             .target("test#AttributeMap")
                             .addTrait(DocumentationTrait("The item that caused the condition check to fail."))
@@ -147,6 +154,17 @@ class AwsJsonProtocolTest {
                     .input(ShapeId.from("test#GetItemInput"))
                     .output(ShapeId.from("test#GetItemOutput"))
                     .build()
+            )
+            .addUnparsedModel(
+                "error-reason.smithy",
+                """
+                ${'$'}version: "2"
+                namespace test
+
+                enum ErrorReason {
+                    CONDITION_FAILED
+                }
+                """.trimIndent(),
             )
             .addUnparsedModel(
                 "aws-json-traits.smithy",
@@ -458,6 +476,17 @@ class AwsJsonProtocolTest {
             assertTrue(
                 Regex("(?m)^    request_id: ").findAll(exception).count() == 1,
                 "AWS JSON $version should not duplicate normalized request_id",
+            )
+        }
+    }
+
+    @Test
+    fun requiredErrorEnumsAllowUnknownValues() {
+        for (version in listOf("1.0", "1.1")) {
+            val errors = generateFiles(version)["errors.zig"]!!
+            assertTrue(
+                errors.contains("reason: ?ErrorReason = null,"),
+                "AWS JSON $version unknown error enum values should remain optional",
             )
         }
     }
