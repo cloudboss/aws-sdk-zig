@@ -14,7 +14,6 @@ import software.amazon.smithy.model.shapes.StructureShape
 import software.amazon.smithy.model.traits.EnumTrait
 import software.amazon.smithy.model.traits.StreamingTrait
 import software.amazon.smithy.zig.ZigSettings
-import software.amazon.smithy.zig.generators.ErrorGenerator
 
 data class OperationContext(
     val operation: OperationShape,
@@ -23,7 +22,6 @@ data class OperationContext(
     val model: Model,
     val service: ServiceShape,
     val apiVersion: String,
-    val errorInfos: List<ErrorGenerator.ErrorInfo>,
     val settings: ZigSettings,
     val symbolProvider: SymbolProvider,
 ) {

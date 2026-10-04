@@ -31,7 +31,6 @@ class OperationGenerator(
     private val model: Model,
     private val operation: OperationShape,
     private val apiVersion: String,
-    private val errorInfos: List<ErrorGenerator.ErrorInfo>,
     private val protocol: ProtocolGenerator,
 ) {
     companion object {
@@ -118,7 +117,6 @@ class OperationGenerator(
             model = model,
             service = service,
             apiVersion = apiVersion,
-            errorInfos = errorInfos,
             settings = settings,
             symbolProvider = context.symbolProvider(),
         )
@@ -138,12 +136,7 @@ class OperationGenerator(
             // Intra-service imports written after standard imports
             writer.write("const Client = @import(\"client.zig\").Client;")
             writer.write("const CallOptions = @import(\"call_options.zig\").CallOptions;")
-            if (protocol.parsesModeledErrorBodies()) {
-                writer.write("const errors = @import(\"errors.zig\");")
-                writer.write("const ServiceError = errors.ServiceError;")
-            } else {
-                writer.write("const ServiceError = @import(\"errors.zig\").ServiceError;")
-            }
+            writer.write("const parseErrorResponse = @import(\"errors.zig\").parseErrorResponse;")
 
             // Import shared types referenced by input/output members
             val sharedTypes = collectSharedTypes()
@@ -204,16 +197,14 @@ class OperationGenerator(
 
                 writer.blankLine()
                 protocol.writeSerializeRequest(writer, ctx)
-                writer.blankLine()
                 if (!isServerPushEventStream) {
+                    writer.blankLine()
                     if (isStreaming) {
                         protocol.writeDeserializeStreamingResponse(writer, ctx)
                     } else {
                         protocol.writeDeserializeResponse(writer, ctx)
                     }
-                    writer.blankLine()
                 }
-                protocol.writeParseErrorResponse(writer, ctx)
             }
         }
     }
@@ -523,17 +514,10 @@ class OperationGenerator(
     }
 
     private fun writeDiagnosticAssignment(writer: ZigWriter, body: String, status: String) {
-        if (protocol.parsesModeledErrorBodies()) {
-            writer.write(
-                "d.* = parseErrorResponse(client.allocator, \$L, \$L) catch return error.OutOfMemory;",
-                body, status,
-            )
-        } else {
-            writer.write(
-                "d.* = parseErrorResponse(client.allocator, \$L, \$L) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(\$L) } } };",
-                body, status, status,
-            )
-        }
+        writer.write(
+            "d.* = try parseErrorResponse(client.allocator, \$L, \$L);",
+            body, status,
+        )
     }
 
     private fun writePresignOptions(writer: ZigWriter) {

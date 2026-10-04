@@ -4,7 +4,14 @@ const aws = @import("aws");
 const backupgateway = @import("backupgateway");
 const cognitoidentity = @import("cognitoidentity");
 const dynamodb = @import("dynamodb");
+const lambda = @import("lambda");
+const s3 = @import("s3");
+const sts = @import("sts");
 const verifiedpermissions = @import("verifiedpermissions");
+
+test {
+    _ = @import("error_parser.zig");
+}
 
 const TestServer = struct {
     server: std.Io.net.Server,
@@ -229,4 +236,74 @@ test "a valid error retains modeled map data" {
         },
         else => return error.ExpectedConditionalCheckFailedException,
     }
+}
+
+fn expectClientDiagnostic(
+    comptime service: type,
+    comptime operation: []const u8,
+    input: anytype,
+    comptime body: []const u8,
+    expected_tag: []const u8,
+    expected_request_id: []const u8,
+) !void {
+    var server = try TestServer.init(body);
+    defer server.deinit();
+    try server.start();
+
+    var env_map: std.process.Environ.Map = .init(std.testing.allocator);
+    defer env_map.deinit();
+    var endpoint_buffer: [64]u8 = undefined;
+    var config = try makeConfig(&env_map, try server.endpoint(&endpoint_buffer));
+    defer config.http_client.deinit();
+    var client = service.Client.initWithOptions(
+        std.testing.allocator,
+        &config,
+        .{ .max_attempts = 1, .keep_alive = false },
+    );
+    defer client.deinit();
+
+    var diagnostic: service.ServiceError = undefined;
+    try std.testing.expectError(error.ServiceError, @call(
+        .auto,
+        @field(service.Client, operation),
+        .{
+            &client,
+            std.testing.allocator,
+            input,
+            service.CallOptions{ .diagnostic = &diagnostic },
+        },
+    ));
+    defer diagnostic.deinit();
+    try std.testing.expectEqualStrings(expected_tag, @tagName(diagnostic.kind));
+    try std.testing.expectEqualStrings("missing", diagnostic.message());
+    try std.testing.expectEqualStrings(expected_request_id, diagnostic.requestId());
+}
+
+test "query client uses the shared parser" {
+    try expectClientDiagnostic(sts, "getCallerIdentity", sts.GetCallerIdentityInput{},
+        \\<ErrorResponse><Error><Code>ExpiredTokenException</Code><Message>missing</Message>
+        \\</Error><RequestId>query-request</RequestId></ErrorResponse>
+    , "expired_token_exception", "query-request");
+}
+
+test "streaming client uses the shared parser" {
+    try expectClientDiagnostic(s3, "getObject", s3.GetObjectInput{
+        .bucket = "review-bucket",
+        .key = "missing-key",
+    },
+        \\<Error><Code>NoSuchKey</Code><Message>missing</Message><RequestId>xml-request</RequestId>
+        \\</Error>
+    , "no_such_key", "xml-request");
+}
+
+test "event stream client uses the shared parser" {
+    try expectClientDiagnostic(
+        lambda,
+        "invokeWithResponseStream",
+        lambda.InvokeWithResponseStreamInput{ .function_name = "missing-function" },
+        \\{"__type":"ResourceNotFoundException","message":"missing"}
+    ,
+        "resource_not_found_exception",
+        "",
+    );
 }

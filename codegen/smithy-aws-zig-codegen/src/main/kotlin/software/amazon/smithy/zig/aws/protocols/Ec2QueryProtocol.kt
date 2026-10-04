@@ -1,6 +1,7 @@
 package software.amazon.smithy.zig.aws.protocols
 
 import software.amazon.smithy.zig.ZigWriter
+import software.amazon.smithy.zig.generators.ErrorGenerator
 import software.amazon.smithy.zig.protocols.OperationContext
 
 class Ec2QueryProtocol : AwsQueryProtocol() {
@@ -17,8 +18,8 @@ class Ec2QueryProtocol : AwsQueryProtocol() {
         writer.closeBlock("}")
     }
 
-    override fun writeParseErrorResponse(writer: ZigWriter, ctx: OperationContext) {
-        writer.openBlock("fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {")
+    override fun writeParseErrorResponse(writer: ZigWriter, errorInfos: List<ErrorGenerator.ErrorInfo>) {
+        writer.openBlock("pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) std.mem.Allocator.Error!ServiceError {")
 
         writer.write("const error_code = aws.xml.findElement(body, \"Code\") orelse \"Unknown\";")
         writer.write("const error_message = aws.xml.findElement(body, \"Message\") orelse \"\";")
@@ -31,7 +32,7 @@ class Ec2QueryProtocol : AwsQueryProtocol() {
         writer.blankLine()
 
         // Match error codes to ServiceError variants
-        for (info in ctx.errorInfos) {
+        for (info in errorInfos) {
             writer.openBlock("if (std.mem.eql(u8, error_code, \"\$L\")) {", info.smithyName)
             writer.write("return .{ .arena = arena, .kind = .{ .\$L = .{", info.variantName)
             writer.write("    .message = owned_message,")

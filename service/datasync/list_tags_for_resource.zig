@@ -3,8 +3,7 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
-const errors = @import("errors.zig");
-const ServiceError = errors.ServiceError;
+const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const TagListEntry = @import("tag_list_entry.zig").TagListEntry;
 
 pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
@@ -27,7 +26,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsFor
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch return error.OutOfMemory;
+            d.* = try parseErrorResponse(client.allocator, response.body, response.status);
         }
         return error.ServiceError;
     }
@@ -60,53 +59,4 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
     _ = headers;
     if (body.len == 0) return .{};
     return aws.json.parseJsonObject(ListTagsForResourceOutput, body, allocator);
-}
-
-fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
-    const error_code = blk: {
-        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
-        if (std.mem.findScalarLast(u8, type_str, '#')) |idx| {
-            break :blk type_str[idx + 1 ..];
-        }
-        break :blk type_str;
-    };
-    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(allocator);
-    errdefer arena.deinit();
-    const arena_alloc = arena.allocator();
-    const owned_message = try arena_alloc.dupe(u8, error_message);
-    const owned_request_id = try arena_alloc.dupe(u8, "");
-
-    if (std.mem.eql(u8, error_code, "InternalException")) {
-        const parsed_error: ?errors.InternalException = aws.json.parseJsonObject(errors.InternalException, body, arena_alloc) catch |err| switch (err) {
-            error.OutOfMemory => return error.OutOfMemory,
-            else => null,
-        };
-        if (parsed_error) |parsed| {
-            var typed_error = parsed;
-            typed_error.message = owned_message;
-            typed_error.request_id = owned_request_id;
-            return .{ .arena = arena, .kind = .{ .internal_exception = typed_error } };
-        }
-    }
-    if (std.mem.eql(u8, error_code, "InvalidRequestException")) {
-        const parsed_error: ?errors.InvalidRequestException = aws.json.parseJsonObject(errors.InvalidRequestException, body, arena_alloc) catch |err| switch (err) {
-            error.OutOfMemory => return error.OutOfMemory,
-            else => null,
-        };
-        if (parsed_error) |parsed| {
-            var typed_error = parsed;
-            typed_error.message = owned_message;
-            typed_error.request_id = owned_request_id;
-            return .{ .arena = arena, .kind = .{ .invalid_request_exception = typed_error } };
-        }
-    }
-
-    const owned_code = try arena_alloc.dupe(u8, error_code);
-    return .{ .arena = arena, .kind = .{ .unknown = .{
-        .code = owned_code,
-        .message = owned_message,
-        .request_id = owned_request_id,
-        .http_status = status,
-    } } };
 }

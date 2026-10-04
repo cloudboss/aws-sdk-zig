@@ -3,7 +3,7 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
-const ServiceError = @import("errors.zig").ServiceError;
+const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ConversationMode = @import("conversation_mode.zig").ConversationMode;
 const StartConversationRequestEventStream = @import("start_conversation_request_event_stream.zig").StartConversationRequestEventStream;
 const StartConversationResponseEventStream = @import("start_conversation_response_event_stream.zig").StartConversationResponseEventStream;

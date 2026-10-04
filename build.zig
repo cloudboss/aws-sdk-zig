@@ -92,7 +92,8 @@ pub fn build(b: *std.Build) void {
     });
     modeled_error_module.addImport("aws", aws_module);
     for ([_][]const u8{
-        "backupgateway", "cognitoidentity", "dynamodb", "verifiedpermissions",
+        "backupgateway", "cognitoidentity", "dynamodb", "ec2",
+        "lambda",        "s3",              "sts",      "verifiedpermissions",
     }) |name| {
         modeled_error_module.addImport(name, service_modules.get(name).?);
     }

@@ -673,20 +673,20 @@ class RestXmlProtocolTest {
     @Test
     fun errorParserUsesXmlFormat() {
         val files = generateFiles()
-        val op = files["put_object.zig"]!!
+        val errors = files["errors.zig"]!!
 
-        assertTrue(op.contains("fn parseErrorResponse("), "Missing parseErrorResponse")
+        assertTrue(errors.contains("fn parseErrorResponse("), "Missing parseErrorResponse")
         assertTrue(
-            op.contains("aws.xml.findElement(body, \"Code\")"),
+            errors.contains("aws.xml.findElement(body, \"Code\")"),
             "Should extract error code from XML <Code> element",
         )
-        assertTrue(op.contains("allocator: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
+        assertTrue(errors.contains("allocator: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
         assertTrue(
-            op.contains("aws.xml.findElement(body, \"Message\")"),
+            errors.contains("aws.xml.findElement(body, \"Message\")"),
             "Should extract error message from XML <Message> element",
         )
         assertTrue(
-            op.contains("aws.xml.findElement(body, \"RequestId\")"),
+            errors.contains("aws.xml.findElement(body, \"RequestId\")"),
             "Should extract request ID from XML <RequestId> element",
         )
     }
@@ -694,10 +694,10 @@ class RestXmlProtocolTest {
     @Test
     fun errorParserMatchesErrorCodes() {
         val files = generateFiles()
-        val op = files["put_object.zig"]!!
+        val errors = files["errors.zig"]!!
 
         assertTrue(
-            op.contains("\"NoSuchBucketException\""),
+            errors.contains("\"NoSuchBucketException\""),
             "Should match NoSuchBucketException error code",
         )
     }
@@ -705,10 +705,10 @@ class RestXmlProtocolTest {
     @Test
     fun deleteObjectErrorParserMatchesCodes() {
         val files = generateFiles()
-        val op = files["delete_object.zig"]!!
+        val errors = files["errors.zig"]!!
 
         assertTrue(
-            op.contains("\"NoSuchKeyException\""),
+            errors.contains("\"NoSuchKeyException\""),
             "Should match NoSuchKeyException error code",
         )
     }
@@ -724,7 +724,8 @@ class RestXmlProtocolTest {
         assertTrue(putObject.contains("aws.url.parseEndpoint("), "Missing parseEndpoint usage")
 
         // Error parsing uses findElement for XML error responses
-        assertTrue(putObject.contains("aws.xml.findElement("), "Missing findElement usage in put_object")
+        val errors = files["errors.zig"]!!
+        assertTrue(errors.contains("aws.xml.findElement("), "Missing findElement usage in errors")
 
         // ListObjects has @httpQuery param so uses appendUrlEncoded
         val listObjects = files["list_objects.zig"]!!

@@ -1,14 +1,13 @@
 package software.amazon.smithy.zig.aws.protocols
 
 import software.amazon.smithy.zig.ZigWriter
+import software.amazon.smithy.zig.generators.ErrorGenerator
 import software.amazon.smithy.zig.protocols.OperationContext
 import software.amazon.smithy.zig.protocols.ProtocolGenerator
 
 class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
 
     override fun contentType(): String = "application/x-amz-json-$version"
-
-    override fun parsesModeledErrorBodies(): Boolean = true
 
     override fun writeSerializeRequest(writer: ZigWriter, ctx: OperationContext) {
         val inputName = "${ctx.operationName}Input"
@@ -86,8 +85,8 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
         writer.closeBlock("}")
     }
 
-    override fun writeParseErrorResponse(writer: ZigWriter, ctx: OperationContext) {
-        writer.openBlock("fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {")
+    override fun writeParseErrorResponse(writer: ZigWriter, errorInfos: List<ErrorGenerator.ErrorInfo>) {
+        writer.openBlock("pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) std.mem.Allocator.Error!ServiceError {")
 
         // Extract error code from __type, stripping namespace prefix
         writer.openBlock("const error_code = blk: {")
@@ -108,10 +107,10 @@ class AwsJsonProtocol(private val version: String) : ProtocolGenerator {
         writer.blankLine()
 
         // Match error codes to ServiceError variants
-        for (info in ctx.errorInfos) {
+        for (info in errorInfos) {
             writer.openBlock("if (std.mem.eql(u8, error_code, \"\$L\")) {", info.smithyName)
             writer.openBlock(
-                "const parsed_error: ?errors.\$L = aws.json.parseJsonObject(errors.\$L, body, arena_alloc) catch |err| switch (err) {",
+                "const parsed_error: ?\$L = aws.json.parseJsonObject(\$L, body, arena_alloc) catch |err| switch (err) {",
                 info.structName, info.structName,
             )
             writer.write("error.OutOfMemory => return error.OutOfMemory,")

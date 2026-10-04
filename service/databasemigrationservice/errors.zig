@@ -1,3 +1,4 @@
+const aws = @import("aws");
 const std = @import("std");
 
 pub const ServiceError = struct {
@@ -457,3 +458,341 @@ pub const UnknownServiceError = struct {
     request_id: []const u8 = "",
     http_status: u16 = 0,
 };
+
+/// Parse a service diagnostic. The caller must call deinit on the result.
+pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) std.mem.Allocator.Error!ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.findScalarLast(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedFault")) {
+        const parsed_error: ?AccessDeniedFault = aws.json.parseJsonObject(AccessDeniedFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .access_denied_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "CollectorNotFoundFault")) {
+        const parsed_error: ?CollectorNotFoundFault = aws.json.parseJsonObject(CollectorNotFoundFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .collector_not_found_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "FailedDependencyFault")) {
+        const parsed_error: ?FailedDependencyFault = aws.json.parseJsonObject(FailedDependencyFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .failed_dependency_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InsufficientResourceCapacityFault")) {
+        const parsed_error: ?InsufficientResourceCapacityFault = aws.json.parseJsonObject(InsufficientResourceCapacityFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .insufficient_resource_capacity_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidCertificateFault")) {
+        const parsed_error: ?InvalidCertificateFault = aws.json.parseJsonObject(InvalidCertificateFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_certificate_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidOperationFault")) {
+        const parsed_error: ?InvalidOperationFault = aws.json.parseJsonObject(InvalidOperationFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_operation_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidResourceStateFault")) {
+        const parsed_error: ?InvalidResourceStateFault = aws.json.parseJsonObject(InvalidResourceStateFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_resource_state_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidSubnet")) {
+        const parsed_error: ?InvalidSubnet = aws.json.parseJsonObject(InvalidSubnet, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_subnet = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "KMSAccessDeniedFault")) {
+        const parsed_error: ?KMSAccessDeniedFault = aws.json.parseJsonObject(KMSAccessDeniedFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .kms_access_denied_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "KMSDisabledFault")) {
+        const parsed_error: ?KMSDisabledFault = aws.json.parseJsonObject(KMSDisabledFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .kms_disabled_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "KMSFault")) {
+        const parsed_error: ?KMSFault = aws.json.parseJsonObject(KMSFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .kms_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "KMSInvalidStateFault")) {
+        const parsed_error: ?KMSInvalidStateFault = aws.json.parseJsonObject(KMSInvalidStateFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .kms_invalid_state_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "KMSKeyNotAccessibleFault")) {
+        const parsed_error: ?KMSKeyNotAccessibleFault = aws.json.parseJsonObject(KMSKeyNotAccessibleFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .kms_key_not_accessible_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "KMSNotFoundFault")) {
+        const parsed_error: ?KMSNotFoundFault = aws.json.parseJsonObject(KMSNotFoundFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .kms_not_found_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "KMSThrottlingFault")) {
+        const parsed_error: ?KMSThrottlingFault = aws.json.parseJsonObject(KMSThrottlingFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .kms_throttling_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ReplicationSubnetGroupDoesNotCoverEnoughAZs")) {
+        const parsed_error: ?ReplicationSubnetGroupDoesNotCoverEnoughAZs = aws.json.parseJsonObject(ReplicationSubnetGroupDoesNotCoverEnoughAZs, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .replication_subnet_group_does_not_cover_enough_a_zs = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ResourceAlreadyExistsFault")) {
+        const parsed_error: ?ResourceAlreadyExistsFault = aws.json.parseJsonObject(ResourceAlreadyExistsFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_already_exists_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundFault")) {
+        const parsed_error: ?ResourceNotFoundFault = aws.json.parseJsonObject(ResourceNotFoundFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_not_found_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ResourceQuotaExceededFault")) {
+        const parsed_error: ?ResourceQuotaExceededFault = aws.json.parseJsonObject(ResourceQuotaExceededFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_quota_exceeded_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "S3AccessDeniedFault")) {
+        const parsed_error: ?S3AccessDeniedFault = aws.json.parseJsonObject(S3AccessDeniedFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .s3_access_denied_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "S3ResourceNotFoundFault")) {
+        const parsed_error: ?S3ResourceNotFoundFault = aws.json.parseJsonObject(S3ResourceNotFoundFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .s3_resource_not_found_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "SNSInvalidTopicFault")) {
+        const parsed_error: ?SNSInvalidTopicFault = aws.json.parseJsonObject(SNSInvalidTopicFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .sns_invalid_topic_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "SNSNoAuthorizationFault")) {
+        const parsed_error: ?SNSNoAuthorizationFault = aws.json.parseJsonObject(SNSNoAuthorizationFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .sns_no_authorization_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "StorageQuotaExceededFault")) {
+        const parsed_error: ?StorageQuotaExceededFault = aws.json.parseJsonObject(StorageQuotaExceededFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .storage_quota_exceeded_fault = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "SubnetAlreadyInUse")) {
+        const parsed_error: ?SubnetAlreadyInUse = aws.json.parseJsonObject(SubnetAlreadyInUse, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .subnet_already_in_use = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "UpgradeDependencyFailureFault")) {
+        const parsed_error: ?UpgradeDependencyFailureFault = aws.json.parseJsonObject(UpgradeDependencyFailureFault, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .upgrade_dependency_failure_fault = typed_error } };
+        }
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

@@ -378,23 +378,23 @@ class AwsJsonProtocolTest {
     @Test
     fun errorParserUsesUnderscoreType() {
         val files = generateFiles("1.0")
-        val op = files["put_item.zig"]!!
+        val errors = files["errors.zig"]!!
 
-        assertTrue(op.contains("fn parseErrorResponse("), "Missing parseErrorResponse")
+        assertTrue(errors.contains("fn parseErrorResponse("), "Missing parseErrorResponse")
         assertTrue(
-            op.contains("__type"),
+            errors.contains("__type"),
             "Should extract error code from __type field",
         )
-        assertTrue(op.contains("allocator: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
+        assertTrue(errors.contains("allocator: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
     }
 
     @Test
     fun errorParserStripsNamespacePrefix() {
         val files = generateFiles("1.0")
-        val op = files["put_item.zig"]!!
+        val errors = files["errors.zig"]!!
 
         assertTrue(
-            op.contains("findScalarLast"),
+            errors.contains("findScalarLast"),
             "Should strip namespace prefix from __type using '#' delimiter",
         )
     }
@@ -402,10 +402,10 @@ class AwsJsonProtocolTest {
     @Test
     fun errorParserMatchesErrorCodes() {
         val files = generateFiles("1.0")
-        val op = files["put_item.zig"]!!
+        val errors = files["errors.zig"]!!
 
         assertTrue(
-            op.contains("\"ResourceNotFoundException\""),
+            errors.contains("\"ResourceNotFoundException\""),
             "Missing error code matching",
         )
     }
@@ -413,14 +413,14 @@ class AwsJsonProtocolTest {
     @Test
     fun errorParserChecksMessageAndMessageCase() {
         val files = generateFiles("1.0")
-        val op = files["put_item.zig"]!!
+        val errors = files["errors.zig"]!!
 
         assertTrue(
-            op.contains("\"message\""),
+            errors.contains("\"message\""),
             "Should check lowercase 'message' field",
         )
         assertTrue(
-            op.contains("\"Message\""),
+            errors.contains("\"Message\""),
             "Should check uppercase 'Message' field as fallback",
         )
     }
@@ -428,14 +428,14 @@ class AwsJsonProtocolTest {
     @Test
     fun errorParserDoesNotUseXmlElements() {
         val files = generateFiles("1.0")
-        val op = files["put_item.zig"]!!
+        val errors = files["errors.zig"]!!
 
         assertFalse(
-            op.contains("findElement"),
+            errors.contains("findElement"),
             "JSON protocol should NOT use XML findElement",
         )
         assertFalse(
-            op.contains("<Code>"),
+            errors.contains("<Code>"),
             "JSON protocol should NOT reference XML tags",
         )
     }
@@ -496,24 +496,28 @@ class AwsJsonProtocolTest {
         for (version in listOf("1.0", "1.1")) {
             val files = generateFiles(version)
             val op = files["put_item.zig"]!!
+            val errors = files["errors.zig"]!!
 
-            assertTrue(op.contains("const errors = @import(\"errors.zig\");"), "AWS JSON $version should import modeled errors")
             assertTrue(
-                op.contains("aws.json.parseJsonObject(errors.ConditionalCheckFailedException, body, arena_alloc)"),
+                op.contains("const parseErrorResponse = @import(\"errors.zig\").parseErrorResponse;"),
+                "AWS JSON $version should import the shared parser",
+            )
+            assertTrue(
+                errors.contains("aws.json.parseJsonObject(ConditionalCheckFailedException, body, arena_alloc)"),
                 "AWS JSON $version should deserialize recognized error bodies",
             )
-            assertTrue(op.contains("typed_error.message = owned_message;"), "AWS JSON $version should normalize error messages")
-            assertTrue(op.contains("typed_error.request_id = owned_request_id;"), "AWS JSON $version should normalize request IDs")
-            assertTrue(op.contains("else => null,"), "AWS JSON $version malformed typed bodies should fall through")
-            assertTrue(op.contains(".code = owned_code,"), "AWS JSON $version fallback should preserve the error code")
-            assertTrue(op.contains(".message = owned_message,"), "AWS JSON $version fallback should preserve the message")
-            assertTrue(op.contains(".http_status = status,"), "AWS JSON $version fallback should preserve HTTP status")
+            assertTrue(errors.contains("typed_error.message = owned_message;"), "AWS JSON $version should normalize error messages")
+            assertTrue(errors.contains("typed_error.request_id = owned_request_id;"), "AWS JSON $version should normalize request IDs")
+            assertTrue(errors.contains("else => null,"), "AWS JSON $version malformed typed bodies should fall through")
+            assertTrue(errors.contains(".code = owned_code,"), "AWS JSON $version fallback should preserve the error code")
+            assertTrue(errors.contains(".message = owned_message,"), "AWS JSON $version fallback should preserve the message")
+            assertTrue(errors.contains(".http_status = status,"), "AWS JSON $version fallback should preserve HTTP status")
             assertTrue(
-                op.contains("error.OutOfMemory => return error.OutOfMemory,"),
+                errors.contains("error.OutOfMemory => return error.OutOfMemory,"),
                 "AWS JSON $version typed parsing should propagate allocation failures",
             )
             assertTrue(
-                op.contains("parseErrorResponse(client.allocator, response.body, response.status) catch return error.OutOfMemory;"),
+                op.contains("d.* = try parseErrorResponse(client.allocator, response.body, response.status);"),
                 "AWS JSON $version operations should propagate diagnostic allocation failures",
             )
         }
@@ -525,8 +529,9 @@ class AwsJsonProtocolTest {
     fun helperFunctionsPresent() {
         val files = generateFiles("1.0")
         val op = files["put_item.zig"]!!
+        val errors = files["errors.zig"]!!
 
-        assertTrue(op.contains("aws.json.findJsonValue("), "Missing findJsonValue usage")
+        assertTrue(errors.contains("aws.json.findJsonValue("), "Missing findJsonValue usage")
         assertTrue(op.contains("aws.url.parseEndpoint("), "Missing parseEndpoint usage")
     }
 
