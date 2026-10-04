@@ -15,6 +15,7 @@ import software.amazon.smithy.model.shapes.ServiceShape
 import software.amazon.smithy.model.shapes.ShapeId
 import software.amazon.smithy.model.shapes.StructureShape
 import software.amazon.smithy.model.traits.PaginatedTrait
+import software.amazon.smithy.model.traits.RequiredTrait
 import software.amazon.smithy.zig.ZigContext
 import software.amazon.smithy.zig.ZigSettings
 import software.amazon.smithy.zig.ZigSymbolVisitor
@@ -252,6 +253,38 @@ class PaginatorGeneratorTest {
             paginator.contains("self.client.allocator.dupe(u8, token)"),
             "String token should be duped via client allocator",
         )
+    }
+
+    @Test
+    fun requiredStringOutputTokenIsAccepted() {
+        val original = buildStringTokenModel()
+        val output = original.expectShape(
+            ShapeId.from("test#ListItemsOutput"),
+            StructureShape::class.java,
+        ).toBuilder()
+            .addMember(
+                MemberShape.builder()
+                    .id("test#ListItemsOutput\$NextToken")
+                    .target("smithy.api#String")
+                    .addTrait(RequiredTrait())
+                    .build()
+            )
+            .build()
+        val model = original.toBuilder().addShape(output).build()
+        val paginator = generateFiles(model)["paginator.zig"]!!
+
+        assertTrue(paginator.contains("const next_token: ?[]const u8 = output.next_token;"))
+        assertFalse(paginator.contains("if (output.next_token) |token|"))
+    }
+
+    @Test
+    fun emptyStringTokenEndsPagination() {
+        val paginator = generateFiles(buildStringTokenModel())["paginator.zig"]!!
+
+        assertTrue(paginator.contains("token.len > 0"))
+        assertTrue(paginator.contains("self.done = self.next_token == null;"))
+        assertTrue(paginator.contains("try self.client.allocator.dupe(u8, token)"))
+        assertFalse(paginator.contains("catch null"))
     }
 
     @Test
