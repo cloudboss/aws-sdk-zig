@@ -1,9 +1,14 @@
 [
   {
-    "version": "v2026.06.12",
-    "title": "v2026.06.12",
+    "version": "v2026.10.04",
+    "title": "v2026.10.04",
     "aliases": [
       "latest"
     ]
+  },
+  {
+    "version": "v2026.06.12",
+    "title": "v2026.06.12",
+    "aliases": []
   }
 ]
