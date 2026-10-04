@@ -93,6 +93,13 @@ wait_for_localstack() {
 
 # --- Run tests ---
 
+echo "Compiling selected integration tests..."
+for scenario_dir in "${SCENARIO_DIRS[@]}"; do
+    scenario=$(basename "$scenario_dir")
+    echo "  Compiling: ${scenario}"
+    zig build "integration-test-localstack-${scenario}-compile" ${ZIG_BUILD_FLAGS}
+done
+
 start_localstack
 wait_for_localstack
 
@@ -121,7 +128,7 @@ for scenario_dir in "${SCENARIO_DIRS[@]}"; do
     # Build and run the test inside a child shell that sources the base
     # environment defaults and any per-scenario overrides, preventing
     # env var changes from one scenario bleeding into the next.
-    echo "  Building and running test..."
+    echo "  Running test..."
     env_cmd=". '${SCRIPT_DIR}/env.sh'"
     if [[ -f "${scenario_dir}/env.sh" ]]; then
         env_cmd="${env_cmd} && . '${scenario_dir}/env.sh'"

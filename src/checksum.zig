@@ -15,11 +15,11 @@ pub const Algorithm = enum {
 };
 
 pub fn computeCrc32(data: []const u8) u32 {
-    return std.hash.crc.Crc32IsoHdlc.hash(data);
+    return std.hash.crc.@"CRC-32/ISO-HDLC".hash(data);
 }
 
 pub fn computeCrc32c(data: []const u8) u32 {
-    return std.hash.crc.Crc32Iscsi.hash(data);
+    return std.hash.crc.@"CRC-32/ISCSI".hash(data);
 }
 
 pub fn computeCrc64Nvme(data: []const u8) u64 {

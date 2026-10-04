@@ -92,9 +92,10 @@ class EnumGenerator(
                 if (branchCost > 1000) {
                     writer.write("@setEvalBranchQuota(\$L);", branchCost + 100)
                 }
-                writer.openBlock("inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {")
-                writer.openBlock("if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {")
-                writer.write("return @field(@This(), field.name);")
+                writer.write("const fields = @typeInfo(@TypeOf(json_field_names)).@\"struct\".field_names;")
+                writer.openBlock("inline for (fields) |field_name| {")
+                writer.openBlock("if (std.mem.eql(u8, str, @field(json_field_names, field_name))) {")
+                writer.write("return @field(@This(), field_name);")
                 writer.closeBlock("}")
                 writer.closeBlock("}")
                 writer.write("return std.meta.stringToEnum(@This(), str);")

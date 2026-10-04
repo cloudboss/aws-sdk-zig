@@ -30,17 +30,17 @@ fn ClientCalls(comptime Service: type) type {
             allocator: *const std.mem.Allocator,
             input: *const anyopaque,
         ) callconv(.c) void {
-            inline for (comptime std.meta.declarations(Service.Client)) |declaration| {
-                const method = @field(Service.Client, declaration.name);
+            inline for (@typeInfo(Service.Client).@"struct".decl_names) |decl_name| {
+                const method = @field(Service.Client, decl_name);
                 const info = @typeInfo(@TypeOf(method));
-                if (comptime info == .@"fn" and info.@"fn".params.len == 4) {
-                    const Input = info.@"fn".params[2].type.?;
+                if (comptime info == .@"fn" and info.@"fn".param_types.len == 4) {
+                    const Input = info.@"fn".param_types[2].?;
                     const params: *const Input = @ptrCast(@alignCast(input));
                     _ = method(client, allocator.*, params.*, .{}) catch {};
                 }
             }
-            inline for (comptime std.meta.declarations(Service.paginator)) |declaration| {
-                const Paginator = @field(Service.paginator, declaration.name);
+            inline for (@typeInfo(Service.paginator).@"struct".decl_names) |decl_name| {
+                const Paginator = @field(Service.paginator, decl_name);
                 const paginator: *Paginator = @ptrCast(@alignCast(@constCast(input)));
                 _ = paginator.next(allocator.*, .{}) catch {};
             }
@@ -513,7 +513,7 @@ test "paginators own tokens and stop on null or empty values" {
 }
 
 test "pagination allocation failure preserves the previous token" {
-    const token = "t" ** 4093;
+    const token: [4093]u8 = @splat('t');
     var server = try TestServer.init(&.{
         "{\"NextMarker\":\"" ++ token ++ "\"}",
         "{\"NextMarker\":null}",

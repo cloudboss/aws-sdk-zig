@@ -249,7 +249,7 @@ fn writeHeader(buffer: []u8, offset: usize, header: Header) !usize {
     std.mem.copyForwards(u8, buffer[cursor .. cursor + header.name.len], header.name);
     cursor += header.name.len;
 
-    buffer[cursor] = @intFromEnum(header.value);
+    buffer[cursor] = @backingInt(header.value);
     cursor += 1;
 
     switch (header.value) {
@@ -438,7 +438,7 @@ const testing = std.testing;
 
 fn expectHeaderEqual(expected: Header, actual: Header) !void {
     try testing.expectEqualStrings(expected.name, actual.name);
-    try testing.expect(@intFromEnum(expected.value) == @intFromEnum(actual.value));
+    try testing.expect(@backingInt(expected.value) == @backingInt(actual.value));
     switch (expected.value) {
         .bool_true, .bool_false => {},
         .byte => |value| try testing.expectEqual(value, actual.value.byte),

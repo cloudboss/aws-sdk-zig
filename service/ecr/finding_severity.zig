@@ -6,7 +6,7 @@ pub const FindingSeverity = enum {
     medium,
     high,
     critical,
-    @"undefined",
+    undefined,
 
     pub const json_field_names = .{
         .informational = "INFORMATIONAL",
@@ -14,7 +14,7 @@ pub const FindingSeverity = enum {
         .medium = "MEDIUM",
         .high = "HIGH",
         .critical = "CRITICAL",
-        .@"undefined" = "UNDEFINED",
+        .undefined = "UNDEFINED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -24,14 +24,15 @@ pub const FindingSeverity = enum {
             .medium => "MEDIUM",
             .high => "HIGH",
             .critical => "CRITICAL",
-            .@"undefined" => "UNDEFINED",
+            .undefined => "UNDEFINED",
         };
     }
 
     pub fn fromWireName(str: []const u8) ?@This() {
-        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
-            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
-                return @field(@This(), field.name);
+        const fields = @typeInfo(@TypeOf(json_field_names)).@"struct".field_names;
+        inline for (fields) |field_name| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field_name))) {
+                return @field(@This(), field_name);
             }
         }
         return std.meta.stringToEnum(@This(), str);

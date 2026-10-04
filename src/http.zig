@@ -605,7 +605,7 @@ pub const HttpClient = struct {
             &redirect_buf,
         ) catch return error.RequestFailed;
 
-        const status = @intFromEnum(response.head.status);
+        const status = @backingInt(response.head.status);
         const resp_headers = try self.parseResponseHeaders(&response);
 
         // Initialize body reader -- this invalidates head strings
@@ -738,7 +738,7 @@ pub const HttpClient = struct {
         try verifyResponseChecksum(effective_checksum_alg, body, &resp_headers, self.allocator);
 
         var final_response = Response{
-            .status = @intFromEnum(response.head.status),
+            .status = @backingInt(response.head.status),
             .body = body,
             .headers = resp_headers,
             .allocator = self.allocator,
@@ -864,7 +864,7 @@ pub fn generateUuidV4(io: std.Io, buf: *[36]u8) void {
 /// True if the HTTP status code disallows a response body per
 /// RFC 9110 6.4.1: 1xx Informational, 204 No Content, 304 Not Modified.
 pub fn statusForbidsBody(status: std.http.Status) bool {
-    const code = @intFromEnum(status);
+    const code = @backingInt(status);
     if (code >= 100 and code < 200) return true;
     return code == 204 or code == 304;
 }

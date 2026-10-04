@@ -151,7 +151,7 @@ fn expectHeadersEqual(
         const current = actual[index];
         try std.testing.expectEqualStrings(header.name, current.name);
         try std.testing.expect(
-            @intFromEnum(header.value) == @intFromEnum(current.value),
+            @backingInt(header.value) == @backingInt(current.value),
         );
         switch (header.value) {
             .bool_true, .bool_false => {},

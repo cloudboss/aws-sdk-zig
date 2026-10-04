@@ -2,7 +2,7 @@
 
 An AWS SDK for Zig, providing AWS service clients from [Smithy models](https://aws.amazon.com/blogs/aws/introducing-aws-api-models-and-publicly-available-resources-for-aws-api-definitions/), built using a Kotlin code generator.
 
-The latest changes require Zig 0.16.0 or later. The `zig-0.15` branch exists for Zig 0.15.x.
+The latest changes require Zig 0.17.0 or later. Branches exist for prior versions going back to 0.15.x.
 
 ## Available Services
 
@@ -149,6 +149,12 @@ AWS_PROFILE=<profile> make test-integration-live SCENARIO=networking
 # Regenerate service code from Smithy models.
 make codegen
 ```
+
+Make targets keep Zig build and package caches under `_output/zig-cache` and `_output/zig-pkg`.
+For direct Zig commands, set `ZIG_LOCAL_PKG_DIR=_output/zig-pkg` to use the same package cache.
+
+Integration tests compile the selected scenarios before starting LocalStack or running setup.
+`SCENARIO_TIMEOUT_SECS` limits test execution to 30 seconds by default; compilation has no such limit.
 
 ## License
 

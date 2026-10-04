@@ -14,13 +14,13 @@ const std = @import("std");
 /// * `RESOURCE_ARN` – The resource affected by the recommendation,
 /// with values like `arn:aws:ses:us-east-1:123456789012:identity/example.com`.
 pub const ListRecommendationsFilterKey = enum {
-    @"type",
+    type,
     impact,
     status,
     resource_arn,
 
     pub const json_field_names = .{
-        .@"type" = "TYPE",
+        .type = "TYPE",
         .impact = "IMPACT",
         .status = "STATUS",
         .resource_arn = "RESOURCE_ARN",
@@ -28,7 +28,7 @@ pub const ListRecommendationsFilterKey = enum {
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
-            .@"type" => "TYPE",
+            .type => "TYPE",
             .impact => "IMPACT",
             .status => "STATUS",
             .resource_arn => "RESOURCE_ARN",
@@ -36,9 +36,10 @@ pub const ListRecommendationsFilterKey = enum {
     }
 
     pub fn fromWireName(str: []const u8) ?@This() {
-        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
-            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
-                return @field(@This(), field.name);
+        const fields = @typeInfo(@TypeOf(json_field_names)).@"struct".field_names;
+        inline for (fields) |field_name| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field_name))) {
+                return @field(@This(), field_name);
             }
         }
         return std.meta.stringToEnum(@This(), str);

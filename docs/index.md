@@ -2,7 +2,7 @@
 
 An AWS SDK for Zig, providing AWS service clients from [Smithy models](https://aws.amazon.com/blogs/aws/introducing-aws-api-models-and-publicly-available-resources-for-aws-api-definitions/), built using a Kotlin code generator.
 
-The latest changes require Zig 0.16.0 or later. The `zig-0.15` branch exists for Zig 0.15.x.
+The latest changes require Zig 0.17.0 or later. The `zig-0.15` branch exists for Zig 0.15.x.
 
 ## Available Services
 

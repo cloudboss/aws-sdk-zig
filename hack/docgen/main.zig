@@ -154,7 +154,7 @@ fn generateService(
         .{ service_dir, service },
     );
     const client_src = try readFileZ(arena, io, cwd, client_path);
-    const client_tree = try Ast.parse(arena, client_src, .zig);
+    const client_tree = try Ast.parse(arena, client_src, .{});
 
     var imports: std.StringHashMapUnmanaged([]const u8) = .empty;
     try collectImports(arena, &imports, client_tree);
@@ -291,7 +291,7 @@ fn renderOperation(
             .{ service_dir, service, stem },
         );
         if (readFileZ(arena, io, cwd, path)) |src| {
-            const tree = try Ast.parse(arena, src, .zig);
+            const tree = try Ast.parse(arena, src, .{});
             if (op.input) |t| try renderStruct(arena, &page, tree, t, "Input");
             if (op.output) |t| try renderStruct(arena, &page, tree, t, "Output");
         } else |_| {}
@@ -387,7 +387,7 @@ fn generateRuntime(
 
         const path = try std.fmt.allocPrint(pa, "{s}/{s}.zig", .{ src_dir, module.stem });
         const src = try readFileZ(pa, io, cwd, path);
-        const tree = try Ast.parse(pa, src, .zig);
+        const tree = try Ast.parse(pa, src, .{});
         const page = try renderModule(pa, tree, module.name);
 
         const rel = try std.fmt.allocPrint(pa, "runtime/{s}.md", .{module.name});
@@ -444,7 +444,7 @@ fn discoverModules(
     out: *std.ArrayList(RuntimeModule),
 ) !void {
     const src = try readFileZ(arena, io, cwd, root_file);
-    const tree = try Ast.parse(arena, src, .zig);
+    const tree = try Ast.parse(arena, src, .{});
     for (tree.rootDecls()) |node| {
         const vd = tree.fullVarDecl(node) orelse continue;
         if (vd.visib_token == null) continue;
@@ -716,7 +716,7 @@ fn camelToSnake(arena: std.mem.Allocator, name: []const u8) ![]u8 {
 
 fn readFileZ(arena: std.mem.Allocator, io: std.Io, dir: std.Io.Dir, path: []const u8) ![:0]u8 {
     const bytes = try dir.readFileAlloc(io, path, arena, .unlimited);
-    return arena.dupeZ(u8, bytes);
+    return arena.dupeSentinel(u8, bytes, 0);
 }
 
 fn writeFilePath(
@@ -816,7 +816,7 @@ test "parseSignature ignores the opening body brace on the return type" {
 }
 
 fn parseFirstDecl(arena: std.mem.Allocator, src: []const u8) !struct { Ast, Ast.Node.Index } {
-    const tree = try Ast.parse(arena, try arena.dupeZ(u8, src), .zig);
+    const tree = try Ast.parse(arena, try arena.dupeSentinel(u8, src, 0), .{});
     return .{ tree, tree.rootDecls()[0] };
 }
 
@@ -886,7 +886,7 @@ test "renderModule documents the module doc, types, variants, and functions" {
         "    return x + y;\n" ++
         "}\n" ++
         "fn hidden() void {}\n";
-    const tree = try Ast.parse(arena, try arena.dupeZ(u8, raw), .zig);
+    const tree = try Ast.parse(arena, try arena.dupeSentinel(u8, raw, 0), .{});
     const page = try renderModule(arena, tree, "example");
 
     for ([_][]const u8{

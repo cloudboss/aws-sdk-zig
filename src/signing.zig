@@ -784,20 +784,20 @@ test "signRequest does not leak header values without an arena" {
 }
 
 test "deriveSigningKey rejects oversized secret_key" {
-    const oversized = "A" ** 253; // "AWS4" prefix + 253 = 257 > 256-byte buffer
-    const result = deriveSigningKey(oversized, "20150830", "us-east-1", "iam");
+    const oversized: [253]u8 = @splat('A');
+    const result = deriveSigningKey(&oversized, "20150830", "us-east-1", "iam");
     try std.testing.expectError(error.InvalidCredentials, result);
 }
 
 test "deriveSigningKeyV4a rejects oversized secret_access_key" {
-    const oversized = "A" ** 257; // "AWS4A" prefix + 257 = 262 > 261-byte buffer
-    const result = deriveSigningKeyV4a(oversized, "AKIAIOSFODNN7EXAMPLE");
+    const oversized: [257]u8 = @splat('A');
+    const result = deriveSigningKeyV4a(&oversized, "AKIAIOSFODNN7EXAMPLE");
     try std.testing.expectError(error.InvalidCredentials, result);
 }
 
 test "deriveSigningKeyV4a rejects oversized access_key_id" {
-    const oversized = "A" ** 257; // access_key_id + 2 > 256+2-byte msg buffer
-    const result = deriveSigningKeyV4a("wJalrXUtnFEMI/K7MDENG+bPxRfiCYEXAMPLEKEY", oversized);
+    const oversized: [257]u8 = @splat('A');
+    const result = deriveSigningKeyV4a("wJalrXUtnFEMI/K7MDENG+bPxRfiCYEXAMPLEKEY", &oversized);
     try std.testing.expectError(error.InvalidCredentials, result);
 }
 
@@ -1260,7 +1260,7 @@ test "signRequest applies positive clock skew" {
 
     try std.testing.expect(
         std.mem.eql(u8, amz_date, &expected_a) or
-        std.mem.eql(u8, amz_date, &expected_b),
+            std.mem.eql(u8, amz_date, &expected_b),
     );
 }
 
@@ -1288,7 +1288,7 @@ test "signRequest applies negative clock skew" {
 
     try std.testing.expect(
         std.mem.eql(u8, amz_date, &expected_a) or
-        std.mem.eql(u8, amz_date, &expected_b),
+            std.mem.eql(u8, amz_date, &expected_b),
     );
 }
 
@@ -1322,6 +1322,6 @@ test "presignRequest applies clock skew offset" {
 
     try std.testing.expect(
         std.mem.eql(u8, amz_date, &expected_a) or
-        std.mem.eql(u8, amz_date, &expected_b),
+            std.mem.eql(u8, amz_date, &expected_b),
     );
 }

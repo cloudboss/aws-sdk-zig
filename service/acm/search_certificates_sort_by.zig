@@ -10,7 +10,7 @@ pub const SearchCertificatesSortBy = enum {
     in_use,
     not_before,
     key_algorithm,
-    @"type",
+    type,
     certificate_arn,
     common_name,
     revoked_at,
@@ -33,7 +33,7 @@ pub const SearchCertificatesSortBy = enum {
         .in_use = "IN_USE",
         .not_before = "NOT_BEFORE",
         .key_algorithm = "KEY_ALGORITHM",
-        .@"type" = "TYPE",
+        .type = "TYPE",
         .certificate_arn = "CERTIFICATE_ARN",
         .common_name = "COMMON_NAME",
         .revoked_at = "REVOKED_AT",
@@ -58,7 +58,7 @@ pub const SearchCertificatesSortBy = enum {
             .in_use => "IN_USE",
             .not_before => "NOT_BEFORE",
             .key_algorithm => "KEY_ALGORITHM",
-            .@"type" => "TYPE",
+            .type => "TYPE",
             .certificate_arn => "CERTIFICATE_ARN",
             .common_name => "COMMON_NAME",
             .revoked_at => "REVOKED_AT",
@@ -75,9 +75,10 @@ pub const SearchCertificatesSortBy = enum {
     }
 
     pub fn fromWireName(str: []const u8) ?@This() {
-        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
-            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
-                return @field(@This(), field.name);
+        const fields = @typeInfo(@TypeOf(json_field_names)).@"struct".field_names;
+        inline for (fields) |field_name| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field_name))) {
+                return @field(@This(), field_name);
             }
         }
         return std.meta.stringToEnum(@This(), str);

@@ -44,6 +44,13 @@ if [[ -z "${region}" ]]; then
     region="unknown"
 fi
 
+echo "Compiling selected integration tests..."
+for scenario_dir in "${SCENARIO_DIRS[@]}"; do
+    scenario=$(basename "$scenario_dir")
+    echo "  Compiling: ${scenario}"
+    zig build "integration-test-live-${scenario}-compile" ${ZIG_BUILD_FLAGS}
+done
+
 PASS=0
 FAIL=0
 ERRORS=()
@@ -81,7 +88,7 @@ for scenario_dir in "${SCENARIO_DIRS[@]}"; do
         fi
     fi
 
-    echo "  Building and running test..."
+    echo "  Running test..."
     env_cmd=". '${SCRIPT_DIR}/env.sh'"
     if [[ -f "${scenario_dir}/env.sh" ]]; then
         env_cmd="${env_cmd} && . '${scenario_dir}/env.sh'"

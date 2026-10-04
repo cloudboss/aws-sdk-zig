@@ -2,7 +2,7 @@ PROJECT = $(shell basename ${PWD})
 DIR_ROOT = $(realpath $(CURDIR))
 DIR_OUT = _output
 
-ZIG_VERSION = 0.16.0
+ZIG_VERSION = 0.17.0
 GRADLE_VERSION = 8.7
 CTR_IMAGE_BASE = ghcr.io/cloudboss/docker.io/library/alpine:3.23.2
 CTR_IMAGE_LOCALSTACK = ghcr.io/cloudboss/docker.io/localstack/localstack:4.14.0
@@ -24,7 +24,8 @@ DOCKER_INPUTS_SHA256 = $(shell echo -n $(UID_SHA256)$(GID_SHA256)$(CTR_IMAGE_BAS
 CTR_IMAGE_LOCAL = $(PROJECT):$(DOCKER_INPUTS_SHA256)
 HAS_IMAGE_LOCAL = $(DIR_OUT)/.image-local-$(DOCKER_INPUTS_SHA256)
 
-ZIG_BUILD_FLAGS = --cache-dir $(DIR_OUT)/zig-cache --global-cache-dir $(DIR_OUT)/zig-cache
+ZIG_BUILD_FLAGS = --cache-dir $(DIR_OUT)/zig-cache --pkg-dir $(DIR_OUT)/zig-pkg
+ZIG_GLOBAL_CACHE_DIR = /code/$(DIR_OUT)/zig-cache
 
 DOCKER_GID = $(shell getent group docker | cut -d: -f3)
 
@@ -52,6 +53,7 @@ build: $(HAS_IMAGE_LOCAL)
 	@docker run --rm \
 		-v $(DIR_ROOT):/code \
 		-w /code \
+		-e ZIG_GLOBAL_CACHE_DIR=$(ZIG_GLOBAL_CACHE_DIR) \
 		--security-opt label=type:container_runtime_t \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "zig build $(ZIG_BUILD_FLAGS)"
 
@@ -59,6 +61,7 @@ test: $(HAS_IMAGE_LOCAL)
 	@docker run --rm \
 		-v $(DIR_ROOT):/code \
 		-w /code \
+		-e ZIG_GLOBAL_CACHE_DIR=$(ZIG_GLOBAL_CACHE_DIR) \
 		--security-opt label=type:container_runtime_t \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "zig build test $(ZIG_BUILD_FLAGS)"
 
@@ -66,6 +69,7 @@ test-integration-compile: $(HAS_IMAGE_LOCAL)
 	@docker run --rm \
 		-v $(DIR_ROOT):/code \
 		-w /code \
+		-e ZIG_GLOBAL_CACHE_DIR=$(ZIG_GLOBAL_CACHE_DIR) \
 		--security-opt label=type:container_runtime_t \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "zig build integration-test-compile $(ZIG_BUILD_FLAGS)"
 
@@ -78,6 +82,7 @@ test-integration-localstack: $(HAS_IMAGE_LOCAL) certs | $(DIR_OUT)
 		--security-opt label=type:container_runtime_t \
 		-e CTR_IMAGE_LOCALSTACK=$(CTR_IMAGE_LOCALSTACK) \
 		-e "ZIG_BUILD_FLAGS=$(ZIG_BUILD_FLAGS)" \
+		-e ZIG_GLOBAL_CACHE_DIR=$(ZIG_GLOBAL_CACHE_DIR) \
 		-e SCENARIO=$(SCENARIO) \
 		-e SCENARIO_TIMEOUT_SECS \
 		-e ZEST_LOG_LEVEL \
@@ -97,6 +102,7 @@ test-integration-live: $(HAS_IMAGE_LOCAL) | $(DIR_OUT)
 		-e AWS_PROFILE \
 		-e AWS_DEFAULT_REGION \
 		-e "ZIG_BUILD_FLAGS=$(ZIG_BUILD_FLAGS)" \
+		-e ZIG_GLOBAL_CACHE_DIR=$(ZIG_GLOBAL_CACHE_DIR) \
 		-e SCENARIO=$(SCENARIO) \
 		-e SCENARIO_TIMEOUT_SECS \
 		-e ZEST_LOG_LEVEL \
@@ -148,6 +154,7 @@ docgen: $(HAS_IMAGE_LOCAL)
 	@docker run --rm \
 		-v $(DIR_ROOT):/code \
 		-w /code \
+		-e ZIG_GLOBAL_CACHE_DIR=$(ZIG_GLOBAL_CACHE_DIR) \
 		--security-opt label=type:container_runtime_t \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "zig build docgen $(ZIG_BUILD_FLAGS) -- $(DOCS_SERVICES_ARG) --runtime-root src/root.zig"
 
@@ -155,6 +162,7 @@ docgen-test: $(HAS_IMAGE_LOCAL)
 	@docker run --rm \
 		-v $(DIR_ROOT):/code \
 		-w /code \
+		-e ZIG_GLOBAL_CACHE_DIR=$(ZIG_GLOBAL_CACHE_DIR) \
 		--security-opt label=type:container_runtime_t \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "zig build docgen-test $(ZIG_BUILD_FLAGS)"
 
@@ -164,4 +172,6 @@ certs:
 clean:
 	@rm -rf $(DIR_OUT)
 
-.PHONY: build test test-integration-compile test-integration-localstack test-integration-live fetch-models codegen docgen docgen-test certs clean
+.PHONY: build test test-integration-compile \
+	test-integration-localstack test-integration-live fetch-models codegen docgen \
+	docgen-test certs clean

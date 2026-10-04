@@ -87,15 +87,15 @@ fn parseOptional(comptime Child: type, scanner: *Scanner, alloc: Allocator) Pars
 
 fn parseStruct(comptime T: type, scanner: *Scanner, alloc: Allocator) ParseError!T {
     var result: T = undefined;
-    const fields = std.meta.fields(T);
-    var seen: [fields.len]bool = @splat(false);
+    const info = @typeInfo(T).@"struct";
+    var seen: [info.field_names.len]bool = @splat(false);
 
     // Initialize fields to defaults
-    inline for (fields) |field| {
-        if (comptime std.mem.eql(u8, field.name, "_arena")) {
+    inline for (info.field_names, info.field_types, info.field_attrs) |name, Field, attrs| {
+        if (comptime std.mem.eql(u8, name, "_arena")) {
             // Skip -- arena is set by caller after parsing
-        } else if (comptime field.defaultValue()) |dv| {
-            @field(result, field.name) = dv;
+        } else if (comptime attrs.defaultValue(Field)) |dv| {
+            @field(result, name) = dv;
         }
     }
 
@@ -117,14 +117,14 @@ fn parseStruct(comptime T: type, scanner: *Scanner, alloc: Allocator) ParseError
         };
 
         var matched = false;
-        inline for (fields, 0..) |field, index| {
-            if (comptime std.mem.eql(u8, field.name, "_arena")) continue;
-            const mapped = comptime jsonKeyForField(T, field.name);
+        inline for (info.field_names, info.field_types, 0..) |name, Field, index| {
+            if (comptime std.mem.eql(u8, name, "_arena")) continue;
+            const mapped = comptime jsonKeyForField(T, name);
             if (std.mem.eql(u8, json_key, mapped)) {
                 if (try scanner.peekNextTokenType() == .null) {
                     _ = try scanner.nextAlloc(alloc, .alloc_if_needed);
                 } else {
-                    @field(result, field.name) = try parseValue(field.type, scanner, alloc);
+                    @field(result, name) = try parseValue(Field, scanner, alloc);
                     seen[index] = true;
                 }
                 matched = true;
@@ -139,11 +139,16 @@ fn parseStruct(comptime T: type, scanner: *Scanner, alloc: Allocator) ParseError
         }
     }
 
-    inline for (fields, 0..) |field, index| {
-        if (comptime std.mem.eql(u8, field.name, "_arena")) continue;
-        if (comptime field.defaultValue() == null) {
+    inline for (info.field_names, info.field_types, info.field_attrs, 0..) |
+        name,
+        Field,
+        attrs,
+        index,
+    | {
+        if (comptime std.mem.eql(u8, name, "_arena")) continue;
+        if (comptime attrs.defaultValue(Field) == null) {
             if (!seen[index]) {
-                @field(result, field.name) = switch (@typeInfo(field.type)) {
+                @field(result, name) = switch (@typeInfo(Field)) {
                     .optional => null,
                     .bool => false,
                     .int, .float => 0,
@@ -178,18 +183,18 @@ fn parseUnion(comptime T: type, scanner: *Scanner, alloc: Allocator) ParseError!
         else => {},
     };
 
-    const fields = std.meta.fields(T);
-    inline for (fields) |field| {
-        const mapped = comptime jsonKeyForField(T, field.name);
+    const info = @typeInfo(T).@"union";
+    inline for (info.field_names, info.field_types) |name, Field| {
+        const mapped = comptime jsonKeyForField(T, name);
         if (std.mem.eql(u8, variant_key, mapped)) {
-            const val = try parseValue(field.type, scanner, alloc);
+            const val = try parseValue(Field, scanner, alloc);
             // Consume closing brace
             const close = try scanner.nextAlloc(alloc, .alloc_if_needed);
             switch (close) {
                 .object_end => {},
                 else => return error.SyntaxError,
             }
-            return @unionInit(T, field.name, val);
+            return @unionInit(T, name, val);
         }
     }
 
@@ -222,9 +227,9 @@ fn parseEnum(comptime T: type, scanner: *Scanner, alloc: Allocator) ParseError!T
         // Check json_field_names mapping for enum values
         if (@hasDecl(T, "json_field_names")) {
             const names = T.json_field_names;
-            inline for (std.meta.fields(@TypeOf(names))) |field| {
-                if (std.mem.eql(u8, str, @field(names, field.name))) {
-                    return @field(T, field.name);
+            inline for (@typeInfo(@TypeOf(names)).@"struct".field_names) |name| {
+                if (std.mem.eql(u8, str, @field(names, name))) {
+                    return @field(T, name);
                 }
             }
         }
@@ -475,13 +480,14 @@ pub fn writeValue(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayL
 fn writeStruct(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayList(u8)) Allocator.Error!void {
     try buf.append(alloc, '{');
     var first = true;
-    inline for (std.meta.fields(T)) |field| {
-        if (comptime std.mem.eql(u8, field.name, "_arena")) continue;
+    const info = @typeInfo(T).@"struct";
+    inline for (info.field_names, info.field_types) |name, Field| {
+        if (comptime std.mem.eql(u8, name, "_arena")) continue;
 
-        const field_val = @field(value, field.name);
-        const key = comptime jsonKeyForField(T, field.name);
+        const field_val = @field(value, name);
+        const key = comptime jsonKeyForField(T, name);
 
-        if (comptime @typeInfo(field.type) == .optional) {
+        if (comptime @typeInfo(Field) == .optional) {
             // Runtime null check -- write only if non-null
             if (field_val) |_| {
                 if (!first) try buf.append(alloc, ',');
@@ -489,7 +495,7 @@ fn writeStruct(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayList
                 try buf.append(alloc, '"');
                 try buf.appendSlice(alloc, key);
                 try buf.appendSlice(alloc, "\":");
-                try writeValue(field.type, field_val, alloc, buf);
+                try writeValue(Field, field_val, alloc, buf);
             }
         } else {
             if (!first) try buf.append(alloc, ',');
@@ -497,7 +503,7 @@ fn writeStruct(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayList
             try buf.append(alloc, '"');
             try buf.appendSlice(alloc, key);
             try buf.appendSlice(alloc, "\":");
-            try writeValue(field.type, field_val, alloc, buf);
+            try writeValue(Field, field_val, alloc, buf);
         }
     }
     try buf.append(alloc, '}');
@@ -512,11 +518,10 @@ fn writeUnion(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayList(
 
     // Map tag name through json_field_names
     const mapped = comptime blk: {
-        const fields = std.meta.fields(T);
-        for (fields) |field| {
+        for (@typeInfo(T).@"union".field_names) |name| {
             if (@hasDecl(T, "json_field_names")) {
                 const names = T.json_field_names;
-                if (@hasField(@TypeOf(names), field.name)) {
+                if (@hasField(@TypeOf(names), name)) {
                     // Can't easily index by runtime tag_name at comptime,
                     // so we handle this inline below
                     break :blk {};
@@ -528,12 +533,13 @@ fn writeUnion(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayList(
     _ = mapped;
 
     // Write the key -- use json_field_names mapping
-    inline for (std.meta.fields(T)) |field| {
-        if (std.mem.eql(u8, tag_name, field.name)) {
-            const key = comptime jsonKeyForField(T, field.name);
+    const info = @typeInfo(T).@"union";
+    inline for (info.field_names, info.field_types) |name, Field| {
+        if (std.mem.eql(u8, tag_name, name)) {
+            const key = comptime jsonKeyForField(T, name);
             try buf.appendSlice(alloc, key);
             try buf.appendSlice(alloc, "\":");
-            try writeValue(field.type, @field(value, field.name), alloc, buf);
+            try writeValue(Field, @field(value, name), alloc, buf);
         }
     }
 
@@ -546,10 +552,10 @@ fn writeEnum(comptime T: type, value: T, alloc: Allocator, buf: *std.ArrayList(u
     // Check json_field_names for mapped name
     if (@hasDecl(T, "json_field_names")) {
         const names = T.json_field_names;
-        inline for (std.meta.fields(@TypeOf(names))) |field| {
-            if (std.mem.eql(u8, tag_name, field.name)) {
+        inline for (@typeInfo(@TypeOf(names)).@"struct".field_names) |name| {
+            if (std.mem.eql(u8, tag_name, name)) {
                 try buf.append(alloc, '"');
-                try buf.appendSlice(alloc, @field(names, field.name));
+                try buf.appendSlice(alloc, @field(names, name));
                 try buf.append(alloc, '"');
                 return;
             }
@@ -847,6 +853,44 @@ test "parse array of structs" {
     try std.testing.expectEqual(@as(i32, 1), result.items.?[0].count.?);
     try std.testing.expectEqualStrings("b", result.items.?[1].name.?);
     try std.testing.expectEqual(@as(i32, 2), result.items.?[1].count.?);
+}
+
+test "parse mapped union variants" {
+    const Choice = union(enum) {
+        count: i32,
+        text: []const u8,
+
+        pub const json_field_names = .{ .count = "Count", .text = "Text" };
+    };
+    const allocator = std.testing.allocator;
+    const count = try parseJsonObject(Choice, "{\"Count\":42}", allocator);
+    try std.testing.expectEqual(@as(i32, 42), count.count);
+
+    const text = try parseJsonObject(Choice, "{\"Text\":\"hello\"}", allocator);
+    defer allocator.free(text.text);
+    try std.testing.expectEqualStrings("hello", text.text);
+
+    try std.testing.expectError(
+        error.SyntaxError,
+        parseJsonObject(Choice, "{\"Future\":{\"nested\":[1,2]}}", allocator),
+    );
+}
+
+test "serialize mapped union variants" {
+    const Choice = union(enum) {
+        count: i32,
+        text: []const u8,
+
+        pub const json_field_names = .{ .count = "Count", .text = "Text" };
+    };
+    const allocator = std.testing.allocator;
+    const count = try jsonStringify(@as(Choice, .{ .count = 42 }), allocator);
+    defer allocator.free(count);
+    try std.testing.expectEqualStrings("{\"Count\":42}", count);
+
+    const text = try jsonStringify(@as(Choice, .{ .text = "hello" }), allocator);
+    defer allocator.free(text);
+    try std.testing.expectEqualStrings("{\"Text\":\"hello\"}", text);
 }
 
 test "parse enum" {

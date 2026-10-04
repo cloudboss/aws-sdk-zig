@@ -16,8 +16,9 @@ pub fn build(b: *std.Build) void {
 
     // Auto-discover service modules from service/*/root.zig
     const services_path = "service";
+    b.dependOnDirectoryContents(b.path(services_path));
     var service_modules = std.StringHashMap(*std.Build.Module).init(b.allocator);
-    if (b.build_root.handle.openDir(io, services_path, .{ .iterate = true })) |dir| {
+    if (b.root.openDir(io, services_path, .{ .iterate = true })) |dir| {
         var services_dir = dir;
         defer services_dir.close(io);
         var svc_iter = services_dir.iterate();
@@ -26,7 +27,8 @@ pub fn build(b: *std.Build) void {
             // Dupe the name so the hash key outlives the directory iterator buffer
             const name = b.allocator.dupe(u8, entry.name) catch continue;
             const root_path = b.fmt("{s}/{s}/root.zig", .{ services_path, name });
-            b.build_root.handle.access(io, root_path, .{}) catch continue;
+            b.dependOnDirectoryContents(b.path(b.fmt("{s}/{s}", .{ services_path, name })));
+            b.root.access(io, root_path, .{}) catch continue;
 
             const svc_module = b.addModule(name, .{
                 .root_source_file = b.path(root_path),
@@ -50,7 +52,7 @@ pub fn build(b: *std.Build) void {
         .root_module = docgen_mod,
     });
     const run_docgen = b.addRunArtifact(docgen_exe);
-    if (b.args) |cli_args| run_docgen.addArgs(cli_args);
+    run_docgen.addPassthruArgs();
     const docgen_step = b.step("docgen", "Generate the Markdown API reference");
     docgen_step.dependOn(&run_docgen.step);
 
@@ -124,19 +126,28 @@ pub fn build(b: *std.Build) void {
         "Compile all integration tests without running them",
     );
 
+    b.dependOnDirectoryContents(b.path("."));
+    for ([_][]const u8{ "tests", "tests/integration" }) |path| {
+        var directory = b.root.openDir(io, path, .{}) catch return;
+        directory.close(io);
+        b.dependOnDirectoryContents(b.path(path));
+    }
+
     // Integration tests: auto-discover scenarios from tests/integration/scenarios-localstack/
     const scenarios_path = "tests/integration/scenarios-localstack";
-    var scenarios_dir = b.build_root.handle.openDir(io, scenarios_path, .{ .iterate = true }) catch return;
+    var scenarios_dir = b.root.openDir(io, scenarios_path, .{ .iterate = true }) catch return;
     defer scenarios_dir.close(io);
+    b.dependOnDirectoryContents(b.path(scenarios_path));
 
     var iter = scenarios_dir.iterate();
     while (iter.next(io) catch null) |entry| {
         if (entry.kind != .directory) continue;
 
         const test_path = b.fmt("{s}/{s}/test.zig", .{ scenarios_path, entry.name });
+        b.dependOnDirectoryContents(b.path(b.fmt("{s}/{s}", .{ scenarios_path, entry.name })));
 
         // Verify test.zig exists
-        b.build_root.handle.access(io, test_path, .{}) catch continue;
+        b.root.access(io, test_path, .{}) catch continue;
 
         const integration_module = b.createModule(.{
             .root_source_file = b.path(test_path),
@@ -160,6 +171,11 @@ pub fn build(b: *std.Build) void {
         });
         compile_integration_tests.dependOn(&integration_test.step);
 
+        const compile_step_name = b.fmt("integration-test-localstack-{s}-compile", .{entry.name});
+        const compile_step_desc = b.fmt("Compile {s} localstack integration tests", .{entry.name});
+        const compile_step = b.step(compile_step_name, compile_step_desc);
+        compile_step.dependOn(&integration_test.step);
+
         const run_integration = b.addRunArtifact(integration_test);
         const step_name = b.fmt("integration-test-localstack-{s}", .{entry.name});
         const step_desc = b.fmt("Run {s} localstack integration tests", .{entry.name});
@@ -169,12 +185,13 @@ pub fn build(b: *std.Build) void {
 
     // Live tests: auto-discover scenarios from tests/integration/scenarios-live/
     const live_scenarios_path = "tests/integration/scenarios-live";
-    var live_scenarios_dir = b.build_root.handle.openDir(
+    var live_scenarios_dir = b.root.openDir(
         io,
         live_scenarios_path,
         .{ .iterate = true },
     ) catch return;
     defer live_scenarios_dir.close(io);
+    b.dependOnDirectoryContents(b.path(live_scenarios_path));
 
     var live_iter = live_scenarios_dir.iterate();
     while (live_iter.next(io) catch null) |entry| {
@@ -184,9 +201,13 @@ pub fn build(b: *std.Build) void {
             "{s}/{s}/test.zig",
             .{ live_scenarios_path, entry.name },
         );
+        b.dependOnDirectoryContents(b.path(b.fmt(
+            "{s}/{s}",
+            .{ live_scenarios_path, entry.name },
+        )));
 
         // Verify test.zig exists
-        b.build_root.handle.access(io, live_test_path, .{}) catch continue;
+        b.root.access(io, live_test_path, .{}) catch continue;
 
         const live_module = b.createModule(.{
             .root_source_file = b.path(live_test_path),
@@ -212,6 +233,11 @@ pub fn build(b: *std.Build) void {
             },
         });
         compile_integration_tests.dependOn(&live_test.step);
+
+        const compile_step_name = b.fmt("integration-test-live-{s}-compile", .{entry.name});
+        const compile_step_desc = b.fmt("Compile {s} live integration tests", .{entry.name});
+        const compile_step = b.step(compile_step_name, compile_step_desc);
+        compile_step.dependOn(&live_test.step);
 
         const run_live_test = b.addRunArtifact(live_test);
         const live_step_name = b.fmt("integration-test-live-{s}", .{entry.name});
