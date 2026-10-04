@@ -3,7 +3,7 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
-const ServiceError = @import("errors.zig").ServiceError;
+const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const DeleteTagsForDomainInput = struct {
     /// The domain for which you want to delete one or more tags.
@@ -37,7 +37,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTagsF
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = try parseErrorResponse(client.allocator, response.body, response.status);
         }
         return error.ServiceError;
     }
@@ -71,77 +71,4 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
     _ = body;
     _ = allocator;
     return .{};
-}
-
-fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
-    const error_code = blk: {
-        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
-        if (std.mem.findScalarLast(u8, type_str, '#')) |idx| {
-            break :blk type_str[idx + 1 ..];
-        }
-        break :blk type_str;
-    };
-    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(allocator);
-    errdefer arena.deinit();
-    const arena_alloc = arena.allocator();
-    const owned_message = try arena_alloc.dupe(u8, error_message);
-    const owned_request_id = try arena_alloc.dupe(u8, "");
-
-    if (std.mem.eql(u8, error_code, "DnssecLimitExceeded")) {
-        return .{ .arena = arena, .kind = .{ .dnssec_limit_exceeded = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "DomainLimitExceeded")) {
-        return .{ .arena = arena, .kind = .{ .domain_limit_exceeded = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "DuplicateRequest")) {
-        return .{ .arena = arena, .kind = .{ .duplicate_request = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "InvalidInput")) {
-        return .{ .arena = arena, .kind = .{ .invalid_input = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "OperationLimitExceeded")) {
-        return .{ .arena = arena, .kind = .{ .operation_limit_exceeded = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "TLDInMaintenance")) {
-        return .{ .arena = arena, .kind = .{ .tld_in_maintenance = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "TLDRulesViolation")) {
-        return .{ .arena = arena, .kind = .{ .tld_rules_violation = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "UnsupportedTLD")) {
-        return .{ .arena = arena, .kind = .{ .unsupported_tld = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-
-    const owned_code = try arena_alloc.dupe(u8, error_code);
-    return .{ .arena = arena, .kind = .{ .unknown = .{
-        .code = owned_code,
-        .message = owned_message,
-        .request_id = owned_request_id,
-        .http_status = status,
-    } } };
 }

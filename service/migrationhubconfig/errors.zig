@@ -1,3 +1,4 @@
+const aws = @import("aws");
 const std = @import("std");
 
 pub const ServiceError = struct {
@@ -83,34 +84,74 @@ pub const ServiceError = struct {
     }
 };
 
+/// You do not have sufficient access to perform this action.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Exception raised to indicate that authorization of an action was successful,
+/// when the
+/// `DryRun` flag is set to true.
 pub const DryRunOperation = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Exception raised when an internal, configuration, or dependency error is
+/// encountered.
 pub const InternalServerError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Exception raised when the provided input violates a policy constraint or is
+/// entered in the
+/// wrong format or data type.
 pub const InvalidInputException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Exception raised when a request fails due to temporary unavailability of the
+/// service.
 pub const ServiceUnavailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request was denied due to request throttling.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The number of seconds the caller should wait before retrying.
+    retry_after_seconds: ?i32 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .retry_after_seconds = "RetryAfterSeconds",
+    };
 };
 
 pub const UnknownServiceError = struct {
@@ -119,3 +160,101 @@ pub const UnknownServiceError = struct {
     request_id: []const u8 = "",
     http_status: u16 = 0,
 };
+
+/// Parse a service diagnostic. The caller must call deinit on the result.
+pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) std.mem.Allocator.Error!ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.findScalarLast(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        const parsed_error: ?AccessDeniedException = aws.json.parseJsonObject(AccessDeniedException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .access_denied_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "DryRunOperation")) {
+        const parsed_error: ?DryRunOperation = aws.json.parseJsonObject(DryRunOperation, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .dry_run_operation = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerError")) {
+        const parsed_error: ?InternalServerError = aws.json.parseJsonObject(InternalServerError, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .internal_server_error = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidInputException")) {
+        const parsed_error: ?InvalidInputException = aws.json.parseJsonObject(InvalidInputException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_input_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ServiceUnavailableException")) {
+        const parsed_error: ?ServiceUnavailableException = aws.json.parseJsonObject(ServiceUnavailableException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .service_unavailable_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        const parsed_error: ?ThrottlingException = aws.json.parseJsonObject(ThrottlingException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .throttling_exception = typed_error } };
+        }
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

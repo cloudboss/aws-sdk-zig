@@ -1,3 +1,4 @@
+const aws = @import("aws");
 const std = @import("std");
 
 pub const ServiceError = struct {
@@ -83,34 +84,68 @@ pub const ServiceError = struct {
     }
 };
 
+/// An Amazon Web Services service limit was exceeded for the calling Amazon Web
+/// Services account.
 pub const AccountLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The CodeBuild access has been suspended for the calling Amazon Web Services
+/// account.
 pub const AccountSuspendedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The input value that was provided is not valid.
 pub const InvalidInputException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// There was a problem with the underlying OAuth provider.
 pub const OAuthProviderException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified Amazon Web Services resource cannot be created, because an
+/// Amazon Web Services resource with the same
+/// settings already exists.
 pub const ResourceAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified Amazon Web Services resource cannot be found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {
@@ -119,3 +154,101 @@ pub const UnknownServiceError = struct {
     request_id: []const u8 = "",
     http_status: u16 = 0,
 };
+
+/// Parse a service diagnostic. The caller must call deinit on the result.
+pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) std.mem.Allocator.Error!ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.findScalarLast(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccountLimitExceededException")) {
+        const parsed_error: ?AccountLimitExceededException = aws.json.parseJsonObject(AccountLimitExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .account_limit_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "AccountSuspendedException")) {
+        const parsed_error: ?AccountSuspendedException = aws.json.parseJsonObject(AccountSuspendedException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .account_suspended_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidInputException")) {
+        const parsed_error: ?InvalidInputException = aws.json.parseJsonObject(InvalidInputException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_input_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "OAuthProviderException")) {
+        const parsed_error: ?OAuthProviderException = aws.json.parseJsonObject(OAuthProviderException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .o_auth_provider_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ResourceAlreadyExistsException")) {
+        const parsed_error: ?ResourceAlreadyExistsException = aws.json.parseJsonObject(ResourceAlreadyExistsException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_already_exists_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        const parsed_error: ?ResourceNotFoundException = aws.json.parseJsonObject(ResourceNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_not_found_exception = typed_error } };
+        }
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

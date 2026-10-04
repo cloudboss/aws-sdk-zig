@@ -1,3 +1,4 @@
+const aws = @import("aws");
 const std = @import("std");
 
 pub const ServiceError = struct {
@@ -748,699 +749,1639 @@ pub const ServiceError = struct {
     }
 };
 
+/// The requester doesn't have permissions to perform the requested operation.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Error returned if an attempt is made to register a patch group with a patch
+/// baseline that is
+/// already registered with a different patch baseline.
 pub const AlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You must disassociate a document from all managed nodes before you can
+/// delete it.
 pub const AssociatedInstances = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
+/// The specified association already exists.
 pub const AssociationAlreadyExists = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
+/// The specified association doesn't exist.
 pub const AssociationDoesNotExist = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified execution ID doesn't exist. Verify the ID number and try
+/// again.
 pub const AssociationExecutionDoesNotExist = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You can have at most 2,000 active associations.
 pub const AssociationLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
+/// You have reached the maximum number versions allowed for an association.
+/// Each association
+/// has a limit of 1,000 versions.
 pub const AssociationVersionLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Indicates that the Change Manager change template used in the change request
+/// was rejected or is
+/// still in a pending state.
 pub const AutomationDefinitionNotApprovedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// An Automation runbook with the specified name couldn't be found.
 pub const AutomationDefinitionNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// An Automation runbook with the specified name and version couldn't be found.
 pub const AutomationDefinitionVersionNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The number of simultaneously running Automation executions exceeded the
+/// allowable
+/// limit.
 pub const AutomationExecutionLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// There is no automation execution information for the requested automation
+/// execution
+/// ID.
 pub const AutomationExecutionNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified step name and execution ID don't exist. Verify the information
+/// and try
+/// again.
 pub const AutomationStepNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You specified too many custom compliance types. You can specify a maximum of
+/// 10 different
+/// types.
 pub const ComplianceTypeCountLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You have exceeded the limit for custom schemas. Delete one or more custom
+/// schemas and try
+/// again.
 pub const CustomSchemaCountLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified document already exists.
 pub const DocumentAlreadyExists = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You can have at most 500 active SSM documents.
 pub const DocumentLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The document can't be shared with more Amazon Web Services accounts. You can
+/// specify a maximum of 20
+/// accounts per API operation to share a private document.
+///
+/// By default, you can share a private document with a maximum of 1,000
+/// accounts and publicly
+/// share up to five documents.
+///
+/// If you need to increase the quota for privately or publicly shared Systems
+/// Manager documents, contact
+/// Amazon Web Services Support.
 pub const DocumentPermissionLimit = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The document has too many versions. Delete one or more document versions and
+/// try
+/// again.
 pub const DocumentVersionLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Error returned when the ID specified for a resource, such as a maintenance
+/// window or patch
+/// baseline, doesn't exist.
+///
+/// For information about resource quotas in Amazon Web Services Systems
+/// Manager, see [Systems Manager service
+/// quotas](https://docs.aws.amazon.com/general/latest/gr/ssm.html#limits_ssm)
+/// in the
+/// *Amazon Web Services General Reference*.
 pub const DoesNotExistException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The content of the association document matches another document. Change the
+/// content of the
+/// document and try again.
 pub const DuplicateDocumentContent = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The version name has already been used in this document. Specify a different
+/// version name,
+/// and then try again.
 pub const DuplicateDocumentVersionName = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You can't specify a managed node ID in more than one association.
 pub const DuplicateInstanceId = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
+/// You attempted to register a `LAMBDA` or `STEP_FUNCTIONS` task in a
+/// region where the corresponding service isn't available.
 pub const FeatureNotAvailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A hierarchy can have a maximum of 15 levels. For more information, see
+/// [Requirements and
+/// constraints for parameter
+/// names](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html) in the *Amazon Web Services Systems Manager User Guide*.
 pub const HierarchyLevelLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Parameter Store doesn't support changing a parameter type in a hierarchy.
+/// For example, you
+/// can't change a parameter from a `String` type to a `SecureString` type. You
+/// must create a new, unique parameter.
 pub const HierarchyTypeMismatchException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Error returned when an idempotent operation is retried and the parameters
+/// don't match the
+/// original call to the API with the same idempotency token.
 pub const IdempotentParameterMismatch = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// There is a conflict in the policies specified for this parameter. You can't,
+/// for example,
+/// specify two Expiration policies for a parameter. Review your policies, and
+/// try again.
 pub const IncompatiblePolicyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An error occurred on the server side.
 pub const InternalServerError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The activation isn't valid. The activation might have been deleted, or the
+/// ActivationId and
+/// the ActivationCode don't match.
 pub const InvalidActivation = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The activation ID isn't valid. Verify that you entered the correct
+/// ActivationId or
+/// ActivationCode and try again.
 pub const InvalidActivationId = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified aggregator isn't valid for the group type. Verify that the
+/// aggregator you
+/// provided is supported.
 pub const InvalidAggregatorException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request doesn't meet the regular expression requirement.
 pub const InvalidAllowedPatternException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The association isn't valid or doesn't exist.
 pub const InvalidAssociation = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The version you specified isn't valid. Use ListAssociationVersions to view
+/// all versions of
+/// an association according to the association ID. Or, use the `$LATEST`
+/// parameter to
+/// view the latest version of the association.
 pub const InvalidAssociationVersion = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The supplied parameters for invoking the specified Automation runbook are
+/// incorrect. For
+/// example, they may not match the set of parameters permitted for the
+/// specified Automation
+/// document.
 pub const InvalidAutomationExecutionParametersException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The signal isn't valid for the current Automation execution.
 pub const InvalidAutomationSignalException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified update status operation isn't valid.
 pub const InvalidAutomationStatusUpdateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified command ID isn't valid. Verify the ID and try again.
 pub const InvalidCommandId = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
+/// One or more of the parameters specified for the delete operation isn't
+/// valid. Verify all
+/// parameters and try again.
 pub const InvalidDeleteInventoryParametersException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The ID specified for the delete operation doesn't exist or isn't valid.
+/// Verify the ID and
+/// try again.
 pub const InvalidDeletionIdException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified SSM document doesn't exist.
 pub const InvalidDocument = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The content for the document isn't valid.
 pub const InvalidDocumentContent = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You attempted to delete a document while it is still shared. You must stop
+/// sharing the
+/// document before you can delete it.
 pub const InvalidDocumentOperation = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The version of the document schema isn't supported.
 pub const InvalidDocumentSchemaVersion = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The SSM document type isn't valid. Valid document types are described in the
+/// `DocumentType` property.
 pub const InvalidDocumentType = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The document version isn't valid or doesn't exist.
 pub const InvalidDocumentVersion = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The filter name isn't valid. Verify that you entered the correct name and
+/// try again.
 pub const InvalidFilter = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified key isn't valid.
 pub const InvalidFilterKey = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
+/// The specified filter option isn't valid. Valid options are Equals and
+/// BeginsWith. For Path
+/// filter, valid options are Recursive and OneLevel.
 pub const InvalidFilterOption = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The filter value isn't valid. Verify the value and try again.
 pub const InvalidFilterValue = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The following problems can cause this exception:
+///
+/// * You don't have permission to access the managed node.
+///
+/// * Amazon Web Services Systems Manager Agent (SSM Agent) isn't running.
+///   Verify that SSM Agent is
+/// running.
+///
+/// * SSM Agent isn't registered with the SSM endpoint. Try reinstalling SSM
+///   Agent.
+///
+/// * The managed node isn't in a valid state. Valid states are: `Running`,
+/// `Pending`, `Stopped`, and `Stopping`. Invalid states are:
+/// `Shutting-down` and `Terminated`.
 pub const InvalidInstanceId = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified filter value isn't valid.
 pub const InvalidInstanceInformationFilterValue = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified filter value isn't valid.
 pub const InvalidInstancePropertyFilterValue = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified inventory group isn't valid.
 pub const InvalidInventoryGroupException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You specified invalid keys or values in the `Context` attribute for
+/// `InventoryItem`. Verify the keys and values, and try again.
 pub const InvalidInventoryItemContextException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request isn't valid.
 pub const InvalidInventoryRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// One or more content items isn't valid.
 pub const InvalidItemContentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    type_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .type_name = "TypeName",
+    };
 };
 
+/// The query key ID isn't valid.
 pub const InvalidKeyId = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified token isn't valid.
 pub const InvalidNextToken = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// One or more configuration items isn't valid. Verify that a valid Amazon
+/// Resource Name (ARN)
+/// was provided for an Amazon Simple Notification Service topic.
 pub const InvalidNotificationConfig = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The delete inventory option specified isn't valid. Verify the option and try
+/// again.
 pub const InvalidOptionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The S3 bucket doesn't exist.
 pub const InvalidOutputFolder = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
+/// The output location isn't valid or doesn't exist.
 pub const InvalidOutputLocation = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
+/// You must specify values for all required parameters in the Amazon Web
+/// Services Systems Manager document (SSM
+/// document). You can only supply values to parameters defined in the SSM
+/// document.
 pub const InvalidParameters = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The permission type isn't supported. *Share* is the only supported
+/// permission type.
 pub const InvalidPermissionType = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The plugin name isn't valid.
 pub const InvalidPluginName = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
+/// A policy attribute or its value is invalid.
 pub const InvalidPolicyAttributeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The policy type isn't supported. Parameter Store supports the following
+/// policy types:
+/// Expiration, ExpirationNotification, and NoChangeNotification.
 pub const InvalidPolicyTypeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The resource ID isn't valid. Verify that you entered the correct ID and try
+/// again.
 pub const InvalidResourceId = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
+/// The resource type isn't valid. For example, if you are attempting to tag an
+/// EC2 instance,
+/// the instance must be a registered managed node.
 pub const InvalidResourceType = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
+/// The specified inventory item result attribute isn't valid.
 pub const InvalidResultAttributeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The role name can't contain invalid characters. Also verify that you
+/// specified an IAM role for notifications that includes the required trust
+/// policy. For information about
+/// configuring the IAM role for Run Command notifications, see [Monitoring
+/// Systems Manager status changes using Amazon SNS
+/// notifications](https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-sns-notifications.html) in
+/// the *Amazon Web Services Systems Manager User Guide*.
 pub const InvalidRole = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The schedule is invalid. Verify your cron or rate expression and try again.
 pub const InvalidSchedule = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified tag key or value isn't valid.
 pub const InvalidTag = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The target isn't valid or doesn't exist. It might not be configured for
+/// Systems Manager or you might
+/// not have permission to perform the operation.
 pub const InvalidTarget = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// TargetMap parameter isn't valid.
 pub const InvalidTargetMaps = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The parameter type name isn't valid.
 pub const InvalidTypeNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The update isn't valid.
 pub const InvalidUpdate = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The command ID and managed node ID you specified didn't match any
+/// invocations. Verify the
+/// command ID and the managed node ID and try again.
 pub const InvocationDoesNotExist = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
+/// The inventory item has invalid content.
 pub const ItemContentMismatchException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    type_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .type_name = "TypeName",
+    };
 };
 
+/// The inventory item size has exceeded the size limit.
 pub const ItemSizeLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    type_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .type_name = "TypeName",
+    };
 };
 
+/// The specified policy document is malformed or invalid, or excessive
+/// `PutResourcePolicy` or `DeleteResourcePolicy` calls have been made.
 pub const MalformedResourcePolicyDocumentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The size limit of a document is 64 KB.
 pub const MaxDocumentSizeExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The requested operation is no longer supported by Systems Manager.
 pub const NoLongerSupportedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You don't have permission to view OpsItems in the specified account. Verify
+/// that your account
+/// is configured either as a Systems Manager delegated administrator or that
+/// you are logged into the Organizations
+/// management account.
 pub const OpsItemAccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The OpsItem already exists.
 pub const OpsItemAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    ops_item_id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .ops_item_id = "OpsItemId",
+    };
 };
 
+/// The specified OpsItem is in the process of being deleted.
 pub const OpsItemConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A specified parameter argument isn't valid. Verify the available arguments
+/// and try
+/// again.
 pub const OpsItemInvalidParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    parameter_names: ?[]const []const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .parameter_names = "ParameterNames",
+    };
 };
 
+/// The request caused OpsItems to exceed one or more quotas.
 pub const OpsItemLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    limit: ?i32 = null,
+
+    limit_type: ?[]const u8 = null,
+
+    resource_types: ?[]const []const u8 = null,
+
+    pub const json_field_names = .{
+        .limit = "Limit",
+        .limit_type = "LimitType",
+        .message = "Message",
+        .resource_types = "ResourceTypes",
+    };
 };
 
+/// The specified OpsItem ID doesn't exist. Verify the ID and try again.
 pub const OpsItemNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The Amazon Resource Name (ARN) is already associated with the OpsItem.
 pub const OpsItemRelatedItemAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    ops_item_id: ?[]const u8 = null,
+
+    resource_uri: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .ops_item_id = "OpsItemId",
+        .resource_uri = "ResourceUri",
+    };
 };
 
+/// The association wasn't found using the parameters you specified in the call.
+/// Verify the
+/// information and try again.
 pub const OpsItemRelatedItemAssociationNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// An OpsMetadata object already exists for the selected resource.
 pub const OpsMetadataAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// One of the arguments passed is invalid.
 pub const OpsMetadataInvalidArgumentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The OpsMetadata object exceeds the maximum number of OpsMetadata keys that
+/// you can assign to
+/// an application in Application Manager.
 pub const OpsMetadataKeyLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Your account reached the maximum number of OpsMetadata objects allowed by
+/// Application Manager. The
+/// maximum is 200 OpsMetadata objects. Delete one or more OpsMetadata object
+/// and try again.
 pub const OpsMetadataLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The OpsMetadata object doesn't exist.
 pub const OpsMetadataNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The system is processing too many concurrent updates. Wait a few moments and
+/// try
+/// again.
 pub const OpsMetadataTooManyUpdatesException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The parameter already exists. You can't create duplicate parameters.
 pub const ParameterAlreadyExists = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// You have exceeded the number of parameters for this Amazon Web Services
+/// account. Delete one or more
+/// parameters and try again.
 pub const ParameterLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Parameter Store retains the 100 most recently created versions of a
+/// parameter. After this
+/// number of versions has been created, Parameter Store deletes the oldest
+/// version when a new one is
+/// created. However, if the oldest version has a *label* attached to it,
+/// Parameter Store won't delete the version and instead presents this error
+/// message:
+///
+/// `An error occurred (ParameterMaxVersionLimitExceeded) when calling the
+/// PutParameter
+/// operation: You attempted to create a new version of *parameter-name* by
+/// calling the PutParameter API with the overwrite flag. Version
+/// *version-number*, the oldest version, can't be deleted because it has a
+/// label associated with it. Move the label to another version of the
+/// parameter, and try
+/// again.`
+///
+/// This safeguard is to prevent parameter versions with mission critical labels
+/// assigned to
+/// them from being deleted. To continue creating new parameters, first move the
+/// label from the
+/// oldest version of the parameter to a newer one for use in your operations.
+/// For information about
+/// moving parameter labels, see [Move a parameter label
+/// (console)](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html#sysman-paramstore-labels-console-move) or [Move a parameter label (CLI)](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html#sysman-paramstore-labels-cli-move) in the *Amazon Web Services Systems Manager User Guide*.
 pub const ParameterMaxVersionLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The parameter couldn't be found. Verify the name and try again.
+///
+/// For the `DeleteParameter` and `GetParameter` actions, if the
+/// specified parameter doesn't exist, the `ParameterNotFound` exception is
+/// *not* recorded in CloudTrail event logs.
 pub const ParameterNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The parameter name isn't valid.
 pub const ParameterPatternMismatchException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A parameter version can have a maximum of ten labels.
 pub const ParameterVersionLabelLimitExceeded = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified parameter version wasn't found. Verify the parameter name and
+/// version, and try
+/// again.
 pub const ParameterVersionNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// You specified more than the maximum number of allowed policies for the
+/// parameter. The
+/// maximum is 10.
 pub const PoliciesLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// A sync configuration with the same name already exists.
 pub const ResourceDataSyncAlreadyExistsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    sync_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .sync_name = "SyncName",
+    };
 };
 
+/// Another `UpdateResourceDataSync` request is being processed. Wait a few
+/// minutes
+/// and try again.
 pub const ResourceDataSyncConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You have exceeded the allowed maximum sync configurations.
 pub const ResourceDataSyncCountExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified sync configuration is invalid.
 pub const ResourceDataSyncInvalidConfigurationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified sync name wasn't found.
 pub const ResourceDataSyncNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    sync_name: ?[]const u8 = null,
+
+    sync_type: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .sync_name = "SyncName",
+        .sync_type = "SyncType",
+    };
 };
 
+/// Error returned if an attempt is made to delete a patch baseline that is
+/// registered for a
+/// patch group.
 pub const ResourceInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Error returned when the caller has exceeded the default resource quotas. For
+/// example, too
+/// many maintenance windows or patch baselines have been created.
+///
+/// For information about resource quotas in Systems Manager, see [Systems
+/// Manager service
+/// quotas](https://docs.aws.amazon.com/general/latest/gr/ssm.html#limits_ssm)
+/// in the
+/// *Amazon Web Services General Reference*.
 pub const ResourceLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified parameter to be shared could not be found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The hash provided in the call doesn't match the stored hash. This exception
+/// is thrown when
+/// trying to update an obsolete policy version or when multiple requests to
+/// update a policy are
+/// sent.
 pub const ResourcePolicyConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// One or more parameters specified for the call aren't valid. Verify the
+/// parameters and their
+/// values and try again.
 pub const ResourcePolicyInvalidParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    parameter_names: ?[]const []const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .parameter_names = "ParameterNames",
+    };
 };
 
+/// The PutResourcePolicy API action enforces two limits. A policy can't be
+/// greater than 1024 bytes in size. And only one policy can be attached to
+/// `OpsItemGroup`. Verify these limits and try again.
 pub const ResourcePolicyLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    limit: ?i32 = null,
+
+    limit_type: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .limit = "Limit",
+        .limit_type = "LimitType",
+        .message = "Message",
+    };
 };
 
+/// No policies with the specified policy ID and hash could be found.
 pub const ResourcePolicyNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request exceeds the service quota. Service quotas, also referred to as
+/// limits, are the
+/// maximum number of service resources or operations for your Amazon Web
+/// Services account.
 pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The quota code recognized by the Amazon Web Services Service Quotas service.
+    quota_code: []const u8,
+
+    /// The unique ID of the resource referenced in the failed request.
+    resource_id: ?[]const u8 = null,
+
+    /// The resource type of the resource referenced in the failed request.
+    resource_type: ?[]const u8 = null,
+
+    /// The code for the Amazon Web Services service that owns the quota.
+    service_code: []const u8,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .quota_code = "QuotaCode",
+        .resource_id = "ResourceId",
+        .resource_type = "ResourceType",
+        .service_code = "ServiceCode",
+    };
 };
 
+/// The specified service setting wasn't found. Either the service name or the
+/// setting hasn't
+/// been provisioned by the Amazon Web Services service team.
 pub const ServiceSettingNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The updated status is the same as the current status.
 pub const StatusUnchanged = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
+/// The sub-type count exceeded the limit for the inventory type.
 pub const SubTypeCountLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You specified the `Safe` option for the
+/// DeregisterTargetFromMaintenanceWindow
+/// operation, but the target is still referenced in a task.
 pub const TargetInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The specified target managed node for the session isn't fully configured for
+/// use with Session Manager.
+/// For more information, see [Setting up
+/// Session
+/// Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started.html) in the *Amazon Web Services Systems Manager User Guide*. This error is also returned if you
+/// attempt to start a session on a managed node that is located in a different
+/// account or
+/// Region
 pub const TargetNotConnected = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request or operation couldn't be performed because the service is
+/// throttling
+/// requests.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The quota code recognized by the Amazon Web Services Service Quotas service.
+    quota_code: ?[]const u8 = null,
+
+    /// The code for the Amazon Web Services service that owns the quota.
+    service_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .quota_code = "QuotaCode",
+        .service_code = "ServiceCode",
+    };
 };
 
+/// The `Targets` parameter includes too many tags. Remove one or more tags and
+/// try
+/// the command again.
 pub const TooManyTagsError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
+/// There are concurrent updates for a resource that supports one update at a
+/// time.
 pub const TooManyUpdates = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The size of inventory data has exceeded the total size limit for the
+/// resource.
 pub const TotalSizeLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The calendar entry contained in the specified SSM document isn't supported.
 pub const UnsupportedCalendarException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Patching for applications released by Microsoft is only available on EC2
+/// instances and
+/// advanced instances. To patch applications released by Microsoft on
+/// on-premises servers and VMs,
+/// you must enable advanced instances. For more information, see [Turning on
+/// the advanced-instances
+/// tier](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances-advanced.html) in the *Amazon Web Services Systems Manager User Guide*.
 pub const UnsupportedFeatureRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The `Context` attribute that you specified for the `InventoryItem`
+/// isn't allowed for this inventory type. You can only use the `Context`
+/// attribute with
+/// inventory types like `AWS:ComplianceItem`.
 pub const UnsupportedInventoryItemContextException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    type_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .type_name = "TypeName",
+    };
 };
 
+/// Inventory item type schema version has to match supported versions in the
+/// service. Check
+/// output of GetInventorySchema to see the available schema version for each
+/// type.
 pub const UnsupportedInventorySchemaVersionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The operating systems you specified isn't supported, or the operation isn't
+/// supported for
+/// the operating system.
 pub const UnsupportedOperatingSystem = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This operation is not supported for the current account. You must first
+/// enable the Systems Manager integrated experience in your account.
 pub const UnsupportedOperationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The parameter type isn't supported.
 pub const UnsupportedParameterType = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The document doesn't support the platform type of the given managed node
+/// IDs. For example,
+/// you sent an document for a Windows managed node to a Linux node.
 pub const UnsupportedPlatformType = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request isn't valid. Verify that you entered valid contents for the
+/// command and try
+/// again.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The reason code for the invalid request.
+    reason_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .reason_code = "ReasonCode",
+    };
 };
 
 pub const UnknownServiceError = struct {
@@ -1449,3 +2390,1697 @@ pub const UnknownServiceError = struct {
     request_id: []const u8 = "",
     http_status: u16 = 0,
 };
+
+/// Parse a service diagnostic. The caller must call deinit on the result.
+pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) std.mem.Allocator.Error!ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.findScalarLast(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        const parsed_error: ?AccessDeniedException = aws.json.parseJsonObject(AccessDeniedException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .access_denied_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "AlreadyExistsException")) {
+        const parsed_error: ?AlreadyExistsException = aws.json.parseJsonObject(AlreadyExistsException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .already_exists_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "AssociatedInstances")) {
+        const parsed_error: ?AssociatedInstances = aws.json.parseJsonObject(AssociatedInstances, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .associated_instances = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "AssociationAlreadyExists")) {
+        const parsed_error: ?AssociationAlreadyExists = aws.json.parseJsonObject(AssociationAlreadyExists, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .association_already_exists = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "AssociationDoesNotExist")) {
+        const parsed_error: ?AssociationDoesNotExist = aws.json.parseJsonObject(AssociationDoesNotExist, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .association_does_not_exist = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "AssociationExecutionDoesNotExist")) {
+        const parsed_error: ?AssociationExecutionDoesNotExist = aws.json.parseJsonObject(AssociationExecutionDoesNotExist, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .association_execution_does_not_exist = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "AssociationLimitExceeded")) {
+        const parsed_error: ?AssociationLimitExceeded = aws.json.parseJsonObject(AssociationLimitExceeded, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .association_limit_exceeded = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "AssociationVersionLimitExceeded")) {
+        const parsed_error: ?AssociationVersionLimitExceeded = aws.json.parseJsonObject(AssociationVersionLimitExceeded, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .association_version_limit_exceeded = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "AutomationDefinitionNotApprovedException")) {
+        const parsed_error: ?AutomationDefinitionNotApprovedException = aws.json.parseJsonObject(AutomationDefinitionNotApprovedException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .automation_definition_not_approved_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "AutomationDefinitionNotFoundException")) {
+        const parsed_error: ?AutomationDefinitionNotFoundException = aws.json.parseJsonObject(AutomationDefinitionNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .automation_definition_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "AutomationDefinitionVersionNotFoundException")) {
+        const parsed_error: ?AutomationDefinitionVersionNotFoundException = aws.json.parseJsonObject(AutomationDefinitionVersionNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .automation_definition_version_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "AutomationExecutionLimitExceededException")) {
+        const parsed_error: ?AutomationExecutionLimitExceededException = aws.json.parseJsonObject(AutomationExecutionLimitExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .automation_execution_limit_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "AutomationExecutionNotFoundException")) {
+        const parsed_error: ?AutomationExecutionNotFoundException = aws.json.parseJsonObject(AutomationExecutionNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .automation_execution_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "AutomationStepNotFoundException")) {
+        const parsed_error: ?AutomationStepNotFoundException = aws.json.parseJsonObject(AutomationStepNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .automation_step_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ComplianceTypeCountLimitExceededException")) {
+        const parsed_error: ?ComplianceTypeCountLimitExceededException = aws.json.parseJsonObject(ComplianceTypeCountLimitExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .compliance_type_count_limit_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "CustomSchemaCountLimitExceededException")) {
+        const parsed_error: ?CustomSchemaCountLimitExceededException = aws.json.parseJsonObject(CustomSchemaCountLimitExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .custom_schema_count_limit_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "DocumentAlreadyExists")) {
+        const parsed_error: ?DocumentAlreadyExists = aws.json.parseJsonObject(DocumentAlreadyExists, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .document_already_exists = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "DocumentLimitExceeded")) {
+        const parsed_error: ?DocumentLimitExceeded = aws.json.parseJsonObject(DocumentLimitExceeded, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .document_limit_exceeded = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "DocumentPermissionLimit")) {
+        const parsed_error: ?DocumentPermissionLimit = aws.json.parseJsonObject(DocumentPermissionLimit, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .document_permission_limit = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "DocumentVersionLimitExceeded")) {
+        const parsed_error: ?DocumentVersionLimitExceeded = aws.json.parseJsonObject(DocumentVersionLimitExceeded, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .document_version_limit_exceeded = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "DoesNotExistException")) {
+        const parsed_error: ?DoesNotExistException = aws.json.parseJsonObject(DoesNotExistException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .does_not_exist_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "DuplicateDocumentContent")) {
+        const parsed_error: ?DuplicateDocumentContent = aws.json.parseJsonObject(DuplicateDocumentContent, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .duplicate_document_content = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "DuplicateDocumentVersionName")) {
+        const parsed_error: ?DuplicateDocumentVersionName = aws.json.parseJsonObject(DuplicateDocumentVersionName, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .duplicate_document_version_name = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "DuplicateInstanceId")) {
+        const parsed_error: ?DuplicateInstanceId = aws.json.parseJsonObject(DuplicateInstanceId, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .duplicate_instance_id = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "FeatureNotAvailableException")) {
+        const parsed_error: ?FeatureNotAvailableException = aws.json.parseJsonObject(FeatureNotAvailableException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .feature_not_available_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "HierarchyLevelLimitExceededException")) {
+        const parsed_error: ?HierarchyLevelLimitExceededException = aws.json.parseJsonObject(HierarchyLevelLimitExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .hierarchy_level_limit_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "HierarchyTypeMismatchException")) {
+        const parsed_error: ?HierarchyTypeMismatchException = aws.json.parseJsonObject(HierarchyTypeMismatchException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .hierarchy_type_mismatch_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "IdempotentParameterMismatch")) {
+        const parsed_error: ?IdempotentParameterMismatch = aws.json.parseJsonObject(IdempotentParameterMismatch, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .idempotent_parameter_mismatch = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "IncompatiblePolicyException")) {
+        const parsed_error: ?IncompatiblePolicyException = aws.json.parseJsonObject(IncompatiblePolicyException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .incompatible_policy_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerError")) {
+        const parsed_error: ?InternalServerError = aws.json.parseJsonObject(InternalServerError, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .internal_server_error = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidActivation")) {
+        const parsed_error: ?InvalidActivation = aws.json.parseJsonObject(InvalidActivation, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_activation = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidActivationId")) {
+        const parsed_error: ?InvalidActivationId = aws.json.parseJsonObject(InvalidActivationId, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_activation_id = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidAggregatorException")) {
+        const parsed_error: ?InvalidAggregatorException = aws.json.parseJsonObject(InvalidAggregatorException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_aggregator_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidAllowedPatternException")) {
+        const parsed_error: ?InvalidAllowedPatternException = aws.json.parseJsonObject(InvalidAllowedPatternException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_allowed_pattern_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidAssociation")) {
+        const parsed_error: ?InvalidAssociation = aws.json.parseJsonObject(InvalidAssociation, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_association = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidAssociationVersion")) {
+        const parsed_error: ?InvalidAssociationVersion = aws.json.parseJsonObject(InvalidAssociationVersion, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_association_version = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidAutomationExecutionParametersException")) {
+        const parsed_error: ?InvalidAutomationExecutionParametersException = aws.json.parseJsonObject(InvalidAutomationExecutionParametersException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_automation_execution_parameters_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidAutomationSignalException")) {
+        const parsed_error: ?InvalidAutomationSignalException = aws.json.parseJsonObject(InvalidAutomationSignalException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_automation_signal_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidAutomationStatusUpdateException")) {
+        const parsed_error: ?InvalidAutomationStatusUpdateException = aws.json.parseJsonObject(InvalidAutomationStatusUpdateException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_automation_status_update_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidCommandId")) {
+        const parsed_error: ?InvalidCommandId = aws.json.parseJsonObject(InvalidCommandId, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_command_id = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidDeleteInventoryParametersException")) {
+        const parsed_error: ?InvalidDeleteInventoryParametersException = aws.json.parseJsonObject(InvalidDeleteInventoryParametersException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_delete_inventory_parameters_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidDeletionIdException")) {
+        const parsed_error: ?InvalidDeletionIdException = aws.json.parseJsonObject(InvalidDeletionIdException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_deletion_id_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidDocument")) {
+        const parsed_error: ?InvalidDocument = aws.json.parseJsonObject(InvalidDocument, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_document = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidDocumentContent")) {
+        const parsed_error: ?InvalidDocumentContent = aws.json.parseJsonObject(InvalidDocumentContent, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_document_content = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidDocumentOperation")) {
+        const parsed_error: ?InvalidDocumentOperation = aws.json.parseJsonObject(InvalidDocumentOperation, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_document_operation = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidDocumentSchemaVersion")) {
+        const parsed_error: ?InvalidDocumentSchemaVersion = aws.json.parseJsonObject(InvalidDocumentSchemaVersion, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_document_schema_version = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidDocumentType")) {
+        const parsed_error: ?InvalidDocumentType = aws.json.parseJsonObject(InvalidDocumentType, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_document_type = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidDocumentVersion")) {
+        const parsed_error: ?InvalidDocumentVersion = aws.json.parseJsonObject(InvalidDocumentVersion, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_document_version = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidFilter")) {
+        const parsed_error: ?InvalidFilter = aws.json.parseJsonObject(InvalidFilter, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_filter = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidFilterKey")) {
+        const parsed_error: ?InvalidFilterKey = aws.json.parseJsonObject(InvalidFilterKey, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_filter_key = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidFilterOption")) {
+        const parsed_error: ?InvalidFilterOption = aws.json.parseJsonObject(InvalidFilterOption, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_filter_option = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidFilterValue")) {
+        const parsed_error: ?InvalidFilterValue = aws.json.parseJsonObject(InvalidFilterValue, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_filter_value = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidInstanceId")) {
+        const parsed_error: ?InvalidInstanceId = aws.json.parseJsonObject(InvalidInstanceId, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_instance_id = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidInstanceInformationFilterValue")) {
+        const parsed_error: ?InvalidInstanceInformationFilterValue = aws.json.parseJsonObject(InvalidInstanceInformationFilterValue, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_instance_information_filter_value = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidInstancePropertyFilterValue")) {
+        const parsed_error: ?InvalidInstancePropertyFilterValue = aws.json.parseJsonObject(InvalidInstancePropertyFilterValue, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_instance_property_filter_value = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidInventoryGroupException")) {
+        const parsed_error: ?InvalidInventoryGroupException = aws.json.parseJsonObject(InvalidInventoryGroupException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_inventory_group_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidInventoryItemContextException")) {
+        const parsed_error: ?InvalidInventoryItemContextException = aws.json.parseJsonObject(InvalidInventoryItemContextException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_inventory_item_context_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidInventoryRequestException")) {
+        const parsed_error: ?InvalidInventoryRequestException = aws.json.parseJsonObject(InvalidInventoryRequestException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_inventory_request_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidItemContentException")) {
+        const parsed_error: ?InvalidItemContentException = aws.json.parseJsonObject(InvalidItemContentException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_item_content_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidKeyId")) {
+        const parsed_error: ?InvalidKeyId = aws.json.parseJsonObject(InvalidKeyId, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_key_id = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidNextToken")) {
+        const parsed_error: ?InvalidNextToken = aws.json.parseJsonObject(InvalidNextToken, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_next_token = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidNotificationConfig")) {
+        const parsed_error: ?InvalidNotificationConfig = aws.json.parseJsonObject(InvalidNotificationConfig, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_notification_config = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidOptionException")) {
+        const parsed_error: ?InvalidOptionException = aws.json.parseJsonObject(InvalidOptionException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_option_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidOutputFolder")) {
+        const parsed_error: ?InvalidOutputFolder = aws.json.parseJsonObject(InvalidOutputFolder, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_output_folder = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidOutputLocation")) {
+        const parsed_error: ?InvalidOutputLocation = aws.json.parseJsonObject(InvalidOutputLocation, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_output_location = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidParameters")) {
+        const parsed_error: ?InvalidParameters = aws.json.parseJsonObject(InvalidParameters, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_parameters = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidPermissionType")) {
+        const parsed_error: ?InvalidPermissionType = aws.json.parseJsonObject(InvalidPermissionType, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_permission_type = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidPluginName")) {
+        const parsed_error: ?InvalidPluginName = aws.json.parseJsonObject(InvalidPluginName, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_plugin_name = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidPolicyAttributeException")) {
+        const parsed_error: ?InvalidPolicyAttributeException = aws.json.parseJsonObject(InvalidPolicyAttributeException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_policy_attribute_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidPolicyTypeException")) {
+        const parsed_error: ?InvalidPolicyTypeException = aws.json.parseJsonObject(InvalidPolicyTypeException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_policy_type_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidResourceId")) {
+        const parsed_error: ?InvalidResourceId = aws.json.parseJsonObject(InvalidResourceId, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_resource_id = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidResourceType")) {
+        const parsed_error: ?InvalidResourceType = aws.json.parseJsonObject(InvalidResourceType, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_resource_type = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidResultAttributeException")) {
+        const parsed_error: ?InvalidResultAttributeException = aws.json.parseJsonObject(InvalidResultAttributeException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_result_attribute_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidRole")) {
+        const parsed_error: ?InvalidRole = aws.json.parseJsonObject(InvalidRole, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_role = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidSchedule")) {
+        const parsed_error: ?InvalidSchedule = aws.json.parseJsonObject(InvalidSchedule, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_schedule = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidTag")) {
+        const parsed_error: ?InvalidTag = aws.json.parseJsonObject(InvalidTag, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_tag = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidTarget")) {
+        const parsed_error: ?InvalidTarget = aws.json.parseJsonObject(InvalidTarget, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_target = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidTargetMaps")) {
+        const parsed_error: ?InvalidTargetMaps = aws.json.parseJsonObject(InvalidTargetMaps, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_target_maps = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidTypeNameException")) {
+        const parsed_error: ?InvalidTypeNameException = aws.json.parseJsonObject(InvalidTypeNameException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_type_name_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidUpdate")) {
+        const parsed_error: ?InvalidUpdate = aws.json.parseJsonObject(InvalidUpdate, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_update = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvocationDoesNotExist")) {
+        const parsed_error: ?InvocationDoesNotExist = aws.json.parseJsonObject(InvocationDoesNotExist, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invocation_does_not_exist = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ItemContentMismatchException")) {
+        const parsed_error: ?ItemContentMismatchException = aws.json.parseJsonObject(ItemContentMismatchException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .item_content_mismatch_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ItemSizeLimitExceededException")) {
+        const parsed_error: ?ItemSizeLimitExceededException = aws.json.parseJsonObject(ItemSizeLimitExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .item_size_limit_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "MalformedResourcePolicyDocumentException")) {
+        const parsed_error: ?MalformedResourcePolicyDocumentException = aws.json.parseJsonObject(MalformedResourcePolicyDocumentException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .malformed_resource_policy_document_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "MaxDocumentSizeExceeded")) {
+        const parsed_error: ?MaxDocumentSizeExceeded = aws.json.parseJsonObject(MaxDocumentSizeExceeded, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .max_document_size_exceeded = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "NoLongerSupportedException")) {
+        const parsed_error: ?NoLongerSupportedException = aws.json.parseJsonObject(NoLongerSupportedException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .no_longer_supported_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "OpsItemAccessDeniedException")) {
+        const parsed_error: ?OpsItemAccessDeniedException = aws.json.parseJsonObject(OpsItemAccessDeniedException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .ops_item_access_denied_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "OpsItemAlreadyExistsException")) {
+        const parsed_error: ?OpsItemAlreadyExistsException = aws.json.parseJsonObject(OpsItemAlreadyExistsException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .ops_item_already_exists_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "OpsItemConflictException")) {
+        const parsed_error: ?OpsItemConflictException = aws.json.parseJsonObject(OpsItemConflictException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .ops_item_conflict_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "OpsItemInvalidParameterException")) {
+        const parsed_error: ?OpsItemInvalidParameterException = aws.json.parseJsonObject(OpsItemInvalidParameterException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .ops_item_invalid_parameter_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "OpsItemLimitExceededException")) {
+        const parsed_error: ?OpsItemLimitExceededException = aws.json.parseJsonObject(OpsItemLimitExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .ops_item_limit_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "OpsItemNotFoundException")) {
+        const parsed_error: ?OpsItemNotFoundException = aws.json.parseJsonObject(OpsItemNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .ops_item_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "OpsItemRelatedItemAlreadyExistsException")) {
+        const parsed_error: ?OpsItemRelatedItemAlreadyExistsException = aws.json.parseJsonObject(OpsItemRelatedItemAlreadyExistsException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .ops_item_related_item_already_exists_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "OpsItemRelatedItemAssociationNotFoundException")) {
+        const parsed_error: ?OpsItemRelatedItemAssociationNotFoundException = aws.json.parseJsonObject(OpsItemRelatedItemAssociationNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .ops_item_related_item_association_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "OpsMetadataAlreadyExistsException")) {
+        const parsed_error: ?OpsMetadataAlreadyExistsException = aws.json.parseJsonObject(OpsMetadataAlreadyExistsException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .ops_metadata_already_exists_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "OpsMetadataInvalidArgumentException")) {
+        const parsed_error: ?OpsMetadataInvalidArgumentException = aws.json.parseJsonObject(OpsMetadataInvalidArgumentException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .ops_metadata_invalid_argument_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "OpsMetadataKeyLimitExceededException")) {
+        const parsed_error: ?OpsMetadataKeyLimitExceededException = aws.json.parseJsonObject(OpsMetadataKeyLimitExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .ops_metadata_key_limit_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "OpsMetadataLimitExceededException")) {
+        const parsed_error: ?OpsMetadataLimitExceededException = aws.json.parseJsonObject(OpsMetadataLimitExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .ops_metadata_limit_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "OpsMetadataNotFoundException")) {
+        const parsed_error: ?OpsMetadataNotFoundException = aws.json.parseJsonObject(OpsMetadataNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .ops_metadata_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "OpsMetadataTooManyUpdatesException")) {
+        const parsed_error: ?OpsMetadataTooManyUpdatesException = aws.json.parseJsonObject(OpsMetadataTooManyUpdatesException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .ops_metadata_too_many_updates_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ParameterAlreadyExists")) {
+        const parsed_error: ?ParameterAlreadyExists = aws.json.parseJsonObject(ParameterAlreadyExists, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .parameter_already_exists = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ParameterLimitExceeded")) {
+        const parsed_error: ?ParameterLimitExceeded = aws.json.parseJsonObject(ParameterLimitExceeded, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .parameter_limit_exceeded = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ParameterMaxVersionLimitExceeded")) {
+        const parsed_error: ?ParameterMaxVersionLimitExceeded = aws.json.parseJsonObject(ParameterMaxVersionLimitExceeded, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .parameter_max_version_limit_exceeded = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ParameterNotFound")) {
+        const parsed_error: ?ParameterNotFound = aws.json.parseJsonObject(ParameterNotFound, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .parameter_not_found = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ParameterPatternMismatchException")) {
+        const parsed_error: ?ParameterPatternMismatchException = aws.json.parseJsonObject(ParameterPatternMismatchException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .parameter_pattern_mismatch_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ParameterVersionLabelLimitExceeded")) {
+        const parsed_error: ?ParameterVersionLabelLimitExceeded = aws.json.parseJsonObject(ParameterVersionLabelLimitExceeded, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .parameter_version_label_limit_exceeded = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ParameterVersionNotFound")) {
+        const parsed_error: ?ParameterVersionNotFound = aws.json.parseJsonObject(ParameterVersionNotFound, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .parameter_version_not_found = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "PoliciesLimitExceededException")) {
+        const parsed_error: ?PoliciesLimitExceededException = aws.json.parseJsonObject(PoliciesLimitExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .policies_limit_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ResourceDataSyncAlreadyExistsException")) {
+        const parsed_error: ?ResourceDataSyncAlreadyExistsException = aws.json.parseJsonObject(ResourceDataSyncAlreadyExistsException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_data_sync_already_exists_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ResourceDataSyncConflictException")) {
+        const parsed_error: ?ResourceDataSyncConflictException = aws.json.parseJsonObject(ResourceDataSyncConflictException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_data_sync_conflict_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ResourceDataSyncCountExceededException")) {
+        const parsed_error: ?ResourceDataSyncCountExceededException = aws.json.parseJsonObject(ResourceDataSyncCountExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_data_sync_count_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ResourceDataSyncInvalidConfigurationException")) {
+        const parsed_error: ?ResourceDataSyncInvalidConfigurationException = aws.json.parseJsonObject(ResourceDataSyncInvalidConfigurationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_data_sync_invalid_configuration_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ResourceDataSyncNotFoundException")) {
+        const parsed_error: ?ResourceDataSyncNotFoundException = aws.json.parseJsonObject(ResourceDataSyncNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_data_sync_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ResourceInUseException")) {
+        const parsed_error: ?ResourceInUseException = aws.json.parseJsonObject(ResourceInUseException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_in_use_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ResourceLimitExceededException")) {
+        const parsed_error: ?ResourceLimitExceededException = aws.json.parseJsonObject(ResourceLimitExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_limit_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        const parsed_error: ?ResourceNotFoundException = aws.json.parseJsonObject(ResourceNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ResourcePolicyConflictException")) {
+        const parsed_error: ?ResourcePolicyConflictException = aws.json.parseJsonObject(ResourcePolicyConflictException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_policy_conflict_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ResourcePolicyInvalidParameterException")) {
+        const parsed_error: ?ResourcePolicyInvalidParameterException = aws.json.parseJsonObject(ResourcePolicyInvalidParameterException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_policy_invalid_parameter_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ResourcePolicyLimitExceededException")) {
+        const parsed_error: ?ResourcePolicyLimitExceededException = aws.json.parseJsonObject(ResourcePolicyLimitExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_policy_limit_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ResourcePolicyNotFoundException")) {
+        const parsed_error: ?ResourcePolicyNotFoundException = aws.json.parseJsonObject(ResourcePolicyNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_policy_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        const parsed_error: ?ServiceQuotaExceededException = aws.json.parseJsonObject(ServiceQuotaExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ServiceSettingNotFound")) {
+        const parsed_error: ?ServiceSettingNotFound = aws.json.parseJsonObject(ServiceSettingNotFound, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .service_setting_not_found = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "StatusUnchanged")) {
+        const parsed_error: ?StatusUnchanged = aws.json.parseJsonObject(StatusUnchanged, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .status_unchanged = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "SubTypeCountLimitExceededException")) {
+        const parsed_error: ?SubTypeCountLimitExceededException = aws.json.parseJsonObject(SubTypeCountLimitExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .sub_type_count_limit_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "TargetInUseException")) {
+        const parsed_error: ?TargetInUseException = aws.json.parseJsonObject(TargetInUseException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .target_in_use_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "TargetNotConnected")) {
+        const parsed_error: ?TargetNotConnected = aws.json.parseJsonObject(TargetNotConnected, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .target_not_connected = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        const parsed_error: ?ThrottlingException = aws.json.parseJsonObject(ThrottlingException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .throttling_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "TooManyTagsError")) {
+        const parsed_error: ?TooManyTagsError = aws.json.parseJsonObject(TooManyTagsError, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .too_many_tags_error = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "TooManyUpdates")) {
+        const parsed_error: ?TooManyUpdates = aws.json.parseJsonObject(TooManyUpdates, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .too_many_updates = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "TotalSizeLimitExceededException")) {
+        const parsed_error: ?TotalSizeLimitExceededException = aws.json.parseJsonObject(TotalSizeLimitExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .total_size_limit_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedCalendarException")) {
+        const parsed_error: ?UnsupportedCalendarException = aws.json.parseJsonObject(UnsupportedCalendarException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .unsupported_calendar_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedFeatureRequiredException")) {
+        const parsed_error: ?UnsupportedFeatureRequiredException = aws.json.parseJsonObject(UnsupportedFeatureRequiredException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .unsupported_feature_required_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedInventoryItemContextException")) {
+        const parsed_error: ?UnsupportedInventoryItemContextException = aws.json.parseJsonObject(UnsupportedInventoryItemContextException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .unsupported_inventory_item_context_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedInventorySchemaVersionException")) {
+        const parsed_error: ?UnsupportedInventorySchemaVersionException = aws.json.parseJsonObject(UnsupportedInventorySchemaVersionException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .unsupported_inventory_schema_version_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedOperatingSystem")) {
+        const parsed_error: ?UnsupportedOperatingSystem = aws.json.parseJsonObject(UnsupportedOperatingSystem, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .unsupported_operating_system = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedOperationException")) {
+        const parsed_error: ?UnsupportedOperationException = aws.json.parseJsonObject(UnsupportedOperationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .unsupported_operation_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedParameterType")) {
+        const parsed_error: ?UnsupportedParameterType = aws.json.parseJsonObject(UnsupportedParameterType, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .unsupported_parameter_type = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedPlatformType")) {
+        const parsed_error: ?UnsupportedPlatformType = aws.json.parseJsonObject(UnsupportedPlatformType, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .unsupported_platform_type = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        const parsed_error: ?ValidationException = aws.json.parseJsonObject(ValidationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .validation_exception = typed_error } };
+        }
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

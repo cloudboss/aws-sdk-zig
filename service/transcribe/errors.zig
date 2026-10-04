@@ -1,3 +1,4 @@
+const aws = @import("aws");
 const std = @import("std");
 
 pub const ServiceError = struct {
@@ -78,29 +79,67 @@ pub const ServiceError = struct {
     }
 };
 
+/// Your request didn't pass one or more validation tests. This can occur when
+/// the entity
+/// you're trying to delete doesn't exist or if it's in a non-terminal state
+/// (such as
+/// `IN PROGRESS`). See the exception message field for more
+/// information.
 pub const BadRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// A resource already exists with this name. Resource names must be unique
+/// within an
+/// Amazon Web Services account.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// There was an internal error. Check the error message, correct the issue, and
+/// try your
+/// request again.
 pub const InternalFailureException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You've either sent too many requests or your input file is too long. Wait
+/// before
+/// retrying your request, or use a smaller file and try your request again.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// We can't find the requested resource. Check that the specified name is
+/// correct and try
+/// your request again.
 pub const NotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {
@@ -109,3 +148,89 @@ pub const UnknownServiceError = struct {
     request_id: []const u8 = "",
     http_status: u16 = 0,
 };
+
+/// Parse a service diagnostic. The caller must call deinit on the result.
+pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) std.mem.Allocator.Error!ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.findScalarLast(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "BadRequestException")) {
+        const parsed_error: ?BadRequestException = aws.json.parseJsonObject(BadRequestException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .bad_request_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        const parsed_error: ?ConflictException = aws.json.parseJsonObject(ConflictException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .conflict_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InternalFailureException")) {
+        const parsed_error: ?InternalFailureException = aws.json.parseJsonObject(InternalFailureException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .internal_failure_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "LimitExceededException")) {
+        const parsed_error: ?LimitExceededException = aws.json.parseJsonObject(LimitExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "NotFoundException")) {
+        const parsed_error: ?NotFoundException = aws.json.parseJsonObject(NotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .not_found_exception = typed_error } };
+        }
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

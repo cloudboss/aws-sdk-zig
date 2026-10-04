@@ -85,6 +85,28 @@ pub fn build(b: *std.Build) void {
     test_step.dependOn(&run_aws_tests.step);
     test_step.dependOn(&run_docgen_tests.step);
 
+    const modeled_error_module = b.createModule(.{
+        .root_source_file = b.path("tests/unit/modeled_errors.zig"),
+        .target = target,
+        .optimize = optimize,
+    });
+    modeled_error_module.addImport("aws", aws_module);
+    for ([_][]const u8{
+        "backupgateway", "cognitoidentity", "dynamodb", "ec2",
+        "lambda",        "s3",              "sts",      "verifiedpermissions",
+    }) |name| {
+        modeled_error_module.addImport(name, service_modules.get(name).?);
+    }
+    const modeled_error_tests = b.addTest(.{
+        .root_module = modeled_error_module,
+        .test_runner = .{
+            .path = zest.path("src/root.zig"),
+            .mode = .simple,
+        },
+    });
+    const run_modeled_error_tests = b.addRunArtifact(modeled_error_tests);
+    test_step.dependOn(&run_modeled_error_tests.step);
+
     // Compile-check all service modules during test
     var check_iter = service_modules.iterator();
     while (check_iter.next()) |svc_entry| {

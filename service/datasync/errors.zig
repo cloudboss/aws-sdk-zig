@@ -1,3 +1,4 @@
+const aws = @import("aws");
 const std = @import("std");
 
 pub const ServiceError = struct {
@@ -63,14 +64,34 @@ pub const ServiceError = struct {
     }
 };
 
+/// This exception is thrown when an error occurs in the DataSync
+/// service.
 pub const InternalException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    error_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .error_code = "errorCode",
+        .message = "message",
+    };
 };
 
+/// This exception is thrown when the client submits a malformed request.
 pub const InvalidRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    datasync_error_code: ?[]const u8 = null,
+
+    error_code: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .datasync_error_code = "datasyncErrorCode",
+        .error_code = "errorCode",
+        .message = "message",
+    };
 };
 
 pub const UnknownServiceError = struct {
@@ -79,3 +100,53 @@ pub const UnknownServiceError = struct {
     request_id: []const u8 = "",
     http_status: u16 = 0,
 };
+
+/// Parse a service diagnostic. The caller must call deinit on the result.
+pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) std.mem.Allocator.Error!ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.findScalarLast(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "InternalException")) {
+        const parsed_error: ?InternalException = aws.json.parseJsonObject(InternalException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .internal_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidRequestException")) {
+        const parsed_error: ?InvalidRequestException = aws.json.parseJsonObject(InvalidRequestException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_request_exception = typed_error } };
+        }
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

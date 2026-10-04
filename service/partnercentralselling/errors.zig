@@ -1,4 +1,9 @@
+const aws = @import("aws");
 const std = @import("std");
+
+const AccessDeniedExceptionErrorCode = @import("access_denied_exception_error_code.zig").AccessDeniedExceptionErrorCode;
+const ValidationExceptionError = @import("validation_exception_error.zig").ValidationExceptionError;
+const ValidationExceptionReason = @import("validation_exception_reason.zig").ValidationExceptionReason;
 
 pub const ServiceError = struct {
     arena: ?std.heap.ArenaAllocator = null,
@@ -88,39 +93,130 @@ pub const ServiceError = struct {
     }
 };
 
+/// This error occurs when you don't have permission to perform the requested
+/// action.
+///
+/// You don’t have access to this action or resource. Review IAM policies or
+/// contact your AWS administrator for assistance.
 pub const AccessDeniedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// The reason why access was denied for the requested operation.
+    reason: ?AccessDeniedExceptionErrorCode = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .reason = "Reason",
+    };
 };
 
+/// This error occurs when the request can’t be processed due to a conflict with
+/// the target resource's current state, which could result from updating or
+/// deleting the resource.
+///
+/// Suggested action: Fetch the latest state of the resource, verify the state,
+/// and retry the request.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This error occurs when the specified resource can’t be found or doesn't
+/// exist. Resource ID and type might be incorrect.
+///
+/// Suggested action: This is usually a transient error. Retry after the
+/// provided retry delay or a short interval. If the problem persists, contact
+/// AWS support.
 pub const InternalServerException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This error occurs when the specified resource can't be found. The resource
+/// might not exist, or isn't visible with the current credentials.
+///
+/// Suggested action: Verify that the resource ID is correct and the resource is
+/// in the expected AWS region. Check IAM permissions for accessing the
+/// resource.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This error occurs when the request would cause a service quota to be
+/// exceeded. Service quotas represent the maximum allowed use of a specific
+/// resource, and this error indicates that the request would surpass that
+/// limit.
+///
+/// Suggested action: Review the
+/// [Quotas](https://docs.aws.amazon.com/partner-central/latest/selling-api/quotas.html) for the resource, and either reduce usage or request a quota increase.
 pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This error occurs when there are too many requests sent. Review the provided
+/// quotas and adapt your usage to avoid throttling.
+///
+/// This error occurs when there are too many requests sent. Review the provided
+/// [Quotas](https://docs.aws.amazon.com/partner-central/latest/selling-api/quotas.html) and retry after the provided delay.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The input fails to satisfy the constraints specified by the service or
+/// business validation rules.
+///
+/// Suggested action: Review the error message, including the failed fields and
+/// reasons, to correct the request payload.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    /// A list of issues that were discovered in the submitted request or the
+    /// resource state.
+    error_list: ?[]const ValidationExceptionError = null,
+
+    /// The primary reason for this validation exception to occur.
+    ///
+    /// * *REQUEST_VALIDATION_FAILED:* The request format is not valid.
+    ///
+    /// Fix: Verify your request payload includes all required fields, uses correct
+    /// data types and string formats.
+    /// * *BUSINESS_VALIDATION_FAILED:* The requested change doesn't pass the
+    ///   business validation rules.
+    ///
+    /// Fix: Check that your change aligns with the business rules defined by AWS
+    /// Partner Central.
+    reason: ?ValidationExceptionReason = null,
+
+    pub const json_field_names = .{
+        .error_list = "ErrorList",
+        .message = "Message",
+        .reason = "Reason",
+    };
 };
 
 pub const UnknownServiceError = struct {
@@ -129,3 +225,113 @@ pub const UnknownServiceError = struct {
     request_id: []const u8 = "",
     http_status: u16 = 0,
 };
+
+/// Parse a service diagnostic. The caller must call deinit on the result.
+pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) std.mem.Allocator.Error!ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.findScalarLast(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
+        const parsed_error: ?AccessDeniedException = aws.json.parseJsonObject(AccessDeniedException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .access_denied_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        const parsed_error: ?ConflictException = aws.json.parseJsonObject(ConflictException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .conflict_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InternalServerException")) {
+        const parsed_error: ?InternalServerException = aws.json.parseJsonObject(InternalServerException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .internal_server_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        const parsed_error: ?ResourceNotFoundException = aws.json.parseJsonObject(ResourceNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        const parsed_error: ?ServiceQuotaExceededException = aws.json.parseJsonObject(ServiceQuotaExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ThrottlingException")) {
+        const parsed_error: ?ThrottlingException = aws.json.parseJsonObject(ThrottlingException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .throttling_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        const parsed_error: ?ValidationException = aws.json.parseJsonObject(ValidationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .validation_exception = typed_error } };
+        }
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

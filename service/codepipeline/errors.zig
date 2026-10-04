@@ -1,3 +1,4 @@
+const aws = @import("aws");
 const std = @import("std");
 
 pub const ServiceError = struct {
@@ -258,206 +259,435 @@ pub const ServiceError = struct {
     }
 };
 
+/// The action execution was not found.
 pub const ActionExecutionNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified action cannot be found.
 pub const ActionNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified action type cannot be found.
 pub const ActionTypeNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The approval action has already been approved or rejected.
 pub const ApprovalAlreadyCompletedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Unable to modify the tag due to a simultaneous update request.
 pub const ConcurrentModificationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The pipeline has reached the limit for concurrent pipeline executions.
 pub const ConcurrentPipelineExecutionsLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Unable to override because the condition does not allow overrides.
 pub const ConditionNotOverridableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Your request cannot be handled because the pipeline is busy handling ongoing
+/// activities. Try again later.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The pipeline execution is already in a `Stopping` state. If you already
+/// chose to stop and wait, you cannot make that request again. You can choose
+/// to stop and
+/// abandon now, but be aware that this option can lead to failed tasks or out
+/// of sequence
+/// tasks. If you already chose to stop and abandon, you cannot make that
+/// request
+/// again.
 pub const DuplicatedStopRequestException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The action declaration was specified in an invalid format.
 pub const InvalidActionDeclarationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The approval request already received a response or has expired.
 pub const InvalidApprovalTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified resource ARN is invalid.
 pub const InvalidArnException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Reserved for future use.
 pub const InvalidBlockerDeclarationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The client token was specified in an invalid format
 pub const InvalidClientTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The job was specified in an invalid format or cannot be found.
 pub const InvalidJobException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The job state was specified in an invalid format.
 pub const InvalidJobStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The next token was specified in an invalid format. Make sure that the next
+/// token
+/// you provide is the token returned by a previous call.
 pub const InvalidNextTokenException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The nonce was specified in an invalid format.
 pub const InvalidNonceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The stage declaration was specified in an invalid format.
 pub const InvalidStageDeclarationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The structure was specified in an invalid format.
 pub const InvalidStructureException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified resource tags are invalid.
 pub const InvalidTagsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified authentication type is in an invalid format.
 pub const InvalidWebhookAuthenticationParametersException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified event filter rule is in an invalid format.
 pub const InvalidWebhookFilterPatternException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The job was specified in an invalid format or cannot be found.
 pub const JobNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The number of pipelines associated with the Amazon Web Services account has
+/// exceeded
+/// the limit allowed for the account.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The stage has failed in a later run of the pipeline and the
+/// `pipelineExecutionId` associated with the request is out of
+/// date.
 pub const NotLatestPipelineExecutionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Exceeded the total size limit for all variables in the pipeline.
 pub const OutputVariablesSizeExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The pipeline execution was specified in an invalid format or cannot be
+/// found, or an
+/// execution ID does not belong to the specified pipeline.
 pub const PipelineExecutionNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Unable to stop the pipeline execution. The execution might already be in a
+/// `Stopped` state, or it might no longer be in progress.
 pub const PipelineExecutionNotStoppableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified pipeline execution is outdated and cannot be used as a target
+/// pipeline
+/// execution for rollback.
 pub const PipelineExecutionOutdatedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified pipeline name is already in use.
 pub const PipelineNameInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The pipeline was specified in an invalid format or cannot be found.
 pub const PipelineNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The pipeline version was specified in an invalid format or cannot be
+/// found.
 pub const PipelineVersionNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The request failed because of an unknown error, exception, or failure.
 pub const RequestFailedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The resource was specified in an invalid format.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The stage was specified in an invalid format or cannot be found.
 pub const StageNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Unable to retry. The pipeline structure or stage state might have changed
+/// while
+/// actions awaited retry, or the stage contains no failed
+/// actions.
 pub const StageNotRetryableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The tags limit for a resource has been exceeded.
 pub const TooManyTagsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Unable to roll back the stage. The cause might be if the pipeline version
+/// has changed
+/// since the target pipeline execution was deployed, the stage is currently
+/// running, or an
+/// incorrect target pipeline execution ID was provided.
 pub const UnableToRollbackStageException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The validation was specified in an invalid format.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The specified webhook was entered in an invalid format or cannot be
+/// found.
 pub const WebhookNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
@@ -469,3 +699,521 @@ pub const UnknownServiceError = struct {
     request_id: []const u8 = "",
     http_status: u16 = 0,
 };
+
+/// Parse a service diagnostic. The caller must call deinit on the result.
+pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) std.mem.Allocator.Error!ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.findScalarLast(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "ActionExecutionNotFoundException")) {
+        const parsed_error: ?ActionExecutionNotFoundException = aws.json.parseJsonObject(ActionExecutionNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .action_execution_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ActionNotFoundException")) {
+        const parsed_error: ?ActionNotFoundException = aws.json.parseJsonObject(ActionNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .action_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ActionTypeNotFoundException")) {
+        const parsed_error: ?ActionTypeNotFoundException = aws.json.parseJsonObject(ActionTypeNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .action_type_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ApprovalAlreadyCompletedException")) {
+        const parsed_error: ?ApprovalAlreadyCompletedException = aws.json.parseJsonObject(ApprovalAlreadyCompletedException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .approval_already_completed_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ConcurrentModificationException")) {
+        const parsed_error: ?ConcurrentModificationException = aws.json.parseJsonObject(ConcurrentModificationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .concurrent_modification_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ConcurrentPipelineExecutionsLimitExceededException")) {
+        const parsed_error: ?ConcurrentPipelineExecutionsLimitExceededException = aws.json.parseJsonObject(ConcurrentPipelineExecutionsLimitExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .concurrent_pipeline_executions_limit_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ConditionNotOverridableException")) {
+        const parsed_error: ?ConditionNotOverridableException = aws.json.parseJsonObject(ConditionNotOverridableException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .condition_not_overridable_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        const parsed_error: ?ConflictException = aws.json.parseJsonObject(ConflictException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .conflict_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "DuplicatedStopRequestException")) {
+        const parsed_error: ?DuplicatedStopRequestException = aws.json.parseJsonObject(DuplicatedStopRequestException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .duplicated_stop_request_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidActionDeclarationException")) {
+        const parsed_error: ?InvalidActionDeclarationException = aws.json.parseJsonObject(InvalidActionDeclarationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_action_declaration_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidApprovalTokenException")) {
+        const parsed_error: ?InvalidApprovalTokenException = aws.json.parseJsonObject(InvalidApprovalTokenException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_approval_token_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidArnException")) {
+        const parsed_error: ?InvalidArnException = aws.json.parseJsonObject(InvalidArnException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_arn_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidBlockerDeclarationException")) {
+        const parsed_error: ?InvalidBlockerDeclarationException = aws.json.parseJsonObject(InvalidBlockerDeclarationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_blocker_declaration_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidClientTokenException")) {
+        const parsed_error: ?InvalidClientTokenException = aws.json.parseJsonObject(InvalidClientTokenException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_client_token_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidJobException")) {
+        const parsed_error: ?InvalidJobException = aws.json.parseJsonObject(InvalidJobException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_job_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidJobStateException")) {
+        const parsed_error: ?InvalidJobStateException = aws.json.parseJsonObject(InvalidJobStateException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_job_state_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidNextTokenException")) {
+        const parsed_error: ?InvalidNextTokenException = aws.json.parseJsonObject(InvalidNextTokenException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_next_token_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidNonceException")) {
+        const parsed_error: ?InvalidNonceException = aws.json.parseJsonObject(InvalidNonceException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_nonce_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidStageDeclarationException")) {
+        const parsed_error: ?InvalidStageDeclarationException = aws.json.parseJsonObject(InvalidStageDeclarationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_stage_declaration_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidStructureException")) {
+        const parsed_error: ?InvalidStructureException = aws.json.parseJsonObject(InvalidStructureException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_structure_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidTagsException")) {
+        const parsed_error: ?InvalidTagsException = aws.json.parseJsonObject(InvalidTagsException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_tags_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidWebhookAuthenticationParametersException")) {
+        const parsed_error: ?InvalidWebhookAuthenticationParametersException = aws.json.parseJsonObject(InvalidWebhookAuthenticationParametersException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_webhook_authentication_parameters_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidWebhookFilterPatternException")) {
+        const parsed_error: ?InvalidWebhookFilterPatternException = aws.json.parseJsonObject(InvalidWebhookFilterPatternException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_webhook_filter_pattern_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "JobNotFoundException")) {
+        const parsed_error: ?JobNotFoundException = aws.json.parseJsonObject(JobNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .job_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "LimitExceededException")) {
+        const parsed_error: ?LimitExceededException = aws.json.parseJsonObject(LimitExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "NotLatestPipelineExecutionException")) {
+        const parsed_error: ?NotLatestPipelineExecutionException = aws.json.parseJsonObject(NotLatestPipelineExecutionException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .not_latest_pipeline_execution_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "OutputVariablesSizeExceededException")) {
+        const parsed_error: ?OutputVariablesSizeExceededException = aws.json.parseJsonObject(OutputVariablesSizeExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .output_variables_size_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "PipelineExecutionNotFoundException")) {
+        const parsed_error: ?PipelineExecutionNotFoundException = aws.json.parseJsonObject(PipelineExecutionNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .pipeline_execution_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "PipelineExecutionNotStoppableException")) {
+        const parsed_error: ?PipelineExecutionNotStoppableException = aws.json.parseJsonObject(PipelineExecutionNotStoppableException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .pipeline_execution_not_stoppable_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "PipelineExecutionOutdatedException")) {
+        const parsed_error: ?PipelineExecutionOutdatedException = aws.json.parseJsonObject(PipelineExecutionOutdatedException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .pipeline_execution_outdated_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "PipelineNameInUseException")) {
+        const parsed_error: ?PipelineNameInUseException = aws.json.parseJsonObject(PipelineNameInUseException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .pipeline_name_in_use_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "PipelineNotFoundException")) {
+        const parsed_error: ?PipelineNotFoundException = aws.json.parseJsonObject(PipelineNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .pipeline_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "PipelineVersionNotFoundException")) {
+        const parsed_error: ?PipelineVersionNotFoundException = aws.json.parseJsonObject(PipelineVersionNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .pipeline_version_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "RequestFailedException")) {
+        const parsed_error: ?RequestFailedException = aws.json.parseJsonObject(RequestFailedException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .request_failed_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        const parsed_error: ?ResourceNotFoundException = aws.json.parseJsonObject(ResourceNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "StageNotFoundException")) {
+        const parsed_error: ?StageNotFoundException = aws.json.parseJsonObject(StageNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .stage_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "StageNotRetryableException")) {
+        const parsed_error: ?StageNotRetryableException = aws.json.parseJsonObject(StageNotRetryableException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .stage_not_retryable_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "TooManyTagsException")) {
+        const parsed_error: ?TooManyTagsException = aws.json.parseJsonObject(TooManyTagsException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .too_many_tags_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "UnableToRollbackStageException")) {
+        const parsed_error: ?UnableToRollbackStageException = aws.json.parseJsonObject(UnableToRollbackStageException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .unable_to_rollback_stage_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        const parsed_error: ?ValidationException = aws.json.parseJsonObject(ValidationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .validation_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "WebhookNotFoundException")) {
+        const parsed_error: ?WebhookNotFoundException = aws.json.parseJsonObject(WebhookNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .webhook_not_found_exception = typed_error } };
+        }
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

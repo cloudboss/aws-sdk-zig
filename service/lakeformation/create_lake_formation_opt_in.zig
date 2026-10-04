@@ -3,7 +3,7 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
-const ServiceError = @import("errors.zig").ServiceError;
+const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Condition = @import("condition.zig").Condition;
 const DataLakePrincipal = @import("data_lake_principal.zig").DataLakePrincipal;
 const Resource = @import("resource.zig").Resource;
@@ -41,7 +41,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateLakeF
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = try parseErrorResponse(client.allocator, response.body, response.status);
         }
         return error.ServiceError;
     }
@@ -98,143 +98,4 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
     const result: CreateLakeFormationOptInOutput = .{};
 
     return result;
-}
-
-fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
-    const error_code = blk: {
-        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
-        if (std.mem.findScalarLast(u8, type_str, '#')) |idx| {
-            break :blk type_str[idx + 1 ..];
-        }
-        break :blk type_str;
-    };
-    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(allocator);
-    errdefer arena.deinit();
-    const arena_alloc = arena.allocator();
-    const owned_message = try arena_alloc.dupe(u8, error_message);
-    const owned_request_id = try arena_alloc.dupe(u8, "");
-
-    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
-        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "AlreadyExistsException")) {
-        return .{ .arena = arena, .kind = .{ .already_exists_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ConcurrentModificationException")) {
-        return .{ .arena = arena, .kind = .{ .concurrent_modification_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ConflictException")) {
-        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "EntityNotFoundException")) {
-        return .{ .arena = arena, .kind = .{ .entity_not_found_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ExpiredException")) {
-        return .{ .arena = arena, .kind = .{ .expired_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "GlueEncryptionException")) {
-        return .{ .arena = arena, .kind = .{ .glue_encryption_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "InternalServiceException")) {
-        return .{ .arena = arena, .kind = .{ .internal_service_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "InvalidInputException")) {
-        return .{ .arena = arena, .kind = .{ .invalid_input_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "OperationTimeoutException")) {
-        return .{ .arena = arena, .kind = .{ .operation_timeout_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "PermissionTypeMismatchException")) {
-        return .{ .arena = arena, .kind = .{ .permission_type_mismatch_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ResourceNotReadyException")) {
-        return .{ .arena = arena, .kind = .{ .resource_not_ready_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ResourceNumberLimitExceededException")) {
-        return .{ .arena = arena, .kind = .{ .resource_number_limit_exceeded_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "StatisticsNotReadyYetException")) {
-        return .{ .arena = arena, .kind = .{ .statistics_not_ready_yet_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ThrottledException")) {
-        return .{ .arena = arena, .kind = .{ .throttled_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "TransactionCanceledException")) {
-        return .{ .arena = arena, .kind = .{ .transaction_canceled_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "TransactionCommitInProgressException")) {
-        return .{ .arena = arena, .kind = .{ .transaction_commit_in_progress_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "TransactionCommittedException")) {
-        return .{ .arena = arena, .kind = .{ .transaction_committed_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "WorkUnitsNotReadyYetException")) {
-        return .{ .arena = arena, .kind = .{ .work_units_not_ready_yet_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-
-    const owned_code = try arena_alloc.dupe(u8, error_code);
-    return .{ .arena = arena, .kind = .{ .unknown = .{
-        .code = owned_code,
-        .message = owned_message,
-        .request_id = owned_request_id,
-        .http_status = status,
-    } } };
 }

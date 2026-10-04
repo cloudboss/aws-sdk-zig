@@ -14,6 +14,7 @@ import software.amazon.smithy.model.traits.HttpResponseCodeTrait
 import software.amazon.smithy.model.traits.HttpTrait
 import software.amazon.smithy.zig.NamingUtil
 import software.amazon.smithy.zig.ZigWriter
+import software.amazon.smithy.zig.generators.ErrorGenerator
 import software.amazon.smithy.zig.protocols.OperationContext
 import software.amazon.smithy.zig.protocols.ProtocolGenerator
 
@@ -656,9 +657,9 @@ class RestJsonProtocol : ProtocolGenerator {
         writer.closeBlock("}")
     }
 
-    override fun writeParseErrorResponse(writer: ZigWriter, ctx: OperationContext) {
+    override fun writeParseErrorResponse(writer: ZigWriter, errorInfos: List<ErrorGenerator.ErrorInfo>) {
         // Error parsing is the same as AWS JSON: __type field or x-amzn-ErrorType header
-        writer.openBlock("fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {")
+        writer.openBlock("pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) std.mem.Allocator.Error!ServiceError {")
 
         // Extract error code from __type, stripping namespace prefix
         writer.openBlock("const error_code = blk: {")
@@ -679,7 +680,7 @@ class RestJsonProtocol : ProtocolGenerator {
         writer.blankLine()
 
         // Match error codes to ServiceError variants
-        for (info in ctx.errorInfos) {
+        for (info in errorInfos) {
             writer.openBlock("if (std.mem.eql(u8, error_code, \"\$L\")) {", info.smithyName)
             writer.write("return .{ .arena = arena, .kind = .{ .\$L = .{", info.variantName)
             writer.write("    .message = owned_message,")

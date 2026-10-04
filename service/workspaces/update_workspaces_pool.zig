@@ -3,7 +3,7 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
-const ServiceError = @import("errors.zig").ServiceError;
+const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ApplicationSettingsRequest = @import("application_settings_request.zig").ApplicationSettingsRequest;
 const Capacity = @import("capacity.zig").Capacity;
 const PoolsRunningMode = @import("pools_running_mode.zig").PoolsRunningMode;
@@ -73,7 +73,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWorks
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = try parseErrorResponse(client.allocator, response.body, response.status);
         }
         return error.ServiceError;
     }
@@ -106,167 +106,4 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
     _ = headers;
     if (body.len == 0) return .{};
     return aws.json.parseJsonObject(UpdateWorkspacesPoolOutput, body, allocator);
-}
-
-fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
-    const error_code = blk: {
-        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
-        if (std.mem.findScalarLast(u8, type_str, '#')) |idx| {
-            break :blk type_str[idx + 1 ..];
-        }
-        break :blk type_str;
-    };
-    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(allocator);
-    errdefer arena.deinit();
-    const arena_alloc = arena.allocator();
-    const owned_message = try arena_alloc.dupe(u8, error_message);
-    const owned_request_id = try arena_alloc.dupe(u8, "");
-
-    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
-        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ApplicationNotSupportedException")) {
-        return .{ .arena = arena, .kind = .{ .application_not_supported_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ComputeNotCompatibleException")) {
-        return .{ .arena = arena, .kind = .{ .compute_not_compatible_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ConflictException")) {
-        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "IncompatibleApplicationsException")) {
-        return .{ .arena = arena, .kind = .{ .incompatible_applications_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "InternalServerException")) {
-        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "InvalidParameterCombinationException")) {
-        return .{ .arena = arena, .kind = .{ .invalid_parameter_combination_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "InvalidParameterValuesException")) {
-        return .{ .arena = arena, .kind = .{ .invalid_parameter_values_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "InvalidResourceStateException")) {
-        return .{ .arena = arena, .kind = .{ .invalid_resource_state_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "OperatingSystemNotCompatibleException")) {
-        return .{ .arena = arena, .kind = .{ .operating_system_not_compatible_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "OperationInProgressException")) {
-        return .{ .arena = arena, .kind = .{ .operation_in_progress_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "OperationNotSupportedException")) {
-        return .{ .arena = arena, .kind = .{ .operation_not_supported_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ResourceAlreadyExistsException")) {
-        return .{ .arena = arena, .kind = .{ .resource_already_exists_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ResourceAssociatedException")) {
-        return .{ .arena = arena, .kind = .{ .resource_associated_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ResourceCreationFailedException")) {
-        return .{ .arena = arena, .kind = .{ .resource_creation_failed_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ResourceInUseException")) {
-        return .{ .arena = arena, .kind = .{ .resource_in_use_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ResourceLimitExceededException")) {
-        return .{ .arena = arena, .kind = .{ .resource_limit_exceeded_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
-        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ResourceUnavailableException")) {
-        return .{ .arena = arena, .kind = .{ .resource_unavailable_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "UnsupportedNetworkConfigurationException")) {
-        return .{ .arena = arena, .kind = .{ .unsupported_network_configuration_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "UnsupportedWorkspaceConfigurationException")) {
-        return .{ .arena = arena, .kind = .{ .unsupported_workspace_configuration_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ValidationException")) {
-        return .{ .arena = arena, .kind = .{ .validation_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "WorkspacesDefaultRoleNotFoundException")) {
-        return .{ .arena = arena, .kind = .{ .workspaces_default_role_not_found_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-
-    const owned_code = try arena_alloc.dupe(u8, error_code);
-    return .{ .arena = arena, .kind = .{ .unknown = .{
-        .code = owned_code,
-        .message = owned_message,
-        .request_id = owned_request_id,
-        .http_status = status,
-    } } };
 }

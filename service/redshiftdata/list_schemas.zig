@@ -3,7 +3,7 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
-const ServiceError = @import("errors.zig").ServiceError;
+const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const ListSchemasInput = struct {
     /// The cluster identifier. This parameter is required when connecting to a
@@ -99,7 +99,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSchemas
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = try parseErrorResponse(client.allocator, response.body, response.status);
         }
         return error.ServiceError;
     }
@@ -132,83 +132,4 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
     _ = headers;
     if (body.len == 0) return .{};
     return aws.json.parseJsonObject(ListSchemasOutput, body, allocator);
-}
-
-fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
-    const error_code = blk: {
-        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
-        if (std.mem.findScalarLast(u8, type_str, '#')) |idx| {
-            break :blk type_str[idx + 1 ..];
-        }
-        break :blk type_str;
-    };
-    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(allocator);
-    errdefer arena.deinit();
-    const arena_alloc = arena.allocator();
-    const owned_message = try arena_alloc.dupe(u8, error_message);
-    const owned_request_id = try arena_alloc.dupe(u8, "");
-
-    if (std.mem.eql(u8, error_code, "ActiveSessionsExceededException")) {
-        return .{ .arena = arena, .kind = .{ .active_sessions_exceeded_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ActiveStatementsExceededException")) {
-        return .{ .arena = arena, .kind = .{ .active_statements_exceeded_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "BatchExecuteStatementException")) {
-        return .{ .arena = arena, .kind = .{ .batch_execute_statement_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "DatabaseConnectionException")) {
-        return .{ .arena = arena, .kind = .{ .database_connection_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ExecuteStatementException")) {
-        return .{ .arena = arena, .kind = .{ .execute_statement_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "InternalServerException")) {
-        return .{ .arena = arena, .kind = .{ .internal_server_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "QueryTimeoutException")) {
-        return .{ .arena = arena, .kind = .{ .query_timeout_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
-        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ValidationException")) {
-        return .{ .arena = arena, .kind = .{ .validation_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-
-    const owned_code = try arena_alloc.dupe(u8, error_code);
-    return .{ .arena = arena, .kind = .{ .unknown = .{
-        .code = owned_code,
-        .message = owned_message,
-        .request_id = owned_request_id,
-        .http_status = status,
-    } } };
 }

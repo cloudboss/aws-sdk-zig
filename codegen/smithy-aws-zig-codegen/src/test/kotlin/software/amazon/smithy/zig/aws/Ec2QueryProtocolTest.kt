@@ -121,14 +121,14 @@ class Ec2QueryProtocolTest {
     @Test
     fun errorParserUsesRequestIDWithCapitalD() {
         val files = generateFiles(Ec2QueryProtocol())
-        val op = files["describe_instances.zig"]!!
+        val errors = files["errors.zig"]!!
 
         assertTrue(
-            op.contains("\"RequestID\""),
+            errors.contains("\"RequestID\""),
             "EC2 Query should use RequestID (capital D)",
         )
         assertFalse(
-            op.contains("\"RequestId\""),
+            errors.contains("\"RequestId\""),
             "EC2 Query should NOT use RequestId (lowercase d)",
         )
     }
@@ -138,14 +138,14 @@ class Ec2QueryProtocolTest {
     @Test
     fun awsQueryUsesRequestIdWithLowercaseD() {
         val files = generateFiles(AwsQueryProtocol())
-        val op = files["describe_instances.zig"]!!
+        val errors = files["errors.zig"]!!
 
         assertTrue(
-            op.contains("\"RequestId\""),
+            errors.contains("\"RequestId\""),
             "AWS Query should use RequestId (lowercase d)",
         )
         assertFalse(
-            op.contains("\"RequestID\""),
+            errors.contains("\"RequestID\""),
             "AWS Query should NOT use RequestID (capital D)",
         )
     }
@@ -182,12 +182,12 @@ class Ec2QueryProtocolTest {
     // ---- Deserialization is inherited ----
 
     @Test
-    fun deserializerUsesFindElement() {
+    fun deserializerUsesXmlReader() {
         val files = generateFiles(Ec2QueryProtocol())
         val op = files["describe_instances.zig"]!!
 
         assertTrue(op.contains("fn deserializeResponse("), "Missing deserializeResponse")
-        assertTrue(op.contains("findElement"), "Missing findElement usage")
+        assertTrue(op.contains("aws.xml.Reader.init(body)"), "Missing XML response reader")
     }
 
     // ---- Error code matching works ----
@@ -195,14 +195,14 @@ class Ec2QueryProtocolTest {
     @Test
     fun errorParserMatchesErrorCodes() {
         val files = generateFiles(Ec2QueryProtocol())
-        val op = files["describe_instances.zig"]!!
+        val errors = files["errors.zig"]!!
 
-        assertTrue(op.contains("fn parseErrorResponse("), "Missing parseErrorResponse")
+        assertTrue(errors.contains("fn parseErrorResponse("), "Missing parseErrorResponse")
         assertTrue(
-            op.contains("\"InvalidParameterException\""),
+            errors.contains("\"InvalidParameterException\""),
             "Missing error code matching for InvalidParameterException",
         )
-        assertTrue(op.contains("allocator: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
+        assertTrue(errors.contains("allocator: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
     }
 
     // ---- Helper functions are present ----
@@ -211,8 +211,9 @@ class Ec2QueryProtocolTest {
     fun helperFunctionsPresent() {
         val files = generateFiles(Ec2QueryProtocol())
         val op = files["describe_instances.zig"]!!
+        val errors = files["errors.zig"]!!
 
-        assertTrue(op.contains("aws.xml.findElement("), "Missing findElement usage")
+        assertTrue(errors.contains("aws.xml.findElement("), "Missing findElement usage")
         assertTrue(op.contains("aws.url.appendUrlEncoded("), "Missing appendUrlEncoded usage")
         assertTrue(op.contains("aws.url.parseEndpoint("), "Missing parseEndpoint usage")
     }

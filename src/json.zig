@@ -31,7 +31,13 @@ pub fn jsonStringify(value: anytype, alloc: Allocator) ![]const u8 {
 // Deserialization
 // ---------------------------------------------------------------------------
 
-const ParseError = Allocator.Error || error{ SyntaxError, UnexpectedEndOfInput, BufferUnderrun, ValueTooLong };
+const ParseError = Allocator.Error || error{
+    SyntaxError,
+    UnexpectedEndOfInput,
+    BufferUnderrun,
+    ValueTooLong,
+    MissingField,
+};
 
 fn parseValue(comptime T: type, scanner: *Scanner, alloc: Allocator) ParseError!T {
     const info = @typeInfo(T);
@@ -81,9 +87,11 @@ fn parseOptional(comptime Child: type, scanner: *Scanner, alloc: Allocator) Pars
 
 fn parseStruct(comptime T: type, scanner: *Scanner, alloc: Allocator) ParseError!T {
     var result: T = undefined;
+    const fields = std.meta.fields(T);
+    var seen: [fields.len]bool = @splat(false);
 
     // Initialize fields to defaults
-    inline for (std.meta.fields(T)) |field| {
+    inline for (fields) |field| {
         if (comptime std.mem.eql(u8, field.name, "_arena")) {
             // Skip -- arena is set by caller after parsing
         } else if (comptime field.defaultValue()) |dv| {
@@ -109,11 +117,16 @@ fn parseStruct(comptime T: type, scanner: *Scanner, alloc: Allocator) ParseError
         };
 
         var matched = false;
-        inline for (std.meta.fields(T)) |field| {
+        inline for (fields, 0..) |field, index| {
             if (comptime std.mem.eql(u8, field.name, "_arena")) continue;
             const mapped = comptime jsonKeyForField(T, field.name);
             if (std.mem.eql(u8, json_key, mapped)) {
-                @field(result, field.name) = try parseValue(field.type, scanner, alloc);
+                if (try scanner.peekNextTokenType() == .null) {
+                    _ = try scanner.nextAlloc(alloc, .alloc_if_needed);
+                } else {
+                    @field(result, field.name) = try parseValue(field.type, scanner, alloc);
+                    seen[index] = true;
+                }
                 matched = true;
             }
         }
@@ -123,6 +136,24 @@ fn parseStruct(comptime T: type, scanner: *Scanner, alloc: Allocator) ParseError
         switch (key_token) {
             .allocated_string => |s| alloc.free(s),
             else => {},
+        }
+    }
+
+    inline for (fields, 0..) |field, index| {
+        if (comptime std.mem.eql(u8, field.name, "_arena")) continue;
+        if (comptime field.defaultValue() == null) {
+            if (!seen[index]) {
+                @field(result, field.name) = switch (@typeInfo(field.type)) {
+                    .optional => null,
+                    .bool => false,
+                    .int, .float => 0,
+                    .pointer => |pointer| if (pointer.size == .slice and pointer.child == u8)
+                        ""
+                    else
+                        return error.MissingField,
+                    else => return error.MissingField,
+                };
+            }
         }
     }
     return result;
@@ -639,6 +670,65 @@ test "parse null fields" {
     const result = try parseJsonObject(TestStruct, json, std.testing.allocator);
     try std.testing.expect(result.name == null);
     try std.testing.expect(result.value == null);
+}
+
+test "parse missing required scalar fields uses zero defaults" {
+    const Record = struct {
+        name: []const u8,
+        count: i32,
+        ratio: f64,
+        active: bool,
+    };
+
+    const result = try parseJsonObject(Record, "{}", std.testing.allocator);
+    try std.testing.expectEqual(@as(usize, 0), result.name.len);
+    try std.testing.expectEqualStrings("", result.name);
+    try std.testing.expectEqual(@as(i32, 0), result.count);
+    try std.testing.expectEqual(@as(f64, 0), result.ratio);
+    try std.testing.expect(!result.active);
+}
+
+test "parse null structure fields preserves defaults" {
+    const Record = struct {
+        name: []const u8 = "default",
+        count: i32 = 7,
+        optional: ?bool = null,
+    };
+
+    const result = try parseJsonObject(Record,
+        \\{"name":null,"count":null,"optional":null}
+    , std.testing.allocator);
+    try std.testing.expectEqualStrings("default", result.name);
+    try std.testing.expectEqual(@as(i32, 7), result.count);
+    try std.testing.expect(result.optional == null);
+}
+
+test "parse missing nested required scalar fields uses zero defaults" {
+    const Record = struct {
+        child: ?struct {
+            name: []const u8,
+            count: i32,
+        } = null,
+    };
+
+    const result = try parseJsonObject(Record,
+        \\{"child":{"count":3}}
+    , std.testing.allocator);
+    const child = result.child orelse return error.MissingChild;
+    try std.testing.expectEqual(@as(usize, 0), child.name.len);
+    try std.testing.expectEqualStrings("", child.name);
+    try std.testing.expectEqual(@as(i32, 3), child.count);
+}
+
+test "parse missing required composite field returns an error" {
+    const Record = struct {
+        child: struct { active: bool },
+    };
+
+    try std.testing.expectError(
+        error.MissingField,
+        parseJsonObject(Record, "{}", std.testing.allocator),
+    );
 }
 
 test "parse unknown fields are skipped" {

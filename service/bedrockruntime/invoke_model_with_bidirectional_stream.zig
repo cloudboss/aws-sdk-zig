@@ -3,7 +3,7 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
-const ServiceError = @import("errors.zig").ServiceError;
+const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const InvokeModelWithBidirectionalStreamInput = @import("invoke_model_with_bidirectional_stream_request.zig").InvokeModelWithBidirectionalStreamRequest;
 

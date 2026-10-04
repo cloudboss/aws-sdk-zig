@@ -1,3 +1,4 @@
+const aws = @import("aws");
 const std = @import("std");
 
 pub const ServiceError = struct {
@@ -83,34 +84,105 @@ pub const ServiceError = struct {
     }
 };
 
+/// The request failed because the target of the operation is currently being
+/// modified by
+/// a different request. Try again later.
 pub const ConcurrentModificationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request failed because performing the operation would violate a
+/// constraint.
+///
+/// Some of the reasons in the following list might not apply to this specific
+/// operation.
+///
+/// * You must meet the prerequisites for using tag policies. For information,
+///   see
+/// [Prerequisites and
+/// permissions](https://docs.aws.amazon.com/tag-editor/latest/userguide/tag-policies-orgs.html#tag-policies-prereqs) in the *Tagging Amazon Web Services resources and Tag Editor* user guide.
+///
+/// * You must enable the tag policies service principal
+/// (`tagpolicies.tag.amazonaws.com`) to integrate with Organizations For
+/// information, see
+/// [EnableAWSServiceAccess](https://docs.aws.amazon.com/organizations/latest/APIReference/API_EnableAWSServiceAccess.html).
+///
+/// * You must have a tag policy attached to the organization root, an OU, or an
+/// account.
 pub const ConstraintViolationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request processing failed because of an unknown error, exception, or
+/// failure. You
+/// can retry the request.
 pub const InternalServiceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request failed because of one of the following reasons:
+///
+/// * A required parameter is missing.
+///
+/// * A provided string parameter is malformed.
+///
+/// * An provided parameter value is out of range.
+///
+/// * The target ID is invalid, unsupported, or doesn't exist.
+///
+/// * You can't access the Amazon S3 bucket for report storage. For more
+///   information, see
+/// [Amazon S3 bucket policy for report
+/// storage](https://docs.aws.amazon.com/tag-editor/latest/userguide/tag-policies-orgs.html#bucket-policy) in the *Tagging Amazon Web Services resources and Tag Editor* user guide.
+///
+/// * The partition specified in an ARN parameter in the request doesn't match
+///   the
+/// partition where you invoked the operation. The partition is specified by the
+/// second field of the ARN.
 pub const InvalidParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request failed because the specified `PaginationToken` has expired. A
+/// `PaginationToken` is valid for a maximum of 15 minutes.
 pub const PaginationTokenExpiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request failed because it exceeded the allowed frequency of submitted
+/// requests.
 pub const ThrottledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {
@@ -119,3 +191,101 @@ pub const UnknownServiceError = struct {
     request_id: []const u8 = "",
     http_status: u16 = 0,
 };
+
+/// Parse a service diagnostic. The caller must call deinit on the result.
+pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) std.mem.Allocator.Error!ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.findScalarLast(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "ConcurrentModificationException")) {
+        const parsed_error: ?ConcurrentModificationException = aws.json.parseJsonObject(ConcurrentModificationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .concurrent_modification_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ConstraintViolationException")) {
+        const parsed_error: ?ConstraintViolationException = aws.json.parseJsonObject(ConstraintViolationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .constraint_violation_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InternalServiceException")) {
+        const parsed_error: ?InternalServiceException = aws.json.parseJsonObject(InternalServiceException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .internal_service_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidParameterException")) {
+        const parsed_error: ?InvalidParameterException = aws.json.parseJsonObject(InvalidParameterException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_parameter_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "PaginationTokenExpiredException")) {
+        const parsed_error: ?PaginationTokenExpiredException = aws.json.parseJsonObject(PaginationTokenExpiredException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .pagination_token_expired_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ThrottledException")) {
+        const parsed_error: ?ThrottledException = aws.json.parseJsonObject(ThrottledException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .throttled_exception = typed_error } };
+        }
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

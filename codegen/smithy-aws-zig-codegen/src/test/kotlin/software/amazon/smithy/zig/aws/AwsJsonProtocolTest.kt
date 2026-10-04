@@ -14,6 +14,7 @@ import software.amazon.smithy.model.shapes.OperationShape
 import software.amazon.smithy.model.shapes.ServiceShape
 import software.amazon.smithy.model.shapes.ShapeId
 import software.amazon.smithy.model.shapes.StructureShape
+import software.amazon.smithy.model.traits.DocumentationTrait
 import software.amazon.smithy.model.traits.ErrorTrait
 import software.amazon.smithy.model.traits.RequiredTrait
 import software.amazon.smithy.zig.ZigContext
@@ -29,13 +30,48 @@ class AwsJsonProtocolTest {
     @TempDir
     lateinit var tempDir: Path
 
-    private fun buildTestModel(): Model {
+    private fun buildTestModel(version: String): Model {
+        val protocolTrait = when (version) {
+            "1.0" -> "awsJson1_0"
+            "1.1" -> "awsJson1_1"
+            else -> error("Unsupported AWS JSON version: $version")
+        }
+
         return Model.assembler()
             .addShape(
                 StructureShape.builder()
                     .id("test#ResourceNotFoundException")
                     .addTrait(ErrorTrait("client"))
                     .addMember("message", ShapeId.from("smithy.api#String"))
+                    .build()
+            )
+            .addShape(
+                StructureShape.builder()
+                    .id("test#ConditionalCheckFailedException")
+                    .addTrait(ErrorTrait("client"))
+                    .addTrait(DocumentationTrait("The condition on the request was not satisfied."))
+                    .addMember(
+                        MemberShape.builder()
+                            .id("test#ConditionalCheckFailedException\$Message")
+                            .target("smithy.api#String")
+                            .addTrait(DocumentationTrait("A normalized explanation of the failure."))
+                            .build()
+                    )
+                    .addMember("requestId", ShapeId.from("smithy.api#String"))
+                    .addMember(
+                        MemberShape.builder()
+                            .id("test#ConditionalCheckFailedException\$Reason")
+                            .target("test#ErrorReason")
+                            .addTrait(RequiredTrait())
+                            .build()
+                    )
+                    .addMember(
+                        MemberShape.builder()
+                            .id("test#ConditionalCheckFailedException\$Item")
+                            .target("test#AttributeMap")
+                            .addTrait(DocumentationTrait("The item that caused the condition check to fail."))
+                            .build()
+                    )
                     .build()
             )
             .addShape(
@@ -72,6 +108,7 @@ class AwsJsonProtocolTest {
                     .input(ShapeId.from("test#PutItemInput"))
                     .output(ShapeId.from("test#PutItemOutput"))
                     .addError(ShapeId.from("test#ResourceNotFoundException"))
+                    .addError(ShapeId.from("test#ConditionalCheckFailedException"))
                     .build()
             )
             .addShape(
@@ -118,14 +155,44 @@ class AwsJsonProtocolTest {
                     .output(ShapeId.from("test#GetItemOutput"))
                     .build()
             )
-            .addShape(
-                ServiceShape.builder()
-                    .id("test#DynamoDB_20120810")
-                    .version("2012-08-10")
-                    .addOperation(ShapeId.from("test#PutItem"))
-                    .addOperation(ShapeId.from("test#ListTables"))
-                    .addOperation(ShapeId.from("test#GetItem"))
-                    .build()
+            .addUnparsedModel(
+                "error-reason.smithy",
+                """
+                ${'$'}version: "2"
+                namespace test
+
+                enum ErrorReason {
+                    CONDITION_FAILED
+                }
+                """.trimIndent(),
+            )
+            .addUnparsedModel(
+                "aws-json-traits.smithy",
+                """
+                ${'$'}version: "2"
+                namespace aws.protocols
+
+                @trait(selector: "service")
+                structure awsJson1_0 {}
+
+                @trait(selector: "service")
+                structure awsJson1_1 {}
+                """.trimIndent(),
+            )
+            .addUnparsedModel(
+                "service.smithy",
+                """
+                ${'$'}version: "2"
+                namespace test
+
+                use aws.protocols#$protocolTrait
+
+                @$protocolTrait
+                service DynamoDB_20120810 {
+                    version: "2012-08-10"
+                    operations: [PutItem, ListTables, GetItem]
+                }
+                """.trimIndent(),
             )
             .assemble()
             .unwrap()
@@ -154,7 +221,7 @@ class AwsJsonProtocolTest {
     }
 
     private fun generateFiles(version: String): Map<String, String> {
-        val model = buildTestModel()
+        val model = buildTestModel(version)
         val context = createContext(model)
         val service = model.expectShape(
             ShapeId.from("test#DynamoDB_20120810"),
@@ -311,23 +378,23 @@ class AwsJsonProtocolTest {
     @Test
     fun errorParserUsesUnderscoreType() {
         val files = generateFiles("1.0")
-        val op = files["put_item.zig"]!!
+        val errors = files["errors.zig"]!!
 
-        assertTrue(op.contains("fn parseErrorResponse("), "Missing parseErrorResponse")
+        assertTrue(errors.contains("fn parseErrorResponse("), "Missing parseErrorResponse")
         assertTrue(
-            op.contains("__type"),
+            errors.contains("__type"),
             "Should extract error code from __type field",
         )
-        assertTrue(op.contains("allocator: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
+        assertTrue(errors.contains("allocator: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
     }
 
     @Test
     fun errorParserStripsNamespacePrefix() {
         val files = generateFiles("1.0")
-        val op = files["put_item.zig"]!!
+        val errors = files["errors.zig"]!!
 
         assertTrue(
-            op.contains("findScalarLast"),
+            errors.contains("findScalarLast"),
             "Should strip namespace prefix from __type using '#' delimiter",
         )
     }
@@ -335,10 +402,10 @@ class AwsJsonProtocolTest {
     @Test
     fun errorParserMatchesErrorCodes() {
         val files = generateFiles("1.0")
-        val op = files["put_item.zig"]!!
+        val errors = files["errors.zig"]!!
 
         assertTrue(
-            op.contains("\"ResourceNotFoundException\""),
+            errors.contains("\"ResourceNotFoundException\""),
             "Missing error code matching",
         )
     }
@@ -346,14 +413,14 @@ class AwsJsonProtocolTest {
     @Test
     fun errorParserChecksMessageAndMessageCase() {
         val files = generateFiles("1.0")
-        val op = files["put_item.zig"]!!
+        val errors = files["errors.zig"]!!
 
         assertTrue(
-            op.contains("\"message\""),
+            errors.contains("\"message\""),
             "Should check lowercase 'message' field",
         )
         assertTrue(
-            op.contains("\"Message\""),
+            errors.contains("\"Message\""),
             "Should check uppercase 'Message' field as fallback",
         )
     }
@@ -361,16 +428,99 @@ class AwsJsonProtocolTest {
     @Test
     fun errorParserDoesNotUseXmlElements() {
         val files = generateFiles("1.0")
-        val op = files["put_item.zig"]!!
+        val errors = files["errors.zig"]!!
 
         assertFalse(
-            op.contains("findElement"),
+            errors.contains("findElement"),
             "JSON protocol should NOT use XML findElement",
         )
         assertFalse(
-            op.contains("<Code>"),
+            errors.contains("<Code>"),
             "JSON protocol should NOT reference XML tags",
         )
+    }
+
+    @Test
+    fun modeledErrorsIncludeMembersImportsDocsAndWireNames() {
+        for (version in listOf("1.0", "1.1")) {
+            val files = generateFiles(version)
+            val errors = files["errors.zig"]!!
+            val exception = errors
+                .substringAfter("pub const ConditionalCheckFailedException = struct {")
+                .substringBefore("\npub const ResourceNotFoundException")
+
+            assertTrue(errors.contains("const aws = @import(\"aws\");"), "AWS JSON $version error maps should import aws")
+            assertTrue(
+                errors.contains("const AttributeValue = @import(\"attribute_value.zig\").AttributeValue;"),
+                "AWS JSON $version errors should import map value types",
+            )
+            assertTrue(
+                errors.contains("/// The condition on the request was not satisfied."),
+                "AWS JSON $version errors should retain exception documentation",
+            )
+            assertTrue(
+                exception.contains("/// The item that caused the condition check to fail."),
+                "AWS JSON $version errors should retain member documentation",
+            )
+            assertTrue(
+                exception.contains("item: ?[]const aws.map.MapEntry(AttributeValue) = null,"),
+                "AWS JSON $version errors should use output-style map optionality",
+            )
+            assertTrue(exception.contains(".message = \"Message\","), "AWS JSON $version should preserve Message wire casing")
+            assertTrue(exception.contains(".request_id = \"requestId\","), "AWS JSON $version should map reserved request IDs")
+            assertTrue(exception.contains(".item = \"Item\","), "AWS JSON $version should map modeled member names")
+            assertTrue(
+                Regex("(?m)^    message: ").findAll(exception).count() == 1,
+                "AWS JSON $version should not duplicate normalized message",
+            )
+            assertTrue(
+                Regex("(?m)^    request_id: ").findAll(exception).count() == 1,
+                "AWS JSON $version should not duplicate normalized request_id",
+            )
+        }
+    }
+
+    @Test
+    fun requiredErrorEnumsAllowUnknownValues() {
+        for (version in listOf("1.0", "1.1")) {
+            val errors = generateFiles(version)["errors.zig"]!!
+            assertTrue(
+                errors.contains("reason: ?ErrorReason = null,"),
+                "AWS JSON $version unknown error enum values should remain optional",
+            )
+        }
+    }
+
+    @Test
+    fun modeledErrorParserDispatchesAndFallsBackWithoutSwallowingOom() {
+        for (version in listOf("1.0", "1.1")) {
+            val files = generateFiles(version)
+            val op = files["put_item.zig"]!!
+            val errors = files["errors.zig"]!!
+
+            assertTrue(
+                op.contains("const parseErrorResponse = @import(\"errors.zig\").parseErrorResponse;"),
+                "AWS JSON $version should import the shared parser",
+            )
+            assertTrue(
+                errors.contains("aws.json.parseJsonObject(ConditionalCheckFailedException, body, arena_alloc)"),
+                "AWS JSON $version should deserialize recognized error bodies",
+            )
+            assertTrue(errors.contains("typed_error.message = owned_message;"), "AWS JSON $version should normalize error messages")
+            assertTrue(errors.contains("typed_error.request_id = owned_request_id;"), "AWS JSON $version should normalize request IDs")
+            assertTrue(errors.contains("else => null,"), "AWS JSON $version malformed typed bodies should fall through")
+            assertTrue(errors.contains(".code = owned_code,"), "AWS JSON $version fallback should preserve the error code")
+            assertTrue(errors.contains(".message = owned_message,"), "AWS JSON $version fallback should preserve the message")
+            assertTrue(errors.contains(".http_status = status,"), "AWS JSON $version fallback should preserve HTTP status")
+            assertTrue(
+                errors.contains("error.OutOfMemory => return error.OutOfMemory,"),
+                "AWS JSON $version typed parsing should propagate allocation failures",
+            )
+            assertTrue(
+                op.contains("d.* = try parseErrorResponse(client.allocator, response.body, response.status);"),
+                "AWS JSON $version operations should propagate diagnostic allocation failures",
+            )
+        }
     }
 
     // ---- Helper functions tests ----
@@ -379,8 +529,9 @@ class AwsJsonProtocolTest {
     fun helperFunctionsPresent() {
         val files = generateFiles("1.0")
         val op = files["put_item.zig"]!!
+        val errors = files["errors.zig"]!!
 
-        assertTrue(op.contains("aws.json.findJsonValue("), "Missing findJsonValue usage")
+        assertTrue(errors.contains("aws.json.findJsonValue("), "Missing findJsonValue usage")
         assertTrue(op.contains("aws.url.parseEndpoint("), "Missing parseEndpoint usage")
     }
 

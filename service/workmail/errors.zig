@@ -1,3 +1,4 @@
+const aws = @import("aws");
 const std = @import("std");
 
 pub const ServiceError = struct {
@@ -163,114 +164,249 @@ pub const ServiceError = struct {
     }
 };
 
+/// The directory is already in use by another WorkMail organization in the same
+/// account and Region.
 pub const DirectoryInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The directory service doesn't recognize the credentials supplied by
+/// WorkMail.
 pub const DirectoryServiceAuthenticationFailedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The directory is unavailable. It might be located in another Region or
+/// deleted.
 pub const DirectoryUnavailableException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The email address that you're trying to assign is already created for a
+/// different
+/// user, group, or resource.
 pub const EmailAddressInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The user, group, or resource that you're trying to register is already
+/// registered.
 pub const EntityAlreadyRegisteredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The identifier supplied for the user, group, or resource does not exist in
+/// your
+/// organization.
 pub const EntityNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You are performing an operation on a user, group, or resource that isn't in
+/// the
+/// expected state, such as trying to delete an active user.
 pub const EntityStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The configuration for a resource isn't valid. A resource must either be able
+/// to
+/// auto-respond to requests or have at least one delegate associated that can
+/// do so on its
+/// behalf.
 pub const InvalidConfigurationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You SES configuration has customizations that WorkMail cannot save. The
+/// error message lists the invalid setting. For examples of invalid settings,
+/// refer to
+/// [CreateReceiptRule](https://docs.aws.amazon.com/ses/latest/APIReference/API_CreateReceiptRule.html).
 pub const InvalidCustomSesConfigurationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// One or more of the input parameters don't match the service's restrictions.
 pub const InvalidParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The supplied password doesn't match the minimum security constraints, such
+/// as length
+/// or use of special characters.
 pub const InvalidPasswordException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The request exceeds the limit of the resource.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The domain you're trying to change is in use by another user or organization
+/// in your account. See the error message for details.
 pub const MailDomainInUseException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The domain specified is not found in your organization.
 pub const MailDomainNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// After a domain has been added to the organization, it must be verified. The
+/// domain is
+/// not yet verified.
 pub const MailDomainStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The user, group, or resource name isn't unique in WorkMail.
 pub const NameAvailabilityException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// An operation received a valid organization identifier that either doesn't
+/// belong or
+/// exist in the system.
 pub const OrganizationNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The organization must have a valid state to perform certain
+/// operations on the organization or its members.
 pub const OrganizationStateException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This user, group, or resource name is not allowed in WorkMail.
 pub const ReservedNameException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource cannot be found.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The resource can have up to 50 user-applied tags.
 pub const TooManyTagsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// You can't perform a write operation against a read-only directory.
 pub const UnsupportedOperationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
 pub const UnknownServiceError = struct {
@@ -279,3 +415,293 @@ pub const UnknownServiceError = struct {
     request_id: []const u8 = "",
     http_status: u16 = 0,
 };
+
+/// Parse a service diagnostic. The caller must call deinit on the result.
+pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) std.mem.Allocator.Error!ServiceError {
+    const error_code = blk: {
+        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
+        if (std.mem.findScalarLast(u8, type_str, '#')) |idx| {
+            break :blk type_str[idx + 1 ..];
+        }
+        break :blk type_str;
+    };
+    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, "");
+
+    if (std.mem.eql(u8, error_code, "DirectoryInUseException")) {
+        const parsed_error: ?DirectoryInUseException = aws.json.parseJsonObject(DirectoryInUseException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .directory_in_use_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "DirectoryServiceAuthenticationFailedException")) {
+        const parsed_error: ?DirectoryServiceAuthenticationFailedException = aws.json.parseJsonObject(DirectoryServiceAuthenticationFailedException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .directory_service_authentication_failed_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "DirectoryUnavailableException")) {
+        const parsed_error: ?DirectoryUnavailableException = aws.json.parseJsonObject(DirectoryUnavailableException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .directory_unavailable_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "EmailAddressInUseException")) {
+        const parsed_error: ?EmailAddressInUseException = aws.json.parseJsonObject(EmailAddressInUseException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .email_address_in_use_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "EntityAlreadyRegisteredException")) {
+        const parsed_error: ?EntityAlreadyRegisteredException = aws.json.parseJsonObject(EntityAlreadyRegisteredException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .entity_already_registered_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "EntityNotFoundException")) {
+        const parsed_error: ?EntityNotFoundException = aws.json.parseJsonObject(EntityNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .entity_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "EntityStateException")) {
+        const parsed_error: ?EntityStateException = aws.json.parseJsonObject(EntityStateException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .entity_state_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidConfigurationException")) {
+        const parsed_error: ?InvalidConfigurationException = aws.json.parseJsonObject(InvalidConfigurationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_configuration_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidCustomSesConfigurationException")) {
+        const parsed_error: ?InvalidCustomSesConfigurationException = aws.json.parseJsonObject(InvalidCustomSesConfigurationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_custom_ses_configuration_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidParameterException")) {
+        const parsed_error: ?InvalidParameterException = aws.json.parseJsonObject(InvalidParameterException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_parameter_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "InvalidPasswordException")) {
+        const parsed_error: ?InvalidPasswordException = aws.json.parseJsonObject(InvalidPasswordException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .invalid_password_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "LimitExceededException")) {
+        const parsed_error: ?LimitExceededException = aws.json.parseJsonObject(LimitExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "MailDomainInUseException")) {
+        const parsed_error: ?MailDomainInUseException = aws.json.parseJsonObject(MailDomainInUseException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .mail_domain_in_use_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "MailDomainNotFoundException")) {
+        const parsed_error: ?MailDomainNotFoundException = aws.json.parseJsonObject(MailDomainNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .mail_domain_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "MailDomainStateException")) {
+        const parsed_error: ?MailDomainStateException = aws.json.parseJsonObject(MailDomainStateException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .mail_domain_state_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "NameAvailabilityException")) {
+        const parsed_error: ?NameAvailabilityException = aws.json.parseJsonObject(NameAvailabilityException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .name_availability_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationNotFoundException")) {
+        const parsed_error: ?OrganizationNotFoundException = aws.json.parseJsonObject(OrganizationNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .organization_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "OrganizationStateException")) {
+        const parsed_error: ?OrganizationStateException = aws.json.parseJsonObject(OrganizationStateException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .organization_state_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ReservedNameException")) {
+        const parsed_error: ?ReservedNameException = aws.json.parseJsonObject(ReservedNameException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .reserved_name_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        const parsed_error: ?ResourceNotFoundException = aws.json.parseJsonObject(ResourceNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .resource_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "TooManyTagsException")) {
+        const parsed_error: ?TooManyTagsException = aws.json.parseJsonObject(TooManyTagsException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .too_many_tags_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedOperationException")) {
+        const parsed_error: ?UnsupportedOperationException = aws.json.parseJsonObject(UnsupportedOperationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .unsupported_operation_exception = typed_error } };
+        }
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

@@ -505,23 +505,23 @@ class RestJsonProtocolTest {
     @Test
     fun errorParserUsesUnderscoreType() {
         val files = generateFiles()
-        val op = files["invoke.zig"]!!
+        val errors = files["errors.zig"]!!
 
-        assertTrue(op.contains("fn parseErrorResponse("), "Missing parseErrorResponse")
+        assertTrue(errors.contains("fn parseErrorResponse("), "Missing parseErrorResponse")
         assertTrue(
-            op.contains("__type"),
+            errors.contains("__type"),
             "Should extract error code from __type field (same as AWS JSON)",
         )
-        assertTrue(op.contains("allocator: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
+        assertTrue(errors.contains("allocator: std.mem.Allocator"), "parseErrorResponse missing allocator parameter")
     }
 
     @Test
     fun errorParserStripsNamespacePrefix() {
         val files = generateFiles()
-        val op = files["invoke.zig"]!!
+        val errors = files["errors.zig"]!!
 
         assertTrue(
-            op.contains("findScalarLast"),
+            errors.contains("findScalarLast"),
             "Should strip namespace prefix from __type using '#' delimiter",
         )
     }
@@ -529,14 +529,14 @@ class RestJsonProtocolTest {
     @Test
     fun errorParserMatchesErrorCodes() {
         val files = generateFiles()
-        val op = files["invoke.zig"]!!
+        val errors = files["errors.zig"]!!
 
         assertTrue(
-            op.contains("\"ResourceNotFoundException\""),
+            errors.contains("\"ResourceNotFoundException\""),
             "Should match ResourceNotFoundException error code",
         )
         assertTrue(
-            op.contains("\"ServiceException\""),
+            errors.contains("\"ServiceException\""),
             "Should match ServiceException error code",
         )
     }
@@ -547,8 +547,9 @@ class RestJsonProtocolTest {
     fun helperFunctionsPresent() {
         val files = generateFiles()
         val op = files["invoke.zig"]!!
+        val errors = files["errors.zig"]!!
 
-        assertTrue(op.contains("aws.json.findJsonValue("), "Missing findJsonValue usage")
+        assertTrue(errors.contains("aws.json.findJsonValue("), "Missing findJsonValue usage")
         assertTrue(op.contains("aws.url.appendUrlEncoded("), "Missing appendUrlEncoded usage")
         assertTrue(op.contains("aws.url.parseEndpoint("), "Missing parseEndpoint usage")
     }

@@ -1,4 +1,7 @@
+const aws = @import("aws");
 const std = @import("std");
+
+const DashboardValidationMessage = @import("dashboard_validation_message.zig").DashboardValidationMessage;
 
 pub const ServiceError = struct {
     arena: ?std.heap.ArenaAllocator = null,
@@ -123,74 +126,154 @@ pub const ServiceError = struct {
     }
 };
 
+/// More than one process tried to modify a resource at the same time.
 pub const ConcurrentModificationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// This operation attempted to create a resource that already exists.
 pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Some part of the dashboard data is invalid.
 pub const DashboardInvalidInputError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    dashboard_validation_messages: ?[]const DashboardValidationMessage = null,
+
+    pub const json_field_names = .{
+        .dashboard_validation_messages = "dashboardValidationMessages",
+        .message = "message",
+    };
 };
 
+/// The specified dashboard does not exist.
 pub const DashboardNotFoundError = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Request processing has failed due to some unknown error, exception, or
+/// failure.
 pub const InternalServiceFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// Data was not syntactically valid JSON.
 pub const InvalidFormatFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The next token specified is invalid.
 pub const InvalidNextToken = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// Parameters were used together that cannot be used together.
 pub const InvalidParameterCombinationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The value of an input parameter is bad or out-of-range.
 pub const InvalidParameterValueException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The operation exceeded one or more limits.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
 };
 
+/// The quota for alarms for this customer has already been reached.
 pub const LimitExceededFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// An input parameter that is required is missing.
 pub const MissingRequiredParameterException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The named resource does not exist.
 pub const ResourceNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
 };
 
+/// The named resource does not exist.
 pub const ResourceNotFoundException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
+
+    resource_id: ?[]const u8 = null,
+
+    resource_type: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "Message",
+        .resource_id = "ResourceId",
+        .resource_type = "ResourceType",
+    };
 };
 
 pub const UnknownServiceError = struct {
@@ -199,3 +282,108 @@ pub const UnknownServiceError = struct {
     request_id: []const u8 = "",
     http_status: u16 = 0,
 };
+
+/// Parse a service diagnostic. The caller must call deinit on the result.
+pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) std.mem.Allocator.Error!ServiceError {
+    const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
+    const error_message = aws.xml.findElement(body, "Message") orelse "";
+    const request_id = aws.xml.findElement(body, "RequestId") orelse "";
+    var arena = std.heap.ArenaAllocator.init(allocator);
+    errdefer arena.deinit();
+    const arena_alloc = arena.allocator();
+    const owned_message = try arena_alloc.dupe(u8, error_message);
+    const owned_request_id = try arena_alloc.dupe(u8, request_id);
+
+    if (std.mem.eql(u8, error_code, "ConcurrentModificationException")) {
+        return .{ .arena = arena, .kind = .{ .concurrent_modification_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DashboardInvalidInputError")) {
+        return .{ .arena = arena, .kind = .{ .dashboard_invalid_input_error = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "DashboardNotFoundError")) {
+        return .{ .arena = arena, .kind = .{ .dashboard_not_found_error = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InternalServiceFault")) {
+        return .{ .arena = arena, .kind = .{ .internal_service_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidFormatFault")) {
+        return .{ .arena = arena, .kind = .{ .invalid_format_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidNextToken")) {
+        return .{ .arena = arena, .kind = .{ .invalid_next_token = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidParameterCombinationException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_parameter_combination_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "InvalidParameterValueException")) {
+        return .{ .arena = arena, .kind = .{ .invalid_parameter_value_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "LimitExceededException")) {
+        return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "LimitExceededFault")) {
+        return .{ .arena = arena, .kind = .{ .limit_exceeded_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "MissingRequiredParameterException")) {
+        return .{ .arena = arena, .kind = .{ .missing_required_parameter_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFound")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+
+    const owned_code = try arena_alloc.dupe(u8, error_code);
+    return .{ .arena = arena, .kind = .{ .unknown = .{
+        .code = owned_code,
+        .message = owned_message,
+        .request_id = owned_request_id,
+        .http_status = status,
+    } } };
+}

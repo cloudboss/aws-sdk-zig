@@ -321,16 +321,32 @@ class ServiceGeneratorTest {
         val op = files["get_caller_identity.zig"]!!
 
         assertTrue(op.contains("fn deserializeResponse("), "Missing deserializeResponse")
-        assertTrue(op.contains("findElement"), "Missing XML element finder")
+        assertTrue(op.contains("aws.xml.Reader.init(body)"), "Missing XML response reader")
     }
 
     @Test
-    fun operationFileContainsErrorParser() {
+    fun operationsReuseServiceErrorParser() {
         val files = generateAndGetFiles()
-        val op = files["get_caller_identity.zig"]!!
+        val errors = files["errors.zig"]!!
 
-        assertTrue(op.contains("fn parseErrorResponse("), "Missing parseErrorResponse")
-        assertTrue(op.contains("\"ExpiredTokenException\""), "Missing error code matching")
+        assertTrue(errors.contains("pub fn parseErrorResponse("), "Missing shared error parser")
+        assertTrue(errors.contains("std.mem.Allocator.Error!ServiceError"), "Missing allocator error set")
+        assertTrue(errors.contains("\"ExpiredTokenException\""), "Missing error code matching")
+        assertTrue(
+            files.values.sumOf { Regex("fn parseErrorResponse\\(").findAll(it).count() } == 1,
+            "The service should contain exactly one error parser",
+        )
+        for (fileName in listOf("get_caller_identity.zig", "get_access_key_info.zig")) {
+            val op = files[fileName]!!
+            assertTrue(
+                op.contains("const parseErrorResponse = @import(\"errors.zig\").parseErrorResponse;"),
+                "$fileName should import the shared parser",
+            )
+            assertTrue(
+                op.contains("d.* = try parseErrorResponse(client.allocator, response.body, response.status);"),
+                "$fileName should propagate diagnostic allocation failures",
+            )
+        }
     }
 
     @Test

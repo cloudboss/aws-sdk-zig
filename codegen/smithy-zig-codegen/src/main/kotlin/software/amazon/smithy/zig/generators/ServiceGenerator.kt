@@ -21,12 +21,17 @@ class ServiceGenerator(
 
         // 2. Generate errors.zig
         errorGenerator.run()
+        context.writerDelegator().useFileWriter("errors.zig") { writer ->
+            writer.importContainer.addImport("aws", "aws")
+            writer.write("/// Parse a service diagnostic. The caller must call deinit on the result.")
+            protocol.writeParseErrorResponse(writer, errorInfos)
+        }
 
         // 3. Generate one file per operation (including resource-bound operations)
         val topDownIndex = TopDownIndex.of(model)
         for (opShape in topDownIndex.getContainedOperations(service)) {
             OperationGenerator(
-                context, context.settings(), service, model, opShape, apiVersion, errorInfos, protocol,
+                context, context.settings(), service, model, opShape, apiVersion, protocol,
             ).run()
         }
 

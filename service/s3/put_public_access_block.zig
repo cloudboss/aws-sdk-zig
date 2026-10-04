@@ -3,7 +3,7 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
-const ServiceError = @import("errors.zig").ServiceError;
+const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ChecksumAlgorithm = @import("checksum_algorithm.zig").ChecksumAlgorithm;
 const PublicAccessBlockConfiguration = @import("public_access_block_configuration.zig").PublicAccessBlockConfiguration;
 const serde = @import("serde.zig");
@@ -68,7 +68,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutPublicAc
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = try parseErrorResponse(client.allocator, response.body, response.status);
         }
         return error.ServiceError;
     }
@@ -128,114 +128,4 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
     const result: PutPublicAccessBlockOutput = .{};
 
     return result;
-}
-
-fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
-    const error_code = aws.xml.findElement(body, "Code") orelse "Unknown";
-    const error_message = aws.xml.findElement(body, "Message") orelse "";
-    const request_id = aws.xml.findElement(body, "RequestId") orelse "";
-    var arena = std.heap.ArenaAllocator.init(allocator);
-    errdefer arena.deinit();
-    const arena_alloc = arena.allocator();
-    const owned_message = try arena_alloc.dupe(u8, error_message);
-    const owned_request_id = try arena_alloc.dupe(u8, request_id);
-
-    if (std.mem.eql(u8, error_code, "AccessDenied")) {
-        return .{ .arena = arena, .kind = .{ .access_denied = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "BucketAlreadyExists")) {
-        return .{ .arena = arena, .kind = .{ .bucket_already_exists = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "BucketAlreadyOwnedByYou")) {
-        return .{ .arena = arena, .kind = .{ .bucket_already_owned_by_you = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "EncryptionTypeMismatch")) {
-        return .{ .arena = arena, .kind = .{ .encryption_type_mismatch = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "IdempotencyParameterMismatch")) {
-        return .{ .arena = arena, .kind = .{ .idempotency_parameter_mismatch = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "InvalidObjectState")) {
-        return .{ .arena = arena, .kind = .{ .invalid_object_state = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "InvalidRequest")) {
-        return .{ .arena = arena, .kind = .{ .invalid_request = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "InvalidWriteOffset")) {
-        return .{ .arena = arena, .kind = .{ .invalid_write_offset = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "NoSuchBucket")) {
-        return .{ .arena = arena, .kind = .{ .no_such_bucket = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "NoSuchKey")) {
-        return .{ .arena = arena, .kind = .{ .no_such_key = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "NoSuchUpload")) {
-        return .{ .arena = arena, .kind = .{ .no_such_upload = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "NotFound")) {
-        return .{ .arena = arena, .kind = .{ .not_found = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ObjectAlreadyInActiveTierError")) {
-        return .{ .arena = arena, .kind = .{ .object_already_in_active_tier_error = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ObjectNotInActiveTierError")) {
-        return .{ .arena = arena, .kind = .{ .object_not_in_active_tier_error = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "TooManyParts")) {
-        return .{ .arena = arena, .kind = .{ .too_many_parts = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-
-    const owned_code = try arena_alloc.dupe(u8, error_code);
-    return .{ .arena = arena, .kind = .{ .unknown = .{
-        .code = owned_code,
-        .message = owned_message,
-        .request_id = owned_request_id,
-        .http_status = status,
-    } } };
 }

@@ -3,7 +3,7 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
-const ServiceError = @import("errors.zig").ServiceError;
+const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const QuotaUtilizationInfo = @import("quota_utilization_info.zig").QuotaUtilizationInfo;
 const ReportStatus = @import("report_status.zig").ReportStatus;
 
@@ -110,7 +110,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetQuotaUti
 
     if (!response.isSuccess()) {
         if (options.diagnostic) |d| {
-            d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };
+            d.* = try parseErrorResponse(client.allocator, response.body, response.status);
         }
         return error.ServiceError;
     }
@@ -143,131 +143,4 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
     _ = headers;
     if (body.len == 0) return .{};
     return aws.json.parseJsonObject(GetQuotaUtilizationReportOutput, body, allocator);
-}
-
-fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {
-    const error_code = blk: {
-        const type_str = aws.json.findJsonValue(body, "__type") orelse break :blk @as([]const u8, "Unknown");
-        if (std.mem.findScalarLast(u8, type_str, '#')) |idx| {
-            break :blk type_str[idx + 1 ..];
-        }
-        break :blk type_str;
-    };
-    const error_message = aws.json.findJsonValue(body, "message") orelse aws.json.findJsonValue(body, "Message") orelse "";
-    var arena = std.heap.ArenaAllocator.init(allocator);
-    errdefer arena.deinit();
-    const arena_alloc = arena.allocator();
-    const owned_message = try arena_alloc.dupe(u8, error_message);
-    const owned_request_id = try arena_alloc.dupe(u8, "");
-
-    if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
-        return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "AWSServiceAccessNotEnabledException")) {
-        return .{ .arena = arena, .kind = .{ .aws_service_access_not_enabled_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "DependencyAccessDeniedException")) {
-        return .{ .arena = arena, .kind = .{ .dependency_access_denied_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "IllegalArgumentException")) {
-        return .{ .arena = arena, .kind = .{ .illegal_argument_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "InvalidPaginationTokenException")) {
-        return .{ .arena = arena, .kind = .{ .invalid_pagination_token_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "InvalidResourceStateException")) {
-        return .{ .arena = arena, .kind = .{ .invalid_resource_state_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "NoAvailableOrganizationException")) {
-        return .{ .arena = arena, .kind = .{ .no_available_organization_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "NoSuchResourceException")) {
-        return .{ .arena = arena, .kind = .{ .no_such_resource_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "OrganizationNotInAllFeaturesModeException")) {
-        return .{ .arena = arena, .kind = .{ .organization_not_in_all_features_mode_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "QuotaExceededException")) {
-        return .{ .arena = arena, .kind = .{ .quota_exceeded_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ResourceAlreadyExistsException")) {
-        return .{ .arena = arena, .kind = .{ .resource_already_exists_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ServiceException")) {
-        return .{ .arena = arena, .kind = .{ .service_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "ServiceQuotaTemplateNotInUseException")) {
-        return .{ .arena = arena, .kind = .{ .service_quota_template_not_in_use_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "TagPolicyViolationException")) {
-        return .{ .arena = arena, .kind = .{ .tag_policy_violation_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "TemplatesNotAvailableInRegionException")) {
-        return .{ .arena = arena, .kind = .{ .templates_not_available_in_region_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "TooManyRequestsException")) {
-        return .{ .arena = arena, .kind = .{ .too_many_requests_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-    if (std.mem.eql(u8, error_code, "TooManyTagsException")) {
-        return .{ .arena = arena, .kind = .{ .too_many_tags_exception = .{
-            .message = owned_message,
-            .request_id = owned_request_id,
-        } } };
-    }
-
-    const owned_code = try arena_alloc.dupe(u8, error_code);
-    return .{ .arena = arena, .kind = .{ .unknown = .{
-        .code = owned_code,
-        .message = owned_message,
-        .request_id = owned_request_id,
-        .http_status = status,
-    } } };
 }

@@ -21,6 +21,7 @@ import software.amazon.smithy.aws.traits.protocols.Ec2QueryNameTrait
 import software.amazon.smithy.model.traits.XmlNameTrait
 import software.amazon.smithy.zig.NamingUtil
 import software.amazon.smithy.zig.ZigWriter
+import software.amazon.smithy.zig.generators.ErrorGenerator
 import software.amazon.smithy.zig.protocols.OperationContext
 import software.amazon.smithy.zig.protocols.ProtocolGenerator
 
@@ -1037,8 +1038,8 @@ open class AwsQueryProtocol : ProtocolGenerator {
         }
     }
 
-    override open fun writeParseErrorResponse(writer: ZigWriter, ctx: OperationContext) {
-        writer.openBlock("fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) !ServiceError {")
+    override open fun writeParseErrorResponse(writer: ZigWriter, errorInfos: List<ErrorGenerator.ErrorInfo>) {
+        writer.openBlock("pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status: u16) std.mem.Allocator.Error!ServiceError {")
 
         writer.write("const error_code = aws.xml.findElement(body, \"Code\") orelse \"Unknown\";")
         writer.write("const error_message = aws.xml.findElement(body, \"Message\") orelse \"\";")
@@ -1051,7 +1052,7 @@ open class AwsQueryProtocol : ProtocolGenerator {
         writer.blankLine()
 
         // Match error codes to ServiceError variants
-        for (info in ctx.errorInfos) {
+        for (info in errorInfos) {
             writer.openBlock("if (std.mem.eql(u8, error_code, \"\$L\")) {", info.smithyName)
             writer.write("return .{ .arena = arena, .kind = .{ .\$L = .{", info.variantName)
             writer.write("    .message = owned_message,")

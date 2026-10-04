@@ -31,7 +31,6 @@ class OperationGenerator(
     private val model: Model,
     private val operation: OperationShape,
     private val apiVersion: String,
-    private val errorInfos: List<ErrorGenerator.ErrorInfo>,
     private val protocol: ProtocolGenerator,
 ) {
     companion object {
@@ -118,7 +117,6 @@ class OperationGenerator(
             model = model,
             service = service,
             apiVersion = apiVersion,
-            errorInfos = errorInfos,
             settings = settings,
             symbolProvider = context.symbolProvider(),
         )
@@ -138,7 +136,7 @@ class OperationGenerator(
             // Intra-service imports written after standard imports
             writer.write("const Client = @import(\"client.zig\").Client;")
             writer.write("const CallOptions = @import(\"call_options.zig\").CallOptions;")
-            writer.write("const ServiceError = @import(\"errors.zig\").ServiceError;")
+            writer.write("const parseErrorResponse = @import(\"errors.zig\").parseErrorResponse;")
 
             // Import shared types referenced by input/output members
             val sharedTypes = collectSharedTypes()
@@ -199,16 +197,14 @@ class OperationGenerator(
 
                 writer.blankLine()
                 protocol.writeSerializeRequest(writer, ctx)
-                writer.blankLine()
                 if (!isServerPushEventStream) {
+                    writer.blankLine()
                     if (isStreaming) {
                         protocol.writeDeserializeStreamingResponse(writer, ctx)
                     } else {
                         protocol.writeDeserializeResponse(writer, ctx)
                     }
-                    writer.blankLine()
                 }
-                protocol.writeParseErrorResponse(writer, ctx)
             }
         }
     }
@@ -404,7 +400,7 @@ class OperationGenerator(
         writer.write("const error_body = stream_resp.body.readAll(client.allocator, 10 * 1024 * 1024) catch return error.RequestFailed;")
         writer.write("defer client.allocator.free(error_body);")
         writer.openBlock("if (options.diagnostic) |d| {")
-        writer.write("d.* = parseErrorResponse(client.allocator, error_body, stream_resp.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(stream_resp.status) } } };")
+        writeDiagnosticAssignment(writer, "error_body", "stream_resp.status")
         writer.closeBlock("}")
         writer.write("return error.ServiceError;")
         writer.closeBlock("}")
@@ -455,7 +451,7 @@ class OperationGenerator(
         // Check for errors
         writer.openBlock("if (!response.isSuccess()) {")
         writer.openBlock("if (options.diagnostic) |d| {")
-        writer.write("d.* = parseErrorResponse(client.allocator, response.body, response.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(response.status) } } };")
+        writeDiagnosticAssignment(writer, "response.body", "response.status")
         writer.closeBlock("}")
         writer.write("return error.ServiceError;")
         writer.closeBlock("}")
@@ -504,7 +500,7 @@ class OperationGenerator(
         writer.write("const error_body = stream_resp.body.readAll(client.allocator, 10 * 1024 * 1024) catch return error.RequestFailed;")
         writer.write("defer client.allocator.free(error_body);")
         writer.openBlock("if (options.diagnostic) |d| {")
-        writer.write("d.* = parseErrorResponse(client.allocator, error_body, stream_resp.status) catch .{ .kind = .{ .unknown = .{ .http_status = @intCast(stream_resp.status) } } };")
+        writeDiagnosticAssignment(writer, "error_body", "stream_resp.status")
         writer.closeBlock("}")
         writer.write("return error.ServiceError;")
         writer.closeBlock("}")
@@ -515,6 +511,13 @@ class OperationGenerator(
         writer.write("return result;")
 
         writer.closeBlock("}")
+    }
+
+    private fun writeDiagnosticAssignment(writer: ZigWriter, body: String, status: String) {
+        writer.write(
+            "d.* = try parseErrorResponse(client.allocator, \$L, \$L);",
+            body, status,
+        )
     }
 
     private fun writePresignOptions(writer: ZigWriter) {
