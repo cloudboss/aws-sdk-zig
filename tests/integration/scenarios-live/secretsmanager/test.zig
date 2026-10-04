@@ -263,23 +263,31 @@ test "tagResource adds a tag" {
     }
 
     {
-        const result = try client.describeSecret(
-            arena.allocator(),
-            .{ .secret_id = shared_secret_name },
-            .{},
-        );
-
-        const tags = result.tags orelse
-            return error.MissingTags;
         var found = false;
-        for (tags) |tag| {
-            const k = tag.key orelse continue;
-            const v = tag.value orelse continue;
-            if (std.mem.eql(u8, k, "test-tag") and
-                std.mem.eql(u8, v, "live"))
-            {
-                found = true;
-                break;
+        // Secrets Manager metadata reads are eventually consistent.
+        for (0..20) |attempt| {
+            var read_arena = std.heap.ArenaAllocator.init(std.testing.allocator);
+            defer read_arena.deinit();
+
+            const result = try client.describeSecret(
+                read_arena.allocator(),
+                .{ .secret_id = shared_secret_name },
+                .{},
+            );
+
+            for (result.tags orelse &.{}) |tag| {
+                const k = tag.key orelse continue;
+                const v = tag.value orelse continue;
+                if (std.mem.eql(u8, k, "test-tag") and
+                    std.mem.eql(u8, v, "live"))
+                {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) break;
+            if (attempt < 19) {
+                try std.testing.io.sleep(.fromMilliseconds(500), .awake);
             }
         }
         try std.testing.expect(found);
