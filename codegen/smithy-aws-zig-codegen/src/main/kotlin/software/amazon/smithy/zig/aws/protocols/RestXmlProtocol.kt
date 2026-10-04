@@ -16,6 +16,7 @@ import software.amazon.smithy.model.shapes.ShortShape
 import software.amazon.smithy.model.shapes.StringShape
 import software.amazon.smithy.model.shapes.StructureShape
 import software.amazon.smithy.model.shapes.TimestampShape
+import software.amazon.smithy.model.shapes.UnionShape
 import software.amazon.smithy.model.traits.EnumTrait
 import software.amazon.smithy.model.traits.HttpHeaderTrait
 import software.amazon.smithy.model.traits.HttpLabelTrait
@@ -1112,7 +1113,9 @@ class RestXmlProtocol : ProtocolGenerator {
         val allocUsedInStreaming = bindings.headers.values.any { ms ->
             val ts = ctx.model.expectShape(ms.target)
             ctx.resolveBaseZigType(ts) == "[]const u8"
-        }
+        } || bindings.payload?.let { (_, member) ->
+            ctx.model.expectShape(member.target) is UnionShape
+        } == true
         if (!allocUsedInStreaming) {
             writer.write("_ = allocator;")
         }
@@ -1159,6 +1162,19 @@ class RestXmlProtocol : ProtocolGenerator {
                     }
                 }
                 writer.closeBlock("}")
+            }
+        }
+
+        if (bindings.payload != null) {
+            val (memberName, member) = bindings.payload
+            if (ctx.model.expectShape(member.target) is UnionShape) {
+                writer.openBlock(
+                    "result.\$L = try aws.event_stream_reader.EventStreamReader.init(",
+                    NamingUtil.toFieldName(memberName),
+                )
+                writer.write("allocator,")
+                writer.write("stream_resp.body,")
+                writer.closeBlock(");")
             }
         }
 

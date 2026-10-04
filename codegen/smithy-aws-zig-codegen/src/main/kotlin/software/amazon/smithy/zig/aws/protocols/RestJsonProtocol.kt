@@ -5,6 +5,8 @@ import software.amazon.smithy.model.shapes.EnumShape
 import software.amazon.smithy.model.shapes.ListShape
 import software.amazon.smithy.model.shapes.MemberShape
 import software.amazon.smithy.model.shapes.StringShape
+import software.amazon.smithy.model.shapes.UnionShape
+import software.amazon.smithy.model.traits.DefaultTrait
 import software.amazon.smithy.model.traits.EnumTrait
 import software.amazon.smithy.model.traits.HttpHeaderTrait
 import software.amazon.smithy.model.traits.HttpLabelTrait
@@ -509,7 +511,10 @@ class RestJsonProtocol : ProtocolGenerator {
                 writer.write("allocator,")
                 writer.closeBlock(");")
             } else {
-                writer.write("var result: \$L = .{};", outputName)
+                writeResultInitializer(writer, ctx, "headers")
+                val ownedMembers = bindings.headers.toMutableMap()
+                bindings.payload?.let { (name, member) -> ownedMembers[name] = member }
+                writeStringCleanup(writer, ctx, ownedMembers)
             }
 
             // Body: @httpPayload, body members from JSON, or unused
@@ -560,6 +565,7 @@ class RestJsonProtocol : ProtocolGenerator {
         writer: ZigWriter,
         ctx: OperationContext,
         headerBindings: Map<String, MemberShape>,
+        headerSource: String = "headers",
     ) {
         for ((memberName, memberShape) in headerBindings) {
             val headerName = memberShape.expectTrait(HttpHeaderTrait::class.java).value.lowercase()
@@ -567,21 +573,27 @@ class RestJsonProtocol : ProtocolGenerator {
             val targetShape = ctx.model.expectShape(memberShape.target)
             val zigType = ctx.resolveBaseZigType(targetShape)
             val isEnum = ctx.isEnumType(targetShape)
+            val nullable = !memberShape.isRequired || memberShape.hasTrait(DefaultTrait::class.java)
 
-            writer.openBlock("if (headers.get(\"\$L\")) |value| {", headerName)
+            writer.openBlock("if (\$L.get(\"\$L\")) |value| {", headerSource, headerName)
             when {
                 zigType == "[]const u8" -> {
                     writer.write("result.\$L = try allocator.dupe(u8, value);", fieldName)
                 }
                 isEnum -> {
                     val typeName = ctx.resolveBaseZigType(targetShape)
-                    writer.write("result.\$L = \$L.fromWireName(value);", fieldName, typeName)
+                    val fallback = if (nullable) "" else " orelse return error.SyntaxError"
+                    writer.write("result.\$L = \$L.fromWireName(value)\$L;", fieldName, typeName, fallback)
                 }
                 zigType == "bool" -> {
                     writer.write("result.\$L = std.mem.eql(u8, value, \"true\");", fieldName)
                 }
                 zigType in listOf("i32", "i64", "i16", "i8") -> {
-                    writer.write("result.\$L = std.fmt.parseInt(\$L, value, 10) catch null;", fieldName, zigType)
+                    if (nullable) {
+                        writer.write("result.\$L = std.fmt.parseInt(\$L, value, 10) catch null;", fieldName, zigType)
+                    } else {
+                        writer.write("result.\$L = try std.fmt.parseInt(\$L, value, 10);", fieldName, zigType)
+                    }
                 }
                 else -> {
                     writer.write("result.\$L = try allocator.dupe(u8, value);", fieldName)
@@ -591,17 +603,67 @@ class RestJsonProtocol : ProtocolGenerator {
         }
     }
 
+    private fun writeResultInitializer(writer: ZigWriter, ctx: OperationContext, headerSource: String) {
+        val outputName = "${ctx.operationName}Output"
+        val requiredMembers = ctx.outputShape.allMembers.filterValues { member ->
+            member.isRequired && !member.hasTrait(DefaultTrait::class.java) &&
+                ctx.isScalarType(ctx.model.expectShape(member.target))
+        }
+        if (requiredMembers.isEmpty()) {
+            writer.write("var result: \$L = .{};", outputName)
+            return
+        }
+        writer.openBlock("var result: \$L = .{", outputName)
+        for ((name, member) in requiredMembers) {
+            val target = ctx.model.expectShape(member.target)
+            val field = NamingUtil.toFieldName(name)
+            if (ctx.isEnumType(target)) {
+                val header = member.expectTrait(HttpHeaderTrait::class.java).value.lowercase()
+                writer.openBlock(".\$L = \$L.fromWireName(", field, ctx.resolveBaseZigType(target))
+                writer.write("\$L.get(\"\$L\") orelse return error.MissingField,", headerSource, header)
+                writer.closeBlock(") orelse return error.SyntaxError,")
+            } else {
+                val default = when (ctx.resolveBaseZigType(target)) {
+                    "[]const u8" -> "\"\""
+                    "bool" -> "false"
+                    else -> "0"
+                }
+                writer.write(".\$L = \$L,", field, default)
+            }
+        }
+        writer.closeBlock("};")
+    }
+
+    private fun writeStringCleanup(writer: ZigWriter, ctx: OperationContext, members: Map<String, MemberShape>) {
+        val strings = members.filterValues { member ->
+            ctx.resolveBaseZigType(ctx.model.expectShape(member.target)) == "[]const u8"
+        }
+        if (strings.isEmpty()) return
+        writer.openBlock("errdefer {")
+        for ((name, member) in strings) {
+            val field = NamingUtil.toFieldName(name)
+            if (!member.isRequired || member.hasTrait(DefaultTrait::class.java)) {
+                writer.write("if (result.\$L) |value| allocator.free(value);", field)
+            } else {
+                writer.write("allocator.free(result.\$L);", field)
+            }
+        }
+        writer.closeBlock("}")
+    }
+
     override fun writeDeserializeStreamingResponse(writer: ZigWriter, ctx: OperationContext) {
         val outputName = "${ctx.operationName}Output"
         val bindings = resolveOutputBindings(ctx)
+        val isEventStream = bindings.payload?.let { (_, member) ->
+            ctx.model.expectShape(member.target) is UnionShape
+        } == true
 
         writer.openBlock(
             "fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !\$L {",
             outputName,
         )
 
-        // Check if allocator is actually used (only string headers need it)
-        val allocUsedInStreaming = bindings.headers.values.any { ms ->
+        val allocUsedInStreaming = isEventStream || bindings.headers.values.any { ms ->
             val ts = ctx.model.expectShape(ms.target)
             ctx.resolveBaseZigType(ts) == "[]const u8"
         }
@@ -609,18 +671,8 @@ class RestJsonProtocol : ProtocolGenerator {
             writer.write("_ = allocator;")
         }
 
-        writer.write("var result: \$L = .{};", outputName)
-
-        // Transfer StreamingBody ownership to result for @httpPayload streaming blob
-        if (bindings.payload != null) {
-            val (memberName, memberShape) = bindings.payload
-            val fieldName = NamingUtil.toFieldName(memberName)
-            val targetShape = ctx.model.expectShape(memberShape.target)
-
-            if (ctx.isStreamingBlob(targetShape)) {
-                writer.write("result.\$L = stream_resp.body;", fieldName)
-            }
-        }
+        writeResultInitializer(writer, ctx, "stream_resp.headers")
+        writeStringCleanup(writer, ctx, bindings.headers)
 
         // @httpResponseCode
         if (bindings.responseCode != null) {
@@ -631,33 +683,22 @@ class RestJsonProtocol : ProtocolGenerator {
 
         // @httpHeader - extract from response headers
         if (bindings.headers.isNotEmpty()) {
-            for ((memberName, memberShape) in bindings.headers) {
-                val headerName = memberShape.expectTrait(HttpHeaderTrait::class.java).value.lowercase()
-                val fieldName = NamingUtil.toFieldName(memberName)
-                val targetShape = ctx.model.expectShape(memberShape.target)
-                val zigType = ctx.resolveBaseZigType(targetShape)
-                val isEnum = ctx.isEnumType(targetShape)
+            writeHeaderDeserialization(writer, ctx, bindings.headers, "stream_resp.headers")
+        }
 
-                writer.openBlock("if (stream_resp.headers.get(\"\$L\")) |value| {", headerName)
-                when {
-                    zigType == "[]const u8" -> {
-                        writer.write("result.\$L = try allocator.dupe(u8, value);", fieldName)
-                    }
-                    isEnum -> {
-                        val typeName = ctx.resolveBaseZigType(targetShape)
-                        writer.write("result.\$L = \$L.fromWireName(value);", fieldName, typeName)
-                    }
-                    zigType == "bool" -> {
-                        writer.write("result.\$L = std.mem.eql(u8, value, \"true\");", fieldName)
-                    }
-                    zigType in listOf("i32", "i64", "i16", "i8") -> {
-                        writer.write("result.\$L = std.fmt.parseInt(\$L, value, 10) catch null;", fieldName, zigType)
-                    }
-                    else -> {
-                        writer.write("result.\$L = try allocator.dupe(u8, value);", fieldName)
-                    }
-                }
-                writer.closeBlock("}")
+        if (bindings.payload != null) {
+            val (memberName, member) = bindings.payload
+            val field = NamingUtil.toFieldName(memberName)
+            if (isEventStream) {
+                writer.openBlock(
+                    "result.\$L = try aws.event_stream_reader.EventStreamReader.init(",
+                    field,
+                )
+                writer.write("allocator,")
+                writer.write("stream_resp.body,")
+                writer.closeBlock(");")
+            } else if (ctx.isStreamingBlob(ctx.model.expectShape(member.target))) {
+                writer.write("result.\$L = stream_resp.body;", field)
             }
         }
 

@@ -15,6 +15,7 @@ import software.amazon.smithy.model.shapes.OperationShape
 import software.amazon.smithy.model.shapes.ServiceShape
 import software.amazon.smithy.model.shapes.ShapeId
 import software.amazon.smithy.model.shapes.StructureShape
+import software.amazon.smithy.model.shapes.UnionShape
 import software.amazon.smithy.model.traits.ErrorTrait
 import software.amazon.smithy.model.traits.HttpHeaderTrait
 import software.amazon.smithy.model.traits.HttpLabelTrait
@@ -23,6 +24,7 @@ import software.amazon.smithy.model.traits.HttpQueryTrait
 import software.amazon.smithy.model.traits.HttpResponseCodeTrait
 import software.amazon.smithy.model.traits.HttpTrait
 import software.amazon.smithy.model.traits.RequiredTrait
+import software.amazon.smithy.model.traits.StreamingTrait
 import software.amazon.smithy.model.traits.DefaultTrait
 import software.amazon.smithy.model.pattern.UriPattern
 import software.amazon.smithy.zig.ZigContext
@@ -295,6 +297,82 @@ class RestJsonProtocolTest {
         assertFalse(response.contains("ListFunctionsOutput = .{};"))
         assertTrue(response.contains("const result: ListFunctionsOutput = try aws.json.parseJsonObject("))
         assertTrue(response.contains("if (body.len > 0) body else \"{}\""))
+    }
+
+    @Test
+    fun eventStreamResponseIncludesRequiredHeaders() {
+        val original = buildTestModel()
+        val output = original.expectShape(
+            ShapeId.from("test#InvokeOutput"),
+            StructureShape::class.java,
+        ).toBuilder()
+            .addMember(
+                MemberShape.builder()
+                    .id("test#InvokeOutput\$FunctionError")
+                    .target("smithy.api#String")
+                    .addTrait(HttpHeaderTrait("X-Amz-Function-Error"))
+                    .addTrait(RequiredTrait())
+                    .build()
+            )
+            .addMember(
+                MemberShape.builder()
+                    .id("test#InvokeOutput\$Payload")
+                    .target("test#ResponseEvents")
+                    .addTrait(HttpPayloadTrait())
+                    .build()
+            )
+            .build()
+        val events = UnionShape.builder()
+            .id("test#ResponseEvents")
+            .addTrait(StreamingTrait())
+            .addMember("Message", ShapeId.from("smithy.api#String"))
+            .build()
+        val reference = StructureShape.builder()
+            .id("test#ResponseContainer")
+            .addMember("Response", output.id)
+            .build()
+        val model = original.toBuilder().addShapes(output, events, reference).build()
+        val response = generateFiles(model)["invoke.zig"]!!
+
+        assertTrue(response.contains("pub const InvokeOutput = struct {"))
+        assertTrue(response.contains("const result = try deserializeStreamingResponse(allocator, &stream_resp);"))
+        assertTrue(response.contains(".function_error = \"\","))
+        assertTrue(response.contains("stream_resp.headers.get(\"x-amz-function-error\")"))
+        assertTrue(response.contains("result.payload = try aws.event_stream_reader.EventStreamReader.init("))
+        assertTrue(response.contains("result.status_code = @intCast(stream_resp.status);"))
+    }
+
+    @Test
+    fun requiredPayloadAndHeadersHaveSafeInitializers() {
+        val original = buildTestModel()
+        val output = original.expectShape(
+            ShapeId.from("test#InvokeOutput"),
+            StructureShape::class.java,
+        ).toBuilder()
+            .addMember(
+                MemberShape.builder()
+                    .id("test#InvokeOutput\$FunctionError")
+                    .target("smithy.api#String")
+                    .addTrait(HttpHeaderTrait("X-Amz-Function-Error"))
+                    .addTrait(RequiredTrait())
+                    .build()
+            )
+            .addMember(
+                MemberShape.builder()
+                    .id("test#InvokeOutput\$Payload")
+                    .target("smithy.api#Blob")
+                    .addTrait(HttpPayloadTrait())
+                    .addTrait(RequiredTrait())
+                    .build()
+            )
+            .build()
+        val model = original.toBuilder().addShape(output).build()
+        val response = generateFiles(model)["invoke.zig"]!!
+            .substringAfter("fn deserializeResponse(")
+
+        assertTrue(response.contains(".function_error = \"\","))
+        assertTrue(response.contains(".payload = \"\","))
+        assertTrue(response.contains("result.payload = try allocator.dupe(u8, body);"))
     }
 
     // ---- File generation tests ----

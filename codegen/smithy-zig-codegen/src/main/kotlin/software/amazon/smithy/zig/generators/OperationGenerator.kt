@@ -167,7 +167,7 @@ class OperationGenerator(
             writer.blankLine()
             if (outputShape.id.toString() == "smithy.api#Unit") {
                 writer.write("pub const \$L = struct {};", "${operationName}Output")
-            } else if (isSharedType(outputShape.id)) {
+            } else if (isSharedType(outputShape.id) && !isStreaming && !isServerPushEventStream) {
                 val outputFileName = NamingUtil.toZigFileName(outputShape.id.name)
                 writer.write(
                     "pub const \$L = @import(\"\$L\").\$L;",
@@ -180,9 +180,7 @@ class OperationGenerator(
 
             if (isBidirectionalEventStream) {
                 writeEventStreamStubExecuteFunction(writer)
-            } else if (isServerPushEventStream) {
-                writeServerPushEventStreamExecuteFunction(writer)
-            } else if (isStreaming) {
+            } else if (isStreaming || isServerPushEventStream) {
                 writeStreamingExecuteFunction(writer)
             } else {
                 writeExecuteFunction(writer)
@@ -197,13 +195,11 @@ class OperationGenerator(
 
                 writer.blankLine()
                 protocol.writeSerializeRequest(writer, ctx)
-                if (!isServerPushEventStream) {
-                    writer.blankLine()
-                    if (isStreaming) {
-                        protocol.writeDeserializeStreamingResponse(writer, ctx)
-                    } else {
-                        protocol.writeDeserializeResponse(writer, ctx)
-                    }
+                writer.blankLine()
+                if (isStreaming || isServerPushEventStream) {
+                    protocol.writeDeserializeStreamingResponse(writer, ctx)
+                } else {
+                    protocol.writeDeserializeResponse(writer, ctx)
                 }
             }
         }
@@ -364,61 +360,6 @@ class OperationGenerator(
         writer.closeBlock("}")
     }
 
-    private fun writeServerPushEventStreamExecuteFunction(writer: ZigWriter) {
-        val inputName = "${operationName}Input"
-        val outputName = "${operationName}Output"
-
-        writer.openBlock(
-            "pub fn execute(client: *Client, allocator: std.mem.Allocator, input: \$L, options: CallOptions) !\$L {",
-            inputName, outputName,
-        )
-
-        writer.write("var arena = std.heap.ArenaAllocator.init(client.allocator);")
-        writer.write("const alloc = arena.allocator();")
-        writer.blankLine()
-
-        // Serialize request
-        writer.write("var request = try serializeRequest(alloc, input, client.config);")
-        writer.blankLine()
-
-        // Sign
-        writer.write("const creds = try client.config.credentials.getCredentials(client.allocator);")
-        writer.write("try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, \"\$L\", client.config.http_client.clock_skew_offset);", settings.signingName)
-        writer.blankLine()
-
-        // Send streaming request
-        writer.write("var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);")
-        writer.blankLine()
-
-        // Free arena - request data already sent
-        writer.write("arena.deinit();")
-        writer.blankLine()
-
-        // Check for errors
-        writer.openBlock("if (!stream_resp.isSuccess()) {")
-        writer.write("defer stream_resp.deinit();")
-        writer.write("const error_body = stream_resp.body.readAll(client.allocator, 10 * 1024 * 1024) catch return error.RequestFailed;")
-        writer.write("defer client.allocator.free(error_body);")
-        writer.openBlock("if (options.diagnostic) |d| {")
-        writeDiagnosticAssignment(writer, "error_body", "stream_resp.status")
-        writer.closeBlock("}")
-        writer.write("return error.ServiceError;")
-        writer.closeBlock("}")
-        writer.blankLine()
-
-        // Clean up response headers (body ownership transfers to output struct)
-        writer.write("stream_resp.deinitHeaders();")
-        writer.write("errdefer stream_resp.body.deinit();")
-        writer.blankLine()
-
-        // Initialize event stream reader -- takes ownership of body
-        val fieldName = eventStreamOutputFieldName()!!
-        writer.write("const \$L = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body);", fieldName)
-        writer.write("return .{ .\$L = \$L };", fieldName, fieldName)
-
-        writer.closeBlock("}")
-    }
-
     private fun writeExecuteFunction(writer: ZigWriter) {
         val inputName = "${operationName}Input"
         val outputName = "${operationName}Output"
@@ -474,6 +415,7 @@ class OperationGenerator(
         )
 
         writer.write("var arena = std.heap.ArenaAllocator.init(client.allocator);")
+        writer.write("defer arena.deinit();")
         writer.write("const alloc = arena.allocator();")
         writer.blankLine()
 
@@ -490,10 +432,6 @@ class OperationGenerator(
         writer.write("var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);")
         writer.blankLine()
 
-        // Free arena -- request data already sent
-        writer.write("arena.deinit();")
-        writer.blankLine()
-
         // Check for errors
         writer.openBlock("if (!stream_resp.isSuccess()) {")
         writer.write("defer stream_resp.deinit();")
@@ -507,6 +445,7 @@ class OperationGenerator(
         writer.blankLine()
 
         // Deserialize into caller-provided allocator
+        writer.write("errdefer stream_resp.deinit();")
         writer.write("const result = try deserializeStreamingResponse(allocator, &stream_resp);")
         writer.write("return result;")
 
