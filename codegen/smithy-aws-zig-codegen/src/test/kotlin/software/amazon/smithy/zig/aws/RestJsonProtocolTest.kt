@@ -249,8 +249,7 @@ class RestJsonProtocolTest {
         )
     }
 
-    private fun generateFiles(): Map<String, String> {
-        val model = buildTestModel()
+    private fun generateFiles(model: Model = buildTestModel()): Map<String, String> {
         val context = createContext(model)
         val service = model.expectShape(
             ShapeId.from("test#Lambda"),
@@ -265,6 +264,37 @@ class RestJsonProtocolTest {
             files[file.fileName.toString()] = file.toFile().readText()
         }
         return files
+    }
+
+    @Test
+    fun requiredBodyMembersAreInitializedByParsing() {
+        val original = buildTestModel()
+        val output = original.expectShape(
+            ShapeId.from("test#ListFunctionsOutput"),
+            StructureShape::class.java,
+        ).toBuilder()
+            .addMember(
+                MemberShape.builder()
+                    .id("test#ListFunctionsOutput\$Runtime")
+                    .target("test#RuntimeType")
+                    .addTrait(RequiredTrait())
+                    .build()
+            )
+            .addMember(
+                MemberShape.builder()
+                    .id("test#ListFunctionsOutput\$NextMarker")
+                    .target("smithy.api#String")
+                    .addTrait(RequiredTrait())
+                    .build()
+            )
+            .build()
+        val model = original.toBuilder().addShape(output).build()
+        val response = generateFiles(model)["list_functions.zig"]!!
+            .substringAfter("fn deserializeResponse(")
+
+        assertFalse(response.contains("ListFunctionsOutput = .{};"))
+        assertTrue(response.contains("const result: ListFunctionsOutput = try aws.json.parseJsonObject("))
+        assertTrue(response.contains("if (body.len > 0) body else \"{}\""))
     }
 
     // ---- File generation tests ----
@@ -495,7 +525,7 @@ class RestJsonProtocolTest {
         val op = files["list_functions.zig"]!!
 
         assertTrue(
-            op.contains("aws.json.parseJsonObject(ListFunctionsOutput, body, allocator)"),
+            op.contains("aws.json.parseJsonObject(\n        ListFunctionsOutput,"),
             "Should use runtime JSON parser for response deserialization",
         )
     }

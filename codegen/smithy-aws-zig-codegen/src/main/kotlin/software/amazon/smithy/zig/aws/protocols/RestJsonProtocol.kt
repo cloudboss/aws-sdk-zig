@@ -494,7 +494,23 @@ class RestJsonProtocol : ProtocolGenerator {
             writer.write("_ = headers;")
             writer.write("const result: \$L = .{};", outputName)
         } else {
-            writer.write("var result: \$L = .{};", outputName)
+            if (bindings.payload == null && hasBodyMembers) {
+                val declaration = if (bindings.responseCode != null || bindings.headers.isNotEmpty()) {
+                    "var"
+                } else {
+                    "const"
+                }
+                writer.openBlock(
+                    "\$L result: \$L = try aws.json.parseJsonObject(",
+                    declaration, outputName,
+                )
+                writer.write("\$L,", outputName)
+                writer.write("if (body.len > 0) body else \"{}\",")
+                writer.write("allocator,")
+                writer.closeBlock(");")
+            } else {
+                writer.write("var result: \$L = .{};", outputName)
+            }
 
             // Body: @httpPayload, body members from JSON, or unused
             if (bindings.payload != null) {
@@ -514,11 +530,7 @@ class RestJsonProtocol : ProtocolGenerator {
                 } else {
                     writer.write("_ = body;")
                 }
-            } else if (hasBodyMembers) {
-                writer.openBlock("if (body.len > 0) {")
-                writer.write("result = try aws.json.parseJsonObject(\$L, body, allocator);", outputName)
-                writer.closeBlock("}")
-            } else {
+            } else if (!hasBodyMembers) {
                 writer.write("_ = body;")
             }
 
